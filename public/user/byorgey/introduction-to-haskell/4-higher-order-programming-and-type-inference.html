@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html><head><title>4: Higher-order programming and type inference - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/byorgey">Brent Yorgey</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell">Introduction to Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/4-higher-order-programming-and-type-inference">4: Higher-order programming and type inference</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">4: Higher-order programming and type inference</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">14 Jul 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/byorgey">Brent Yorgey</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/32/4c1590e7cae2b4b1985bdd48749d2c93799c586d">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/3-recursion-patterns-polymorphism-and-the-prelude">Previous content: 3: Recursion Patterns, Polymorphism, and the Prelude</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/5-type-classes">Next content: 5: Type Classes</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell">Go up to: Introduction to Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey">See all content by Brent Yorgey</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#anonymous-functions">Anonymous Functions</a></li><li><a href="#currying-and-partial-application">Currying and partial application</a></li><li><a href="#partial-application">Partial application</a></li><li><a href="#wholemeal-programming">Wholemeal programming</a></li><li><a href="#folds">Folds</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="anonymous-functions"><a href="#anonymous-functions">Anonymous Functions</a></h1><p>Suppose we want to write a function</p><p><code>greaterThan100 :: [Integer] -&gt; [Integer]</code></p><p>which keeps only those Integers from the input list which are greater than 100. For example,</p><pre><code class="haskell">greaterThan100 [1,9,349,6,907,98,105] == [349,907,105]</code></pre><p>By now, we know a nice way to do this:</p><pre><code class="active haskell">gt100 :: Integer -&gt; Bool
+gt100 x = x &gt; 100
+
+greaterThan100 :: [Integer] -&gt; [Integer]
+greaterThan100 xs = filter gt100 xs
+
+main = print (greaterThan100 [1,9,349,6,907,98,105])</code></pre><p>But it’s annoying to give gt100 a name, since we are probably never going to use it again. Instead, we can use an anonymous function, also known as a lambda abstraction:</p><pre><code class="active haskell">greaterThan100 :: [Integer] -&gt; [Integer]
+greaterThan100 xs = filter (\x -&gt; x &gt; 100) xs
+
+main = print (greaterThan100 [1,9,349,6,907,98,105])</code></pre><p><code>\x -&gt; x &gt; 100</code> (the backslash is supposed to look kind of like a lambda with the short leg missing) is the function which takes a single argument <code>x</code> and outputs whether <code>x</code> is greater than 100.</p><p>Lambda abstractions can also have multiple arguments. For example:</p><pre><code class="active haskell">main = print ((\x y z -&gt; [x,2*y,3*z]) 5 6 3)</code></pre><p>However, in the particular case of <code>greaterThan100</code>, there’s an even better way to write it, without a lambda abstraction:</p><pre><code class="active haskell">greaterThan100 :: [Integer] -&gt; [Integer]
+greaterThan100 xs = filter (&gt;100) xs
+
+main = print (greaterThan100 [1,9,349,6,907,98,105])</code></pre><p><code>(&gt;100)</code> is an operator section: if <code>?</code> is an operator, then <code>(?y)</code> is equivalent to the function <code>\x -&gt; x ? y</code>, and <code>(y?)</code> is equivalent to <code>\x -&gt; y ? x</code>. In other words, using an operator section allows us to partially apply an operator to one of its two arguments. What we get is a function of a single argument. Here are some examples:</p><pre><code class="active haskell">main = print ((&gt;100) 102, (100&gt;) 102, map (*6) [1..5])</code></pre><p>Before reading on, can you write down a function whose type is
+<code>(b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)</code>
+?</p><p>Let’s try. It has to take two arguments, both of which are functions, and output a function. So it must be something like</p><pre><code class="haskell">foo f g = ...</code></pre><p>In the place of the <code>...</code>, we need to write a function of type <code>a -&gt; c</code>. Well, we can create a function using a lambda abstraction:</p><pre><code class="haskell">foo f g = \x -&gt; ...</code></pre><p><code>x</code> will have type <code>a</code>, and now in the <code>...</code> we need to write an expression of type <code>c</code>. Well, we have a function <code>g</code> which can turn an <code>a</code> into a <code>b</code>, and a function <code>f</code> which can turn a <code>b</code> into a <code>c</code>, so this ought to work:</p><pre><code class="haskell">foo :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+foo f g = \x -&gt; f (g x)</code></pre><p>(Quick quiz: why do we need the parentheses around <code>g x</code>?)</p><div class="hidden"><p>Function application is <i>left-associative</i>, so <code>f g x == (f g) x</code>, clearly not what we want in this case. More about this coming up...</p></div><p>OK, so what was the point of that? Does foo actually do anything useful or was that just a silly exercise in working with types?</p><p>As it turns out, foo is really called <code>(.)</code>, and represents function composition. That is, if <code>f</code> and <code>g</code> are functions, then <code>f . g</code> is the function which does first <code>g</code> and then <code>f</code>.</p><p>Function composition can be quite useful in writing concise, elegant code. It fits well in a “wholemeal” style where we think about composing together successive high-level transformations of a data structure.</p><p>As an example, consider the following function:</p><pre><code class="active haskell">-- /show
+greaterThan100 :: [Integer] -&gt; [Integer]
+greaterThan100 xs = filter (&gt;100) xs
+
+-- show
+myTest :: [Integer] -&gt; Bool
+myTest xs = even (length (greaterThan100 xs))
+
+main = print (myTest [1,9,349,6,907,98,105])</code></pre><p>We can rewrite this as:</p><pre><code class="active haskell">-- /show
+greaterThan100 :: [Integer] -&gt; [Integer]
+greaterThan100 xs = filter (&gt;100) xs
+
+-- show
+myTest :: [Integer] -&gt; Bool
+myTest = even . length . greaterThan100
+
+main = print (myTest [1,9,349,6,907,98,105])</code></pre><p>This version makes much clearer what is really going on: <code>myTest'</code> is just a “pipeline” composed of three smaller functions. This example also demonstrates why function composition seems “backwards”: it’s because function application is backwards! Since we read from left to right, it would make sense to think of values as also flowing from left to right. But in that case we should write <code>(x)f</code> to denote giving the value <code>x</code> as an input to the function <code>f</code>. But no thanks to Alexis Claude Clairaut and Euler, we have been stuck with the backwards notation since 1734.</p><p>Let’s take a closer look at the type of <code>(.)</code>. If we ask ghci for its type, we get</p><pre><code class="haskell">Prelude&gt; :t (.)
+(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c</code></pre><p>Wait a minute. What’s going on here? What happened to the parentheses around <code>(a -&gt; c)</code>?</p><h1 id="currying-and-partial-application"><a href="#currying-and-partial-application">Currying and partial application</a></h1><p>Remember how the types of multi-argument functions look weird, like they have “extra” arrows in them? For example, consider the function</p><pre><code class="active haskell">f :: Int -&gt; Int -&gt; Int
+f x y = 2*x + y
+
+main = print (f 3 12)</code></pre><p>I promised before that there is a beautiful, deep reason for this, and now it’s finally time to reveal it: all functions in Haskell take only one argument. Say what?! But doesn’t the function <code>f</code> shown above take two arguments? No, actually, it doesn’t: it takes one argument (an <code>Int</code>) and outputs a function (of type <code>Int -&gt; Int</code>); that function takes one argument and returns the final answer. In fact, we can equivalently write <code>f</code>’s type like this:</p><pre><code class="active haskell">f :: Int -&gt; (Int -&gt; Int)
+f x y = 2*x + y
+
+main = print (f 3 12)</code></pre><p>In particular, note that function arrows associate to the right, that is,</p><pre><code class="haskell">W -&gt; X -&gt; Y -&gt; Z</code></pre><p>is equivalent to</p><pre><code class="haskell">W -&gt; (X -&gt; (Y -&gt; Z))</code></pre><p>We can always add or remove parentheses around the rightmost top-level arrow in a type.</p><p>Function application, in turn, is left-associative. That is, <code>f 3 2</code> is really shorthand for <code>(f 3) 2</code>. This makes sense given what we said previously about <code>f</code> actually taking one argument and returning a function: we apply <code>f</code> to an argument <code>3</code>, which returns a function of type <code>Int -&gt; Int</code>, namely, a function which takes an <code>Int</code> and adds <code>6</code> to it. We then apply that function to the argument 2 by writing <code>(f 3) 2</code>, which gives us an <code>Int</code>. Since function application associates to the left, however, we can abbreviate <code>(f 3) 2</code> as <code>f 3 2</code>, giving us a nice notation for <code>f</code> as a “multi-argument” function.</p><p>The “multi-argument” lambda abstraction</p><pre><code class="haskell">\x y z -&gt; ...</code></pre><p>is really just syntax sugar for</p><pre><code class="haskell">\x -&gt; (\y -&gt; (\z -&gt; ...))</code></pre><p>Likewise, the function definition</p><pre><code class="haskell">f x y z = ...</code></pre><p>is syntax sugar for</p><pre><code class="haskell">f = \x -&gt; (\y -&gt; (\z -&gt; ...))</code></pre><p>Note, for example, that we can rewrite our composition function from above by moving the <code>\x -&gt; ...</code> from the right-hand side of the <code>=</code> to the left-hand side:</p><pre><code class="haskell">comp :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+comp f g x = f (g x)</code></pre><p>This idea of representing multi-argument functions as one-argument functions returning functions is known as currying, named for the British mathematician and logician Haskell Curry. (His first name might sound familiar; yes, it’s the same guy.) Curry lived from 1900-1982 and spent much of his life at Penn State—but he also helped work on ENIAC at UPenn. The idea of representing multi-argument functions as one-argument functions returning functions was actually first discovered by Moses Schönfinkel, so we probably ought to call it schönfinkeling. Curry himself attributed the idea to Schönfinkel, but others had already started calling it “currying” and it was too late.</p><p>If we want to actually represent a function of two arguments we can use a single argument which is a tuple. That is, the function</p><pre><code class="active haskell">f :: (Int,Int) -&gt; Int
+f (x,y) = 2*x + y
+
+main = print (f (2,3))</code></pre><p>can also be thought of as taking “two arguments”, although in another sense it really only takes one argument which happens to be a pair. In order to convert between the two representations of a two-argument function, the standard library defines functions called curry and uncurry, defined like this (except with different names):</p><pre><code class="active haskell">-- /show
+f :: (Int,Int) -&gt; Int
+f (x,y) = 2*x + y
+
+-- show
+schönfinkel :: ((a,b) -&gt; c) -&gt; a -&gt; b -&gt; c
+schönfinkel f x y = f (x,y)
+
+unschönfinkel :: (a -&gt; b -&gt; c) -&gt; (a,b) -&gt; c
+unschönfinkel f (x,y) = f x y
+
+main = print (schönfinkel f 2 3)</code></pre><p><code>uncurry</code>, in particular, can be useful when you have a pair and want to apply a function to it. For example:</p><pre><code>Prelude&gt; uncurry (+) (2,3)
+5</code></pre><h1 id="partial-application"><a href="#partial-application">Partial application</a></h1><p>The fact that functions in Haskell are curried makes partial application particularly easy. The idea of partial application is that we can take a function of multiple arguments and apply it to just some of its arguments, and get out a function of the remaining arguments. But as we’ve just seen, in Haskell there are no functions of multiple arguments! Every function can be “partially applied” to its first (and only) argument, resulting in a function of the remaining arguments.</p><p>Note that Haskell doesn’t make it easy to partially apply to an argument other than the first. The one exception is infix operators, which as we’ve seen, can be partially applied to either of their two arguments using an operator section. In practice this is not that big of a restriction. There is an art to deciding the order of arguments to a function to make partial applications of it as useful as possible: the arguments should be ordered from from “least to greatest variation”, that is, arguments which will often be the same should be listed first, and arguments which will often be different should come last.</p><h1 id="wholemeal-programming"><a href="#wholemeal-programming">Wholemeal programming</a></h1><p>Let’s put some of the things we’ve just learned together in an example that also shows the power of a “wholemeal” style of programming. Consider the function foobar, defined as follows:</p><pre><code class="active haskell">foobar :: [Integer] -&gt; Integer
+foobar []     = 0
+foobar (x:xs)
+  | x &gt; 3     = (7*x + 2) + foobar xs
+  | otherwise = foobar xs
+  
+main = print (foobar [1,2,3,4,5])</code></pre><p>This seems straightforward enough, but it is not good Haskell style. The problem is that it is doing too much at once, and
+working at too low of a level.
+Instead of thinking about what we want to do with each element, we can instead think about making incremental transformations to the entire input, using the existing recursion patterns that we know of. Here’s a much more idiomatic implementation of foobar:</p><pre><code class="active haskell">foobar :: [Integer] -&gt; Integer
+foobar = sum . map (\x -&gt; 7*x + 2) . filter (&gt;3)
+
+main = print (foobar [1,2,3,4,5])</code></pre><p>This defines foobar as a “pipeline” of three functions: first, we throw away all elements from the list which are not greater than three; next, we apply an arithmetic operation to every element of the remaining list; finally, we sum the results.</p><p>Notice that in the above example, map and filter have been partially applied. For example, the type of <code>filter</code> is <code>(a -&gt; Bool) -&gt; [a] -&gt; [a]</code>. 
+Applying it to <code>(&gt;3)</code> (which has type <code>Integer -&gt; Bool</code>) results in a function of type <code>[Integer] -&gt; [Integer]</code>, which is exactly the right sort of thing to compose with another function on <code>[Integer]</code>.</p><p>This style of coding in which we define a function without reference to its arguments—in some sense saying what a function is rather than what it does—is known as “point-free” style. As we can see from the above example, it can be quite beautiful. Some people might even go so far as to say that you should always strive to use point-free style; but taken too far it can become extremely confusing. lambdabot in the #haskell IRC channel has a command @pl for turning functions into equivalent point-free expressions; here’s an example:</p><pre><code class="haskell">@pl \f g x y -&gt; f (x ++ g x) (g y)
+join . ((flip . ((.) .)) .) . (. ap (++)) . (.)</code></pre><p>This is clearly not an improvement!</p><h1 id="folds"><a href="#folds">Folds</a></h1><p>We have one more recursion pattern on lists to talk about: folds. Here are a few functions on lists that follow a similar pattern: all of them somehow “combine” the elements of the list into a final answer.</p><pre><code class="haskell">sum' :: [Integer] -&gt; Integer
+sum' []     = 0
+sum' (x:xs) = x + sum' xs
+
+product' :: [Integer] -&gt; Integer
+product' [] = 1
+product' (x:xs) = x * product' xs
+
+length' :: [a] -&gt; Int
+length' []     = 0
+length' (_:xs) = 1 + length' xs</code></pre><p>What do these three functions have in common, and what is different? As usual, the idea will be to abstract out the parts that vary, aided by the ability to define higher-order functions.</p><pre><code class="haskell">fold :: (a -&gt; b -&gt; b) -&gt; b -&gt; [a] -&gt; b
+fold f z []     = z
+fold f z (x:xs) = f x (fold f z xs)</code></pre><p>Notice how <code>fold</code> essentially replaces <code>[]</code> with <code>z</code> and <code>(:)</code> with <code>f</code>, that is,</p><pre><code class="haskell">fold f [a,b,c] z == a `f` (b `f` (c `f` z))</code></pre><p>(If you think about fold from this perspective, you may be able to figure out how to generalize fold to data types other than lists…)</p><p>Now let’s rewrite <code>sum'</code>, <code>product'</code>, and <code>length'</code> in terms of <code>fold</code>:</p><pre><code class="haskell">sum'     = fold (+) 0
+product' = fold (*) 1
+length'  = fold (\_ s -&gt; 1 + s) 0
+
+myList = [1,2,3,4,5]
+
+main = print (sum' myList, product' myList, length' myList)</code></pre><p>(Instead of <code>(\_ s -&gt; 1 + s)</code> we could also write <code>(\_ -&gt; (1+))</code> or even <code>(const (1+))</code>.)</p><p>Of course, <code>fold</code> is already provided in the standard Prelude, under the name <code>foldr</code>. The arguments to <code>foldr</code> are in a slightly different order but it’s the exact same function. Here are some Prelude functions which are defined in terms of <code>foldr</code>:</p><pre><code class="haskell">length :: [a] -&gt; Int
+sum :: Num a =&gt; [a] -&gt; a
+product :: Num a =&gt; [a] -&gt; a
+and :: [Bool] -&gt; Bool
+or :: [Bool] -&gt; Bool
+any :: (a -&gt; Bool) -&gt; [a] -&gt; Bool
+all :: (a -&gt; Bool) -&gt; [a] -&gt; Bool</code></pre><p>There is also <code>foldl</code>, which folds “from the left”. That is,</p><pre><code class="haskell">foldr f [a,b,c] z == a `f` (b `f` (c `f` z))
+foldl f [a,b,c] z == ((z `f` a) `f` b) `f` c</code></pre><p>In general, however, you should use <code>foldl'</code> from <code>Data.List</code> instead, which does the same thing as <code>foldl</code> but is more efficient.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/byorgey/introduction-to-haskell/4-higher-order-programming-and-type-inference';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

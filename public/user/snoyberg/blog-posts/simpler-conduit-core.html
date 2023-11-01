@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html><head><title>Simpler conduit core - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/snoyberg">Michael Snoyman</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/blog-posts">Blog posts</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/blog-posts/simpler-conduit-core">Simpler conduit core</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Simpler conduit core</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 9 Oct 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/snoyberg">Michael Snoyman</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/1/b31d920c719e605dd6e08648b27cda804ccba6f3">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/blog-posts">Go up to: Blog posts</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg">See all content by Michael Snoyman</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#deriving-the-core-datatype">Deriving the core datatype</a></li><li><a href="#await-and-yield--add-maybe">Await and Yield: add Maybe</a></li><li><a href="#finalization">Finalization</a></li><li><a href="#draining-upstream">Draining upstream</a></li><li><a href="#downstream-result-type">Downstream result type</a></li><li><a href="#leftovers-chunked-data">Leftovers/chunked data</a></li><li><a href="#early-termination">Early termination</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>In <a href="http://www.yesodweb.com/blog/2013/10/core-flaw-pipes-conduit">my last blog post</a>, I made the case that automatic termination is the cause
+of a lot of problems in both pipes and conduit. In this blog post, I'd like to:</p><ol><li><p>Derive a simple core datatype that does not have automatic termination.</p></li><li><p>Discuss the desired behavior of this datatype.</p></li><li><p>Assess what convenience functionality we lost along the way, and see if we
+can get it back with an added layer on top of the core.</p></li></ol><p>Note that this blog post is meant to demonstrate an idea; it's not to be taken as a working implementation. There are many details that still need to be worked out. I'm hoping that presenting my thoughts in this manner will give enough of a basis for an informed discussion.</p><h2 id="deriving-the-core-datatype"><a href="#deriving-the-core-datatype">Deriving the core datatype</a></h2><p>I want to start as simple as possible. Let's begin with the core datatype from
+pipes 1.0. This leaves out any extra complexity we don't want to deal with in
+this process, like leftovers, finalizers, or bidirectionality.</p><pre><code class="haskell">data Pipe i o m r
+    = Pure r
+    | M (m (Pipe i o m r))
+    | Yield (Pipe i o m r) o
+    | Await (i -&gt; Pipe i o m r)</code></pre><p>Quick recap: <code>M</code> is for performing monadic actions. <code>Yield</code> passes a value
+downstream, and gives up control of the flow of execution to downstream. If
+downstream meanwhile returns <code>Pure</code>, the current <code>Pipe</code> will never get control
+of execution again. Similarly, <code>Await</code> asks for a value from upstream, and will
+similarly terminate of upstream returns <code>Pure</code>.</p><p>Let's implement the identity pipe in terms of the raw constructors:</p><pre><code class="haskell">idP :: Monad m =&gt; Pipe i i m r
+idP = Await (Yield idP)</code></pre><p>We'll also need some kind of function to compose two pipes together. The type for this function is:</p><pre><code class="haskell">fuse :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r</code></pre><p>You can experiment with some sample code here:</p><pre><code class="haskell active">import Control.Monad
+
+data Pipe i o m r
+    = Pure r
+    | M (m (Pipe i o m r))
+    | Yield (Pipe i o m r) o
+    | Await (i -&gt; Pipe i o m r)
+
+fuse :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+fuse _ (Pure r) = Pure r
+fuse up (M m) = M (liftM (fuse up) m)
+fuse up (Yield down o) = Yield (fuse up down) o
+fuse up0 (Await down) =
+    go up0
+  where
+    go (Pure r) = Pure r
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i m r
+idP = Await (Yield idP)
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o m [i]
+consume =
+    go id
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \i -&gt; go (front . (i:)) (count - 1)
+
+yieldMany :: Monad m =&gt; [o] -&gt; Pipe i o m r
+yieldMany [] = error &quot;FIXME&quot;
+yieldMany (o:os) = Yield (yieldMany os) o
+
+runPipe :: Monad m =&gt; Pipe () () m r -&gt; m r
+runPipe (Pure r) = return r
+runPipe (M m) = m &gt;&gt;= runPipe
+runPipe (Await f) = runPipe (f ())
+runPipe (Yield f ()) = runPipe f
+
+main = runPipe (yieldMany [1..] &gt;-&gt; idP &gt;-&gt; consume 10) &gt;&gt;= print</code></pre><p>In this blog post, I want to modify the core datatype to allow for
+non-termination. We'll start with the <code>Await</code> side of the equation, and allow
+the identity pipe guide our design for the rest of the other constructors.
+(Note: we're going to target simplicity here, not efficiency. Efficiency can be
+addressed another time.)</p><h2 id="await-and-yield--add-maybe"><a href="#await-and-yield--add-maybe">Await and Yield: add Maybe</a></h2><p>The simplest way to allow for non-termination is to modify <code>Await</code> to include a
+<code>Maybe</code> wrapper:</p><pre><code>Await (Maybe i -&gt; Pipe i o m r)</code></pre><p>This means that, when awaiting for a response from upstream, we can be informed
+via <code>Nothing</code> that no values are available. However, our <code>idP</code> no longer
+compiles. That's because we're getting a <code>Maybe i</code>, but <code>Yield</code> expects an <code>i</code>.
+Let's fix this by modifying our <code>Yield</code> constructor also:</p><pre><code>Yield (Pipe i o m r) (Maybe o)</code></pre><p>Now our original <code>idP</code> continues to compile. This change now allows us to write a fold, e.g.:</p><pre><code class="haskell">fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o m r
+fold f =
+    loop
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r</code></pre><h2 id="finalization"><a href="#finalization">Finalization</a></h2><p>However, we still haven't actually <i>fixed</i> the non-termination problem. As soon as one <code>Pipe</code> terminates, the whole <code>Pipe</code> terminates. The practical issue is that prompt termination is still not achieved. Try out the following example:</p><pre><code class="haskell active">import Control.Monad
+
+data Pipe i o m r
+    = Pure r
+    | M (m (Pipe i o m r))
+    | Yield (Pipe i o m r) (Maybe o)
+    | Await (Maybe i -&gt; Pipe i o m r)
+
+fuse :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+fuse _ (Pure r) = Pure r
+fuse up (M m) = M (liftM (fuse up) m)
+fuse up (Yield down o) = Yield (fuse up down) o
+fuse up0 (Await down) =
+    go up0
+  where
+    go (Pure r) = Pure r
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i m r
+idP = Await (Yield idP)
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o m [i]
+consume =
+    go id
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure (front [])
+-- show Data producer with finalization
+yieldMany :: [o] -&gt; Pipe i o IO r
+yieldMany [] = M (putStrLn &quot;Finalization&quot; &gt;&gt; return (Yield (yieldMany []) Nothing))
+yieldMany (o:os) = Yield (yieldMany os) (Just o)
+-- /show
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o m r
+fold f =
+    loop
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r
+
+runPipe :: Monad m =&gt; Pipe () () m r -&gt; m r
+runPipe (Pure r) = return r
+runPipe (M m) = m &gt;&gt;= runPipe
+runPipe (Await f) = runPipe (f Nothing)
+runPipe (Yield f _) = runPipe f
+
+-- show When does the finalizer get called?
+main = do
+    runPipe (yieldMany [1..10] &gt;-&gt; idP &gt;-&gt; fold (+) 0) &gt;&gt;= print
+    runPipe (yieldMany [1..10] &gt;-&gt; idP &gt;-&gt; consume 5) &gt;&gt;= print
+-- /show</code></pre><p>If the input stream it fully consumed, then <code>Finalization</code> is printed.
+Otherwise, it's not. We need to change our semantics so that we don't exit until <i>all</i> <code>Pipe</code>s exit.</p><p>Downstream is already notified when upstream is done producing data, via <code>Nothing</code> getting passed with <code>Yield</code>. We need a similar mechanism on the upstream side. In this case, we want it to be a <code>Maybe</code> result value. This value needs to be present as soon as the <code>Pipe</code> begins execution. To allow for this, we're going to refactor our type a bit as follows:</p><pre><code class="haskell">data Step i o m r
+    = Pure r
+    | M (m (Step i o m r))
+    | Yield (Pipe i o m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o m r)
+
+type Pipe i o m r = Maybe r -&gt; Step i o m r</code></pre><p>Now a <code>Pipe</code> is notified if downstream has already completed execution. I'd like to focus on one important distinction in the <code>Step</code> type's constructors: whereas <code>M</code> and <code>Await</code> represent the next thing to be done via a <code>Step</code> value, <code>Yield</code> represents it with a <code>Pipe</code> value. The reason for this distinction is that, when you call <code>Yield</code>, downstream has a chance to continue processing, and may provide a return value if it hadn't provided one previously. In the <code>M</code> and <code>Await</code> cases, downstream never gets a chance to provide a new result value.</p><p>Let's think about the identity pipe. Its semantics should be that, if downstream is done processing, it's also done processing. If downstream is not done processing, it should await for a new value from upstream and yield it downstream. This turns out to be pretty easy to implement:</p><pre><code class="haskell">idP :: Monad m =&gt; Pipe i i m r
+idP Nothing = Await (Yield idP)
+idP (Just r) = Pure r</code></pre><p>Below is our full running example.</p><pre><code class="haskell active">import Control.Monad
+
+data Step i o m r
+    = Pure r
+    | M (m (Step i o m r))
+    | Yield (Pipe i o m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o m r)
+
+type Pipe i o m r = Maybe r -&gt; Step i o m r
+
+-- show Fusion is a bit more complicated now
+fuse :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe r -&gt; Step a b m r)
+      -&gt; Step b c m r
+      -&gt; Step a c m r
+fuse' up0 (Pure r) =
+    go $ up0 $ Just r
+  where
+    go (Pure r') = Pure r'
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just r
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    -- It's easy to get this next clause wrong.
+    -- We need to make sure that we give downstream
+    -- a chance to finish processing, not just terminate
+    -- immediately.
+    go (Pure r) = fuse' (\_ -&gt; Pure r) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+-- /show
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i m r
+idP Nothing = Await (Yield idP)
+idP (Just r) = Pure r
+
+-- show Consumers can just ignore downstream results
+consume :: Monad m =&gt; Int -&gt; Pipe i o m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure (front [])
+-- /show
+
+-- show Finalization
+-- Note that we only finalize once downstream completes.
+-- We could instead finalize as soon as our input is empty,
+-- which would allow for more promptness. Try implementing that
+-- change. Make sure that the finalizer only gets called once!
+yieldMany :: [o] -&gt; Pipe i o IO r
+yieldMany _ (Just r) = M (putStrLn &quot;Finalization&quot; &gt;&gt; return (Pure r))
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)
+-- /show
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r
+
+runPipe :: Monad m =&gt; Pipe () () m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+runStep :: Monad m =&gt; Step () () m r -&gt; m r
+runStep (Pure r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+
+main = do
+    runPipe (yieldMany [1..10] &gt;-&gt; idP &gt;-&gt; fold (+) 0) &gt;&gt;= print
+    runPipe (yieldMany [1..10] &gt;-&gt; idP &gt;-&gt; consume 5) &gt;&gt;= print</code></pre><p>That's it, we've moved from automatic termination to manual termination. We can now fold, get prompt finalization, and even modify result values from downstream. Let's play with a few more changes.</p><h2 id="draining-upstream"><a href="#draining-upstream">Draining upstream</a></h2><p>Consider writing a <code>Pipe</code> that takes precisely 5 values from upstream and passes them downstream. If downstream finishes early, it still takes those 5 values. This is not currently possible in pipes or conduit. Let's try it out in our new framework:</p><pre><code class="haskell active">import Control.Monad
+
+data Step i o m r
+    = Pure r
+    | M (m (Step i o m r))
+    | Yield (Pipe i o m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o m r)
+
+type Pipe i o m r = Maybe r -&gt; Step i o m r
+
+fuse :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe r -&gt; Step a b m r)
+      -&gt; Step b c m r
+      -&gt; Step a c m r
+fuse' up0 (Pure r) =
+    go $ up0 $ Just r
+  where
+    go (Pure r') = Pure r'
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just r
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    go (Pure r) = fuse' (\_ -&gt; Pure r) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b m r
+     -&gt; Pipe b c m r
+     -&gt; Pipe a c m r
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i m r
+idP Nothing = Await (Yield idP)
+idP (Just r) = Pure r
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure (front [])
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r
+
+runPipe :: Monad m =&gt; Pipe () () m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+-- show
+takeExactly :: Monad m =&gt; Int -&gt; Pipe i i m r
+takeExactly 0 (Just r) = Pure r
+takeExactly 0 Nothing = Yield (takeExactly 0) Nothing
+takeExactly count _ = Await $ \mi -&gt; Yield (takeExactly (count - 1)) mi
+-- We can optimize the above a bit by skipping
+-- extra Awaits, give it a shot.
+
+yieldMany :: Show o =&gt; [o] -&gt; Pipe i o IO r
+yieldMany rest (Just r) = M $ do
+    putStrLn $ &quot;Finalization: &quot; ++ show rest
+    return (Pure r)
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)
+
+main = runPipe (yieldMany [1..10] &gt;-&gt; takeExactly 5 &gt;-&gt; fold (+) 0) &gt;&gt;= print
+-- /show
+
+runStep :: Monad m =&gt; Step () () m r -&gt; m r
+runStep (Pure r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+</code></pre><h2 id="downstream-result-type"><a href="#downstream-result-type">Downstream result type</a></h2><p>There's a nice generalization we can provide here. There's no reason that the upstream and downstream result types need to be the same. In fact, if we just add an extra type parameter (<code>d</code> for <b>d</b>ownstream result), the rest of our code can remain the same. Here's an example:</p><pre><code class="haskell active">import Control.Monad
+
+-- show
+data Step i o d m r
+    = Pure r
+    | M (m (Step i o d m r))
+    | Yield (Pipe i o d m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o d m r)
+
+type Pipe i o d m r = Maybe d -&gt; Step i o d m r
+
+-- Notice the way that a-&gt;b-&gt;c flows downstream.
+-- On the other hand, the result values x-&gt;y-&gt;z
+-- &quot;bubble up&quot; from downstream.
+fuse :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+-- /show
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe y -&gt; Step a b y m z)
+      -&gt; Step b c x m y
+      -&gt; Step a c x m z
+fuse' up0 (Pure r) =
+    go $ up0 $ Just r
+  where
+    go (Pure r') = Pure r'
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just r
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    go (Pure r) = fuse' (\_ -&gt; Pure r) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+(&gt;-&gt;) = fuse
+
+-- show
+-- Identity keeps the same stream value (i) and result
+-- value (r) for both upstream and downstream.
+idP :: Monad m =&gt; Pipe i i r m r
+idP Nothing = Await (Yield idP)
+idP (Just r) = Pure r
+-- /show
+
+-- show
+-- Consumers can just ignore the downstream result.
+consume :: Monad m =&gt; Int -&gt; Pipe i o d m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure (front [])
+-- /show
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r
+
+runPipe :: Monad m =&gt; Pipe () () d m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+runStep :: Monad m =&gt; Step () () d m r -&gt; m r
+runStep (Pure r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+
+-- show
+-- Producers can simply return the downstream result
+-- as its own result value.
+takeExactly :: Monad m =&gt; Int -&gt; Pipe i i r m r
+takeExactly 0 (Just r) = Pure r
+takeExactly 0 Nothing = Yield (takeExactly 0) Nothing
+takeExactly count _ = Await $ \mi -&gt; Yield (takeExactly (count - 1)) mi
+
+yieldMany :: Show o =&gt; [o] -&gt; Pipe i o r IO r
+yieldMany rest (Just r) = M $ do
+    putStrLn $ &quot;Finalization: &quot; ++ show rest
+    return (Pure r)
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)
+-- /show
+
+main = runPipe (yieldMany [1..10] &gt;-&gt; takeExactly 5 &gt;-&gt; fold (+) 0) &gt;&gt;= print</code></pre><p>However, we can also use this functionality to modify the result type. For example, we may want to return any unused values from our input list in <code>yieldMany</code>. This would look like:</p><pre><code class="haskell active">import Control.Monad
+
+data Step i o d m r
+    = Pure r
+    | M (m (Step i o d m r))
+    | Yield (Pipe i o d m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o d m r)
+
+type Pipe i o d m r = Maybe d -&gt; Step i o d m r
+
+fuse :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe y -&gt; Step a b y m z)
+      -&gt; Step b c x m y
+      -&gt; Step a c x m z
+fuse' up0 (Pure r) =
+    go $ up0 $ Just r
+  where
+    go (Pure r') = Pure r'
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just r
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    go (Pure r) = fuse' (\_ -&gt; Pure r) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i r m r
+idP Nothing = Await (Yield idP)
+idP (Just r) = Pure r
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o d m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure (front [])
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure r
+
+runPipe :: Monad m =&gt; Pipe () () d m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+runStep :: Monad m =&gt; Step () () d m r -&gt; m r
+runStep (Pure r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+
+takeExactly :: Monad m =&gt; Int -&gt; Pipe i i r m r
+takeExactly 0 (Just r) = Pure r
+takeExactly 0 Nothing = Yield (takeExactly 0) Nothing
+takeExactly count _ = Await $ \mi -&gt; Yield (takeExactly (count - 1)) mi
+
+-- show
+yieldMany :: Monad m =&gt; [o] -&gt; Pipe i o r m ([o], r)
+yieldMany rest (Just r) = Pure (rest, r)
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)
+
+main = runPipe (yieldMany [1..10] &gt;-&gt; takeExactly 5 &gt;-&gt; fold (+) 0) &gt;&gt;= print
+-- /show
+-- IGNORED</code></pre><h2 id="leftovers-chunked-data"><a href="#leftovers-chunked-data">Leftovers/chunked data</a></h2><p>So I promised a solution to leftovers as well. Actually, we can base a solution on that preceding example. When we return a result, we should also return any unconsumed input with it. When we monadically compose two <code>Pipe</code>s, we want the leftovers from the first to be injected into the second to be used any time the second awaits. We haven't actually shown a <code>Monad</code> instance yet, and without creating a <code>newtype</code> in place of our type synonym, we can't. But let's play around with some <code>pipeReturn</code> and <code>pipeBind</code> functions:</p><pre><code class="haskell active">import Control.Monad
+
+-- show
+data Step i o d m r
+    = Pure [i] r
+    | M (m (Step i o d m r))
+    | Yield (Pipe i o d m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o d m r)
+
+type Pipe i o d m r = Maybe ([o], d) -&gt; Step i o d m r
+
+pipeReturn :: Monad m =&gt; r -&gt; Pipe i o d m r
+pipeReturn r _downRes = Pure [] r
+
+pipeBind :: Monad m
+         =&gt; Pipe i o d m a
+         -&gt; (a -&gt; Pipe i o d m b)
+         -&gt; Pipe i o d m b
+pipeBind f g mr =
+    go $ f mr
+  where
+    go (Pure is a) = inject is (g a) mr
+    go (M m) = M (liftM go m)
+    go (Yield p o) = Yield (pipeBind p g) o
+    go (Await f) = Await (go . f)
+
+inject :: Monad m =&gt; [i] -&gt; Pipe i o d m r -&gt; Pipe i o d m r
+inject [] p = p
+inject is0 p0 =
+    go is0 . p0
+  where
+    go [] p = p
+    go is (Pure is' r) = Pure (is' ++ is) r
+    go is (M m) = M (liftM (go is) m)
+    go is (Yield p o) = Yield (go is . p) o
+    go (i:is) (Await p) = go is (p $ Just i)
+
+peek :: Monad m =&gt; Pipe i o d m (Maybe i)
+peek _ = Await $ \mi -&gt;
+    case mi of
+        Nothing -&gt; Pure [] Nothing
+        Just i -&gt; Pure [i] (Just i)
+
+peekFold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d m (Maybe i, r)
+peekFold f r = peek `pipeBind` \a -&gt; fold f r `pipeBind` \b -&gt; pipeReturn (a, b)
+
+main = do
+    runPipe (yieldMany [1..10] &gt;-&gt; peek) &gt;&gt;= print
+    runPipe (yieldMany [1..10] &gt;-&gt; peekFold (+) 0) &gt;&gt;= print
+-- /show
+
+fuse :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe ([b], y) -&gt; Step a b y m z)
+      -&gt; Step b c x m y
+      -&gt; Step a c x m z
+fuse' up0 (Pure cs z) =
+    go $ up0 $ Just (cs, z)
+  where
+    go (Pure bs y) = Pure bs y
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just ([], z)
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    go (Pure bs y) = fuse' (\_ -&gt; Pure bs y) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b y m z
+     -&gt; Pipe b c x m y
+     -&gt; Pipe a c x m z
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i r m r
+idP Nothing = Await (Yield idP)
+idP (Just (is, r)) = Pure is r
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o d m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure [] (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure [] (front [])
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure [] r
+
+runPipe :: Monad m =&gt; Pipe () () d m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+runStep :: Monad m =&gt; Step () () d m r -&gt; m r
+runStep (Pure _ r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+
+takeExactly :: Monad m =&gt; Int -&gt; Pipe i i r m r
+-- We specifically ignore leftovers, since we want to ensure
+-- that we consumed exactly the given number of elements
+-- from the stream.
+takeExactly 0 (Just (_, r)) = Pure [] r
+takeExactly 0 Nothing = Yield (takeExactly 0) Nothing
+takeExactly count _ = Await $ \mi -&gt; Yield (takeExactly (count - 1)) mi
+
+yieldMany :: Monad m =&gt; [o] -&gt; Pipe i o r m ([o], [o], r)
+yieldMany rest (Just (os, r)) = Pure [] (rest, os, r)
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)</code></pre><h2 id="early-termination"><a href="#early-termination">Early termination</a></h2><p>So we've done all of this work to get rid of early termination. But in practice, it's often very convenient to have early termination. For example, a common pipes and conduit idiom to create a producer from an infinite list is:</p><pre><code>mapM_ yield [1..]</code></pre><p>Without some kind of early termination, this will never exit. Fortunately, having early exit from a <code>Monad</code> is a solved problem. We could either layer something like <code>MaybeT</code> in our transformer stack, or add a new constructor to our <code>Step</code> datatype. There are a few complications introduced by this, notably that we have an extra type parameter (<code>t</code> for <b>t</b>ermination) which must be unified with our result type, but the approach works.</p><pre><code class="haskell active">import Control.Monad
+-- show
+data Step i o d t m r
+    = Pure [i] r
+    | M (m (Step i o d t m r))
+    | Yield (Pipe i o d t m r) (Maybe o)
+    | Await (Maybe i -&gt; Step i o d t m r)
+    | Stop [i] t
+
+type Pipe i o d t m r = Maybe ([o], d) -&gt; Step i o d t m r
+
+yield :: Monad m =&gt; o -&gt; Pipe i o d d m ()
+yield _ (Just (_, d)) = Stop [] d
+yield o Nothing = Yield (pipeReturn ()) (Just o)
+
+stop :: Monad m =&gt; Pipe i o d d m r
+stop (Just (_, r)) = Stop [] r
+stop Nothing = Yield stop Nothing
+
+pipeMapM_ :: Monad m
+          =&gt; (a -&gt; Pipe i o d t m ())
+          -&gt; [a]
+          -&gt; Pipe i o d t m ()
+pipeMapM_ _ [] = pipeReturn ()
+pipeMapM_ f (x:xs) = f x `pipeBind` (const (pipeMapM_ f xs))
+
+main :: IO ()
+main = do
+    let producer =
+            pipeMapM_ yield [1..] `pipeBind`
+            const stop
+    runPipe (producer &gt;-&gt; takeExactly 10 &gt;-&gt; fold (+) 0)
+        &gt;&gt;= print
+-- /show
+pipeReturn :: Monad m =&gt; r -&gt; Pipe i o d t m r
+pipeReturn r _downRes = Pure [] r
+
+pipeBind :: Monad m
+         =&gt; Pipe i o d t m a
+         -&gt; (a -&gt; Pipe i o d t m b)
+         -&gt; Pipe i o d t m b
+pipeBind f g mr =
+    go $ f mr
+  where
+    go (Pure is a) = inject is (g a) mr
+    go (M m) = M (liftM go m)
+    go (Yield p o) = Yield (pipeBind p g) o
+    go (Await p) = Await (go . p)
+    go (Stop is t) = Stop is t
+
+inject :: Monad m =&gt; [i] -&gt; Pipe i o d t m r -&gt; Pipe i o d t m r
+inject [] p = p
+inject is0 p0 =
+    go is0 . p0
+  where
+    go [] p = p
+    go is (Pure is' r) = Pure (is' ++ is) r
+    go is (M m) = M (liftM (go is) m)
+    go is (Yield p o) = Yield (go is . p) o
+    go (i:is) (Await p) = go is (p $ Just i)
+    go is (Stop is' r) = Stop (is' ++ is) r
+
+peek :: Monad m =&gt; Pipe i o d t m (Maybe i)
+peek _ = Await $ \mi -&gt;
+    case mi of
+        Nothing -&gt; Pure [] Nothing
+        Just i -&gt; Pure [i] (Just i)
+
+peekFold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d t m (Maybe i, r)
+peekFold f r = peek `pipeBind` \a -&gt; fold f r `pipeBind` \b -&gt; pipeReturn (a, b)
+
+fuse :: Monad m
+     =&gt; Pipe a b y z m z
+     -&gt; Pipe b c x y m y
+     -&gt; Pipe a c x z m z
+fuse up down mr = fuse' up (down mr)
+
+fuse' :: Monad m
+      =&gt; (Maybe ([b], y) -&gt; Step a b y z m z)
+      -&gt; Step b c x y m y
+      -&gt; Step a c x z m z
+fuse' up0 (Pure cs z) =
+    go $ up0 $ Just (cs, z)
+  where
+    go (Pure bs y) = Pure bs y
+    go (M m) = M (liftM go m)
+    go (Yield up _) = go $ up $ Just ([], z)
+    go (Await up) = Await $ \ma -&gt; go $ up ma
+    go (Stop bs y) = Stop bs y
+fuse' up (M m) = M (liftM (fuse' up) m)
+fuse' up (Yield down o) = Yield (fuse up down) o
+fuse' up0 (Await down) =
+    go $ up0 Nothing
+  where
+    go (Pure bs y) = fuse' (\_ -&gt; Pure bs y) (down Nothing)
+    go (M m) = M (liftM go m)
+    go (Yield up b) = fuse' up (down b)
+    go (Await up) = Await (go . up)
+    go (Stop bs y) = fuse' (\_ -&gt; Stop bs y) (down Nothing)
+fuse' up0 (Stop cs z) = fuse' up0 (Pure cs z)
+
+(&gt;-&gt;) :: Monad m
+     =&gt; Pipe a b y z m z
+     -&gt; Pipe b c x y m y
+     -&gt; Pipe a c x z m z
+(&gt;-&gt;) = fuse
+
+idP :: Monad m =&gt; Pipe i i r t m r
+idP Nothing = Await (Yield idP)
+idP (Just (is, r)) = Pure is r
+
+consume :: Monad m =&gt; Int -&gt; Pipe i o d t m [i]
+consume count0 _ =
+    go id count0
+  where
+    go front 0 = Pure [] (front [])
+    go front count = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; go (front . (i:)) (count - 1)
+            Nothing -&gt; Pure [] (front [])
+
+fold :: Monad m =&gt; (r -&gt; i -&gt; r) -&gt; r -&gt; Pipe i o d t m r
+fold f r0 _ =
+    loop r0
+  where
+    loop r = Await $ \mi -&gt;
+        case mi of
+            Just i -&gt; loop $! f r i
+            Nothing -&gt; Pure [] r
+
+runPipe :: Monad m =&gt; Pipe () () d r m r -&gt; m r
+runPipe f = runStep (f Nothing)
+
+runStep :: Monad m =&gt; Step () () d r m r -&gt; m r
+runStep (Pure _ r) = return r
+runStep (M m) = m &gt;&gt;= runStep
+runStep (Await f) = runStep (f Nothing)
+runStep (Yield f _) = runPipe f
+runStep (Stop _ r) = return r
+
+takeExactly :: Monad m =&gt; Int -&gt; Pipe i i r t m r
+-- We specifically ignore leftovers, since we want to ensure
+-- that we consumed exactly the given number of elements
+-- from the stream.
+takeExactly 0 (Just (_, r)) = Pure [] r
+takeExactly 0 Nothing = Yield (takeExactly 0) Nothing
+takeExactly count _ = Await $ \mi -&gt; Yield (takeExactly (count - 1)) mi
+
+yieldMany :: Monad m =&gt; [o] -&gt; Pipe i o r t m ([o], [o], r)
+yieldMany rest (Just (os, r)) = Pure [] (rest, os, r)
+yieldMany [] Nothing = Yield (yieldMany []) Nothing
+yieldMany (o:os) Nothing = Yield (yieldMany os) (Just o)</code></pre><h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2><p>The approach I've shown here is not optimized. A faster way of implementing this is to collapse <code>Pipe</code> and <code>Step</code> back into a single data type, and have a dedicated constructor to asking for downstream results. It's also more efficient to skip all of the <code>Maybe</code> wrappers. Instead of <code>Await</code> taking a <code>Maybe i</code>, <code>Await</code> can have two fields: one for when a value is available from upstream, and the other for when no such value is available.</p><p>Though it's currently highly experimental, I've implemented these ideas in an <a href="https://github.com/snoyberg/conduit/blob/1d6e35e3956666a62ed65538e40474b4891be9f9/conduit/Data/Conduit/Internal.hs#L68">experimental branch of conduit</a>. A quick translation from our approach is:</p><ul><li>Stop is called Terminate.</li><li>Await has been deconstructed into two fields.</li><li>Instead of <code>Yield</code> providing a <code>Maybe o</code>, it provides an <code>o</code>. The functionality provided by yielding <code>Nothing</code> is now handled by the <code>Empty</code> constructor.</li><li><code>Check</code> is used for checking for downstream results.</li><li><code>Yield</code> and <code>Empty</code> are also able to check for downstream results. In the case of <code>Empty</code>, we are guaranteed that downstream must provide a result. In the case of <code>Yield</code>, we include the extra field as an optimization, since composing <code>Yield</code> and <code>Check</code> is otherwise so common.</li></ul><p>I've been able to replicate the current conduit API on top of this. The full test suite passes, including some tests for identity and associativity that failed previously. And the benchmarks show this approach as comparable to previous versions.</p><p>This approach seems very promising to me, but I also think we need to take time to analyze it properly. I look forward to hearing what the rest of the community thinks.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "snoyberg-soh"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/snoyberg/blog-posts/simpler-conduit-core';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html><head><title>Web app/Microservice example in Haskell - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/alexanderaa">Alexander</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/alexanderaa/haskell-microservice">Web app/Microservice example in Haskell</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Web app/Microservice example in Haskell</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">22 Jul 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/alexanderaa">Alexander</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/17782/783ca40227c048fdbc53c6a95c355e8b3e71e76f">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/alexanderaa/stm-examples">Previous content: STM examples</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/alexanderaa">See all content by Alexander</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a><ul><li><a href="#tools">Tools</a></li><li><a href="#starting-a-project">Starting a project</a></li></ul></li><li><a href="#building-a-microservice">Building a microservice</a></li><li><a href="#summary">Summary</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><blockquote><p>&quot;The term 'Microservice Architecture' has sprung up over the last few years to describe a particular way of designing software applications as suites of independently deployable services. While there is <b>no precise definition</b> of this architectural style, there are certain common characteristics around organization around business capability, automated deployment, intelligence in the endpoints, and decentralized control of languages and data.&quot;
+<a href="http://martinfowler.com/articles/microservices.html">(Martin Fowler - Microservices)</a></p></blockquote><h2 id="introduction"><a href="#introduction">Introduction</a></h2><p>The intention of this tutorial is to build a complete web application in Haskell and to highlight a variety of related topics - providing a starting point for Haskell beginners and discussion topics for everyone else.</p><h3 id="tools"><a href="#tools">Tools</a></h3><p>Haskell is a more complex language than many others. Therefore all code examples run in online FPComplete IDE - to allow more time to experiment with the code rather than build and deployment.</p><p>The IDE does not have all libraries preinstalled, so a minor configuration change will be required to run the examples - the lines below should be included into the 'extra packages' section of the IDE config.</p><pre><code>Hackage: digestive-functors 0.8.0.0
+Hackage: hspec-discover 2.1.8
+Hackage: hspec-expectations 0.7.0
+Hackage: hspec-core 2.1.8
+Hackage: hspec 2.1.8
+Hackage: hspec-snap 0.3.3.0
+Hackage: snaplet-sqlite-simple 0.4.8.3</code></pre><p>Haskell has a variety of tools to develop web applications. Snap, Yesod, Happstack and other quality frameworks are available for immediate use and it is easy to find their documentation online. Cabal and its recently created sibling, Stack, are used for application deployment and packaging.</p><p>The general approach used in Haskell web frameworks is to have a framework-specific monad, which enforces certain kind of API - allows to read request data, send responses, interact with routes, cookies, application state, etc. in a predefined way.</p><h3 id="starting-a-project"><a href="#starting-a-project">Starting a project</a></h3><p>Normally we would use a sequence of commands like below to start our project:</p><pre><code>$ mkdir project &amp;&amp; cd project  # create project directory
+$ cabal sandbox init           # create development sandbox
+
+&lt;Add actual source files, e.g. Main.hs; add dependencies to project.cabal&gt;
+
+$ cabal install                # compile the application
+</code></pre><p>Cabal is the name for two different things in Haskell. One of them is a library and another one is a package manager, based on the forementioned library. There is also a new tool, which is compatible with Cabal and is called Stack.</p><p>Note, that most frameworks provide project templates, e.g.:</p><pre><code>$ snap init barebones          # creates a predefined directory/file structure for a new project</code></pre><p>We will start with a very simplistic application, written using Snap framework. The application does not do anything except that it returns &quot;hello&quot; to every request.</p><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+{- | Simple application.
+
+    No cookies, no logging, no routes,
+    no database connections,
+    no templates and no forms.
+-}
+
+module Main where
+
+import Control.Applicative
+import Snap
+import qualified System.Environment as E
+
+app :: Snap ()
+app = do
+    writeText &quot;hello&quot;
+
+main :: IO ()
+main = do
+
+    -- FPComplete-specific: we need to get a port number to serve at
+    port &lt;- read &lt;$&gt; E.getEnv &quot;PORT&quot;
+
+    -- Serve the app
+    httpServe (setPort port defaultConfig) app
+</code></pre><p>The application should be pretty self-explanatory at this stage. Try to run the app in the IDE and note the link in the &quot;Console&quot; tab (you might need to scroll up a little bit).</p><p>To gain understanding of how things work, it is very useful to review type signatures. For example, using <a href="https://www.haskell.org/hoogle/">Hoogle</a> or <a href="http://www.stackage.org/lts-2.19/hoogle">Hoogle at FPComplete</a> or <a href="http://hayoo.fh-wedel.de/">Hayoo</a> - try to find out what is the type signature for writeText. Both Hoogle and Hayoo could be installed on your development machine.</p><p>Snap does not make too many choices in terms of how the application should be structured and which libraries to use. There are multiple choices of libraries for interaction with databases, templating, etc.</p><h2 id="building-a-microservice"><a href="#building-a-microservice">Building a microservice</a></h2><p>In this tutorial we will be building an app which provides simple postal code lookup functionality. It returns zip codes for addresses it knows, nothing else.
+Lets add a QuickCheck test to the application to see how it works.</p><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+{- | Simple application.
+
+    No cookies, no logging, no routes,
+    no database connections,
+    no templates and no forms.
+-}
+
+module Main where
+
+import Control.Applicative
+import Snap
+import Test.QuickCheck
+import qualified System.Environment as E
+
+app :: Snap ()
+app = do
+    writeText &quot;hello?&quot;
+
+prop_plus :: Int -&gt; Int -&gt; Bool
+prop_plus a b = (a+b) == (b+a)
+
+main :: IO ()
+main = do
+
+    -- FPComplete-specific: we need to get a port number to serve at
+    port &lt;- read &lt;$&gt; E.getEnv &quot;PORT&quot;
+
+    -- Run tests
+    quickCheck prop_plus
+    -- Serve the app
+    httpServe (setPort port defaultConfig) app
+</code></pre><p>There are more specialised libraries, which help to run more framework-specific tests. For example, <a href="http://hspec.github.io/writing-specs.html">Hspec</a>.
+Hspec includes integration both with Snap framework and with QuickCheck.</p><p>Lets try to use Hspec in our project - describe an application, which responds with &quot;hello&quot;, when we visit /hello, and implement the application.</p><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+{- | Simple application. -}
+
+module Main where
+
+import Data.ByteString
+import Control.Applicative
+import Snap
+import Test.Hspec
+import qualified Test.Hspec.Snap as T
+import qualified System.Environment as E
+
+-- | Application database pool, state, etc. can be added here
+data App = App {}
+
+-- | Simple handler
+sayHello :: Handler App App ()
+sayHello = do
+    writeText &quot;hello&quot;
+
+-- | Application routes
+routes :: [(ByteString, Handler App App ())]
+routes = [(&quot;/hello&quot;, method GET $ sayHello)]
+
+-- | Initialisation
+appInit :: SnapletInit App App
+appInit = makeSnaplet &quot;microservice&quot; &quot;My example microservice&quot; Nothing $ do
+    addRoutes routes
+    return $ App
+
+-- | Tests
+tests :: Spec
+tests = do
+    T.snap (route routes) appInit $ do
+        describe &quot;Application&quot; $ do
+            it &quot;Has /hello route&quot; $ do
+                T.get &quot;/hello&quot; &gt;&gt;= T.should200
+            it &quot;Says 'hello'&quot; $ do
+                T.get &quot;/hello&quot; &gt;&gt;= T.shouldHaveText &quot;hello&quot;
+
+main :: IO ()
+main = do
+
+    -- FPComplete-specific: we need to get a port number to serve at
+    port &lt;- read &lt;$&gt; E.getEnv &quot;PORT&quot;
+
+    -- Run tests
+    hspec tests
+
+    -- Serve the app
+    serveSnaplet (setPort port defaultConfig) appInit</code></pre><p>Now, it is time to extend the application even further - add database logic.</p><p>Things to look at:</p><ul><li><p>To add database connection, or cookie handling or templating or any global state to the application, we reuse or create a snaplet - basically a module, which provides certain functionality using framework tools and API.</p><p>  In this particular case it was a bit challenging to connect database, because FPComplete does not provide database hosting. However, there is still a possibility to create SQLite databases, which we do in this example.</p><p>  I also do not know how to create a proper directory structure for Snap configuration files. As a result, to make this example self-contained, I wrote a small Snaplet, which creates in-memory SQLite database without looking into configuration files - sqliteInit.</p><p>  As we use in-memory database, we need a way to re-create database on application start. initDb does just that.</p></li><li><p>To include a snaplet into our application, we add it to the App type. 
+  makeLenses is a Template Haskell construct. The idea is pretty simple - it automatically generates accessors (lenses) for the App type. We probably can do the same explicitly if needed (try to remove makeLenses!).</p></li><li><p>appInit constains initialization logic for the application - can be used to initialize snaplets, add routes, etc. In this case it only adds routes, creates an in-memory SQLite database and provides a database connection handle.</p></li><li><p>MVar is used to manage the connection to our database. MVar is a primitive from Control.Concurrent, which provides a useful API for concurrent programming. putMVar puts value into MVar, when it is empty and blocks otherwise. takeMVar empties the MVar if it is not empty, otherwise blocks.</p></li><li><p>hAdd, hFind are handlers. Their responsibility is to take requests and return responses</p></li><li>query and execute are taken from Database.SQLite.Simple, which is a pretty low-level library (there are quite a few ORMs for Haskell. In contrast, sqlite-simple provides almost direct access to the database, which might be good for certain applications. It is also easier for understanding and looks like a good starting option.<ul><li>Check if it is possible to get SQL injection vulnerability in the example code. A good starting point will be to look at the Query type.</li></ul></li><li><p>Show, Readable, ToField, FromRow type classes provide an interface for data type/format conversion. It is possible to automatically generate type class instances for certain types - look at Address and Postcode for example. &quot;deriving Show&quot; generates Show class instance automatically. However, it is also possible to create instances explicitly - look at ToField instances in the code.</p></li></ul><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances   #-}
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TemplateHaskell     #-}
+
+module Main where
+
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Lens
+import           Data.ByteString
+import           Data.Maybe
+import qualified Data.Text                        as TX
+import qualified Data.Text.Encoding               as TE
+import qualified Database.SQLite.Simple           as S
+import           Database.SQLite.Simple.ToField
+import           Snap
+import           Snap.Snaplet.SqliteSimple
+import           Snap.Util.Readable
+import qualified System.Environment               as E
+import           Test.Hspec
+import qualified Test.Hspec.Snap                  as T
+
+-----------------------------------------------------------------------------
+
+-- | Application database pool, state, etc. can be added here
+data App = App { _db :: Snaplet Sqlite }
+makeLenses ''App
+
+instance HasSqlite (Handler b App) where
+  getSqliteState = with db get
+
+-----------------------------------------------------------------------------
+
+data Address = Address TX.Text   deriving Show
+data Postcode = Postcode TX.Text deriving Show
+
+instance Readable Address where
+    fromBS bs = return $ Address (TE.decodeUtf8 bs)
+instance Readable Postcode where
+    fromBS bs = return $ Postcode (TE.decodeUtf8 bs)
+
+
+instance ToField Address where
+    toField (Address x) = toField x
+instance ToField Postcode where
+    toField (Postcode x) = toField x
+
+instance FromRow Postcode where
+    fromRow = Postcode &lt;$&gt; field
+instance ToRow Address where
+    toRow (Address x) = [toField x]
+
+-----------------------------------------------------------------------------
+
+-- | Create database schema - we use in-memory database
+initDb :: S.Connection -&gt; IO S.Connection
+initDb c = do
+    S.execute_ c &quot;create table post_code (address text, code int)&quot;
+    S.execute_ c &quot;insert into post_code (address, code) values ('Grafton','x1010')&quot;
+    return c
+
+-- | Initialise the snaplet
+sqliteInit :: SnapletInit b Sqlite
+sqliteInit = makeSnaplet &quot;sqlite-simple&quot; description datadir $ do
+    c &lt;- liftIO $ S.open &quot;:memory:&quot; &gt;&gt;= initDb &gt;&gt;= newMVar
+    return $ Sqlite c
+  where
+    description = &quot;Sqlite abstraction&quot;
+    datadir = Nothing
+
+-- | Initialise app
+appInit :: SnapletInit App App
+appInit = makeSnaplet &quot;microservice&quot; &quot;My example microservice&quot; Nothing $ do
+    addRoutes routes
+    d &lt;- nestSnaplet &quot;in-memory db&quot; db Main.sqliteInit
+    return $ App d
+
+-----------------------------------------------------------------------------
+
+-- | Handler - finds postcode for known addresses
+hFind :: Handler App App ()
+hFind = do
+    address &lt;- fromJust &lt;$&gt; getParam &quot;address&quot;
+    addr &lt;- fromBS $ address
+    r &lt;- query &quot;select cast(code as text) from post_code where address = ?&quot; (addr :: Address) :: Handler App App [Postcode]
+    writeText $ (TX.pack . show) r
+
+-- | Handler - adds new (address, postcode) pairs
+hAdd :: Handler App App ()
+hAdd = do
+    address  &lt;- fromJust &lt;$&gt; getParam &quot;address&quot;
+    postcode &lt;- fromJust &lt;$&gt; getParam &quot;postcode&quot;
+    addr :: Address &lt;- fromBS address
+    code :: Postcode &lt;- fromBS postcode
+    execute &quot;insert into post_code (address, code) values (?,?)&quot; (addr, code)  :: Handler App App ()
+
+-----------------------------------------------------------------------------
+
+-- | Application routes
+routes :: [(ByteString, Handler App App ())]
+routes = [(&quot;/find&quot;, hFind),
+          (&quot;/add&quot;,  hAdd )]
+
+-- | Tests
+tests :: Spec
+tests =
+    T.snap (route routes) appInit $ do
+        describe &quot;Application&quot; $ do
+            it &quot;Has /add route&quot; $ do
+                T.get' &quot;/add&quot; (T.params [(&quot;address&quot;, &quot;Grafton&quot;), (&quot;postcode&quot;, &quot;1010&quot;)]) &gt;&gt;= T.should200
+            it &quot;Adds (postcode,address) pair&quot; $ do
+                T.post &quot;/add&quot; (T.params [(&quot;address&quot;, &quot;Grafton&quot;), (&quot;postcode&quot;, &quot;1010&quot;)]) &gt;&gt;= T.should200
+            it &quot;Returns postcode for known address&quot; $ do
+                T.get' &quot;/find&quot; (T.params [(&quot;address&quot;, &quot;Grafton&quot;)]) &gt;&gt;= T.shouldHaveText &quot;1010&quot;
+
+main :: IO ()
+main = do
+    -- FPComplete-specific: we need to get a port number to serve at
+    port &lt;- read &lt;$&gt; E.getEnv &quot;PORT&quot;
+
+    -- Run tests
+    hspec tests
+
+    -- Serve the app
+    serveSnaplet (setPort port defaultConfig) appInit</code></pre><p>At this stage we have a working application, which provides a very simplistic postal code lookup service. There are obviously many things, which could be improved. Some of them are:</p><ul><li>Support for a variety of input/output formats<ul><li>Could be (easily) accomplished with Aeson and similar libraries - that would require us to e.g. define ToJSON and FromJSON type class instances</li></ul></li><li>Database interactions/ORM<ul><li>There are several quality implementations of ORM in Haskell. For example, <a href="https://hackage.haskell.org/package/esqueleto">Esqueleto</a> provides a DSL for database manipulations:</li></ul></li></ul><pre><code class="haskell">do people &lt;- select (from $ \person -&gt; return person)
+   liftIO $ mapM_ (putStrLn . personName . entityVal) people</code></pre><ul><li>Concurrency and multithreading<ul><li>Haskell has really advanced support for writing both concurrent and parallel software. Good starting points will be:<ul><li><a href="https://hackage.haskell.org/package/parallel">Control.Parallel</a></li></ul></li><li>and for concurrency primitives:<ul><li><a href="https://hackage.haskell.org/package/stm">Control.Concurrent.STM</a></li><li><a href="http://hackage.haskell.org/package/base-4.8.0.0/docs/Control-Concurrent-MVar.html">Control.Concurrent.MVar</a></li><li><a href="http://hackage.haskell.org/package/base-4.8.0.0/docs/Data-IORef.html">Data.IORef</a></li></ul></li></ul></li><li>Automated API generation, based on table structure (or any equivalent description)<ul><li><a href="http://silkapp.github.io/rest/">rest</a></li><li><a href="https://hackage.haskell.org/package/postgrest">postgrest</a></li><li>.. and many others</li></ul></li></ul><h2 id="summary"><a href="#summary">Summary</a></h2><p>Haskell language and implementations include a variety of concepts, which assist us to write reliable software. Haskell makes the task of code verification easier, provides practical concurrency primitives, allows to enforce APIs (e.g. remember Snap monad) and combine pieces of software easier. As a side effect, these properties also make average quality of Haskell libraries much higher.</p><p>The tutorial highlights several things which might be useful for people who consider Haskell as a language for their next web application - the expectation is that many things mentioned in the tutorial will be not quite clear for beginners.</p><p><a href="https://wiki.haskell.org/Haskell">Haskell wiki</a> and <a href="https://www.fpcomplete.com/school">School of Haskell</a> are really helpful and highly recommended resources to explore both theoretical and practical sides of Haskell.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/alexanderaa/haskell-microservice';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

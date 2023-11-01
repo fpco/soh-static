@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html><head><title>From Zipper To Lens - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/psygnisfive">psygnisfive</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/psygnisfive/from-zipper-to-lens">From Zipper To Lens</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">From Zipper To Lens</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 3 Mar 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/psygnisfive">psygnisfive</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/9898/e4c11dec2e12596f50aa43f97be7620ed88e461e">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/psygnisfive">See all content by psygnisfive</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Before we start, some prefacing junk:</p><pre><code class="haskell">{-# LANGUAGE RankNTypes #-}
+
+import Control.Applicative</code></pre><p>How can we pull out an element from a structure to focus on it without losing our sense of where it is in the structure? One approach is zippers (if you don't know what a zipper is, read up!). Let's make a zipper for pairs:</p><pre><code class="haskell">data PairContext a b = InFst b | InSnd a
+
+data PairZipper a b c = PairZipper c (PairContext a b)</code></pre><p>A <code>PairZipper a b c</code> is a pair in <code>(a,b)</code> focused on something of type <code>c</code>. We can look into the components of a pair (and wrap zippers back up into pairs) like so:</p><pre><code class="haskell">lookFstPZ :: (a,b) -&gt; PairZipper a b a
+lookFstPZ (a,b) = PairZipper a (InFst b)
+
+unzipFstPZ :: PairZipper a b a -&gt; (a,b)
+unzipFstPZ (PairZipper a (InFst b)) = (a,b)
+
+lookSndPZ :: (a,b) -&gt; PairZipper a b b
+lookSndPZ (a,b) = PairZipper b (InSnd a)
+
+unzipSndPZ :: PairZipper a b b -&gt; (a,b)
+unzipSndPZ (PairZipper b (InSnd a)) = (a,b)</code></pre><p>And we can look at or modify a focused element:</p><pre><code class="haskell">viewPZ :: PairZipper a b c -&gt; c
+viewPZ (PairZipper c l) = c
+
+overPZ :: (c -&gt; c) -&gt; PairZipper a b c -&gt; PairZipper a b c
+overPZ f (PairZipper c l) = PairZipper (f c) l</code></pre><p>Question: how can we compose these so that we can <code>lookFstPZ</code>, then <code>lookSndPZ</code>, and have this be another kind of Zipper-like thing?</p><p>Answer: too hard, forget it.</p><p>How about a zipper for lists?</p><pre><code class="haskell">data ListContext a = ListCtx [a] [a]
+
+data ListZipper a = ListZipper a (ListContext a)
+
+lookHeadLZ :: [a] -&gt; ListZipper a
+lookHeadLZ (a:as) = ListZipper a (ListCtx [] as)
+
+unzipLZ :: ListZipper a -&gt; [a]
+unzipLZ (ListZipper a (ListCtx bfr aft)) = bfr ++ [a] ++ aft
+
+viewLZ :: ListZipper a -&gt; a
+viewLZ (ListZipper a l) = a
+
+overLZ :: (a -&gt; a) -&gt; ListZipper a -&gt; ListZipper a
+overLZ f (ListZipper a l) = ListZipper (f a) l</code></pre><p>Question: how can we compose these? Again, too hard. Forget it!</p><pre><code class="haskell">data Tree a = Leaf a | Branch a (Tree a) (Tree a)
+
+data TreeCtx a = Here
+               | InLeft a (TreeCtx a) (Tree a)
+               | InRight a (Tree a) (TreeCtx a)
+
+data TreeZipper a = TreeZipper (Tree a) (TreeCtx a)
+
+lookRootTZ :: Tree a -&gt; TreeZipper a
+lookRootTZ t = TreeZipper t Here
+
+unzipTZ :: TreeZipper a -&gt; Tree a
+unzipTZ (TreeZipper t Here) = t
+unzipTZ (TreeZipper l (InLeft a c r)) = unzipTZ (TreeZipper (Branch a l r) c)
+unzipTZ (TreeZipper r (InRight a l c)) = unzipTZ (TreeZipper (Branch a l r) c)
+
+viewTZ :: TreeZipper a -&gt; a
+viewTZ (TreeZipper (Leaf a) c) = a
+viewTZ (TreeZipper (Branch a l r) c) = a
+
+overTZ :: (a -&gt; a) -&gt; TreeZipper a -&gt; TreeZipper a
+overTZ f (TreeZipper (Leaf a) c) = TreeZipper (Leaf (f a)) c
+overTZ f (TreeZipper (Branch a l r) c) = TreeZipper (Branch (f a) l r) c</code></pre><p>Question: ... well you get the idea.</p><p>Why not just use...</p><pre><code class="haskell">data Focused s a = Focused { foc :: a, loc :: a -&gt; s }</code></pre><p>We can now be pretty generic:</p><pre><code class="haskell">unfocusF :: Focused s a -&gt; s
+unfocusF (Focused foc loc) = loc foc
+
+type Focuser s a = s -&gt; Focused s a
+
+viewF :: Focuser s a -&gt; s -&gt; a
+viewF l s = foc (l s)
+
+overF :: Focuser s a -&gt; (a -&gt; a) -&gt; s -&gt; s
+overF l f s = let Focused foc loc = l s
+              in loc (f foc)</code></pre><p>Let's also introduce a new function that makes life simpler:</p><pre><code class="haskell">setF :: Focuser s a -&gt; a -&gt; s -&gt; s
+setF l a s = overF l (const a) s</code></pre><p>Let's look at our various zippers, but this time viewed as <code>Focused</code> elements. First pairs:</p><pre><code class="haskell">lookFstF :: Focuser (a,b) a
+lookFstF (a,b) = Focused a (\a' -&gt; (a',b))
+
+lookSndF :: Focuser (a,b) b
+lookSndF (a,b) = Focused b (\b' -&gt; (a,b'))</code></pre><p>And lists:</p><pre><code class="haskell">lookHeadF :: Focuser [a] a
+lookHeadF (a:as) = Focused a (\a' -&gt; a':as)</code></pre><p>And trees:</p><pre><code class="haskell">lookRootF :: Focuser (Tree a) a
+lookRootF (Leaf a) = Focused a (\a' -&gt; Leaf a')
+lookRootF (Branch a l r) = Focused a (\a' -&gt; Branch a' l r)</code></pre><p>We can now answer our question about how to compose:</p><pre><code class="haskell">(&gt;-) :: Focuser a b -&gt; Focuser b c -&gt; Focuser a c
+(l &gt;- l') a = let Focused foc loc = l a
+                  Focused foc' loc' = l' foc
+              in Focused foc' (loc.loc')</code></pre><p>This does exactly what you'd hope: <code>lookFstF &gt;- lookSndF :: Focuser ((a,b),c) b</code>  is exactly
+the gadget that looks at the first element of the outer pair, then at the second of that
+same for, say, lists: <code>lookHeadF &gt;- lookFstF :: Focuser [(a,b)] a</code> looks at the first
+component of the head of a list of pairs. and so on generically.</p><p>But over has an unusual restriction: the action on the focused element can't change the
+elements type. Sometimes that seems reasonable, like for a list which have to be homogeneously
+typed, but other times it's an unnecessary constraint, such as for pairs. Why can't we, for
+instance, focus on the first component of an <code>(a,b)</code> and then somehow act on it to produce
+an <code>(a',b)</code>? We need to generalize focusing for this to work:</p><pre><code class="haskell">data Focused' t a b = Focused' { foc' :: a, loc' :: b -&gt; t }
+
+type Focuser' s t a b = s -&gt; Focused' t a b</code></pre><p>Fortunately, that's <i>all</i> we have to change. The rest is identical, other than types:</p><pre><code class="haskell">unfocusF' :: Focused' s a a -&gt; s
+unfocusF' (Focused' foc loc) = loc foc
+
+viewF' :: Focuser' s t a b -&gt; s -&gt; a
+viewF' l s = foc' (l s)
+
+overF' :: Focuser' s t a b -&gt; (a -&gt; b) -&gt; s -&gt; t
+overF' l f s = let Focused' foc loc = l s
+               in loc (f foc)
+
+setF' :: Focuser' s t a b -&gt; b -&gt; s -&gt; t
+setF' l b s = overF' l (const b) s
+
+lookFstF' :: Focuser' (a,b) (a',b) a a'
+lookFstF' (a,b) = Focused' a (\a' -&gt; (a',b))
+
+lookSndF' :: Focuser' (a,b) (a,b') b b'
+lookSndF' (a,b) = Focused' b (\b' -&gt; (a,b'))
+
+lookHeadF' :: Focuser' [a] [a] a a
+lookHeadF' (a:as) = Focused' a (\a' -&gt; a':as)
+
+lookRootF' :: Focuser' (Tree a) (Tree a) a a
+lookRootF' (Leaf a) = Focused' a (\a' -&gt; Leaf a')
+lookRootF' (Branch a l r) = Focused' a (\a' -&gt; Branch a' l r)</code></pre><p>We can again compose:</p><pre><code class="haskell">(&gt;--) :: Focuser' s t a b -&gt; Focuser' a b u v -&gt; Focuser' s t u v
+(l &gt;-- l') a = let Focused' foc loc = l a
+                   Focused' foc' loc' = l' foc
+               in Focused' foc' (loc.loc')</code></pre><p>So we have some nice examples now, for instance: <code>setF' lookFstF' 3 (&quot;a&quot;,&quot;b&quot;) == (3,&quot;b&quot;)</code></p><p>The modern lens type, however, aims to fuse this functionality together, by finding a single type that can somehow provide both <code>view</code> behavior and <code>over</code> behavior.</p><p>If we inspect the types of these two functions</p><pre><code class="haskell">viewF' :: Focuser' s t a b -&gt; s -&gt; a
+overF' :: Focuser' s t a b -&gt; (a -&gt; b) -&gt; s -&gt; t</code></pre><p>we see that there is some similarity: both look roughly like <code>Focuser' s t a b -&gt; ... -&gt; s -&gt; ...</code>. Let's line things up nicer:</p><pre><code class="haskell">viewF' :: Focuser' s t a b -&gt;                 s -&gt; a
+overF' :: Focuser' s t a b -&gt;   (a -&gt; b) -&gt;   s -&gt; t</code></pre><p>If we could somehow have a type that, in one moment can be equivalent to <code>a</code> and in the next <code>t</code>, we would be closer to our goal. Similarly, if we had a type that was equivalent to <code>a</code> one moment and <code>b</code> the next, we could also supply the identity function in the former situations and get our <code>viewF'</code> type out. That is to say, abstractly we need a type <code>b'</code> that is equivalent to <code>a</code> or <code>b</code> depending, and similarly <code>t'</code>. We ought to factor out the &quot;depending&quot;, so instead let's use a type operator, to say that <code>f b</code> is equivalent to <code>a</code> or <code>b</code> depending, and similarly <code>f t</code>. Depending on what? Well, the choice of <code>f</code>!</p><p>Abstractly then what we need is</p><pre><code class="haskell">Focuser' s t a b -&gt; (a -&gt; f b) -&gt; s -&gt; f t</code></pre><p>This gives us our general type:</p><pre><code class="haskell">type Lens s t a b = forall f. Functor f =&gt; (a -&gt; f b) -&gt; s -&gt; f t</code></pre><p>Choosing functors, not just type operators, makes using lenses much more convenient, and guarantees certain properties about how values of this type are defined.</p><p>If we pick <code>f</code> appropriately, <code>a -&gt; f b</code> is equivalent to <code>a -&gt; a</code> and <code>s -&gt; f t</code> is equivalent to <code>s -&gt; a</code>, letting us define <code>view</code> functionality. The easiest way to do this is by choosing <code>f = Const a</code>, where <code>Const</code> is defined as</p><pre><code class="haskell">data Const a b = Const { getConst :: a }</code></pre><p>with the functor instance</p><pre><code class="haskell">instance Functor (Const a) where
+  fmap f (Const a) = Const a</code></pre><p>Instantiating <code>f = Const a</code>, we get</p><pre><code class="haskell">(a -&gt; Const a b) -&gt; s -&gt; Const a t</code></pre><p>Now all we need to do is somehow turn such a function into <code>s -&gt; Const a t</code> by
+supplying another function <code>a -&gt; Const a b</code> as it's argument. The constructor <code>Const</code>
+is precisely what we need. Thus, given</p><pre><code class="haskell">f :: (a -&gt; Const a b) -&gt; s -&gt; Const a t</code></pre><p>we have that</p><pre><code class="haskell">f Const :: s -&gt; Const a t</code></pre><p>We can now extract the a value using the <code>getConst</code> function:</p><pre><code class="haskell">view :: Lens s t a b -&gt; s -&gt; a
+view l s = getConst (l Const s)</code></pre><p>Similarly, we need to pick <code>f</code> so that <code>a -&gt; f b</code> is equivalent to <code>a -&gt; b</code> and <code>s -&gt; f t</code> to <code>s -&gt; t</code>. This is somewhat easier, by
+choosing <code>f = Identity</code>:</p><pre><code class="haskell">data Identity a = Identity { getIdentity :: a }
+
+instance Functor Identity where
+  fmap f (Identity a) = Identity (f a)</code></pre><p>The definition of <code>over</code> is subtly different but no harder to find:</p><pre><code class="haskell">over :: Lens s t a b -&gt; (a -&gt; b) -&gt; s -&gt; t
+over l f s = getIdentity (l (Identity . f) s)</code></pre><p>We can of course convert back and forth between <code>Focuser'</code>s and <code>Lens</code>es.</p><pre><code class="haskell">lens :: Focuser' s t a b -&gt; Lens s t a b
+lens l f s = let Focused' foc loc = l s
+             in fmap loc (f foc)
+
+focuser :: Lens s t a b -&gt; Focuser' s t a b
+focuser l s = Focused' (view l s) (\b -&gt; over l (const b) s)</code></pre><p>That these are mutual inverses is relatively easy to show, and this
+demonstrates that <code>Lens s t a b</code> is equivalent to <code>Focuser' s t a b</code>.</p><p>A convenience type can be defined:</p><pre><code class="haskell">type SimpleLens s a = Lens s s a a</code></pre><p>Here are our <code>Focuser'</code>s again, this time as <code>Lens</code>es:</p><pre><code class="haskell">_1 :: Lens (a,b) (a',b) a a'
+_1 f (a,b) = (\a' -&gt; (a',b)) &lt;$&gt; f a
+
+_2 :: Lens (a,b) (a,b') b b'
+_2 f (a,b) = (\b' -&gt; (a,b')) &lt;$&gt; f b
+
+_head :: SimpleLens [a] a
+_head f (a:as) = (\a' -&gt; a':as) &lt;$&gt; f a
+
+_root :: SimpleLens (Tree a) a
+_root f (Leaf a) = (\a' -&gt; Leaf a') &lt;$&gt; f a
+_root f (Branch a l r) = (\a' -&gt; Branch a' l r) &lt;$&gt; f a</code></pre><p>Notice that this is more or less exactly how things would behave if we focused
+with whichever focuser, used an action on the focus, and then unfocused. Except here,
+the unfocus function application is not the normal application but is instead
+functorial, using <code>fmap</code> in its infix form <code>(&lt;$&gt;)</code>.</p><p>That means that we can compose lenses as functions with <code>(.)</code> instead of defining a custom
+composition, and we get something rather sensible looking:</p><pre><code class="haskell">_head._1 :: SimpleLens [(a,b)] a
+  = \f ((a,b):ps) -&gt; (\p' -&gt; p':ps) &lt;$&gt; ((\a' -&gt; (a',b)) &lt;$&gt; f a)</code></pre><p>Sometimes this is described as composing &quot;backwards&quot;, but it really shouldn't be
+seen like that. Instead, you just need to think of lenses as things which turn
+actions on parts into actions on wholes, so <code>_1</code> doesn't &quot;retrieve&quot; the first component
+of a pair, rather, it turns an action on the first component into an action on the whole
+pair. Same with <code>_head</code>: it turns an action on the head element into an action on the
+whole list. That means that if you compose two lenses, you're making an action on the whole
+that runs an action on a part that runs an action on an even smaller part. That's just what
+fmap does: it pushes actions down into structure. Lenses just happen to do that in a
+very specific way, to a focused place, rather than in the usual &quot;apply everywhere&quot; way
+that normal functor intuitions provide.</p><p>This schema also lets us produce lenses really easily. The general picture is</p><pre><code class="haskell">_l f m = (\a' -&gt; [a'/a]m) &lt;$&gt; f a</code></pre><p>where <code>m</code> is some pattern with variable <code>a</code>, and <code>[a'/a]m</code> is the pattern with all occurrences
+of <code>a</code> replaced by <code>a'</code>, just so we don't get confused with the new bound variable. This provides a general schema for making lenses for your own types. It even lets us make funky lenses that focus on &quot;non-elements&quot;, such as the first two elements of a triple:</p><pre><code class="haskell">_12 :: SimpleLens (a,b,c) (a,b)
+_12 f (a,b,c) = (\(a',b') -&gt; (a',b',c)) &lt;$&gt; f (a,b)</code></pre><p>or the heads of both elements of a pair of lists:</p><pre><code class="haskell">_1head2head :: SimpleLens ([a],[b]) (a,b)
+_1head2head f (a:as,b:bs) = (\(a',b') -&gt; (a':as,b':bs)) &lt;$&gt; f (a,b)</code></pre></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/psygnisfive/from-zipper-to-lens';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

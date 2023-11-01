@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html><head><title>Part V: Heaps of Performance - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/revisiting-matrix-multiplication">Revisiting Matrix Multiplication</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/revisiting-matrix-multiplication/part-5">Part V: Heaps of Performance</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part V: Heaps of Performance</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">16 Nov 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/b43bf065739f05937cdb8de9cdac53ec646bed1a">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/revisiting-matrix-multiplication/part-4">Previous content: Part IV: IntMap!?</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/revisiting-matrix-multiplication/part-6">Next content: Part VI: A Most Significant Comparison</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/revisiting-matrix-multiplication">Go up to: Revisiting Matrix Multiplication</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#work-smarter">Work Smarter</a></li><li><a href="#steques">Steques</a></li><li><a href="#bootstrapping">Bootstrapping</a></li><li><a href="#catenable-heaps">Catenable Heaps</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Back in <a href="https://www.fpcomplete.com/user/edwardk/revisiting-matrix-multiplication-part-3">part 3</a> I naïvely plodded ahead with implementing a nice fusion combinator to try to use inside of my matrix multiplication routine.</p><p>It was slow.</p><p>It was slow because I built nested trees of concatenations and merges, and then when pumping it stream fusion was never getting anything that it could unroll into a bigger loop. Moreover, when faced with a tree of merges, the <code>Stream</code> fusion framework was being forced to keep the associativity by which it was originally constructed, but there was no balance ensuring that tree was any good.</p><p>If you're just joining, you may want to go back and read parts <a href="https://www.fpcomplete.com/user/edwardk/revisiting-matrix-multiplication-part-1">1</a>,<a href="https://www.fpcomplete.com/user/edwardk/revisiting-matrix-multiplication-part-2">2</a>,<a href="https://www.fpcomplete.com/user/edwardk/revisiting-matrix-multiplication-part-3">3</a>, and <a href="https://www.fpcomplete.com/user/edwardk/revisiting-matrix-multiplication-part-4">4</a>, but like the last two parts, this one mostly stands alone if you ignore the motivation for the trick as a short practicum on how to bootstrap a datastructure and an introduction to pairing heaps and ephemeral steques.</p><h1 id="work-smarter"><a href="#work-smarter">Work Smarter</a></h1><p>Let's work smarter, not harder, by finding a better algorithm, rather than trying to run a dumb one fast.</p><p>To that end, I need to be able to deal with merging together streams and concatenating streams with a minimum of impact from concatenation on the cost of getting the next element.</p><p>We could of course merge streams by representing them as a <a href="http://en.wikipedia.org/wiki/Heap_%28data_structure%29">heap</a>.</p><p>Pick your favorite heap. Mine today for ease of exposition is a <a href="http://en.wikipedia.org/wiki/Pairing_Heap">pairing heap</a>. It is pretty awful when you want to actually analyze the runtime performance of your algorithm, but it has excellent <a href="http://en.wikipedia.org/wiki/Amortized_analysis">amortized</a> performance in practice and fits the form of what I'm going to put around it.</p><p>I'll deal with only non-empty heaps, as we can move all the reasoning for the empty case into <code>Maybe (Heap a)</code> and it admits a nicer recursive definition.</p><p>For simplicity, I'll just be using <code>Int</code> keys rather than <a href="http://en.wikipedia.org/wiki/Z-order_curve">Morton-ordered</a> keys below.</p><p>A pairing heap is a heap built on a <a href="http://en.wikipedia.org/wiki/Rose_Tree">rose tree</a>. That is to say any node in your heap can have any number of children, so long as you satisfy the <a href="http://xlinux.nist.gov/dads/HTML/heapproperty.html">heap property</a>.</p><pre><code class="haskell">data Heap a = Heap !Int a [Heap a] deriving Show</code></pre><p>A pairing heap provides us with a dead simple union for two heaps. Compare them, and then shove the one with the larger starting key one underneath the smaller. That it is.</p><pre><code class="haskell">mix :: Heap a -&gt; Heap a -&gt; Heap a
+mix x@(Heap i a as) y@(Heap j b bs) 
+  | i &lt;= j    = Heap i a (y:as)
+  | otherwise = Heap j b (x:bs)</code></pre><p>We can obviously grab the <code>top</code> element</p><pre><code class="haskell">top :: Heap a -&gt; (Int, a)
+top (Heap i a _) = (i, a)</code></pre><p>and we can <code>pop</code> that element off the <code>Heap</code>:</p><pre><code class="haskell">pop :: Heap a -&gt; Maybe (Heap a)
+pop (Heap _ _ [])    = Nothing
+pop (Heap _ _ (x:xs) = Just (merge x xs)
+
+merge :: Heap a -&gt; [Heap a] -&gt; Heap a
+merge x (y:ys) = case ys of
+  (z:zs) -&gt; mix x y `mix` merge z zs
+  []     -&gt; mix x y
+merge x [] = x</code></pre><p>The complexity in analyzing the asymptotics of a pairing heap comes from the fact that <code>merge</code> might have to do a lot of work, but <code>merge</code> pairs up the heaps before doing it's work to get better balancing. Again, nothing in what I'm writing here cares about the pairing heap parts, other than it is easy to write and similar to the surrounding code we're adding, and it is the most obviously amenable heap to the transformation I'll be applying later.</p><p><code>mix</code> now handles the behavior I need for merging streams/heaps, but I'm also going to need efficient concatenation. While <code>mix</code> is &quot;technically correct&quot; for concatenating two heaps that do not overlap in key space, it also isn't terribly good at it.</p><h1 id="steques"><a href="#steques">Steques</a></h1><p>A &quot;stack-ended queue&quot;, or steque, is what <a href="http://en.wikipedia.org/wiki/Robert_Tarjan">Tarjan</a> calls a structure that permits <code>cons</code> and <code>snoc</code> on both ends, but only efficient <code>head</code>/<code>tail</code>/<code>uncons</code> from one side.</p><p>This distinguishes it from a <a href="http://en.wikipedia.org/wiki/Double-ended_queue">deque</a>, which permits efficient <code>init</code>/<code>tail</code>/<code>unsnoc</code> as well.</p><p>The simplest implementation of a steque is</p><pre><code class="haskell">data Steque a = Steque [a] [a] deriving (Show,Read)</code></pre><p>The first list is in order from left to right, and the second list is reversed.</p><p>Note: This isn't the most robust steque or deque in Okasaki's book. Its asymptotics are amortized, not worst case, and they only hold for ephemeral rather than persistent use. However, I only care about that ephemeral use case and so the reduction in book-keeping overhead is more valuable than slower execution to support operations I don't use!</p><pre><code class="haskell">instance Functor Steque where
+  fmap f (Steque fs rs) = Steque (fmap f fs) (fmap f rs)
+
+instance Foldable Steque where
+  foldMap f (Steque fs rs) = foldMap f fs `mappend` getDual (foldMap (Dual . f) rs)</code></pre><p>We can use a little bit of <code>lens</code> to make the <code>Traversable</code> instance easier, given the
+combinator <code>backwards</code> that can turn a <code>Traversal</code> around.</p><pre><code class="haskell">instance Traversable Steque where
+  traverse f (Steque fs rs) = Steque &lt;$&gt; traverse f fs &lt;*&gt; backwards traverse f rs</code></pre><p>and then we could quotient out the irrelevancies of how our elements are distributed between the two lists:</p><pre><code class="haskell">instance Eq a =&gt; Eq (Steque a) where
+  (==) = (==) `on` toList
+
+instance Ord a =&gt; Ord (Steque a) where
+  compare = compare `on` toList</code></pre><p>We could even get ambitious and define a bunch of other instances on <code>Steque</code>, just because we can:</p><pre><code class="haskell">instance Applicative Steque where
+  pure a = Steque [a] []
+  (&lt;*&gt;) = ap
+
+instance Monad Steque where
+  return a = Steque [a] []
+  Steque fs bs &gt;&gt;= f = Steque (fs &gt;&gt;= toList . f) (bs &gt;&gt;= toListOf (backwards folded) . f)</code></pre><p>... but we're getting distracted, we really just want to be able to <code>cons</code>/<code>head</code>/<code>tail</code>/<code>uncons</code>, and <code>snoc</code>.</p><p>To make this interesting, let us show how to implement these using some lesser understood parts of <code>lens</code>.</p><p>The <code>lens</code> package provides a common <a href="http://hackage.haskell.org/packages/archive/lens/3.9.0.2/doc/html/Control-Lens-Cons.html"><code>Cons</code></a> class for dealing with <code>cons</code>-like behavior. It is tricky to instantiate correctly, because it is overloaded to permit usecases where you can merely <code>cons</code> and not <code>uncons</code> and vice-versa, but we can define an instance:</p><pre><code class="haskell">instance (Choice p, Applicative f) =&gt; Cons p f (Steque a) (Steque b) a b where
+  _Cons = prism (\(x,Steque fs bs) -&gt; Steque (x:fs) bs) $ \ (Steque fs bs) -&gt; case fs of
+     x:xs -&gt; Right (x,Steque xs bs)
+     []   -&gt; case reverse bs of
+       x:xs -&gt; Right (x,Steque xs [])
+       [] -&gt; Left (Steque [] [])</code></pre><p>This gives us the following <a href="http://hackage.haskell.org/packages/archive/lens/3.9.0.2/doc/html/Control-Lens-Prism.html"><code>Prism</code></a>:</p><pre><code class="haskell">_Cons :: Prism (Steque a) (Steque b) (a, Steque a) (b, Steque b)</code></pre><p>We can now use it to <code>cons</code> and <code>uncons</code>, using the definitions from <code>Control.Lens.Cons</code>:</p><pre><code class="haskell">cons a as = _Cons # (a,as)
+uncons as = as^?_Cons</code></pre><p>That module also provides combinators that makes either a <code>Getter</code>, <code>Setter</code>, <code>Lens</code> or <code>Traversal</code> for each of <code>_head</code> and <code>_tail</code> depending on the restricted form of <code>_Cons</code> you chose.</p><pre><code class="haskell">_head = _Cons._1
+_tail = _Cons._2</code></pre><p>On the other side we only want to be able to <code>snoc</code>, not use <code>tail</code>, <code>init</code> or <code>unsnoc</code>, so let's define:</p><pre><code class="haskell">instance (p ~ Reviewed, f ~ Identity, a ~ b) =&gt; Snoc p f (Steque a) (Steque b) a b where
+  _Snoc = unto $ \(Steque f b,x) -&gt; Steque f (x:b)</code></pre><p>Note: we <i>could</i> also support <code>_init</code> and <code>_tail</code> and <code>unsnoc</code>, but they will be <i>O(n)</i>, even for ephemeral use, because we do not try to preserve any balance between the front and back lists.</p><p><code>unto</code> is used to define a <a href="http://hackage.haskell.org/packages/archive/lens/3.9.0.2/doc/html/Control-Lens-Review.html#g:1"><code>Review</code></a>, which is to a <code>Prism</code> what a <code>Getter</code> is to a <code>Lens</code>. In practice it makes something that is like a <code>Prism</code> in that you can apply <code>#</code> to it, but nothing else.</p><p>This is enough to permit us to use the stock definition of <code>snoc</code>:</p><pre><code class="haskell">snoc as a = _Snoc # (as,a)</code></pre><p>With all of that we can finally play with our <code>Steque</code>:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE UndecidableInstances #-}
+import Control.Applicative
+import Control.Monad
+import Control.Lens
+import Control.Lens.Internal.Review
+import Data.Foldable
+import Data.Functor.Identity
+import Data.Monoid
+import Data.Function (on)
+
+data Steque a = Steque [a] [a] deriving (Show,Read)
+
+instance Eq a =&gt; Eq (Steque a) where
+  (==) = (==) `on` toList
+
+instance Ord a =&gt; Ord (Steque a) where
+  compare = compare `on` toList
+
+instance Functor Steque where
+  fmap f (Steque fs rs) = Steque (fmap f fs) (fmap f rs)
+
+instance Foldable Steque where
+  foldMap f (Steque fs rs) = foldMap f fs `mappend` getDual (foldMap (Dual . f) rs)
+
+instance Traversable Steque where
+  traverse f (Steque fs rs) = Steque &lt;$&gt; traverse f fs &lt;*&gt; backwards traverse f rs
+
+instance Applicative Steque where
+  pure a = Steque [a] []
+  (&lt;*&gt;) = ap
+  
+instance Alternative Steque where
+  Steque fs rs &lt;|&gt; Steque fs' rs' = Steque (fs ++ reverse rs ++ fs') rs'
+  empty = Steque [] []
+
+instance Monad Steque where
+  return a = Steque [a] []
+  Steque fs bs &gt;&gt;= f = Steque (fs &gt;&gt;= toList . f) (bs &gt;&gt;= toListOf (backwards folded) . f)
+
+instance MonadPlus Steque where
+  mplus = (&lt;|&gt;)
+  mzero = Steque [] []
+
+instance Monoid (Steque a) where
+  mappend = (&lt;|&gt;)
+  mempty = Steque [] []
+
+instance (Choice p, Applicative f) =&gt; Cons p f (Steque a) (Steque b) a b where
+  _Cons = prism (\(x,Steque fs bs) -&gt; Steque (x:fs) bs) $ \ (Steque fs bs) -&gt; case fs of
+     x:xs -&gt; Right (x,Steque xs bs)
+     []   -&gt; case reverse bs of
+       x:xs -&gt; Right (x,Steque xs [])
+       [] -&gt; Left (Steque [] [])
+
+instance (p ~ Reviewed, f ~ Identity, a ~ b) =&gt; Snoc p f (Steque a) (Steque b) a b where
+  _Snoc = unto $ \(Steque f b,x) -&gt; Steque f (x:b)
+  
+-- show
+main = print $ uncons (snoc (cons 1 (cons 2 (snoc (empty :: Steque Int) 4))) 5)
+-- /show</code></pre><p>Now, our definition of a <code>Steque</code> works passably well.</p><p>We can snoc, cons, uncons, head, or tail all in <i>O(1)</i> amortized time.</p><p>but the <code>Monoid</code>, <code>Alternative</code> and <code>MonadPlus</code> instances perform poorly, doing <i>O(n)</i> work because it has to glue together potentially rather long lists:</p><pre><code class="haskell">Steque fs rs &lt;|&gt; Steque fs' rs' = Steque (fs ++ reverse rs ++ fs') rs'</code></pre><p>It is that <code>Monoid</code> performance that makes us sad, so let's do something about it.</p><h1 id="bootstrapping"><a href="#bootstrapping">Bootstrapping</a></h1><p>To solve that we turn to <a href="http://www.usma.edu/eecs/SitePages/Chris%20Okasaki.aspx">Chris Okasaki</a>'s <a href="http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf">Purely Functional Data Structures</a> once again, this time to find bootstrapping.</p><p>Bootstrapping is a tool for defining a data structure with cheap concatenation by recursively storing it in itself.</p><pre><code class="haskell">data Catenable f a = Empty | Cons a (f (Catenable f a))</code></pre><p>Here we could build a <code>Catenable Steque</code> out of our basic <code>Steque</code> following Okasaki's recipe. Here the vocabulary of Tarjan is more accurate and extensible. Tarjan calls a &quot;catenable steque&quot; a c-steque, while Okasaki uses the less informative name &quot;catenable list.&quot;</p><p>As with the pairing <code>Heap</code>, recursion is simpler if we don't allow <code>Empty</code> catenable substructures, and I'm only going to need non-empty catenable structures, though, so <code>Catenable</code> simplifies to:</p><pre><code class="haskell">data Catenable f a = Cons a (f (Catenable f a))</code></pre><p>which advanced Haskell programmers in the audience may recognize as my old friend the <a href="http://hackage.haskell.org/packages/archive/free/3.4.2/doc/html/Control-Comonad-Cofree.html">cofree comonad</a>! In the interest of retaining some semblance of accessibility, I'm not going to work through this exercise in its full generality.</p><p>Now it is obvious how to concatenate a pair of catenable steques, we simply insert one into the other.</p><pre><code class="haskell">data CSteque a = Cons a (Steque (CSteque a))
+
+instance Semigroup (CSteque a) where
+  CSteque a as &lt;&gt; bs = CSteque a (snoc as bs)</code></pre><p>Hrmm. That sounds suspiciously like the operation that drove our pairing heap.</p><p>You can derive <code>cons</code> and <code>snoc</code> by just concatenating singleton catenable steques, and <code>uncons</code> simply has to put back the leftovers if any into the underlying <code>Steque</code>, which it can do because our <code>Steque</code> supports <i>O(1)</i> <code>cons</code>!</p><p>If we inline the definition of <code>Steque</code> into <code>CSteque</code> we get:</p><pre><code class="haskell">data CSteque a = Cons a [CSteque a] [CSteque a]</code></pre><p>and that looks a <i>lot</i> like our pairing heap, just with different invariants.</p><p>Hrmm.</p><h1 id="catenable-heaps"><a href="#catenable-heaps">Catenable Heaps</a></h1><p>Finally, what we want looks kind of like a steque of heaps, but where the heaps can also act like steques of heaps, <i>ad infinitum</i>. We can get there by mashing all the parts we've described together to get:</p><pre><code class="haskell">data Heap a = Heap {-# UNPACK #-} !Int a [Heap a] [Heap a] [Heap a]</code></pre><p>This type represents a form of catenable non-empty pairing heap. The three lists of heaps in turn are:</p><p>1.) the jumbled mess of heaps we haven't sorted relative to one another except partially via the heap property, followed by
+2.) a list of heaps that do not overlap one another in key space in ascending order, followed by
+3.) another list of heaps that do not overlap one another in key space in descending order.</p><p>Now we can concatenate in <i>O(1)</i>!</p><pre><code class="haskell">fby :: Heap a -&gt; Heap a -&gt; Heap a
+fby (Heap i a as ls rs) r = Heap i a as ls (r:rs)</code></pre><p>A number of operations remain trivial:</p><pre><code class="haskell">top :: Heap a -&gt; (Key, a)
+top (Heap i a _ _ _) = (i, a)
+
+singleton :: Key -&gt; a -&gt; Heap a
+singleton k v = Heap k v [] [] []
+
+fromList :: [(Key,a)] -&gt; Heap a
+fromList ((k0,v0):xs) = Prelude.foldr (\(k,v) r -&gt; mix (singleton k v) r) (singleton k0 v0) xs
+fromList [] = error &quot;empty Heap&quot;
+
+fromAscList :: [(Key,a)] -&gt; Heap a
+fromAscList ((k0,v0):xs) = Prelude.foldr (\(k,v) r -&gt; fby (singleton k v) r) (singleton k0 v0) xs
+fromAscList [] = error &quot;empty Heap&quot;</code></pre><p><code>pop</code> got a bit more complicated. We'll just pass it the 3 lists from our heap, as it doesn't use the key/value pair out front and we don't want to require the compiler to figure out to specialize on the constructor.</p><pre><code class="haskell">pop :: [Heap a] -&gt; [Heap a] -&gt; [Heap a] -&gt; Maybe (Heap a)
+pop (x:xs) ls     rs = Just $ fbys (merge x xs) ls rs
+pop []     (l:ls) rs = Just $ fbys l ls rs
+pop []     []     rs = case reverse rs of
+  f:fs -&gt; Just (fbys f fs [])
+  []   -&gt; Nothing
+  
+fbys :: Heap a -&gt; [Heap a] -&gt; [Heap a] -&gt; Heap a
+fbys (Heap i a as [] []) ls' rs' = Heap i a as ls' rs'
+fbys (Heap i a as ls []) ls' rs' = Heap i a as ls $ rs' &lt;&gt; reverse ls'
+fbys (Heap i a as ls rs) ls' rs' = Heap i a as ls $ rs' &lt;&gt; reverse ls' &lt;&gt; rs</code></pre><blockquote><p><b>No-Prize #7</b></p><p>Computing with <code>fbys</code> in <code>pop</code> is somewhat unpleasant, but I don't have a cleaner way.</p><p>Is there something where I can preserve the correctness of this but not have to move content
+into the right hand reversed list and re-reverse it? Keep in mind it isn't sound to move 
+it into the left list, because we don't know the length of the left list and can only 
+move content left when the left list is empty.</p><p>We could probably insert a pair of other heaps into the reversed list by building up a
+chain of <code>fby</code>s popping something off of the <code>ls'</code> and smashing the other <code>ls'</code> and <code>rs'</code> 
+underneath it by using this function recursively. What does that look like?</p></blockquote><p>and <code>mix</code> also becomes more complex as it now has to deal with the extra concatenated components, pushing what it can into the nested pairing heap.</p><pre><code class="haskell">mix :: Heap a -&gt; Heap a -&gt; Heap a
+mix x@(Heap i a as al ar) y@(Heap j b bs bl br)
+  | i &lt;= j    = Heap i a (y:pops as al ar) [] []
+  | otherwise = Heap j b (x:pops bs bl br) [] []
+  
+  
+merge :: Heap a -&gt; [Heap a] -&gt; Heap a
+merge x (y:ys) = case ys of
+  (z:zs) -&gt; mix x y `mix` merge z zs
+  []     -&gt; mix x y
+merge x [] = x
+  
+pops :: [Heap a] -&gt; [Heap a] -&gt; [Heap a] -&gt; [Heap a]
+pops xs     []     [] = xs
+pops (x:xs) ls     rs = [fbys (merge x xs) ls rs]
+pops []     (l:ls) rs = [fbys l ls rs]
+pops []     []     rs = case reverse rs of
+  f:fs -&gt; [fbys f fs []]
+  _    -&gt; [] -- caught above</code></pre><p><code>pops</code> is a slight optimization of <code>pop</code> that uses the fact that the result is winding up in a list subject to the heap property and need not be reduced all the way down to a <code>Maybe (Heap a)</code> just yet.</p><p>Finally, we can define a <i>useful</i> conversion to a <code>Stream</code> that can get some benefit out of stream fusion.</p><pre><code class="haskell">data HeapState a
+  = Start !(Heap a)
+  | Ready {-# UNPACK #-} !Key a !(Heap a)
+  | Final {-# UNPACK #-} !Key a
+  | Finished
+
+streamHeapWith :: Monad m =&gt; (a -&gt; a -&gt; a) -&gt; Maybe (Heap a) -&gt; Stream m (Key, a)
+streamHeapWith f h0 = Stream step (maybe Finished Start h0) Unknown where
+  step (Start (Heap i a xs ls rs))     = return $ Skip $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Ready i a (Heap j b xs ls rs)) = return $ case compare i j of
+    LT -&gt; Yield (i, a)      $ maybe (Final j b) (Ready j b) $ pop xs ls rs
+    EQ | c &lt;- f a b -&gt; Skip $ maybe (Final i c) (Ready i c) $ pop xs ls rs
+    GT -&gt; Yield (j, b)      $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Final i a) = return $ Yield (i,a) Finished
+  step Finished    = return Done
+  {-# INLINE [1] step #-}
+{-# INLINE [0] streamHeapWith #-}</code></pre><p>This doesn't quite hit the <a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.7401">stream fusion</a> goal of being made of a single loop that can fuse into other loops, due to the recursive calls to <code>pop</code>. I leave it as an exercise for the reader to find a form that implements <code>pop</code> via iterative <code>Skip</code> steps and a more complex state -- In other words, I haven't bothered yet. ;)</p><p>Putting it all together yields:</p><pre><code class="active haskell">-- show
+{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE PatternGuards #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies #-}
+
+import Control.Applicative
+import Control.Lens
+import Data.Bits
+import Data.Foldable
+import Data.Monoid
+import Data.Vector.Fusion.Stream.Monadic hiding (singleton, fromList)
+import Data.Vector.Fusion.Stream.Size
+import Data.Vector.Fusion.Util
+import Data.Word
+import Prelude
+
+type Key = Int
+
+-- | Bootstrapped _catenable_ non-empty pairing heaps
+data Heap a = Heap {-# UNPACK #-} !Key a [Heap a] [Heap a] [Heap a]
+  deriving (Show,Read)
+
+-- | Append two heaps where we know every key in the first occurs before every key in the second
+fby :: Heap a -&gt; Heap a -&gt; Heap a
+fby (Heap i a as ls rs) r = Heap i a as ls (r:rs)
+
+-- | Interleave two heaps making a new 'Heap'
+mix :: Heap a -&gt; Heap a -&gt; Heap a
+mix x@(Heap i a as al ar) y@(Heap j b bs bl br)
+  | i &lt;= j    = Heap i a (y:pops as al ar) [] []
+  | otherwise = Heap j b (x:pops bs bl br) [] []
+
+
+merge :: Heap a -&gt; [Heap a] -&gt; Heap a
+merge x (y:ys) = case ys of
+  (z:zs) -&gt; mix x y `mix` merge z zs
+  []     -&gt; mix x y
+merge x [] = x
+
+top :: Heap a -&gt; (Key, a)
+top (Heap i a _ _ _) = (i, a)
+
+pop :: [Heap a] -&gt; [Heap a] -&gt; [Heap a] -&gt; Maybe (Heap a)
+pop (x:xs) ls     rs = Just $ fbys (merge x xs) ls rs
+pop []     (l:ls) rs = Just $ fbys l ls rs
+pop []     []     rs = case reverse rs of
+  f:fs -&gt; Just (fbys f fs [])
+  []   -&gt; Nothing
+
+singleton :: Key -&gt; a -&gt; Heap a
+singleton k v = Heap k v [] [] []
+
+fromList :: [(Key,a)] -&gt; Heap a
+fromList ((k0,v0):xs) = Prelude.foldr (\(k,v) r -&gt; mix (singleton k v) r) (singleton k0 v0) xs
+fromList [] = error &quot;empty Heap&quot;
+
+fromAscList :: [(Key,a)] -&gt; Heap a
+fromAscList ((k0,v0):xs) = Prelude.foldr (\(k,v) r -&gt; fby (singleton k v) r) (singleton k0 v0) xs
+fromAscList [] = error &quot;empty Heap&quot;
+
+-- * Internals
+
+fbys :: Heap a -&gt; [Heap a] -&gt; [Heap a] -&gt; Heap a
+fbys (Heap i a as [] []) ls' rs' = Heap i a as ls' rs'
+fbys (Heap i a as ls []) ls' rs' = Heap i a as ls $ rs' &lt;&gt; reverse ls'
+fbys (Heap i a as ls rs) ls' rs' = Heap i a as ls $ rs' &lt;&gt; reverse ls' &lt;&gt; rs
+
+pops :: [Heap a] -&gt; [Heap a] -&gt; [Heap a] -&gt; [Heap a]
+pops xs     []     [] = xs
+pops (x:xs) ls     rs = [fbys (merge x xs) ls rs]
+pops []     (l:ls) rs = [fbys l ls rs]
+pops []     []     rs = case reverse rs of
+  f:fs -&gt; [fbys f fs []]
+  _    -&gt; [] -- caught above by the 'go as [] []' case
+
+-- * Instances
+
+instance Functor Heap where
+  fmap f (Heap k a xs ls rs) = Heap k (f a) (fmap f &lt;$&gt; xs) (fmap f &lt;$&gt; ls) (fmap f &lt;$&gt; rs)
+
+instance FunctorWithIndex Key Heap where
+  imap f (Heap k a xs ls rs) = Heap k (f k a) (imap f &lt;$&gt; xs) (imap f &lt;$&gt; ls) (imap f &lt;$&gt; rs)
+
+instance Foldable Heap where
+  foldMap f = go where
+    go (Heap _ a xs ls rs) = case pop xs ls rs of
+      Nothing -&gt; f a
+      Just h  -&gt; f a `mappend` go h
+  {-# INLINE foldMap #-}
+
+instance FoldableWithIndex Key Heap where
+  ifoldMap f = go where
+    go (Heap i a xs ls rs) = case pop xs ls rs of
+      Nothing -&gt; f i a
+      Just h  -&gt; f i a `mappend` go h
+  {-# INLINE ifoldMap #-}
+
+-- this linearizes the heap
+instance Traversable Heap where
+  traverse f xs = fromAscList &lt;$&gt; traverse (traverse f) (itoList xs)
+  {-# INLINE traverse #-}
+
+instance TraversableWithIndex Key Heap where
+  itraverse f xs = fromAscList &lt;$&gt; traverse (\(k,v) -&gt; (,) k &lt;$&gt; f k v) (itoList xs)
+  {-# INLINE itraverse #-}
+
+data HeapState a
+  = Start !(Heap a)
+  | Ready {-# UNPACK #-} !Key a !(Heap a)
+  | Final {-# UNPACK #-} !Key a
+  | Finished
+
+streamHeapWith :: Monad m =&gt; (a -&gt; a -&gt; a) -&gt; Maybe (Heap a) -&gt; Stream m (Key, a)
+streamHeapWith f h0 = Stream step (maybe Finished Start h0) Unknown where
+  step (Start (Heap i a xs ls rs))     = return $ Skip $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Ready i a (Heap j b xs ls rs)) = return $ case compare i j of
+    LT -&gt; Yield (i, a)      $ maybe (Final j b) (Ready j b) $ pop xs ls rs
+    EQ | c &lt;- f a b -&gt; Skip $ maybe (Final i c) (Ready i c) $ pop xs ls rs
+    GT -&gt; Yield (j, b)      $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Final i a) = return $ Yield (i,a) Finished
+  step Finished    = return Done
+  {-# INLINE [1] step #-}
+{-# INLINE [0] streamHeapWith #-}
+
+streamHeapWith0 :: Monad m =&gt; (a -&gt; a -&gt; Maybe a) -&gt; Maybe (Heap a) -&gt; Stream m (Key, a)
+streamHeapWith0 f h0 = Stream step (maybe Finished Start h0) Unknown where
+  step (Start (Heap i a xs ls rs))     = return $ Skip $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Ready i a (Heap j b xs ls rs)) = return $ case compare i j of
+    LT -&gt; Yield (i, a) $ maybe (Final j b) (Ready j b) $ pop xs ls rs
+    EQ -&gt; case f a b of
+      Nothing -&gt; Skip  $ maybe Finished Start $ pop xs ls rs
+      Just c  -&gt; Skip  $ maybe (Final i c) (Ready i c) $ pop xs ls rs
+    GT -&gt; Yield (j, b) $ maybe (Final i a) (Ready i a) $ pop xs ls rs
+  step (Final i a) = return $ Yield (i,a) Finished
+  step Finished = return Done
+  {-# INLINE [1] step #-}
+{-# INLINE [0] streamHeapWith0 #-}
+
+-- /show
+-- show
+main = print $ (fromList [(10,&quot;hi&quot;),(20,&quot;there&quot;)] `mix` singleton 100 &quot;hello&quot;) `fby` singleton 200 &quot;goodbye&quot;
+-- show</code></pre><p>I've left figuring out how to write <code>_Cons</code> and <code>_Snoc</code> as an exercise for the reader.</p><p>With that we can finally concatenate heaps and mix them together as needed, and the stream fusion combinators can be used after the fact to spit out a stream of values that have been merged by our desired concept of addition. What has happened is that we for the most part are able to punt considering anything later in the chain of concatenations until after we've fully explored the stuff nearer to hand.</p><p>In practice this made a couple of orders of magnitude difference in the performance of the resulting code, so all this theoretical nonsense paid off.</p><p>I'd like a version of this that let's me reach the asymptotic bounds on set union set and reached by Erik Demaine et al.'s tour de force <a href="http://dl.acm.org/citation.cfm?id=338634">Adaptive set intersections, unions, and differences</a>, but I don't <i>think</i> we can get there given the extra constraints that we don't fully know the contents of the streams we're skipping over in advance.</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>August 23 2013</p><p><i>Edited September 14th, 2013</i>: Mihály Bárász pointed out to me that I had over-simplified the pairing heap implementation. I've rectified that by replacing <code>foldl mix</code> with <code>merge</code> uniformly throughout the code above. This makes a noticeable improvement in performance.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/revisiting-matrix-multiplication/part-5';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

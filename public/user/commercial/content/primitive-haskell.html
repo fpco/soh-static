@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html><head><title>Primitive Haskell - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/commercial">Commercial Haskell group</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content">Content</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content/primitive-haskell">Primitive Haskell</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Primitive Haskell</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 3 Apr 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/commercial">Commercial Haskell group</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/17892/5406745aba9be42931d80bdd91fcbb6ab18fab21">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content/overview-streaming-data-libraries">Previous content: Overview of Streaming Data Libraries</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content/all-about-strings">Next content: All about strings</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content">Go up to: Content</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial">See all content by Commercial Haskell group</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#let-s-do-addition">Let&#39;s do addition</a></li><li><a href="#primops">primops</a></li><li><a href="#unboxed-types">Unboxed types</a></li><li><a href="#more-addition">More addition</a></li><li><a href="#the-st-monad">The ST monad</a></li><li><a href="#primmonad">PrimMonad</a></li><li><a href="#readerio-monad">ReaderIO monad</a></li><li><a href="#further-reading">Further reading</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article>
+<p>The point of this chapter is to help you peel back some of the layers of
+abstraction in Haskell coding, with the goal of understanding things like
+primitive operations, evaluation order, and mutation. Some concepts covered
+here are generally &quot;common knowledge&quot; in the community, while others are less
+well understood. The goal is to cover the entire topic in a cohesive manner. If
+a specific section seems like it's not covering anything you don't already
+know, skim through it and move on to the next one.</p><p>While this chapter is called &quot;Primitive Haskell,&quot; the topics are very much
+GHC-specific. I avoided calling it &quot;Primitive GHC&quot; for fear of people assuming
+it was about the internals of GHC itself. To be clear: these topics apply to
+anyone compiling their Haskell code using the GHC compiler.</p><p>Note that we will not be fully covering all topics here. There is a &quot;further
+reading&quot; section at the end of this chapter with links for more details.</p><h2 id="let-s-do-addition"><a href="#let-s-do-addition">Let's do addition</a></h2><p>Let's start with a really simple question: tell me how GHC deals with the
+expression <code>1 + 2</code>. What <i>actually</i> happens inside GHC? Well, that's a bit of a
+trick question, since the expression is polymorphic. Let's instead use the more
+concrete expression <code>1 + 2 :: Int</code>.</p><p>The <code>+</code> operator is actually a method of <a href="http://www.stackage.org/haddock/lts-1.0/base-4.7.0.2/Prelude.html#t:Num">the <code>Num</code> type class</a>, so we need to look at <a href="http://www.stackage.org/haddock/lts-1.0/base-4.7.0.2/src/GHC-Num.html#Num">the <code>Num Int</code> instance</a>:</p><pre><code class="haskell">instance  Num Int  where
+    I# x + I# y = I# (x +# y)</code></pre><p>Huh... well <i>that</i> looks somewhat magical. Now we need to understand both the
+<code>I#</code> constructor and the <code>+#</code> operator (and what's with the hashes all of a
+sudden?). If we <a href="http://www.stackage.org/snapshot/lts-1.0/hoogle?q=I%23">do a Hoogle
+search</a>, we can easily
+<a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/GHC-Types.html#t:Int">find the relevant
+docs</a>,
+which leads us to the following definition:</p><pre><code class="haskell">data Int = I# Int#</code></pre><p>So our first lesson: the <code>Int</code> data type you've been using since you first
+started with Haskell isn't magical at all, it's defined just like any other
+algebraic data type... except for those hashes. We can also <a href="http://www.stackage.org/snapshot/lts-1.0/hoogle?q=%2B%23">search for
+<code>+#</code></a>, and end up at
+<a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/GHC-Prim.html#v:-43--35-">some
+documentation</a>
+giving the type:</p><pre><code class="haskell">+# :: Int# -&gt; Int# -&gt; Int#</code></pre><p>Now that we know all the types involved, go back and look at the <code>Num</code> instance
+I quoted above, and make sure you feel comfortable that all the types add up
+(no pun intended). Hurrah, we now understand exactly how addition of <code>Int</code>s
+works. Right?</p><p>Well, not so fast. The Haddocks for <code>+#</code> have a very convenient source link...
+which (apparently due to a Haddock bug) doesn't actually work. However, it's
+easy enough <a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/src/GHC-Prim.html#line-1386">to find the correct hyperlinked
+source</a>.
+And now we see the implementation of <code>+#</code>, which is:</p><pre><code class="haskell">infixl 6 +#
+(+#) :: Int# -&gt; Int# -&gt; Int#
+(+#) = let x = x in x</code></pre><p>That doesn't look like addition, does it? In fact, <code>let x = x in x</code> is another
+way of saying bottom, or <code>undefined</code>, or infinite loop. We have now officially
+entered the world of primops.</p><h2 id="primops"><a href="#primops">primops</a></h2><p>primops, short for primary operations, are core pieces of functionality
+provided by GHC itself. They are the magical boundary between &quot;things we do in
+Haskell itself&quot; and &quot;things which our implementation provides.&quot; This division
+is actually quite elegant; as we already explored, the standard <code>+</code> operator
+and <code>Int</code> data type you're used to are actually themselves defined in normal
+Haskell code, which provides many benefits: you get standard type class
+support, laziness, etc. We'll explore some of that in more detail later.</p><p>Look at <a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/src/GHC-Prim.html">the implementation of other functions in
+<code>GHC.Prim</code></a>;
+they're <i>all</i> defined as <code>let x = x in x</code>. When GHC reaches a call to one of
+these primops, it automatically replaces it with the real implementation for
+you, which will be some assembly code, LLVM code, or something similar.</p><p>You may be wondering: why bother with this dummy implementation at all? The
+sole reason is to give Haddock documentation for the primops a place to live.
+GHC.Prim is processed by Haddock more or less like any other module; but is
+effectively ignored by GHC itself.</p><p>Why do all of these functions end in a <code>#</code>? That's called the magic hash
+(enabled by the <code>MagicHash</code> language extension), and it is a convention to
+distinguish boxed and unboxed types and operations. Which, of course, brings us
+to our next topic.</p><h2 id="unboxed-types"><a href="#unboxed-types">Unboxed types</a></h2><p>The <code>I#</code> constructor is actually just a normal data constructor in Haskell,
+which happens to end with a magic hash. However, <code>Int#</code> is <i>not</i> a normal
+Haskell data type. In <code>GHC.Prim</code>, we can see that it's implementation is:</p><pre><code class="haskell">data Int#</code></pre><p>Which, like everything else in <code>GHC.Prim</code> is really a lie. In fact, it's
+provided by the implementation, and is in fact a normal <code>long int</code> from C
+(32-bit or 64-bit, depending on architecture). We can see something even
+funnier about it in GHCi:</p><pre><code>&gt; :k Int
+Int :: *
+&gt; :k Int#
+Int# :: #</code></pre><p>That's right, <code>Int#</code> has a different <i>kind</i> than normal Haskell datatypes: <code>#</code>.
+To quote <a href="https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/primitives.html">the GHC
+docs</a>:</p><blockquote><p>Most types in GHC are boxed, which means that values of that type are
+represented by a pointer to a heap object. The representation of a Haskell
+<code>Int</code>, for example, is a two-word heap object. An unboxed type, however, is
+represented by the value itself, no pointers or heap allocation are involved.</p></blockquote><p>See those docs for more information on distinctions between boxed and unboxed
+types. It is vital to understand those differences when working with unboxed
+values. However, we're not going to go into those details now. Instead, let's
+sum up what we've learnt so far:</p><ul><li><code>Int</code> addition is just normal Haskell code in a typeclass</li><li><code>Int</code> itself is a normal Haskell datatype</li><li>GHC provides <code>Int#</code> and <code>+#</code> as an unboxed <code>long int</code> and addition on that type, respectively. This is exported by <code>GHC.Prim</code>, but the real implementation is &quot;inside&quot; GHC.</li><li>An <code>Int</code> contains an <code>Int#</code>, which is an unboxed type.</li><li>Addition of <code>Int</code>s takes advantage of the <code>+#</code> primop.</li></ul><h2 id="more-addition"><a href="#more-addition">More addition</a></h2><p>Alright, we understand basic addition! Let's make things a bit more
+complicated. Consider the program:</p><pre><code class="haskell">main = do
+    let x = 1 + 2
+        y = 3 + 4
+    print x
+    print y</code></pre><p>We know for certain that the program will first print <code>3</code>, and then print <code>7</code>.
+But let me ask you a different question. Which operation will GHC perform
+first: <code>1 + 2</code> or <code>3 + 4</code>? If you guessed <code>1 + 2</code>, you're <i>probably</i> right, but
+not necessarily! Thanks to referential transparency, GHC is fully within its
+rights to rearrange evaluation of those expressions and add <code>3 + 4</code> before
+<code>1 + 2</code>. Since neither expression depends on the result of the other, we
+know that it is irrelevant which evaluation occurs first.</p><p>Note: This is covered in much more detail on the GHC wiki's <a href="https://www.haskell.org/haskellwiki/Evaluation_order_and_state_tokens">evaluation order
+and state
+tokens</a>
+page.</p><p>That begs the question: if GHC is free to rearrange evaluation like that, how
+could I say in the previous paragraph that the program will always print <code>3</code>
+before printing <code>7</code>? After all, it doesn't appear that <code>print y</code> uses the
+result of <code>print x</code> at all, so we not rearrange the calls? To answer that, we
+again need to unwrap some layers of abstraction. First, let's evaluate and
+inline <code>x</code> and <code>y</code> and get rid of the <code>do</code>-notation sugar. We end up with the
+program:</p><pre><code class="haskell">main = print 3 &gt;&gt; print 7</code></pre><p>We know that <code>print 3</code> and <code>print 7</code> each have type <code>IO ()</code>, so the <code>&gt;&gt;</code> operator being used comes from the <code>Monad IO</code> instance. Before we can understand that, though, we need to look at <a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/src/GHC-Types.html#IO">the definition of <code>IO</code> itself</a></p><pre><code class="haskell">newtype IO a = IO (State# RealWorld -&gt; (# State# RealWorld, a #))</code></pre><p>We have a few things to understand about this line. Firstly,
+<a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/GHC-Prim.html#t:State-35-"><code>State#</code></a>
+and
+<a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/GHC-Prim.html#t:RealWorld"><code>RealWorld</code></a>.
+For now, just pretend like they are a single type; we'll see when we get to
+<code>ST</code> why <code>State#</code> has a type parameter.</p><p>The other thing to understand is that <code>(# ... #)</code> syntax. That's an <i>unboxed
+tuple</i>, and it's a way of returning multiple values from a function. Unlike a
+normal, boxed tuple, unboxed tuples involve no extra allocation and create no
+thunks.</p><p>So <code>IO</code> takes a real world state, and gives you back a real world state and
+some value. And that right there is how we model side effects and mutation in a
+referentially transparent language. You may have heard the description of <code>IO</code>
+as &quot;taking the world and giving you a new one back.&quot; What we're doing here is
+threading a specific state token through a series of function calls. By
+creating a dependency on the result of a previous function, we are able to
+ensure evaluation order, yet still remain purely functional.</p><p>Let's see this in action, by coming back to our example from above. We're now
+ready to look at <a href="http://www.stackage.org/haddock/lts-1.0/base-4.7.0.2/src/GHC-Base.html">the <code>Monad IO</code>
+instance</a>:</p><pre><code class="haskell">instance  Monad IO  where
+    (&gt;&gt;) = thenIO
+
+thenIO :: IO a -&gt; IO b -&gt; IO b
+thenIO (IO m) k = IO $ \ s -&gt; case m s of (# new_s, _ #) -&gt; unIO k new_s
+
+unIO :: IO a -&gt; (State# RealWorld -&gt; (# State# RealWorld, a #))
+unIO (IO a) = a</code></pre><p>(Yes, I changed things a bit to make them easier to understand. As an exercise,
+compare that this version is in fact equivalent to what is actually defined in
+<code>GHC.Base</code>.)</p><p>Let's inline these definitions into <code>print 3 &gt;&gt; print 7</code>:</p><pre><code class="haskell">main = IO $ \s0 -&gt;
+    case unIO (print 3) s0 of
+        (# s1, res1 #) -&gt; unIO (print 7) s1</code></pre><p>Notice how, even though we ignore the <i>result</i> of <code>print 3</code> (the <code>res1</code>
+value), we still depend on the new state token <code>s1</code> when we evaluate <code>print 7</code>,
+which forces the order of evaluation to first evaluate <code>print 3</code> and then
+evaluate <code>print 7</code>.</p><p>If you look through <code>GHC.Prim</code>, you'll see that a number of primitive
+operations are defined in terms of <code>State# RealWorld</code> or <code>State# s</code>, which
+allows us to force evaluation order.</p><p><b>Exercise</b>: implement a function <code>getMaskingState :: IO Int</code> using the
+<code>getMaskingState#</code> primop and the <code>IO</code> data constructor.</p><h2 id="the-st-monad"><a href="#the-st-monad">The ST monad</a></h2><p>Let's compare the definitions of the <code>IO</code> and <a href="http://www.stackage.org/haddock/lts-1.0/base-4.7.0.2/src/GHC-ST.html#ST"><code>ST</code></a> types:</p><pre><code class="haskell">newtype IO   a = IO (State# RealWorld -&gt; (# State# RealWorld, a #))
+newtype ST s a = ST (State# s         -&gt; (# State# s,         a #))</code></pre><p>Well <i>that</i> looks oddly similar. Said more precisely, <code>IO</code> is isomorphic to <code>ST
+RealWorld</code>. <code>ST</code> works under the exact same principles as <code>IO</code> for threading
+state through, which is why we're able to have things like mutable references
+in the <code>ST</code> monad.</p><p>By using an uninstantiated <code>s</code> value, we can ensure that we aren't &quot;cheating&quot;
+and running arbitrary <code>IO</code> actions inside an <code>ST</code> action. Instead, we just have
+&quot;local state&quot; modifications, for some definition of local state. The details of
+using <code>ST</code> correctly and the Rank2Types approach to <code>runST</code> are interesting,
+but beyond the scope of this chapter, so we'll stop discussing them here.</p><p>Since <code>ST RealWorld</code> is isomorphic to <code>IO</code>, we should be able to convert
+between the two of them. <code>base</code> does in fact <a href="http://www.stackage.org/haddock/lts-1.0/base-4.7.0.2/Control-Monad-ST.html#v:stToIO">provide the
+<code>stToIO</code></a>
+function.</p><p><b>Exercise</b>: write a pair of functions to convert between <code>IO a</code> and <code>ST
+RealWorld a</code>.</p><p><b>Exercise</b>: <code>GHC.Prim</code> has a <a href="http://www.stackage.org/haddock/lts-1.0/ghc-prim-0.3.1.0/GHC-Prim.html#g:12">section on mutable
+variables</a>,
+which forms the basis on <code>IORef</code> and <code>STRef</code>. Provide a new implementation of
+<code>STRef</code>, including <code>newSTRef, </code>readSTRef<code>, and </code>writeSTRef`.</p><h2 id="primmonad"><a href="#primmonad">PrimMonad</a></h2><p>It's a bit unfortunate that we have to have two completely separate sets of
+APIs: one for <code>IO</code> and another for <code>ST</code>. One common example of this is <code>IORef</code>
+and <code>STRef</code>, but- as we'll see at the end of this section- there are plenty of
+operations that we'd like to be able to generalize.</p><p>This is where <code>PrimMonad</code>, from the <code>primitive</code> package, comes into play. Let's
+look at <a href="http://www.stackage.org/haddock/lts-1.0/primitive-0.5.4.0/src/Control-Monad-Primitive.html#PrimMonad">its definition</a>:</p><pre><code class="haskell">-- | Class of primitive state-transformer monads
+class Monad m =&gt; PrimMonad m where
+  -- | State token type
+  type PrimState m
+
+  -- | Execute a primitive operation
+  primitive :: (State# (PrimState m) -&gt; (# State# (PrimState m), a #)) -&gt; m a</code></pre><p>Note: I have <i>not</i> included the <code>internal</code> method, since <a href="https://github.com/haskell/primitive/pull/19">it will likely be
+removed</a>. In fact, at the time
+you're reading this, it may already be gone!</p><p><code>PrimState</code> is an associated type giving the type of the state token. For <code>IO</code>,
+that's <code>RealWorld</code>, and for <code>ST s</code>, it's <code>s</code>. <code>primitive</code> gives a way to lift
+the internal implementation of both <code>IO</code> and <code>ST</code> to the monad under question.</p><p><b>Exercise</b>: Write implementations of the <code>PrimMonad IO</code> and <code>PrimMonad (ST s)</code> instances, and compare against the real ones.</p><p>The primitive package provides a number of wrappers around types and functions
+from <code>GHC.Prim</code> and generalizes them to both <code>IO</code> and <code>ST</code> via the <code>PrimMonad</code>
+type class.</p><p><b>Exercise</b>: Extend your previous <code>STRef</code> implementation to work in any
+<code>PrimMonad</code>. After you're done, you may want to <a href="http://www.stackage.org/haddock/lts-1.0/primitive-0.5.4.0/Data-Primitive-MutVar.html">have a look at
+Data.Primitive.MutVar</a>.</p><p>The <code>vector</code> package builds on top of the <code>primitive</code> package to provide
+mutable vectors that can be used from both <code>IO</code> and <code>ST</code>. This chapter is <i>not</i>
+a tutorial on the <code>vector</code> package, so we won't go into any more details now.
+However, if you're curious, please <a href="http://www.stackage.org/haddock/nightly-2015-01-08/vector-0.10.12.2/Data-Vector-Generic-Mutable.html">look through the
+<code>Data.Vector.Generic.Mutable</code>
+docs</a>.</p><h2 id="readerio-monad"><a href="#readerio-monad">ReaderIO monad</a></h2><p>To tie this off, we're going to implement a <code>ReaderIO</code> type. This will flatten
+together the implementations of <code>ReaderT</code> and <code>IO</code>. Generally speaking, there's
+no advantage to doing this: GHC should always be smart enough to generate the
+same code for this and for <code>ReaderT r IO</code> (and in my benchmarks, they perform
+identically). But it's a good way to test that you understand the details here.</p><p>You may want to try implementing this yourself before looking at the
+implementation below.</p><pre><code class="haskell">{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MagicHash             #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE UnboxedTuples         #-}
+import Control.Applicative        (Applicative (..))
+import Control.Monad              (ap, liftM)
+import Control.Monad.IO.Class     (MonadIO (..))
+import Control.Monad.Primitive    (PrimMonad (..))
+import Control.Monad.Reader.Class (MonadReader (..))
+import GHC.Base                   (IO (..))
+import GHC.Prim                   (RealWorld, State#)
+
+-- | Behaves like a @ReaderT r IO a@.
+newtype ReaderIO r a = ReaderIO
+    (r -&gt; State# RealWorld -&gt; (# State# RealWorld, a #))
+
+-- standard implementations...
+instance Functor (ReaderIO r) where
+    fmap = liftM
+instance Applicative (ReaderIO r) where
+    pure = return
+    (&lt;*&gt;) = ap
+
+instance Monad (ReaderIO r) where
+    return x = ReaderIO $ \_ s -&gt; (# s, x #)
+    ReaderIO f &gt;&gt;= g = ReaderIO $ \r s0 -&gt;
+        case f r s0 of
+            (# s1, x #) -&gt;
+                let ReaderIO g' = g x
+                 in g' r s1
+
+instance MonadReader r (ReaderIO r) where
+    ask = ReaderIO $ \r s -&gt; (# s, r #)
+    local f (ReaderIO m) = ReaderIO $ \r s -&gt; m (f r) s
+
+instance MonadIO (ReaderIO r) where
+    liftIO (IO f) = ReaderIO $ \_ s -&gt; f s
+
+instance PrimMonad (ReaderIO r) where
+    type PrimState (ReaderIO r) = RealWorld
+
+    primitive f = ReaderIO $ \_ s -&gt; f s
+
+    -- Cannot properly define internal, since there's no way to express a
+    -- computation that requires an @r@ input value as one that doesn't. This
+    -- limitation of @PrimMonad@ is being addressed:
+    --
+    -- https://github.com/haskell/primitive/pull/19
+    internal (ReaderIO f) =
+        f (error &quot;PrimMonad.internal: environment evaluated&quot;)</code></pre><p><b>Exercise</b>: Modify the <code>ReaderIO</code> monad to instead be a <code>ReaderST</code> monad, and
+take an <code>s</code> parameter for the specific state token.</p><h2 id="further-reading"><a href="#further-reading">Further reading</a></h2><ul><li><a href="https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/primitives.html">GHC docs on primitives</a></li><li><a href="https://ghc.haskell.org/trac/ghc/wiki/Commentary/PrimOps">GHC Wiki on PrimOps</a></li><li><a href="https://www.haskell.org/haskellwiki/Evaluation_order_and_state_tokens">Evaluation order and state tokens</a></li></ul></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/commercial/content/primitive-haskell';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

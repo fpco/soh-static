@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html><head><title>Parallel and Incremental CRCs - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/parallel-crc">Parallel and Incremental CRCs</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Parallel and Incremental CRCs</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">11 Sep 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/3310c904c4265dd33884d81f64bff43f7f927209">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/online-lca">Previous content: On-line Lowest Common Ancestor</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#crc-32">CRC-32</a></li><li><a href="#the-view-from-the-left">The View from the Left</a></li><li><a href="#tearing-apart-a-crc">Tearing Apart a CRC</a></li><li><a href="#properties-of-all-crcs">Properties of all CRCs</a></li><li><a href="#zero-blindness">Zero Blindness</a></li><li><a href="#additive-homomorphism">Additive Homomorphism</a></li><li><a href="#exploiting-weakness">Exploiting Weakness</a></li><li><a href="#the-story-so-far">The Story So Far</a></li><li><a href="#deeper-down-the-rabbit-hole">Deeper Down the Rabbit Hole</a></li><li><a href="#monoidal-folding">Monoidal Folding</a></li><li><a href="#pause-for-reflection">Pause for Reflection</a></li><li><a href="#not-the-comonads-you-are-looking-for">Not The Comonads You Are Looking For</a></li><li><a href="#isomorphism-does-not-imply-equal-efficiency">Isomorphism Does Not Imply Equal Efficiency</a></li><li><a href="#putting-it-back-together-again">Putting It Back Together Again</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Back in the <a href="https://www.fpcomplete.com/user/edwardk/cellular-automata/part-2">second part</a> of my <a href="https://www.fpcomplete.com/user/edwardk/cellular-automata/">series on cellular automata</a>, I implemented a <a href="http://en.wikipedia.org/wiki/Moore_machine">Moore machine</a> for computing a <a href="http://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC-32</a>. It was used to generate the CRC-32 for the end of a <a href="http://www.libpng.org/pub/png/">PNG</a> block header.</p><p>At the time I was somewhat saddened by the fact that I was forced to turn to a left fold, because there didn't appear to be an algorithm for computing a CRC in parallel or incrementally, beyond simply working a few more bits at a time through a lookup table.</p><p>It finally occurred to me how we can implement a parallel/incremental CRC calculator today during the walk home from work, and I figured I should share it. This has a number of practical applications, as it permits us to regenerate CRCs in response to small edits in very large datasets in logarithmic time!</p><p>I've never seen this algorithm before applied to CRCs, so it is at least new to me.</p><p>This may also let me play some games with fast composable hashing for data structures in a later post.</p><h1 id="crc-32"><a href="#crc-32">CRC-32</a></h1><p>Calculating a CRC is just an exercise in long division.</p><p>The particular number system we're working in is a bit peculiar.</p><p>But other than that, it really is just what you were taught in grade-school!</p><p>Probably the best explanation for how a CRC works comes from Ross William's rather unassuming and seemingly immortal 1996 <a href="http://www.repairfaq.org/filipg/LINK/F_crc_v31.html">&quot;A Painless Guide to CRC Error Detection Algorithms&quot;</a>, which goes through from soup to nuts how a CRC is defined from an operational perspective. It can be found on Filip G's <a href="http://www.repairfaq.org/filipg/">site on repairfaq.org</a>, which will provide you a fresh reminder of what the internet was like for us in the mid 90s.</p><p>The content, however, is excellent.</p><h1 id="the-view-from-the-left"><a href="#the-view-from-the-left">The View from the Left</a></h1><p>Recall my definition of CRC-32 from last time along with enough of an implementation of left folding to run it:</p><pre><code class="active haskell">{-# LANGUAGE ExistentialQuantification, OverloadedStrings #-}
+import Data.Bits
+import Data.ByteString.Lazy as Lazy
+import Data.ByteString.Lazy.Char8 ()
+import Data.Vector.Unboxed as Unboxed
+import Data.Word
+
+data L b a = forall x. L (x -&gt; b -&gt; x) x (x -&gt; a)
+
+runL :: L Word8 a -&gt; Lazy.ByteString -&gt; a
+runL (L xbx x xa) bs = xa (Lazy.foldl' xbx x bs)
+
+crc32 :: L Word8 Word32
+crc32 = L step 0xffffffff complement where
+  step r b = unsafeShiftR r 8 
+     `xor` crcs Unboxed.! fromIntegral (xor r (fromIntegral b) .&amp;. 0xff)
+
+crcs :: Unboxed.Vector Word32
+crcs = Unboxed.generate 256 (go.go.go.go.go.go.go.go.fromIntegral) where
+  go c = unsafeShiftR c 1 `xor` if c .&amp;. 1 /= 0 then 0xedb88320 else 0
+
+main = print $ runL crc32 &quot;12345689&quot;</code></pre><p>This is already what is somewhat embarassingly considered the &quot;parallel&quot; algorithm for computing a CRC. It computes 8 bits of the CRC at a time by using a look-up table, but it doesn't let me put extra cores to work and it doesn't let me split up my workload.</p><p>The algorithm I used above as the left fold can be seen as an implementation of the reflected table-driven algorithm Williams defines in Chapter 12, but it is pretty standard, modulo the trappings I've put on it to treat it as a fold, and algorithms just like it can be found everywhere.</p><p>I was skimming <a href="http://sar.informatik.hu-berlin.de/research/publications/SAR-PR-2006-05/SAR-PR-2006-05_.pdf">Reversing CRC, Theory and Practice</a> when it clicked for me what the properties are of a CRC that make this possible, so through the rest of the post, I'll try to follow their vocabulary when it comes to a CRC.</p><h1 id="tearing-apart-a-crc"><a href="#tearing-apart-a-crc">Tearing Apart a CRC</a></h1><p>Let's define <code>crc(a) = r</code> to be the core calculation that performs the polynomial division in <i>GF(2^32)</i> that drives a CRC. We'll abuse notation, and permit us to have partially applied this long division to have obtained some remainder <code>r</code> so far, and take <code>crc(r,a) = r'</code> to be the calculation that picks up with remainder <code>r</code> and accepts more input <code>a</code>, obtaining the new remainder <code>r'</code>.</p><p>Using juxtaposition in the input argument to denote concatenation, this gives us the first property we'll need:</p><pre><code>crc(r,ab) = crc(crc(r,a),b)</code></pre><p>If we try to adapt it directly to get a <code>Monoid</code> we get stuck. This seems to be inherently sequential.</p><p>So, let's define the Galois field used for CRC-32.</p><p>When working with numbers in <i>GF(2^32)</i> addition is given by <code>xor</code>, and multiplication is limited to like powers of <code>x</code>. If we fix the CRC polynomial and work bit reversed, we get the following number type.</p><pre><code class="active haskell">{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+import Data.Bits
+import Data.Word
+
+-- show
+newtype GF = GF { runGF :: Word32 } deriving (Eq,Show,Read,Bits)
+
+poly :: GF
+poly = GF 0xedb88320 -- -- x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1
+
+-- | compute x * p(x)
+xtimes :: GF -&gt; GF
+xtimes c = unsafeShiftR c 1 + if testBit c 0 then poly else 0
+
+instance Num GF where
+  (+) = xor
+  (-) = xor
+  _ * 0 = 0
+  a * b = xtimes a * unsafeShiftL b 1 + if testBit b 31 then a else 0
+  negate = id
+  abs = id
+  signum = fromIntegral . signum . runGF
+  fromInteger i
+    | odd i     = GF 0x80000000 -- x^0
+    | otherwise = GF 0          -- 0
+-- /show
+
+main = putStrLn &quot;It compiles, so it is obviously correct.&quot;</code></pre><p>Since we're working bit reversed, the coefficient of x^31 is the least significant bit, and on the other extreme the coefficient of <code>1 = x^0</code> is our most significant bit.</p><p>The next most significant bit gives us <code>x</code> itself.</p><pre><code class="haskell">x :: GF
+x = GF 0x40000000</code></pre><p><code>xtimes</code> above was the more humorously named <code>go</code> calculation used in <code>crcs</code> in the original left fold. It computes <code>x * p(x)</code> for a polynomial <code>p</code>. In the multiplication algorithm above, we're using it in a peasant multiplier. Since we have a working <code>Num</code>, we can now use the built-in <code>(^)</code> from the Prelude to compute <code>x^n</code>.</p><p>If you care about efficiency you could write the peasant exponentiator by hand:</p><pre><code class="haskell">-- | peasant exponentiation
+xpow :: Int -&gt; GF
+xpow 0 = 1
+xpow 1 = x
+xpow n = case divMod n 2 of
+  (q,0) -&gt;          square (xpow q)
+  (q,1) -&gt; xtimes $ square (xpow q)
+  _     -&gt; error &quot;unimplemented: extended Euclidean algorithm&quot;
+  where square a = a * a</code></pre><p>This has the benefit that it gets to use <code>xtimes</code> rather than <code>(* x)</code> internally, shaving a few cycles, but clutters exposition. That said, if you care about efficiency, perhaps you can find me a nicer multiplication routine. The peasant exponentiator we're using isn't the fastest form of multiplication in <i>GF(2^n)</i>. We might consider adapting something like <a href="http://www.csd.uwo.ca/~eschost/Exam/Koc.pdf">Montgomery multiplication and exponentiation</a>, for very large choices of <code>n</code>, there are other multiplication routines as well.</p><p>My implementation of <code>GF</code> is structured along the lines of a quickly dashed off sketch by Adrian Keet during a discussion on <code>#haskell-lens</code>. Any errors introduced in the above code, however, are all mine.</p><h1 id="properties-of-all-crcs"><a href="#properties-of-all-crcs">Properties of all CRCs</a></h1><p><a href="http://en.wikipedia.org/wiki/Andrew_S._Tanenbaum">Tanenbaum</a>'s <a href="http://www.amazon.com/Computer-Networks-Edition-Andrew-Tanenbaum/dp/0132126958">Computer Networks</a> describes a few of the conditions necessary to define a good polynomial, including resistance to single and two bit errors, odd numbers of bits, bursts of all ones or zeroes, etc. But even with a well chosen standard polynomial in hand, there are a couple of classes of errors that standard CRC algorithms are tweaked to handle better.</p><p>Rather than reason about this through properties of <i>GF(2^32)</i> directly, let's talk about two properties that are commonly seen as weaknesses of CRC and use them to derive an algorithm.</p><h1 id="zero-blindness"><a href="#zero-blindness">Zero Blindness</a></h1><p>An actual CRC looks like <code>CRC(a) = crc(INIT,a) <code>xor</code> FINAL</code>, rather than being a just pure long division. Usually <code>INIT</code> and <code>FINAL</code> will be something like all 1s to complement the initial state and the final state. The reason why <code>INIT</code> is chosen to be non-zero is to combat a phenomenon known as &quot;zero blindness&quot;.</p><p>If you consider a CRC as a polynomial long division, then prefixing a number of zeroes onto the number we're dividing wouldn't change the CRC at all! So what is done in practice is that we start with a current &quot;remainder&quot; that is <code>0xffffffff</code> rather than <code>0</code>.</p><p>There is another kind of zero blindness that affects the message followed by the CRC itself, any additional trailing 0's wouldn't affect the checksum, so most real world CRCs <code>complement</code> all of the bits of the remainder before emitting it into the output as well.</p><p>Here we'll be using the same mask for both <code>INIT</code> and <code>FINAL</code>:</p><pre><code class="haskell">-- | @x^31 + x^30 + ... + x + 1@
+ones :: GF
+ones = GF 0xffffffff</code></pre><p>We'll be reasoning about our CRC by conceptually abusing this property of a CRC alongside a second, much more powerful property. 'forcing' our CRC into a blind state by exploiting:</p><h1 id="additive-homomorphism"><a href="#additive-homomorphism">Additive Homomorphism</a></h1><p>This second property is one that is much more often used from a cracking perspective than as a desirable property:</p><pre><code>crc(r1 `xor` r2, a1 `xor` a2) = crc(r1,a1) `xor` crc(r2,a2)</code></pre><h1 id="exploiting-weakness"><a href="#exploiting-weakness">Exploiting Weakness</a></h1><p>If we have input fragments <code>a</code> and <code>b</code> with lengths <code>m</code> and <code>n</code> respectively:</p><pre><code>CRC(ab) =                               -- definition of CRC
+crc(INIT,ab) + FINAL =                  -- linearity
+crc(INIT,a0^n + 0^m b) + FINAL =        -- additive homomorphism
+crc(INIT,a0^n) + crc(0,0^nb) + FINAL =  -- zero blindness 
+crc(INIT,a0^n) + crc(0,b) + FINAL       -- definition of crc
+crc(crc(INIT,a),0^n) + crc(0,b) + FINAL -- additive homomorphism
+crc(crc(INIT,0^m)+crc(0,a),0^n) + crc(0,b) + FINAL</code></pre><p>That final expression requires us to be able to calculate <code>crc(r,0^m)</code> and to know <code>crc(0,a)</code> for each half of the input, but nothing more.</p><p>As James Deikun pointed out to me, <code>crc(r,0^m)</code> is particularly well behaved. When we look at what it does to our division is it appends just a number of 0's. When we work out the effect on the remainder we just need to multiply through our remainder by <code>x^m</code>!</p><p>Instead of storing the string <code>0^m</code> or the length <code>m</code>, I'll just store <code>x^m</code> directly.</p><p>Monoidal composition proceeds through a simplification of the definition above, where <code>INIT = FINAL = 0</code>:</p><pre><code>crc(0,ab) =                    -- linearity
+crc(0,a 0^n + 0^mb)            -- additive homomorphism
+crc(0,a 0^n) + crc(0,0^m b) =  -- zero blindness
+crc(0,a 0^n) + crc(0,b) =      -- definition of crc
+crc(crc(0,a),0^n) + crc(0,b) = -- crc(r,0^m) = r*x^m 
+crc(0,a)*x^n + crc(0,b)</code></pre><p>So if we just store the length (mangled as <code>x^n</code>) and the CRC remainder from a starting remainder of <code>0</code>, we can compose these answers associatively!</p><pre><code class="haskell">data CRC32 = CRC32 
+  {-# UNPACK #-} !GF
+  {-# UNPACK #-} !GF 
+  deriving (Eq,Read,Show)
+
+instance Monoid CRC32 where
+  CRC32 p m `mappend` CRC32 q n = CRC32 (p*n+q) (m*n)
+  mempty = CRC32 0 1</code></pre><p>Here <code>CRC32 p m</code> stores <code>p = crc(0,a)</code> for our input string alongside <code>m = x^|a|</code>.</p><p>Our <code>mempty</code> comes from the fact that <code>crc(0,&quot;&quot;) = 0</code>, and note that the 1 here is actually <code>GF 0x80000000</code> and represents <code>x^0</code> in our Galois field, so we're denoting an input of length 0.</p><p>If we build the standard byte-wise CRC table:</p><pre><code class="haskell">crcs :: UArray Word8 GF
+crcs = listArray (0,255) $ map (xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.GF) [0..255]</code></pre><p>We can then define the injection into our monoid for a byte worth of data at a time.</p><pre><code class="haskell">byte :: Word8 -&gt; CRC32
+byte a = CRC32 (crcs ! a) (x^8) -- x^8 = GF 0x800000</code></pre><p>The last thing we need to do is apply the <code>INIT</code> and <code>FINAL</code> masks.</p><p>Going back to our original equations, <code>crc(INIT,0^m)</code> can be computed by multiplying the mask by <code>x^m</code>, and we can just add in the <code>FINAL</code> mask when we're done. Here it is also <code>0xffffffff</code>.</p><p>Using those results we can finally find our fold:</p><pre><code class="haskell">runCRC :: CRC32 -&gt; Word32
+runCRC (CRC32 p m) = runGF (ones * m + p + ones)</code></pre><h1 id="the-story-so-far"><a href="#the-story-so-far">The Story So Far</a></h1><pre><code class="active haskell">{-# LANGUAGE GADTs, GeneralizedNewtypeDeriving #-}
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
+import Control.Comonad
+import Data.Bits
+import Data.Foldable as Foldable
+import Data.Monoid
+import Data.Profunctor
+import Data.Array.Unboxed
+import Data.Word
+
+newtype GF = GF { runGF :: Word32 } deriving (Eq,Show,Read,Bits,IArray UArray)
+
+poly :: GF
+poly = GF 0xedb88320 -- x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1
+
+-- | compute x * p(x)
+xtimes :: GF -&gt; GF
+xtimes c = unsafeShiftR c 1 + if testBit c 0 then poly else 0
+
+instance Num GF where
+  (+) = xor
+  (-) = xor
+  _ * 0 = 0
+  a * b = xtimes a * unsafeShiftL b 1 + if testBit b 31 then a else 0
+  negate = id
+  abs = id
+  signum = fromIntegral . signum . runGF
+  fromInteger i
+    | odd i     = GF 0x80000000 -- x^0
+    | otherwise = GF 0          -- 0
+
+x :: GF
+x = GF 0x40000000 -- x^1
+
+ones :: GF
+ones = GF 0xffffffff -- | x^31+x^30+...+x+1
+
+data CRC32 = CRC32 {-# UNPACK #-} !GF {-# UNPACK #-} !GF deriving (Eq,Read,Show)
+
+instance Monoid CRC32 where
+  CRC32 p m `mappend` CRC32 q n = CRC32 (p*n+q) (m*n)
+  mempty = CRC32 0 1
+
+crcs :: UArray Word8 GF
+crcs = listArray (0,255) $ map (xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.GF) [0..255]
+
+runCRC :: CRC32 -&gt; Word32
+runCRC (CRC32 p m) = runGF (ones * m + p + ones)
+
+byte :: Word8 -&gt; CRC32
+byte a = CRC32 (crcs ! a) (x^8)
+
+main = print $ runCRC $ foldMap (byte.fromIntegral.fromEnum) &quot;123456789&quot;</code></pre><h1 id="deeper-down-the-rabbit-hole"><a href="#deeper-down-the-rabbit-hole">Deeper Down the Rabbit Hole</a></h1><p>This also means if you keep the blinded CRCs around you can calculate a modified aggregate CRC without starting over from the left of your document or ADT.</p><p>Combining this with a <a href="http://www.soi.city.ac.uk/~ross/papers/FingerTree.html">finger tree</a> can enable you to calculate a CRC for an entire document in parallel and then to update it incrementally in mere logarithmic time in response to edits. It also means that you do not need to invalidate an entire CRC.</p><p>Combining this with an ADT makes for cheap rehashing as portions of a structure changes.</p><p>Nothing here was specific to the modulus used for CRC-32. It works equally well for any other standard &quot;Rocksoft&quot;-style CRC. This works particularly well for the variant of CRC-8 used in <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard">Rijndael/AES</a>, because the lookup table can be used directly for multiplication.</p><p>A CRC isn't a cryptographically strong hash, however, due to their importance in network protocols, telecommunications, document and image formats,  and general ubiquity, having a way to compute them both in parallel and incrementally opens up new opportunities.</p><p>Now what we've come all the way through to the conclusion there are obvious analogies to how one can execute a Rabin-Karp or a simple addition modulo prime hash in parallel.</p><h1 id="monoidal-folding"><a href="#monoidal-folding">Monoidal Folding</a></h1><p><i>(if you aren't interested in folding, you can probably skip the remainder, but it does polish up the API nicely)</i></p><p>I haven't mentioned a single <code>Comonad</code> all post. Time to fix that.</p><p>We can build up a new kind of folding, based capturing the arguments to a <code>foldMap</code> in amber, just like <a href="http://squing.blogspot.com/2008/11/beautiful-folding.html">Max Rabkin originally did</a> with the arguments to <code>foldl'</code>.</p><p>This yields the following type:</p><pre><code class="haskell">data M a b = forall r. M (r -&gt; b) (a -&gt; r) (r -&gt; r -&gt; r) r</code></pre><p>We can map over the inputs and outputs:</p><pre><code class="haskell">instance Profunctor M where
+  dimap f g (M k h m e) = M (g.k) (h.f) m e</code></pre><p>There is also an <code>Applicative</code> structured just like the <code>Applicative</code> for <code>L</code>.</p><p>There is even a <code>Monad</code> that permits you to write (inefficient) multipass algorithms!</p><h1 id="pause-for-reflection"><a href="#pause-for-reflection">Pause for Reflection</a></h1><p>The problem then becomes, how to run it. <code>foldMap</code> doesn't let us explicitly pass arguments for the <code>mappend</code> and <code>mempty</code> of the Monoid in question.</p><p>We could run <code>M</code> using <code>foldr</code>:</p><pre><code class="haskell">runM :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runM (M k h m z) xs = k (Foldable.foldr (m.h) z xs)</code></pre><p>But that isn't very satisfying, the whole point of introducing a 'Monoid' was to be able to associate however we pleased.</p><p>We could make a <code>Monoid</code>:</p><pre><code class="haskell">newtype Slow a = Slow { runSlow :: (a -&gt; a -&gt; a) -&gt; a -&gt; a }
+
+instance Monoid (Slow a) where
+  mempty = Slow (\_ e -&gt; e)
+  mappend (Slow f) (Slow g) = Slow $ \p e = runSlow f p e `p` runShow g p e</code></pre><p>But if you have any sharing of monoidal values, then working with <code>Slow</code> will actually only share the <i>functions</i> it contains, not their results.</p><p>The better tool for evaluating <code>M</code>, unfortunately requires some heavy lifting. We can turn to my <code>reflection</code> package to allow us to manufacture a <code>Monoid</code> out of an arbitrary function and unit value.</p><p><a href="https://github.com/thoughtpolice">Austin Seipp</a> recently wrote <a href="https://www.fpcomplete.com/user/thoughtpolice/using-reflection">a nice tutorial on how to do this</a>, so I'll just skip to the solution:</p><pre><code class="haskell">newtype N a s = N { runN :: a }
+
+instance Reifies s (a -&gt; a -&gt; a, a) =&gt; Monoid (N a s) where
+  mempty = N $ snd $ reflect (Proxy :: Proxy s)
+  mappend (N a) (N b) = N $ fst (reflect (Proxy :: Proxy s)) a b
+
+runM :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runM (M k h m (z :: m)) s = reify (m, z) $
+    \ (_ :: Proxy s) -&gt; k $ runN (foldMap (N #. h) s :: N m s)</code></pre><p>Here we make up a <code>Monoid</code> that reflects how to do what it needs to do out of the environment, then make up an instance with the <code>mappend</code> and <code>mempty</code> we want.</p><p>Finally <code>(#.)</code> in <code>runM</code> is drawn from <code>Data.Profunctor.Unsafe</code> to work around the fact that <code>SomeNewType . f</code> doesn't erase down to <code>f</code>, but rather to the eta-expansion of <code>f</code>, so it has ever so slightly different semantics.</p><p>Now that we can run an monoidal folding, it'd be nice to be able to do the same things we could with left foldings.</p><h1 id="not-the-comonads-you-are-looking-for"><a href="#not-the-comonads-you-are-looking-for">Not The Comonads You Are Looking For</a></h1><p>But if we go to copy the <code>Comonad</code> from <code>L</code> we get gobbledygook!</p><pre><code class="haskell">instance Comonad (L a) where
+  extract (L k _ z) = k z
+  duplicate (L k h z) = L (L k h) h z</code></pre><p>When we were working with <code>L</code>, this comonad was able to sneak in before the final tweak is applied at the end and snatches up the seed we've computed so far and uses at as the seed for the nested <code>L</code> in</p><pre><code class="haskell">duplicate :: L a b -&gt; L a (L a b)</code></pre><p>But if we do that with <code>M</code>, we'd get something that replaced the <code>mempty</code> of our <code>Monoid</code> with the result of what we've tallied up so far!</p><p>Last time, we used the fact that <code>(L a)</code> was isomorphic to an <code>EnvT</code>'d <code>Store</code> <code>Comonad</code>, where we'd quantified away the state parameter.</p><p>This time, we'll have to turn to a different isomorphism.</p><p>There is a comonad for <code>(-&gt;) m</code>, whenever <code>m</code> is a <code>Monoid</code>. This <code>Comonad</code> is what I called the <code>Traced</code> comonad in <code>comonad-transformers</code>. If you squint hard enough, you can see that <code>M a</code> is isomorphic to <code>forall m. Monoid m =&gt; EnvT (a -&gt; m) ((-&gt;) m) a</code>.</p><p>When we borrow this structure we get</p><pre><code class="haskell">instance Comonad (M b) where
+  extract (M k _ _ z) = k z
+  duplicate (M k h m z) = M (\n -&gt; M (k . m n) h m z) h m z</code></pre><h1 id="isomorphism-does-not-imply-equal-efficiency"><a href="#isomorphism-does-not-imply-equal-efficiency">Isomorphism Does Not Imply Equal Efficiency</a></h1><p>I had a performance issue with the monoid homomorphism described in the last post, that this <code>Comonad</code> helps address.</p><p>Last time I noted that with <code>L</code>:</p><pre><code class="haskell">extract = more [] 
+more xs =&lt;= more ys = more (xs ++ ys)</code></pre><p>But if we expand the second law:</p><pre><code class="haskell">more (xs ++ ys) = more xs =&lt;= more ys = more xs . extend (more ys)</code></pre><p>there we're partially applying a <i>suffix</i> of our input to a left fold!</p><p>This means we're capturing it in the environment:</p><pre><code class="haskell">more xs . extend (more ys) = more xs . fmap (more ys) . duplicate</code></pre><p>This leads to the observation that we don't have to do that, our comonad was set up precisely so we could partially evaluate out to a new seed.</p><p>By naturality or good old fashioned equational reasoning, we can get to an alternate statement of the second law:</p><pre><code class="haskell">more (xs ++ ys) = more ys . more xs . duplicate</code></pre><p>This gives us an efficient algorithm for composing left foldings.</p><p>When we work with the monoidal folding above, we have the flexibility to get the more efficient non-leaky version for both the left side and the right side of the structure.</p><h1 id="putting-it-back-together-again"><a href="#putting-it-back-together-again">Putting It Back Together Again</a></h1><pre><code class="active haskell">{-# LANGUAGE GADTs, GeneralizedNewtypeDeriving, ScopedTypeVariables, FlexibleContexts, UndecidableInstances #-}
+
+import Control.Comonad
+import Data.Bits
+import Data.Foldable as Foldable
+import Data.Monoid
+import Data.Profunctor.Unsafe
+import Data.Proxy
+import Data.Reflection
+import Data.Array.Unboxed
+import Data.Word
+
+newtype GF = GF { runGF :: Word32 } deriving (Eq,Show,Read,Bits,IArray UArray)
+
+-- | @x^32 + x^26 + x^23 + x^22 + x^16 + x^12 + x^11 + x^10 + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1@
+poly :: GF
+poly = GF 0xedb88320 -- the polynomial we're working modulo in GF(2^32) for CRC32.
+
+-- | compute x * p(x)
+xtimes :: GF -&gt; GF
+xtimes c = unsafeShiftR c 1 + if testBit c 0 then poly else 0
+
+instance Num GF where
+  (+) = xor
+  (-) = xor
+  _ * 0 = 0
+  a * b = xtimes a * unsafeShiftL b 1 + if testBit b 31 then a else 0
+  negate = id
+  abs = id
+  signum = fromIntegral . signum . runGF
+  fromInteger i
+    | odd i     = GF 0x80000000 -- x^0
+    | otherwise = GF 0          -- 0
+
+-- | @x^1@
+x :: GF
+x = GF 0x40000000
+
+-- | @x^31 + x^30 + ... + x + 1@
+ones :: GF
+ones = GF 0xffffffff
+
+data CRC32 = CRC32 {-# UNPACK #-} !GF {-# UNPACK #-} !GF deriving (Eq,Read,Show)
+
+instance Monoid CRC32 where
+  CRC32 p m `mappend` CRC32 q n = CRC32 (p*n+q) (m*n)
+  mempty = CRC32 0 1
+
+crcs :: UArray Word8 GF
+crcs = listArray (0,255) $ map (xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.GF) [0..255]
+
+runCRC :: CRC32 -&gt; Word32
+runCRC (CRC32 p m) = runGF (ones * m + p + ones)
+
+byte :: Word8 -&gt; CRC32
+byte a = CRC32 (crcs ! a) (x^8)
+
+data M a b where
+  M :: (r -&gt; b) -&gt; (a -&gt; r) -&gt; (r -&gt; r -&gt; r) -&gt; r -&gt; M a b
+
+instance Functor (M a) where
+  fmap f (M k h m z) = M (f.k) h m z
+
+instance Profunctor M where
+  dimap f g (M k h m z) = M (g.k) (h.f) m z
+
+instance Comonad (M a) where
+  extract (M k _ _ z) = k z
+  duplicate (M k h m z) = M (\n -&gt; M (k . m n) h m z) h m z
+
+newtype N a s = N { runN :: a }
+
+instance Reifies s (a -&gt; a -&gt; a, a) =&gt; Monoid (N a s) where
+  mempty = N $ snd $ reflect (Proxy :: Proxy s)
+  mappend (N a) (N b) = N $ fst (reflect (Proxy :: Proxy s)) a b
+
+-- show
+runM :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runM (M k h m (z :: m)) s = reify (m, z) $
+    \ (_ :: Proxy s) -&gt; k $ runN (foldMap (N #. h) s :: N m s)
+
+runR :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runR (M k h m z) xs = k (Foldable.foldr (m.h) z xs)
+
+runL :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runL (M k h m z) xs = k (Foldable.foldl' (\r -&gt; m r . h) z xs)
+
+crc32 :: M Word8 Word32
+crc32 = M runCRC byte mappend mempty
+
+main = print $ runM crc32 [0x12,0x34]
+-- /show</code></pre><p>Now the only part of the CRC API that the user has to concern themselves with is the actual <code>crc32</code> combinator. Everything else is generic and can be reused for other folds. If you want to keep folding you can keep the fold alive by using <code>duplicate</code>!</p><p>We could actually abstract over the choice of polynomial for our Galois field, by calculating our lut locally in a <code>crc</code> combinator that was parameterized on the values of <code>INIT</code>, <code>FINAL</code> and <code>poly</code>, or even by using <code>reflection</code> to move the modulus and/or lookup table into a type parameter. By switching to <code>Bits</code> and <code>Integral</code> constraints rather than fixing ourselves to <code>Word32</code>, we can implement <code>CRC-8</code>, <code>CRC-16</code> and <code>CRC-64</code> variants very easily as well.</p><div class="hidden"><pre><code class="active haskell">{-# LANGUAGE GADTs, GeneralizedNewtypeDeriving, RankNTypes, ScopedTypeVariables, StandaloneDeriving, MultiParamTypeClasses, FlexibleContexts #-}
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
+import Control.Comonad
+import Data.Bits
+import Data.Foldable as Foldable
+import Data.Monoid
+import Data.Profunctor
+import Data.Proxy
+import Data.Reflection
+import Data.Array.Unboxed
+import Data.Word
+
+newtype GF a s = GF { runGF :: a } deriving (Eq,Show,Read,Bits)
+
+deriving instance IArray UArray a =&gt; IArray UArray (GF a s)
+
+-- | compute x * p(x)
+xtimes :: (Integral a, Bits a, Reifies s a) =&gt; GF a s -&gt; GF a s
+xtimes c = unsafeShiftR c 1 + if testBit c 0 then GF (reflect c) else 0
+{-# INLINE xtimes #-}
+
+instance (Integral a, Bits a, Reifies s a) =&gt; Num (GF a s) where
+  (+) = xor
+  (-) = xor
+  _ * 0 = 0
+  a * b = xtimes a * unsafeShiftL b 1 + if testBit b (bitSize b - 1) then a else 0
+  negate = id
+  abs = id
+  signum = fromIntegral . signum . runGF
+  fromInteger i
+    | odd i     = GF (bit (bitSize (undefined :: a) - 1)) -- x^0
+    | otherwise = GF 0                     -- 0
+
+-- | @x^1@
+x :: forall a s. Bits a =&gt; GF a s
+x = GF (bit (bitSize (undefined :: a) - 2))
+{-# INLINE x #-}
+
+data CRC a = CRC !a !a deriving (Eq,Read,Show)
+
+instance Num a =&gt; Monoid (CRC a) where
+  CRC p m `mappend` CRC q n = CRC (p*n+q) (m*n)
+  mempty = CRC 0 1
+
+crc :: forall a. (Integral a, Bits a, IArray UArray a) =&gt; a -&gt; a -&gt; a -&gt; M Word8 a
+crc _INIT _FINAL poly = reify poly $ \(_ :: Proxy s) -&gt;
+  let crcs :: UArray Word8 (GF a s)
+      crcs = listArray (0,255) $ map (xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.xtimes.GF) [0..255]
+      k (CRC p m) = runGF (GF _INIT * m + p + GF _FINAL)
+      h a = CRC (crcs ! a) (x^8)
+  in M k h mappend mempty
+{-# INLINE crc #-}
+
+-- | @x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1@
+crc32 :: M Word8 Word32
+crc32 = crc 0xffffffff 0xffffffff 0xedb88320
+
+crc64_ecma182 :: M Word8 Word64
+crc64_ecma182 = crc (-1) (-1) 0xC96C5795D7870F42
+
+crc8 :: M Word8 Word8
+crc8 = crc 0xff 0xff 0xab
+
+crc8_sae :: M Word8 Word8
+crc8_sae = crc 0xff 0xff 0xb8
+
+data M a b where
+  M :: (r -&gt; b) -&gt; (a -&gt; r) -&gt; (r -&gt; r -&gt; r) -&gt; r -&gt; M a b
+
+instance Functor (M a) where
+  fmap f (M k h m z) = M (f.k) h m z
+
+instance Profunctor M where
+  dimap f g (M k h m z) = M (g.k) (h.f) m z
+
+instance Comonad (M a) where
+  extract (M k _ _ z) = k z
+  duplicate (M k h m z) = M (\n -&gt; M (k . m n) h m z) h m z
+
+runM :: Foldable f =&gt; M a b -&gt; f a -&gt; b
+runM (M k h m z) xs = k (Foldable.foldr (m.h) z xs)
+
+main = print $ runM crc32 [0x12,0x34]</code></pre></div><p>Now that the algorithm is fully assembled, I can recognize aspects of it.</p><p>I've seen a similar trick applied to turn a Rabin-Karp hash into a rolling hash.</p><p>There the <code>Monoid</code> was the same, except we worked with a different ring <code>Z/nZ</code>, with <code>n</code> odd, and instead of <code>x^k</code>, we track <code>2^k mod n</code> and exploit the fact that 2 is coprime with n.</p><p>Spotting that connection means that this also provides a way to make an efficient rolling-hash function out of any standard CRC!</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>September 10th, 2013</p><p>P.S. I packaged <code>M</code> up over the weekend in the <a href="http://hackage.haskell.org/package/folds"><code>folds</code> package on hackage</a>, but I reserve the right to change the API and welcome feedback.</p><p>[Edit: It appears either <a href="https://crcutil.googlecode.com/hg/doc/crc.pdf">Kadatch or Jenkins</a> figured out the same basic trick, which isn't surprising given how basic it is once you peel apart the math. They also identified the opportunity for a CRC-based rolling hash.]</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/parallel-crc';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

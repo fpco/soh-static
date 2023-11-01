@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html><head><title>Part 1: Leonardo Random Access Lists - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci">Fibonacci</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci/leonardo">Part 1: Leonardo Random Access Lists</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part 1: Leonardo Random Access Lists</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Apr 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/3a2678a9238b713dbb2240b8e98bff28c88444f4">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci/search">Next content: Part 2: Open-Ended Fibonacci Search</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci">Go up to: Fibonacci</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#leonardo-numbers">Leonardo Numbers</a></li><li><a href="#building-a-data-structure">Building a Data Structure</a></li><li><a href="#lopsided-trees">Lopsided Trees</a></li><li><a href="#growing-a-spine">Growing a Spine</a></li><li><a href="#simplifying-the-spine">Simplifying the Spine</a></li><li><a href="#why-care-">Why Care?</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>Chris Okasaki wrote about many data structures in his excellent book <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">&quot;Purely Functional Data Structures&quot;</a>.</p><p>Today I have the rare opportunity to talk about (invent?) one that he didn't. It doesn't achieve anything
+new in this space, but it is an interesting rearrangement of parts folks already knew for other things.</p><h1 id="leonardo-numbers"><a href="#leonardo-numbers">Leonardo Numbers</a></h1><p>The &quot;Leonardo&quot; numbers are given by <a href="https://oeis.org/A001595">1,1,3,5,9,15,25,41...</a>.</p><p>This arises from a recurrence:</p><pre><code class="haskell">leonardo 0 = 1
+leonardo 1 = 1
+leonardo n = leonardo (n - 2) + leonardo (n - 1) + 1</code></pre><p>This is just a slight mutation of the usual Fibonacci recurrence, where we add an extra 1 at each step.</p><p>(Fibonacci was named Leonardo Bonacci.)</p><p>We can read the recurrence formula forwards:</p><pre><code class="haskell">next i j = i + j + 1</code></pre><p>or backwards</p><pre><code class="haskell">prev i j = j - i - 1</code></pre><p>You can take multiple steps given a sequence of Leonardo numbers. Given <code>...g,h,i,j..</code> you can compute <code>g</code> from <code>i</code> and <code>j</code> directly, just by expanding:</p><pre><code class="haskell">prev2 i j = prev (prev i j) i</code></pre><p>into</p><pre><code class="haskell">prev2 i j = 2*i - j</code></pre><p>We can compute the n<i>th</i> Leonardo number in <code>O(log n)</code> time, just like the Fibonacci numbers, or any similar linear recurrence relation.</p><p>They are in fact, intimately related to the Fibonacci numbers:</p><pre><code class="haskell">leonardo n = 2 * fibonacci (n+1) - 1</code></pre><p>We know <code>leonardo 0 = leonardo 1 = 1</code>, but after that the positive Leonardo numbers are unique.</p><p>By the recurrence, <code>leonardo (-1) = prev 1 1 = -1</code>. We can continue to define negative Leonardo numbers analogous to negative Fibonacci numbers.</p><p>Regardless, to exploit any of the recurrences above, to walk forward or backwards from some current Leonardo number, it is highly beneficial to
+keep around the previous (or next) one. You can think of this pair as a cursor through the list of Leonardo numbers.</p><p>Dijkstra has a lot more to say on the subject of Leonardo numbers in <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD07xx/EWD797.html">EWD797</a>.</p><h1 id="building-a-data-structure"><a href="#building-a-data-structure">Building a Data Structure</a></h1><p>Okasaki, Knuth and others teach us to think of data structures from number systems or recurrences like this and I'm definitely not the first to play around with using the Leonardo numbers in this fashion.</p><p>The first use of Leonardo numbers in the shape of a data structure that I am aware of is the heap shape in Dijkstra's &quot;smoothsort,&quot; defined in <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD07xx/EWD796a.html">EWD796a</a> from which I first learned the name of the sequence. We'll revisit that in a bit.</p><p>A Leonardo number adds one to the previous two Leonardo numbers. When we recast this as a data structure, it sounds like a biased tree.</p><p>But the property of Leonardo numbers that grabs my attention is that you have two trees &quot;plus one new element&quot;. This sounds a lot like the structure of skew binary.</p><p>So this invited the question:</p><p>Can you build an efficient random access list structure using the Leonardo numbers, rather than skew binary?</p><p>It turns out the answer is yes.</p><h1 id="lopsided-trees"><a href="#lopsided-trees">Lopsided Trees</a></h1><p>We'll need some lopsided binary trees</p><pre><code class="haskell">data Tree a = Bin a (Tree a) (Tree a) | Tip a deriving Show</code></pre><p>We'll internally maintain the invariant that all of our trees are some Leonardo number in size, with the left and right children having the previous 2 Leonardo numbers worth of children respectively. I'll leave it as an exercise to the folks in the crowd who love dependent types to enforce this invariant in their code, and just assume this invariant from here out.</p><p>E.g. a tree of size 5 has a left child of size 1, and a right child of size 3:</p><pre><code>  1     
+  +---,
+  |   |
+  2   3
+      +----, 
+      |    | 
+      4    5</code></pre><p>while a tree of size 9 has a left child of size 3 and a right child of size 5:</p><pre><code>  1
+  +-------+
+  |       |
+  2       5
+  +---,   +---,
+  |   |   |   |
+  3   4   6   7
+              +---, 
+              |   | 
+              8   9 </code></pre><p>You can show that the height of the tree grows logarithmically with the number of elements despite the skew.</p><p>We'll delegate tracking the sizes of the trees to the next part.</p><h1 id="growing-a-spine"><a href="#growing-a-spine">Growing a Spine</a></h1><p>We need a &quot;spine&quot; for the structure, analogous to the skew binary random access list, but now cluttered with a couple of extra numbers.</p><p>If given a Leonardo number n, if <code>leonardo i = n</code>, with i &gt;= 0, I'll say that n has index i. Since 1 occurs twice, 1 has both index 0 and 1.</p><pre><code class="haskell">data Leonardo a = Cons !Int !Int (Tree a) (Leonardo a) | Nil deriving Show</code></pre><p>Each tree we cons onto the spine will be associated with some Leonardo number, and we'll keep the previous Leonardo number as well to facilitate walking the trees and merging nodes later. We maintain the invariant that the sequence of Leonardo numbers we use has not just a series of increasing indices, but other than possibly the two trees present that have the smallest indices, there are no Leonardo numbers with with adjacent indices in the spine.</p><p>This prevents the representation from being ambiguous, forcing us to use a tree of size 5 instead of the sequence 1,1,3.</p><p>I now leave as an exercise for the reader to show that this operation preserves the invariant above.</p><pre><code class="haskell">cons :: a -&gt; Leonardo a -&gt; Leonardo a
+cons a (Cons i j bs (Cons j' k cs zs))
+  | j == j' = Cons k (next j k) (Bin a bs cs) zs
+cons a rs = Cons 1 1 (Tip a) rs</code></pre><p>I cheat a bit, and use the (1,1) digit twice to save a little work, rather than start with (1,-1).</p><p><b>Exercise:</b> Why does this work?</p><p>This yields the following progression:</p><pre><code class="haskell">1
+1,1
+3
+1,3
+5
+1,5
+1,1,5
+3,5
+9
+1,9
+1,1,9
+3,9
+1,3,9
+5,9
+15
+1,15
+...</code></pre><p>We can compute the size of the random access list in log time.</p><p><b>Exercise:</b> Why?</p><pre><code class="haskell">size :: Leonardo a -&gt; Int
+size (Cons _ i _ as) = i + size as
+size Nil = 0</code></pre><p>We can now write a routine that indexes into a given Leonardo random access list in log time:</p><pre><code class="haskell">(!) :: Leonardo a -&gt; Int -&gt; a
+Nil ! i = undefined
+Cons j k a as ! i
+  | i &lt; k     = go i (prev j k) j a
+  | otherwise = as ! (i - k)
+  where
+    go 0 _ _ (Tip a) = a
+    go 0 _ _ (Bin a _ _) = a
+    go i j k (Bin _ l r)
+      | i &lt;= j    = go (i-1)  (prev2 j k) (prev j k) l
+      | otherwise = go (i-j-1) (prev j k) j r</code></pre><p>Like I showed with skew-binary random access lists for <a href="https://www.fpcomplete.com/user/edwardk/online-lca">on-line lowest common ancestor search</a>, you should be able to compute how to <code>drop n</code> elements from a list in <code>O(log n)</code> time. This should work as a drop-in replacement for skew-binary random access lists in that algorithm as well.</p><p>The spine is actually quite a bit shorter than the spine of a skew-binary random access list in terms of constant factors in exchange for the trees being correspondingly taller. (Dijkstra ended EWD797 on this note.)</p><p>Consequently, this pretty much works as a drop in replacement for a skew-binary random access list.</p><p>The code is available all together in a short <a href="https://gist.github.com/ekmett/036e28ff705cb27e9de6">gist</a>.</p><h1 id="simplifying-the-spine"><a href="#simplifying-the-spine">Simplifying the Spine</a></h1><p>It is somewhat ugly that we store two coefficients in each node in the spine. There is a scheme by Dijkstra that manages to track everything
+with a simple bit vector for which Leonardo numbers are present in the tree and a single pair of adjacent Leonardo numbers for where to start counting. He uses this in smoothsort to argue for it really being a fully in-place algorithm. On the other hand, it'd considerably complicate <code>cons</code>, above.</p><p>I leave this as an exercise for the reader as well.</p><h1 id="why-care-"><a href="#why-care-">Why Care?</a></h1><p>Gerth Stølting Brodal pointed out <a href="http://dl.acm.org/citation.cfm?id=1276254">in a paper with Gabriel Moruz</a> that balancing your tree wasn't actually optimal on real hardware. We have branch predictions, cache effects, etc. Consequently, the costs of going left vs. going right aren't the same!</p><p>(He also has <a href="http://www.cs.au.dk/~gerth/slides/cphstl06.pdf">slides available</a>.)</p><p>In particular, he showed empirically a bias to one side can speed things up considerably due to these effects. Something like 30% or so was the optimal balance, gaining up to 15% performance over a &quot;real&quot; balanced binary tree.</p><p>The ratio between consecutive Leonardo numbers approaches to the golden ratio φ and <code>1/(1+φ) ~ 38%</code> at least gets us in that ballpark.</p><p>Is there a nice, cheap, recurrence that gets us closer and retains the nice property that <code>cons</code> is also <i>O(1)</i>?</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>April 27, 2015</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/fibonacci/leonardo';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

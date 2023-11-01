@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html><head><title>Gravity Demo - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/work-in-progress">Work in Progress</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/work-in-progress/gravity-demo">Gravity Demo</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Gravity Demo</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">10 May 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/4377c0dfd84157dd764baf1c8035f3c0583cd688">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/work-in-progress">Go up to: Work in Progress</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>This is not a tutorial. I just put this code together to show the power of our snippet running system. This project is also maintained on <a href="https://github.com/BartoszMilewski/gravity-sim">GitHub</a>.</p><p>It's an example of a client server application capable of performing calculation on the server and displaying graphics on the client. Press the run button and scroll to the bottom to see a simulation. You can also click on the button there to view the simulation in a separate window.</p><p>What you will see is the movement of the inner planets in our Solar System according to Newton's laws of gravity. I also threw in some comets, just for fun.</p><pre><code class="active haskell web">
+{-# START_FILE World.hs #-}
+-- show
+
+{-# LANGUAGE ScopedTypeVariables #-}
+
+module World (
+  -- read a world from a file
+  readWorld,
+
+  solarWorld,
+  -- a 4-body world
+  world4 
+) where
+
+import Control.Exception  (catch)
+import System.Exit        (exitFailure)
+import Types
+
+width, height :: Int    -- extent of the window; origin is in the center
+width  = 600
+height = 600
+
+-- Read a world model from the given file
+--
+readWorld :: FilePath -&gt; IO World
+readWorld fname
+  = do
+      contents &lt;- readFile fname
+      readIO contents
+   `catch` \(exc::IOError) -&gt;
+     do 
+       putStrLn $ &quot;Fatal error: can't read world description\n&quot; ++ show exc
+       exitFailure
+
+solarWorld :: World
+solarWorld = World 0 distanceScale (earthMass / 10000) 750
+                      [ Particle (Mass sunMass) 
+                                 (Pos 0 0) (Vel 0 0)
+                      , Particle (Mass cometMass) 
+                                 (Pos cometDist 0) (Vel 0 cometVelocity)
+                      , Particle (Mass cometMass) 
+                                 (Pos (-cometDist) (-cometDist)) (Vel 5000 (-5000))
+                      , Particle (Mass cometMass) 
+                                 (Pos 2.0e11 1.0e11) (Vel (-2500) 5000)
+                      , Particle (Mass earthMass) 
+                                 (Pos earthDist  0) (Vel 0 earthVelocity)
+                      , Particle (Mass venusMass) 
+                                 (Pos venusDist  0) (Vel 0 venusVelocity)
+                      , Particle (Mass mercuryMass) 
+                                 (Pos mercuryDist  0) (Vel 0 mercuryVelocity)]
+  where
+    sunMass         = 1.9891e30
+    earthDist       = 152098232e3   -- Aphelion
+    earthMass       = 5.9736e24
+    earthVelocity   = 29.78e3
+    venusDist       = 1.08e11
+    venusMass       = 4.869e24
+    venusVelocity   = 35e3
+    mercuryDist     = 4.6e10
+    mercuryMass     = 3.3e23
+    mercuryVelocity = 49.88e3
+    cometDist       = 2.0e11
+    cometMass       = 1.0e20
+    cometVelocity   = 7000
+    --
+    distanceScale = (fromIntegral height * 0.4) / earthDist 
+
+world4 :: World
+world4 = World 0 0.5 9.42590890872e11 1
+               [ Particle (Mass 1e16) (Pos (-100) 30) (Vel 0 (-65))
+               , Particle (Mass 1e16) (Pos 240 0)     (Vel (-40) 30)
+               , Particle (Mass 1e16) (Pos 50 200)    (Vel 0 (-30))
+               , Particle (Mass 1e15) (Pos 0 (-300))  (Vel 0 5)]
+
+
+{-# START_FILE Physics.hs #-}
+-- show
+
+module Physics (force) where
+
+import Types
+
+-- For floating point comparisons
+epsilon :: Float
+epsilon = 0.001
+
+-- Gravitational constant
+bigG :: Float
+bigG = 6.67428e-11        -- in m^3 kg^(-1) s^(-2)
+
+-- Given two particles, determine the acceleration exerted by the second on the first.
+--
+-- As a special case, the force is zero if both particles are closer than 
+-- a minimal epsilon distance.
+--
+force :: Particle -&gt; Particle -&gt; Accel
+force (Particle (Mass _) (Pos x1 y1) _) (Particle (Mass m2) (Pos x2 y2) _)
+  | d &lt; epsilon = Acc 0 0
+  | otherwise   = Acc (absAccel * dx / d) (absAccel * dy / d) 
+  where
+    dx       = x2 - x1
+    dy       = y2 - y1
+    dsqr     = dx * dx + dy * dy
+    d        = sqrt dsqr
+    absAccel = bigG * m2 / dsqr
+
+{-# START_FILE Simulation.hs #-}
+-- show
+
+module Simulation (moveParticle, accelerate, advanceWorld) where
+
+import Types
+import Physics
+import Control.Parallel.Strategies
+
+-- Move a particle according to its velocity for the given 
+-- number of (simulated) seconds.
+--
+moveParticle :: Float -&gt; Particle -&gt; Particle
+moveParticle dt (Particle m (Pos x y) (Vel vx vy)) =
+  Particle m (Pos (x + dt * vx) (y + dt * vy)) (Vel vx vy)
+    
+-- Accelerate a particle in dependence on the gravitational force 
+-- exerted by all other particles for
+-- the given number of (simulated) seconds.
+-- force :: Particle -&gt; Particle -&gt; Accel
+accelerate :: Float -&gt; [Particle] -&gt; [Particle]
+accelerate dt particles =
+    parMap rseq acc particles
+  where
+    acc particle =
+      foldl addAcc particle particles
+    addAcc myParticle@(Particle m pos (Vel vx vy)) otherParticle =
+      let (Acc ax ay) = force myParticle otherParticle
+      in
+        Particle m pos (Vel (vx + dt * ax) (vy + dt * ay))
+
+-- Progressing the world state
+--
+advanceWorld :: Float -&gt; World -&gt; World
+advanceWorld dtReal world =
+  let dt = dtReal * usrToWrldTime world
+      newParticles = map (moveParticle dt) (accelerate dt $ parts world)
+  in
+      world { parts = newParticles }
+
+{-# START_FILE Main.hs #-}
+-- show
+
+{-# LANGUAGE TypeFamilies, QuasiQuotes, MultiParamTypeClasses,
+             TemplateHaskell, OverloadedStrings #-}
+module Main where
+
+import Yesod
+import Types
+import System.Environment (getEnv)
+import qualified Control.Exception as E
+
+import World
+import Simulation
+
+-- to do:
+-- add Pause button
+-- set maximum time for simulation
+-- make curWorld a local variable
+
+data Gravity = Gravity
+
+instance Yesod Gravity
+
+mkYesod &quot;Gravity&quot; [parseRoutes|
+  /        HomeR    GET
+  /advance AdvanceR POST
+  /solar   SolarR   GET
+  /world4  World4R  GET
+|]
+
+boxColor, bodyColor :: String
+
+boxColor   = &quot;#00&quot;
+bodyColor  = &quot;#333&quot;
+
+boxSizeX, boxSizeY  :: Int
+boxSizeX    = 600
+boxSizeY    = 600
+
+framesPerS :: Int
+framesPerS = 16
+
+getHomeR :: HandlerT Gravity IO Html
+getHomeR = defaultLayout $ do
+  setTitle &quot;Gravity&quot;
+
+  [whamlet|
+    &lt;div #box&gt;
+      &lt;p&gt;
+      &lt;canvas #sky width=#{boxSizeX} height=#{boxSizeY}&gt; 
+         Your browser doesn't support HTML 5
+      &lt;p&gt;
+        Gravitational interaction demo based on one of 
+        &lt;a href=&quot;http://www.cse.unsw.edu.au/~chak/&quot; target=&quot;_blank&quot;&gt;Manuel Chakravarty&lt;/a&gt;'s 
+        Haskell course exercises. The simulation is done in Haskell on the server. 
+        Client code uses HTML 5 to display instantaneous positions of bodies. 
+        It communicates with the (stateless) server using JSON. The web site is written in 
+        &lt;a href=&quot;http://www.yesodweb.com/&quot; target=&quot;_blank&quot;&gt;Yesod&lt;/a&gt;.
+        &lt;div&gt;
+          &lt;button #reset&gt;Reset
+          &lt;select&gt;
+            &lt;option value=&quot;solar&quot;&gt; Inner planets
+            &lt;option value=&quot;world4&quot;&gt; Four stars
+  |]
+
+  toWidget [cassius|
+    #box
+      width:#{show boxSizeX}px
+      height:#{show boxSizeY}px
+      margin-left:auto
+      margin-right:auto
+    canvas
+      background-color:#{boxColor}
+    body
+      background-color:#{bodyColor}
+      color:#eee
+      font-family:Arial,Helvetica,sans-serif
+      font-size:small
+    a
+      text-decoration:none
+      color:#bdf
+    #sky
+      border:1px solid #888
+  |]
+
+  addScriptRemote &quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;
+
+  toWidget [julius|
+    var urls = { // map from simulation names to urls
+      solar:   &quot;@{SolarR}&quot;, 
+      world4:  &quot;@{World4R}&quot; 
+    };
+    // Important: changes to global variables
+    // may only happen inside JSON handlers
+    var interval = 1000.0 / #{toJSON framesPerS};
+    var curSimName = null;
+    var curWorld = null; // constantly changing world
+    var skip = 0; // skip n frames if congested
+
+    $(document).ready(function() {
+        $(&quot;#reset&quot;).click(function() {reset(curSimName);});
+        $(&quot;select&quot;).change(function() {
+            var str = $(&quot;select option:selected&quot;).val();
+            reset(str);
+        });
+        $(&quot;select option[value='solar']&quot;).attr('selected', 'selected');
+        reset(&quot;solar&quot;);
+        setInterval(advance, interval);
+    });
+
+    function reset(simName) {
+        if (!urls[simName]) 
+            alert(&quot;Error: invalid simulation: &quot; + simName);
+        $.getJSON(urls[simName], function(newWorld){
+            newWorld.seqNum = curWorld? curWorld.seqNum + 1: 0;
+            curSimName = simName;
+            curWorld = newWorld;
+        });
+    }
+
+    // Called in a loop
+    function advance() {
+        if (skip == 0) {
+            drawWorld();
+            refreshWorld();
+        } else
+            skip -= 1;
+    }
+
+    function refreshWorld(simName) {
+        // Get new world from server
+        $.ajax(
+        {
+           &quot;data&quot;    : JSON.stringify(curWorld),
+           &quot;type&quot;    : &quot;POST&quot;,
+           &quot;url&quot;     : &quot;@{AdvanceR}&quot;,
+           &quot;success&quot; : updateWorld
+        });
+    }
+
+    // Handler called with new world
+    function updateWorld(newWorld)
+    {
+       if(!curWorld) alert(&quot;null world!&quot;);
+       var lag = curWorld.seqNum - newWorld.seqNum;
+       if (lag == 0) {
+           curWorld = newWorld;
+           curWorld.seqNum += 1;
+       } else if (lag &gt; 0)
+           skip = lag;
+       else
+           alert(&quot;Time travel discovered!&quot;)
+    }
+
+    var dimX = #{toJSON boxSizeX};
+    var dimY = #{toJSON boxSizeY};
+
+    function drawWorld() {
+        if (!curWorld) return true; // might happen
+
+        var canvas = document.getElementById('sky');
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, dimX, dimY);
+        ctx.fillStyle = &quot;white&quot;;
+
+        // Draw particles
+        var partsInView = 0;
+        for (var j = 0; j &lt; curWorld.parts.length; j++) {
+          var part = curWorld.parts[j];
+          var size = Math.log(part.pmass/curWorld.pixInKg) / Math.LN10;
+          if (size &lt; 2) size = 2;
+          var x = dimX/2 + curWorld.pixInM * part.ppos.posx;
+          var y = dimY/2 + curWorld.pixInM * part.ppos.posy;
+          if ( x &gt; -10 &amp;&amp; x &lt; dimX + 10 &amp;&amp; y &gt; -10 &amp;&amp; y &lt; dimY + 10) {
+              partsInView += 1;
+              ctx.beginPath(); 
+              ctx.arc(x, y, size/2, 0, Math.PI * 2, true); 
+              ctx.fill();
+          }
+      }
+      return partsInView != 0;
+    }
+  |]
+
+--------------------
+-- Server side logic
+--------------------
+
+postAdvanceR :: Handler Value
+postAdvanceR = do
+    -- Parse the request body to a data type as a JSON value
+    world &lt;- requireJsonBody
+    -- user time in seconds
+    let userTime = 1.0 / fromIntegral framesPerS
+    let worldTime = userTime * usrToWrldTime world
+    -- do the simulation
+    returnJson $ advanceWorld worldTime world
+
+getSolarR  :: Handler Value
+getSolarR  = returnJson solarWorld
+
+getWorld4R :: Handler Value
+getWorld4R = returnJson world4
+
+main :: IO ()
+main = do
+    portEither &lt;- getPortEither
+    let port = case portEither of
+                        Right val -&gt; read val
+                        Left _    -&gt; 3000
+    -- start the server
+    warp port Gravity
+  where
+    -- try to get the port from environment
+    getPortEither :: IO (Either IOError String)
+    getPortEither = E.try (getEnv &quot;PORT&quot;)
+</code></pre></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/work-in-progress/gravity-demo';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

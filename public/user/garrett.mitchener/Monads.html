@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html><head><title>Monads - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/garrett.mitchener">Garrett Mitchener</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/garrett.mitchener/Monads">Monads</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Monads</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 3 Aug 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/garrett.mitchener">Garrett Mitchener</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/6621/6dd0689a3728105cf33eac84afea4df82b79da22">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/garrett.mitchener/Type%20classes">Previous content: Type classes</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/garrett.mitchener">See all content by Garrett Mitchener</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#class-monad">Class Monad</a></li><li><a href="#reminder-about-do-notation">Reminder about do notation</a></li><li><a href="#what-return-does-and-doesn-t-do">What return does and doesn&#39;t do</a></li><li><a href="#about-the-unit-type-and-value---">About the unit type and value ()</a></li><li><a href="#famous-monad">Famous monad</a><ul><li><a href="#the-state-monad">The State monad</a><ul><li><a href="#threading-state">Threading state</a></li><li><a href="#an-easy-random-number-generator">An easy random number generator</a></li><li><a href="#implementing-a-state-monad-for-the-random-generator">Implementing a state monad for the random generator</a></li></ul></li><li><a href="#exercises">Exercises</a><ul><li><a href="#flip-a-coin--bernouli-random-variables-">Flip a coin (Bernouli random variables)</a></li><li><a href="#toss-a-die">Toss a die</a></li><li><a href="#many-dice">Many dice</a></li></ul></li><li><a href="#the-maybe-monad">The Maybe monad</a></li><li><a href="#the-list-monad">The List monad</a></li><li><a href="#the-identity-monad">The Identity monad</a></li><li><a href="#monad-transformers">Monad transformers</a></li><li><a href="#st">ST</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="class-monad"><a href="#class-monad">Class Monad</a></h1><p>Class <code>Monad</code> is defined as follows:</p><pre><code class="haskell">-- from Control.Monad that comes with GHC
+class  Monad m  where
+    -- | Sequentially compose two actions, passing any value produced
+    -- by the first as an argument to the second.
+    (&gt;&gt;=)       :: forall a b. m a -&gt; (a -&gt; m b) -&gt; m b
+    -- | Sequentially compose two actions, discarding any value produced
+    -- by the first, like sequencing operators (such as the semicolon)
+    -- in imperative languages.
+    (&gt;&gt;)        :: forall a b. m a -&gt; m b -&gt; m b
+        -- Explicit for-alls so that we know what order to
+        -- give type arguments when desugaring
+
+    -- | Inject a value into the monadic type.
+    return      :: a -&gt; m a
+    -- | Fail with a message.  This operation is not part of the
+    -- mathematical definition of a monad, but is invoked on pattern-match
+    -- failure in a @do@ expression.
+    fail        :: String -&gt; m a
+
+    {-# INLINE (&gt;&gt;) #-}
+    m &gt;&gt; k      = m &gt;&gt;= \_ -&gt; k
+    fail s      = error s</code></pre><p>The two key functions are <code>&gt;&gt;=</code> and <code>return</code>.  Note that <code>&gt;&gt;</code>, which sequences two actions, is given a default definition at the bottom.  Instances of <code>Monad</code> don't have to implement <code>&gt;&gt;</code> if that default definition is okay, which it usually is.</p><h1 id="reminder-about-do-notation"><a href="#reminder-about-do-notation">Reminder about do notation</a></h1><pre><code class="haskell">stuff x y z = do
+    a &lt;- anAction x
+    b &lt;- anotherAction y z
+    let c = nifty a b
+    d &lt;- if c == 0
+        then narfle a
+        else burble b
+    return (a,b,c,d)</code></pre><p>translates into</p><pre><code class="haskell">stuff x y z =
+    anAction x &gt;&gt;= (\a -&gt;
+        anotherAction y z &gt;&gt;= (\b -&gt;
+            let
+                c = nifty a b
+            in (if c == 0 then narfle a else burble b) &gt;&gt;= (\d -&gt;
+                return (a,b,c,d)
+                ) -- end of \d -&gt; ...
+            ) -- end of \b -&gt; ...
+        ) -- end of \a -&gt; ...</code></pre><h1 id="what-return-does-and-doesn-t-do"><a href="#what-return-does-and-doesn-t-do">What return does and doesn't do</a></h1><p>We've seen the <code>IO</code> monad's bind operator already:</p><pre><code class="haskell">instance Monad IO where
+    action1 &gt;&gt;= action2 = ...
+        -- perform action1, yielding a result x
+        -- perform (action2 x)
+    ...</code></pre><p>but <code>return</code> is new.  Note the type, <code>return :: a -&gt; m a</code>, so for the <code>IO</code> monad, what <code>return</code> does is produce <code>x</code>, sort of as if it had been read from a file or some other input source, but without actually doing anything to the real world.  Here's one reason you might need <code>return</code>:</p><pre><code class="haskell">analyzeFile :: FilePath -&gt; IO String
+
+analyzeFile path = do
+    h &lt;- openFile path ReadMode
+    result &lt;- ...
+    hClose h
+    return result
+    
+main = do
+    result &lt;- analyzeFile &quot;/etc/stuff&quot;
+    ...</code></pre><p>That is, you want to output something from an action, but you have to perform other actions after the construction of the result but before you consider your action complete.  Note that unlike in Python, C, C++, Java, and so many other languages, <code>return</code> is <i>not</i> a keyword, it doesn't generally cause exectution to exit from a procedure early, and you don't need it for a function that isn't a monadic action.</p><h1 id="about-the-unit-type-and-value---"><a href="#about-the-unit-type-and-value---">About the unit type and value ()</a></h1><p>Haskell functions have to result in some value.  There is no <code>void</code> as in C and Java.  However, sometimes an action has nothing useful to produce.  Haskell's convention is the unit type <code>()</code> which suggests a 0-element tuple.  The type of <code>()</code> is also called <code>()</code>.  Here's a standard monadic conditional function:</p><pre><code class="haskell">when :: Monad m =&gt; Bool -&gt; m () -&gt; m ()
+when t action =
+    if t
+        then action
+        else return ()</code></pre><p>If the given test value <code>t</code> is <code>True</code>, perform the action, otherwise, do nothing.  And since the result of <code>when</code> may be an action that does nothing and produces nothing, the action you pass it to do when <code>t == True</code> must also produce nothing. (Both branches of an <code>if</code> must have the same type.)</p><h1 id="famous-monad"><a href="#famous-monad">Famous monad</a></h1><p>What follows is a rough sketch of several other monads that are built in to the Haskell standard library.  They aren't exactly as I've presented here: I've left out a lot of complications because this article is about the concepts rather covering every tiny nasty little detail.  Look at the modules <code>Control.Monad.*</code> for full details and references to research papers and other articles.</p><h2 id="the-state-monad"><a href="#the-state-monad">The State monad</a></h2><h3 id="threading-state"><a href="#threading-state">Threading state</a></h3><p>Since you generally create new data structures rather than modifying them, it's common to have stuff like this in Haskell:</p><pre><code class="haskell">
+doTheWork x y z =
+    let
+        thing0 = ...
+        (a, thing1) = doStuff x thing0
+        (b, thing2) = doMoreStuff y thing1
+        (c, thing3) = doEvenMoreStuff z thing2
+    in
+        (..., thing3)</code></pre><p>Common examples include adding things to a <code>Data.Set</code> or other container, and random number generation.</p><h3 id="an-easy-random-number-generator"><a href="#an-easy-random-number-generator">An easy random number generator</a></h3><p>So, let's write a linear congruential generator.  This isn't an especially good generator--Mersenne twister would be better for example--but it'll serve as an example.</p><pre><code class="active haskell">import Data.Word
+
+data LCGState = LCGState Word32 Word32 Word32 Word32
+    deriving (Read, Show, Eq, Ord)
+
+-- This is apparently what glibc uses
+makeSeed x = LCGState (2 ^ 31) 1103515245 12345 x
+
+nextState :: LCGState -&gt; LCGState
+nextState (LCGState m a c x1) = LCGState m a c x2
+    where x2 = (a * x1 + c) `mod` m
+
+-- | Pull a random number between 0 and 1
+nextRandomDouble :: LCGState -&gt; (Double, LCGState)
+nextRandomDouble state0 =
+    let
+        LCGState m a c x = state0
+        state1 = nextState state0
+    in
+        ((fromIntegral x) / (fromIntegral m), state1)
+
+s0 = makeSeed 6502
+(y1, s1) = nextRandomDouble s0
+(y2, s2) = nextRandomDouble s1
+(y3, s3) = nextRandomDouble s2
+
+main = do
+    print s0
+    print [y1, y2, y3]</code></pre><p>It would be nice not to have to keep threading the random seed through all those calculations.  It turns out that this type of calculation is handled nicely as a state monad.  We want to end up writing stuff like this:</p><pre><code class="haskell">pickThree = do
+    y1 &lt;- pullRandomDouble
+    y2 &lt;- pullRandomDouble
+    y3 &lt;- pullRandomDouble
+    return [y1, y2, y3]</code></pre><h3 id="implementing-a-state-monad-for-the-random-generator"><a href="#implementing-a-state-monad-for-the-random-generator">Implementing a state monad for the random generator</a></h3><p>This is how to implement a state monad:</p><pre><code class="active haskell">-- This is a wrapper around a transition function
+-- that takes a s(tate) and returns a r(esult) and a new s(tate)
+data State s r = State (s -&gt; (r, s))
+
+-- Running a state object on an s is easy, just apply the wrapped function
+runState (State f) s = f s
+
+instance Monad (State s) where
+    
+    -- introduce the result without modifying s
+    return result = State (\s -&gt; (result, s))
+    
+    -- compose two transition functions,
+    -- threading the result of the first into the second
+    (State fTrans) &gt;&gt;= mkTrans = State hTrans
+        where
+        hTrans s0 =
+            let
+                (r1, s1) = fTrans s0
+                State gTrans = mkTrans r1
+                (r2, s2) = gTrans s1
+            in
+                (r2, s2)</code></pre><p>So now we can do random number generation like this:</p><pre><code class="active haskell">import Data.Word
+
+data LCGState = LCGState Word32 Word32 Word32 Word32
+    deriving (Read, Show, Eq, Ord)
+
+-- This is apparently what glibc uses
+makeSeed x = LCGState (2 ^ 31) 1103515245 12345 x
+
+nextState :: LCGState -&gt; LCGState
+nextState (LCGState m a c x1) = LCGState m a c x2
+    where x2 = (a * x1 + c) `mod` m
+
+-- | Pull a random number between 0 and 1
+nextRandomDouble :: LCGState -&gt; (Double, LCGState)
+nextRandomDouble state0 =
+    let
+        LCGState m a c x = state0
+        state1 = nextState state0
+    in
+        ((fromIntegral x) / (fromIntegral m), state1)
+
+
+
+-- This is a wrapper around a transition function
+-- that takes a s(tate) and returns a r(esult) and a new s(tate)
+data State s r = State (s -&gt; (r, s))
+
+-- Running a state object on an s is easy, just apply the wrapped function
+runState (State f) s = f s
+
+instance Monad (State s) where
+    
+    -- introduce the result without modifying s
+    return result = State (\s -&gt; (result, s))
+    
+    -- compose two transition functions,
+    -- threading the result of the first into the second
+    (State fTrans) &gt;&gt;= mkTrans = State hTrans
+        where
+        hTrans s0 =
+            let
+                (r1, s1) = fTrans s0
+                State gTrans = mkTrans r1
+                (r2, s2) = gTrans s1
+            in
+                (r2, s2)
+pullRandomDouble :: State LCGState Double
+pullRandomDouble = State nextRandomDouble
+
+pickThree :: State LCGState [Double]
+pickThree = do
+    y1 &lt;- pullRandomDouble
+    y2 &lt;- pullRandomDouble
+    y3 &lt;- pullRandomDouble
+    return [y1, y2, y3]
+
+s0 = makeSeed 6502
+(ys, sNext) = runState pickThree s0
+
+main = do
+    print ys</code></pre><p>The GHC library includes an implementation of the state monad very much like the one here.  See the <code>Control.Monad.State</code> module.</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p>Use this workspace:</p><pre><code class="active haskell">--show Imports
+import Data.Word
+import Control.Monad
+--/show
+
+--show Random number generator
+data LCGState = LCGState Word32 Word32 Word32 Word32
+    deriving (Read, Show, Eq, Ord)
+
+-- This is apparently what glibc uses
+makeSeed x = LCGState (2 ^ 31) 1103515245 12345 x
+
+nextState :: LCGState -&gt; LCGState
+nextState (LCGState m a c x1) = LCGState m a c x2
+    where x2 = (a * x1 + c) `mod` m
+
+-- | Pull a random number between 0 and 1
+nextRandomDouble :: LCGState -&gt; (Double, LCGState)
+nextRandomDouble state0 =
+    let
+        LCGState m a c x = state0
+        state1 = nextState state0
+    in
+        ((fromIntegral x) / (fromIntegral m), state1)
+--/show
+
+
+--show State monad
+-- This is a wrapper around a transition function
+-- that takes a s(tate) and returns a r(esult) and a new s(tate)
+data State s r = State (s -&gt; (r, s))
+
+-- Running a state object on an s is easy, just apply the wrapped function
+runState (State f) s = f s
+
+instance Monad (State s) where
+    
+    -- introduce the result without modifying s
+    return result = State (\s -&gt; (result, s))
+    
+    -- compose two transition functions,
+    -- threading the result of the first into the second
+    (State fTrans) &gt;&gt;= mkTrans = State hTrans
+        where
+        hTrans s0 =
+            let
+                (r1, s1) = fTrans s0
+                State gTrans = mkTrans r1
+                (r2, s2) = gTrans s1
+            in
+                (r2, s2)
+--/show
+
+--show More friendly random number generation
+
+-- | Generate a random number uniformly between 0 and 1
+pullRandomDouble :: State LCGState Double
+pullRandomDouble = State nextRandomDouble
+
+-- Your job, see below:
+
+pullRandomBool = undefined
+
+pullDieToss = undefined
+
+pullDieTosses = undefined
+
+--/show
+
+--show Test cases
+pickThree :: State LCGState [Double]
+pickThree = do
+    y1 &lt;- pullRandomDouble
+    y2 &lt;- pullRandomDouble
+    y3 &lt;- pullRandomDouble
+    return [y1, y2, y3]
+
+s0 = makeSeed 6502
+(ys, sNext) = runState pickThree s0
+
+main = do
+    print ys
+--/show</code></pre><h3 id="flip-a-coin--bernouli-random-variables-"><a href="#flip-a-coin--bernouli-random-variables-">Flip a coin (Bernouli random variables)</a></h3><p>Write a monadic function <code>pullRandomBool :: Double -&gt; State LCGState Double</code> that takes a number q between 0 and 1 and generates <code>True</code> with probability q, and <code>False</code> with probability (1-q).</p><h3 id="toss-a-die"><a href="#toss-a-die">Toss a die</a></h3><p>Write a monadic function <code>pullDieToss :: Int -&gt; State LCGState Int</code> that takes a number n (= number of sides on the die) and generates a random number between 1 and n, uniformly.</p><h3 id="many-dice"><a href="#many-dice">Many dice</a></h3><p>Look up <code>Control.Monad</code> on the Haskell web site.  Look for a function called <code>replicateM</code>.  Use it to write a function <code>pullDieTosses :: Int -&gt; Int -&gt; State LCGState [Int]</code> that takes a number k and a number n, and generates a list of k rolls of a die with n sides.</p><h2 id="the-maybe-monad"><a href="#the-maybe-monad">The Maybe monad</a></h2><p>Recall that the <code>Maybe</code> type represents something that might not exist, like a pointer that is allowed to be null:</p><pre><code class="haskell">data Maybe t = Nothing | Just t</code></pre><p>Maybeness also has monadic semantics, and I like to think of the <code>&gt;&gt;=</code> operator as 'feeding' a value to a function.  Feeding <code>Nothing</code> to any function results in <code>Nothing</code>.  Feeding <code>Just x</code> to a function applies it to <code>x</code>, and the result might be an actual value <code>Just y</code> or <code>Nothing</code>.</p><pre><code class="haskell">instance Monad Maybe where
+    return x = Just x
+    
+    Nothing &gt;&gt;= f  = Nothing
+    Just x &gt;&gt;= f  = f x</code></pre><p>Using <code>Maybe</code> monadically is a clean way to write a sequence of operations that could fail (resulting in <code>Nothing</code>) at any step.</p><p>You can also create an error monad, which is very similar but instead of <code>Nothing</code>, you return something describing the failure.  You can use that as a means of throwing and catching exceptions, although Haskell can also do that within the IO monad.  See <code>Control.Monad.Error</code>.</p><h2 id="the-list-monad"><a href="#the-list-monad">The List monad</a></h2><p>A list has monadic sematics, too.  If a <code>Maybe t</code> is either one value <code>Just x</code> or <code>Nothing</code>, you can think of a list as zero or more possible values.  Returning a value to the list monad produces a list of that one value.  Binding a list of possible values to a function means applying that function to each possible value, and building one big list out of all the possible results it returns.</p><pre><code class="haskell">instance Monad [] where
+    return x = [x]
+    
+    xs &gt;&gt;= f =
+        concat (map f xs)</code></pre><p>And actually, the list comprehension notation is transformed into monadic binding during compilation:</p><pre><code class="active haskell">ns = [1 .. 5]
+
+squares = [n^2 | n &lt;- ns]
+
+squares2 = do
+    n &lt;- ns
+    return (n^2)
+
+-- all possible pairings of ns and squares:
+pairs = [(n, m) | n &lt;- ns, m &lt;- squares]
+
+-- all possible pairings of ns and squares:
+pairs2 = do
+    n &lt;- ns
+    m &lt;- squares
+    return (n, m)
+    
+main = do
+    print ns
+    print squares
+    print squares2
+    print pairs
+    print pairs2</code></pre><h2 id="the-identity-monad"><a href="#the-identity-monad">The Identity monad</a></h2><p>Plain old function application is also a monad, called the identity monad.  All we have to do is wrap it:</p><pre><code class="haskell">data Identity t = Identity t
+
+instance Monad Identity where
+
+    return x = Identity x
+    
+    (Identity x) &gt;&gt;= f = f x</code></pre><p>Why would you ever both with that? Well...</p><h2 id="monad-transformers"><a href="#monad-transformers">Monad transformers</a></h2><p>... it turns out there are ways to convert a monad into a <i>monad transformer</i>, which then adds properties to another monad.  So, there's a <code>StateT</code> that adds a state item to another monad.  There's <code>ErrorT</code> that adds exception handling capabilities.  So in the Haskell standard libary, the plain old <code>State</code> monad is defined by applying <code>StateT</code> to <code>Identity</code> and <code>Error</code> is defined by applying <code>ErrorT</code> to <code>Identity</code>.  There's also a <code>ListT</code> that adds backtracking, <code>ReaderT</code>, <code>WriterT</code>, ... and you can combine them in all sorts of ways.</p><p>We don't have time for all of that here.</p><h2 id="st"><a href="#st">ST</a></h2><p>The state thread monad <code>ST</code> is kind of like <code>State</code>: It performs sequences of operations that send state around, but the state itself is an abstraction that is never made available.  In fact, it's essentially an abstraction of the entire machine memory.  The use of <code>ST</code> is more like <code>IO</code> than <code>Stat</code>: It provides a way of sequencing imperative-like operations, such as changing a data structure in place.  However, you can run many <code>ST</code> actions in any part of the program, and the actions aren't as strictly ordered as in <code>IO</code>. There's normally only one sequence of <code>IO</code> actions (the <code>main</code> function).  And you can peek at <code>Control.Monad.ST</code> and see how GHC implements <code>IO</code> in terms of <code>ST</code>.</p><p>The weirdness of <code>ST</code> is a feature called <i>rank-n types</i>.  In this case it refers to a phantom unspecified type that represents the abstract world state to be threaded, and because of how rank-<i>n</i> types work, each call to <code>runST</code> that executes a sequence of <code>ST</code> actions gets its own abstract world state.  This bit of madness is needed to make sure that, for example, a mutable array under construction inside <code>runST</code> in one place can't be deallocated by another sequence of actions running inside another <code>runST</code>.  (Remember that Haskell can evaluate a program in any order, so it's allowed to do some work on one <code>ST</code> action, then turn its attention to another.)</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/garrett.mitchener/Monads';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

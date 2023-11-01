@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html><head><title>Int Overflow And Maybe result expressions on weird Int results - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/griba">Gabriel Riba Faura</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/safe_int_addition_and_product">Int Overflow And Maybe result expressions on weird Int results</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Int Overflow And Maybe result expressions on weird Int results</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">26 Nov 2018</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/griba">Gabriel Riba Faura</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4225/020ff872669c22c81a63a84cd6b7a26c3dbf4e8b">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/lazy_lists_on_strict_purescript">Previous content: Strictness surprises in PureScript Lazy lists</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/The_preferences_problem_varying_global_state">Next content: The Preferences problem. Varying global state</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba">See all content by Gabriel Riba Faura</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#defining-a-specific-exception-type">Defining a specific exception type</a></li><li><a href="#int-addition--checking-the-result-sign">Int addition, checking the result sign</a></li><li><a href="#int-negate--the-case-of-the-minimum-integer-value">Int negate, the case of the minimum integer value</a></li><li><a href="#int-product--with-2-numberofbits-bounds">Int product, with 2^numberOfBits bounds</a></li><li><a href="#int-product--through-unlimited-precision-promotion-and-result-cast-checking">Int product, through unlimited precision promotion and result cast checking</a></li><li><a href="#cast-between-integral-types">Cast between Integral types</a></li><li><a href="#out-of-range-numeric-literals">Out of range numeric literals</a></li><li><a href="#defining-types-that-use-the-above">Defining types that use the above</a></li><li><a href="#everything-together-now">Everything together now</a></li><li><a href="#using-the-default-clause-with-the-newly-defined-types">Using the default clause with the newly defined types</a></li><li><a href="#checking">Checking</a></li><li><a href="#reflexion">Reflexion</a></li><li><a href="#using-the-maybe-result-ops--and-extra-newtypes">Using the Maybe result ops. and extra newtypes</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>Bounded Int{N} types arithmetic, for certain values give results that don't match the decimal arithmetic we use for counting.</p><p>No <b>arithmetic Overflow</b> is thrown in haskell Int{N} sum, product and casting between Int{N} types.</p><p>Here is a solution, with a CPP macro for exception enabled derived newtypes that use it.</p><h3 id="defining-a-specific-exception-type"><a href="#defining-a-specific-exception-type">Defining a specific exception type</a></h3><pre><code class="haskell">data IntOverflow = IntSumOverflow String | IntNegOverflow 
+                   | IntProdOverflow String
+                   | IntCastOverflow String | IntOutOfRange String
+                   deriving (Show, Typeable)
+
+instance Exception IntOverflow</code></pre><h3 id="int-addition--checking-the-result-sign"><a href="#int-addition--checking-the-result-sign">Int addition, checking the result sign</a></h3><p>The <a href="https://en.wikipedia.org/wiki/Two's_complement">two's complement</a> addition that overflows the maxBound value alters the result leftmost bit, the sign. Some examples:</p><pre><code class="haskell">$ ghci
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
+Prelude&gt; :set -XNegativeLiterals
+Prelude&gt; import Data.Int
+
+Prelude Data.Int&gt; 127 + 1 :: Int8
+-128
+Prelude Data.Int&gt; 127 + 127 :: Int8
+-2
+Prelude Data.Int&gt; (-128) + (-1) :: Int8
+127
+Prelude Data.Int&gt; (-128) + (-128) :: Int8
+0</code></pre><p>Different sign operands don't pose overflow problems, as it equates to a substraction.</p><p>Let's use the function <a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:signum"><i>signum</i></a> that returns {-1,0,1} upon sign and zero tests.</p><pre><code class="haskell">-- show parenthesis on negative values
+showPar :: (Num a, Eq a, Show a) =&gt; a -&gt; String
+showPar x = if signum x == (-1) then &quot;(&quot; ++ show x ++ &quot;)&quot; else show x
+
+--------------------
+
+intAddEx :: (Num a, Eq a, Show a) =&gt; a -&gt; a -&gt; a
+intAddEx x y
+  | signum x == signum y =
+             if signum result == signum x
+               then result
+               else let msg = showPar x ++ &quot; + &quot; ++ showPar y
+                    in throw (IntSumOverflow msg)
+  | otherwise = result -- no risk of overflow when sign differs
+  where result = x + y
+
+intAddMay :: (Num a, Eq a) =&gt; a -&gt; a -&gt; Maybe a
+intAddMay x y
+  | signum x == signum y =
+             if signum result == signum x
+               then Just result
+               else Nothing
+  | otherwise = Just result -- no risk of overflow when sign differs
+  where result = x + y</code></pre><h3 id="int-negate--the-case-of-the-minimum-integer-value"><a href="#int-negate--the-case-of-the-minimum-integer-value">Int negate, the case of the minimum integer value</a></h3><pre><code class="haskell">Prelude Data.Int&gt; - (-128) :: Int8  -- minimum Int{N} negation
+-128                                -- (-0x80::Int8) == 0x80 !!
+</code></pre><p>Checking code:</p><pre><code class="haskell">intNegateEx :: (Num a, Eq a) =&gt; a -&gt; a
+intNegateEx x = if x == -x then throw IntNegOverflow
+                           else -x
+
+intNegateMay:: (Num a, Eq a) =&gt; a -&gt; Maybe a
+intNegateMay x = if x == -x     -- this is the case for 0x80 :: Int8
+                  then Nothing
+                  else Just (-x)</code></pre><h3 id="int-product--with-2-numberofbits-bounds"><a href="#int-product--with-2-numberofbits-bounds">Int product, with 2^numberOfBits bounds</a></h3><p>Since <code>2^x * 2^y = 2^(x+y)</code> all products where the sum of bits of the absolute values is less or equal than the maximum are safe.</p><pre><code class="haskell">import Data.Bits (FiniteBits(..)) -- the FiniteBits class for finite bitSize integer types
+
+-- we need to take into account the minimum integer value (sign bit followed by zeros) whose absolute value is bigger than the highest positive value
+
+bits :: (Integral a, FiniteBits a) =&gt; a -&gt; Int
+bits v
+  | v == -v = finiteBitSize v   -- the data type size
+  | otherwise = finiteBitSize v - countLeadingZeros (abs v) -- positive bitMask length
+
+intProdEx :: (Integral a, FiniteBits a, Show a) =&gt; a -&gt; a -&gt; a
+intProdEx x y
+  | abs x &lt;= 1 || abs y &lt;= 1 = x * y
+  | bits x + bits y &lt; finiteBitSize x = x * y   -- no prod overflow
+  | otherwise = throw $ IntProdOverflow $ showPar x ++ &quot; * &quot; ++ showPar y
+</code></pre><p>but this check rejects good products (e.g. <code>31 * 4 :: Int8</code>) that can be accepted through the following proposal:</p><h3 id="int-product--through-unlimited-precision-promotion-and-result-cast-checking"><a href="#int-product--through-unlimited-precision-promotion-and-result-cast-checking">Int product, through unlimited precision promotion and result cast checking</a></h3><pre><code class="haskell">intProdEx :: (Integral a, Show a) =&gt; a -&gt; a -&gt; a
+intProdEx x y
+  | abs x &lt;= 1 || abs y &lt;= 1 = x * y
+  | otherwise = let integerProd = (fromIntegral x :: Integer) * fromIntegral y
+                    result = fromInteger integerProd -- cast to return type
+                in if integerProd == fromIntegral result
+                      then result
+                   else let msg = showPar x ++ &quot; * &quot; ++ showPar y
+                        in throw (IntProdOverflow msg)
+
+
+intProdMay :: (Integral a) =&gt; a -&gt; a -&gt; Maybe a
+intProdMay x y
+  | abs x &lt;= 1 || abs y &lt;= 1 = Just (x * y)
+  | otherwise = let integerProd = (fromIntegral x :: Integer) * fromIntegral y  
+                    result = fromInteger integerProd -- cast to return type parameter
+                in if integerProd == fromIntegral result
+                      then Just result
+                      else Nothing
+                      </code></pre><h3 id="cast-between-integral-types"><a href="#cast-between-integral-types">Cast between Integral types</a></h3><pre><code class="haskell">intCastEx :: (Integral a, Show a, Integral b,
+              Typeable a, Typeable b) =&gt; a -&gt; b
+intCastEx x = let result = fromIntegral x     -- cast to output type
+              in if x == fromIntegral result  -- cast result to input type and check
+                   then result                -- output
+                   else let msg = showPar x 
+                               ++ &quot; :: from &quot; ++ show (typeOf x)
+                               ++ &quot; to &quot; ++ show (typeOf result)
+                        in throw (IntCastOverflow msg)
+
+intCastMay :: (Integral a, Integral b) =&gt; a -&gt; Maybe b
+intCastMay x = let result = fromIntegral x     -- cast to output type parameter
+               in if x == fromIntegral result  -- cast result to input type and check
+                    then Just result           -- output
+                    else Nothing</code></pre><h3 id="out-of-range-numeric-literals"><a href="#out-of-range-numeric-literals">Out of range numeric literals</a></h3><p>Actually, out of range literals give a compiler warning and a different value.</p><p>But using the <i>default</i> clause the warning doesn't show:</p><pre><code class="haskell">Prelude&gt; import Data.Int
+Prelude Data.Int&gt; 129::Int8
+                           
+&lt;interactive&gt;:3:1: Warning:                                                                          
+    Literal 129 is out of the Int8 range -128..127
+    
+-127
+Prelude Data.Int&gt; default (Int8)
+Prelude Data.Int&gt; 129
+-127  -- ??? cannot match out-of-range input ; no warning !!!</code></pre><p>Defining a specific <i>fromInteger</i> for the derived types being defined, checking the converted value:</p><pre><code class="haskell">
+intFromIntegerEx :: Integral a =&gt; Integer -&gt; a
+intFromIntegerEx integer = 
+     let result = fromInteger integer
+     in if integer == fromIntegral result
+           then result
+           else throw (IntOutOfRange $ showPar integer)
+</code></pre><h3 id="defining-types-that-use-the-above"><a href="#defining-types-that-use-the-above">Defining types that use the above</a></h3><p>A <i>CPP macro</i> for newtype and instances definition.</p><p>CPP macros don't generate newline characters, so single line notation (curly brackets and semicolons) must be used:</p><pre><code class="haskell">-----------------
+-- Macro for newtype and instances definition
+#define BLOC( IntEN, IntN) \
+newtype IntEN = IntEN IntN deriving (Show, Eq, Ord, Enum, Bounded, Real, Integral) ; \
+instance Num IntEN where {\
+    IntEN x + IntEN y = IntEN (intAddEx x y) ; \
+    IntEN x * IntEN y = IntEN (intProdEx x y) ; \
+    abs (IntEN x) = IntEN (abs x) ; \
+    signum (IntEN x) = IntEN (signum x) ; \
+    fromInteger = IntEN . intFromIntegerEx ; \
+    negate (IntEN x) = IntEN (intNegateEx x) ; \
+         } 
+
+-----------------
+
+BLOC( IntE, Int)
+BLOC( IntE8, Int8)
+BLOC( IntE16, Int16)
+BLOC( IntE32, Int32)
+BLOC( IntE64, Int64)
+
+-----------------</code></pre><h3 id="everything-together-now"><a href="#everything-together-now">Everything together now</a></h3><pre><code class="active haskell">{-# LANGUAGE CPP, DeriveDataTypeable, GeneralizedNewtypeDeriving #-}
+module IntEx (
+  IntE(..), IntE8(..), IntE16(..), IntE32(..), IntE64(..),
+  intAddEx, intProdEx, intCastEx,
+  intAddMay, intProdMay, intCastMay,
+  ) where
+
+import Control.Exception (Exception, throw)
+import Data.Typeable
+import Data.Int (Int8, Int16, Int32, Int64)
+
+
+data IntOverflow = IntSumOverflow String | IntNegOverflow 
+                   | IntProdOverflow String
+                   | IntCastOverflow String | IntOutOfRange String
+                   deriving (Show, Typeable)
+
+instance Exception IntOverflow
+
+showPar :: (Num a, Eq a, Show a) =&gt; a -&gt; String
+showPar x = if signum x == (-1) then &quot;(&quot; ++ show x ++ &quot;)&quot; else show x
+
+--------------------
+
+intAddEx :: (Num a, Eq a, Show a) =&gt; a -&gt; a -&gt; a
+intAddEx x y
+  | signum x == signum y =
+             if signum result == signum x
+               then result
+               else let msg = showPar x ++ &quot; + &quot; ++ showPar y
+                    in throw (IntSumOverflow msg)
+  | otherwise = result -- no risk of overflow when sign differs
+  where result = x + y
+
+intAddMay :: (Num a, Eq a) =&gt; a -&gt; a -&gt; Maybe a
+intAddMay x y
+  | signum x == signum y =
+             if signum result == signum x
+               then Just result
+               else Nothing
+  | otherwise = Just result -- no risk of overflow when sign differs
+  where result = x + y
+
+-----------------
+
+intNegateEx :: (Num a, Eq a) =&gt; a -&gt; a
+intNegateEx x = if x == -x then throw IntNegOverflow
+                           else -x
+
+intNegateMay:: (Num a, Eq a) =&gt; a -&gt; Maybe a
+intNegateMay x = if x == -x     -- this is the case for 0x80 :: Int8
+                  then Nothing
+                  else Just (-x)
+
+-----------------
+
+intProdEx :: (Integral a, Bounded a, Show a) =&gt; a -&gt; a -&gt; a
+intProdEx x y
+  | abs x &lt;= 1 || abs y &lt;= 1 = x * y
+  | otherwise = let integerProd = (fromIntegral x :: Integer) * fromIntegral y
+                    result = fromInteger integerProd -- cast to return type
+                in if integerProd == fromIntegral result
+                      then result
+                   else let msg = showPar x ++ &quot; * &quot; ++ showPar y
+                        in throw (IntProdOverflow msg)
+
+intProdMay :: (Integral a, Bounded a) =&gt; a -&gt; a -&gt; Maybe a
+intProdMay x y
+  | abs x &lt;= 1 || abs y &lt;= 1 = Just (x * y)
+  | otherwise = let integerProd = (fromIntegral x :: Integer) * fromIntegral y  
+                    result = fromInteger integerProd -- cast to return type parameter
+                in if integerProd == fromIntegral result
+                      then Just result
+                      else Nothing
+
+-----------------
+
+intFromIntegerEx :: (Integral a) =&gt; Integer -&gt; a
+intFromIntegerEx integer =
+     let result = fromInteger integer
+     in if integer == fromIntegral result
+           then result
+           else throw (IntOutOfRange $ showPar integer)
+
+-----------------
+-- Macro for newtype and instances definition
+#define BLOC( IntEN, IntN) \
+newtype IntEN = IntEN IntN deriving (Show, Eq, Ord, Enum, Bounded, Real, Integral) ; \
+instance Num IntEN where {\
+    IntEN x + IntEN y = IntEN (intAddEx x y) ; \
+    IntEN x * IntEN y = IntEN (intProdEx x y) ; \
+    abs (IntEN x) = IntEN (abs x) ; \
+    signum (IntEN x) = IntEN (signum x) ; \
+    fromInteger = IntEN . intFromIntegerEx ; \
+    negate (IntEN x) = IntEN (intNegateEx x) ; \
+         }
+
+-----------------
+
+BLOC( IntE, Int)
+BLOC( IntE8, Int8)
+BLOC( IntE16, Int16)
+BLOC( IntE32, Int32)
+BLOC( IntE64, Int64)
+
+-----------------
+
+intCastEx :: (Integral a, Show a, Integral b,
+              Typeable a, Typeable b) =&gt; a -&gt; b
+intCastEx x = let result = fromIntegral x     -- cast to output type
+              in if x == fromIntegral result  -- cast result to input type and check
+                   then result                -- output
+                   else let msg = showPar x 
+                               ++ &quot; :: from &quot; ++ show (typeOf x)
+                               ++ &quot; to &quot; ++ show (typeOf result)
+                        in throw (IntCastOverflow msg)
+
+intCastMay :: (Integral a, Integral b) =&gt; a -&gt; Maybe b
+intCastMay x = let result = fromIntegral x     -- cast to output type parameter
+               in if x == fromIntegral result  -- cast result to input type and check
+                    then Just result           -- output
+                    else Nothing
+</code></pre><h3 id="using-the-default-clause-with-the-newly-defined-types"><a href="#using-the-default-clause-with-the-newly-defined-types">Using the <i>default</i> clause with the newly defined types</a></h3><p>Since the IntE{N} type has <i>fromInteger</i> from the <i>Num</i> typeclass instance, you can preset the literals type with the <i>default</i> clause</p><pre><code class="bash">$ ghci
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
+Prelude&gt; :load IntEx
+[1 of 1] Compiling IntEx          ( IntEx.hs, interpreted )
+Ok, modules loaded: IntEx.
+
+*IntEx&gt; import Data.Int
+*IntEx Data.Int&gt; default (Int8)
+
+*IntEx Data.Int&gt; 129
+-127  -- ??? cannot match out-of-range input ; no warning !!!
+
+*IntEx Data.Int&gt; default (IntE8)
+
+*IntEx Data.Int&gt; 129
+IntE8 *** Exception: IntOutOfRange &quot;129&quot;
+
+*IntEx Data.Int&gt; 4
+IntE8 4
+</code></pre><h3 id="checking"><a href="#checking">Checking</a></h3><pre><code class="bash">$ ghci
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
+Prelude&gt; :load IntEx
+[1 of 1] Compiling IntEx          ( IntEx.hs, interpreted )
+Ok, modules loaded: IntEx.
+
+*IntEx&gt; (minBound::IntE8, maxBound::IntE8)
+(IntE8 (-128),IntE8 127)
+
+*IntEx&gt; (126::IntE8) +1
+IntE8 127
+
+*IntEx&gt; (127::Int8) +1
+-128  -- ??? not in decimal arithmetics !!!
+
+*IntEx&gt; (127::IntE8) +1
+IntE8 *** Exception: IntSumOverflow &quot;127 + 1&quot;
+
+*IntEx&gt; :set -XNegativeLiterals
+
+*IntEx&gt; (-128) + (-1) :: IntE8
+IntE8 *** Exception: IntSumOverflow &quot;(-128) + (-1)&quot;
+
+*IntEx&gt; (-128) - (-1) :: IntE8
+IntE8 (-127)
+
+*IntEx&gt; (-128) + (-128) :: IntE8
+IntE8 *** Exception: IntSumOverflow &quot;(-128) + (-128)&quot;
+-----------
+
+*IntEx&gt; (127::Int8) *2
+-2    -- ??? not in decimal arithmetics !!!
+
+*IntEx&gt; (127::IntE8) *2
+IntE8 *** Exception: IntProdOverflow &quot;127 * 2&quot;
+-----------
+
+*IntEx&gt; import Data.Int
+
+*IntEx Data.Int&gt; fromIntegral (128::Int16) :: Int8
+-128  -- ??? out-of-range input cannot match result !!!
+
+*IntEx Data.Int&gt; intCastEx (127::Int16) :: Int8
+127
+
+*IntEx Data.Int&gt; intCastEx (128::Int16) :: Int8
+*** Exception: IntCastOverflow &quot;128 :: from Int16 to Int8&quot;
+
+*IntEx&gt; intCastEx (128::IntE16) :: IntE8
+IntE8 *** Exception: IntOutOfRange &quot;128&quot;
+</code></pre><h3 id="reflexion"><a href="#reflexion">Reflexion</a></h3><p>All this is nice, but <i>exceptions</i> that can throw everywhere are hard to debug.</p><p>It would be better to use the Maybe result operation versions, compose them as monadic expressions, and check the final result, throwing routine specific exceptions in case of Nothing (meaning Int{N} Overflow).</p><h3 id="using-the-maybe-result-ops--and-extra-newtypes"><a href="#using-the-maybe-result-ops--and-extra-newtypes">Using the Maybe result ops. and extra newtypes</a></h3><p>Adding the following code for IntM{N} newtypes.</p><pre><code class="haskell">-----------------
+
+class Num a =&gt; NumMaybe a where
+  (+?),(-?),(*?):: a -&gt; a -&gt; Maybe a
+
+#define BLOC2( IntMN, IntN) \
+newtype IntMN = IntMN IntN deriving (Show, Eq, Ord, Enum, Bounded, Num, Real, Integral) ; \
+instance NumMaybe IntMN where {\
+    IntMN x +? IntMN y = fmap IntMN (intAddMay x y) ; \
+    IntMN x -? IntMN y = fmap IntMN (intNegateMay y &gt;&gt;= \minusY -&gt; intAddMay x minusY) ; \
+    IntMN x *? IntMN y = fmap IntMN (intProdMay x y) ; \
+         }
+
+-----------------
+
+BLOC2( IntM, Int)
+BLOC2( IntM8, Int8)
+BLOC2( IntM16, Int16)
+BLOC2( IntM32, Int32)
+BLOC2( IntM64, Int64)
+</code></pre><p>Use:</p><pre><code class="haskell">$ghci
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
+Prelude&gt; :load prova4
+[1 of 1] Compiling IntEx            ( prova4.hs, interpreted )
+Ok, modules loaded: IntEx.
+
+*IntEx&gt; :{   -- multiline entry mode
+
+*IntEx| let aRiskyCalc :: NumMaybe a =&gt; a -&gt; a -&gt; a -&gt; Maybe a
+*IntEx|     aRiskyCalc x y z = do
+*IntEx|          r &lt;- x +? y
+*IntEx|          s &lt;- r *? z
+*IntEx|          (-100) -? s
+*IntEx| :}
+*IntEx&gt; aRiskyCalc 2 4 2 :: Maybe IntM8
+Just (IntM8 (-112))
+*IntEx&gt; aRiskyCalc 2 4 8 :: Maybe IntM8
+Nothing         -- the calculation overflowed !!!</code></pre></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/griba/safe_int_addition_and_product';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

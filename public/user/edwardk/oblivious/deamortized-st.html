@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html><head><title>Part I: Deamortized ST - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/oblivious">Cache-Oblivious Data Structures</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/oblivious/deamortized-st">Part I: Deamortized ST</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part I: Deamortized ST</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 8 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/4244d5709e256fd7dacdf3512e7d00334eafbc6b">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/oblivious">Go up to: Cache-Oblivious Data Structures</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-price-of-purity">The Price of Purity</a></li><li><a href="#the-price-of-laziness">The Price of Laziness</a></li><li><a href="#slowdown--what-is-the-worst-case-">Slowdown: What is the Worst Case?</a></li><li><a href="#partiality-as-an-effect">Partiality as an Effect</a></li><li><a href="#the-power-of-mutation">The Power of Mutation</a></li><li><a href="#laziness-is-its-own-reward">Laziness is its Own Reward</a></li><li><a href="#is-it-cheating-if-you-don-t-get-caught-">Is It Cheating If You Don&#39;t Get Caught?</a></li><li><a href="#every-step-you-take">Every Step You Take</a></li><li><a href="#capretta-s-iterative-monad-transformer">Capretta&#39;s Iterative Monad Transformer</a></li><li><a href="#walking-the-walk">Walking the Walk</a></li><li><a href="#newsflash--unsafeinterleavest-is-unsafe-">Newsflash: unsafeInterleaveST Is Unsafe!</a></li><li><a href="#a-safer-alternative--unsafeperformio">A Safer Alternative: unsafePerformIO</a></li><li><a href="#next-time">Next Time</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>A week or two ago I gave a talk at Mozilla, San Francisco on <a href="http://www.youtube.com/watch?v=P3pLDpbzqCw">Cache-Oblivious Maps</a> to the Bay Area Haskell User Group.</p><p>My goal with this series of posts is to ultimately improve on the conclusion of that talk to generate a purely functional version of a structure like <a href="http://supertech.csail.mit.edu/papers/sbtree.pdf">Bender <i>et al.</i></a>'s cache-oblivious lookahead array and the <a href="http://arxiv.org/pdf/1103.4282v2.pdf">stratified B-tree</a>, closing the gap between the performance of imperative and functional data structures in this space.</p><p>In short I want a really fast <code>Map</code>, optimized for contiguous use of memory that hits provably optimal asymptotics across the board for a wide array of problems despite exposing a purely functional API.</p><p>We won't get there today, but we'll at least establish some of the building blocks.</p><p>Today, I want to talk about a new trick that I came up with that allows us work with observably-functional algorithms in Haskell that can provide them with a purely-functional API in the same manner as the <code>ST</code> monad does today, but which permits us enough additional control over scheduling that we can deamortize many such algorithms.</p><h2 id="the-price-of-purity"><a href="#the-price-of-purity">The Price of Purity</a></h2><p>In a purely functional language, <a href="http://en.wikipedia.org/wiki/Amortized_analysis">amortized analysis</a> is further hampered by the fact that every previous version of a structure is available at all times, so you have to consider that any structure can participate in multiple futures. This makes working with amortization much trickier.</p><p>You can't really earn credit by doing things cheaply and then use all that credit to do something big later depending on data not known when you earned the credit because someone may reuse the data structure with different data, and respend the same credit!</p><p>In a purely-functional setting, if you don't use your budget this time you won't get more to spend later. It is just gone!</p><p>The trick is coming up with the right contortions, so that you can build in enough lag in your data structures to ensure that you always have just enough to work on.</p><h2 id="the-price-of-laziness"><a href="#the-price-of-laziness">The Price of Laziness</a></h2><p>Chris Okasaki's book <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and <a href="http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf">thesis</a> cover a suite of tools for reasoning about asymptotics in a pure <i>lazy</i> language.</p><p>He notes that you can often set up a thunk that will evaluate to the right result, if you know all the data you'll need to calculate its answer in the end. Then if two versions of the data structure in the future force this same thunk then they'll share the answer, but only compute it once. This preserves the correctness of the asymptotic analysis of the algorithm despite amortization.</p><p>We get quite a bit more flexibility with regards to amortization than in the strict setting. Now we can pay into an account for later by building a thunk we'll force in later calculations.</p><h2 id="slowdown--what-is-the-worst-case-"><a href="#slowdown--what-is-the-worst-case-">Slowdown: What is the Worst Case?</a></h2><p>When amortized complexity bounds aren't enough you can often follow Okasaki's advice and use even more advanced techniques such as &quot;Implicit Recursive Slowdown&quot;, a variant on a technique by Kaplan and Tarjan.  There we set up a series of thunks you'll evaluate over time, each individually relatively cheap, so that you can turn amortized bounds into worst case bounds. Then you just force an appropriate amount of work as you go.</p><p>By setting up the thunks and paying them down by forcing them at just the right time you can often derive quite good worst-case performance in a purely functional persistent setting, so long as you have access to laziness.</p><p>There are still some algorthms such as Tarjan's <a href="http://en.wikipedia.org/wiki/Disjoint-set_data_structure">Union-Find</a> problem that don't seem to yield to this technique, but surprisingly many do.</p><h2 id="partiality-as-an-effect"><a href="#partiality-as-an-effect">Partiality as an Effect</a></h2><p>So, if I want to set up such a chain of thunks, what would be a good general purpose way to go about it?</p><p><a href="http://arxiv.org/pdf/cs/0505037v6.pdf">Venanzio Capretta</a> defined a simple partiality monad. I'll play with the names a bit and reproduce a version of it here:</p><pre><code class="active haskell">-- show
+data Partial a = Stop a | Step (Partial a)
+
+instance Monad Partial where
+  return = Stop
+  Stop a &gt;&gt;= f = f a
+  Step m &gt;&gt;= f = Step (m &gt;&gt;= f)
+-- /show
+
+main = putStrLn &quot;It typechecks!&quot;</code></pre><p>Those of you who watch out for such things will recognize this as just <code>Free Identity</code>, though technically there is a distinction to be had when you move beyond Haskell here. This is based on <code>νx. a + x</code> rather than <code>μx. a + x</code>, but in Haskell, <code>ν</code> and <code>μ</code> coincide. This means that technically we're using the &quot;completely iterative&quot; monad based on <code>Identity</code>, not the free construction, but I digress.</p><p>Using it you can run a calculation a number of steps and check to see if it has stopped with an answer yet.</p><pre><code class="haskell">run :: Int -&gt; Partial a -&gt; Partial a
+run 0 m = m
+run n m@Stop{} = m
+run n (Step m) = run (n-1) m</code></pre><p>You can inject steps into a calculation to demarcate time.</p><pre><code class="haskell">step :: Partial ()
+step = Step (return ())</code></pre><p>As a trivial example, you can also define a calculation that no matter how many steps you take will spin forever, but where each individual <code>Step</code> takes <i>O(1)</i></p><pre><code class="haskell">never :: Partial a
+never = Step never</code></pre><p>Using this if you have a purely functional algorithm that builds a sub-structure gradually you could pay it down <code>Step</code> by <code>Step</code> by burying a <code>Partial</code> result somewhere down in your structure. If you are careful about the amount of work within a <code>Step</code> then you can reason about the asymptotics of the overall system.</p><h2 id="the-power-of-mutation"><a href="#the-power-of-mutation">The Power of Mutation</a></h2><div align="center"><img src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fekmett.github.com%2Fimages%2Fx-men.jpg" style="padding-bottom:10px" /></div><p>There is an old result by <a href="http://www.cs.princeton.edu/courses/archive/fall03/cs528/handouts/Pure%20Versus%20Impure%20LISP.pdf">Pippenger</a> that showed that an algorithm implemented in a pure strict language may need to suffer a logarithmic slowdown relative to an algorithm implemented in a strict language with side-effects.</p><p>The fact that the slowdown for some algorithms is at least logarithmic in the absence of mutation can be shown using a fairly easy pigeon-hole argument.</p><p>The fact that the slowdown is at most logarithmic derives from the fact that you could always maintain a set of 'references' yourself in a <code>Map</code> like structure, in exchange for logarithmic overhead on (de)reference.</p><p>The price you pay for this power is that mutation brings with it its own headaches. From a free theorem perspective every mutable input is now effectively an extra output, and you have all sorts of spooky action at a distance concerns entangling distant parts of your program.</p><h2 id="laziness-is-its-own-reward"><a href="#laziness-is-its-own-reward">Laziness is its Own Reward</a></h2><div align="center"><img src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fekmett.github.com%2Fimages%2Fjennifer-lawrence-pants.gif" style="padding-bottom:10px" /></div><p>Pippenger's analysis relied on the absence of mutation.</p><p>In a non-strict language like Haskell, graph reduction / memoization of thunk evaluation provides us with a limited form of mutation! This renders his analysis inconclusive.</p><p>Many algorithms that are provably slowed down asymptotically in a strict pure language can be implemented just fine in a non-strict language, by creative contortions to exploit this limited form of mutation.</p><p>This means we can at least sometimes win a log factor in a strict setting by cheating and using side-effects. There may or may not be cases where we need to pay an extra logarithmic factor for this in a lazy functional setting, but we don't have a definitive proof one way or the other.</p><p>My goal today is to help narrow the gap a bit by cheating.</p><h2 id="is-it-cheating-if-you-don-t-get-caught-"><a href="#is-it-cheating-if-you-don-t-get-caught-">Is It Cheating If You Don't Get Caught?</a></h2><p>If your algorithm builds an immutable result, then does it matter how you built it?</p><img src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fekmett.github.com%2Fimages%2Fcheater.jpg" style="float:right;width:45%;margin-left:10px;margin-bottom:15px" /><p>Secretly cheating and doing mutable stuff behind the user's back but only exposing immutable purely functional trappings has been the job of the <code>ST s</code> monad in Haskell since John Launchbury and Simon Peyton Jones introduced it in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.144.2237&amp;rep=rep1&amp;type=pdf">Lazy Functional State Threads</a> back in 1994.</p><p>The idea behind <code>ST</code> is that as long as nobody knows that you cheated and nobody can observe that you did, and no matter how many times they try to catch you you get away with it, does it matter that you cheated? I will definitely <i>not</i> be trying this line of reasoning with my wife, but types are more forgiving.</p><p>I'm not going to dive into the use of the <code>ST s</code> monad here, beyond noting that it looks a lot like the <code>IO</code> monad under the hood with a much reduced palette of operations intended so that the result of the <code>ST s</code> calculation should be deterministic.</p><br clear="all" /><pre><code class="haskell">newSTRef :: a -&gt; ST s (STRef s a)
+readSTRef :: STRef s a -&gt; ST s a
+writeSTRef :: STRef s a -&gt; a -&gt; ST s ()
+...</code></pre><p>When you're done, you run the entire <code>ST s</code> calculation at once:</p><pre><code class="haskell">runST :: (forall s. ST s a) -&gt; a</code></pre><p>Since you are universally quantified over the choice of <code>s</code>, you can't use references produced in one <code>ST</code> calculation in another, and encapsulation, referential transparency and all the good things about functional programming are preserved.</p><p>However, we had to run the entire effect at once.</p><p>If I want to amortize it and pay it down over time, I'm out of luck. In the end I'm interested in building very large vectors but paying for their construction in very small, affordable, chunks.</p><p>That's where today's hackery comes in.</p><h2 id="every-step-you-take"><a href="#every-step-you-take">Every Step You Take</a></h2><p>My first thought was of course to use something like</p><pre><code class="haskell">walkST :: (forall s. Free (ST s) a) -&gt; Free Identity a</code></pre><p>or</p><pre><code class="haskell">walkST :: (forall s. Free (ST s) a) -&gt; Partial a</code></pre><p>But this has the problem that <a href="http://www.youtube.com/watch?v=OMOGaugKpzs&amp;t=26s">every step you take</a> will be observed and must be paid for, even little administrative actions at the end, such as freezing the result vector costs you an extra step.</p><p>If I want to do something like work with existing <code>Stream</code> fusion out of <code>vector</code> and just have it pay once for every <code>step</code>, this approach isn't going to cut it.</p><p>You could bandaid this with a coproduct and use <code>Free (ST s :+: Identity)</code> and promise not to use the knowledge that the <code>ST s</code> calculations were generated separately for evil, but given the amount of time I recently spent talking about <a href="https://www.fpcomplete.com/user/edwardk/editorial/procrustean-mathematics">rightsizing abstractions</a>, it'd be hypocritical for me not to try to find a better way.</p><h2 id="capretta-s-iterative-monad-transformer"><a href="#capretta-s-iterative-monad-transformer">Capretta's Iterative Monad Transformer</a></h2><p>We can upgrade Capretta's partiality monad to a monad transformer as done by <a href="http://www.ioc.ee/~tarmo/tday-veskisilla/uustalu-slides.pdf">Capretta, Altenkirch and Uustalu</a>.</p><pre><code class="active haskell">-- show
+newtype IterT m a = IterT 
+  { runIterT :: m (Either a (IterT m a)) 
+  }
+
+instance Monad m =&gt; Monad (IterT m) where
+  return = IterT . return . Left
+  IterT m &gt;&gt;= k = IterT $ 
+    m &gt;&gt;= either (runIterT . k) (return . Right . (&gt;&gt;= k))
+  fail = IterT . fail
+-- /show 
+
+main = putStrLn &quot;It typechecks!&quot;</code></pre><p>I've added <code>IterT</code> and its dual to <code>free</code></p><p>Here we can still insert explicit steps:</p><pre><code class="haskell">step :: Monad m =&gt; IterT m ()
+step = IterT . return . Right . return</code></pre><p>If you've been playing with free monads for a while you'll recognize this as a version of <code>FreeT Identity m</code> from the <code>free</code> package, rather than the simpler <code>Free m</code> above. Again, we face the technical distinction that this is based on <code>νx. ST s (a + x)</code> not <code>μx. ST s (a + x)</code>.</p><p><code>IterT</code> has been added to the <code>free</code> package in version 4.2 as a distinct construction from <code>FreeT Identity</code> to help drive this distinction home!</p><p>Now what we want to do now is generate a slower version of <code>runST</code> that takes a properly quantified <code>ST s</code> calculation with inserted step markers and walks through it carefully, one step at a time:</p><pre><code class="haskell">walkST :: (forall s. IterT (ST s) a) -&gt; Partial a</code></pre><h2 id="walking-the-walk"><a href="#walking-the-walk">Walking the Walk</a></h2><p>We have a few options for how to implement <code>walkST</code>.</p><p>It is possible to do this entirely with <code>unsafeInterleaveST</code>.</p><p>This is actually a non-trivial exercise and it is very easy to accidentally write a version that is too eager and performs effects too soon. My best version so far requires two uses of <code>unsafeInterleaveST</code> to get the right semantics.</p><p>I leave this as an exercise for the reader.</p><p>You can also rummage through <a href="http://lpaste.net">λpaste</a> for old versions of this monad for tips. ;)</p><h2 id="newsflash--unsafeinterleavest-is-unsafe-"><a href="#newsflash--unsafeinterleavest-is-unsafe-">Newsflash: <code>unsafeInterleaveST</code> Is Unsafe!</a></h2><p>Even if you get that right though, <code>unsafeInterleaveST</code> is a whole lot more unsafe for this use case, than the equivalent <code>unsafeInterleaveIO</code> operation! To understand why we need to look down in the guts of each of them.</p><p>When a thunk is evaluated in GHC there is an ever so tiny race condition. When one thread enters into a thunk there is a tiny 1-2 cycle window between that thread entering and establishing the <a href="http://citeseerx.ist.psu.edu/viewdoc/download?rep=rep1&amp;type=pdf&amp;doi=10.1.1.125.857">greyhole</a> that will catch other threads and make them block, during which another thread could come along and start evaluating the same thunk at the same time.</p><p>In the absence of side-effects this is benign. The risk is so low relative to the astronomical costs of synchronization across threads that we, well, just don't bother synchronizing.</p><p>This of course would be bad if the thunk <i>did</i> have side-effects, <i>e.g.</i> if it called <code>unsafePerformIO</code>.</p><p>Internally <code>unsafePerformIO</code> calls <code>noDuplicate</code> to check to make sure that we're not duplicating effort and effects:</p><pre><code class="haskell">unsafePerformIO :: IO a -&gt; a
+unsafePerformIO m = unsafeDupablePerformIO (noDuplicate &gt;&gt; m)</code></pre><p>Similarly <code>unsafeInterleaveIO</code> also checks <code>noDuplicate</code>.</p><pre><code class="haskell">unsafeInterleaveIO :: IO a -&gt; a
+unsafeInterleaveIO m = unsafeDupableInterleaveIO (noDuplicate &gt;&gt; m)</code></pre><p>But <code>unsafeInterleaveST</code>, on the other hand rather boldly does not.</p><pre><code class="haskell">unsafeInterleaveST :: ST s a -&gt; ST s a
+unsafeInterleaveST (ST m) = ST ( \ s -&gt;
+    let
+        r = case m s of (# _, res #) -&gt; res
+    in
+    (# s, r #)
+  )</code></pre><p>This means that it may very well wind up duplicating work if the result <code>r</code> of the <code>ST s a</code> calculation we called <code>unsafeInterleaveST</code> on is evaluated via <code>par</code>. And since we don't control what users will do with our code, you really do need to allow for that.</p><p>Roman Leschinskiy's cute <a href="http://unlines.wordpress.com/2010/04/21/sparking-imperatives/">Sparking Imperatives</a> hack even mixes <code>par</code> with <code>ST</code>, but he is careful to <code>noDuplicate</code> as he goes.</p><p>Now, there is possibly a very good reason for this distinction. If we look at the haddocks for <code>noDuplicate</code> it</p><blockquote><p>Ensures that the suspensions under evaluation by the current thread
+are unique; that is, the current thread is not evaluating anything
+that is also under evaluation by another thread that has also executed
+'noDuplicate'.</p></blockquote><p>So we're faced with a dilemma (trilemma?), we can either:</p><ol><li><p>abandon the use of <code>unsafeInterleaveST</code> entirely as too risky.</p></li><li><p>reason through whether <code>noDuplicate</code> would be legal to use and how to mix it with the existing <code>unsafeInterleaveST</code>.</p></li><li><p>or we can require the end user to only ever perform idempotent operations in the <code>ST</code> monad!</p></li></ol><p>For now I'm largely restricting myself to #1 and #3.</p><p>For an API I expect to expose to an end user, I'm most likely to choose option #1. Anything they do with the resulting construction can be branded <code>Trustworthy</code> and they don't need to know how it is built in too much detail.</p><p>But when I'm writing code myself that merely exposes a pure façade, the performance benefits of #3 may well outweigh the reasoning difficulties. In principle, if my principal operations are merging elements from two immutable input vectors and generating output in another vector, so long as I'm not bumping a counter stored in an <code>STRef</code>, everything I do will have idempotent effects.</p><p>In the long term, it is probably worth checking to see if <code>unsafeInterleaveST</code> should be updated to do <code>noDuplicate</code> and thereby close out the concern about #2, effectively merging it performance-wise with option #1.</p><p>This still leaves option #3 open for constant tuning in the same crazy way as the <code>inlinePerformIO</code> hackery gets used down in <code>bytestring</code>.</p><h2 id="a-safer-alternative--unsafeperformio"><a href="#a-safer-alternative--unsafeperformio">A Safer Alternative: <code>unsafePerformIO</code></a></h2><p>You have to love it when <code>unsafePerformIO</code> is the safest option.</p><pre><code class="active haskell">{-# LANGUAGE RankNTypes #-}
+
+import Control.Monad.ST
+import System.IO.Unsafe as Unsafe
+import Control.Monad.ST.Unsafe as Unsafe
+
+-- show
+walkST :: (forall s. IterT (ST s) a) -&gt; Partial a
+walkST m = go m where
+  go (IterT m) = 
+    case Unsafe.unsafePerformIO $ 
+         Unsafe.unsafeSTToIO m of
+      Left a  -&gt; Stop a
+      Right m -&gt; Step (go m)
+-- /show
+
+newtype IterT m a = IterT 
+  { runIterT :: m (Either a (IterT m a)) 
+  }
+
+instance Monad m =&gt; Monad (IterT m) where
+  return = IterT . return . Left
+  IterT m &gt;&gt;= k = IterT $ 
+    m &gt;&gt;= either (runIterT . k) (return . Right . (&gt;&gt;= k))
+  fail = IterT . fail
+
+data Partial a = Stop a | Step (Partial a)
+
+instance Monad Partial where
+  return = Stop
+  Stop a &gt;&gt;= f = f a
+  Step m &gt;&gt;= f = Step (m &gt;&gt;= f)
+  
+main = putStrLn &quot;It typechecks!&quot;</code></pre><p>Here we're relying on the fact that we perform one step at a time, and that we're evaluating an &quot;entirely sealed&quot; <code>ST s</code> calculation. When we're done and have the answer <code>a</code> in our <code>Partial a</code>, like with conventional <code>ST s</code> we can't go back and use any of our references any more. In <code>walkST</code> we keep reopening the same ST region, but we only do so after we look around and make sure nobody else is going to catch us and nobody else is doing the same thing.</p><p>With this, we can go through and do things like calculate an <code>n</code>-element unboxed vector in <code>n</code> individually worst-case constant time steps!</p><h2 id="next-time"><a href="#next-time">Next Time</a></h2><p>This opens up new opportunities for matching worst case asymptotic bounds of algorithms from the imperative world in a purely functional setting.</p><p>Next time I'll start to explore how we can mix this approach with a novel (to me) choice of number system to dynamize and deamortize large immutable lookup structures.</p><p>Happy Halloween!</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a>
+Oct 31, 2013</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/oblivious/deamortized-st';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

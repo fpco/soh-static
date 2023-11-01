@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html><head><title>Polynomials - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics">Computational Physics</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools">Beginner&#39;s Tools</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools/polynomials">Polynomials</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Polynomials</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Jul 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5577/ce03e479fddbc5d74d9b6fdaff4fcaf716c861d9">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools/simple-integration">Previous content: Simple Integration</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools/root-finding">Next content: Root Finding</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools">Go up to: Beginner&#39;s Tools</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567">See all content by Samuel Buteau</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#what-is-a-polynomial-">What is a Polynomial?</a><ul><li><a href="#how-will-we-represent-a-polynomial-">How will we represent a Polynomial?</a></li><li><a href="#proper-and-improper-representations">Proper and Improper Representations</a></li></ul></li><li><a href="#operations">Operations</a><ul><li><a href="#you-can-add-two-polynomials">You can add two Polynomials</a></li><li><a href="#you-can-multiply-a-polynomial-by-a-constant">You can multiply a polynomial by a constant</a></li><li><a href="#you-can-multiply-by-x">You can multiply by x</a></li><li><a href="#we-can-multiply-two-polynomials">We can multiply two polynomials</a></li><li><a href="#we-can-negate-a-polynomial--coefficient-wise-">We can negate a polynomial (coefficient-wise)</a></li><li><a href="#we-can-derive-a-polynomial">We can derive a polynomial</a></li></ul></li><li><a href="#instances">Instances</a></li><li><a href="#polynomials-as-functions">Polynomials as functions</a></li><li><a href="#important-families-of-polynomials">Important Families of Polynomials</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#bonus-round--getting-rid-of-improper-representations-">Bonus Round: Getting rid of Improper Representations.</a></li><li><a href="#bonus-round-2--integration">Bonus Round 2: Integration</a><ul><li><a href="#why-not-just-do-definite-integration-">Why not just do definite integration?</a></li></ul></li><li><a href="#solution-to-using-vectors-and-optimising-a-bit-">Solution to using vectors and optimising a bit.</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="what-is-a-polynomial-"><a href="#what-is-a-polynomial-">What is a Polynomial?</a></h1><p>Here, we will implement standard mathematical operations on polynomials.</p><p>If you do not know what a polynomial is, here is an example:</p><pre><code class="haskell">f x = x**2 + 3*x + 2</code></pre><p>In the example, <code>f</code> is a <i>polynomial function</i>, and the right-hand-side is an expression of a polynomial.</p><h2 id="how-will-we-represent-a-polynomial-"><a href="#how-will-we-represent-a-polynomial-">How will we represent a Polynomial?</a></h2><p>More specifically, we will represent polynomials as a list of coefficients:</p><pre><code class="haskell">(x**2 + 3*x + 2) {- is represented by: -} [2,3,1]
+
+(20) {- is represented by: -} [20]
+
+(x) {- is represented by: -} [0,1]
+
+(c0 + c1*x + c2*x**2 + ...) {- is represented by: -} [c0,c1,c2,..]
+</code></pre><h2 id="proper-and-improper-representations"><a href="#proper-and-improper-representations">Proper and Improper Representations</a></h2><p>Mathematically, something like (<code>0*x**2 + x + 0</code>) is equal to (<code>x</code>), but one of them contains more symbols than the other.</p><p>For simplicity, we will say:</p><pre><code class="haskell">(0*x**2 + x + 0) {- is represented by: -} [0,1,0]
+(x)  {- is represented by: -} [0,1]</code></pre><p>so that by looking at the expression of a polynomial, we can immediately get a list of coefficients.</p><p>This decision implies that a polynomial like <code>0</code> has an infinity of representations:</p><pre><code class="haskell">listOfAllRepresentationsOfZero = [[],[0],[0,0],[0,0,0],..]</code></pre><p>To avoid unnecessary memory usage, we would like to use <code>[]</code> to represent <code>0</code>; it is the minimal representation. So, we say that the minimal representation is the proper representation, and any other representation is improper.</p><p>It is possible to define a function which takes any finite representation, and turns it into a proper representation:</p><pre><code class="active haskell">import Data.List
+-- show This gets rid of all the zeroes at the end of the representation.
+toProper [] = []
+toProper p = if (last p /= 0) -- this means there is nothing to do.
+             then p 
+             else toProper $ init p -- this means the last zero can be discarded.
+
+main = do print $ toProper []
+          print $ toProper [0,0,0]
+          print $ toProper [0,1]
+          print $ toProper [0,1,0]
+-- /show</code></pre><h1 id="operations"><a href="#operations">Operations</a></h1><p>First, we implement operations like <code>(+)</code> for representations which are not necessarily proper. Afterwards, we will use <code>toProper</code> to &quot;close&quot; these operations for proper polynomials.</p><h2 id="you-can-add-two-polynomials"><a href="#you-can-add-two-polynomials">You can add two Polynomials</a></h2><pre><code class="active haskell">addPoly p1 p2 = if (length p1 &gt;= length p2)
+                then zipWith (+) p1 (p2 ++ repeat)
+                else addPoly p2 p1
+                
+{-
+if you have 
+
+(2*x**2 + 3*x + 2) + (x)
+
+you rewrite
+
+(2*x**2 + 3*x + 2) + (0*x**2 + x + 0) = (2+0)*x**2 + (3+1)*x + (2+0)
+-}
+
+main = print $ [0,1] `addPoly` [2,3,2]</code></pre><h2 id="you-can-multiply-a-polynomial-by-a-constant"><a href="#you-can-multiply-a-polynomial-by-a-constant">You can multiply a polynomial by a constant</a></h2><pre><code class="active haskell">multiplyBy a p1 = map (a*) p1
+
+{-
+if you have 
+4 * (2*x**2 + 3*x + 2) = (4*2)*x**2 + (4*3)*x + (4*2) 
+-}
+
+main = do print $ 4 `multiplyBy` [2,3,2]</code></pre><p>We see that this operation is already closed over proper representations.</p><h2 id="you-can-multiply-by-x"><a href="#you-can-multiply-by-x">You can multiply by <code>x</code></a></h2><pre><code class="active haskell">multiplyByX p = 0:p
+
+{-
+if you have 
+(x) * (x**2 + 3*x + 4) = (x**3 + 3*x**2 + 4*x + 0) 
+-}
+
+main = do print $  multiplyByX [4,3,1]</code></pre><p>We see that this is not closed over proper representations. However, it is almost closed.</p><p>Exercise: Find the only case where this transforms a proper representation into an improper one.</p><h2 id="we-can-multiply-two-polynomials"><a href="#we-can-multiply-two-polynomials">We can multiply two polynomials</a></h2><pre><code class="active haskell">-- show
+multPoly [] p2 = []
+multPoly (p:p1) p2 = let pTimesP2 = multiplyBy p p2
+                         xTimesP1Timesp2 = multiplyByX $ multPoly p1 p2
+                     in addPoly pTimesP2 xTimesP1Timesp2    
+
+{- 
+if we have
+(2*x + 1) * (x**2 + 3*x + 2) = 1 * (x**2 + 3*x + 2) + (x) * (2) * (x**2 + 3*x + 2)
+-}
+
+main = print $ multPoly [1,2] [2,3,1]
+
+-- /show
+
+addPoly p1 p2 = if (length p1 &gt;= length p2)
+                then zipWith (+) p1 (p2 ++ repeat 0)
+                else addPoly p2 p1
+multiplyBy a p1 = map (a*) p1
+multiplyByX p = 0:p</code></pre><h2 id="we-can-negate-a-polynomial--coefficient-wise-"><a href="#we-can-negate-a-polynomial--coefficient-wise-">We can negate a polynomial (coefficient-wise)</a></h2><pre><code class="active haskell">negatePoly = map negate
+
+main = print $ negatePoly [0,1]</code></pre><h2 id="we-can-derive-a-polynomial"><a href="#we-can-derive-a-polynomial">We can derive a polynomial</a></h2><pre><code class="active haskell">derive [] = []
+derive (_:ps) = zipWith (*) ps [1..]
+
+main = do print $ derive [0,1]
+          print $ derive [0,1,4,2]
+</code></pre><h1 id="instances"><a href="#instances">Instances</a></h1><p>Here are three important instances: <code>Num</code>, <code>Show</code>, <code>Eq</code>.</p><pre><code class="active haskell">import Data.List
+multPoly [] p2 = []
+multPoly (p:p1) p2 = let pTimesP2 = multiplyBy p p2
+                         xTimesP1Timesp2 = multiplyByX $ multPoly p1 p2
+                     in addPoly pTimesP2 xTimesP1Timesp2    
+addPoly p1 p2 = if (length p1 &gt;= length p2)
+                then zipWith (+) p1 (p2 ++ repeat 0)
+                else addPoly p2 p1
+multiplyBy a p1 = map (a*) p1
+multiplyByX p = 0:p
+
+negatePoly :: Num a =&gt; [a] -&gt; [a]
+negatePoly = map negate
+
+
+
+toProper [] = []
+toProper p = if (last p /= 0) -- this means there is nothing to do.
+             then p 
+             else toProper $ init p -- this means the last zero can be discarded.
+
+-- show This allows us to instantiate typeclasses to which regular lists belong.
+newtype Poly a = P [a] 
+-- /show
+
+
+
+-- show A polynomial is sort of a number. We enforce closure by properP, which only creates proper Ps.
+--By using modules, we could only export properP, not P. This would simply get rid 
+--of all those improper representations. However, some things are more efficient 
+--with improper representations, so we do not want to lose that power. Depending 
+--on the application, this constraint might be removed.
+properP :: (Num a, Eq a) =&gt; [a] -&gt; Poly a
+properP = P . toProper
+
+instance (Num a, Eq a) =&gt; Num (Poly a) where
+    (P a) + (P b) = properP $ addPoly a b
+    (P a) * (P b) = properP $ multPoly a b
+    negate (P a) = properP $ negatePoly a
+    abs = undefined
+    signum = undefined
+    fromInteger i = properP [fromIntegral i]
+-- /show
+
+-- show Shows polynomials how we write them mathematically.
+-- It would be harder to parse.
+showPoly [] = show 0
+showPoly p =  let cOs = zip p [0..]
+                  nonZeroCOs = filter (\(c,_) -&gt; c /= 0) cOs
+                  cShow c = if c == 1 
+                            then &quot;&quot; 
+                            else show c
+                  nShow n = case n of 
+                              0 -&gt; &quot;&quot;
+                              1 -&gt; &quot;x&quot; 
+                              m -&gt; &quot;x^&quot; ++ show m
+                  cnShow c n = if c == 1 &amp;&amp; n == 0 
+                               then show 1 
+                               else intercalate &quot; &quot; $ filter (/=&quot;&quot;) [cShow c, nShow n]            
+                  terms = map (\(c,n) -&gt; cnShow c n) nonZeroCOs
+              in intercalate &quot; + &quot; (reverse terms)    
+
+instance (Show a, Eq a, Num a) =&gt; Show (Poly a) where
+    show (P a) = showPoly $ toProper a
+-- /show
+
+-- show Eqs two polynomials
+instance (Num a, Eq a) =&gt; Eq (Poly a) where
+    (P a) == (P b) = toProper a == toProper b
+-- /show
+
+-- show Try it!
+main = do print (P [1,3,4] - P [0,1,0,0])
+          print $ P []
+          print $ P [0,0]
+          print (P [3,2,5] * P [4,1,1])
+          print (P [3,2,5] * P [4,1,1] == properP [4,1,1] * P [3,2,5,0,0])
+                    
+-- /show
+</code></pre><p>Exercise: 1) modify the instance of Show so that multiplication is denoted by <code>*</code> (as in <code>2*x + 1</code>). 2) (Bonus) modify the instance of Show so that things like <code>2 x^2 + -3</code> become <code>2 x^2 - 3</code>.</p><h1 id="polynomials-as-functions"><a href="#polynomials-as-functions">Polynomials as functions</a></h1><pre><code class="haskell">-- show
+listOfPowers x = map (\n -&gt; x**n) [0..]
+
+makeFunction p = \x -&gt; sum $ zipWith (*) p (listOfPowers x)
+-- /show</code></pre><h1 id="important-families-of-polynomials"><a href="#important-families-of-polynomials">Important Families of Polynomials</a></h1><pre><code class="active haskell">import Data.List
+multPoly [] p2 = []
+multPoly (p:p1) p2 = let pTimesP2 = multiplyBy p p2
+                         xTimesP1Timesp2 = multiplyByX $ multPoly p1 p2
+                     in addPoly pTimesP2 xTimesP1Timesp2    
+addPoly p1 p2 = if (length p1 &gt;= length p2)
+                then zipWith (+) p1 (p2 ++ repeat 0)
+                else addPoly p2 p1
+multiplyBy a p1 = map (a*) p1
+multiplyByX p = 0:p
+
+negatePoly :: Num a =&gt; [a] -&gt; [a]
+negatePoly = map negate
+
+
+
+toProper [] = []
+toProper p = if (last p /= 0) -- this means there is nothing to do.
+             then p 
+             else toProper $ init p -- this means the last zero can be discarded.
+
+newtype Poly a = P [a] 
+properP :: (Num a, Eq a) =&gt; [a] -&gt; Poly a
+properP = P . toProper
+
+instance (Num a, Eq a) =&gt; Num (Poly a) where
+    (P a) + (P b) = properP $ addPoly a b
+    (P a) * (P b) = properP $ multPoly a b
+    negate (P a) = properP $ negatePoly a
+    abs = undefined
+    signum = undefined
+    fromInteger i = properP [fromIntegral i]
+showPoly [] = show 0
+showPoly p =  let cOs = zip p [0..]
+                  nonZeroCOs = filter (\(c,_) -&gt; c /= 0) cOs
+                  cShow c = if c == 1 
+                            then &quot;&quot; 
+                            else show c
+                  nShow n = case n of 
+                              0 -&gt; &quot;&quot;
+                              1 -&gt; &quot;x&quot; 
+                              m -&gt; &quot;x^&quot; ++ show m
+                  cnShow c n = if c == 1 &amp;&amp; n == 0 
+                               then show 1 
+                               else intercalate &quot; &quot; $ filter (/=&quot;&quot;) [cShow c, nShow n]            
+                  terms = map (\(c,n) -&gt; cnShow c n) nonZeroCOs
+              in intercalate &quot; + &quot; (reverse terms)    
+
+instance (Show a, Eq a, Num a) =&gt; Show (Poly a) where
+    show (P a) = showPoly $ toProper a
+instance (Num a, Eq a) =&gt; Eq (Poly a) where
+    (P a) == (P b) = toProper a == toProper b
+                    
+-- show Legendre Polynomials
+x = P [0,1]
+coef a = properP [a]
+coeff `mono` order = properP (replicate order 0 ++ [coeff]) 
+
+--this is the zeroth legendre polynomial
+leg0 = coef 1
+--this is the 1st legendre poly.
+leg1 = x 
+--this is the relationship between the current legendre 
+--polynomial and the two previous ones.
+legN n legP legPP = coef (1/n) * (coef (2*n-1) * x * legP + coef (1-n) * legPP) 
+
+--the infinite list of legendre polynomials
+legs = leg0 : leg1 : zipWith3 legN [2..] (tail legs) legs
+getLegendre n = legs !! n
+
+derive (P []) = (P [])
+derive (P (_:ps)) = P $ zipWith (*) ps [1..]
+getLegendre' = derive . getLegendre
+-- /show
+
+--show Chebyshev Polynomials
+ch0 = coef 1
+ch1 = x 
+chN chPrev chPrevPrev =   2 * x * chPrev - chPrevPrev 
+
+chebys = ch0:ch1: zipWith chN (tail chebys) chebys
+getCheby n = chebys !! n
+-- /show
+
+-- show Try it!
+main = do putStrLn &quot;Legendre polynomials:&quot;
+          putStrLn $ intercalate &quot;\n&quot; $ map show $ take 10 legs
+          putStrLn &quot;Associated Legendre polynomials:&quot;
+          putStrLn $ intercalate &quot;\n&quot; $ map show $  map getLegendre' [0..9]
+          putStrLn &quot;Chebyshev Polynomials:&quot;
+          putStrLn $ intercalate &quot;\n&quot; $ map show $ take 10 chebys
+-- /show</code></pre><p>Exercise: Define the set of all legendre polynomials using 1) a recursion, 2) an iteration. 3) (Bonus) Why is it a bad idea to do this recursively for n = 1000? 4) Is it a good idea to use an iteration for n = 1000 ?</p><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>Now that we have the power of polynomials, there are many important applications to mention. See my tutorial on Numerical Methods for the actual applications.</p><p>We can do interpolation with polynomials. The idea is to construct a polynomial which interpolates a set of points.</p><p>We can find the roots of simple polynomials exactly:</p><pre><code class="haskell">
+realquadroots (P [c,b,a]) = let disc = b**2 - 4 * a * c
+                            in if disc &lt; 0 
+                               then []
+                               else if disc == 0
+                                    then [-b/(2*a)]
+                                    else [(-b + sqrt disc)/(2*a),(-b - sqrt disc)/(2*a)]
+                                    </code></pre><p>We can also use <code>makeFunction</code> to find the roots of simple polynomials approximately (with Newton's method, for instance).</p><p>You can also use the legendre polynomials in more complex techniques such as the Gaussian Quadrature.</p><h1 id="bonus-round--getting-rid-of-improper-representations-"><a href="#bonus-round--getting-rid-of-improper-representations-">Bonus Round: Getting rid of Improper Representations.</a></h1><p>Here is how you ensure the utter annilation of Improper Polynomials. This technique can be used for your own applications with a similar structure.</p><p>The idea is that we will make <code>P</code> dissapear, leaving only <code>properP</code>. You see, if all of our operations are closed, and there is no way to introduce Improper representations, then <i>it becomes impossible to get an Improper polynomial</i>.</p><p>First, we have to introduce explicitely a function we used without knowing it.</p><pre><code class="haskell">
+toList (P p) = p
+</code></pre><p>Because we want to still be able to work directly on the list (this is necessary if we want to define additional functions).</p><p>So now, we put what we have done so far in a module, and only export the functions in the parantesis. 
+The user of our module will work in another file (Main.hs).</p><pre><code class="active haskell">{-# START_FILE Poly.hs #-}
+-- show
+module Poly (toList, makeFunction, properP, Poly(), x, coef, mono, legs, getLegendre, getLegendre', derive, chebys, getCheby) where
+
+--Note: the instances for Show, Num, and Eq are exported.
+
+--There is actually more stuff here, but it is all a repeat of what we saw previously.
+-- /show
+import Data.List
+
+toList (P p) = p
+
+listOfPowers x = map (\n -&gt; x**n) [0..]
+
+makeFunction (P p) = \x -&gt; sum $ zipWith (*) p (listOfPowers x)
+
+multPoly [] p2 = []
+multPoly (p:p1) p2 = let pTimesP2 = multiplyBy p p2
+                         xTimesP1Timesp2 = multiplyByX $ multPoly p1 p2
+                     in addPoly pTimesP2 xTimesP1Timesp2    
+addPoly p1 p2 = if (length p1 &gt;= length p2)
+                then zipWith (+) p1 (p2 ++ repeat 0)
+                else addPoly p2 p1
+multiplyBy a p1 = map (a*) p1
+multiplyByX p = 0:p
+
+negatePoly :: Num a =&gt; [a] -&gt; [a]
+negatePoly = map negate
+
+
+
+toProper [] = []
+toProper p = if (last p /= 0) -- this means there is nothing to do.
+             then p 
+             else toProper $ init p -- this means the last zero can be discarded.
+
+newtype Poly a = P [a] 
+properP :: (Num a, Eq a) =&gt; [a] -&gt; Poly a
+properP = P . toProper
+
+instance (Num a, Eq a) =&gt; Num (Poly a) where
+    (P a) + (P b) = properP $ addPoly a b
+    (P a) * (P b) = properP $ multPoly a b
+    negate (P a) = properP $ negatePoly a
+    abs = undefined
+    signum = undefined
+    fromInteger i = properP [fromIntegral i]
+showPoly [] = show 0
+showPoly p =  let cOs = zip p [0..]
+                  nonZeroCOs = filter (\(c,_) -&gt; c /= 0) cOs
+                  cShow c = if c == 1 
+                            then &quot;&quot; 
+                            else show c
+                  nShow n = case n of 
+                              0 -&gt; &quot;&quot;
+                              1 -&gt; &quot;x&quot; 
+                              m -&gt; &quot;x^&quot; ++ show m
+                  cnShow c n = if c == 1 &amp;&amp; n == 0 
+                               then show 1 
+                               else intercalate &quot; &quot; $ filter (/=&quot;&quot;) [cShow c, nShow n]            
+                  terms = map (\(c,n) -&gt; cnShow c n) nonZeroCOs
+              in intercalate &quot; + &quot; (reverse terms)    
+
+instance (Show a, Eq a, Num a) =&gt; Show (Poly a) where
+    show (P a) = showPoly $ toProper a
+instance (Num a, Eq a) =&gt; Eq (Poly a) where
+    (P a) == (P b) = toProper a == toProper b
+
+x = P [0,1]
+coef a = properP [a]
+coeff `mono` order = properP (replicate order 0 ++ [coeff]) 
+
+--this is the zeroth legendre polynomial
+leg0 = coef 1
+--this is the 1st legendre poly.
+leg1 = x 
+--this is the relationship between the current legendre 
+--polynomial and the two previous ones.
+legN n legP legPP = coef (1/n) * (coef (2*n-1) * x * legP + coef (1-n) * legPP) 
+
+--the infinite list of legendre polynomials
+legs = leg0 : leg1 : zipWith3 legN [2..] (tail legs) legs
+getLegendre n = legs !! n
+
+derive (P []) = (P [])
+derive (P (_:ps)) = P $ zipWith (*) ps [1..]
+getLegendre' = derive . getLegendre
+
+ch0 = coef 1
+ch1 = x 
+chN chPrev chPrevPrev =   2 * x * chPrev - chPrevPrev 
+
+chebys = ch0:ch1: zipWith chN (tail chebys) chebys
+getCheby n = chebys !! n
+
+{-# START_FILE Main.hs #-}
+import Poly
+import Data.List
+
+main = do putStrLn &quot;Legendre polynomials:&quot;
+          putStrLn $ intercalate &quot;\n&quot; $ map show $ take 10 legs
+          putStrLn &quot;Testing the arithmetic operations&quot;
+          print (properP [1,3,4] - properP [0,1,0,0])
+          print $ properP []
+          print $ properP [0,0]
+          print (properP [3,2,5] * properP [4,1,1])
+          putStrLn &quot;Testing the Equality test&quot;
+          print (properP [3,2,5] * properP [4,1,1] == properP [4,1,1] * properP [3,2,5,0,0])
+          putStrLn &quot;Testing derivation&quot;
+          print (derive (properP [1,0,2]))
+          </code></pre><p>Exercise: 1) write a test for <code>makeFunction</code>, 2) try to replace <code>properP</code> by <code>P</code> in Main.hs; what happens?</p><ol><li><p>(Bonus *) Try to implement Polynomials as a Vector (from <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Vector.Unboxed" title="Hoogle search for: Data.Vector.Unboxed"><code>Data.Vector.Unboxed</code></a>) of coefficient instead of a list (do all this in Poly.hs), but you must keep Main.hs the way it is, and have all the tests give you the same thing as they give you now.</p></li></ol><p>Have fun.</p><h1 id="bonus-round-2--integration"><a href="#bonus-round-2--integration">Bonus Round 2: Integration</a></h1><p>In the same way that polynomials can be derived exactly according to calculus, so too can they be integrated.</p><p>The integral of a polynomial is a polynomial, which is rather nice. (as I will discuss later, this kind of property is often very good if you want your code to be powerful and relatively small)</p><p>Of course, integration (indefinite integration) does not fully specify what the result should be. We know that the following property must hold:</p><pre><code class="haskell">
+derive (integrate p) == p
+</code></pre><p>This only specifies integration up to a constant. In other words,</p><pre><code class="haskell">
+integrate (derive p) == p + c
+</code></pre><p>where <code>c</code> is a constant polynomial.</p><p>For simplicity, we use the convention that integration always gives a polynomial going through the origin. For instance,</p><pre><code class="haskell">
+integrate (P [1]) == P [0,1]</code></pre><h2 id="why-not-just-do-definite-integration-"><a href="#why-not-just-do-definite-integration-">Why not just do definite integration?</a></h2><p>The ultimate goal is definite integration, but suppose we want to visualise the integral of some polynomial. In that case, it is more efficient (and more interesting) to first calculate the indefinite integral, and then evaluate it between various points plot the curve.</p><p>Exercise: Try to implement polynomial integration.</p><p>Solution:</p><div class="hidden"><pre><code class="haskell">
+integrate (P p) = P (0 : zipWith (/) p (map fromIntegral [1..length p]))
+</code></pre></div><h1 id="solution-to-using-vectors-and-optimising-a-bit-"><a href="#solution-to-using-vectors-and-optimising-a-bit-">Solution to using vectors and optimising a bit.</a></h1><p>As you can see below, programs using vectors are a little less descriptive of the meaning, and more descriptive of the procedures. However, after understanding the list version, you can use the vector version without difficulty. Notice also how I didn't convert the <code>show</code> function to a vector style. The <code>show</code> function doesn't need to be super-fast, and the tools to work with <code>String</code>s are using lists (because <code>String</code> is just <code>[Char]</code>). This is the kind of compromise in favor of convenience you should always be making.</p><p>A good rule of thumb is this: functions that take some <code>a</code> and makes a new <code>a</code> are potential bottlenecks, because some bigger function could call this smaller function a billion times in some program. However, a function that takes some <code>a</code> and returns something that only <i>you</i> will understand ... well, this will never be the bottleneck; you and your understanding will (you can't look at a billion strings representing a polynomial faster than your computer can print them).</p><div class="hidden"><pre><code class="haskell">module PolyV (toVec, makeFunction, properP, Poly(), x, coef, mono , legs, getLegendre, getLegendre', derive, integrate, chebys, getCheby)  where
+
+import Data.List (intercalate)
+import Numeric.Polynomial
+import qualified Data.Vector.Generic as G
+import           Data.Vector.Generic  (Vector)
+import qualified Data.Vector.Unboxed as U
+
+
+toVec :: Poly t -&gt; U.Vector t
+toVec (P p) = p
+{-# INLINE toVec #-}
+
+makeFunction :: (Num a, U.Unbox a) =&gt; Poly a -&gt; (a -&gt; a)
+makeFunction (P p) = \x -&gt;  evaluatePolynomial x p
+{-# INLINE makeFunction #-}
+
+multPoly :: (Eq a, Num a, U.Unbox a) =&gt; U.Vector a -&gt; U.Vector a -&gt; U.Vector a
+multPoly   xs  myYs     = if U.null myYs
+                          then U.empty
+                          else let 
+                            y = U.head myYs
+                            ys = U.tail myYs
+                            mul 0 bs = 0 `U.cons` bs
+                            mul x bs = (x*y) `U.cons` addPoly (U.map (x*) ys) bs
+                            in U.foldr mul U.empty xs
+{-# INLINE multPoly #-}                           
+
+
+
+
+
+
+
+addPoly :: (Num a, U.Unbox a) =&gt; U.Vector a -&gt; U.Vector a -&gt; U.Vector a
+addPoly p1 p2 = let
+    n1 = U.length p1 
+    n2 = U.length p2
+    in if n1 &gt;= n2
+       then let 
+          (fittingPart, rest) = U.splitAt n2 p1
+          in  (U.zipWith (+) fittingPart p2) U.++ rest
+       else addPoly p2 p1
+{-# INLINE addPoly #-}
+
+multiplyBy :: (Num b, U.Unbox b) =&gt; b -&gt; U.Vector b -&gt; U.Vector b
+multiplyBy a p1 = U.map (a*) p1
+{-# INLINE multiplyBy #-}
+
+multiplyByX :: (Num a, U.Unbox a) =&gt; U.Vector a -&gt; U.Vector a
+multiplyByX p = 0 `U.cons` p
+{-# INLINE multiplyByX #-}
+
+
+negatePoly ::(U.Unbox b0, Num b0) =&gt; U.Vector b0 -&gt; U.Vector b0
+negatePoly = U.map negate
+{-# INLINE negatePoly #-}
+
+
+toProper ::  (Eq a, Num a, U.Unbox a) =&gt; U.Vector a -&gt; U.Vector a 
+toProper p = if (U.null p || U.last p /= 0) 
+             then     p -- this means there is nothing to do.        
+             else     toProper $ U.init p -- this means the last zero can be discarded.
+{-# INLINE toProper #-}
+
+newtype Poly a = P (U.Vector a) 
+
+properP :: (Eq a, Num a, U.Unbox a) =&gt; U.Vector a -&gt; Poly a
+properP = P . toProper
+{-# INLINE properP #-}
+
+
+showPoly mp = if U.null mp 
+             then show 0
+             else let
+                p = U.toList mp
+                cOs = zip p [0..]
+                nonZeroCOs = filter (\(c,_) -&gt; c /= 0) cOs
+                cShow c = if c == 1 
+                          then &quot;&quot; 
+                          else show c
+                nShow n = case n of 
+                            0 -&gt; &quot;&quot;
+                            1 -&gt; &quot;x&quot; 
+                            m -&gt; &quot;x^&quot; ++ show m
+                cnShow c n = if c == 1 &amp;&amp; n == 0 
+                             then show 1 
+                             else intercalate &quot; &quot; $ filter (/=&quot;&quot;) [cShow c, nShow n]            
+                terms = map (\(c,n) -&gt; cnShow c n) nonZeroCOs
+                in intercalate &quot; + &quot; (reverse terms)    
+              
+instance (Num a, Eq a, U.Unbox a) =&gt; Num (Poly a) where
+    (P a) + (P b) = properP $ addPoly a b
+    (P a) * (P b) = properP $ multPoly a b
+    negate (P a) = properP $ negatePoly a
+    abs = undefined
+    signum = undefined
+    fromInteger i = properP $ U.singleton $ fromIntegral i
+
+
+{-
+instance (Show a, Eq a, Num a) =&gt; Show (Poly a) where
+    show (P a) = showPoly $ toProper a
+-}
+
+instance (Num a, Eq a, U.Unbox a) =&gt; Eq (Poly a) where
+    (P a) == (P b) = toProper a == toProper b
+
+
+x :: (Num a0, U.Unbox a0) =&gt; Poly a0
+x = P $  0 `U.cons` U.singleton 1
+
+coef :: (Eq a, Num a, U.Unbox a) =&gt; a -&gt; Poly a
+coef a = properP $ U.singleton a
+
+mono :: (Eq a, Num a, U.Unbox a) =&gt; a -&gt; Int -&gt; Poly a
+coeff `mono` order = properP (U.replicate order 0 `U.snoc` coeff) 
+
+--this is the zeroth legendre polynomial
+leg0 :: (Eq a, Num a, U.Unbox a) =&gt; Poly a
+leg0 = coef 1
+--this is the 1st legendre poly.
+leg1 :: (Num a, U.Unbox a) =&gt; Poly a
+leg1 = x 
+--this is the relationship between the current legendre 
+--polynomial and the two previous ones.
+
+legN n legP legPP = coef (1/n) * (coef (2*n-1) * x * legP + coef (1-n) * legPP) 
+
+--the infinite list of legendre polynomials
+legs :: (Eq a, Num a, U.Unbox a, Fractional a) =&gt; [Poly a]
+legs = leg0 : leg1 : zipWith3 legN (map fromIntegral [2..]) (tail legs) legs
+
+getLegendre :: (Eq a, Num a, U.Unbox a, Fractional a) =&gt; Int -&gt; Poly a
+getLegendre n = legs !! n
+
+derivePoly p = if U.null p
+               then p
+               else U.zipWith (*) (U.tail p) (U.enumFromN 1 (U.length p - 1))
+
+derive :: (Fractional a, U.Unbox a) =&gt; Poly a -&gt; Poly a
+derive = P . derivePoly . toVec
+
+integratePoly p = 0 `U.cons` U.zipWith (/) p (U.enumFromN 1 (U.length p))
+
+integrate :: (Fractional a, U.Unbox a) =&gt; Poly a -&gt; Poly a
+integrate = P . integratePoly . toVec
+
+getLegendre' :: (Eq a, Num a, U.Unbox a, Fractional a) =&gt; Int -&gt; Poly a
+getLegendre' = derive . getLegendre
+
+ch0 :: (Eq a, Num a, U.Unbox a) =&gt; Poly a
+ch0 = coef 1
+
+ch1 :: (Num a, U.Unbox a) =&gt; Poly a
+ch1 = x 
+
+chN chPrev chPrevPrev =   2 * x * chPrev - chPrevPrev 
+
+chebys :: (Eq a, Num a, U.Unbox a) =&gt; [Poly a]
+chebys = ch0:ch1: zipWith chN (tail chebys) chebys
+getCheby n = chebys !! n
+
+</code></pre></div></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/Sam567/computational-physics/beginner-s-tools/polynomials';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

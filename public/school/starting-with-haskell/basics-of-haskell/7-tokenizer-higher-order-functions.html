@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html><head><title>7. Tokenizer: Higher Order Functions - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/7-tokenizer-higher-order-functions">7. Tokenizer: Higher Order Functions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">7. Tokenizer: Higher Order Functions</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 2 Jul 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/0f58b177f36293b7db2cf233838e37f41390a383">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/basics-of-haskell/6-tokenizer-function-types">Previous content: 6. Tokenizer: Function Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/basics-of-haskell/8_Parser">Next content: 8. Parser</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#higher-order-functions-and-lambdas">Higher Order Functions and Lambdas</a><ul><li><a href="#map-and-filter-in-action">Map and Filter in Action</a></li></ul></li><li><a href="#tokenizing-identifiers">Tokenizing Identifiers</a><ul><li><a href="#mutual-recursion">Mutual Recursion</a></li><li><a href="#accumulating">Accumulating</a></li><li><a href="#folding">Folding</a></li></ul></li><li><a href="#tokenizing-numbers">Tokenizing Numbers</a></li><li><a href="#the-tokenizer">The Tokenizer</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p><a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/6-tokenizer-function-types">Previously</a> we have implemented a single-character proof-of-concept tokenizer. What we really need is to be able to recognize multi-character tokens such as identifiers and numbers. But before we get there, let's explore some new functional techniques.</p><h2 id="higher-order-functions-and-lambdas"><a href="#higher-order-functions-and-lambdas">Higher Order Functions and Lambdas</a></h2><p>It's a good programming practice to separate independent concerns. The code we came up with so far was a mixture of two such concerns:</p><ol><li>Traversing a data structure</li><li>Performing an operation on each element</li></ol><p>Try to identify the two in our implementation of <code>tokenize</code>:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | isDigit c  = TokNum (digitToInt c) : tokenize cs
+    | isAlpha c  = TokIdent [c]          : tokenize cs
+    | isSpace c  = tokenize cs
+    | otherwise  = error $ &quot;Cannot tokenize &quot; ++ [c]</code></pre><p>These kinds of traversals are so common that functional languages abstract them into higher order functions. A <i>higher order function</i> is a function that takes another function as an argument.</p><p>This higher order functional approach has been so successful that it was eventually adopted by imperative languages. The C++ STL is based on the separation of concerns and higher order functions: traversal is abstracted into iterators, and generic algorithms accept functions (function pointers, function objects, or lambdas) as arguments. If you're familiar with the STL algorithms: <code>std::transform</code>, <code>std::copy_if</code>, and <code>std::remove_if</code>, you'll have no problem understanding what follows.</p><p>Let me start with the function <code>map</code> defined in the Prelude:</p><pre><code class="haskell">map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code></pre><p>The first argument to <code>map</code> is a function <code>(a -&gt; b)</code>. Notice that the parentheses around this argument are mandatory because the arrow associates to the right. The second argument is a list of <code>a</code>, and the result is the list of <code>b</code>. The type signature pretty much says it all: <code>map</code> applies the function <code>(a -&gt; b)</code> to everly element of a list to produce a new list. The implementation is pretty straightforward too:</p><pre><code class="active haskell">import Data.Char -- for the example
+import Prelude hiding (map)
+-- show
+map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+map _ [] = []
+map f (a : as) = f a : map f as
+
+main = print $ map toUpper &quot;hello world!&quot;</code></pre><p>Notice that <code>map</code> is generic in both type variables, <code>a</code> and <code>b</code>.</p><h3 id="map-and-filter-in-action"><a href="#map-and-filter-in-action">Map and Filter in Action</a></h3><p>Now suppose we have a helper function <code>tokenizeChar</code> that turns a single character into a token. We can rewrite our tokenizer using <code>map</code>:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize str = map tokenizeChar str</code></pre><p>This can be simplified further using currying (&quot;divide&quot; both sides by <code>str</code>):</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize = map tokenizeChar</code></pre><p>Here's the function <code>tokenizeChar</code>:</p><pre><code class="haskell">tokenizeChar :: Char -&gt; Token
+tokenizeChar c | elem c &quot;+-*/&quot; = TokOp (operator c)
+               | isDigit c  = TokNum (digitToInt c)
+               | isAlpha c  = TokIdent [c]
+               | isSpace c  = TokSpace
+               | otherwise  = error $ &quot;Cannot tokenize &quot; ++ [c]</code></pre><p>Notice that the skipping of whitespace cannot be done using <code>map</code> because <code>map</code> cannot change the <i>shape</i> of the list (the length, in this case). That's why I had to introduce a new token, <code>TokSpace</code> to replace white space characters.</p><p>Fortunately, there is another higher-order function, <code>filter</code>, for removing stuff from a list:</p><pre><code class="haskell">filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]</code></pre><p>It takes a predicate function, <code>(a -&gt; Bool)</code>, and applies it to each element of the list. If the predicate returns <code>True</code> the element is kept in the list, otherwise it's removed. <code>filter</code> is defined in the Prelude, but we could have as well implemented it ourselves -- it's so easy:</p><pre><code class="active haskell">import Data.Char
+import Prelude hiding (filter)
+-- show
+filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+filter _ [] = []
+filter p (a : as) = if p a 
+                    then a : filter p as
+                    else filter p as
+main = putStrLn $ filter isDigit &quot;1x+3y&quot;</code></pre><p>We are now ready to implement the function <code>deSpace</code> that filters out <code>TokSpace</code> tokens.</p><pre><code class="haskell">deSpace :: [Token] -&gt; [Token]
+deSpace = filter notSpace 
+
+notSpace :: Token -&gt; Bool
+notSpace t = t /= TokSpace</code></pre><p>(This definition will only work with tokens that are <code>deriving Eq</code>. Can you tell why?  Recall that <code>/=</code> means <i>not equal</i>)</p><p>Since the auxiliary function <code>notSpace</code> is so simple, we can inline it using a lambda -- the anonymous function:</p><pre><code class="haskell">deSpace :: [Token] -&gt; [Token]
+deSpace = filter (\t -&gt; t /= TokSpace)</code></pre><p>The syntax for lambdas is very simple. You start with a backslash, which looks a little like the Greek letter lambda, λ; follow it with the list of arguments; an arrow <code>-&gt;</code>; and the body of the function -- an expression. Lambda syntax doesn't support multiple patterns or guards, but otherwise lambdas are just like definitions of regular functions. Lambdas are so useful that they are now part of C++11 and Java 8.</p><p>Here's the final version of the single-character tokenizer:</p><pre><code class="active haskell">import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokIdent String
+           | TokNum Int
+           | TokSpace
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+
+tokenize :: String -&gt; [Token]
+tokenize = map tokenizeChar
+
+tokenizeChar :: Char -&gt; Token
+tokenizeChar c | elem c &quot;+-*/&quot; = TokOp (operator c)
+               | isDigit c  = TokNum (digitToInt c)
+               | isAlpha c  = TokIdent [c]
+               | isSpace c  = TokSpace
+               | otherwise  = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+deSpace :: [Token] -&gt; [Token]
+deSpace = filter (\t -&gt; t /= TokSpace) 
+
+main = print $ deSpace $ tokenize &quot; 1 + 4 / x &quot;</code></pre><p>Did you notice something interesting? This program doesn't exhibit any recursion at all. Recursion is hidden in the implementation of higher order functions.</p><p>A good program in any language should take advantage of higher order abstractions. Haskell makes it easier, but even in imperative languages it pays to raise the level of abstraction. For instance, the use of plain loops is now being actively discouraged in modern C++ in favor of range-based <code>for</code> or STL algorithms like <code>foreach</code>, <code>transform</code>, <code>accumulate</code>, etc.; all of which was made considerably easier with the use of lambdas.</p><p><b>Ex 1.</b> Implement the function <code>toInts</code> from the previous tutorial using <code>map</code>. This function takes a string of digits and creates a list of <code>Int</code>s corresponding to these digits.</p><pre><code class="active haskell">import Data.Char -- (digitToInt)
+
+toInts :: String -&gt; [Int]
+toInts = undefined
+
+main = print $ toInts &quot;30750&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+toInts :: String -&gt; [Int]
+toInts = map digitToInt
+
+main = print $ toInts &quot;30750&quot;</code></pre></div><p><b>Ex 2.</b> Implement function <code>squares</code> that takes a list of integers and returns the list of their squares. Use higher order functions and lambdas.</p><pre><code class="active haskell">squares :: [Int] -&gt; [Int]
+squares = undefined
+
+main = print $ squares [1..10]</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">squares :: [Int] -&gt; [Int]
+squares = map (\x -&gt; x * x)
+
+main = print $ squares [1..10]</code></pre></div><p><b>Ex 3.</b> Implement function <code>inCircle2</code> that takes a list of 2-D points and returns only those that fit inside the circle of radius 2.</p><pre><code class="active haskell">type Point = (Double, Double)
+inCircle2 :: [Point] -&gt; [Point]
+inCircle2 = undefined
+
+main = print $ inCircle2 [(0, 0), (2, -2), (1, -1), (1.9, 0.1), (10, 1)]</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">type Point = (Double, Double)
+inCircle2 :: [Point] -&gt; [Point]
+inCircle2 = filter (\(x, y) -&gt; sqrt (x*x + y*y) &lt;= 2.0)
+
+main = print $ inCircle2 [(0, 0), (2, -2), (1, -1), (1.9, 0.1), (10, 1)]</code></pre></div><h2 id="tokenizing-identifiers"><a href="#tokenizing-identifiers">Tokenizing Identifiers</a></h2><p>Unfortunately, recognizing multi-character tokens can't be reduced to <code>map</code> and <code>filter</code>. The former doesn't modify the shape of the list; the latter does, but only by deleting elements. So let's go back to the recursive version of the tokenizer and let's start with multi-character identifiers.</p><p>It's easy to recognize the start of an identifier: it must be an alphabetic character. We even have a predicate <code>isAlpha</code> just for that purpose. This first character can be followed by zero or more alphanumeric characters. There is another predicate, <code>isAlphaNum</code>, for that purpose. Notice that the tokenizer has to change its behavior while processing an identifier: digits inside an identifier are <i>not</i> treated as numbers, as they would normally be.</p><p>First, let's modify the appropriate part of <code>tokenize</code> to look for more than one character:</p><pre><code class="haskell">tokenize (c : cs) 
+    ...
+    | isAlpha c = identifier c cs
+    ...</code></pre><p>The new function <code>identifier</code> takes the already recognized alphabetic character, plus the rest of the input for further processing. We'll run the input through a helper function, <code>alnums</code>, that consumes and aggregates alphanumeric characters. What should we do if there's still more input after the run of anphanumeric characters? We need the function <code>alnums</code> to return the leftover input <i>together</i> with the list of recognized characters -- we'll return a pair of lists:</p><pre><code class="haskell">alnums :: String -&gt; (String, String)</code></pre><p>So here's the implementation of <code>identifier</code> using <code>alnums</code>:</p><pre><code class="haskell">identifier c cs = let (str, cs') = alnums cs in
+                  TokIdent (c:str) : tokenize cs'</code></pre><p>We have to store (and pattern match) the pair returned by <code>alnums</code> in temporary variables, because we'll do different things with different components of the pair. Defining local variables (local binding) is done using the <code>let</code>/<code>in</code> expression. The <code>let</code> part defines local variables, and the <code>in</code> part is an expression that uses those variables. Variables bound in <code>let</code> can be pattern matched. One <code>let</code> statement may contain multiple definitions.</p><pre><code class="haskell">let (pattern1) = expr1
+    (pattern2) = expr2
+    var = expr3
+in
+    expression</code></pre><p>It's important to understand that <code>let</code> is not a statement -- it's an expression. It has a value: the value defined by the <code>in</code> expression.</p><p>The visibility of local variables is restricted to the <code>let</code>/<code>in</code> scope.</p><h3 id="mutual-recursion"><a href="#mutual-recursion">Mutual Recursion</a></h3><p>Notice what <code>identifier</code> does with the unconsumed input, <code>cs'</code>. It recursively calls our main <code>tokenize</code> function. We could have done the same trick as with <code>identifier</code> -- returning both the result and the unprocessed string -- but that would unnecessarily complicate the code for processing other tokens. What I've done instead is to use <i>mutual recursion</i>, where multiple functions recurse into each other.</p><h3 id="accumulating"><a href="#accumulating">Accumulating</a></h3><p>The remaining task is to implement the helper function <code>alnums</code>. This function should accumulate alphanumeric characters into a list. As usual, we will recurse into the input list, but this time we have to carry along the accumulator -- the list of alphanumerics that were recognized so far. The standard trick is to define an auxiliary recursive function, let's call it <code>als</code>, that takes the accumulator along with the rest of the input. To start the recursion, we will pass an empty accumulator to this function.</p><pre><code class="haskell">alnums :: String -&gt; (String, String)
+alnums str = als &quot;&quot; str</code></pre><p>Let's first consider the conditions that terminate recursion. One is the end of input, and the other is a non-alphanumeric character. In both cases <code>als</code> should return the current accumulator paired with the rest (if any) of the input.</p><p>When <code>als</code> recognizes an alphanumeric character, <code>c</code>, it will hold on to it and immediately call <code>als</code> with the rest of the input. This call will return the list of alphanumeric characters,<code>acc'</code>, and the unused tail of the input, <code>cs'</code>. We prepend the retained character to the front of the accumulator, and pair it with the new tail: <code>(c:acc', cs')</code>. Here it is:</p><pre><code class="active haskell">import Data.Char
+
+alnums :: String -&gt; (String, String)
+alnums str = als &quot;&quot; str
+  where
+    als acc [] = (acc, [])
+    als acc (c : cs) | isAlphaNum c = 
+                           let (acc', cs') = als acc cs 
+                           in (c:acc', cs')
+                     | otherwise = (acc, c:cs)
+
+main = print $ alnums &quot;R2D2+C3Po&quot;</code></pre><p>Instead of making <code>als</code> a top-level function, I introduced the new construct, <code>where</code>. Whatever is defined inside the <code>where</code> block -- it could be definitiona of functions or variables -- is visible to the main body of the function but not outside of it. Here, the function <code>als</code> is defined in the <code>where</code> clause. (Conversely, the arguments to the main function are accessible inside the <code>where</code> clause, but we're not using this property in this example).</p><p>I could have used <code>let</code> instead of <code>where</code> to define <code>als</code>, but I think it would be less readable. See for yourself:</p><pre><code class="active haskell">import Data.Char
+
+alnums :: String -&gt; (String, String)
+alnums str = 
+  let
+    als acc [] = (acc, [])
+    als acc (c : cs) | isAlphaNum c = 
+                           let (acc', cs') = als acc cs 
+                           in (c:acc', cs')
+                     | otherwise = (acc, c:cs)
+  in
+    als &quot;&quot; str
+
+main = print $ alnums &quot;R2D2+C3Po&quot;</code></pre><p>In general, though, these two constructs are not exchangeable: <code>let</code>/<code>in</code> can be used anywhere an expression is expected; whereas <code>where</code> is tied to the end of a function definition. Moreover, if you have a function defined using multiple patterns and guards, the definitions in the <code>where</code> clause are going to be visible accross all bodies of the function; whereas <code>let</code> is local to each body.</p><h3 id="folding"><a href="#folding">Folding</a></h3><p>Traversal with accumulation is also a very common pattern and is encapsulated in <code>foldl</code> and <code>foldr</code> (fold left and fold right) -- higher order functions defined in the Prelude. For instance, here's the signature of <code>foldl</code>:</p><pre><code class="haskell">foldl :: (a -&gt; b -&gt; a) -&gt; a -&gt; [b] -&gt; a</code></pre><p><code>a</code> is the type of the accumulator and <code>[b]</code> is the input list type. <code>foldl</code> traverses the list from left to right, calling the function <code>(a -&gt; b -&gt; a)</code> with two arguments: the current accumulator and the current element. The function returns the new accumulator, which is then used in the next iteration.</p><p><b>Ex 4.</b> Use <code>foldl</code> to calculate the sum of squares given a list of doubles.</p><pre><code class="active haskell">squares :: [Int] -&gt; Int
+squares = foldl (\acc x -&gt; ???) 0
+
+main = print $ squares [3, 4, 5]</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">squares :: [Int] -&gt; Int
+squares = foldl (\acc x -&gt; acc + x * x) 0
+
+main = print $ squares [3, 4, 5]</code></pre></div><p><b>Ex 5.</b> The accumulator in <code>foldl</code> can also be a list. With this in mind, implement function <code>rev</code> that reverses a list.</p><pre><code class="active haskell">rev :: [a] -&gt; [a]
+rev = foldl ???
+
+main = print $ rev &quot;spot on&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">rev :: [a] -&gt; [a]
+rev = foldl (\acc a -&gt; a : acc) []
+
+main = print $ rev &quot;spot on&quot;</code></pre><p>This function is available in the Prelude under the name <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=reverse" title="Hoogle search for: reverse"><code>reverse</code></a>.</p></div><p><b>Ex 6.</b> Just as a proof of concept, implement a version of <code>alnums</code> using <code>foldl</code>, even though it's going to be awkward and inefficient.</p><pre><code class="active haskell">import Data.Char
+
+alnums :: String -&gt; (String, String)
+alnums str = undefined
+
+main = do
+    print $ alnums &quot;R2D2+C3Po&quot;
+    print $ alnums &quot;a14&quot;</code></pre><div class="hidden" title="Show hint"><p>Since <code>foldl</code> must consume the whole input list, the accumulator must not only build the result string but also the remaining input string (yes, that's extremely inefficient). It must also keep track of the state: &quot;Am I gathering alphanumeric characters or am I accumulating the tail of the list?&quot; Use the following type as the accumulator:</p><pre><code class="haskell">type Accum = (Bool, String, String)</code></pre><p>Also, since we have to process the input left to right, we'll be appending (rather than prepending) characters to either list. Appending (operator <code>++</code>), is also a very inefficient operation.</p></div><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+type Accum = (Bool, String, String)
+
+alnums :: String -&gt; (String, String)
+alnums str = let (_, als, rest) = foldl f (True, [], []) str
+             in (als, rest)
+  where
+    f (True, als, rest) c  | isAlphaNum c = (True, als ++ [c], rest)
+                           | otherwise = (False, als, [c])
+    f (False, als, rest) c = (False, als, rest ++ [c])
+
+main = do
+    print $ alnums &quot;R2D2+C3Po&quot;
+    print $ alnums &quot;a14&quot;</code></pre><p>It's easy to figure out that this implementation runs in N² time, where N is the size of the whole input. Clearly, this is not recommended.</p></div><h2 id="tokenizing-numbers"><a href="#tokenizing-numbers">Tokenizing Numbers</a></h2><p>The tokenizer for numbers is very similar to the tokenizer for identifiers. As before, we'll use mutual recursion:</p><pre><code class="haskell">tokenize (c : cs) 
+    ...
+    | isDigit c = number c cs
+    
+number c cs = 
+   let (digs, cs') = digits cs in
+   TokNum (read (c : digs)) : tokenize cs'</code></pre><p>I used <code>read</code> to convert a string to an <code>Int</code>.</p><p>The function <code>digits</code> is the equivalent of <code>alnums</code>, except that it gathers digits rather than alphanumeric characters:</p><pre><code class="haskell">digits :: String -&gt; (String, String)
+digits str = digs &quot;&quot; str
+  where
+    digs :: String -&gt; String -&gt; (String, String)
+    digs acc [] = (acc, [])
+    digs acc (c : cs) | isDigit c = 
+                            let (acc', cs') = digs acc cs 
+                            in (c:acc', cs')
+                      | otherwise = (acc, c:cs)</code></pre><p>In fact, if you compare the two functions, they only differ in one place: The predicate <code>isAlphaNum</code> is replaced by <code>isDigit</code>. This clearly calls for refactoring: We should make the predicate an argument to a more general (higher order) function. Let's call this function <code>span</code>:</p><pre><code class="active haskell">import Data.Char
+import Prelude hiding (span)
+-- show
+span :: (a -&gt; Bool) -&gt; [a] -&gt; ([a], [a])
+span pred str = 
+  let -- define a helper function 'spanAcc'
+    spanAcc acc [] = (acc, [])
+    spanAcc acc (c : cs) | pred c = 
+                             let (acc', cs') = spanAcc acc cs 
+                             in (c:acc', cs')
+                         | otherwise = (acc, c:cs)
+  in
+    spanAcc [] str
+
+main = print $ span isAlphaNum &quot;R2D2 + C3Po&quot;</code></pre><p><code>span</code> is so useful that it's included in the Prelude. We'll use it in the final version of the tokenizer, which follows.</p><h2 id="the-tokenizer"><a href="#the-tokenizer">The Tokenizer</a></h2><pre><code class="active haskell">import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokIdent String
+           | TokNum Int
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier c cs = let (str, cs') = span isAlphaNum cs in
+                  TokIdent (c:str) : tokenize cs'
+
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+main = do
+    print $ tokenize &quot;12 + 24 / x1&quot;</code></pre><p>In the next installment we are going to implement the parser. We'll be using the results of the simple exercise below, so try to work on it, or just peek at the solution.</p><p><b>Ex 7.</b> Extend the tokenizer above to recognize more tokens: <code>LParen</code> and <code>RParen</code> corresponding to <code>(</code> and <code>)</code>; as well as <code>TokAssign</code> for <code>=</code>.</p><div class="hidden" title="Show solution"><p>This is the new <code>Token</code> definition:</p><pre><code class="haskell">data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)</code></pre><p>These are the changes to <code>tokenize</code>:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]</code></pre></div></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/basics-of-haskell/7-tokenizer-higher-order-functions';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

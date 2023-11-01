@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html><head><title>Sending even more money - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/chowells79">chowells79</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/chowells79/even-more-money">Sending even more money</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Sending even more money</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 May 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/chowells79">chowells79</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5133/978be978dba3289110837e0ceaed520ef8263abe">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/chowells79/types-not-tutorials">Next content: Programming With Types, Not Tutorials</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/chowells79">See all content by chowells79</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>A short while ago I came across <a href="http://blog.jle.im/entry/unique-sample-drawing-searches-with-list-and-statet">Justin Le's take on the SEND+MORE=MONEY problem</a>.
+It describes a clever way to model nondeterministic selection-without-replacement searches with <code>StateT [a] [] a</code>.
+I liked the idea a lot, started playing with it, and immediately slammed into just <i>how</i> slow the naive search is.</p><p>It got me thinking about my final year at the University of Oregon.
+I was on one of two (or was it three?) teams from the university to attend the Pacific Northwest regionals for the ACM Intercollegiate Programming Competition.
+We were taking the train up the coast to the competition site and our coach, Eugene Luks, kept mentioning that brute-force searches were often good enough for combinatorial searches if the branches were pruned as early as possible.
+This turned out to be important.
+One of the problems in the competition had to do with finding permutations of numbers on a clock face such that no consecutive set of three had a sum that exceeded a given total.
+I worked on that problem for my team, and the solution I put together was fast enough to complete the search in the time allotted.
+Professor Luks referred to the search pattern as &quot;branch-and-bound&quot;, and I've always remembered that name as apt.</p><p>It turns out the nondeterministic search Justin Le provided is a fully capable implementation of branch-and-bound searching for selection-without-replacement problems.
+The end of his article showed an example of using <code>mfilter</code> to prune the tree early a bit.
+But even that variant wasn't all that fast, so I decided to look into the problem further.</p><p>The first thing I wanted to figure out was how to count the number of selection operations being performed in the course of a search.
+I immediately went for throwing a <code>Writer (Sum Int)</code> into the works to track the count.
+I always mess up nesting transformers a bit, and this was no exception.
+I eventually sorted it out when I remembered I wanted to count the selections in the entire search, not just in a branch.
+I ended up with a stack like <code>StateT [a] (ListT (Writer (Sum Int))) b</code>.
+I was slightly worried about <code>ListT</code>, but I checked the <a href="https://hackage.haskell.org/package/transformers-0.4.3.0/docs/Control-Monad-Trans-List.html#t:ListT">validity precondition</a>.
+<code>Writer</code> is a commutative monad whenever the underlying monoid is commutative, and <code>Sum Int</code> is commutative.
+And then I decided to test it.</p><pre><code class="active haskell">import Control.Monad.State.Strict
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Control.Monad.Writer.Strict
+import Control.Arrow(second)
+
+-- CS = Counting Selections
+type CS a b = StateT [a] (ListT (Writer (Sum Int))) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    xs &lt;- get
+    lift . lift . tell . Sum  $! length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = second getSum . runWriter . runListT $ evalStateT a xs
+
+main :: IO ()
+main = print $ runCS select [1..3]</code></pre><p>So far, so good.
+It selected each element of the input list in turn, for a total of 3 selections
+So I tested another couple variants.</p><pre><code class="active haskell">-- /show
+import Control.Monad.State.Strict
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Control.Monad.Writer.Strict
+import Control.Arrow(second)
+
+-- CS = Counting Selections
+type CS a b = StateT [a] (ListT (Writer (Sum Int))) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    xs &lt;- get
+    lift . lift . tell . Sum  $! length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = second getSum . runWriter . runListT $ evalStateT a xs
+-- show
+main :: IO ()
+main = do
+    print $ runCS (liftM2 (,) select select) [1..3]
+    print $ runCS (liftM3 (,,) select select select) [1..3]</code></pre><p>Huh.
+I was promptly confused.
+The output lists were exactly what I expected.
+The selection counts were not.
+I spent an hour chasing what I had done wrong.
+Eventually, I found the problem — and it was in the worst place.
+My expected results were wrong.
+The code was correct!</p><p>I expected <code>6</code> as the result for both of those, because there were 6 elements in the list.
+But that's not what I was actually counting.
+I was counting the number of selection operations taking place.
+It's the difference between counting the number of leaves in a tree and counting the number of nodes in the tree.
+There is some relation between the two numbers, sure — but they're not the same.</p><p>Properly embarassed that incorrect expectations had caused me to spend an hour looking for bugs in correct code, I proceeded to blunder directly into an even more embarrassing problem.
+I wasn't fully happy with the performance of the code.
+I mean, I expected it to be slow.
+I didn't expect just <i>how</i> ridiculously slow it would be.
+I wasn't sure if it was buggy-slow, or just appropriately-slow for the amount of work being added over Justin Le's code.
+So I grabbed a heap profile and took a look.
+Sure enough, the heap use graph was a giant triangle consisting mostly of thunks.
+I'd recently dismissed space leaks as not a real issue with experience.
+Sure, they happen from time to time, but when you discover you have one, they're easy to fix.
+And then I stared at this one cluelessly.
+It was something of a foot-in-mouth moment, even if the only person who was aware of my silliness was me.</p><p>I eventually tracked the issue to <code>Writer</code> not keeping its accumulator evaluated, even when imported as <code>Control.Monad.Writer.Strict</code>.
+I asked about it on IRC, and was directed to a <a href="https://mail.haskell.org/pipermail/libraries/2013-March/019528.html">mailing list post</a> on the topic from Gabriel Gonzalez, pointing out the problem, the underlying cause, and suggesting a solution.</p><p>I replaced my use of <code>Writer (Sum Int)</code> with <code>State Int</code>.
+I suffered a bit of anguish over the fact that I was losing my static guarantee that <code>ListT</code> was giving me a valid <code>Monad</code> instance, but I found solace in the fact that I was never branching on the current state, so I wasn't breaking any monad laws.</p><p>And that <i>mostly</i> flattened the heap profile graph.
+But there was still a definite increasing pattern of there being a ton of <code>[]</code> constructors in the heap profile.
+So I looked at the <code>Monad</code> instance for <code>ListT</code>, and found that its strictness depends on the strictness of the underlying <code>(&gt;&gt;=)</code> operation, of course.
+And then I smacked my forehead and stopped importing <code>State</code> strictly.
+Yeah - space leaks are caused by inappropriate strictness, too.</p><p>Finally, the heap profile graph was flat.
+Ok, the changes required were small, but tracking them down was a problem.
+I had to sleep on it to start tracking down the problematic location.
+Space leaks are still not too hard to fix, once you pin down their <i>exact</i> cause!
+(Yeah, I'm challenging fate again..  But how will I ever get better at solving tough space leaks if I don't keep running into them?)</p><p>So I was finally ready to experiment with bounding the search space better.</p><pre><code class="active haskell">import Control.Monad.State
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Data.List (foldl')
+
+type CS a b = StateT [a] (ListT (State Int)) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    i &lt;- lift . lift $ get
+    xs &lt;- get
+    lift . lift . put $! i + length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = flip runState 0 . runListT $ evalStateT a xs
+
+fromDigits :: [Int] -&gt; Int
+fromDigits = foldl' (\x y -&gt; 10 * x + y) 0
+
+sendMoreMoney :: ([(Int, Int, Int)], Int)
+sendMoreMoney = flip runCS [0..9] $ do
+    [s,e,n,d,m,o,r,y] &lt;- replicateM 8 select
+    let send  = fromDigits [s,e,n,d]
+        more  = fromDigits [m,o,r,e]
+        money = fromDigits [m,o,n,e,y]
+    guard $ s /= 0 &amp;&amp; m /= 0 &amp;&amp; send + more == money
+    return (send, more, money)
+
+main :: IO ()
+main = do
+    putStrLn &quot;This is going to take a while... But it will finish.&quot;
+    print sendMoreMoney</code></pre><p>Well.
+That was...
+Slow.</p><p>The problem is that it's doing a lot of selection.
+I mean, look at that number.
+Over 2.6 million selections!
+Yes, that's quite a lot more than <code>10!/2!</code>.
+The number of permuations only counts the <i>leaves</i> of the selection tree.
+Once again, the full tree is a fair bit bigger than just the number of leaves it has.</p><p>The closer to the root things get pruned from the selection tree, the smaller the tree gets.
+One of the constraints in the problem is that the initial digits, represented by <code>s</code> and <code>m</code>, can't be <code>0</code>.
+Let's prune those out.</p><pre><code class="active haskell">-- /show
+import Control.Monad.State
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Data.List (foldl')
+
+type CS a b = StateT [a] (ListT (State Int)) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    i &lt;- lift . lift $ get
+    xs &lt;- get
+    lift . lift . put $! i + length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = flip runState 0 . runListT $ evalStateT a xs
+
+fromDigits :: [Int] -&gt; Int
+fromDigits = foldl' (\x y -&gt; 10 * x + y) 0
+
+-- show
+sendMoreMoney :: ([(Int, Int, Int)], Int)
+sendMoreMoney = flip runCS [0..9] $ do
+    s &lt;- mfilter (/= 0) select
+    m &lt;- mfilter (/= 0) select
+    [e,n,d,o,r,y] &lt;- replicateM 6 select
+    let send  = fromDigits [s,e,n,d]
+        more  = fromDigits [m,o,r,e]
+        money = fromDigits [m,o,n,e,y]
+    guard $ s /= 0 &amp;&amp; m /= 0 &amp;&amp; send + more == money
+    return (send, more, money)
+-- /show
+main :: IO ()
+main = do
+    putStrLn &quot;This is a bit faster. A tiny bit.&quot;
+    print sendMoreMoney</code></pre><p>That didn't actually help that much.
+Not nearly enough to make it fast.
+Apparently removing only one top-level branch and one child from each of the remaing top-level branches isn't actually good enough.</p><p>But there's more structure to exploit in the problem.
+For instance, the partial sums need to work out.
+<code>d + e</code> needs to give you <code>y</code>...
+More or less.
+Let's try that out.</p><pre><code class="active haskell">-- /show
+import Control.Monad.State
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Data.List (foldl')
+
+type CS a b = StateT [a] (ListT (State Int)) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    i &lt;- lift . lift $ get
+    xs &lt;- get
+    lift . lift . put $! i + length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = flip runState 0 . runListT $ evalStateT a xs
+
+fromDigits :: [Int] -&gt; Int
+fromDigits = foldl' (\x y -&gt; 10 * x + y) 0
+
+-- show
+sendMoreMoney :: ([(Int, Int, Int)], Int)
+sendMoreMoney = flip runCS [0..9] $ do
+    [e,d,y] &lt;- replicateM 3 select
+    guard $ (d + e) `mod` 10 == y
+    [s,n,m,o,r] &lt;- replicateM 5 select
+    let send  = fromDigits [s,e,n,d]
+        more  = fromDigits [m,o,r,e]
+        money = fromDigits [m,o,n,e,y]
+    guard $ s /= 0 &amp;&amp; m /= 0 &amp;&amp; send + more == money
+    return (send, more, money)
+-- /show
+main :: IO ()
+main = do
+    putStrLn &quot;Now this is more like it.&quot;
+    print sendMoreMoney</code></pre><p>Finally, something reasonable!
+At the third level of the tree, this prunes out all but one branch of each subtree.
+That's just about a 90% reduction in size of the search tree.
+Not bad.</p><p>I can do better.</p><pre><code class="active haskell">-- /show
+import Control.Monad.State
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Data.List (foldl')
+
+type CS a b = StateT [a] (ListT (State Int)) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    i &lt;- lift . lift $ get
+    xs &lt;- get
+    lift . lift . put $! i + length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = flip runState 0 . runListT $ evalStateT a xs
+
+fromDigits :: [Int] -&gt; Int
+fromDigits = foldl' (\x y -&gt; 10 * x + y) 0
+
+-- show
+sendMoreMoney :: ([(Int, Int, Int)], Int)
+sendMoreMoney = flip runCS [0..9] $ do
+    [d,e,y] &lt;- replicateM 3 select
+    guard $ (d + e) `mod` 10 == y
+    [n,r] &lt;- replicateM 2 select
+    guard $ (fromDigits [n,d] + fromDigits [r,e]) `mod` 100 == fromDigits [e,y]
+    [s,m,o] &lt;- replicateM 3 select
+    let send  = fromDigits [s,e,n,d]
+        more  = fromDigits [m,o,r,e]
+        money = fromDigits [m,o,n,e,y]
+    guard $ s /= 0 &amp;&amp; m /= 0 &amp;&amp; send + more == money
+    return (send, more, money)
+-- /show
+main :: IO ()
+main = do
+    putStrLn &quot;Whoa.&quot;
+    print sendMoreMoney</code></pre><p>And...  Even better?</p><pre><code class="active haskell">-- /show
+import Control.Monad.State
+import Control.Monad.Trans.List
+import Control.Monad.Morph
+import Data.List (foldl')
+
+type CS a b = StateT [a] (ListT (State Int)) b
+
+select' :: [a] -&gt; [(a, [a])]
+select' [] = []
+select' (x:xs) = (x, xs) : [(y, x:ys) | (y, ys) &lt;- select' xs]
+
+select :: CS a a
+select = do
+    i &lt;- lift . lift $ get
+    xs &lt;- get
+    lift . lift . put $! i + length xs
+    hoist (ListT . return) (StateT select')
+
+runCS :: CS a b -&gt; [a] -&gt; ([b], Int)
+runCS a xs = flip runState 0 . runListT $ evalStateT a xs
+
+fromDigits :: [Int] -&gt; Int
+fromDigits = foldl' (\x y -&gt; 10 * x + y) 0
+
+-- show
+sendMoreMoney :: ([(Int, Int, Int)], Int)
+sendMoreMoney = flip runCS [0..9] $ do
+    [d,e,y] &lt;- replicateM 3 select
+    guard $ (d + e) `mod` 10 == y
+    [n,r] &lt;- replicateM 2 select
+    guard $ (fromDigits [n,d] + fromDigits [r,e]) `mod` 100 == fromDigits [e,y]
+    o &lt;- select
+    guard $ (fromDigits [e,n,d] + fromDigits [o,r,e]) `mod` 1000 == fromDigits [n,e,y]
+    [s,m] &lt;- replicateM 2 select
+    let send  = fromDigits [s,e,n,d]
+        more  = fromDigits [m,o,r,e]
+        money = fromDigits [m,o,n,e,y]
+    guard $ s /= 0 &amp;&amp; m /= 0 &amp;&amp; send + more == money
+    return (send, more, money)
+-- /show
+main :: IO ()
+main = print sendMoreMoney</code></pre><p>So yeah.
+These optimizations work.
+Really well, in fact.</p><p>But something's just not right.
+They're mechanical, tedious, and ugly to do by hand.
+And even worse, they're error-prone.
+When I was putting these illustrations together, I kept getting empty result lists because I messed up pattern-matching the <code>replicateM</code>s.</p><p>Whenever there's a problem that's mechanical, tedious, and error-prone, that suggests automation.
+What's the structure of the problem here?
+Well, I have a couple ideas, but I haven't got them down into code just yet.
+But this is getting awfully long, so it's time to just call this part 1.
+I'll write part 2 as soon as I've figured out how to automate this process in an interesting way.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/chowells79/even-more-money';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

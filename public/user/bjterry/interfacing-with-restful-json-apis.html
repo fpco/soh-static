@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html><head><title>Interfacing with RESTful JSON APIs - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bjterry">BJ Terry</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bjterry/interfacing-with-restful-json-apis">Interfacing with RESTful JSON APIs</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Interfacing with RESTful JSON APIs</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Aug 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bjterry">BJ Terry</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/7057/bd95ec344e93faa91fd320e99b7701371170a5d0">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bjterry">See all content by BJ Terry</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#create-your-package">Create Your Package</a></li><li><a href="#representing-api-keys">Representing API Keys</a></li><li><a href="#building-the-endpoint-url-and-other-types">Building the Endpoint URL and Other Types</a></li><li><a href="#subscribeuser--version-0">subscribeUser, Version 0</a></li><li><a href="#creating-json-instances">Creating JSON Instances</a></li><li><a href="#better-error-handling">Better Error Handling</a></li><li><a href="#trying-it-out">Trying it Out</a></li><li><a href="#create-query-function">Create query Function</a></li><li><a href="#using-readert">Using ReaderT</a></li><li><a href="#dealing-with-mailchimp-idiosyncrasies">Dealing with Mailchimp Idiosyncrasies</a></li><li><a href="#adding-logging">Adding Logging</a></li><li><a href="#mailchimpt-monad-transformer">MailchimpT Monad Transformer</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>The world is full of RESTful JSON APIs that are of interest to developers. While you can often use them in an ad hoc manner if you only need a few features for your Haskell application, sometimes you will be using so much of the API that a complete Haskell interface becomes useful. This tutorial will help you build packages to interface with RESTful JSON APIs.  For the sake of the tutorial will implement an interface for the Mailchimp API, which allows developers to manage e-mail marketing mailing lists. By the end of the tutorial you should be well-prepared to create your own packages. This short tutorial assumes an intermediate understanding of Haskell.</p><h1 id="create-your-package"><a href="#create-your-package">Create Your Package</a></h1><p>Create a folder for your package. Initialize with cabal init.</p><pre><code>mkdir mailchimp
+cabal init
+# Select default package name, package version, choose your license, etc.</code></pre><p>Your package will be created with a basic .cabal file. I recommend adding declarations for the OverloadedStrings GHC extension right out of the gate, as any useful library will make heavy use of the Data.Text datatype. OverloadedStrings allows you to use literal strings in your Haskell code as Data.Text (and a few other types) rather than as String types, which are very inefficient.</p><h1 id="representing-api-keys"><a href="#representing-api-keys">Representing API Keys</a></h1><p>The first step to supporting the Mailchimp API is parsing the the API key to build request URLs. In Mailchimp's API, unlike many others, the API key includes the datacenter within it, which must be extracted for the URL. We use the following type to represent an API key, which we will put in the Web.Mailchimp module (the complete source for the mailchimp package is <a href="https://github.com/BJTerry/mailchimp">on github</a>:</p><pre><code class="haskell">-- | Represents a mailchimp API key, which implicitly includes a datacenter.
+data MailchimpApiKey = MailchimpApiKey
+  { makApiKey :: Text -- Full API key including datacenter
+  , makDatacenter :: Text -- 3-letter datacenter code
+  }</code></pre><p>While we could require users of the package to pass properly constructed MailchimpApiKeys to the library, we will probably want to make it easy to parse the API keys as provided by Mailchimp, in case someone wants to load keys dynamically. Haskell Platform includes a parser (Parsec) that makes this simple. One could also use regular expressions, which are likewise provided by the Haskell Platform. A full discussion of how to use either of these tools are outside of the scope of this tutorial, but you can find examples of each in <a href="http://book.realworldhaskell.org/">Real World Haskell</a>.</p><pre><code class="haskell">-- | Create a MailchimpApiKey from Text
+mailchimpKey :: Text -&gt; Maybe MailchimpApiKey
+mailchimpKey apiKey = 
+  case parse parseKey &quot;(unknown)&quot; apiKey of
+    Left _ -&gt; Nothing
+    Right (_, dcString) -&gt;
+      Just MailchimpApiKey 
+        { makApiKey = apiKey 
+        , makDatacenter = pack dcString
+        }
+
+parseKey :: GenParser st (String, String)
+parseKey = do
+  key &lt;- many1 hexDigit
+  _ &lt;- char '-'
+  dc &lt;- many1 alphaNum
+  return (key, dc)</code></pre><h1 id="building-the-endpoint-url-and-other-types"><a href="#building-the-endpoint-url-and-other-types">Building the Endpoint URL and Other Types</a></h1><p>With any normal JSON API you will need a function that builds the endpoint URL for the method you are calling. URLs in Mailchimp's JSON API have the form <code>https://*dc*.api.mailchimp.com/2.0/*section*/*method*.json</code>:</p><pre><code class="haskell">-- | Builds the mailchimp endpoint URL
+apiEndpointUrl :: Text -&gt; Text -&gt; Text -&gt; Text
+apiEndpointUrl datacenter section method = 
+  Data.Text.concat [&quot;https://&quot;, datacenter, &quot;.api.mailchimp.com/2.0/&quot;, 
+      section, &quot;/&quot;, method, &quot;.json&quot;]</code></pre><p>We will start by supporting the the &quot;lists/subscribe&quot; method of the API, which subscribes a user to a Mailchimp mailing list. It may be helpful to reference the Mailchimp <a href="http://apidocs.mailchimp.com/api/2.0/lists/subscribe.php">documentation</a> for this method. (Although during the creation of this tutorial I found several errors in the documentation. I imagine you will find the same with APIs you are accessing!) We create the Web.Mailchimp.Lists module which will hold the following types:</p><pre><code class="haskell">-- | Represents an individual mailing list
+newtype ListId = ListId {unListId :: Text}
+  deriving (Show, Eq)
+    
+-- | Represents one of the canonical ways of identifying subscribers
+data EmailId = Email Text
+             | EmailUniqueId Text
+             | ListEmailId Text
+  deriving (Show, Eq)
+
+-- | Represents an individual merge variable    
+type MergeVarsItem = Pair -- From the Aeson library.
+
+-- | The type of e-mail your user will receive
+data EmailType = EmailTypeHTML
+               | EmailTypeText</code></pre><p>E-mail addresses in the Mailchimp API can always be sent in one of three forms. As an e-mail address, as an ID associated with the e-mail address, or as the ID of a particular subscriber within a list. MergeVarsItem represents data associated with the user, such as FNAME (for first name) or LNAME (for last name) or one of a number of special purpose variables. These are used to insert user data into e-mails that you are sending out. We use the Pair type from the Aeson JSON library to represent them, which is just a tuple of <code>(Text, Value)</code>, and Value is a JSON object, string, etc., because, while not frequently used, Mailchimp has some special-purpose merge variables that can be sent as JSON objects.</p><h1 id="subscribeuser--version-0"><a href="#subscribeuser--version-0">subscribeUser, Version 0</a></h1><p>We can now write a simple function to perform the lists/subscribe request. It's helpful to write a specific case before deciding how to move up to a higher level of abstraction. In many cases, such as if you only need to support a single JSON method, you can pretty much stop after writing one function.</p><pre><code class="haskell">-- | The result of calling subscribeUser. Provides three ways of  
+--   identifying the user for subsequent calls.
+data EmailResult = EmailResult { erEmail :: EmailId
+                               , erEmailUniqueId :: EmailId
+                               , erListEmailId :: EmailId
+                               }
+  deriving (Show, Eq)
+
+subscribeUser :: MailchimpApiKey 
+              -&gt; ListId 
+              -&gt; EmailId 
+              -&gt; Maybe [MergeVarsItem] 
+              -&gt; Maybe EmailType
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; IO EmailResult
+subscribeUser apiKey 
+              listId 
+              emailId 
+              mergeVars 
+              emailType 
+              doubleOptin 
+              updateExisting 
+              replaceInterests 
+              sendWelcome = runResourceT $ do
+  initReq &lt;- parseUrl $ unpack $ apiEndpointUrl (makDatacenter apiKey) 
+    &quot;lists&quot; &quot;subscribe&quot;
+  let requestJson = object [ &quot;apikey&quot; .= makApiKey apiKey
+                           , &quot;id&quot; .= unListId listId
+                           , &quot;email&quot; .= emailId
+                           , &quot;merge_vars&quot; .= fmap object mergeVars
+                           , &quot;email_type&quot; .= emailType
+                           , &quot;double_optin&quot; .= doubleOptin
+                           , &quot;update_existing&quot; .= updateExisting
+                           , &quot;replace_interests&quot; .= replaceInterests
+                           , &quot;send_welcome&quot; .= sendWelcome
+                           ]
+  let req = initReq { requestBody = RequestBodyLBS $ encode requestJson 
+                    , method = methodPost
+                    }
+  man &lt;- liftIO $ newManager def 
+  response &lt;- httpLbs req man 
+  let meResult = decode $ responseBody response
+  case meResult of
+    Just emailResult -&gt; return emailResult
+    Nothing -&gt; liftIO $ mzero</code></pre><p>Now, this version has a couple of problems (and doesn't compile), but it's a good first try. <code>EmailResult</code> is just a record to wrap up the returned value from the &quot;lists/subscribe&quot; method call. Mailchimp always returns subscriber info with all three representations. A typical response might look like <code>{&quot;email&quot;:&quot;example@example.com&quot;,&quot;euid&quot;:&quot;abc123&quot;,&quot;leid&quot;:&quot;abc123&quot;}</code>.</p><p>To actually perform the request, we use the <a href="http://hackage.haskell.org/package/http-conduit">http-conduit package</a>. That package requires everything be run in a <a href="http://hackage.haskell.org/packages/archive/resourcet/latest/doc/html/Control-Monad-Trans-Resource.html#t:ResourceT">ResourceT</a> monad transformer (which manages creating and freeing resources, such as network connections), so the function starts with runResourceT. Within this context (<code>ResourceT IO</code>), any actions in the IO monad must be called with <a href="http://hackage.haskell.org/packages/archive/transformers/latest/doc/html/Control-Monad-IO-Class.html#t:MonadIO">liftIO</a>.</p><p>First, we parse the endpoint URL to create the intial request (initReq). Then we set the request options to include our request body and HTTP method. Creating the request body uses the <a href="http://hackage.haskell.org/package/aeson">Aeson</a> library to create and encode JSON using the object, encode and decode functions. <code>httpLbs</code> (from http-conduit) is the function that actually performs the request, and we are going to expect back a result of <code>Maybe EmailResult</code>. If we couldn't parse the response we will fail with an error (<code>mzero</code>).</p><h1 id="creating-json-instances"><a href="#creating-json-instances">Creating JSON Instances</a></h1><p>The first problem with the code is that we currently don't know how to convert <code>EmailId</code> and <code>EmailType</code> to JSON, and we don't know how to convert <code>EmailResult</code> from JSON. We will use the Aeson library to create instances that tell Haskell how to do these conversions. The instances look like this:</p><pre><code class="haskell">instance ToJSON EmailType where
+  toJSON EmailTypeHTML = &quot;html&quot;
+  toJSON EmailTypeText = &quot;text&quot;
+
+instance ToJSON EmailId where
+  toJSON (Email t) = object [&quot;email&quot; .= t]
+  toJSON (EmailUniqueId t) = object [&quot;euid&quot; .= t]
+  toJSON (ListEmailId t) = object [&quot;leid&quot; .= t]
+
+instance FromJSON EmailResult where
+  parseJSON (Object v) = do
+    email &lt;- v .: &quot;email&quot;
+    euid &lt;- v .: &quot;euid&quot;
+    leid &lt;- v .: &quot;leid&quot;
+    return $ EmailResult (Email email) (EmailUniqueId euid) (ListEmailId leid)
+  parseJSON _ = mzero 
+</code></pre><p>The <code>ToJSON</code> instances simply take one of their respective values and create the appropriate JSON objects. <code>FromJSON</code> is a little more complex. The <code>parseJSON</code> function of <code>FromJSON</code> runs in the <code>Parser</code> monad. Within <code>Parser</code>, the <code>(.:)</code> operator accesses object values by key, allowing us to construct the final value. The <code>parseJSON</code> instance function can parse any type of JSON value (not only objects, but integers, arrays, etc.) but anything other than an object is not an <code>EmailReturn</code>, so we call mzero. If one were reading a field that had a <code>Maybe</code> type (i.e. an optional field), one would instead use the <code>(.:?)</code> operator from Aeson.</p><p>While Aeson includes template haskell functions to create <code>ToJSON</code> and <code>FromJSON</code> instances from record definitions for you, beware that the created instances for <code>FromJSON</code> in the current version on Hackage (0.6.1) have a couple major failings when it comes to RESTful JSON APIs. First, it will fail to parse objects that have <i>extra</i> keys that do not appear in your records. Second, it requires that optional <code>Maybe</code> fields <i>actually be present</i> in the parsed JSON with <code>null</code> value, otherwise the parse fails. The function to derive <code>ToJSON</code> instances also adds <code>null</code> entries for <code>Nothing</code> values, which would be fine in most APIs but actually causes problems in Mailchimp. A future version is intended to address some of these problems, but is not on Hackage yet.</p><p>More generally, APIs are usually being served in dynamic programming languages, and not from Aeson. There will be lots of edge cases that aren't handled in the way you expect, along with errors. For example, Mailchimp in some instances serializes numbers as JSON strings rather than integers, and it sometimes returns empty lists instead of null values. The only way to know is with extensive unit testing of the API (you can see some example unit tests of Mailchimp in the repository, though they are far from complete).</p><h1 id="better-error-handling"><a href="#better-error-handling">Better Error Handling</a></h1><p>The next issue with <code>subscribeUser</code> is that it doesn't currently handle errors gracefully. When the Mailchimp API signals an error, it always returns an HTTP status other than 200. Using <code>httpLbs</code>, this will immediately cause an <code>HttpException</code> to be thrown. We would rather throw <code>Exception</code> types specific to the Mailchimp API so that users of our library can handle them as appropriate for their application.</p><p>Let's create a type to represent API exceptions in Web.Mailchimp.Client. For now we will just include the method-specific error for this particular method in addition to the API-wide errors.</p><pre><code class="haskell">data MailchimpError = InvalidApiKey Int Text Text
+                    | UserDisabled Int Text Text
+                    | UserInvalidRole Int Text Text
+                    | TooManyConnections Int Text Text
+                    | UserUnderMaintenance Int Text Text
+                    | UserInvalidAction Int Text Text
+                    | ValidationError Int Text Text
+                    | ListDoesNotExist Int Text Text
+                    -- Undocumented error
+                    | ListAlreadySubscribed Int Text Text
+                    | OtherMailchimpError Int Text Text
+  deriving (Typeable, Show, Eq)
+
+instance Exception MailchimpError -- Requires Typeable
+
+instance FromJSON MailchimpError where
+  parseJSON (Object v) = do
+    status &lt;- v .: &quot;status&quot;
+    when (status /= (&quot;error&quot; :: Text)) mzero
+    name &lt;- v .: &quot;name&quot;
+    code &lt;- v .: &quot;code&quot;
+    message &lt;- v .: &quot;error&quot; -- Documentation shows this is under the 
+                            -- &quot;message&quot; key, but it is incorrect
+    return $ (errConstructor name) code name message
+   where
+      errConstructor name = case (name :: Text) of
+        &quot;Invalid_ApiKey&quot; -&gt; InvalidApiKey 
+        &quot;User_Disabled&quot; -&gt; UserDisabled 
+        &quot;User_InvalidRole&quot; -&gt; UserInvalidRole 
+        &quot;Too_Many_Connections&quot; -&gt; TooManyConnections 
+        &quot;User_UnderMaintenance&quot; -&gt; UserUnderMaintenance 
+        &quot;User_InvalidAction&quot; -&gt; UserInvalidAction 
+        &quot;ValidationError&quot; -&gt; ValidationError 
+        &quot;List_DoesNotExist&quot; -&gt; ListDoesNotExist 
+        &quot;List_AlreadySubscribed&quot; -&gt; ListAlreadySubscribed
+        _ -&gt; OtherMailchimpError 
+  parseJSON _ = mzero
+</code></pre><p><code>Exception</code> is defined in <a href="http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Exception-Base.html">Control.Exception.Base</a> and will allow us to throw and catch MailchimpErrors. Next, let's revise <code>subscribeUser</code> to include our error handling code:</p><pre><code class="haskell">subscribeUser :: MailchimpApiKey 
+              -&gt; ListId 
+              -&gt; EmailId 
+              -&gt; Maybe [MergeVarsItem] 
+              -&gt; Maybe EmailType
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; IO EmailReturn
+subscribeUser apiKey 
+              listId 
+              emailId 
+              mergeVars 
+              emailType 
+              doubleOptin 
+              updateExisting 
+              replaceInterests 
+              sendWelcome = runResourceT $ do
+  initReq &lt;- parseUrl $ unpack $ apiEndpointUrl (makDatacenter apiKey) 
+    &quot;lists&quot; &quot;subscribe&quot;
+  let requestJson = object [ &quot;apikey&quot; .= makApiKey apiKey
+                           , &quot;id&quot; .= unListId listId
+                           , &quot;email&quot; .= emailId
+                           , &quot;merge_vars&quot; .= fmap object mergeVars
+                           , &quot;email_type&quot; .= emailType
+                           , &quot;double_optin&quot; .= doubleOptin
+                           , &quot;update_existing&quot; .= updateExisting
+                           , &quot;replace_interests&quot; .= replaceInterests
+                           , &quot;send_welcome&quot; .= sendWelcome
+                           ]
+  let req = initReq { requestBody = RequestBodyLBS $ encode requestJson 
+                    , method = methodPost
+                    }
+  man &lt;- liftIO $ newManager def 
+  response &lt;- catch (httpLbs req man) 
+    (\e -&gt; 
+      case e :: HttpException of
+        StatusCodeException _ headers _ -&gt; do
+          let (mResponse :: Maybe MailchimpError) = fromStrict `fmap` 
+                (lookup &quot;X-Response-Body-Start&quot; headers) &gt;&gt;= decode
+          maybe (throwIO e) id (throwIO `fmap` mResponse)
+        _ -&gt; throwIO e)
+  let mResult = decode $ responseBody response
+  case mResult of
+    Just emailResult -&gt; return emailResult
+    Nothing -&gt; throwIO $ OtherMailchimpError (-1) &quot;ParseError&quot; 
+                           &quot;Could not parse result JSON from Mailchimp&quot;    
+</code></pre><p>Because we are in the <code>ResourceT IO</code> monad, we use <code>throwIO</code> and <code>catch</code> from <a href="http://hackage.haskell.org/packages/archive/lifted-base/latest/doc/html/Control-Exception-Lifted.html">lifted-base</a>. They work the same as their analogs in base, but are generalized to a wider variety of monadic contexts. When <code>httpLbs</code> gets a non-200 result, it throws a <code>StatusCodeException</code>, which we catch. Mailchimp's API sends the response body of errors in the X-Response-Body-Start header of the result, so we attempt to decode that and if possible, we throw the appropriate <code>MailchimpError</code>, otherwise we throw the original <code>HttpException</code>. We will also throw an <code>OtherMailchimpError</code> if we couldn't parse the result JSON.</p><h1 id="trying-it-out"><a href="#trying-it-out">Trying it Out</a></h1><p>We now have a working function, so lets try it in ghci. Unfortunately, Mailchimp doesn't have a test mode for their API, so I used my API key and a test list:</p><pre><code>~ cabal-ghci
+&gt; :l Web.Mailchimp.Lists Web.Mailchimp.Client
+&gt; :m Web.Mailchimp.Lists Web.Mailchimp.Client
+&gt; let key = MailchimpApiKey &quot;&lt;your key here&gt;&quot; &quot;&lt;dc code&gt;&quot;
+&gt; subscribeUser key (ListId &quot;&lt;list id&gt;&quot;) (Email &quot;example@example.com&quot;) Nothing (Just EmailTypeHTML) Nothing Nothing Nothing Nothing
+EmailReturn {erEmail = Email &quot;example@example.com&quot;, erEmailUniqueId = EmailUniqueId &quot;&lt;id&gt;&quot;, erListEmailId = ListEmailId &quot;&lt;id&gt;&quot;}</code></pre><p>The function worked. And if you run it again, you see that error handling also works:</p><pre><code>&gt; subscribeUser key (ListId &quot;&lt;list id&gt;&quot;) (Email &quot;example@example.com&quot;) Nothing (Just EmailTypeHTML) Nothing Nothing Nothing Nothing
+*** Exception: ListAlreadySubscribed 214 &quot;List_AlreadySubscribed&quot; &quot;example@example.com is already subscribed to list Users Newsletter. Click here to update your profile.&quot;</code></pre><p>Wunderbar!</p><h1 id="create-query-function"><a href="#create-query-function">Create query Function</a></h1><p>Of course, we don't want to write such a long function for each of Mailchimp's 104 API methods, so let's extract some common functionality from <code>subscribeUser</code> that we'll use over and over:</p><pre><code class="haskell">query :: FromJSON x =&gt; MailchimpApiKey -&gt; Text -&gt; Text -&gt; Value -&gt; IO x
+query apiKey section method request = runResourceT $ do
+  initReq &lt;- parseUrl $ unpack $ apiEndpointUrl (makDatacenter apiKey) 
+    section method
+  let req = initReq { requestBody = RequestBodyLBS $ encode request 
+                    , method = methodPost
+                    }
+  man &lt;- liftIO $ newManager def
+  response &lt;- catch (httpLbs req man) catchHttpException
+  case decode $ responseBody response of
+    Just result -&gt; return result
+    Nothing -&gt; throwIO $ OtherMailchimpError (-1) &quot;ParseError&quot; 
+                         &quot;Could not parse result JSON from Mailchimp&quot;
+ where
+  catchHttpException :: HttpException -&gt; ResourceT (IO a)
+  catchHttpException e@(StatusCodeException _ headers _) =
+    maybe (throwIO e) id (throwIO `fmap` (decodeError headers))
+  catchHttpException e = throwIO e
+  decodeError :: ResponseHeaders -&gt; Maybe MailchimpError
+  decodeError headers = fromStrict `fmap` 
+    (lookup &quot;X-Response-Body-Start&quot; headers) &gt;&gt;= decode
+
+
+subscribeUser :: MailchimpApiKey 
+              -&gt; ListId 
+              -&gt; EmailId 
+              -&gt; Maybe [MergeVarsItem] 
+              -&gt; Maybe EmailType
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; IO EmailReturn
+subscribeUser apiKey 
+              listId 
+              emailId 
+              mergeVars 
+              emailType 
+              doubleOptin 
+              updateExisting 
+              replaceInterests 
+              sendWelcome = 
+  query apiKey &quot;lists&quot; &quot;subscribe&quot; request
+ where
+  request = object [ &quot;apikey&quot; .= makApiKey apiKey
+                   , &quot;id&quot; .= unListId listId
+                   , &quot;email&quot; .= emailId
+                   , &quot;merge_vars&quot; .= fmap object mergeVars
+                   , &quot;email_type&quot; .= emailType
+                   , &quot;double_optin&quot; .= doubleOptin
+                   , &quot;update_existing&quot; .= updateExisting
+                   , &quot;replace_interests&quot; .= replaceInterests
+                   , &quot;send_welcome&quot; .= sendWelcome
+                   ]
+</code></pre><p>And now we know that all of our API methods can be written with a function as simple as <code>subscribeUser</code> is here.</p><h1 id="using-readert"><a href="#using-readert">Using ReaderT</a></h1><p>There are still a couple improvements that could be made to the interface. First, we are creating a new Manager each time query is called, which is very inefficient as it's an expensive operation. Second, if you are making multiple calls within the library, the current syntax could be slightly improved. Suppose that you want to delete all your folders created before a certain date, and you are in a non-IO monadic context, such as in a Yesod <code>Handler</code>. The code to perform that operation would look like this:</p><pre><code class="haskell">liftIO $ do
+  now &lt;- getCurrentTime
+  folders &lt;- listFolders apiKey &quot;campaign&quot;
+  mapM_ (\f -&gt; deleteFolder apiKey (folderId f) (folderType f)) $ 
+    filter (\folder -&gt; dateCreated folder &lt; (now - 60 * 60 * 24 * 7)) folders
+</code></pre><p>For every action, we are passing in <code>apiKey</code> even though the key is not changing. One can imagine even more complex actions where it would be more of a burden. To solve this problem and the problem of creating potentially hundreds of managers, let's wrap up our actions in a monad, specfically in <a href="http://hackage.haskell.org/packages/archive/mtl/latest/doc/html/Control-Monad-Reader.html#v:ReaderT">ReaderT</a>. We'll also create a <code>MailchimpConfig</code> type to carry the <code>apiKey</code> and the shared <code>Manager</code>:</p><pre><code class="haskell">data MailchimpConfig = MailchimpConfig 
+  { mcApiKey :: MailchimpApiKey
+  , mcManager :: Manager
+  }
+
+-- | Creates a MailchimpConfig with a new Manager
+defaultMailchimpConfig :: MonadIO m =&gt; MailchimpApiKey -&gt; m MailchimpConfig
+defaultMailchimpConfig apiKey = do
+  man &lt;- liftIO $ newManager def
+  return MailchimpConfig { mcApiKey = apiKey
+                         , mcManager = man
+                         }
+
+type Mailchimp a = ReaderT MailchimpConfig (ResourceT IO) a
+
+runMailchimp :: (MonadIO m) =&gt; MailchimpConfig -&gt; Mailchimp a -&gt; m a
+runMailchimp config action = 
+  liftIO $ runResourceT $ runReaderT action config</code></pre><p><code>MailchimpConfig</code> is just a simple type to carry around the configuration, and <code>defaultMailchimpConfig</code> is a way to create a default configuration with a new <code>Manager</code>. We will run all of our actions in the <code>Mailchimp</code> monad stack, which is <code>IO</code>, <code>ResourceT</code> (used by Network.HTTP.Conduit) and a <code>ReaderT</code>, which will allow us to query the <code>MailchimpConfig</code> without having to pass it around in every function.</p><p>With these changes <code>query</code> and <code>subscribeUser</code> now look like this:</p><pre><code class="haskell">query :: (FromJSON x) =&gt; Text -&gt; Text -&gt; Value -&gt; Mailchimp x
+query section method request = do
+  config &lt;- ask
+  initReq &lt;- liftIO $ parseUrl $ unpack $ apiEndpointUrl 
+                      (makDatacenter $ mcApiKey config) section method
+  let req = initReq { requestBody = RequestBodyLBS $ encode request 
+                    , method = methodPost
+                    }
+  response &lt;- catch (httpLbs req $ mcManager config) catchHttpException
+  case decode $ responseBody response of
+    Just result -&gt; return result
+    Nothing -&gt; throwIO $ OtherMailchimpError (-1) &quot;ParseError&quot; 
+                         &quot;Could not parse result JSON from Mailchimp&quot;
+ where
+  catchHttpException :: HttpException -&gt; Mailchimp a
+  catchHttpException e@(StatusCodeException _ headers _) = 
+    maybe (throwIO e) id (throwIO `fmap` (decodeError headers))
+  catchHttpException e = throwIO e
+  decodeError :: ResponseHeaders -&gt; Maybe MailchimpError
+  decodeError headers = fromStrict `fmap` 
+    (lookup &quot;X-Response-Body-Start&quot; headers) &gt;&gt;= decode
+
+subscribeUser :: ListId 
+              -&gt; EmailId 
+              -&gt; Maybe [MergeVarsItem] 
+              -&gt; Maybe EmailType
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Maybe Bool 
+              -&gt; Mailchimp EmailReturn
+subscribeUser listId 
+              emailId 
+              mergeVars 
+              emailType 
+              doubleOptin 
+              updateExisting 
+              replaceInterests 
+              sendWelcome = do
+  apiKey &lt;- askApiKey
+  query &quot;lists&quot; &quot;subscribe&quot; $ request apiKey
+ where
+  request apiKey = object [ &quot;apikey&quot; .= makApiKey apiKey
+                          , &quot;id&quot; .= unListId listId
+                          , &quot;email&quot; .= emailId
+                          , &quot;merge_vars&quot; .= fmap object mergeVars
+                          , &quot;email_type&quot; .= emailType
+                          , &quot;double_optin&quot; .= doubleOptin
+                          , &quot;update_existing&quot; .= updateExisting
+                          , &quot;replace_interests&quot; .= replaceInterests
+                          , &quot;send_welcome&quot; .= sendWelcome
+                          ]</code></pre><h1 id="dealing-with-mailchimp-idiosyncrasies"><a href="#dealing-with-mailchimp-idiosyncrasies">Dealing with Mailchimp Idiosyncrasies</a></h1><p>As is the case with many JSON APIs, Mailchimp has a couple idiosyncrasies that are not immediately apparent. First, Aeson assumes that <code>Nothing</code> in a JSON object that's being created should create the associated key with a <code>null</code> JSON value, but the Mailchimp API actually checks for the existence of the key rather than a non-null value and treats it differently (it is treated as a &quot;false&quot; for optional parameters), so we must filter out <code>Nothing</code> entries before the object is created. To replace the <code>object</code> function of Aeson, we create filterObject:</p><pre><code class="haskell">filterObject list =
+  object $ filter notNothing list
+ where
+  notNothing (_, Null) = False
+  notNothing _ = True</code></pre><p>Another issue with the API is Mailchimp's time format. Mailchimp sends and receives times as &quot;YYYY-MM-DD HH:MM:SS&quot; in GMT, while Aeson only tries to read <code>UTCTime</code> in ECMA-262/ISO-8601 format (YYYY-MM-DDTHH:MM:SS.sZ). Instead of relying on Aeson's instance of <code>ToJSON UTCTime</code> and <code>FromJSON UTCTime</code>, we newtype <code>UTCTime</code> and instance the new type:</p><pre><code class="haskell">newtype MCTime = MCTime {unMCTime :: UTCTime}
+
+mcFormatString :: String
+mcFormatString = &quot;%F %T&quot;
+
+instance ToJSON MCTime where
+  toJSON (MCTime t) = String $ pack $ 
+    formatTime defaultTimeLocale mcFormatString t
+instance FromJSON MCTime where
+  parseJSON (String s) = maybe mzero (return . MCTime) $ 
+    parseTime defaultTimeLocale mcFormatString (unpack s)
+  parseJSON _ = mzero</code></pre><p>This makes use of the <code>formatTime</code> function from the <a href="http://hackage.haskell.org/package/time">time</a> package so we can continue to provide UTCTime in all of our interface functions. Obviously these two issues may not effect future APIs you are interfacing with, but it may give you a flavor of the sort of problems that can crop up. With those problems out of the way, let's try running the code with our new Monad.</p><pre><code>~ ghci -fglasgow-exts
+&gt; :set -XOverloadedStrings
+&gt; :l Web.Mailchimp.Lists Web.Mailchimp.Client
+&gt; :m Web.Mailchimp.Lists Web.Mailchimp.Client
+&gt; let key = MailchimpApiKey &quot;&lt;your key here&gt;&quot; &quot;&lt;dc code&gt;&quot;
+&gt; cfg &lt;- defaultMailchimpConfig key
+&gt; runMailchimp cfg $ subscribeUser (ListId &quot;f771e2e2be&quot;) (Email &quot;example@cardsharp.ly&quot;) Nothing (Just EmailTypeHTML) Nothing Nothing Nothing Nothing 
+&gt; EmailReturn {erEmail = Email &quot;example@example.com&quot;, erEmailUniqueId = EmailUniqueId &quot;&lt;id&gt;&quot;, erListEmailId = ListEmailId &quot;&lt;id&gt;&quot;&quot;</code></pre><h1 id="adding-logging"><a href="#adding-logging">Adding Logging</a></h1><p>Everything seems to be working, but after implementing a few more API methods, a problem has come up. While we could add <code>liftIO $ print x</code> to debug, it's tedious and not great for production. Let's add real logging to make debugging somewhat easier. You can use the <a href="hackage.haskell.org/packages/archive/monad-logger/latest/doc/html/Control-Monad-Logger.html">LoggerT</a> monad transformer to add logging to your monad, which requires only a couple changes to the Mailchimp definition:</p><pre><code class="haskell">type Mailchimp a = LoggingT (ReaderT MailchimpConfig (ResourceT IO)) a
+
+runMailchimp :: (MonadIO m) =&gt; MailchimpConfig -&gt; Mailchimp a -&gt; m a
+runMailchimp config action = 
+  liftIO $ runResourceT $ flip runReaderT config $ runStderrLoggingT action</code></pre><p>Now we can add debugging statements anywhere in the Mailchimp monad and they will be printed to stderr. For example, to log the request and response bodies in query, note the added <code>$(logDebug)</code> statements, which use Template Haskell to create log messages that include line numbers.</p><pre><code class="haskell">query :: (FromJSON x) =&gt; Text -&gt; Text -&gt; Value -&gt; Mailchimp x
+query section apiMethod request = do
+  config &lt;- ask
+  initReq &lt;- liftIO $ parseUrl $ unpack $ apiEndpointUrl 
+                      (makDatacenter $ mcApiKey config) section apiMethod
+  let req = initReq { requestBody = RequestBodyLBS $ encode request 
+                    , method = methodPost
+                    }
+  $(logDebug) $ pack . show $ requestBody req
+  response &lt;- catch (httpLbs req $ mcManager config) catchHttpException
+  $(logDebug) $ pack . show $ responseBody response
+  case decode $ responseBody response of
+    Just result -&gt; return result
+    Nothing -&gt; throwIO $ OtherMailchimpError (-1) &quot;ParseError&quot; 
+                         &quot;Could not parse result JSON from Mailchimp&quot;
+ where
+  catchHttpException :: HttpException -&gt; Mailchimp a
+  catchHttpException e@(StatusCodeException _ headers _) = do
+    $(logDebug) $ pack . show $ decodeError headers
+    maybe (throwIO e) id (throwIO `fmap` (decodeError headers))
+  catchHttpException e = throwIO e
+  decodeError :: ResponseHeaders -&gt; Maybe MailchimpError
+  decodeError headers = fromStrict `fmap` 
+    (lookup &quot;X-Response-Body-Start&quot; headers) &gt;&gt;= decode</code></pre><p>If you are just using your package outside of the context of Yesod applications, you can probably stop here and still have a nice, full-featured library that's easy to use in <code>IO</code>. If you <b>are</b> using Yesod, though, there is one more useful change.</p><h1 id="mailchimpt-monad-transformer"><a href="#mailchimpt-monad-transformer">MailchimpT Monad Transformer</a></h1><p>The way <code>Mailchimp</code> is currently written it might interact negatively with existing logging functionality in a user's application. They may want to bring their own logging to the table. For example, if you are developing a Yesod application, your <code>Handler</code> monad already includes <code>MonadLogger</code>, and you can control the output level for development vs. production. Instead of giving <code>Mailchimp</code> a defined monad stack, let's make it into a monad transformer that requires logging.</p><p>By making <code>Mailchimp</code> into a monad transformer, we also allow users to interleave actions from the <code>Mailchimp</code> monad and their own monad in a single do-block (or other standard monadic operations). To make the change, we enable RankNTypes (this allows the type constraints in the below type definition) and specify in our Mailchimp type the monadic instances that we require to run, in this case <code>MonadIO</code> (for IO), <code>MonadLogger</code> (for logging) and <code>MonadBaseControl IO</code> (used by <code>query</code> to throw and catch exceptions from <code>ResourceT</code>). Using monad transformers in this manner basically specifies a required set of capabilities. To make life easier, we move uses of <code>runResourceT</code> down into <code>query</code> only where they are needed rather than in <code>runMailchimp</code>, because we don't need it's functionality everywhere and because getting all of its constraints to typecheck is a pain.</p><pre><code class="haskell">type MailchimpT m a = (MonadIO m, MonadLogger m, MonadBaseControl IO m) =&gt; 
+                        ReaderT MailchimpConfig m a
+
+runMailchimpT :: (MonadIO m, MonadLogger m, MonadBaseControl IO m) =&gt; 
+                   MailchimpConfig -&gt; MailchimpT m a -&gt; m a
+runMailchimpT config action = 
+  runReaderT action config
+
+-- | Runs Mailchimp in IO, ignoring the existing monadic context 
+--   and logging to stderr
+runMailchimp :: (MonadIO m) =&gt; 
+                  (MailchimpConfig -&gt; MailchimpT (LoggingT IO) a -&gt; m a)
+runMailchimp config action =
+  liftIO $ runStderrLoggingT $ flip runReaderT config action</code></pre><p>If users of the package don't want to use <code>MailchimpT</code>, they can instead use <code>runMailchimp</code> in <code>IO</code> which will build up the monad transformer stack itself.</p><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>At this point the core of the package is written, and the rest is just translating the API documentation into Haskell code, i.e. extensive boilerplate. If you want to see what all this boilerplate looks like, you can check out the complete source for Web.Mailchimp.Lists <a href="https://github.com/BJTerry/mailchimp">on GitHub</a>. Hopefully you have found this tutorial useful, thanks for reading, and feedback is always appreciated.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bjterry/interfacing-with-restful-json-apis';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

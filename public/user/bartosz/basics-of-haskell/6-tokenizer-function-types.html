@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html><head><title>6. Tokenizer: Function Types - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/6-tokenizer-function-types">6. Tokenizer: Function Types</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">6. Tokenizer: Function Types</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 2 Oct 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/51eeff5ddb6a5b8d94b92e00bb9fc804db6bf292">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/5-tokenizer-data-types">Previous content: 5. Tokenizer: Data Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/7-tokenizer-higher-order-functions">Next content: 7. Tokenizer: Higher Order Functions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#categorizing-characters">Categorizing Characters</a></li><li><a href="#currying">Currying</a></li><li><a href="#tokenizing-operators--guards">Tokenizing Operators: Guards</a></li><li><a href="#single-character-tokenizer">Single Character Tokenizer</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>We haven't gotten too far in our implementation of the symbolic calculator yet, but we've already learned a lot. We know how to work with list, and <code>String</code>s in particular, and we have defined the <code>Token</code> data type. It's time to start implementing the tokenizer function:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]</code></pre><h2 id="categorizing-characters"><a href="#categorizing-characters">Categorizing Characters</a></h2><p>An imperative programmer would implement the tokenizer as a loop for processing consecutive characters in the string.</p><p>An object-oriented programmer would implement a tokenizer as a stateful object with a getter that returns the current token and an incrementer that moves to the next token, consuming one or more characters from the string in the process.</p><p>A functional programmer looks at the tokenizer as a function that picks the first character of the string, categorizes it, turns it into a token, and then tokenizes the rest of the string. (We'll tackle multi-character tokens in the next tutorial.)</p><p>The application of the tokenizer to the rest of the string is the standard recursive step in the algorithm.</p><p>Here's a very simple tokenizer that recognizes digits and non-digit characters:</p><pre><code class="active haskell">import Data.Char
+
+data Token = Digit | Alpha
+    deriving (Show, Eq)
+
+tokenize :: String -&gt; [Token]
+tokenize (c : rest) = 
+    if isDigit c
+    then Digit : tokenize rest
+    else Alpha : tokenize rest
+tokenize [] = []
+
+main = print $ tokenize &quot;passwd123&quot;</code></pre><p>I used the library function <code>isDigit</code>. This function is not defined in the Prelude, it's defined in a different library called <code>Data.Char</code>. I had to import it explicitly using the <code>import</code> statement at the top of the file -- somewhat analogous to C's or Java's <code>#include</code> statement.</p><p><code>Data.Char</code> defines several useful functions, like <code>isSpace</code>, <code>isAlpha</code>, <code>isAlphaNum</code>, and many more. You can look them up in Haskell's <a href="http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Char.html">Hoogle database</a>.</p><p>We could have easily implemented <code>isDigit</code> from scratch using the Prelude function <code>elem</code>, which tests whether its first argument is an element of the second argument (which is a list):</p><pre><code class="active haskell">isDigit :: Char -&gt; Bool
+isDigit c = elem c &quot;0123456789&quot;
+
+main = print $ isDigit '3'</code></pre><p>Here we are testing whether <code>c</code> is an element of the list of characters (string) &quot;0123456789&quot;.</p><p>We could have also implemented the function <code>elem</code> from scratch, except that, up to now, I've been avoiding functions that require more than one argument. That's because I wanted to defer the explanation of currying until you get comfortable with single-argument functions.</p><h2 id="currying"><a href="#currying">Currying</a></h2><p>Defining a multi-argument function is easy -- it's the type signature that requires some getting used to.</p><p>So, ignoring type signatures for a moment, here's the recursive implementation of <code>isElem</code>:</p><pre><code class="active haskell">isElem c (d : rest) = if c == d 
+                      then True 
+                      else isElem c rest
+isElem _ [] = False
+
+main = do
+    print $ isElem '3' &quot;abc&quot;
+    print $ isElem '3' &quot;123&quot;</code></pre><p>Nothing surprising here. You just specify more than one argument, and you can do pattern matching on each of them.</p><p>The fun part is that Haskell allows you to call a function using fewer arguments than there are formal parameters in its definition. In our example, it's okay to call <code>isElem</code> with just one argument, say, character <code>'3'</code>. What you get back is not a <code>Bool</code> but something that expects one more argument, a list, to produce a <code>Bool</code>. In other words you get a function <code>[Char]-&gt;Bool</code>.</p><pre><code class="active haskell">isElem c (d : rest) = if c == d 
+                      then True 
+                      else isElem c rest
+isElem _ [] = False
+-- show
+is3elem :: [Char] -&gt; Bool
+is3elem = isElem '3'
+
+main = print $ is3elem &quot;123&quot;</code></pre><p>Let me repeat this, because it's very important: we have curried the two-argument function <code>isElem</code> by providing the first argument, <code>'3'</code>. The result is a function that expects a list of <code>Char</code> (the second argument to <code>isElem</code>). We are storing this curried function in the variable <code>is3elem</code>. We can then call <code>is3elem</code> with a list of <code>Char</code> and get back a <code>Bool</code>.</p><p>By the way, we could have defined <code>is3elem</code> using standard function definition syntax:</p><pre><code class="active haskell">isElem c (d : rest) = if c == d 
+                      then True 
+                      else isElem c rest
+isElem _ [] = False
+-- show
+is3elem' :: [Char] -&gt; Bool
+is3elem' str = isElem '3' str
+
+main = print $ is3elem' &quot;123&quot;</code></pre><p>It almost looks like the first definition was obtained by &quot;dividing&quot; both sides of the second definition by <code>str</code>. After such simplification, the only trace of the <code>[Char]</code> argument is in the signature of <code>is3elem</code>. So if you see a function definition that is missing some arguments that are specified in its signature, you're looking at a curried definition. You'll see a lot of code written in this style, which has its own name: <i>point-free notation</i>. We'll talk more about it in the future.</p><p>Back to <code>isElem</code>: What's its type signature? By our reasoning, we can look at it as a function that takes a <code>Char</code> and returns a function <code>([Char]-&gt;Bool)</code>. Being able to return a function from a function is one of the perks of &quot;functions being first-class citizens in Haskell.&quot; (The others are storing functions in variables, which we've already seen, and passing functions as arguments to other functions, which we'll see soon.)</p><p>Indeed, this is a valid signature of the funtion <code>isElem</code>:</p><pre><code class="haskell">isElem :: Char -&gt; ([Char] -&gt; Bool)</code></pre><p>However, since the arrow <code>-&gt;</code> is right associative, the parentheses are not necessary and are usually omitted, as in:</p><pre><code class="haskell">isElem :: Char -&gt; [Char] -&gt; Bool</code></pre><p>One more observation: <code>isElem</code>, as well as <code>elem</code>, will work not only for <code>Char</code>, but for any type that supports equality comparison. In particular, since we defined <code>Token</code> as <code>deriving Eq</code>, it supports equality comparison and can be used with <code>elem</code>.</p><pre><code class="active haskell">data Token = Digit | Alpha
+    deriving (Show, Eq)
+
+main = print $ elem Digit [Digit, Alpha]</code></pre><p>We'll come back to this when we study type classes.</p><p>To summarize: multi-argument functions can always be curried, and this is reflected in the way their type signatures are written. For instance, the signature:</p><pre><code class="haskell">f :: a -&gt; b -&gt; c -&gt; d</code></pre><p>tells us that <code>f</code> is a function of three arguments of types <code>a</code>, <code>b</code>, and <code>c</code>, returning <code>d</code>. You can also treat it as a function of two arguments <code>a</code> and <code>b</code> returning a function <code>(c -&gt;d)</code>. Or a one-argument function taking <code>a</code> returning a two argument function <code>(b -&gt; c -&gt; d)</code>.</p><p>Currying is extremely useful and it's a pity that most other languages don't support it out of the box. Multi-argument functions in those languages are written and behave as if they were always taking tuples: In Haskell, the syntax <code>f (x, y, z)</code> would be interpreted as a function taking a tuple of three elements. In fact such function are sometimes called <i>uncurried</i>.</p><p>Parentheses and commas in the function syntax impede currying. Scala has special syntax for curriable functions: multiple pairs of parentheses. But you have to anticipate the need for currying when defining the function -- the default doesn't support it.</p><h2 id="tokenizing-operators--guards"><a href="#tokenizing-operators--guards">Tokenizing Operators: Guards</a></h2><p>The tokenizer has to recognize operators, identifiers, and numbers. Let's start with operators. We could categorize them using a bunch of nested if/then/else clauses, but that would be awkward. Let's use a different mechanism: guards. Just like you can split a function definition by patterns, you can further specialize it based on more general predicates (Boolean expressions). Let's define a function <code>operator</code> that converts a character to <code>Operator</code>:</p><pre><code class="active haskell">data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+
+main = print $ operator '*'</code></pre><p>There are four bodies of the function <code>operator</code> corresponding to four different guards (a body of a function starts after the equal sign). For example, the guard <code>c == '+'</code> corresponds to the body <code>Plus</code>, etc. Guards are placed after vertical bars. They are tested in order of appearance.</p><p>What happens when no guard is satisfied? You can try it by calling <code>operator</code> with the &quot;wrong&quot; character. You'll get a runtime error <code>PatternMatchFail</code> and the program will abort. This might be good enough if all you need is a bona fide assertion. In general, these kinds of non-exhaustive patterns are to be avoided. You can always end your list of guards with <code>otherwise</code> (which is syntactic sugar for <code>True</code>) and provide a default body. You'll see an example of this later.</p><h2 id="single-character-tokenizer"><a href="#single-character-tokenizer">Single Character Tokenizer</a></h2><p>Before we implement full blown tokenizers for numbers and identifiers, let's first tackle a simplified problem. Let's restrict numbers to single digits, and identifiers to single characters. This way we'll only need to process one character at a time and we can use simple recursion. Here's our recursive skeleton:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) = ... : tokenize cs</code></pre><p>We'll have to categorize the current character, convert it to a token, and then tokenize the rest of the string (here I'm pattern matching the string as a list of characters). The result is the current token prepended to the rest of tokens.</p><p>We'll do categorization using guards. Let's start with operators:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | otherwise  = error $ &quot;Cannot tokenize &quot; ++ [c]</code></pre><p>The guard checks if <code>c</code> is an element of the list of four characters <code>&quot;+-*/&quot;</code>. If it is, it constructs a <code>Token</code> using the <code>TokOp</code> constructor, passing it the result of the call to <code>operator c</code> (the function we defined earlier). This token is combined using <code>:</code> with the list returned by the recursive call, <code>tokenize cs</code>.</p><p>I also added the catch all guard that calls <code>error</code>. <code>error</code> is a function that takes a <code>String</code>, displays it, and aborts the program. (In order to satisfy the type checker, <code>error</code> is polymorphic in its return type. In this example, the type checker expects a list of <code>Token</code>s; so that's the type it will pick for the return type of <code>error</code>.)</p><p>I constructed the string by concatenating <code>&quot;Cannot tokenize &quot;</code> with a single character string <code>[c]</code>. I couldn't use <code>c</code> directly, because the concatenation operator <code>++</code> expects a list of <code>Char</code>, not a <code>Char</code>. So I created a one-element list <code>[c]</code>.</p><p>The tokenization of one-character numbers and identifiers is pretty simple:</p><pre><code class="haskell">| isDigit c  = TokNum (digitToInt c) : tokenize cs
+| isAlpha c  = TokIdent [c]          : tokenize cs</code></pre><p>Here, I converted a digit to an integer using <code>digitToInt</code>, and a single character to a string using <code>[c]</code>.</p><p>Finally, our tokenizer should also be able to discard white space between tokens:</p><pre><code class="haskell">| isSpace c  = tokenize cs</code></pre><p>We are ready to test our first tokenizer:</p><pre><code class="active haskell">import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokIdent String
+           | TokNum Int
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | isDigit c  = TokNum (digitToInt c) : tokenize cs
+    | isAlpha c  = TokIdent [c]          : tokenize cs
+    | isSpace c  = tokenize cs
+    | otherwise  = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+main = print $ tokenize &quot; 1 + 4 / x &quot;</code></pre><p>Next time we'll work on tokenizing multi-character numbers and identifiers and learn about mutual recursion.</p><p><b>Ex 1.</b> Rewrite the implementation of Fibonacci numbers using guards instead of the <code>if</code> statement (it should become much closer to the mathematical definition):</p><pre><code class="active haskell">-- Old definition:
+-- fib n = if n &gt; 2 then fib (n - 1) + fib (n - 2) else 1
+fib n | n == 1    = ...
+      | ...       = ...
+      | otherwise = ...
+
+main = print (fib 20)</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">fib :: Int -&gt; Int
+fib n | n == 1    = 1
+      | n == 2    = 1
+      | otherwise = fib (n-1) + fib (n-2)
+
+main = print (fib 20)</code></pre></div><p><b>Ex 2.</b> Implement function <code>cat</code> that concatenates two lists.</p><pre><code class="active haskell">cat :: [a] -&gt; [a] -&gt; [a]
+cat = undefined
+
+main = putStrLn $ cat &quot;Hello &quot; &quot;World!&quot;</code></pre><div class="hidden" title="Show hint"><p>You want to create a list whose first element is the first element of the first list (if any) followed by <i>the rest of the first list concatenated with the second list</i>.</p></div><div class="hidden" title="Show solution"><pre><code class="active haskell">cat :: [a] -&gt; [a] -&gt; [a]
+cat [] ys = ys
+cat (x : xs) ys = x : cat xs ys
+
+main = putStrLn $ cat &quot;Hello &quot; &quot;World!&quot;</code></pre></div><p><b>Ex 3.</b> Use <code>cat</code> from previous exercise and currying to define a function <code>pig</code> that prepends &quot;pig&quot; to any string.</p><pre><code class="active haskell">cat :: [a] -&gt; [a] -&gt; [a]
+cat = undefined
+
+pig :: String -&gt; String
+pig = undefined
+
+main = putStrLn $ pig &quot;sty&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">cat :: [a] -&gt; [a] -&gt; [a]
+cat [] ys = ys
+cat (x : xs) ys = x : cat xs ys
+
+pig :: String -&gt; String
+pig = cat &quot;pig&quot;
+
+main = putStrLn $ pig &quot;sty&quot;</code></pre></div><p><b>Ex 4.</b> Implement function <code>toInts</code> that takes a number in the form of a string and returns a list of its digits as integers.</p><pre><code class="active haskell">import Data.Char
+
+toInts :: String -&gt; [Int]
+toInts = undefined
+
+main = print $ toInts &quot;2013&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+toInts :: String -&gt; [Int]
+toInts [] = []
+toInts (c : cs) = digitToInt c : toInts cs
+
+main = print $ toInts &quot;2013&quot;</code></pre></div><p><b>Ex 5.</b> Implement function <code>sumDig</code> that takes a number in the form of a string and calculates the sum of its digits. Make use of the function from the previous exercise.</p><pre><code class="active haskell">import Data.Char
+
+toInts :: String -&gt; [Int]
+toInts [] = []
+toInts (c : cs) = digitToInt c : toInts cs
+
+sumDig :: String -&gt; Int
+sumDig = undefined
+
+main = print $ sumDig &quot;30750&quot;</code></pre><div class="hidden" title="Show hint"><p>Define an auxiliary recursive function <code>acc</code> that takes the sum-so-far and the remaining digits, and returns the total. Call it with appropriate arguments.</p><pre><code class="haskell">acc :: Int -&gt; [Int] -&gt; Int</code></pre></div><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+toInts :: String -&gt; [Int]
+toInts [] = []
+toInts (c : cs) = digitToInt c : toInts cs
+
+sumDig :: String -&gt; Int
+sumDig str = acc 0 (toInts str)
+
+acc :: Int -&gt; [Int] -&gt; Int
+acc a [] = a
+acc a (i:is) = acc (a + i) is
+
+main = print $ sumDig &quot;30750&quot;</code></pre></div></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/basics-of-haskell/6-tokenizer-function-types';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

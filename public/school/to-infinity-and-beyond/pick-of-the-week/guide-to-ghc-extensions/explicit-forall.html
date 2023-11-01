@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html><head><title>Explicit `forall` - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions">Guide to GHC Extensions</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/explicit-forall">Explicit `forall`</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Explicit `forall`</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">22 Jan 2016</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/PthariensFlame">Alexander Altman</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5324/07cae31f989871c38350b4a4ba2d0064db056181">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/pattern-and-guard-extensions">Previous content: Pattern and Guard Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/list-and-comprehension-extensions">Next content: List and Comprehension Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions">Go up to: Guide to GHC Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame">See all content by Alexander Altman</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#explicitforall">ExplicitForAll</a></li><li><a href="#scopedtypevariables">ScopedTypeVariables</a></li><li><a href="#liberaltypesynonyms">LiberalTypeSynonyms</a></li><li><a href="#rankntypes--rank2types--and-polymorphiccomponents">RankNTypes, Rank2Types, and PolymorphicComponents</a><ul><li><a href="#basic-usage">Basic Usage</a></li><li><a href="#interaction-with-liberaltypesynonyms">Interaction with LiberalTypeSynonyms</a></li><li><a href="#use-case--the-st-monad">Use Case: The ST Monad</a></li><li><a href="#use-case--lens">Use Case: lens</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>These extensions allow finer-grained control over polymorphism.</p><h1 id="explicitforall"><a href="#explicitforall"><code>ExplicitForAll</code></a></h1><p><b>Available in:  GHC 6.12 and later</b></p><p>The <code>ExplicitForAll</code> extension allows you to explicitly specify the universal quantification in polymorphic type signatures.  For example, this:</p><pre><code class="haskell">Just :: a -&gt; Maybe a
+Nothing :: Maybe a
+reverse :: [a] -&gt; [a]
+map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+show :: (Show a) =&gt; a -&gt; String</code></pre><p>becomes this:</p><pre><code class="haskell">Just :: forall a. a -&gt; Maybe a
+Nothing :: forall a. Maybe a
+reverse :: forall a. [a] -&gt; [a]
+map :: forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+show :: forall a. (Show a) =&gt; a -&gt; String</code></pre><p>GHC does this for you anyway, but while <code>ExplicitForAll</code> is not very useful on its own, the other extensions in this section depend on the ability to write out your <code>forall</code>s manually, to allow you to write them in places GHC normally wouldn't.</p><p>Although <code>ExplicitForAll</code> is important as a prerequisite for all of the other extensions in this section, it does not do anything on its own that could not be done in standard Haskell.</p><h1 id="scopedtypevariables"><a href="#scopedtypevariables"><code>ScopedTypeVariables</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>ScopedTypeVariables</code> extension is perhaps the simplest of the actually useful <code>forall</code>-based extensions.  It allows you to specify that the type variables in a definition's signature should be <i>scoped</i> over the body of that definition.</p><p>To give some motivation, consider the following function:</p><pre><code class="active haskell">import Data.List
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+myFunction :: Ord a =&gt; [a] -&gt; [(a, a)]
+myFunction inputList = zip sortedList nubbedList
+    where sortedList = sort inputList
+          nubbedList = nub inputList
+-- /show</code></pre><p>What happens if we try to give a type to <code>sortedList</code> or <code>nubbedList</code>?  Let's see:</p><pre><code class="active haskell">import Data.List
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+myFunction :: Ord a =&gt; [a] -&gt; [(a, a)]
+myFunction inputList = zip sortedList nubbedList
+    where sortedList :: [a]
+          sortedList = sort inputList
+          nubbedList :: [a]
+          nubbedList = nub inputList
+-- /show</code></pre><p>We get some ugly errors telling us the the <code>a</code>'s in our inner definitions are not the same as the <code>a</code> in our outer definition (the two inner <code>a</code>'s aren't the same as each other, either).  How can we fix this?  We need a way to tell GHC that, inside the <code>where</code> clause, <code>[a]</code> does not mean <code>forall a. [a]</code>, but instead <i>closes over the <code>a</code> from the outer definition</i>.</p><p>This is what <code>ScopedTypeVariables</code> is for.   By enabling it, and by placing a <code>forall</code> in the outer definition's signature, that <code>a</code> becomes scoped over the whole body of the outer definition, including the <code>where</code> clause:</p><pre><code class="active haskell">{-# LANGUAGE ScopedTypeVariables #-}
+import Data.List
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+myFunction :: forall a. Ord a =&gt; [a] -&gt; [(a, a)]
+myFunction inputList = zip sortedList nubbedList
+    where sortedList :: [a]
+          sortedList = sort inputList
+          nubbedList :: [a]
+          nubbedList = nub inputList
+-- /show</code></pre><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE ScopedTypeVariables #-}
+import Data.List
+
+main = print $ myFunction [1, 1, 3, 2]
+
+myFunction :: forall a. Ord a =&gt; [a] -&gt; [(Char, a, a)]
+myFunction inputList = zip3 ['a'..'z'] sortedList nubbedList
+    where sortedList :: [a]
+          sortedList = sort inputList
+          nubbedList :: [a]
+          nubbedList = nub inputList</code></pre><h1 id="liberaltypesynonyms"><a href="#liberaltypesynonyms"><code>LiberalTypeSynonyms</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>In standard, unextended Haskell, type synonyms are fairly restricted.  They must always be fully applied and they cannot contain type variables other than their parameters.  The <code>LiberalTypeSynonyms</code> extension relaxes both of these limitations, as well as some others that only come into play when certain other extensions are used (the use of <code>LiberalTypeSynonyms</code> in combination with each other relevant extension is described in the section for that particular other extension).</p><p>When <code>LiberalTypeSynonyms</code> is enabled, GHC only type-checks a signature <i>after</i> all type synonyms have been expanded, outermost first.  You can now partially apply a type synonym, as long as it's surrounded by another type synonym such that the obvious outermost-first expansion will cause the partially-applied synonym to become fully applied.</p><p>This means that the following partial application of type synonyms is now legal:</p><pre><code class="active haskell">{-# LANGUAGE LiberalTypeSynonyms #-}
+import Data.Char
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+type Const a b = a
+
+type Id a = a
+
+type NatApp f g i = f i -&gt; g i
+
+myFunc :: NatApp Id (Const Int) Char
+--     ~  Id Char -&gt; Const Int Char
+--     ~  Char    -&gt; Int
+myFunc = ord
+-- /show</code></pre><p>It's important to note that GHC will still <i>kind-check</i> type synonyms and their (possibly partial) applications, just not <i>type-check</i> them (until after full expansion).  It will also still forbid any expansion that would be illegal for some other reason; i.e., <code>LiberalTypeSynonyms</code> alone will not allow type safety to be broken.  Anything that would not type-check even after all type synonyms are expanded will still remain illegal with <code>LiberalTypeSynonyms</code> enabled.</p><p>While <code>LiberalTypeSynonyms</code> does not by itself use explicit <code>forall</code>s, it is often important  when working with the rest of the extensions in this section, so its guide is placed here for convenience.</p><h1 id="rankntypes--rank2types--and-polymorphiccomponents"><a href="#rankntypes--rank2types--and-polymorphiccomponents"><code>RankNTypes</code>, <code>Rank2Types</code>, and <code>PolymorphicComponents</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><h2 id="basic-usage"><a href="#basic-usage">Basic Usage</a></h2><p>The <code>RankNTypes</code> extension (as well as its deprecated synonyms <code>Rank2Types</code> and <code>PolymorphicComponents</code>) allows you to nest explicit <code>forall</code>s within function types and data definitions.  For example, the following program requires <code>RankNTypes</code>:</p><pre><code class="active haskell">{-# LANGUAGE RankNTypes #-}
+
+-- show
+main = print $ rankN (+1)
+
+rankN :: (forall n. Num n =&gt; n -&gt; n) -&gt; (Int, Double)
+rankN f = (f 1, f 1.0)
+-- /show</code></pre><p>The difference between the signature of <code>rankN</code> and the similar signature</p><pre><code class="haskell">forall n. Num n =&gt; (n -&gt; n) -&gt; (Int, Double)</code></pre><p>is that, in the latter, <code>n</code> is chosen by the <i>caller</i>, but in the former, <code>n</code> is chosen by the <i>callee</i>; in both cases <i><code>n</code> may be chosen more than once!</i>  In other words, you could pass a function of type <code>Int -&gt; Int</code> or <code>Double -&gt; Double</code> as the first parameter of the latter signature, and the type system would be fine with it.  However, the former signature forces its user to only pass in truly polymorphic functions:  functions precisely of type <code>forall n. Num n =&gt; n -&gt; n</code> or more general.  <code>(+1)</code> is one such function, as are <code>(6*)</code>, <code>abs</code>, and <code>id</code>; however, you could not pass in <code>(/5)</code> because that requires <code>Fractional</code>, even if some types with an instance of <code>Num</code> also have an instance of <code>Fractional</code>.  The latter signature requires a function from <code>n</code> to <code>n</code> <i>for some</i> <code>Num</code> <code>n</code>; the former signature requires a function from <code>n</code> to <code>n</code> <i>for every</i> <code>Num</code> <code>n</code>.</p><h2 id="interaction-with-liberaltypesynonyms"><a href="#interaction-with-liberaltypesynonyms">Interaction with <a href="https://www.fpcomplete.com/user/PthariensFlame/guide-to-ghc-extensions/explicit-forall#liberaltypesynonyms"><code>LiberalTypeSynonyms</code></a></a></h2><p>With both <code>RankNTypes</code> and <code>LiberalTypeSynonyms</code> enabled, it becomes possible to:</p><ul><li><p>use <code>forall</code> and/or constraints in type synonyms:</p></li></ul><pre><code class="active haskell">{-# LANGUAGE RankNTypes, LiberalTypeSynonyms #-}
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+type Const a b = a
+
+type Id a = a
+
+type Indexed f g = forall i. f i -&gt; g i
+
+type ShowIndexed f g = forall i. (Show i) =&gt; f i -&gt; g i
+
+type ShowConstrained f a = (Show a) =&gt; f a
+
+type FunctionTo a b = b -&gt; a
+
+myFunc1 :: Indexed Id (Const Int)
+--      ~  forall i. Id i -&gt; Const Int i
+--      ~  forall i. i    -&gt; Int
+myFunc1 _ = 2
+
+myFunc2 :: ShowIndexed Id (Const Int)
+--      ~  forall i. (Show i) =&gt; Id i -&gt; Const Int i
+--      ~  forall i. (Show i) =&gt; i    -&gt; Int
+myFunc2 = length . show
+
+myFunc3 :: forall a. ShowConstrained (FunctionTo Char) a
+--      ~  forall a. (Show a) =&gt;      FunctionTo Char  a
+--      ~  forall a. (Show a) =&gt;      a -&gt; Char
+myFunc3 = head . show
+-- /show</code></pre><ul><li><p>apply (or even partially apply) a type synonym to a type containing <code>forall</code> and/or constraints:</p></li></ul><pre><code class="active haskell">{-# LANGUAGE RankNTypes, LiberalTypeSynonyms #-}
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+type ShowConstrained f = forall a. (Show a) =&gt; f a
+
+type EnumFunctionTo b a = (Enum a) =&gt; a -&gt; b
+
+myFunc :: ShowConstrained              (EnumFunctionTo Char)
+--     ~  forall a. (Show a) =&gt;         EnumFunctionTo Char a
+--     ~  forall a. (Show a, Enum a) =&gt; a -&gt; Char
+myFunc = head . show . succ
+-- /show</code></pre><h2 id="use-case--the-st-monad"><a href="#use-case--the-st-monad">Use Case: The <code>ST</code> Monad</a></h2><p>There is a place in the standard libraries where <code>RankNTypes</code> is used to great effect.  That place is the <code>Control.Monad.ST</code> module in the <code>base</code> package (as well as its submodules), and <code>RankNTypes</code> is used there to allow local mutability while maintaining a pure interface.</p><p>Let's say we want to implement an algorithm in Haskell, but the algorithm we've chosen depends internally upon mutability.  Nonetheless, we know that the algorithm is effectively pure.  Take the following semi-contrived example (in C-like pseudocode), trying to demonstrate the <a href="http://en.wikipedia.org/wiki/Collatz_conjecture">Collatz conjecture</a>:</p><pre><code>Integer collatz(Integer n) {
+    
+    assert(n &gt; 0, &quot;n must be positive&quot;);
+    
+    Integer x = n;
+    Integer count = 0;
+    
+    while (x != 1) {
+        
+        count = count+1;
+        
+        if (x % 2 == 0) {
+            x = x/2;
+        } else {
+            x = 3*x+1;
+        }
+        
+    }
+    
+    return count;
+    
+}</code></pre><p>Let's say we want to implement this algorithm in Haskell, and we want it to be a pure function (because it effectively is), but we don't want to give up the efficiency that mutability affords us.  Fortunately, the <code>ST</code> monad comes to our rescue.  Here's how this example looks in Haskell:</p><pre><code class="active haskell">import Control.Exception (evaluate)
+import Control.Monad.ST
+import Data.STRef
+import System.IO
+
+-- copied verbatim from:
+-- monad-loops-0.3.3.0:Control.Monad.Loops.whileM_
+whileM_ :: (Monad m) =&gt; m Bool -&gt; m a -&gt; m ()
+whileM_ p f = go
+    where go = do x &lt;- p
+                  if x
+                     then f &gt;&gt; go
+                     else return ()
+
+main = do putStrLn &quot;Enter a positive integer:&quot;
+          ln &lt;- getLine
+          if null ln then hFlush stdout else
+            do let x = collatz $ read ln
+               evaluate x
+               putStr $ &quot;collatz &quot; ++ ln ++ &quot; = &quot;
+               print x
+               main
+
+-- show
+collatz :: Integer -&gt; Integer
+collatz n | n &gt; 0 = runST $ do xRef &lt;- newSTRef n
+                               countRef &lt;- newSTRef (0 :: Integer)
+                               whileM_ (do x &lt;- readSTRef xRef
+                                           return $ x /= 1)
+                                       (do modifySTRef countRef (+1)
+                                           modifySTRef xRef (\x -&gt; if even x
+                                                                      then x `div` 2
+                                                                      else 3*x+1))
+                               readSTRef countRef
+          | otherwise = error &quot;n must be positive&quot;
+-- /show</code></pre><p>What does this have to do with <code>RankNTypes</code>?  Well, the signatures of the various <code>ST</code> functions we've used are as follows:</p><pre><code class="haskell">newSTRef :: forall s a. a -&gt; ST s (STRef s a)
+readSTRef :: forall s a. STRef s a -&gt; ST s a
+writeSTRef :: forall s a. STRef s a -&gt; a -&gt; ST s () -- not used in this example
+modifySTRef :: forall s a. STRef s a -&gt; (a -&gt; a) -&gt; ST s ()
+runST :: forall a. (forall s. ST s a) -&gt; a</code></pre><p>Notice that the <code>ST</code> monad (as well as <code>STRef</code>s) carries around an extra type parameter <code>s</code> that <code>runST</code> forces to be completely polymorphic <i>and not present in its result</i>.  If you try to pass a mutable variable out of the <code>ST</code> monad (<i>e.g.</i>, if you call <code>runST</code> on a value of type <code>ST s (STRef s a)</code>), it will be a compile-time error.  See what happens when we try to break referential transparency:</p><pre><code class="active haskell">import Control.Monad.ST
+import Data.STRef
+
+main = putStrLn &quot;No errors.&quot;
+
+-- show
+illegal = runST $ do xRef &lt;- newSTRef (0 :: Integer)
+                     modifySTRef xRef (+1)
+                     return xRef
+-- /show</code></pre><p>We get a compile-time error that tells us that there is no possible valid type for <code>illegal</code>.  Because of the use of <code>RankNTypes</code> in the signature of <code>runST</code>, it is statically guaranteed that the result of <code>runST</code> is pure, even if the computation uses mutability internally.</p><h2 id="use-case--lens"><a href="#use-case--lens">Use Case: <code>lens</code></a></h2><p>The <a href="http://hackage.haskell.org/package/lens"><code>lens</code> library</a> makes use of <code>RankNTypes</code> (and <code>LiberalTypeSynonyms</code>) to implement the very powerful notion of lenses, sometimes called “functional references”.  The idea behind lenses is that we need a thing like a property accessor:  something that, given a value of its source type, can produce a value of its target type, and that, given a value of its source type and a value of its target type, can produce a modified value of its source type:</p><pre><code class="haskell">type Lens' s a
+view :: Lens' s a -&gt; s -&gt; a
+set :: Lens' s a -&gt; a -&gt; s -&gt; s</code></pre><p>(Note that the actual types are a bit more general than this; see the <code>lens</code> package's documentation, linked above, for the exact types used).</p><p>For example, the <code>lens</code> package (in the <code>Data.Complex.Lens</code> module) conveniently provides a lens to get the real part of a complex number:</p><pre><code class="haskell">_realPart :: Lens' (Complex a) a</code></pre><p>We can use <code>view</code> to feed this lens a complex number, and we will get back its real part; we can also use <code>set</code> to feed this lens a complex number and a new real part, and we will get back a complex number with the new real part and the original imaginary part:</p><pre><code class="active haskell">import Data.Complex
+import Control.Lens
+import Data.Complex.Lens
+
+main = do putStr &quot;c  = &quot;
+          print   c
+          putStr &quot;r  = &quot;
+          print   r
+          putStr &quot;r' = &quot;
+          print   r'
+          putStr &quot;c' = &quot;
+          print   c'
+
+
+-- show
+c  :: Complex Double
+c  =  1.0 :+ 2.5
+
+r  :: Double
+r  =  view _realPart c
+
+r' :: Double
+r' =  2.0
+
+c' :: Complex Double
+c' =  set _realPart r' c
+-- /show</code></pre><p>How is <code>RankNTypes</code> involved here?  Well, it has to do with the implementation of the <code>Lens'</code> type alias (see the <code>lens</code> package documentation for the actual code involved):</p><pre><code class="haskell">type Lens' s a = forall f. (Functor f) =&gt; (a -&gt; f a) -&gt; (s -&gt; f s)</code></pre><p>While this is not the place for a full introduction to the van Laarhoven lens representation and its many and varied uses and extensions, suffice to say that <code>RankNTypes</code> plays a critical role in the core functionality of the <code>lens</code> package, and that much of that functionality is impossible to reproduce in any language without either higher-rank universal polymorphism or some equivalent capability.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/explicit-forall';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

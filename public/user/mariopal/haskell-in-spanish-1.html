@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html><head><title>Haskell in Spanish 1 - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/mariopal">mariopal</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mariopal/haskell-in-spanish-1">Haskell in Spanish 1</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Haskell in Spanish 1</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">26 Dec 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/mariopal">mariopal</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3657/786144bf186a57575ea5fd009d024ca02b109216">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mariopal">See all content by mariopal</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#haskell-in-spanish-1">Haskell in Spanish 1</a><ul><li><a href="#hechos-interesantes-sobre-haskell">Hechos interesantes sobre Haskell</a></li><li><a href="#software-importante-escrito-en-haskell">Software importante escrito en Haskell</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="haskell-in-spanish-1"><a href="#haskell-in-spanish-1">Haskell in Spanish 1</a></h1><p><i>I've seen very few tutorials or introductions to Haskell written in Spanish, so I decided to write some text in my native language about this great programming language, even though I consider myself still a newbie in Haskell, and therefore the content will be very basic. I also hope to learn more on the way, thanks to the corrections that make others about what I write, and by the fact that I will have to further study in order to write properly on some issues</i>. Now in Spanish.</p><p>He visto pocos tutoriales o introducciones sobre Haskell escritos en español, así que he decidido escribir algunas entradas en mi lengua nativa sobre este genial lenguaje de programación, a pesar de que me considero aún un novato en Haskell, y por tanto el contenido en principio será muy básico. Con esto espero también aprender más por el camino, gracias a las correciones que puedan hacer otros sobre lo que escribo, y al hecho de que tendré que estudiar más a fondo para poder escribir con propiedad sobre algunos temas.</p><p>Voy a comenzar con una lista de cosas que me han sorprendido de Haskell cuando empecé a interesarme por él. Puesto que estoy ilusionado con lo que he visto, puede que mi estilo en esta primera entrada sea demasiado optimista y positivo, sin ser capaz de indicar las debilidades de Haskell, y únicamente ser capaz de resaltar sus fortalezas y ventajas. Pero por otro lado no hay nada mejor que un poco de pasión para convencer a alguien a adentrarse en un tema nuevo e interesante. Espero que disculpen mis imprecisiones debido a mi euforia a la hora de hablar de estos hechos.</p><h2 id="hechos-interesantes-sobre-haskell"><a href="#hechos-interesantes-sobre-haskell">Hechos interesantes sobre Haskell</a></h2><ul><li><p>La primera vez que vi código en Haskell fue en los primeros puestos de la &quot;Google Code Jam&quot;. ¡¡Los que ganaban el concurso escribían sus programas en Haskell!! Recuerdo que no entendía nada del código, y que me sorprendió que los programas eran muy cortos, sobre todo comparados con mis soluciones en Python. Me daba la impresión como que no estaban terminados. Pero estaban perfectamente cerrados y solucionaban bien los retos de programación del concurso en el tiempo establecido.</p></li><li><p>En Haskell no importa el orden de declaración de las funciones: todas se ven con todas (puedes poner la función &quot;main&quot; donde quieras).</p></li><li><p>El número de palabras reservadas en Haskell es aprox. 2/3 del número de palabras reservadas en C (unas 22 frente a unas 33). Con esto quiero decir que tiene un núcleo muy simple y reducido.</p></li><li><p>En Haskell no hay palabras reservadas para hacer bucles de ningún tipo (ni for, ni while, ni siquiera algo como goto para emularlo). El truco está en utilizar recursividad y el pattern-matching para conseguir iterar sobre algo muchas veces (hasta que se cumpla alguna condición). Cuando sabes más del lenguaje te das cuenta que el 95% de las veces puedes usar funciones genéricas en vez de bucles (ej: map, fold). Es curioso que ahora es esto lo que se aconseja en las versiones más modernas de lenguajes como C++: siempre que se pueda, utilizar funciones de alto nivel para las iteraciones en vez de bucles explícitos.</p></li><li><p>Todas las &quot;variables&quot; (o definiciones, o expresiones) en Haskell son inmutables, lo que significa que todas son constantes y no se pueden modificar. Para un programador imperativo esto parece una limitación gigantesca... hasta que te das cuenta de que es una ventaja. Como curiosidad, si escribes <code>x = x + 1</code> no estas incrementando x en uno más del número que tenía (si &quot;x&quot; está definido, es inmutable, es decir, constante, y ya no se puede modificar), sino que normalmente estás escribiendo una definición recursiva: <code>x = ((..x.. + 1) + 1) + 1) + 1</code> (básicamente esta definición es un bucle infinito). No hay que complicarse: si quieres almacenar el siguiente valor de &quot;x&quot; sólo hay que escribir &quot;y = x + 1&quot; ¿no?.</p></li><li><p>Aunque Haskell tiene tipado estático, en la práctica no es necesario declarar ningún tipo, y el lenguaje encuentra automáticamente los mejores tipos para cualquier expresión, pues internamente implementa el más potente sistema de inferencia de tipos que existe (algoritmo de Hindley-Milner). Esto te da la facilidad de uso del tipado dinámico con las ventajas del tipado estático. Otros lenguajes tienen algo parecido, o empiezan a tenerlo (ej: &quot;auto&quot; en C++), pero no suele estar tan integrado en el lenguaje.</p></li><li><p>Haskell permite escribir código siguiendo &quot;reglas de identado&quot; similares a las de Python (alineando en la misma columna expresiones dentro del mismo bloque), pero también tiene un modo &quot;layout&quot; o de &quot;escritura libre&quot; sin reglas de identado, que utiliza llaves y puntos y coma (a lo C) para escribir expresiones, que permitiría escribir cualquier programa entero en una única línea. Ambos sistemas están activos simultáneamente, y se pueden mezclar (siempre que se haga entre bloques de código distintos).</p></li><li><p>Haskell acepta también el formato llamado &quot;literate haskell&quot;, que consiste en escribir en el fichero del código cualquier texto libre (normalmente formateado como Markdown o ReStructuredText, pero puede ser cualquier cosa) y sólo se considera como texto del programa el código que sigue al carácter '&gt;', cuando dicho carácter es el primero que aparece en una línea (se admiten espacios antes y después). Unido a que las funciones se pueden declarar en cualquier orden y siempre tienen visibilidad en todo el fichero, esto permite escribir una documentación textual muy elaborada, e intercalar el código Haskell en el fichero de texto con dicha documentación. Hay muchas entradas de Blog en Internet escritas en &quot;literate haskell&quot;, como ficheros con la extensión &quot;*.lhs&quot;, que el compilador acepta exactamente igual que los ficheros que únicamente contienen código Haskell (extensión &quot;*.hs&quot;).</p></li><li><p>Se dice de los programas de Haskell que &quot;si compilan, entonces funcionan&quot;, remarcando el hecho de que es uno de los lenguajes de programación que es capaz de encontrar el mayor número de errores de un programa en tiempo de compilación (muchos de los errores que otros lenguajes sólo encuentran en tiempo de ejecución). El tipado estático y estricto, junto con el potente sistema de tipos paramétricos y polimórficos, sobre el que se tiene que basar todo el código que se escribe, es lo que hace esto posible. En muchos casos es capaz de proveer garantías estáticas (es decir, demostradas de manera teórica, y no sólo con una batería de tests) para partes del programa que normalmente suelen ser fuente de errores y difíciles de testar, como las que pueden provocar &quot;condiciones de carrera&quot;.</p></li><li><p>Se dice de Haskell que es &quot;el mejor lenguaje imperativo&quot;. No es una broma, pues gracias a la sintaxis de la palabra reservada &quot;do&quot;, el código escrito dentro de la Monad IO tiene aspecto totalmente imperativo, pero al no serlo realmente, tiene toda la fiabilidad, seguridad y ventajas del código escrito directamente en el paradigma funcional. Aunque se podrían escribir programas enteros dentro de la Monad IO y trabajar como si Haskell fuera un lenguaje de programación imperativo, la idea es precisamente la contraria: escribir el mínimo código posible dentro de IO y sacar lo máximo posible hacia funciones &quot;puras&quot;, con todas las ventajas directas del código funcional puro que ello conlleva. Sólo las funciones con &quot;efectos laterales&quot; ineludibles deben estar dentro de la Monad IO.</p></li><li><p>El hecho de que Haskell sea funcional &quot;puro&quot; (sin efectos laterales) a la vez que no-estricto (implementado como &quot;lazy&quot; o perezoso) por defecto, lo hace ideal para crear programas concurrentes, que aprovechen al máximo los múltiples procesadores de las arquitecturas actuales. Esto ocurre además de manera natural, pues las funciones puras son thread-safe siempre, y el funcionamiento no-estricto (lazy) permite una planificación implicita de operaciones en paralelo. Esto quizás sea unas de las características más potentes de Haskell, y probablemente el hecho de que en los últimos tiempos tenga más visibilidad e importancia como lenguaje de programación.</p></li><li><p>La librería STM de Haskell (Software Transactional Memory) se considera la más potente que existe en este campo, aprovechando al máximo el paralelismo y la concurrencia de los procesadores actuales, utilizando un paradigma de programación concurrente muy fácil e intuitivo, sin tener que escribir código difícil de razonar, como el que hay que escribir dentro del infierno de los threads y los mutex, con sus problemas de deadlocks, livelocks, inversión de prioridad, etc... asociados (y sin tener que recurrir de manera explícita a código lock-free aún más complejo y difícil, y aunque en su implementación interna la STM lo utilice, nunca lo expone al usuario de la librería). Por su facilidad, prestaciones y la seguridad que aporta para este tipo de código, la STM se considera el paradigma del futuro para escribir código concurrente. Aunque se puede usar STM en otros lenguajes (hay librerías STM para muchos) es en Haskell donde se integra de manera natural con el lenguaje y donde mejor brilla su potencial y facilidad de uso. La última hornada de procesadores empiezan a implementar Memoria Transaccional por Hardware, mediante extensiones en el juego de instrucciones, lo que portado y aprovechado por esta librería la haría realmente potente, y sin competencia en la creación de programas concurrentes fáciles de escribir y realmente eficientes.</p><p>Incluso en la entrada de la Wikipedia sobre la STM (al menos en la inglesa), al final del apartado sobre &quot;ventajas y desventajas conceptuales&quot;, se habla de que Haskell está mejor preparado que otros lenguajes al resolver los problemas de la STM en tiempo de compilación: <a href="http://goo.gl/cgOrDT">http://goo.gl/cgOrDT</a>, y el apartado siguiente (&quot;Composable operations&quot;) es prácticamente exclusivo sobre Haskell.</p></li><li><p>Como negativo, se dice que la curva de aprendizaje de Haskell es larga y empinada, sobre todo para programadores que provienen del paradigma imperativo y apenas han trabajado con el paradigma funcional. También se dice que si no te rindes y superas esa barrera de entrada, las ventajas son evidentes luego. Por ejemplo, se dice que un programador imperativo tarda en dominar Haskell de manera bastante completa en torno a 1 año de media, siempre que se proponga en serio aprender a manejarlo y no se rinda.</p></li><li><p>No sólo de Haskell, sino del paradigma de programación funcional en general, se dice que cuando lo dominas, tus programas imperativos son mejores, y tienes más herramientas y abstracciones con las que trabajar a la hora de escribir código de cualquier tipo, incluso aunque sea en un lenguaje que no es principalmente funcional.</p></li><li><p>Haskell es compilado a código nativo, con lo que es todo lo eficiente en ejecución que puede ser un programa con paradigma funcional (creo que nadie me corregiría si dijera que es el lenguaje funcional que genera el código más eficiente). Pero también tiene un intérprete muy similar al intérprete de Python, que te permite escribir pruebas muy fácilmente, e incluso scripts. Aunque el código interpretado es mucho menos eficiente, esta posibilidad es muy cómoda durante el desarrollo.</p></li><li><p>Haskell utiliza un recolector de basura: como Java, como C#, como Javascript y como Python. También como lenguajes aún más modernos: como D y como Go. El recolector de basura está integrado en el runtime de Haskell, y por tanto acompaña al código compilado en formato nativo. Esto no podía ser de otra forma: es un lenguaje funcional muy potente, no hay punteros ni elementos de bajo nivel similares, su ejecución no-estricta se implementa como lazy (perezosa) la mayor parte del tiempo, planifica la ejecución concurrente y paralela desde dentro, y todo eso no podría hacerse sin un potente recolector de basura. Podemos pensar que esto creará ejecutables menos eficientes, y puede que sea así, pero debe ser uno de los recolectores de basura más eficientes que existen, cuando muchos de sus ejecutables compiten en eficiencia con ejecutables de código escrito en C. Si además estamos en un entorno multiprocesador y se aprovechan las características de concurrencia de Haskell, el recolector de basura es necesario, y convierte al código en más eficiente, pues se aprovecha su infraestructura para hacer cosas en paralelo y de bajo nivel de manera implícita, que hace que el código escrito apenas tenga que tener en cuenta la concurrencia porque el recolector de basura, y el runtime de Haskell en general, ya se encarga de esas cosas de manera automática internamente. Por cierto, se dice también que cualquier programa lo suficientemente complejo implementa internamente algún tipo primitivo de recolector de basura sin darse demasiado cuenta de ello, y probablemente no de la forma más eficiente que podría hacerse.</p></li><li><p>Su principal compilador, el GHC (Glasgow Haskell Compiler, que es libre), está escrito también en Haskell (algo raro, pues la mayoría de los compiladores de casi cualquier lenguaje están escritos en C o C++), y lleva décadas desarrollándose. Por supuesto, hay partes de bajo nivel y enganches con el Sistema Operativo escritos en C. Se considera uno de los compiladores más complejos que existen, y durante los últimos años, tanto Haskell en general como GHC en particular se han obsesionado con generar código eficiente para demostrar que los programas compilados de lenguajes funcionales también pueden ser rápidos. El objetivo en su comunidad es el de &quot;batir&quot; a C (ni siquiera a C++), el rey invicto de los ejecutables super-óptimos (y el rey de los lenguajes imperativos). Aunque no lo consigan, es un listón muy alto para un lenguaje funcional, de tan alto nivel y con gran capacidad de abstracción y flexibilidad. Y en el mundo de la programación concurrente y paralela, sobre máquinas multiprocesador, probablemente ya ha conseguido este objetivo. El compilador GHC, además de compilar a código nativo, también puede compilar a código en C.</p></li><li><p>Es una broma repetida a lo largo de los años de Haskell el decir en sus círculos que debemos tratar de que Haskell permanezca siendo inútil, y que &quot;hay que evitar su éxito a toda costa&quot;, porque no querían que la pureza de Haskell se contaminase al introducirse en el mundo real. De hecho, es también relativamente común que algunos de los artículos de Haskell (sobre todo de los principales programadores y desarrolladores del compilador principal) tengan títulos negativos, del tipo: &quot;Haskell es inútil&quot;. Hoy en día se comenta en los foros que esto ya no aleja a Haskell del mundo real, sino todo lo contrario: sus fans leen los artículos porque ya saben que el título es una broma, y los despistados lo leen al principio un poco con recelo para luego descubrir que dentro no se critica al lenguaje sino todo lo contrario. Los detractores también van corriendo a leerlo para tener argumentos contra este &quot;lenguaje tan complicado y distinto&quot;, para descubrir muchas veces que el artículo les gusta y hasta los &quot;convierte&quot; a favor de Haskell.</p></li><li><p>El lenguaje tuvo un punto de inflexión cuando se introdujo como base para sus librerías (sobre todo para la parte no-pura de sus librerías más básicas, como la librería estándar IO) principios de la Teoría de Categorías (supuestamente una de las ramas más complejas de las matemáticas, que trata de desplazar a la Teoría de Conjuntos como teoría de base para todas las matemáticas). Esto llevó a usar el concepto de Monad (o mónada) como uno de los patrones de diseño más potentes del lenguaje, y que prácticamente lo convirtió en un lenguaje nuevo (la base estaba bien y casi cualquier lenguaje funcional puede usar y aprovecharse del concepto de Monad, pero a Haskell 98 además le añadieron una palabra reservada, &quot;do&quot;, como &quot;sintaxis sugar&quot; para trabajar con Monads siguiendo un estilo que podríamos llamar de &quot;programación imperativa&quot; y que lo hacía todo increíblemente más fácil).</p></li><li><p>Se dice que lo primero que un aprendiz de Haskell hace cuando empieza a entender el lenguaje es escribir en un blog un artículo (otro más de cientos o miles que ya hay) o tutorial explicando al mundo lo que son las Monads y cómo funcionan. Normalmente no sirve mucho como tutorial para terceros, sino más bien para que el propio autor y aprendiz de Haskell asiente sus ideas.</p></li><li><p>Haskell es el segundo lenguaje de la historia que implementó evaluación perezosa generalizada y presente por defecto en todo el lenguaje (el primero fue Miranda, que fue un prototipo de lenguaje creado para una investigación sobre este tema y del que Haskell tomó ideas). Y es el primer lenguaje de la historia en utilizar entrada/salida mediante mónadas (Monadic IO), que es su abstracción más potente.</p></li><li><p>El hecho de ser &quot;perezoso&quot; o &quot;lazy&quot; hace que en Haskell se puedan definir estructuras de datos &quot;infinitas&quot;, como por ejemplo una lista con todos los números del 1 hasta el infinito (o un árbol infinito, o un grafo infinito), y trabajar normalmente con ellas. Haskell sólo evaluará la parte que necesite de la lista (por eso es &quot;perezoso&quot;) y si al final de las operaciones el resultado es finito, no tendrá problemas en mostrarlo. Esto es una abstración muy útil para determinado tipo de problemas.</p></li><li><p>Por lo que yo he visto, su única desventaja con Lisp es que no tiene integrado lo que se denomina &quot;las macros de Lisp&quot; (que no tienen nada que ver con las macros de C). Para ello hay una extensión (ya bastante madura, y perfectamente soportada por GHC, el compilador principal) denominada Template Haskell, que permite hacer lo mismo y más (parseo de texto libre y generación de código Haskell en tiempo de compilación, que luego vuelve a compilarse en una segunda fase), pero hay que reconocer que el manejo es un poco más feo y menos elegante que en Lisp (donde las macros tienen el mismo aspecto que el código normal de Lisp: las S-expression). Pero el formato del código normal de Lisp está a su vez limitado y es menos elegante que en Haskell precisamente para poder soportar las macros utilizando el mismo formato del lenguaje (es decir, para conseguir que datos y programas tengan el mismo formato). Con Template Haskell también puedes tratar un programa como si fueran datos, y se creó para cubrir esa deficiencia original respecto a Lisp.</p></li><li><p>Hay muchos conceptos de programación que normalmente se asocian o implementan como parte intrínseca de los lenguajes de programación que en Haskell se implementan como simples librerías que únicamente utilizan el &quot;core&quot; del lenguaje, demostrando que estas abstracciones o conceptos no son de tan bajo nivel, y que con un lenguaje con una base adecuada, como Haskell, se pueden implementar utilizando sólo unos elementos básicos. Algunos ejemplos de estos conceptos de los que hablo:</p><ul><li><p>Bucles: Bueno, ya he hablado de esto, pero el caso es que basta con tener una capacidad de recursividad potente en el lenguaje, unido a cosas como el pattern-matching, para no necesitar bucles de ningún tipo como elementos intrínsecos del lenguaje.</p></li><li><p>Programación Imperativa y secuencial: como ya he dicho, mediante el concepto de Monad, y sobre todo con la Monad IO.</p></li><li><p>Excepciones: Sí, en Haskell existen excepciones, pero no están implementadas como un componente dentro del lenguaje, sino como una librería, por lo que el utilizarlas o no es decisión del programador. Hay que tener en cuenta que algunas librerías base del lenguaje sí las utilizan.</p></li><li><p>Orientación a Objetos: Aunque es un paradigma distinto y en la programación funcional no encaja, se pueden utilizar conceptos de este paradigma en Haskell (ej: he llegado a leer que las Comonads y la OOP son básicamente lo mismo). Esto no es nada nuevo, pues ya sabemos que hasta en lenguaje C (que no es orientado a objetos) se puede trabajar con este paradigma.</p></li><li><p>Funciones con parámetros opcionales o con un número de parámetros variable (variadic functions): En Haskell las funciones tienen un número de parámetros fijo (bueno, en realidad tienen un único parámetro y devuelven otra función que coje el siguiente parámetro, y así hasta el último), pero gracias al polimorfismo y las typeclass es posible implementar funciones que &quot;parecen&quot; que tienen un número de parámetros variable. Un ejemplo claro está en la librería &quot;Printf&quot;, que implementa una función &quot;printf&quot; al estilo de C (y por tanto con un número de parámetros variable). Es curioso y esclarecedor estudiar cómo se consigue esto, pues no se utiliza ninguna extensión del lenguaje, sino que únicamente con las herramientas que ya tenemos (clases de tipos y tipos paramétricos y polimórficos) es posible que una función con un parámetro de cualquier tipo devuelva a su vez otra función que de nuevo acepta un parámetro de cualquier tipo, y así llegar hasta la función principal que las ejecuta a todas en cadena emulando así la ejecución de una única función multiparámetro. El concepto se asemeja a clases de C++ con funciones que devuelven al propio objeto, de manera que pueden anidarse llamadas a funciones miembro todas las veces que queramos (también muy utilizado en Javascript, en librerías como jQuery). Solo que en Haskell el aspecto externo final es exactamente el mismo que el de una llamada a función con tantos parámetros como hagan falta.</p></li></ul></li></ul><h2 id="software-importante-escrito-en-haskell"><a href="#software-importante-escrito-en-haskell">Software importante escrito en Haskell</a></h2><ul><li><p><b>ghc</b>: El Glasgow Haskell Compiler es el compilador de Haskell más desarrollado, y probablemente el proyecto de software más grande escrito en Haskell.</p></li><li><p><b>pandoc</b>: Es una librería para convertir de un formato de marcas a otro, y una utilidad en línea de comandos que utiliza esta librería. En sistemas con LaTeX instalado puede generar salida en PDF.</p><ul><li><p>Puede leer:<br />Markdown y (subconjuntos de) Textile, reStructuredText, HTML, LaTeX, MediaWiki y DocBook XML.</p></li><li><p>Puede escribir:<br />Texto plano, Markdown, reStructuredText, XHTML, HTML5, LaTeX (incluidas presentaciones beamer), ConTeXt, RTF, DocBook XML, OpenDocument XML, ODT, Word docx, GNU Texinfo, MediaWiki, EPUB (v2 o v3), FictionBook2, Textile, páginas man, Emacs Org-Mode, AsciiDoc, Slidy, Slideous, DZSlides y S5 HTML.</p></li></ul></li><li><p><b>darcs</b>: Es un sistema de control de versiones distribuido. Como ventaja tiene que está basado en la &quot;teoría de parches&quot; lo que le permite hacer más cosas de manera automática y correcta que otros sistemas como Mercurial o Git (su interfaz por tanto es más sencilla, con menos comandos necesarios). En concreto su sistema de fusionado es el más potente, pero también es su punto débil, pues como desventaja está el rendimiento, ya que su completo sistema de fusionado puede llegar a requerir tiempos exponenciales: mejorar esto es el principal desarrollo que se hace actualmente en este software. Hay que decir que el problema de rendimiento es por diseño, y no por elegir a Haskell. De hecho las primeras versiones de Darcs se escribieron en C++ y tenían el mismo problema.</p></li><li><p><b>xmonad</b>: Es un completo gestor de ventanas de tipo mosaico para el sistema de ventanas &quot;X Window System&quot;, escrito en menos de 1200 líneas de código. Sus ventajas son que ordena y dimensiona las ventanas automáticamente según varias reglas y criterios, que se pueden configurar e incluso &quot;programar&quot; por el usuario. La idea es que no haga falta el ratón para la gestión de las ventanas. También se considera muy estable, lo que viene por estar escrito en Haskell (dicen que te garantizan que es &quot;crash-free&quot;). Soporta los últimos estándares relacionados con el escritorio en Linux (incluyendo xinerama real, espacios de trabajo distintos para cada pantalla, bandeja del sistema) y es fácilmente extensible. Por ejemplo, sigue los estándares de manera que puede usarse como gestor de ventanas de un escritorio completo como es KDE, sustituyendo a KWin de manera compatible.</p></li><li><p><b>snap</b>: Una completa infraestructura de desarrollo web que incluye un servidor web, librerías de apoyo y plantillas para HTML.</p></li><li><p><b>yesod</b>: La infraestructura de desarrollo web más avanzada de Haskell. Se la podría comparar con Django o Rails. El servidor web que incluye (warp) es tan rápido como nginx (y a veces incluso más rápido en algunos benchmarks). Hace un uso intensivo de Template Haskell, lo que le permite validar en tiempo de compilación hasta el HTML, CSS y Javascript de las plantillas. También incluye una librería genérica de acceso a bases de datos, que se puede utilizar de manera aislada, sin necesidad de tener todo Yesod instalado.</p></li><li><p><b>dfsbuild</b>: Herramienta oficial de Debian para generar los discos de rescate llamados &quot;Debian From Scratch&quot;.</p></li><li><p><b>pugs</b>: Una implementación completa del lenguaje Perl 6 en Haskell. Con esto se demuestra que se puede utilizar para implementar otros lenguajes.</p></li></ul></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/mariopal/haskell-in-spanish-1';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

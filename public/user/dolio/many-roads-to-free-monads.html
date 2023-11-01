@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html><head><title>Many Roads to Free Monads - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/dolio">Dan Doel</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads">Many Roads to Free Monads</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Many Roads to Free Monads</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Apr 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/dolio">Dan Doel</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/7629/a415299125739e8e423e74f567c195f947f612be">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/dolio/monad-transformers-and-static-effect-scoping">Next content: Monad Transformers and Static Effect Scoping</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/dolio">See all content by Dan Doel</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#free-as-in-monoids">Free as in Monoids</a></li><li><a href="#algebras-of-a-monad">Algebras of a Monad</a></li><li><a href="#free-monads">Free Monads</a></li><li><a href="#another-type-of-algebra">Another type of algebra</a></li><li><a href="#free-algebras">Free Algebras</a></li><li><a href="#general-versus-specific-cases">General versus specific cases</a></li><li><a href="#a-new-slogan">A new slogan</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Free monads are handy constructs to have in one's bag of tricks, and have become fairly popular of late. This article attempts to explain their basis in category theory, as well as some interesting/amusing connections that may not have been spelled out elsewhere.</p><h3 id="free-as-in-monoids"><a href="#free-as-in-monoids">Free as in Monoids</a></h3><p>Free monads arise as a standard sort of construction in category theory. Suppose we have two categories. The first, <code>D</code> may be any category, and the second, <code>C</code> has objects that are like objects of <code>D</code>, but equipped with extra structure or properties. Finally, suppose there is a functor <code>U : C -&gt; D</code> that takes the structured objects to the corresponding plain objects, and embeds structure-preserving morphisms into the collection of plain morphisms. This <code>U</code> is often called a forgetful functor (although there is no way of formally specifying what 'forgetful' really means). If there exists a functor <code>F : D -&gt; C</code> that is left adjoint to <code>U</code>:</p><pre><code>Hom(F A, B) ~= Hom(A, U B)</code></pre><p>then it is said to generate 'free' objects with structure. In other words, homomorphisms from the free structure over <code>A</code> into <code>B</code> correspond to 'plain' morphisms from <code>A</code> to the 'plain' part of <code>B</code>.</p><p>A common example takes <code>C</code> to be the category of monoids and <code>D</code> to be the category of sets. The free monoid functor takes sets <code>A</code> to the monoid <code>([A], (++), [])</code>. And the adjunction says:</p><pre><code>Hom(([A], (++), []), (M, mappend, mempty)) ~= A -&gt; M</code></pre><p>That is, the monoid homomorphisms from the free monoid over <code>A</code> to some other monoid <code>M</code> are in correspondence with ordinary functions from <code>A</code> to <code>M</code>. Another way of saying this is that all the behavior of such a homomorphism is determined by the behavior on singleton lists, which makes sense, because the rest of the behavior is determined by the rules for a homomorphism:</p><pre><code class="haskell">h [] = mempty
+h (l1 ++ l2) = h l1 `mappend` h l2</code></pre><h3 id="algebras-of-a-monad"><a href="#algebras-of-a-monad">Algebras of a Monad</a></h3><p>Time for a quick digression. Whenever we have an adjunction <code>F -| U</code>, we can get a monad <code>UF</code>. In the case of the above adjunction involving monoids, we get the free monoid monad, or list monad as it's usually known in Haskell. In category theory, monads are typically used for algebra. First, one defines the algebras of a monad <code>T</code>. These are pairs <code>(A, a : T A -&gt; A)</code> (call the first component the 'carrier' and the second the 'action') that follow the following rules:</p><pre><code>a . return = id
+a . fmap a = a . join</code></pre><p>So, for the free monoid monad, these are pairs <code>(M, fold : [M] -&gt; M)</code>, such that:</p><pre><code>forall (m :: M). fold [m] = m
+forall (mss :: [[M]]). fold (map fold ms) = fold (concat ms)</code></pre><p>One also defines homomorphisms between these algebras, which are maps on the carriers that follow the following rule:</p><pre><code>h :: (A, a : T A -&gt; A) -&gt; (B, b : T B -&gt; B)
+h :: A -&gt; B
+
+h . a = b . fmap h</code></pre><p>Now, if one looks closely, it turns out that algebras of the free monoid monad are monoids, and the algebra homomorphisms are monoid homomorphisms. And this is a general pattern: if there is a free-forgetful adjunction <code>F -| U : C -&gt; D</code> involving categories of algebraic structures, then the category of algebras of the monad <code>UF</code> is equivalent to the category <code>C</code>.</p><h3 id="free-monads"><a href="#free-monads">Free Monads</a></h3><p>Free monads are actually quite analogous to free monoids, except instead of categories of monoids and sets, we use categories of monads and endofunctors. So, there is a forgetful functor:</p><pre><code class="haskell">U :: Monad -&gt; Endofunctor
+U (T, join, return) = T</code></pre><p>And the free monad functor can be given as a Haskell data type, if we're interested in endofunctors that can be represented in Haskell:</p><pre><code class="haskell">data Free f a = Pure a | Roll (f (Free f a))</code></pre><p>Which is rather like having 0-or-more copies of <code>f</code> applied to <code>a</code> (instead of 0-or-more elements of a set . The required adjunction similarly says that monad morphisms from <code>Free F A</code> to some other monad <code>M</code> correspond to natural transformations from <code>F</code> to <code>M</code>, which is again saying that such morphisms are determined by the 'singleton' pieces of the free monad, and the rest is determined by the structure-preserving rules.</p><h3 id="another-type-of-algebra"><a href="#another-type-of-algebra">Another type of algebra</a></h3><p>Above we talked about algebras of a monad. However, there is a weaker type of algebra that we talk about more often in Haskell: algebras of a functor. These look much like monad algebras, except there is no structure to the functor (just being an endofunctor), so there are no rules for the 'action' to follow. The algebras of an endofunctor <code>F</code> are simply pairs <code>(A, a : F A -&gt; A)</code>, and algebra homomorphisms are morphisms on the carriers that commute with the actions.</p><p>Data types are given semantics in terms of 'initial F-algebras.' The monad algebras earlier could express generators and equations, but for data types, we need only the former. It is the unit and join rules that enforce the equations of the monad algebras, so we can cover everything needed for data types by saying that they are F-algebras, where <code>F</code> specifies generators for the constructors of the type. Being initial ensures that there is in some sense just the structure generated by <code>F</code>, and that no structure of <code>F</code> has been lost, which is what we want out of a data type.</p><p>Do note that in the case of a monad <code>T</code>, there is a difference between functor algebras of <code>T</code> and monad algebras of <code>T</code>. For instance, lists are the free monoid monad. Monad algebras are monoids, but functor algebras aren't necessarily. The initial algebra of the list functor has unadorned rose trees as values:</p><pre><code class="haskell">data Rose = Node { children :: [Rose] }</code></pre><h3 id="free-algebras"><a href="#free-algebras">Free Algebras</a></h3><p>However, instead of looking at initial F-algebras, we can look at a connection between the category of F-algebras and the category of types. There is an obvious forgetful functor, which just gives the carrier of the algebra (and algebra homomorphisms are already functions on the carriers---just ones that satisfy a particular property). So we can talk about free F-algebras, such that:</p><pre><code>Hom((Free F A, ???), (B, b)) ~ A -&gt; B</code></pre><p>It was pointed out to me recently that this is exactly the same <code>Free</code> as above, and <code>???</code> is actually <code>Roll</code>. This adjunction says that every algebra homomorphism above is determined only by a choice of embedding <code>A</code> into <code>B</code>; the rest of the structure is determined by rules for homomorphisms (<code>b</code> must be applied for all the <code>F</code> layers in the <code>Free F A</code>, after using the function to create a <code>Free F B</code>).</p><p>We remarked earlier that every adjunction <code>F -| U</code> gives a monad <code>UF</code>. And in this case, that monad is the free monad over <code>F</code>. This is also a free-forgetful adjunction to a category of algebras (F-algebras), so we can get that the category of F-algebras is equivalent to the category of <code>Free F</code> monad algebras. So, above we had two notions of algebras for the list functor. It turns out these can both be expressed as monad algebras: monoids are monad algebras of <code>[]</code>, while the rose-tree like things are monad algebras of <code>Free []</code>.</p><p>One final aside is that there is a well known theorem that &quot;left adjoints preserve colimits&quot; (and right adjoints, limits). <code>Free F</code> is a left adjoint, so it will take an initial object <code>0</code> to the initial F-algebra.</p><h3 id="general-versus-specific-cases"><a href="#general-versus-specific-cases">General versus specific cases</a></h3><p>I was asked about the free algebra stuff recently with regard to why we get the same data type in both cases. The answer, I think, can be explained as part of a general pattern in category theory. Basically, both free monads and the free F-algebra are trying to accomplish the same thing.</p><p>We noted earlier that monads and their algebras are used to characterize algebras with generators and equations, and that functors and their algebras can cover generators, but not equations. The category of F-algebras, and free F-algebras do this, but we also saw that we can do both with the free monad. The free monad just takes any functor, and completes it into a monad that enforces no equations, but uses the given functor for the generators, and then monad algebras of <code>Free F</code> are just the same as functor algebras of <code>F</code>. It is just two ways of achieving the same result.</p><p>However, the way we specified free monads used an adjunction <code>Free -| U</code> between a category of monads and one of endofunctors. For such an adjunction to exist, it is required that there be a free monad for <i>all</i> <code>F</code>. This is true in Haskell, because it is 'nice' in many ways. But in a general categorical setting, it is possible for that to fail, so that there is no free monad functor. However, in such a case, there may still be specific choices of <code>F</code> such that free <code>F</code> algebras exist. So our second adjunction would work (for some <code>F</code>), but the first wouldn't. Those free algebra functors would still give rise to a monad, and one could call it the free monad over <code>F</code>, but it would be for particular points, so to speak.</p><p>One could actually take this down another level. We also specified free F-algebras via an adjunction, but this assumes that there is such a construction for all choices of <code>A</code>. It is possible for that not to be true, but for there to be specific choices of <code>A</code> for which a type like <code>Free F A</code> exists. We could construct a diagram involving <code>A + F _</code>, such that a colimit of the diagram would have the right properties, for instance. But there might not be such a colimit for all <code>A</code>.</p><h3 id="a-new-slogan"><a href="#a-new-slogan">A new slogan</a></h3><p>So, above we have shown how free monads are related to free algebras, and noted that F-algebras are <code>Free F</code> monad-algebras. We also saw similarities between monoids and monads. There is, of course, a famous line that, &quot;monads are monoids in the category of endofunctors.&quot; Let's play a bit more with these similarities.</p><p>Earlier we went through how the category of monoids is equivalent to the category of free monoid monad algebras. But, our slogan above just said that monads are themselves like monoids. So, we should be able to make a similar statement about categories of monads.</p><p>Again, the free monoid monad comes from the adjunction <code>F -| U</code>. <code>UF</code> forms a monad, and this is the monad used to characterize the algebraic structure. But, we now have <code>Free -| U</code> as an adjunction between a category of monads and a category of endofunctors. So, <code>U . Free</code> is itself a monad <i>on endofunctors</i>:</p><pre><code class="active haskell">{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TypeOperators #-}
+import Control.Applicative
+import Control.Monad
+-- show
+type f :-&gt; g = forall a. f a -&gt; g a
+
+data Free f a = Pure a | Roll (f (Free f a))
+
+instance Functor f =&gt; Functor (Free f) where
+  fmap g (Pure a) = Pure $ g a
+  fmap g (Roll f) = Roll $ fmap g &lt;$&gt; f
+
+instance Functor f =&gt; Monad (Free f) where
+  return = Pure
+  Pure x &gt;&gt;= g = g x
+  Roll f &gt;&gt;= g = Roll $ (&gt;&gt;= g) &lt;$&gt; f
+  
+eta :: Functor f =&gt; f :-&gt; Free f
+eta = Roll . fmap Pure
+
+mu :: Functor f =&gt; Free (Free f) :-&gt; Free f
+mu (Pure a) = Pure a
+mu (Roll f) = join $ mu &lt;$&gt; f
+
+-- /show
+main = putStrLn &quot;typechecks&quot;</code></pre><p>The typical naming convention seems to be to call this the 'free &lt;X&gt; monad', where &lt;X&gt; is the richer type of algebraic structure. Since the algebraic structure is monads, this is the free monad monad. And, the category we went through to get it is the (a) category of monads, so the category of monad-algebras is equivalent to this category of monads. This leads to the excellent slogan (with some punctuation to help):</p><blockquote><p>Monads are just free-monad monad monad-algebras. What's the problem?</p></blockquote></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/dolio/many-roads-to-free-monads';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

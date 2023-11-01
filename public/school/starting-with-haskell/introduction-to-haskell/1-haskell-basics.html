@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html><head><title>1: Haskell Basics - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/introduction-to-haskell">Introduction to Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/introduction-to-haskell/1-haskell-basics">1: Haskell Basics</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">1: Haskell Basics</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 1 Dec 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/byorgey">Brent Yorgey</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/32/9d2a0b32ed0b3dc05e93aae44ef590311d3d7064">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/introduction-to-haskell/2-algebraic-data-types">Next content: 2: Algebraic Data Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/introduction-to-haskell">Go up to: Introduction to Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey">See all content by Brent Yorgey</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#what-is-haskell-">What is Haskell?</a><ul><li><a href="#functional">Functional</a></li><li><a href="#pure">Pure</a></li><li><a href="#lazy">Lazy</a></li><li><a href="#statically-typed">Statically Typed</a></li></ul></li><li><a href="#themes">Themes</a><ul><li><a href="#types">Types</a></li><li><a href="#abstraction">Abstraction</a></li><li><a href="#wholemeal-programming">Wholemeal programming</a></li></ul></li><li><a href="#declarations-and-variables">Declarations and Variables</a></li><li><a href="#basic-types">Basic Types</a></li><li><a href="#ghci">GHCi</a></li><li><a href="#arithmetic">Arithmetic</a></li><li><a href="#boolean-logic">Boolean Logic</a></li><li><a href="#defining-basic-functions">Defining Basic Functions</a></li><li><a href="#pairs">Pairs</a></li><li><a href="#using-functions">Using functions</a></li><li><a href="#constructing-lists">Constructing Lists</a></li><li><a href="#functions-on-lists">Functions on Lists</a></li><li><a href="#combining-functions">Combining Functions</a></li><li><a href="#a-word-about-error-messages">A Word About Error Messages</a><ul><li><a href="#don-t-be-scared-of-error-messages-">Don&#39;t be scared of error messages!</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="what-is-haskell-"><a href="#what-is-haskell-">What is Haskell?</a></h1><p>Haskell is a lazy, functional programming language created in the late 1980s by a committee of academics. There were a plethora of lazy functional languages around, everyone had their favorite, and it was hard to communicate ideas. So a bunch of people got together and designed a new language, taking some of the best ideas from existing languages (and a few new ideas of their own). Haskell was born.</p><p>So what is Haskell like? Haskell is:</p><h2 id="functional"><a href="#functional">Functional</a></h2><p>There is no precise, accepted meaning for the term “functional”. But when we say that Haskell is a functional language, we usually have in mind two things:</p><ol><li>Functions are first-class, that is, functions are values which can be used in exactly the same ways as any other sort of value.</li><li>The meaning of Haskell programs is centered around evaluating expressions rather than executing instructions.</li></ol><p>Taken together, these result in an entirely different way of thinking about programming. Much of this course will be spent exploring this way of thinking.</p><h2 id="pure"><a href="#pure">Pure</a></h2><p>Haskell expressions are always referentially transparent, that is:</p><ul><li>No mutation! Everything (variables, data structures...) is immutable.</li><li>Expressions never have “side effects” (like updating global variables or printing to the screen).</li><li>Calling the same function with the same arguments results in the same output every time.</li></ul><p>This may sound crazy at this point. How is it even possible to get anything done without mutation or side
+effects? Well, it certainly requires a shift in thinking (if you’re used to an imperative or object-oriented
+paradigm). But once you’ve made the shift, there are a number of wonderful benefits:</p><ul><li>Equational reasoning and refactoring: In Haskell one can always “replace equals by equals”, just like you learned in algebra class.</li><li>Parallelism: Evaluating expressions in parallel is easy when they are guaranteed not to affect one another.</li><li>Fewer headaches: Simply put, unrestricted effects and action-at-a-distance makes for programs that are hard to debug, maintain, and reason about.</li></ul><h2 id="lazy"><a href="#lazy">Lazy</a></h2><p>In Haskell, expressions are not evaluated until their results are actually needed. This is a simple decision
+with far-reaching consequences, which we will explore throughout the semester. Some of the consequences
+include:</p><ul><li>It is easy to define a new control structure just by defining a function.</li><li>It is possible to define and work with infinite data structures.</li><li>It enables a more compositional programming style (see wholemeal programming below).</li><li>One major downside, however, is that reasoning about time and space usage becomes much more complicated!</li></ul><h2 id="statically-typed"><a href="#statically-typed">Statically Typed</a></h2><p>Every Haskell expression has a type, and types are all checked at compile-time. Programs with type errors
+will not even compile, much less run.</p><h1 id="themes"><a href="#themes">Themes</a></h1><p>Throughout this course, we will focus on three main themes.</p><h2 id="types"><a href="#types">Types</a></h2><p>Static type systems can seem annoying. In fact, in languages like C++ and Java, they are annoying. But this
+isn’t because static type systems per se are annoying; it’s because C++ and Java’s type systems are
+insufficiently expressive! This semester we’ll take a close look at Haskell’s type system, which</p><ul><li><p>Helps clarify thinking and express program structure</p></li></ul><p>The first step in writing a Haskell program is usually to write down all the types. Because Haskell’s
+type system is so expressive, this is a non-trivial design step and</p><ul><li><p>Serves as a form of documentation</p></li></ul><p>Given an expressive type system, just looking at a function’s type tells you a lot about what the
+function might do and how it can be used, even before you have read a single word of written
+documentation.</p><ul><li><p>Turns run-time errors into compile-time errors</p></li></ul><p>It’s much better to be able to fix errors up front than to just test a lot and hope for the best. “If it
+compiles, it must be correct” is mostly facetious (it’s still quite possible to have errors in logic even in
+a type-correct program), but it happens in Haskell much more than in other languages.</p><h2 id="abstraction"><a href="#abstraction">Abstraction</a></h2><p>“Don’t Repeat Yourself” is a mantra often heard in the world of programming. Also known as the “Abstraction
+Principle”, the idea is that nothing should be duplicated: every idea, algorithm, and piece of data should occur
+exactly once in your code. Taking similar pieces of code and factoring out their commonality is known as the
+process of <i>abstraction</i>.</p><p>Haskell is very good at abstraction: features like parametric polymorphism, higher-order functions, and type
+classes all aid in the fight against repetition. Our journey through Haskell this semester will in large part be a
+journey from the specific to the abstract.</p><h2 id="wholemeal-programming"><a href="#wholemeal-programming">Wholemeal programming</a></h2><p>Another theme we will explore is <i>wholemeal programming</i>. A quote from Ralf Hinze:</p><blockquote><p>“Functional languages excel at wholemeal programming, a term coined by Geraint Jones.
+Wholemeal programming means to think big: work with an entire list, rather than a sequence of
+elements; develop a solution space, rather than an individual solution; imagine a graph, rather than a single path. The wholemeal approach often offers new insights or provides new
+perspectives on a given problem. It is nicely complemented by the idea of projective
+programming: first solve a more general problem, then extract the interesting bits and pieces by
+transforming the general program into more specialised ones.”</p></blockquote><p>For example, consider this pseudocode in a C/Java-ish sort of language:</p><pre><code>lst = [2,3,5,7,11]
+
+int total = 0;
+for ( int i = 0; i &lt; lst.length; i++) {
+  total = total + 3 * lst[i];
+}
+
+print total;</code></pre><p>This code suffers from what Richard Bird refers to as “indexitis”: it has to worry about the low-level details of
+iterating over an array by keeping track of a current index. It also mixes together what can more usefully be
+thought of as two separate operations: multiplying every item in a list by 3, and summing the results.</p><p>In Haskell, we can just write</p><pre><code class="active haskell">lst = [2,3,5,7,11]
+
+total = sum (map (3*) lst)
+
+main = print total</code></pre><p>In this course we’ll explore the shift in thinking represented by this way of programming, and examine how and why Haskell makes it possible.</p><h1 id="declarations-and-variables"><a href="#declarations-and-variables">Declarations and Variables</a></h1><p>Here is some Haskell code:</p><pre><code class="active haskell">x :: Int
+x = 3
+-- Note that comments are preceded by two hyphens
+{- or enclosed
+   in curly brace/hypens pairs. -}
+-- x = 4
+
+main = print x</code></pre><p>Try uncommenting the line <code>x=4</code> above; you should see the error <code>Multiple declarations of 'x'</code>.</p><p>The above code declares a variable <code>x</code> with type <code>Int</code> (<code>::</code> is pronounced “has type”) and declares the value of <code>x</code> to be 3. Note that this will be the value of <code>x</code> forever (at least, in this particular program). The value of <code>x</code> cannot be changed later.</p><p>In Haskell, <i>variables are not mutable boxes</i>; they are just names for values!</p><p>Put another way, <code>=</code> does not denote <i>assignment</i> like it does in many other languages. Instead, <code>=</code> denotes <i>definition</i>, like it does in mathematics. That is, <code>x = 4</code> should not be read as “<code>x</code> gets 4” or “assign 4 to <code>x</code>”, but as “<code>x</code> is defined to be 4”.</p><p>What do you think this code means?</p><pre><code class="haskell">y :: Int
+y = y + 1</code></pre><div class="hidden"><p>Because <code>=</code> denotes <i>definition</i> rather than <i>assignment</i>, this does <b>not</b> increment the value of <code>y</code>. Instead, this statement is taken as a <i>recursive</i> definition; evaluation of <code>y</code> yields</p><pre><code class="haskell">y = y + 1
+  = (y + 1) + 1
+  = ((y + 1) + 1) + 1
+  =
+  .
+  .
+  .</code></pre><p>resulting in an endless loop.</p></div><h1 id="basic-types"><a href="#basic-types">Basic Types</a></h1><pre><code class="haskell">-- Machine-sized integers
+i :: Int
+i = -78</code></pre><p><code>Int</code>s are guaranteed by the Haskell language standard to accommodate values at least up to ±2^29, but the
+exact size depends on your architecture. For example, on many 64-bit architectures the range is ±2^63 . You can find the range on a particular machine by evaluating the following:</p><pre><code class="active haskell">main = print 
+-- show
+  (minBound :: Int, maxBound :: Int)
+-- /show</code></pre><p>[Note that idiomatic Haskell uses <code>camelCase</code> for identifier names. If you don’t like it, tough luck.]</p><p>The <code>Integer</code> type, on the other hand, is limited only by the amount of memory on your machine.</p><pre><code class="active haskell">-- Arbitrary-precision integers
+n :: Integer
+n = 1234567890987654321987340982334987349872349874534
+
+reallyBig :: Integer
+reallyBig = 2^(2^(2^(2^2)))
+
+numDigits :: Int
+numDigits = length (show reallyBig)
+
+main = print numDigits</code></pre><p>For floating-point numbers, there is <code>Double</code>:</p><pre><code class="haskell">d1, d2 :: Double
+d1 = 4.5387
+d2 = 6.2831e-4</code></pre><p>There is also a single-precision floating point type, <code>Float</code>, but it is not used much.</p><pre><code class="haskell">-- Booleans
+b1, b2 :: Bool
+b1 = True
+b2 = False
+
+-- Unicode characters
+c1, c2, c3 :: Char
+c1 = 'x'
+c2 = 'Ø'
+c3 = 'ダ'
+
+-- Strings are lists of characters with special syntax
+s :: String
+s = &quot;Hello, Haskell!&quot;</code></pre><h1 id="ghci"><a href="#ghci">GHCi</a></h1><p><i>GHCi</i> is an interactive Haskell REPL (Read-Eval-Print-Loop) that comes with GHC. At the GHCi prompt, you
+can evaluate expressions, load Haskell files with <code>:load</code> (<code>:l</code>) (and reload them with <code>:reload</code> (<code>:r</code>)), ask for the type of an expression with <code>:type</code> (<code>:t</code>), and many other things (try <code>:?</code> for a list of commands).</p><h1 id="arithmetic"><a href="#arithmetic">Arithmetic</a></h1><p>Try evaluating each of the following expressions in GHCi:</p><pre><code class="haskell">ex01 = 3 + 2
+ex02 = 19 - 27
+ex03 = 2.35 * 8.6
+ex04 = 8.7 / 3.1
+ex05 = mod 19 3
+ex06 = 19 `mod` 3
+ex07 = 7 ^ 222
+ex08 = (-3) * (-7)</code></pre><p>Note how `backticks` make a function name into an infix operator. Note also that negative numbers must
+often be surrounded by parentheses, to avoid having the negation sign parsed as subtraction. (Yes, this is ugly. I’m sorry.)
+This, however, gives an error:</p><pre><code class="active haskell">i = 30 :: Int
+n = 10 :: Integer
+main = print (i + n)</code></pre><p>Addition is only between values of the same numeric type, and Haskell does not do implicit conversion. You must explicitly convert with:</p><ul><li><code>fromIntegral</code>: converts from any integral type (<code>Int</code> or <code>Integer</code>) to any other numeric type.</li><li><code>round</code>, <code>floor</code>, <code>ceiling</code>: convert floating-point numbers to <code>Int</code> or <code>Integer</code>.</li></ul><p>Now try this:</p><pre><code class="active haskell">i = 30 :: Int
+main = print (i / i)</code></pre><p>This is an error since <code>/</code> performs floating-point division only. For integer division we can use <code>div</code>:</p><pre><code class="active haskell">i = 30 :: Int
+main = print (i `div` i, 12 `div` 5)</code></pre><p>If you are used to other languages which do implicit conversion of numeric types, this can all seem rather prudish and annoying at first. However, I promise you’ll get used to it, and in time you may even come to appreciate it. Implicit numeric conversion encourages sloppy thinking about numeric code.</p><h1 id="boolean-logic"><a href="#boolean-logic">Boolean Logic</a></h1><p>As you would expect, Boolean values can be compared with <code>(&amp;&amp;)</code> (logical and), <code>(||)</code> (logical or), and <code>not</code>. For example,</p><pre><code class="haskell">ex11 = True &amp;&amp; False
+ex12 = not (False || True)</code></pre><p>Things can be compared for equality with <code>(==)</code> and <code>(/=)</code>, or compared for order using <code>(&lt;)</code>, <code>(&gt;)</code>, <code>(&lt;=)</code>, and <code>(&gt;=)</code>.</p><pre><code class="haskell">ex13 = ('a' == 'a')
+ex14 = (16 /= 3)
+ex15 = (5 &gt; 3) &amp;&amp; ('p' &lt;= 'q')
+ex16 = &quot;Haskell&quot; &gt; &quot;C++&quot;</code></pre><p>Haskell also has <code>if</code> expressions: <code>if b then t else f</code> is an expression which evaluates to <code>t</code> if the Boolean expression <code>b</code> evaluates to <code>True</code>, and <code>f</code> if <code>b</code> evaluates to <code>False</code>. Notice that <code>if</code> expressions are very different than <code>if</code> statements. For example, with an <code>if</code> statement, the <code>else</code> part can be optional; an omitted <code>else</code> clause means &quot;if the test evaluates to <code>False</code> then do nothing&quot;. With an <code>if</code> expression, on the other hand, the <code>else</code> part is required, since the <code>if</code> expression must result in some value.</p><h1 id="defining-basic-functions"><a href="#defining-basic-functions">Defining Basic Functions</a></h1><p>We can write functions on integers by cases.</p><pre><code class="active haskell">-- Compute the sum if the integers from 1 to n.
+sumtorial :: Integer -&gt; Integer
+sumtorial 0 = 0
+sumtorial n = n + sumtorial (n - 1)
+
+main = print (sumtorial 10)</code></pre><p>Note that the syntax for the type of a function <code>sumtorial :: Integer -&gt; Integer</code> says that <code>sumtorial</code> is a function which takes an <code>Integer</code> as input and yields another <code>Integer</code> as output.</p><p>Each clause is checked in order from top to bottom, and the first matching clause is chosen. For example, <code>sumtorial 0</code> evaluates to <code>0</code>, since the first clause is matched. <code>sumtorial 3</code> does not match the first clause (<code>3</code> is not <code>0</code>), so the second clause is tried. A variable like <code>n</code> matches anything, so the second clause matches and <code>sumtorial 3</code> evaluates to <code>3 + sumtorial (3-1)</code> (which can then be evaluated further).</p><p>Choices can also be made based on arbitrary Boolean expressions using <i>guards</i>. For example:</p><pre><code class="active haskell">hailstone :: Integer -&gt; Integer
+hailstone n
+  | n `mod` 2 == 0 = n `div` 2
+  | otherwise      = 3 * n + 1
+  
+main = print (hailstone 3)</code></pre><p>Any number of guards can be associated with each clause of a function definition, each of which is a Boolean expression. If the clause’s patterns match, the guards are evaluated in order from top to bottom, and the first one which evaluates to <code>True</code> is chosen. If none of the guards evaluate to <code>True</code>, matching continues with the next clause.</p><p>For example, suppose we evaluate <code>hailstone 3</code>. First, <code>3</code> is matched against <code>n</code>, which succeeds (since a variable matches anything). Next, <code>(n `mod` 2 == 0)</code> is evaluated; it is <code>False</code> since <code>n = 3</code> does not result in a remainder of <code>0</code> when divided by <code>2</code>. <code>otherwise</code> is just a convenient synonym for <code>True</code>, so the second
+guard is chosen, and the result of <code>hailstone 3</code> is thus <code>3 * 3 + 1 = 10</code>.</p><p>As a more complex (but more contrived) example:</p><pre><code class="active haskell">foo :: Integer -&gt; Integer
+foo 0 = 16
+foo 1
+  | &quot;Haskell&quot; &gt; &quot;C++&quot; = 3
+  | otherwise         = 4
+foo n
+  | n &lt; 0           = 0
+  | n `mod` 17 == 2 = -43
+  | otherwise       = n + 3
+  
+main = print [foo (-3), foo 0, foo 1, foo 36, foo 38]
+</code></pre><p>As a final note about Boolean expressions and guards, suppose we wanted to abstract out the test of
+evenness used in defining <code>hailstone</code>. A first attempt is shown below:</p><pre><code class="active haskell">isEven :: Integer -&gt; Bool
+isEven n
+  | n `mod` 2 == 0 = True
+  | otherwise      = False
+  
+main = print [isEven 2, isEven 5]</code></pre><p>This <i>works</i>, but is much too complicated. Can you see why?</p><div class="hidden"><p>The code returns <code>True</code> or <code>False</code>, depending whether <code>n `mod` 2 == 0</code> is <code>True</code> or <code>False</code>. It would have been much simpler to write it as</p><pre><code class="haskell">isEven : Integer -&gt; Bool
+isEven n = n `mod` 2 == 0</code></pre></div><h1 id="pairs"><a href="#pairs">Pairs</a></h1><p>We can pair things together like so:</p><pre><code class="haskell">p :: (Int, Char)
+p = (3, 'x')</code></pre><p>Notice that the (x,y) notation is used both for the <i>type</i> of a pair and a pair <i>value</i>.</p><p>The elements of a pair can be extracted again with <i>pattern matching</i>:</p><pre><code class="active haskell">sumPair :: (Int, Int) -&gt; Int
+sumPair (x,y) = x + y
+
+main = print (sumPair (3,4))</code></pre><p>Haskell also has triples, quadruples, ... but you should never use them. As we’ll see in the next lesson, there are much better ways to package three or more pieces of information together.</p><h1 id="using-functions"><a href="#using-functions">Using functions</a></h1><p>To apply a function to some arguments, just list the arguments after the function, separated by spaces, like this:</p><pre><code class="active haskell">f x y z = x + y + z
+main = print (f 3 17 8)</code></pre><p>The above example applies the function <code>f</code> to the three arguments <code>3</code>, <code>17</code>, and <code>8</code>.</p><p>Note that function application has higher precedence than any infix operators! So it would be incorrect to write <code>f 3 n+1 7</code> if you intend to pass <code>n+1</code> as the second argument to <code>f</code>, because this parses as <code>(f 3 n) + (1 7)</code>. Instead, one must write <code>f 3 (n+1) 7</code>.</p><h1 id="constructing-lists"><a href="#constructing-lists">Constructing Lists</a></h1><p>The simplest possible list is the empty list:</p><pre><code class="haskell">emptyList = []</code></pre><p>Other lists are built up from the empty list using the <i>cons</i> operator, <code>(:)</code>. Cons takes an element and a list, and produces a new list with the element prepended to the front.</p><pre><code class="haskell">a = 1 : []
+b = 3 : (1 : [])
+c = [2,3,4] == 2 : 3 : 4 : []</code></pre><p>We can see that <code>[2,3,4]</code> notation is just convenient shorthand for <code>2 : 3 : 4 : []</code>. Note also that these are really singly-linked lists, and <b>not</b> arrays.</p><pre><code class="active haskell">-- /show
+hailstone :: Integer -&gt; Integer
+hailstone n
+  | n `mod` 2 == 0 = n `div` 2
+  | otherwise      = 3 * n + 1
+  
+-- show
+hailstoneSeq :: Integer -&gt; [Integer]
+hailstoneSeq 1 = [1]
+hailstoneSeq n = n : hailstoneSeq (hailstone n)
+
+main = print (hailstoneSeq 5)</code></pre><p>We stop the hailstone sequence when we reach 1. The hailstone sequence for a general n consists of n
+itself, followed by the hailstone sequence for <code>hailstone n</code>, that is, the number obtained by applying the hailstone transformation once to <code>n</code>.</p><h1 id="functions-on-lists"><a href="#functions-on-lists">Functions on Lists</a></h1><p>We can write functions on lists using <i>pattern matching</i>.</p><pre><code class="active haskell">-- Compute the length of a list of Integers
+intListLength :: [Integer] -&gt; Integer
+intListLength [] = 0
+intListLength (x:xs) = 1 + intListLength xs
+
+main = print (intListLength [1,2,3,4,5])</code></pre><p>The first clause says that the length of an empty list is 0. The second clause says that if the input list looks like <code>(x:xs)</code>, that is, a first element xconsed onto a remaining list <code>xs</code>, then the length is one more than the length of <code>xs</code>.</p><p>Since we don’t use <code>x</code> at all we could also replace it by an underscore: <code>intListLength (_:xs) = 1 + intListLength xs</code>.</p><p>We can also use nested patterns:</p><pre><code class="active haskell">sumEveryTwo :: [Integer] -&gt; [Integer]
+sumEveryTwo []         = [] -- Do nothing to the empty list
+sumEveryTwo (x:[])     = [] -- Do nothing to lists with a single element
+sumEveryTwo (x:(y:zs)) = (x + y) : sumEveryTwo zs
+
+main = print (sumEveryTwo [1,2,3,4,5,6,7,8])</code></pre><p>Note how the last clause matches a list starting with <code>x</code> and followed by... a list starting with <code>y</code> and followed by the list <code>zs</code>. We don’t actually need the extra parentheses, so <code>sumEveryTwo (x:y:zs) = ...</code> would be equivalent.</p><h1 id="combining-functions"><a href="#combining-functions">Combining Functions</a></h1><p>It’s good Haskell style to build up more complex functions by combining many simple ones.</p><pre><code class="active haskell">hailstone :: Integer -&gt; Integer
+hailstone n
+  | n `mod` 2 == 0 = n `div` 2
+  | otherwise      = 3 * n + 1
+  
+
+hailstoneSeq :: Integer -&gt; [Integer]
+hailstoneSeq 1 = [1]
+hailstoneSeq n = n : hailstoneSeq (hailstone n)
+
+-- Compute the length of a list of Integers
+intListLength :: [Integer] -&gt; Integer
+intListLength [] = 0
+intListLength (x:xs) = 1 + intListLength xs
+
+-- show
+-- The number of hailstone steps needed to reach 1 from a given number
+hailstoneLen :: Integer -&gt; Integer
+hailstoneLen n = intListLength (hailstoneSeq n) - 1
+
+main = print (hailstoneLen 5)</code></pre><p>This may seem inefficient to you: it generates the entire hailstone sequence first and then finds its length, which wastes lots of memory... doesn’t it? Actually, it doesn’t! Because of Haskell’s lazy evaluation, each element of the sequence is only generated as needed, so the sequence generation and list length calculation are interleaved. The whole computation uses only O(1) memory, no matter how long the sequence. [Actually, this is a tiny white lie, but explaining why (and how to fix it) will have to wait a few lessons.]</p><h1 id="a-word-about-error-messages"><a href="#a-word-about-error-messages">A Word About Error Messages</a></h1><p>Actually, six:</p><h2 id="don-t-be-scared-of-error-messages-"><a href="#don-t-be-scared-of-error-messages-">Don't be scared of error messages!</a></h2><p>GHC’s error messages can be rather long and (seemingly) scary. However, usually they’re long not because they are obscure, but because they contain a lot of useful information! Here’s an example:</p><pre><code>Prelude&gt; 'x' ++ &quot;foo&quot;
+
+&lt;interactive&gt;:2:1:
+    Couldn't match expected type `[Char]' with actual type `Char'
+    In the first argument of `(++)', namely 'x'
+    In the expression: 'x' ++ &quot;foo&quot;
+    In an equation for `it': it = 'x' ++ &quot;foo&quot;</code></pre><p>First we are told <code> Couldn't match expected type `[Char]' with actual type `Char' </code>. This means that something was expected to have a list type, but actually had type <code>Char</code>. What something? The next line tells us: it’s the first argument of <code>(++)</code> which is at fault, namely, <code>'x'</code>. The next lines go on to give us a bit more context.</p><p>Now we can see what the problem is: clearly <code>'x'</code> has type <code>Char</code>, as the first line said. Why would it be expected to have a list type? Well, because it is used as an argument to <code>(++)</code>, which takes a list as its first argument.</p><p>When you get a huge error message, resist your initial impulse to run away; take a deep breath; and read it carefully. You won’t necessarily understand the entire thing, but you will probably learn a lot, and you may just get enough information to figure out what the problem is.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/introduction-to-haskell/1-haskell-basics';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

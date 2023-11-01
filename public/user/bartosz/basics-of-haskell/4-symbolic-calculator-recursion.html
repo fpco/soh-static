@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html><head><title>4. Symbolic Calculator: Recursion - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/4-symbolic-calculator-recursion">4. Symbolic Calculator: Recursion</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">4. Symbolic Calculator: Recursion</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">19 Jun 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/a00944509ffcd45dae8fc02338435cf308c4ab67">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/the-tao-of-monad">Previous content: 3.a The Tao of Monad</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/5-tokenizer-data-types">Next content: 5. Tokenizer: Data Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-design">The Design</a></li><li><a href="#designing-with-types">Designing with Types</a><ul><li><a href="#1--lexical-analyzer">1. Lexical analyzer</a></li><li><a href="#2--parser">2. Parser</a></li><li><a href="#3--evaluator">3. Evaluator</a></li></ul></li><li><a href="#recursion">Recursion</a><ul><li><a href="#conditional">Conditional</a></li></ul></li><li><a href="#exercises">Exercises</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Now that we are done with the <a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/3-pure-functions-laziness-io">preliminaries</a>, I'd like to show you how to design and develop a small application -- a symbolic calculator. It's a console application: the user types in expressions that are evaluated, and the results are displayed. To make it more interesting, the calculator supports symbolic variables that can be assigned and re-assigned and used in expressions. Here's an example of a user session:</p><p><img alt="Calculator session" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FSoH%2FCalc.png" /></p><p>In fact you can run the calculator right here, on the spot:</p><pre><code class="active haskell">import Text.Parsec
+import Text.Parsec.String
+import Text.Parsec.Token
+import Text.Parsec.Expr
+import Text.Parsec.Language
+import qualified Data.Map as M
+import qualified Control.Monad.State as S
+import Control.Monad.Error
+import Control.Monad.Identity
+
+-- Lexer
+
+def = emptyDef { identStart  = letter
+               , identLetter = alphaNum 
+               , opStart     = oneOf &quot;+-*/=&quot;
+               , opLetter    = oneOf &quot;+-*/=&quot;
+               }
+
+lexer :: TokenParser ()
+lexer = makeTokenParser def
+
+-- Expression tree
+
+data Expression = Constant Double
+                | Identifier String
+                | Addition Expression Expression
+                | Subtraction Expression Expression
+                | Multiplication Expression Expression
+                | Division Expression Expression
+                | Negation Expression
+                | Assignment Expression Expression
+                deriving Show
+
+-- Parser
+
+parseNumber :: Parser Expression
+parseNumber = do
+    v &lt;- naturalOrFloat lexer
+    case v of
+        Left  i -&gt; return $ Constant $ fromIntegral i
+        Right n -&gt; return $ Constant n
+
+parseIdentifier :: Parser Expression
+parseIdentifier = do
+   i &lt;- identifier lexer
+   return $ Identifier i
+   
+parseExpression :: Parser Expression
+parseExpression = (flip buildExpressionParser) parseTerm [
+   [ Prefix (reservedOp lexer &quot;-&quot; &gt;&gt; return Negation)
+   , Prefix (reservedOp lexer &quot;+&quot; &gt;&gt; return id) 
+   ]
+ , [ Infix (reservedOp lexer &quot;*&quot; &gt;&gt; return Multiplication) AssocLeft
+   , Infix (reservedOp lexer &quot;/&quot; &gt;&gt; return Division) AssocLeft
+   ]
+ , [ Infix (reservedOp lexer &quot;+&quot; &gt;&gt; return Addition) AssocLeft
+   , Infix (reservedOp lexer &quot;-&quot; &gt;&gt; return Subtraction) AssocLeft 
+   ]
+ , [ Infix (reservedOp lexer &quot;=&quot; &gt;&gt; return Assignment) AssocRight
+   ]
+ ]
+
+parseTerm :: Parser Expression
+parseTerm = parens lexer parseExpression 
+        &lt;|&gt; parseNumber
+        &lt;|&gt; parseIdentifier
+
+parseInput :: Parser Expression
+parseInput = do
+    whiteSpace lexer
+    ex &lt;- parseExpression
+    eof
+    return ex
+
+-- Evaluator
+
+type SymTab = M.Map String Double
+
+type Evaluator a = S.StateT SymTab (ErrorT String Identity) a
+
+runEvaluator :: Evaluator Double -&gt; SymTab -&gt; Either String (Double, SymTab)
+runEvaluator calc symTab = runIdentity $ runErrorT $ S.runStateT calc symTab
+
+eval :: Expression -&gt; Evaluator Double
+
+eval (Constant x) = return x
+
+eval (Identifier i) = do
+    symtab &lt;- S.get
+    case M.lookup i symtab of
+        Nothing -&gt; fail $ &quot;Undefined variable &quot; ++ i
+        Just e  -&gt; return e
+
+eval (Addition eLeft eRight) = do
+    lft &lt;- eval eLeft
+    rgt &lt;- eval eRight
+    return $ lft + rgt
+
+eval (Subtraction eLeft eRight) = do
+    lft &lt;- eval eLeft
+    rgt &lt;- eval eRight
+    return $ lft - rgt
+
+eval (Multiplication eLeft eRight) = do
+    lft &lt;- eval eLeft
+    rgt &lt;- eval eRight
+    return $ lft * rgt
+
+eval (Division eLeft eRight) = do
+    lft &lt;- eval eLeft
+    rgt &lt;- eval eRight
+    return $ lft / rgt
+
+eval (Negation e) = do
+    val &lt;- eval e
+    return $ -val
+
+eval (Assignment (Identifier i) e) = do
+    val &lt;- eval e
+    S.modify (M.insert i val)
+    return val
+
+eval (Assignment _ _) =
+    fail &quot;Left of assignment must be an identifier&quot;
+
+defaultVars :: M.Map String Double
+defaultVars = M.fromList
+   [ (&quot;e&quot;, exp 1)
+   , (&quot;pi&quot;, pi)
+   ]
+   
+--runEvaluator returns Either String (Double, SymTab Double)
+
+calculate :: SymTab -&gt; String -&gt; (String, SymTab)
+calculate symTab s = 
+    case parse parseInput &quot;&quot; s of
+    Left  err -&gt; (&quot;error: &quot; ++ (show err), symTab)
+    Right exp -&gt; case runEvaluator (eval exp) symTab of
+                 Left  err              -&gt; (&quot;error: &quot; ++ err, symTab)
+                 Right (val, newSymTab) -&gt; (show val, newSymTab)
+
+loop :: SymTab -&gt; IO ()
+loop symTab = do
+    line &lt;- getLine
+    if null line
+    then return ()
+    else do
+        let (result, symTab') = calculate symTab line
+        putStrLn result
+        loop symTab'
+   
+main = loop defaultVars
+-- show 
+-- Enter expressions, one per line. Empty line to quit --</code></pre><p>This is not the implementation I'll be describing. I wrote this one using Haskell libraries such as Parsec (one of the standard parsing libraries) and several monad transformers. In this series of tutorials I'd like to implement the same functionality from scratch, so you'll be able to clearly see each step and learn the language in the process.</p><h2 id="the-design"><a href="#the-design">The Design</a></h2><ul><li>At the very high level, the calculator is a loop that gets a line of text from the user and then calculates and displays the result.</li><li>The calculation is done is three steps:<ul><li>Lexical analysis: The string is converted to tokens</li><li>Parsing: Building an expression tree</li><li>Evaluation: The expression is evaluated.</li></ul></li></ul><p>In the first phase of implementation we won't worry about error handling and symbolic variables -- we'll add them later.</p><p>Notice that there's nothing Haskell-specific in this design -- it's just a piece of good old software engineering. Some people worry that programming in Haskell means re-learning everything from scratch. This is based on seriously underestimating the amount of software engineering that is common to all programming tasks -- independent of the language.</p><h2 id="designing-with-types"><a href="#designing-with-types">Designing with Types</a></h2><p>We haven't talked about types yet because, even though Haskell is a strongly typed language, it has a powerful type inference system. This feature makes quick prototyping easy. Sometimes you just want to write a function and not worry about types. The compiler will figure them out. (C++11 introduced a modicum of type inference with the keyword <code>auto</code>.)</p><p>On the other hand, software <i>design</i> in Haskell often starts with types. Let's try this approach.</p><h3 id="1--lexical-analyzer"><a href="#1--lexical-analyzer">1. Lexical analyzer</a></h3><p>Lexical analyzer is implemented as a function <code>tokenize</code> that takes a string (of type <code>String</code>) and returns a list of tokens. We'll define the <code>Token</code> data type later. A list of tokens has the type <code>[Token]</code> -- the square brackets are used to create lists (both list <i>types</i>, like <code>[Int]</code>, and list <i>literals</i>, like <code>[1, 2, 3]</code>). Finally, a <i>function</i> type is constructed with an arrow <code>-&gt;</code> between the type of the argument and the type of the result (we'll get to multi-argument functions later). Putting all this together, we can write the Haskell type signature for the function <code>tokenize</code> as follows:</p><pre><code class="haskell">tokenize :: String -&gt; [Token]</code></pre><p>This is read as: Tokenize is a function taking a string and returning a list of tokens. The double colon is used to introduce a type signature.</p><p>Type names must always start with capital letters, as in <code>String</code> or <code>Double</code> (except for names constructed from special characters, like the list type, <code>[]</code>).</p><h3 id="2--parser"><a href="#2--parser">2. Parser</a></h3><p>The parsing function takes a list of tokens and produces an expression. We'll define the <code>Expression</code> type later. For now, this is the type of <code>parse</code>:</p><pre><code class="haskell">parse :: [Token] -&gt; Expression</code></pre><h3 id="3--evaluator"><a href="#3--evaluator">3. Evaluator</a></h3><p>We'll make <code>evaluate</code> take an <code>Expression</code> and return a value of the built in type <code>Double</code> (double precision floating point number).</p><pre><code class="haskell">evaluate :: Expression -&gt; Double</code></pre><p>We can define dummy data types for <code>Token</code> and <code>Expression</code>, and dummy function bodies; and fire up the compiler to typecheck our design:</p><pre><code class="active haskell">data Token
+data Expression
+
+tokenize :: String -&gt; [Token]
+tokenize = undefined
+
+parse :: [Token] -&gt; Expression
+parse = undefined
+
+evaluate :: Expression -&gt; Double
+evaluate = undefined
+
+main :: IO ()
+main = putStrLn &quot;It works, so are we done yet?&quot;</code></pre><p>You might wonder how <code>undefined</code> plays with the type checker. It turns out that the type of <code>undefined</code> is the <i>bottom</i> of the type hierarchy, which means it can be implicitly converted to any type. For instance, in the definition of <code>tokenize</code> the type of <code>undefined</code> becomes the function type: <code>String-&gt;[Token]</code>.</p><p>The type of <code>main</code> is always <code>IO ()</code>: the type of <code>IO</code> monadic action that produces no result (only side effects). The type <code>()</code> itself is called <i>unit</i> -- loosely corresponding to <code>void</code> in C-like languages.</p><h2 id="recursion"><a href="#recursion">Recursion</a></h2><p>Our design calls for a loop that accepts user input and displays the results. All loops in Haskell are implemented either using recursion or using (higher-order) functions whose implementation uses recursion.</p><p>You might be concerned about the performance or recursion and the possibility of blowing the stack -- in most cases this is not a problem since the compiler is able to turn most recursions into loops. This is called <i>tail recursion</i> optimization, where the recursive call at the very end of a function is simply turned into a goto to the beginning of the function. More serious performance concerns arise occasionally from Haskell's laziness but we'll talk about it later.</p><p>With that in mind, we are ready to implement the top-level loop of our calculator:</p><pre><code class="active haskell">main :: IO ()
+main = do
+    line &lt;- getLine
+    putStrLn line
+    main</code></pre><p>You can think of <code>main</code> as first calling <code>getLine</code>, storing the result in the variable <code>line</code>, then calling <code>putStrLn</code> with that <code>line</code>, and then calling itself again. This will create an infinite loop, but no stack will be hurt in the process, since this is a typical case of tail recursion.</p><p>Of course, what really happens when the program is running is slightly different because of the <code>IO</code> monad and general laziness. So it would be more appropriate to say that <code>main</code> is an <code>IO</code> action that is a sequence of three other actions: the ones returned by <code>getLine</code>, <code>putStrLn</code>, and <code>main</code>. The last action, when the time comes to execute it, will produce three new actions, etc. But everything happens on the need to run basis, so the inner <code>main</code> will not be evaluated until the (blocking) action produced by <code>getLine</code> delivers its result.</p><p>Thinking about recursion rather than looping might initially seem unnatural, but it quickly becomes second nature. The main reason Haskell doesn't use loops is because of immutability: Loops in imperative languages usually have some kind of mutable counter or a mutable pointer. It's relatively easy to replace those loops with recursion. But first we need to learn about conditionals: We have to be able to break out of recursion at some point.</p><h3 id="conditional"><a href="#conditional">Conditional</a></h3><p>A conditional in Haskell is just a simple <code>if</code>, <code>then</code>, <code>else</code> construct. The <code>else</code> is mandatory.</p><p>Anything between <code>if</code> and <code>then</code> is the condition (you don't even have to surround it with parentheses), and it must evaluate to a Boolean. You can pretty much use the familiar equality and comparison operators, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, to create Boolean values; except for the not-equal operator which is <code>/=</code>. You can also combine them using <code>&amp;&amp;</code> and <code>||</code> for logical <i>and</i> and <i>or</i>, and <code>not</code> for <i>not</i>.</p><p>However, unlike in imperative languages, the Haskell if/then/else is not a statement but an expression (similar to C's (<code>?:</code>) construct). It evaluates to either the <code>then</code> or the <code>else</code> expression, both of which have to be of the same type. For instance:</p><pre><code class="active haskell">main = do
+    putStrLn &quot;Enter a number&quot;
+    str &lt;- getLine
+    print (if read str &gt;= 1 then 1 else 0)</code></pre><p>Here, the if/then/else expression that is the argument to <code>print</code> evaluates to either 1 or 0.</p><p>You might be wandering about the short-circuitting properties of if/then/else or the binary Boolean operators <code>&amp;&amp;</code> and <code>||</code>. In most languages the property of not evaluating the branch that is not taken has to be built into the language as a special feature. Otherwise constructs like:</p><pre><code>x = (p != nullptr) ? *p : 0</code></pre><p>wouldn't work properly. In Haskell, short-circuiting is just the side effect of laziness. The branch not taken is never used, so it won't be evaluated.</p><p>Several explanations are in order: I used the function <code>read</code> to turn a string into a value. It's an interesting function -- it's overloaded on the return type. Here, the compiler deduced that an integral value was needed because it was compared to another integral value, 1. (Try experimenting with this code by inputing a floating point number. Then change the 1 in the if clause to 1.0 and see if the behavior changes.)</p><p>We are now ready to convert a simple imperative loop that prints numbers from 0 to 4 to Haskell. Here's the C++ loop:</p><pre><code>for (int i = 0; i &lt; 5; ++i)
+    std::cout &lt;&lt; i &lt;&lt; std::endl</code></pre><p>And here's its recursive counterpart written in Haskell:</p><pre><code class="active haskell">loop :: Int -&gt; IO ()
+loop n = do
+    if n &lt; 5
+    then do
+        putStrLn (show n)
+        loop (n + 1)
+    else
+        return ()
+
+main :: IO ()
+main = loop 0</code></pre><p>The Haskell code looks straightforward, although it's more verbose than its C++ counterpart. That's because I made it control-driven -- which is closer to the imperative version -- rather than data-driven. In Haskell one should really try to think at a higher abstraction level. Here, the goal is to print a list of integers from 0 to 4, so it would be more natural to start with such a list: <code>[0, 1, 2, 3, 4]</code> or, using a handy shorthand, <code>[0..4]</code>; and apply a function to it. We'll see examples of this approach later.</p><p>Let's talk about types: <code>loop</code> returns a &quot;void&quot; <code>IO</code> action, so both branches of the if must also return an <code>IO ()</code> action. The first branch is a sequence of two actions (hence the use of <code>do</code> in that branch), the last of which is indeed of the type <code>IO ()</code> (that's the result of calling <code>loop</code>). The second branch is more interesting. At first sight you might not even notice anything out of the ordinary: Well, it does return a unit value <code>()</code>, which is of the type unit <code>()</code>. But how does this value become an <code>IO ()</code> action? The trick is that <code>return</code> is not a built-in keyword, it's actually an important monadic function (every monad has it).</p><p>The <code>return</code> function turns whatever value it's given into a monadic value: here it turns <code>()</code> into <code>IO ()</code>. It could also turn &quot;Hello!&quot; into <code>IO String</code>, etc. We'll see more examples of using <code>return</code> to &quot;return&quot; a value from a <code>do</code> block in the future. Also notice the use of the <code>Int</code> type -- it's a fixed precision integer.</p><p>In the <a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/5-tokenizer-data-types">next installment</a> we'll start implementing the lexical analyzer and learn more about data types.</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p><b>Ex 1</b>. Print squares of numbers from 1 to 10.</p><pre><code class="active haskell">loop :: Int -&gt; IO ()
+loop n = undefined
+
+main :: IO ()
+main = loop 1</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">loop :: Int -&gt; IO ()
+loop n = do
+    if n &lt;= 10
+    then do
+        putStrLn (show (n * n))
+        loop (n + 1)
+    else
+        return ()
+
+main :: IO ()
+main = loop 1</code></pre></div><p><b>Ex 2</b>. No exposition of recursion is complete without factorial. Use the following property: Factorial of n is n times the factorial of (n - 1), and the factorial of 0 is 1.</p><pre><code class="active haskell">fact :: Int -&gt; Int
+fact n = undefined
+
+main = print (fact 20)</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">fact :: Int -&gt; Int
+fact n = if n &gt; 0 then n * fact (n - 1) else 1
+
+main = print (fact 20)</code></pre></div><p><b>Ex 3</b>. The evaluation of factorial starts returning incorrect results right about n = 21 because of the <code>Int</code> overflow. Try implementing a version that uses the infinite precision <code>Integer</code> instead of <code>Int</code>.</p><pre><code class="active haskell">fact :: Int -&gt; Int
+fact n = if n &gt; 0 then n * fact (n - 1) else 1
+
+fullFact :: ...
+fullFact n = ...
+
+main = do
+    print (fact 23)
+    print (fullFact 23)</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">fact :: Int -&gt; Int
+fact n = if n &gt; 0 then n * fact (n - 1) else 1
+
+fullFact :: Integer -&gt; Integer
+fullFact n = if n &gt; 0 then n * fullFact (n - 1) else 1
+
+main = do
+    print (fact 23)
+    print (fullFact 23)</code></pre></div><p><b>Ex 4</b>. No exposition of recursion is complete without Fibonacci numbers. (I'm using these mathematical examples because we haven't learned about data structures. In general, Haskell is not just about math.) Use the following property of Fibonacci numbers: The n'th Fibonacci number is the sum of the (n-1)'st and the (n-2)'nd, and the first and second Fibonacci numbers are both 1.</p><pre><code class="active haskell">fib :: Int -&gt; Int
+fib n = undefined
+
+main = print (fib 20)</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">fib :: Int -&gt; Int
+fib n = if n &gt; 2 then fib (n - 1) + fib (n - 2) else 1
+
+main = print (fib 20)</code></pre></div></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/basics-of-haskell/4-symbolic-calculator-recursion';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

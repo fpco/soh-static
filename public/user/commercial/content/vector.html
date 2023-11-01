@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html><head><title>The vector package - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/commercial">Commercial Haskell group</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content">Content</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content/vector">The vector package</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">The vector package</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">27 Oct 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/commercial">Commercial Haskell group</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/17892/f65748aaccd1a91ad4d6a026ec8b0285bfd3899e">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content/covariance-contravariance">Next content: Covariance, contravariance, and positive and negative position</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial/content">Go up to: Content</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/commercial">See all content by Commercial Haskell group</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#example">Example</a></li><li><a href="#terminology">Terminology</a></li><li><a href="#efficiency">Efficiency</a><ul><li><a href="#boxed--storable-and-unboxed">Boxed, storable and unboxed</a></li><li><a href="#stream-fusion">Stream fusion</a></li><li><a href="#slicing">Slicing</a></li></ul></li><li><a href="#replacing-lists">Replacing lists</a></li><li><a href="#mutable-vectors">Mutable vectors</a></li><li><a href="#freezing-and-thawing">Freezing and thawing</a></li><li><a href="#primmonad">PrimMonad</a></li><li><a href="#modify-and-the-st-monad">modify and the ST monad</a></li><li><a href="#generic">Generic</a></li><li><a href="#vector-algorithms">vector-algorithms</a></li><li><a href="#mwc-random">mwc-random</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article>
+<p>The de facto standard package in the Haskell ecosystem for integer-indexed
+array data is the <a href="http://www.stackage.org/package/vector">vector package</a>.
+This corresponds at a high level to arrays in C, or the vector class in C++'s
+STL. However, the vector package offers quite a bit of functionality not
+familiar to those used to the options in imperative and mutable languages.</p><p>While the interface for vector is relatively straightforward, the abundance of
+different modules can be daunting. This article will start off with an overview
+of terminology to guide you, and then step through a number of concrete
+examples of using the package.</p><h2 id="example"><a href="#example">Example</a></h2><p>Since we're about to jump into a few sections of descriptive text, let's kick
+this off with a concrete example to whet your appetite. We're going to count
+the frequency of different bytes that appear on standard input, and then
+display this content.</p><p>Note that this example is purposely written in a very generic form. We'll build
+up to handling this form throughout this article.</p><pre><code class="haskell">{-# LANGUAGE FlexibleContexts #-}
+import           Control.Monad.Primitive     (PrimMonad, PrimState)
+import qualified Data.ByteString.Lazy        as L
+import qualified Data.Vector.Generic.Mutable as M
+import qualified Data.Vector.Unboxed         as U
+import           Data.Word                   (Word8)
+
+main :: IO ()
+main = do
+    -- Get all of the contents from stdin
+    lbs &lt;- L.getContents
+
+    -- Create a new 256-size mutable vector
+    -- Fill the vector with zeros
+    mutable &lt;- M.replicate 256 0
+
+    -- Add all of the bytes from stdin
+    addBytes mutable lbs
+
+    -- Freeze to get an immutable version
+    vector &lt;- U.unsafeFreeze mutable
+
+    -- Print the frequency of each byte
+    -- In newer vectors: we can use imapM_
+    U.zipWithM_ printFreq (U.enumFromTo 0 255) vector
+
+addBytes :: (PrimMonad m, M.MVector v Int)
+         =&gt; v (PrimState m) Int
+         -&gt; L.ByteString
+         -&gt; m ()
+addBytes v lbs = mapM_ (addByte v) (L.unpack lbs)
+
+addByte :: (PrimMonad m, M.MVector v Int)
+        =&gt; v (PrimState m) Int
+        -&gt; Word8
+        -&gt; m ()
+addByte v w = do
+    -- Read out the old count value
+    oldCount &lt;- M.read v index
+    -- Write back the updated count value
+    M.write v index (oldCount + 1)
+  where
+    -- Indices in vectors are always Ints. Our bytes come in as Word8, so we
+    -- need to convert them.
+    index :: Int
+    index = fromIntegral w
+
+printFreq :: Int -&gt; Int -&gt; IO ()
+printFreq index count = putStrLn $ concat
+    [ &quot;Frequency of byte &quot;
+    , show index
+    , &quot;: &quot;
+    , show count
+    ]</code></pre><h2 id="terminology"><a href="#terminology">Terminology</a></h2><p>There are two different varieties of vectors: immutable and mutable. Immutable
+vectors (such as provided by the <code>Data.Vector</code> module) are essentially
+swappable with normal lists in Haskell, though with drastically different
+performance characteristics (discussed below). The high-level API is similar to
+lists, it implements common typeclasses like <code>Functor</code> and <code>Foldable</code>, and
+plays quite nicely with parallel code.</p><p>By contrast, mutable vectors are much closer to C-style arrays. Operations
+working on these values must live in the <code>IO</code> or <code>ST</code> monads (see <code>PrimMonad</code>
+below for more details). Concurrent access from multiple threads has all of the
+normal concerns of shared mutable state. And perhaps most importantly for
+usage: mutable vectors can be <i>much</i> more efficient for certain use cases.</p><p>However, that's not the only dimension of choice you get in the vector package.
+vector itself defines three flavors: boxed
+(<code>Data.Vector</code>/<code>Data.Vector.Mutable</code>), storable (<code>Data.Vector.Storable</code> and
+<code>Data.Vector.Storable.Mutable</code>), and unboxed (<code>Data.Vector.Unboxed</code> and
+<code>Data.Vector.Unboxed.Mutable</code>). (There's also technically primitive vectors,
+but in practice you should always prefer unboxed vectors; see the module
+documentation for more information on the distinction here.)</p><p>And our final point: in addition to having these three flavors, the vector
+package provides a typeclass-based interface which allows you to write code
+that works in any of these three (plus other vector types that may be defined
+in other packages, like
+<a href="http://www.stackage.org/package/hybrid-vectors">hybrid-vectors</a>). These
+interfaces are in <code>Data.Vector.Generic</code> and <code>Data.Vector.Generic.Mutable</code>. When
+using these interfaces, you must still eventually choose a concrete
+representation, but your helper code can be agnostic to what it is.</p><p>What's nice is that - with small differences - all four mutable modules have
+the same interface, and all four immutable modules have the same interface.
+This means you can focus on learning one type of vector, and almost for free
+have that knowledge apply to other types as well. It then just becomes a
+question of choosing the representation that best fits your use case, which
+we'll get to shortly.</p><h2 id="efficiency"><a href="#efficiency">Efficiency</a></h2><p>Standard lists in Haskell are immutable, singly-linked lists. Every time you
+add another value to the front of the list, it has to allocate another heap
+object for that cell, create a pointer to the head of the original list, and
+create a pointer to the value in the current cell. This takes up a lot of
+memory for holding pointers, and makes it inefficient to index or traverse the
+list (indexing to position N requires N pointer dereferences).</p><p>In contrast, vectors are stored in a contiguous set of memory locations, meaning random access
+is a constant time operation, and the memory overhead per additional item in the vector
+is much smaller (depending on the type of vector, which we'll cover in a
+moment). However, compared to lists, prepending an item to a vector is
+relatively expensive: it requires creating a new buffer in memory, copying the
+old values, and then adding the new value.</p><p>There are other data structures that can be considered for list-like data, such
+as <code>Seq</code> from containers, or in some cases a <code>Set</code>, <code>IntMap</code>, or <code>Map</code>.
+Figuring out the best choice for each use case can only be reliably determined
+via profiling and benchmarking. As a general rule though, a densely populated
+collection requiring integral or random access to the values will be best served by
+a vector.</p><p>Now let's talk about some of the other things that make vector so efficient.</p><h3 id="boxed--storable-and-unboxed"><a href="#boxed--storable-and-unboxed">Boxed, storable and unboxed</a></h3><p>Boxed vectors hold normal Haskell values. These can be <i>any</i> values at all, and
+are stored on the heap with pointers kept in the vector. The advantage is that
+this works for all datatypes, but the extra memory overhead for the pointers
+and the indirection of needing to dereference those pointers makes them
+(relative to the next two types) inefficient.</p><p>Storable and unboxed vectors both store their data in a byte array, avoiding
+pointer indirection. This is more memory efficient and allows better usage of
+caches. The distinction between storable and unboxed vectors is subtle:</p><ul><li>Storable vectors require data which is an instance of the <a href="http://haddock.stackage.org/lts-3.11/base-4.8.1.0/Foreign-Storable.html#t:Storable"><code>Storable</code> type
+class</a>.
+This data is stored in <code>malloc</code>ed memory, which is <i>pinned</i> (the garbage
+collector can't move it around). This can lead to memory fragmentation, but
+allows the data to be shared over the C FFI.</li><li>Unboxed vectors require data which is an instance of the <a href="http://haddock.stackage.org/lts-3.11/primitive-0.6.1.0/Data-Primitive-Types.html"><code>Prim</code> type
+class</a>.
+This data is stored in GC-managed <i>unpinned</i> memory, which helps avoid memory
+fragmentation. However, this data cannot be shared over the C FFI.</li></ul><p>Both the <code>Storable</code> and <code>Prim</code> typeclasses provide a way to store a value as
+bytes, and to load bytes into a value. The distinction is what type of
+bytearray is used.</p><p>As usual, the only true measure of performance will be benchmarking. However,
+as a general guideline:</p><ul><li>If you don't need to pass values to a C FFI, and you have a <code>Prim</code> instance,
+use unboxed vectors.</li><li>If you have a <code>Storable</code> instance, use a storable vector.</li><li>Otherwise, use a boxed vector.</li></ul><p>There are also other issues to consider, such as the fact that boxed vectors
+are instances of <code>Functor</code> while storable and unboxed vectors are not.</p><h3 id="stream-fusion"><a href="#stream-fusion">Stream fusion</a></h3><p>Take a guess how much memory the following program will take to run:</p><pre><code class="haskell">import qualified Data.Vector.Unboxed as V
+
+main :: IO ()
+main = print $ V.sum $ V.enumFromTo 1 (10^9 :: Int)</code></pre><p>A valid guess may be <code>10^9 * sizeof int</code> bytes. However, when compiled with
+optimizations (<code>-O2</code>) on my system, it allocates a total of only 52kb! How it
+is possible to create a one billion integer array without using up 4-8GB of
+memory?</p><p>The vector package has a powerful technique: stream fusion. Using GHC rewrite
+rules, it's able to find many cases where creating a vector is unnecessary, and
+instead create a tight inner loop. In our case, GHC will end up generating code
+that can avoid touching system memory, and instead work on just the <a href="https://en.wikipedia.org/wiki/Processor_register">registers</a>,
+yielding not only a tiny memory footprint, but performance close to a for-loop
+in C. This is one of the beauties of this library: you can write high-level
+code, and optimizations can churn out something much more CPU-friendly.</p><h3 id="slicing"><a href="#slicing">Slicing</a></h3><p>Above we discussed the problem of appending values to the front of a vector.
+However, one place where vector shines is with <i>slicing</i>, or taking a subset of
+the vector. When dealing with immutable vectors, slicing is a safe operation,
+with slices being sharable with multiple threads. Slicing also works with
+mutable vectors, but as usual you need to be a bit more careful.</p><h2 id="replacing-lists"><a href="#replacing-lists">Replacing lists</a></h2><p>Enough talk! Let's start using vector. Assuming you're familiar with the list
+API, this should look rather boring.</p><pre><code class="haskell">import qualified Data.Vector as V
+
+main :: IO ()
+main = do
+    let list = [1..10] :: [Int]
+        vector = V.fromList list :: V.Vector Int
+        vector2 = V.enumFromTo 1 10 :: V.Vector Int
+    print $ vector == vector2 -- True
+    print $ list == V.toList vector -- also True
+    print $ V.filter odd vector -- 1,3,5,7,9
+    print $ V.map (* 2) vector -- 2,4,6,...,20
+    print $ V.zip vector vector -- (1,1),(2,2),...(10,10)
+    print $ V.zipWith (*) vector vector -- (1,4,9,16,...,100)
+    print $ V.reverse vector -- 10,9,...,1
+    print $ V.takeWhile (&lt; 6) vector -- 1,2,3,4,5
+    print $ V.takeWhile odd vector -- 1
+    print $ V.takeWhile even vector -- []
+    print $ V.dropWhile (&lt; 6) vector -- 6,7,8,9,10
+    print $ V.head vector -- 1
+    print $ V.tail vector -- 2,3,4,...,10
+    print $ V.head $ V.takeWhile even vector -- exception!</code></pre><p>Hopefully there's nothing too surprising about this. Most <code>Prelude</code> functions
+that apply to lists have a corresponding vector function. If you know what a
+function does in <code>Prelude</code>, you probably know what it does in <code>Data.Vector</code>.
+This is the simplest usage of the vector package: import <code>Data.Vector</code>
+qualified, convert to/from lists with <code>V.fromList</code> and <code>V.toList</code>, and then
+prefix your function calls with <code>V.</code>.</p><ul><li><p>Exercise 1: Try out some other functions available in the <a href="http://haddock.stackage.org/lts-3.11/vector-0.10.12.3/Data-Vector.html"><code>Data.Vector</code>
+module</a>.
+In particular, try some of the fold functions, which we haven't covered here.</p></li><li><p>Exercise 2: Try using the <code>Functor</code>, <code>Foldable</code>, and <code>Traversable</code> versions of
+functions with a vector</p></li><li><p>Exercise 3: Use an unboxed (or storable) vector instead of the boxed vectors
+we were using above. What code did you have to change from the original
+example?  Do all of your examples from exercise 2 still work?</p></li></ul><p>There are also a number of functions in the <code>Data.Vector</code> module with no
+corresponding function in <code>Prelude</code>. Many of these are related to mutable
+vectors (which we'll cover shortly). Others are present to provide more
+efficient means of manipulating a vector, based on their special in-memory
+representation.</p><h2 id="mutable-vectors"><a href="#mutable-vectors">Mutable vectors</a></h2><p>I want to test how fair the <code>System.Random</code> number generator is at generating
+numbers between 0 and 9, inclusive. I want to generate 1,000,000 random values,
+count the frequency of each result, and then print how often each value
+appeared. Let's first implement this using immutable vectors:</p><pre><code class="haskell">import           Data.Vector.Unboxed ((!), (//))
+import qualified Data.Vector.Unboxed as V
+import           System.Random       (randomRIO)
+
+main :: IO ()
+main = do
+    let v0 = V.replicate 10 (0 :: Int)
+
+        loop v 0 = return v
+        loop v rest = do
+            i &lt;- randomRIO (0, 9)
+            let oldCount = v ! i
+                v' = v // [(i, oldCount + 1)]
+            loop v' (rest - 1)
+
+    vector &lt;- loop v0 (10^6)
+    print vector</code></pre><p>We've introduced the <code>!</code> operator for indexing, and the <code>//</code> operator for
+updating. Other than that, this is fairly straightforward code. When I ran this
+on my system, it had 48MB maximum memory residency, and took 1.968s to
+complete. Surely we can do better.</p><p>This problem is inherently better as a mutable state one: instead of generating
+a new immutable <code>Vector</code> for each random number generated, we'd like to simply
+increment a piece of memory. Let's rewrite this to use a mutable, unboxed
+vector:</p><pre><code class="haskell">import           Control.Monad               (replicateM_)
+import           Data.Vector.Unboxed         (freeze)
+import qualified Data.Vector.Unboxed.Mutable as V
+import           System.Random               (randomRIO)
+
+main :: IO ()
+main = do
+    vector &lt;- V.replicate 10 (0 :: Int)
+
+    replicateM_ (10^6) $ do
+        i &lt;- randomRIO (0, 9)
+        oldCount &lt;- V.read vector i
+        V.write vector i (oldCount + 1)
+
+    ivector &lt;- freeze vector
+    print ivector</code></pre><p>Once again, we use <code>replicate</code> to create a size-10 vector filled with 0. But
+now we've created a mutable vector (note the change in import). We then use
+<code>replicateM_</code> to perform the inner action 1,000,000 times, namely: generate a
+random index, read the old value at that index, increment it, and write it
+back.</p><p>After we're finished, we <i>freeze</i> the vector (more on that in the next section)
+and print it. The resulting distribution of values is the same (or close - we are dealing with random
+numbers here) as the previous calculation using an immutable vector. But instead of 48MB and 1.968s,
+this program has a maximum residency of 44KB and runs in 0.247s! That's a
+significant improvement!</p><p>If we feel like being even more adventurous, we can replace our <code>read</code> and
+<code>write</code> calls with <code>unsafeRead</code> and <code>unsafeWrite</code>. That will disable some
+bounds checks before reading and writing. This can be a nice performance boost
+in very tight loops, but has the potential to <a href="https://en.wikipedia.org/wiki/Segmentation_fault">segfault</a>
+your program, so caveat
+emptor! For example, try replacing <code>replicate 10</code> with <code>replicate 9</code>, change
+the <code>read</code> for an <code>unsafeRead</code>, and run your program. You'll see something
+like:</p><pre><code>internal error: evacuate: strange closure type -1944718914
+    (GHC version 7.10.2 for x86_64_unknown_linux)
+    Please report this as a GHC bug:  http://www.haskell.org/ghc/reportabug
+Aborted (core dumped)</code></pre><p>The same logic applies to the other <code>unsafe</code> functions in vector. The
+nomenclature means: <code>unsafe</code> may segfault your whole process, while
+not-marked-unsafe may just throw an impure exception (also not great, but
+certainly better than a segfault).</p><p>And if you were curious: on my system using <code>unsafeRead</code> and <code>unsafeWrite</code>
+speeds the program up marginally, from 0.247s to 0.233s. In our example, most
+of our time is spent on generating the random numbers, so taking off the safety
+checks does not have a significant impact.</p><h2 id="freezing-and-thawing"><a href="#freezing-and-thawing">Freezing and thawing</a></h2><p>We used the <code>freeze</code> function above. The behavior of this may not be
+immediately obvious. When you freeze a mutable vector, what happens is:</p><ol><li>A new mutable vector of the same size is created</li><li>Each value in the original mutable vector is copied to the new mutable vector</li><li>A new immutable vector is created out of the memory space used by the new mutable vector</li></ol><p>Why not just freeze it in place? Two reasons, actually:</p><ol><li><p>It has the potential to break referential transparency. Consider this code:</p><pre><code class="haskell">import           Data.Vector.Unboxed         (freeze)
+import qualified Data.Vector.Unboxed.Mutable as V
+
+main :: IO ()
+main = do
+    vector &lt;- V.replicate 1 (0 :: Int)
+    V.write vector 0 1
+    ivector &lt;- freeze vector
+    print ivector
+    V.write vector 0 2
+    print ivector</code></pre><p>If we froze the vector in-place in the call to <code>freeze</code>, then the second
+<code>write</code> call would modify our <code>ivector</code> value, meaning that the first and
+second call to <code>print ivector</code> would have different results!</p></li><li><p>When you freeze a mutable vector, its memory is marked differently for
+garbage collection purposes. Later attempts to write to that same memory can
+lead to a segfault.</p></li></ol><p>However, if you really want to avoid that extra buffer copy, and are certain
+it's safe, you can use <code>unsafeFreeze</code>. And in fact, our random number example
+above is a case where <code>freeze</code> can be safely replaced by <code>unsafeFreeze</code>, since
+after the freeze, the original mutable vector is never used again.</p><ul><li>Exercise 1: Go ahead and make that swap and confirm that your program works
+as expected.</li><li>Exercise 2: In the program just above (with <code>V.replicate 1 (0 :: Int)</code>),
+replace <code>freeze</code> with <code>unsafeFreeze</code>. What result do you see?</li></ul><p>The opposite of <code>freeze</code> is <code>thaw</code>. Similar to <code>freeze</code>, <code>thaw</code> will copy to a
+new mutable vector instead of exposing the current memory buffer. And also,
+like <code>freeze</code>, there's an <code>unsafeThaw</code> that turns off the safety measures. Like
+everything <code>unsafe</code>: caveat emptor!</p><p>(We'll cover some functions like <code>create</code> that provide safe wrappers around
+<code>unsafeFreeze</code> and <code>unsafeThaw</code> later.)</p><h2 id="primmonad"><a href="#primmonad">PrimMonad</a></h2><p>If you look at the mutation functions we used above like <code>read</code> and <code>write</code>,
+you can tell that they were looking in the <code>IO</code> monad. However, vector is more
+generic than that, and will allow your mutations to live in any <i>primitive
+monad</i>, meaning: <code>IO</code>, strict <code>ST s</code>, and transformers sitting on top of those
+two. The type class controlling this is <code>PrimMonad</code>.</p><p>You can get more information on <code>PrimMonad</code> in the <a href="primitive-haskell">Primitive
+Haskell</a> article. Without diving into details: every
+primitive monad also has an associated primitive state token type, which is
+captured with <code>PrimState</code>. As a result, the type signatures for <code>read</code> and
+<code>write</code> (for boxed vectors) look like:</p><pre><code class="haskell">read :: PrimMonad m =&gt; MVector (PrimState m) a -&gt; Int -&gt; m a
+write :: PrimMonad m =&gt; MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()</code></pre><p>Every mutable vector takes two type parameters: the state token of the monad it
+lives in, and the type of value it holds. These gymnastics may seem overkill
+now, but are necessary for making mutable vectors both versatile in multiple
+monads, and type safe.</p><h2 id="modify-and-the-st-monad"><a href="#modify-and-the-st-monad">modify and the ST monad</a></h2><p>Let's check out a particularly complicated type signature (for unboxed vectors):</p><pre><code class="haskell">modify :: Unbox a =&gt; (forall s. MVector s a -&gt; ST s ()) -&gt; Vector a -&gt; Vector a</code></pre><p>What this function does is:</p><ol><li>Creates a new mutable buffer the same length as the original vector</li><li>Copies the values from the original vector into the new mutable vector</li><li>Runs the provided <code>ST</code> action on the provided mutable vector</li><li>Unsafely freezes the mutable vector and returns it.</li></ol><p>What's great about this function is that it does the minimal amount of buffer
+copying to be safe, and that it can be used from pure code (since all
+side-effects are captured inside the <code>ST</code> action you provide).</p><ul><li>Exercise 1: Steps 1 and 2 should look pretty similar to a function we
+discussed above. Can you figure out which one it is?</li><li>Exercise 2: Implement <code>modify</code> yourself using functions we've discussed and
+<code>runST</code> from <code>Control.Monad.ST</code>.</li></ul><p>Let's use our new function to implement a Fisher-Yates shuffle. If we start
+with a vector of size 20, we'll generate a random number between 0 and 19. Then
+we'll swap position 19 with that generated random number. Then we'll loop, but
+this time with a random number between 0 and 18 and swapping with position 18.
+We continue until we get down to 0.</p><pre><code class="haskell">import           Control.Monad.Primitive     (PrimMonad, PrimState)
+import qualified Data.Vector.Unboxed         as V
+import qualified Data.Vector.Unboxed.Mutable as M
+import           System.Random               (StdGen, getStdGen, randomR)
+
+shuffleM :: (PrimMonad m, V.Unbox a)
+         =&gt; StdGen
+         -&gt; Int -- ^ count to shuffle
+         -&gt; M.MVector (PrimState m) a
+         -&gt; m ()
+shuffleM _ i _ | i &lt;= 1 = return ()
+shuffleM gen i v = do
+    M.swap v i' index
+    shuffleM gen' i' v
+  where
+    (index, gen') = randomR (0, i') gen
+    i' = i - 1
+
+shuffle :: V.Unbox a
+        =&gt; StdGen
+        -&gt; V.Vector a
+        -&gt; V.Vector a
+shuffle gen vector = V.modify (shuffleM gen (V.length vector)) vector
+
+main :: IO ()
+main = do
+    gen &lt;- getStdGen
+    print $ shuffle gen $ V.enumFromTo 1 (20 :: Int)</code></pre><p>Notice how <code>shuffleM</code> is a mutable, side-effecting function. However, <code>shuffle</code>
+itself is pure.</p><h2 id="generic"><a href="#generic">Generic</a></h2><p>After everything else we've dealt with, <code>Generic</code> is a relatively easy
+addition. We introduce two new typeclasses:</p><pre><code class="haskell">class MVector v a
+class MVector (Mutable v) a =&gt; Vector v a</code></pre><p>Said in English: an instance <code>MVector v a</code> is a mutable vector of type <code>v</code> that
+can hold values of type <code>a</code>. The <code>Vector v a</code> is the immutable counterpart to
+some mutable vector. You can find the mutable version with <code>Mutable v</code>.</p><p>One important thing to keep in mind is <i>kinds</i>. The kind of the <code>v</code> is <code>MVector
+v a</code> is <code>* -&gt; * -&gt; *</code>, since it takes parameters for both the state token and
+the value it holds. With the immutable <code>Vector v a</code>, the <code>v</code> is of kind <code>* -&gt;
+*</code>. Was that a little abstract? No problem, some type signatures should help:</p><pre><code class="haskell">length :: MVector v a =&gt; v s a -&gt; Int
+length :: Vector v a =&gt; v a -&gt; Int
+
+read :: (PrimMonad m, MVector v a) =&gt; v (PrimState m) a -&gt; Int -&gt; m a</code></pre><p>It takes a bit of time to get used to these generic classes, but once you do
+it's fairly easy to use them. The best advice is to practice! And as such:</p><ul><li><p>Exercise: modify the <code>shuffle</code> program above to work on a generic vector
+instead of specifically on an unboxed vector.</p></li></ul><p>The final trick when working with generic vectors is that, ultimately, you will
+need to provide a concrete type. If you forget to do so, you'll end up with
+error messages that look like the following:</p><pre><code class="haskell">stream.hs:28:13:
+    No instance for (V.Vector v0 Int) arising from a use of ‘shuffle’
+    In the expression: shuffle gen
+    In the second argument of ‘($)’, namely
+      ‘shuffle gen $ V.enumFromTo 1 (20 :: Int)’
+    In a stmt of a 'do' block:
+      print $ shuffle gen $ V.enumFromTo 1 (20 :: Int)</code></pre><h2 id="vector-algorithms"><a href="#vector-algorithms">vector-algorithms</a></h2><p>A package of note is
+<a href="http://www.stackage.org/package/vector-algorithms">vector-algorithms</a>, which
+provides some algorithms (mostly sort) on mutable vectors. For example, let's
+generate 100 random numbers and then sort them.</p><pre><code class="haskell">import           Data.Vector.Algorithms.Merge (sort)
+import qualified Data.Vector.Generic.Mutable  as M
+import qualified Data.Vector.Unboxed          as V
+import           System.Random                (randomRIO)
+
+main :: IO ()
+main = do
+    vector &lt;- M.replicateM 100 $ randomRIO (0, 999 :: Int)
+    sort vector
+    V.unsafeFreeze vector &gt;&gt;= print</code></pre><ul><li>Exercise 1: write a helper function <code>sortImmutable</code> that uses <code>modify</code> and <code>sort</code> from vector-algorithms to sort an immutable vector safely</li><li>Exercise 2: rewrite the main function above to use <code>sortImmutable</code> and only the immutable vector API</li><li>Exercise 3: is your new version more efficient, less efficient, or the same? Explain.</li></ul><h2 id="mwc-random"><a href="#mwc-random">mwc-random</a></h2><p>One final library to mention now is mwc-random, a random number generation
+library built on top of vector and primitive. Its API can be a bit daunting
+initially, but given your newfound understanding of the vector package, the API
+might make a lot more sense now. It provides a <code>Gen s</code> type, where <code>s</code> is some
+state token. You can then use <code>uniform</code> and <code>uniformR</code> to get random numbers
+out of that generator.</p><p>As a final example, here's how we can shuffle the numbers 1-20 using
+mwc-random.</p><pre><code class="haskell">import           Control.Monad.ST            (ST)
+import qualified Data.Vector.Unboxed         as V
+import qualified Data.Vector.Unboxed.Mutable as M
+import           System.Random.MWC           (Gen, uniformR, withSystemRandom)
+
+shuffleM :: V.Unbox a
+         =&gt; Gen s
+         -&gt; Int -- ^ count to shuffle
+         -&gt; M.MVector s a
+         -&gt; ST s ()
+shuffleM _ i _ | i &lt;= 1 = return ()
+shuffleM gen i v = do
+    index &lt;- uniformR (0, i') gen
+    M.swap v i' index
+    shuffleM gen i' v
+  where
+    i' = i - 1
+
+main :: IO ()
+main = do
+    vector &lt;- withSystemRandom $ \gen -&gt; do
+        vector &lt;- V.unsafeThaw $ V.enumFromTo 1 (20 :: Int)
+        shuffleM gen (M.length vector) vector
+        V.unsafeFreeze vector
+    print vector</code></pre></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/commercial/content/vector';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

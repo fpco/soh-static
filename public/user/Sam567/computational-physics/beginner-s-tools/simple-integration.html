@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html><head><title>Simple Integration - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics">Computational Physics</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools">Beginner&#39;s Tools</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools/simple-integration">Simple Integration</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Simple Integration</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">12 May 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5577/a32ebe946a2b7402dc5e2b9fc838d9a59f8070f5">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools/polynomials">Next content: Polynomials</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/beginner-s-tools">Go up to: Beginner&#39;s Tools</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567">See all content by Samuel Buteau</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#from-exact-to-approximate-integration">From Exact to Approximate Integration</a><ul><li><a href="#solution--two-for-the-price-of-one">Solution: Two for the price of One</a></li><li><a href="#note-about-higher-order-functions">Note about higher-order Functions</a></li><li><a href="#take-away-from-our-first-two-tries">Take-away from our first two tries</a></li><li><a href="#a-third-representation--now--we-talk-about-approximate-integration-">A third representation; Now, we talk about approximate integration.</a></li><li><a href="#more--the-second-and-third-representation-are-compatible">More: The second and third representation are compatible</a></li></ul></li><li><a href="#simple-rules">Simple Rules</a><ul><li><a href="#note--why-we-work-with-the-2nd-rep--from-now-on-">Note: why we work with the 2nd rep. from now on.</a></li><li><a href="#left-rule">Left rule</a><ul><li><a href="#what-is-n-again-">What is n again?</a></li><li><a href="#why-bother-with-integraloflist---first-reason-">Why bother with integralOfList? (First Reason)</a></li><li><a href="#why-bother-with-integraloflist---second-reason-">Why bother with integralOfList? (Second Reason)</a></li></ul></li><li><a href="#trapezoidal-rule">Trapezoidal rule</a><ul><li><a href="#why-different-weights-for-the-edges-">Why different weights for the edges?</a></li><li><a href="#common-patterns-">Common Patterns?</a></li></ul></li><li><a href="#simpson-s-rule">Simpson&#39;s Rule</a></li></ul></li><li><a href="#a-little-problem-just-for-you">A little Problem just for You</a></li><li><a href="#note-on-performance-">Note on Performance.</a><ul><li><a href="#a-few-thoughts-on-optimization--we-will-come-back-to-it-">A few thoughts on Optimization (we will come back to it)</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>For the sake of smoothness :), we start by 'formalizing' the notion of definite integration. If you haven't seen my previous tutorial on 'Representation, Operations, and Semantics', be aware that this 'formalization' is an application of the concepts discussed in 'ROS'.</p><p>The idea is to take you through my own journey in Computational Physics. In this specific tutorial, you will see how I took the concepts from a Calculus 101 course, and turned it into a 'Computational Idea', which I then implemented in Haskell.</p><p>You do not have to do this in Haskell, but I recommend it. Even if you plan to work in 'C' or 'FORTRAN', I believe (that is the reason we are here) Haskell can teach you more about 'Computational Ideas' and their relationship to 'Mathematical Ideas' (and later, we will discuss 'Physical Ideas') than any other languages out there. Also, Haskell allows you to write efficient programs, which is important in Computational Physics. Furthermore, I will teach you (if you keep coming back) what optimization is, and how to do it smartly.</p><p>But enough blabla, let's dive in.</p><h1 id="from-exact-to-approximate-integration"><a href="#from-exact-to-approximate-integration">From Exact to Approximate Integration</a></h1><p>Let us consider definite integrals.</p><pre><code class="haskell">integral f a b
+</code></pre><p>How can we make sense of this concept in a 'computational' manner?</p><p>In mathematics, <code>integral</code>  is a function that takes a function as input, an interval, and returns the area under the curve.</p><p>In a computational context, <code>integral</code> is likely to be an <code>Operation</code> rather than a <code>Representation</code>.</p><p>So, our task is to find a 'computational idea' where <code>integral</code> is an operation.</p><p>Exercise: How would <i>you</i> solve this problem? How would you represent real numbers? How would you represent a function from the real to the real? How would you represent an interval?</p><h3 id="solution--two-for-the-price-of-one"><a href="#solution--two-for-the-price-of-one">Solution: Two for the price of One</a></h3><div class="hidden"><p>These are two representations you might have come up with:</p><ol><li><p>if we represent mathematical functions <code>f:: Real -&gt; Real</code> as haskell functions <code>f::Double -&gt; Double</code>, and every number <code>x::Real</code> by a haskell number <code>x::Double</code>, then <code>Integral</code> is a function with the following type:</p></li></ol><pre><code class="haskell">
+integral :: (Double -&gt; Double) -&gt; Double -&gt; Double -&gt; Double
+</code></pre><p>By introducing type synonyms, we really start to get a handle on the fundamental notion here:</p><pre><code class="haskell">
+type Func = Double -&gt; Double
+
+integral :: Func -&gt; Double -&gt; Double -&gt; Double
+
+--If we want to emphasize the fact that a and b form an interval, then we can do this:
+
+type Interval = (Double,Double)
+
+integral :: Func -&gt; Interval -&gt; Double
+integral f (a,b) = ...
+</code></pre><p>So the integral is an <code>Operation</code> which takes a function, an interval, and returns a real number.</p><ol><li><p>if we represent a mathematical function <code>f</code> by the list of values which it takes on the interval (a,b), and we represent the independent variable <code>x</code> by the values for which the function is evaluated, then <code>Integral</code> is a function with the following type:</p></li></ol><pre><code class="haskell">
+integral :: [Double] -&gt; [Double] -&gt; Double
+integral fs xs = ...
+
+--with the understanding that if f is the mathematical function, then 
+
+fs = map f xs
+</code></pre><p>With a few type synonyms:</p><pre><code class="haskell">
+type Func = [Double]
+type Var = [Double]
+
+integral :: Func -&gt; Var -&gt; Double
+</code></pre></div><h3 id="note-about-higher-order-functions"><a href="#note-about-higher-order-functions">Note about higher-order Functions</a></h3><div class="hidden"><p>In mathematics, functions on functions are called operators (linear operators in cases like <code>integral</code>). However, once you accept that functions aren't special, then the word <code>operator</code> can be replaced by <code>function</code>. In Haskell, there is nothing special about <code>operators</code>; they are simply functions, and you define them the same way as functions on data. This single fact is responsible for much of Haskell's power, and many other languages have this feature.</p></div><h3 id="take-away-from-our-first-two-tries"><a href="#take-away-from-our-first-two-tries">Take-away from our first two tries</a></h3><p>So you notice that these two notions of integrations are different. (I'm talking about the Solution to the first Exercise)</p><p>Clearly, the first integral really corresponds directly to the mathematical idea of an exact (definite) integral.</p><p>Given a function <code>f</code>, and an interval <code>(a,b)</code>, then there is really only one exact integral in math, and one exact integral in the first representation.</p><p>However, the second representation offers many representations of the same function. (you are free to choose how many point you use to represent your function)</p><p>for instance:</p><pre><code class="haskell">
+f x = x
+a = 0
+b = 1
+
+fs1 = [0, 1]      --representing f with 2 points on the interval (a,b)
+fs2 = [0, 0.5, 1] --................... 3 ...........................
+
+xs1 = [0, 1]      -- the corresponding variables
+xs2 = [0, 0.5, 1]</code></pre><p>So what is essential here?</p><p>Let us suppose that we always evaluate points at constant increments.</p><p>Now, the only freedom we have is the number of points contained on our interval.</p><p>Thus, a more useful representation than 1) for approximate integration is</p><h3 id="a-third-representation--now--we-talk-about-approximate-integration-"><a href="#a-third-representation--now--we-talk-about-approximate-integration-">A third representation; Now, we talk about approximate integration.</a></h3><pre><code class="haskell">
+type Func = Double -&gt; Double
+data Interval = I (Double,Double) Int
+
+integral :: Func -&gt; Interval -&gt; Double
+integral f (I (a,b) n) = ...
+</code></pre><p>This is a representation of a discrete interval, which now makes the two representations (2 and 3) equivalent.</p><p>However, it is possible to define integration without the constraint of constant increment.</p><h3 id="more--the-second-and-third-representation-are-compatible"><a href="#more--the-second-and-third-representation-are-compatible">More: The second and third representation are compatible</a></h3><div class="hidden"><p>In the case of non-constant increments, the 3rd rep can change to the following, and become equivalent to the 2nd:</p><pre><code class="haskell">
+type Func = Double -&gt; Double
+type Interval = [Double] --This is a Var in disguise, so let us be more explicit:
+type Var = [Double]
+
+integral :: Func -&gt; Var -&gt; Double
+integral f xs = ...
+</code></pre><p>Incidentally, if one restricts himself to the case of constant increments, then one can modify the 2nd representation to  fit the original 3rd:</p><pre><code class="haskell">
+type Func = [Double]
+data Interval = I (Double,Double) Int
+
+integral :: Func -&gt; Interval -&gt; Double
+integral fs (I (a,b) n) = ...</code></pre><p>So we see that at its core, the approximate definite integral has a structure independent of representation.</p></div><h1 id="simple-rules"><a href="#simple-rules">Simple Rules</a></h1><p>OK, now that we really really know what an integral is, let us look at various algorithms for integration.</p><p>For the moment (we will come back when we talk about Stochastic Methods), the mathematical form of algorithms to compute integrals has the following form:</p><pre><code class="haskell">
+integral f xs = sum [f x_i * w x_i | x_i &lt;- xs]
+--or
+integral' fs xs = sum $ zipWith (*) ws fs</code></pre><p>However, this form doesn't tell us about <code>w</code> or <code>ws</code>. Intuitively, you can think of an integral as a sum, where the <code>ws</code> are the weights of each of the <code>fs</code>.</p><h3 id="note--why-we-work-with-the-2nd-rep--from-now-on-"><a href="#note--why-we-work-with-the-2nd-rep--from-now-on-">Note: why we work with the 2nd rep. from now on.</a></h3><div class="hidden"><p>By the way, the way to go from the 3rd rep. to the 2nd is rather obvious (<code>fs = map f xs</code>), whereas the other way around seems troublesome. Therefore, we will work with the 2nd, and then, if we want to implement something for the 3rd, we will first convert the input to the  2nd rep, and then use our implementation for the 2nd.</p><p>Exercise: how to get from an <code>Interval</code> to a <code>Var</code> in the case of equal increments?</p><p>Solution:</p><pre><code class="active haskell">data Interval = I (Double,Double) Int
+toXs (I (a,b) n) =map (\x -&gt; a + (b-a)/fromIntegral (n-1) * fromIntegral x) [0..n-1]
+
+main = print toXs (I (1,2) 10)</code></pre></div><h2 id="left-rule"><a href="#left-rule">Left rule</a></h2><p>This is the simplest way to integrate;</p><ol><li>we split the interval (a,b) in (n-1) slices of equal length <code>h = (b - a)/(n-1)</code>,</li><li>we approximate the function on each of those intervals by a constant.</li></ol><h3 id="what-is-n-again-"><a href="#what-is-n-again-">What is <code>n</code> again?</a></h3><div class="hidden"><p>n is the number of points in the interval. If <code>n = 3</code>, <code>a=0</code>, and <code>b=1</code>,
+then the three points are <code>[0, 0.5, 1]</code></p><p>For this rule, the last point is never used, because we only need one point per interval to approximate a constant.</p></div><p>In the case of the Left rule, the first interval will be approximated by <code>f a</code>, the second by <code>f (a + h)</code>, and so forth. Thus, <code>f b</code> is never evaluated.</p><p>Formally,</p><pre><code class="haskell">
+integral f (I (a,b) n) = let h = (b - a)/(n-1)
+                             xs = map (\i -&gt; a + i * h) [0..n-2]
+                         in sum [h * f x_i | x_i &lt;- xs]</code></pre><p>To help us later, we want to define <code>w</code>, the weight function.</p><pre><code class="haskell">wLeft h = h -- w is a constant, always h ... for the first n - 1 points.
+</code></pre><p>This is not quite right; we would like to be explicit about the fact that if we were to include <code>b</code> in <code>xs</code>, then <code>w</code> would be <code>0</code>.</p><pre><code class="haskell">--here, number is the position in the sum starting at 1.
+wLeft h n number | (number == n) = 0
+                 | (number &gt;= 1 &amp;&amp; number &lt; n) = h
+                 | otherwise = error &quot;number is not in range with n&quot;
+                 </code></pre><p>Therefore, we can have something like:</p><pre><code class="haskell">integral f (I (a,b) n) = let h = (b - a)/(n-1)
+                             xs = toXs (I (a,b) n)
+                             fs = map f xs
+                             ws = map (wLeft h n) [1..n] 
+                         in sum $ zipWith (*) fs ws
+
+-- If we already have the list of function values from somewhere else. 
+integralOfList fs (I (a,b) n) = let h = (b - a)/(n-1)
+                                    ws = map (wLeft h n) [1..n] 
+                                in sum $ zipWith (*) fs ws                         </code></pre><p>We see that the structure is rather independent of the specific choice of <code>wLeft</code>.</p><h3 id="why-bother-with-integraloflist---first-reason-"><a href="#why-bother-with-integraloflist---first-reason-">Why bother with <code>integralOfList</code>? (First Reason)</a></h3><div class="hidden"><p>First, we could implement <code>integral</code> in terms of <code>integralOfList</code>. (3rd rep vs. 2nd)</p><p>Exercise: rewrite <code>integral</code> in terms of <code>integralOfList</code>:</p><pre><code class="active haskell">data Interval = I (Double,Double) Int
+toXs (I (a,b) n) =map (\x -&gt; a + (b-a)/fromIntegral (n-1) * fromIntegral x) [0..n-1]
+
+wLeft h n number | (number == n) = 0
+                 | (number &gt;= 1 &amp;&amp; number &lt; n) = h
+                 | otherwise = error &quot;number is not in range with n&quot;
+                 
+integralOfList fs (I (a,b) n) = let h = (b - a)/ fromIntegral (n-1)
+                                    ws = map (wLeft h n) [1..n] 
+                                in sum $ zipWith (*) fs ws  
+
+integral:: (Double -&gt; Double) -&gt; Interval -&gt; Double
+integral f (I (a,b) n) = FIXME
+
+main = print $ integral (\x -&gt; x**2) (I (-1,1) 100) </code></pre></div><h3 id="why-bother-with-integraloflist---second-reason-"><a href="#why-bother-with-integraloflist---second-reason-">Why bother with <code>integralOfList</code>? (Second Reason)</a></h3><div class="hidden"><p>Sometimes, we don't have a <code>f</code>; for instance, someone could give you a table containing <code>fs</code>; maybe he did an experiment, or maybe he wrote a big program just to compute <code>fs</code>. Now, your job is to integrate. Can you do it? Yes you can; with <code>integralOfList</code>, you can.</p><p>And if you have <code>f</code>, then use this (Solution to the previous exercise):</p><pre><code class="haskell">integral f (I (a,b) n) = let xs = toXs (I (a,b) n)
+                             fs = map f xs 
+                         in integralOfList fs (I (a,b) n)                    </code></pre></div><p>This method---although simple---is never used, because the error is proportional to <code>1/n</code>. Let's do better.</p><h2 id="trapezoidal-rule"><a href="#trapezoidal-rule">Trapezoidal rule</a></h2><p>Before, we approximated the function locally as a constant. Now, we will do just a tiny bit better, but the error will be proportional to <code>1/n^2</code> (still bad, but much better than <code>1/n</code>).</p><p>The idea is that for each slice of <code>x</code>, you approximate <code>f</code> by a linear function.</p><p>This gives you (on a single interval)</p><pre><code class="haskell">integral f [x_0, x_1] = let h = x_1 - x_0
+                        in h * (f x_0 + f x_1)/2                       </code></pre><p>The name of the rule comes from the formula above (the area of each slice is that of a trapezoid).</p><p>Exercise: 1)   Draw a trapezoid. 2) What shape corresponds to the Left rule?</p><p>If you carry this rule through for a whole interval (by summing over all slices), you get the following:</p><pre><code class="haskell">integral [f1,f2,..,fN] (I (a,b) n) = let h = (b - a)/ fromIntegral (n - 1)
+                                     in h*f1/2 + h*f2 + .. + h*fN/2</code></pre><h3 id="why-different-weights-for-the-edges-"><a href="#why-different-weights-for-the-edges-">Why different weights for the edges?</a></h3><div class="hidden"><p>When we add the contribution from each interval, every point gets a <code>h/2</code>, but the points <i>inside</i> (not at the edge) get two contributions (one for each interval they belong to).</p><p>To see this more clearly, we could rewrite:</p><pre><code class="haskell">integral [f1,f2,..,fN] (I (a,b) n) = let h = (b - a)/ fromIntegral (n - 1)
+                                     in h * (f1 + f2)/2+  h * (f2 + f3)/2  + .. +  h * (f(N-1) + fN)/2 </code></pre></div><p>So basically, we only need to define <code>w</code> for the trapezoidal rule in accordance to this, and we are good.</p><pre><code class="haskell">--here, number is the position in the sum starting at 1.
+wTrap h n number | (number == 1 || number == n) = h/2
+                 | (number &gt; 1 &amp;&amp; number &lt; n) = h
+                 | otherwise = error &quot;number is not in range with n&quot;
+                 </code></pre><p>Now, the full integral formula:</p><pre><code class="haskell">integralOfList fs (I (a,b) n) = let h = (b - a)/(n-1)
+                                    ws = map (wTrap h n) [1..n] 
+                                in sum $ zipWith (*) fs ws </code></pre><p>The only difference between this one and the one for the Left rule is the weight function.</p><h3 id="common-patterns-"><a href="#common-patterns-">Common Patterns?</a></h3><div class="hidden"><p>This gives us the idea to define a super-function (sorry) which takes the weight function as a parameter.</p><pre><code class="haskell">integralOfList w fs (I (a,b) n) = let h = (b - a)/(n-1)
+                                      ws = map (w h n) [1..n] 
+                                  in sum $ zipWith (*) fs ws 
+                                  
+intLeft = integralOfList wLeft
+intTrap = integralOfList wTrap</code></pre><p>If you do not understand partial application (last two lines), then rewrite <code>intLeft</code> to be the same as <code>integralOfListLeft</code>.</p></div><h2 id="simpson-s-rule"><a href="#simpson-s-rule">Simpson's Rule</a></h2><p><i>This method only works if the number of points n is an <i>odd</i> number.</i></p><p>The idea is to approximate the function by a quadratic in each slice of three points; it amounts to this:</p><pre><code class="haskell">
+f x = f x_0 + 
+    (x - x_0) * (f (x_0 + h) - f (x_0 - h))/ (2*h) + 
+    (x - x_0)**2 / 2 * (f (x_0 + h) - 2 * f x_0 + f (x_0 - h))/ h**2 +
+    O (h**3)
+
+--where ** means exponentiation;
+-- and O means `Big-oh notation'. 
+-- It means that what is left, 
+-- after we expanded the first 
+-- Taylor terms, is proportional to `h**3`.</code></pre><p>This gives you:</p><pre><code class="haskell">
+integral f [x_0, x_1, x_2] = let h = (x_2 - x_0) / 2
+                             in h * (f x_0 + 4 * f x_1 + f x_2)/3 
+                        </code></pre><p>If you are skeptical, try to integrate <code>f x</code> as approximated above with your knowledge of mathematical (exact) integration. Remember, a quadratic can be integrated exactly.</p><p>If you carry this rule through for a whole interval (by summing all the slices), you get the following:</p><pre><code class="haskell">integral [f1,f2,..,fN] (I (a,b) n) = let h = (b - a)/ fromIntegral (n - 1)
+                                     in (1/3) * h*f1 + 
+                                        (4/3) * h*f2 +
+                                        (2/3) * h*f3 +
+                                        (4/3) * h*f4 +
+                                        .. + 
+                                        (1/3) * h*fN</code></pre><p>So basically, we only need to define <code>w</code> for the Simpson's rule in accordance to this, and we are good.</p><pre><code class="haskell">--here, number is the position in the sum starting at 1.
+wSimp h n number | (number == 1 || number == n) = (1/3)*h
+                 | (number &gt; 1 &amp;&amp; number &lt; n &amp;&amp; even number) = (4/3)*h
+                 | (number &gt; 1 &amp;&amp; number &lt; n &amp;&amp; odd number) = (2/3)*h
+                 | otherwise = error &quot;number is not in range with n&quot;
+                 </code></pre><p>The full integral formula is:</p><pre><code class="haskell">intSimp fs (I (a,b) n) = if odd n 
+                         then integralOfList wSimp fs (I (a,b) n)
+                         else error &quot;The Simpson's rule only works with an odd number of points; the Interval given had an even n.&quot;
+</code></pre><p>Exercise: Use both the Simpson's rule and the Trapezoidal rule to create an integration which never fails due to <code>even n</code>, and has best accuracy.</p><div class="hidden"><pre><code class="haskell">--You got it
+intSuper fs (I (a,b) n) = if odd n 
+                          then integralOfList wSimp fs (I (a,b) n)
+                          else integralOfList wTrap fs (I (a,b) n)
+                          
+--You're a genius. Seriously, that was clever of you.  
+intGotcha fs (I (a,b) n) = if odd n 
+                           then integralOfList wSimp fs (I (a,b) n)
+                           else let h = (b-a) / fromIntegral (n-1)
+                                in integralOfList wSimp (init fs) (I (a,b-h) (n-1))</code></pre></div><p>The Simpson's rule makes the error go as <code>1/n^4</code>.</p><h1 id="a-little-problem-just-for-you"><a href="#a-little-problem-just-for-you">A little Problem just for You</a></h1><p>The error function is defined exactly by:</p><pre><code class="haskell">
+erf x = 2 / sqrt pi * integral (\y -&gt; exp (-y**2)) (0,x)
+</code></pre><p>Now, suppose we fix <code>x=1</code>,</p><p>I am telling you that: <code>erf 1 = 0.842700792949715</code>.</p><p>Your mission---should you choose to accept it---is to use the three methods we saw 
+1.  Left 
+2.  Trapezoidal 
+3.  Simpson 
+to <i>investigate</i>.</p><p>More precisely, for each of these methods, you can define the relative error as a function of <code>n</code>:</p><pre><code class="haskell">--this is not actual code; part of your mission is to define relative error properly.
+
+relError n = abs (methodAnswer n - exactAnswer) / exactAnswer
+</code></pre><p>Then, you must:</p><ol><li><p>Compute this function for all three methods for n = 3, 5, 9, 16, 32, 64, 128.</p></li><li><p>Make a table, or plot your results.</p></li><li><p>Compare the three methods.</p></li><li><p>(Very important) Have fun.</p></li><li><p>Hold your breath for the upcoming Gaussian Quadrature in 'Advanced Integration'.</p></li></ol><h1 id="note-on-performance-"><a href="#note-on-performance-">Note on Performance.</a></h1><p>As we will see later, the Gaussian quadrature is much better than Simpson's rule, but suppose we didn't know about such quadrature; how could we improve the performance of Simpson's rule?</p><p>So far, we used lists to represent our function. The compiler does an amazing job for you when you're working with lists, but (this is completely irrelevant now, and we will come back to it when it becomes relevant) lists are not the best representation for things of fixed length.</p><p>Because our integrator doesn't return a list (in fact, it doesn't have to take a list as input to begin with), we could replace lists by some similar representation.</p><p>A better representation, which has the same interface (has the same name for similar functions) and operations, is the Vector representation. If you are a performance junky, I challenge you to implement Simpson's rule without using any lists; instead, use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Vector" title="Hoogle search for: Vector"><code>Vector</code></a> from <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Vector.Unboxed" title="Hoogle search for: Data.Vector.Unboxed"><code>Data.Vector.Unboxed</code></a>. You can click on the green word for more info on Data.Vector.</p><h3 id="a-few-thoughts-on-optimization--we-will-come-back-to-it-"><a href="#a-few-thoughts-on-optimization--we-will-come-back-to-it-">A few thoughts on Optimization (we will come back to it)</a></h3><div class="hidden"><p>When building complex programs, it is always better to get something simple working quickly. However, Computational Physics contains many (most) problems where your code needs to be super-fast in order to be useful.</p><p>My take on the subject is the following: 
+1.  build the simplest program you can think of, with crystal-clear semantics,</p><ol><li>make sure it does what it's supposed to,</li><li>explain (using meaningful names in your program, and comments) what it does, and how it does it.</li><li>use abstraction and observation to identify the key features of your program. (more on that later)</li><li>use optimized representations (Data.Vector is an optimized representation of Data.List; it does the same things, has a few more utilities purely for performance), and optimized libraries written by someone else. However, you must not change the semantics developed at step 1 unless you have an excellent reason (you found even clearer semantics; the original semantics turn out to be incomplete, which means you can't do certain things you wanted to do; the new semantics are as clear, as powerful, and allow for a <i>dramatic</i> performance increase).</li><li>learn about optimization.</li><li>optimize without changing the semantics. At this point, you should have a copy of your code which has the same semantics, but isn't optimized, you can think of it as a backup. Here is why:<ol><li>to show other people; say something like &quot;this code isn't my actual code, but you can write your program which uses my code AS IF this were the actual code.&quot;</li><li>to test whether your 'optimized' code is 1) actually much faster 2) actually equivalent in terms of meaning (semantics)</li></ol></li><li>use parallelism, GPUs, FFI.</li><li>(if you are good at this step, this step should be inserted between 5. and 6.) Go back to the drawing board, and find a new algorithm, or read the literature for similar problems, or, and this is a sad alternative, understand that your problem can't be solved on today's computers (have you tried super-computers?). At this point, it is time to change your problem of study. If you are emotionally attached to the problem, it might be worthwhile to try setting it up differently.</li></ol><p>You might be surprised at how rare you have to go past step 5 (not so rare in Computational Physics, but still rare). However, you sometimes have to go all the way to step 9. Later, we will learn to predict, at step 1, up to where a certain program is likely to take us. Even later, we might learn to predict to where we'll need to go without writing any code (just by looking at the problem).</p><p>Anyway, this is my take on optimization in a nutshell. If you stick to this course, we will eventually revisit this hard and crucial subject, but not until we actually need it.</p></div></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/Sam567/computational-physics/beginner-s-tools/simple-integration';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

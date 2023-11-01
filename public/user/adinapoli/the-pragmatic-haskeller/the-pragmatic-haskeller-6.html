@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html><head><title>Episode 6 - Wrapping Up - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/adinapoli">Alfredo Di Napoli</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/adinapoli/the-pragmatic-haskeller">The Pragmatic Haskeller</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/adinapoli/the-pragmatic-haskeller/the-pragmatic-haskeller-6">Episode 6 - Wrapping Up</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Episode 6 - Wrapping Up</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">17 Jul 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/adinapoli">Alfredo Di Napoli</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/2810/87c012bbdbead12f6845c16c0cc839ce767f1253">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/adinapoli/the-pragmatic-haskeller/episode-5-a-simple-dsl">Next content: Episode 5 - A simple DSL</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/adinapoli/the-pragmatic-haskeller">Go up to: The Pragmatic Haskeller</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/adinapoli">See all content by Alfredo Di Napoli</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#foreword">Foreword</a><ul><li><a href="#wiring-everything-together">Wiring everything together</a></li><li><a href="#using-lens-for-accessing-and-modifying-immutable-data-structures">Using lens for accessing and modifying immutable data structures</a></li><li><a href="#writing-our-first-heist-template">Writing our first heist template</a></li><li><a href="#handling-our-route-and-writing-a-splice">Handling our route and writing a Splice</a></li></ul></li><li><a href="#conclusions">Conclusions</a></li><li><a href="#external-references">External References</a></li><li><a href="#the-code">The code</a></li><li><a href="#what-about-other-episodes-">What about other episodes?</a></li><li><a href="#where-to-go-from-here">Where to go from here</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="foreword"><a href="#foreword">Foreword</a></h2><p>This is part of <a href="https://github.com/cakesolutions/the-pragmatic-haskeller">The Pragmatic Haskeller</a> series.</p><p>Note: The code we are referring to is contained inside the folder <b>08-heist</b> of the Github repository.</p><h3 id="wiring-everything-together"><a href="#wiring-everything-together">Wiring everything together</a></h3><p>At the moment, we have <i>almost</i> everything in place: we have a JSON layer to marshall/unmarshall our
+data structures, we have an API we can call if we want recipes, we can store our JSON as a BSON into
+a MongoDB collection and we have a simple but effective DSL for describing recipes. Now it's time to
+expose our mini language to the world, and obviously for a web application this means writing a bunch
+of HTML pages. We'll do that using Snap's templating system, Heist. Even though you can use pretty
+much every template language you want, Heist is the one which come shipped with Snap, so we'll stick
+with that. But before diving into that, we need to fix the bug I was talking about last time, do
+you remember?</p><h3 id="using-lens-for-accessing-and-modifying-immutable-data-structures"><a href="#using-lens-for-accessing-and-modifying-immutable-data-structures">Using lens for accessing and modifying immutable data structures</a></h3><p>If you followed carefully the <a href="https://www.fpcomplete.com/user/adinapoli/the-pragmatic-haskeller/episode-5-a-simple-dsl">last episode</a>,
+you might have noticed that our parser was a bit naive. Let's try to run again the code and see the output:</p><pre><code class="haskell">Right (Recipe {recipeName = &quot;Ciambellone&quot;, ingredients = [Ingredient {ingredientName = &quot;Flour&quot;,
+quantity = 250, measure = Just &quot;gr&quot;},Ingredient {ingredientName = &quot;Sugar&quot;, quantity = 250, measure = Just &quot;gr&quot;},
+Ingredient {ingredientName = &quot;Sunflower Oil&quot;, quantity = 130, measure = Just &quot;ml&quot;},
+Ingredient {ingredientName = &quot;Water&quot;, quantity = 130, measure = Just &quot;ml&quot;},
+Ingredient {ingredientName = &quot;Eggs&quot;, quantity = 3, measure = Nothing}], steps = [
+Step {stepName = &quot;Mixing everything&quot;, order = 1, stepDuration = Nothing},
+Step {stepName = &quot;Cooking in oven at 200 degrees&quot;, order = 1,
+stepDuration = Just (Duration {duration = 40, durationMeasure = &quot;minutes&quot;})}]})</code></pre><p>Do you spot something wrong? Well, look at the order or our steps, it's always 1! This is because <code>order</code> is
+not something we create as the result of the parsing, so in the parser we put a placeholder value to allow
+our parser to finish. Now it's time to fix things using <a href="http://hackage.haskell.org/package/lens">lens(es)</a>.
+Again, the goal of this episode is not learning you to use lenses (many have tried),
+but how you can pragmatically use a tiny part of this fantastic package to get the job done.</p><pre><code class="active haskell">
+{-# START_FILE Main.hs #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Main where
+
+import Control.Lens
+import Control.Applicative
+
+-------------------------------------------------------------------------------
+type Measure = String
+
+
+-------------------------------------------------------------------------------
+data Ingredient = Ingredient 
+  { ingredientName :: String
+  , quantity :: Int
+  , measure :: Maybe Measure
+  } deriving Show
+
+
+-------------------------------------------------------------------------------
+data Duration = Duration
+  { duration :: Int
+  , durationMeasure :: Measure
+  } deriving (Eq, Show)
+
+
+-- show
+-- We need to &quot;embue&quot; our data type of magical lens powers.
+-- The other data types remain the same.
+-------------------------------------------------------------------------------
+data Step = Step
+  { _stepName :: String
+  , _order :: Int
+  , _stepDuration :: Maybe Duration
+  } deriving (Eq, Show)
+
+makeLenses ''Step
+
+instance Ord Step where
+    compare s1 s2 = compare (_order s1) (_order s2)
+
+-------------------------------------------------------------------------------
+data Recipe = Recipe
+  { _recipeName :: String
+  , _ingredients :: [Ingredient]
+  , _steps :: [Step]
+  } deriving Show
+
+makeLenses ''Recipe
+
+
+-- We can now succinctly correct the order
+correctOrder :: Recipe -&gt; Recipe
+correctOrder r = r { _steps = newSteps (_steps r)}
+  where newSteps s = zipWith (over order) (const &lt;$&gt; [1..length s]) s
+
+
+buggedRecipe :: Recipe
+buggedRecipe = Recipe &quot;Ciambellone&quot; [
+    Ingredient &quot;Flour&quot; 250 (Just &quot;gr&quot;),
+    Ingredient &quot;Sugar&quot; 250 (Just &quot;gr&quot;)]
+    [Step &quot;Mixing everything&quot; 1 Nothing
+    ,Step &quot;Cooking in oven at 200 degrees&quot; 1 (Just (Duration 40 &quot;minutes&quot;))]
+
+main :: IO ()
+main = do
+    print . show $ buggedRecipe
+    print . show . correctOrder $ buggedRecipe
+-- /show</code></pre><p>Wow, that was short! The above snippet is quite laconic, so I think it's
+worth an accurate explanation. What we want is to &quot;enumerate&quot; our steps,
+so ideally for each step we want to generate ad assign an incremental
+counter. Do do that, we need to actually generate the enumeration, which
+is what, unsurprisingly, <code>[1 .. length s]</code> does. So far so good. Now we
+also need a way to &quot;map&quot; this enumeration over our existing steps,
+yielding another list of steps, but with the correct order. To do that,
+let's first recall the signature of <code>zipWith</code>:</p><pre><code class="haskell">zipWith :: (a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]</code></pre><p>So all we need to pass to our zipWith is a function and two lists: for
+each <code>a</code> and <code>b</code> we read from the lists, <code>zipWith</code> will apply the
+function to them, producing a value <code>c</code> which will be accumulated into
+a list produce the final result! The list of <code>b</code> is obvious, it's our
+old list of steps, but what about the function to apply and the first
+list? The answer lies in the <code>over</code> function, which simplified
+signature can be daunting at first:</p><pre><code class="haskell">over :: Setter s t a b -&gt; (a -&gt; b) -&gt; s -&gt; t</code></pre><p>We can intuitively read the above as: &quot;Given a <code>Setter</code> and a
+function <code>f</code> from <code>a</code> to <code>b</code> along with a source <code>s</code>, over
+apply <code>f</code> to the source, producing the target <code>t</code>. If you think
+about that, it's all we need! We have the <code>Setter</code> (<code>order</code>) generated
+for us for free when we called <code>makeLenses ''Step</code>, and we do have
+the source, it will be a single <code>Step</code> record. But what about the
+function? It's easy! All we need is something that, no matter what
+we feed into, will yield a constant result.. well, apparently
+<code>const</code> is what we need! So let's wire up everything together:</p><ul><li>We build a list of partially applied functions, such as:
+<code>[const 1, const 2, ....]</code></li><li>We zip this list together with <code>over order</code> and a <code>[Step]</code>.</li></ul><p>Let's simulate the first two steps:</p><pre><code class="active haskell">
+{-# START_FILE Main.hs #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Main where
+
+import Control.Lens
+
+-- We need to &quot;embue&quot; our data type of magical lens powers
+
+-------------------------------------------------------------------------------
+type Measure = String
+
+
+-------------------------------------------------------------------------------
+data Ingredient = Ingredient 
+  { ingredientName :: String
+  , quantity :: Int
+  , measure :: Maybe Measure
+  } deriving Show
+
+
+-------------------------------------------------------------------------------
+data Duration = Duration
+  { duration :: Int
+  , durationMeasure :: Measure
+  } deriving (Eq, Show)
+
+
+-------------------------------------------------------------------------------
+data Step = Step
+  { _stepName :: String
+  , _order :: Int
+  , _stepDuration :: Maybe Duration
+  } deriving (Eq, Show)
+
+makeLenses ''Step
+
+instance Ord Step where
+    compare s1 s2 = compare (_order s1) (_order s2)
+
+-- show
+-- correspond to the first invocation of zipWith:
+main :: IO ()
+main = do
+    print . show $ over order (const 1) (Step &quot;mix everything&quot; 1 Nothing)
+    print . show $ over order (const 2) (Step &quot;cook in the oven&quot; 1 Nothing)
+-- /show</code></pre><p>Fantastic, we have corrected our orders in a one liner!</p><h3 id="writing-our-first-heist-template"><a href="#writing-our-first-heist-template">Writing our first heist template</a></h3><p>Brilliant! Now we have our DSL ready, a way to convert the generated data
+type from and to JSON and a way to serialise everything as BSON inside MongoDB.
+What else we need? Well, we need user interaction! We're going to build a simple
+Heist template to display a text area where the user can modify our DSL, and a
+button to send the DSL to the server, where it will be parsed, validated and
+if it yields a valid <code>Recipe</code>, converted to JSON and showed in a &quot;success&quot; page.
+We'll simplify a bit, not writing into the DB, but just because I didn't want
+to have too much data being written in my small Amazon Box. But you already saw
+the episode where we were talking with Mongo, and you know that once we have our
+Aeson <code>Object</code> converting it into BSON is a one liner.</p><p>Without further ado, let's write first the presentation layer, a.k.a our Heist
+template. For who have no clue about what I'm talking about, Heist is just
+another library in the Snap &quot;toolbelt&quot;. Quoting from the documentation:</p><p> <i>&quot;Heist is a templating engine based loosely on ideas from the Lift Web Framework.
+ It functions as a bridge between your web application and its views.
+ Heist templates are HTML (or XML) fragments that are not required to have a single root element.&quot;</i></p><p>So, at least for the front-end developer, Heist is nothing more than a template engine.
+Armed with this knowledge, we can write this simple template:</p><pre><code class="html"> &lt;!-- new_dsl.tpl --&gt;
+ &lt;apply template=&quot;base&quot;&gt;
+ 
+     &lt;div class=&quot;control-group span5&quot;&gt;
+       &lt;form method=&quot;post&quot; action=&quot;/recipe/new&quot;&gt;
+           &lt;label class=&quot;control-label&quot; for=&quot;dsl&quot;&gt;Submit your recipe&lt;/label&gt;
+           &lt;div class=&quot;controls&quot;&gt;
+             &lt;textarea class=&quot;input-xlarge span5&quot; name=&quot;dsl&quot; id=&quot;dsl&quot;&gt;
+ &lt;recipe/&gt;
+             &lt;/textarea&gt;
+             &lt;br/&gt;
+             &lt;button type=&quot;submit&quot; class=&quot;span5 btn btn-primary&quot;&gt;Save your recipe!&lt;/button&gt;
+             &lt;div class=&quot;span5&quot;&gt;
+               &lt;parsingError/&gt;
+             &lt;/div&gt;
+           &lt;/div&gt;
+       &lt;/form&gt;
+ 
+     &lt;/div&gt;
+ 
+     &lt;div name=&quot;errorLine&quot; id=&quot;errorLine&quot; class=&quot;hidden&quot;&gt;&lt;editorCurrentLine/&gt;&lt;/div&gt;
+ 
+     &lt;script&gt;
+       var editor = CodeMirror.fromTextArea(document.getElementById(&quot;dsl&quot;), {
+         lineNumbers: true,
+         styleActiveLine: true,
+         theme: &quot;ambiance&quot;,
+         mode: &quot;recipe&quot;
+       });
+       var cursorLine = parseInt(document.getElementById(&quot;errorLine&quot;).innerText)
+       editor.setSize(500,350);
+       editor.setCursor(cursorLine-1)
+     &lt;/script&gt;
+ 
+ &lt;/apply&gt;
+</code></pre><p>Even if it's the first time you ever looked at an Heist template, it should
+be familiar; it's just xml/html on steroid. The only unfamiliar bits are:</p><ul><li><p><code>apply template=&quot;base&quot;</code>, which, unsurprisingly, it's just a way to enforce
+reuse and composability, allowing us to reuse a template as &quot;container&quot; for
+our specific page. Inside <code>base.tpl</code> ((browse it!)[https://github.com/cakesolutions/the-pragmatic-haskeller/blob/master/08-heist/snaplets/heist/templates/base.tpl])
+you'll find a tag called <code>&lt;apply-content/&gt;</code> which has the purpose of doing exactly that.</p></li><li><p>Some &quot;unbound&quot; tags such as <code>&lt;recipe/&gt;</code> or <code>&lt;editorCurrentLine/&gt;</code>: they are
+our &quot;entrypoints&quot; for <i>splices</i>, which will be discussed in a minute.</p></li></ul><h3 id="handling-our-route-and-writing-a-splice"><a href="#handling-our-route-and-writing-a-splice">Handling our route and writing a Splice</a></h3><p>The last bit which will show you now it's probably the most important bit of
+the entire series (no pressure!) because it wires together everything and allows
+our web application to actually doing &quot;something interesting&quot;. Obviously I can't
+cover the entire app here and that's why there is a Github repository you can
+clone to have a play. In this last paragraph we'll write a <i>handler</i> which will
+produce a <i>splice</i>. Ok, but what's a <i>splice</i> exactly? Quoting from the Snap's
+documentation: &quot;A Splice takes the input node from the template and outputs a
+list of nodes that get “spliced” back into the template. This lets you call
+haskell functions from your templates, while ensuring that business logic does
+not creep into the presentation layer&quot;. Sounds nice! So, in a nutshell, we'll
+write our <i>splice</i> and instruct Snap which tag we want to bind to a particular
+<i>splice</i>, and we're sorted! Snap will &quot;splice back&quot; the value where we
+previously have the tag in our template. To enforce modularity and separation
+of concerns, we'll create a file called <code>Routes.hs</code> inside the package <code>DSL</code>,
+and finally we'll assemble its routes back to the main <code>Site.hs</code>. Ready for the code?</p><pre><code class="haskell">{-# START_FILE Routes.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+module Pragmatic.DSL.Routes where
+
+import Control.Lens
+import Data.Aeson.Encode.Pretty (encodePretty)
+import Data.ByteString (ByteString)
+import Data.ByteString.Lazy (toStrict)
+import Data.Text (Text)
+import Data.Text.Encoding (decodeUtf8)
+import Pragmatic.DSL.Parser
+import Pragmatic.JSON.Parser()
+import Pragmatic.Server.Application
+import Pragmatic.Types
+import Snap
+import Snap.Snaplet.Heist
+import Text.Blaze.Html5
+import Text.Blaze.Renderer.XmlHtml (renderHtmlNodes)
+import Text.Parsec (parse)
+import qualified Data.ByteString.Char8 as BC (unpack)
+import qualified Data.Text as T
+import qualified Heist.Interpreted as I
+import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5.Attributes as A
+
+dslRoutes :: [(ByteString, AppHandler ())]
+dslRoutes = [(&quot;/recipe/new&quot;, handleNewRecipe)]
+
+recipe2json :: Recipe -&gt; Text
+recipe2json = decodeUtf8 . toStrict . encodePretty
+
+
+correctOrder :: Recipe -&gt; Recipe
+correctOrder r = r { _steps = newSteps (_steps r)}
+  where newSteps s = zipWith (over order) (const &lt;$&gt; [1..length s]) s
+
+
+-- Can be refactored out
+bootstrapAlert :: String -&gt; String -&gt; I.Splice AppHandler
+bootstrapAlert alertType msg = return $ renderHtmlNodes innerHtml
+  where innerHtml = H.div ! A.class_ (toValue (&quot;alert alert-&quot; ++ alertType)) $
+                      toHtml msg
+
+handleNewRecipe :: AppHandler ()
+handleNewRecipe = method POST handleParsing
+  where handleParsing = do
+            dslSourceCode &lt;- getPostParam &quot;dsl&quot;
+            maybe (spliceError &quot;Dsl can't be empty!&quot; &quot;&quot;)(\s -&gt;
+                  case parse recipe &quot;&quot; (BC.unpack s) of
+                    Left e -&gt; spliceError (show e) (T.strip . decodeUtf8 $ s)
+                    -- Parsing succeeded, we render the template &quot;new_recipe.tpl&quot;
+                    Right r -&gt; let splices = [(&quot;json&quot;, I.textSplice $ recipe2json . correctOrder $ r)]
+                                in renderWithSplices &quot;new_recipe&quot; splices) dslSourceCode
+
+        spliceError e d = let splices = [(&quot;parsingError&quot;, bootstrapAlert &quot;alert&quot; e)
+                                        ,(&quot;editorCurrentLine&quot;, findErrorLine e)
+                                        ,(&quot;recipe&quot;, I.textSplice d)]
+                             in renderWithSplices &quot;new_dsl&quot; splices 
+
+        findErrorLine = I.textSplice . T.singleton . Prelude.head . snd . splitAt 6</code></pre><p>Ok, it seems a lot of code in the first place, but don't worry, we'll go through it.
+The only two functions worth explaining are <code>bootstrapAlert</code> and <code>handleNewRecipe</code>. Let's start
+from the former. In a nutshell, this function generates, given a <code>msg</code> and an
+<code>alertType</code>, the required HTML to display a <a href="http://twitter.github.io/bootstrap/">Bootstrap</a> alert message.
+It's doing that using <a href="http://hackage.haskell.org/package/blaze-html-0.6.1.1">Blaze</a>,
+a fantastic library created by Jasper Van der Jeugt which allow us to
+generate HTML directly from Haskell, with a extremely nice syntax.</p><p>As regards <code>handleNewRecipe</code>, the workflow is the following: if the method is a POST,
+try to extract the content of the html element with id &quot;dsl&quot;: if it's there (it's a <code>Just</code>),
+then try to parse the content, reacting accordingly whether it's a valid recipe or not,
+whereas if you got a <code>Nothing</code>, display an error to the user, informing that he can't
+submit an empty DSL. The interesting stuff happen inside the &quot;Right branch&quot; of the <code>case</code>,
+where we build an associative list which second argument of each tuple is a <i>splice</i>. You
+might have notices some functions have been imported qualified with the prefix <code>I</code>, and
+this is because recent Heist versions introduced &quot;Compiled Splices&quot; as opposed to
+&quot;Interpreted Splices&quot;, which we are using here. The discussion about &quot;Interpreted&quot; vs
+&quot;Compiled&quot; is out the scope of this episode, so I'll add a link in the reference section
+if you are interested in learning further.</p><p>It's still worth taking a look at how an interpreted Splice is defined, to understand
+what we are doing here, and how the whole function typecheck. First of all, when we want
+to build a Splice out from a simple <code>Text</code>, doing that is kid's stuff thanks to the
+function <code>I.textSplice</code>:</p><pre><code class="haskell">I.textSplice :: Monad m =&gt; Text -&gt; HeistT n m Template</code></pre><p>In case we want to build something more complicated, like a list of Html nodes, things
+are just slightly more complicated, and it's what we are doing in <code>bootstrapAlert</code>: we
+are building a list of html nodes with:</p><pre><code class="haskell">renderHtmlNodes :: Text.Blaze.Html.Html -&gt; [Text.XmlHtml.Common.Node]</code></pre><p>and then putting this list inside the environment context calling <code>return</code>, and yielding
+a <code>Splice AppHandler</code>. If we look at the implementation, an interpreted <code>Splice</code> is
+defined as such:</p><pre><code class="haskell">type Splice m = HeistT m m [Node]</code></pre><p>where, quoting from the documentation &quot;The type parameter <code>m</code> is the runtime execution monad
+(in a Snap application this will usually be <code>Handler</code> or <code>Snap</code>)&quot;. Aha! So this explain
+why the code works (remember? our <code>AppHandler</code> is just a type synonym around
+<code>Handler Pragmatic Pragmatic</code>)! It's because both <code>textSplice</code> and <code>bootstrapAlert</code> returns
+an Heist transformer, where the &quot;execution monad&quot; will be bound to our <code>AppHandler</code>!</p><p>The last thing we need to do is to call the function <code>renderWithSplices</code> which has the
+following type signature:</p><pre><code class="haskell">renderWithSplices :: HasHeist b =&gt; ByteString -&gt; [(Text, SnapletISplice b)] -&gt; Handler b v ()</code></pre><p>Which basically takes a <code>ByteString</code> (the name of the <i>template</i> we want to target) and a list
+of tuples to instruct Snap about the particular association between a tag <code>T</code> (in our template)
+and a splice <code>S</code>: the result will be an <code>Handler b v ()</code>, exactly what we need (remember? A
+route list in nothing more than a <code>[(ByteString, Handler b v ())]</code>, which associate for each
+uri the correspondent <code>Handler</code> that handles it.</p><p>As you can see from the code, we call the <code>renderWithSplices</code> in two places: one is in case we
+want to display parsing errors to the user (and even handle a basic form of validation, not
+allowing empty text to be passed aroud for parsing), the other is when the parsing succeeded and
+we want to show the user, on another page, the result of the parsing.</p><p>That's it! Now we can use our newly created route into the &quot;main&quot; one, defined inside <code>Site.hs</code>,
+and finally call <code>http://localhost:8000/recipe/new</code> to see the outcome!</p><h2 id="conclusions"><a href="#conclusions">Conclusions</a></h2><p>During this months, I've showed you how you can build a basic Haskell web application to solve real world
+problems. We have DB access, JSON parsing, a DSL and an API to talk to external services. A lot of business
+out there have kick-started with a lot less! So I would humbly say &quot;Mission accomplished&quot;. This series wasn't
+meant to teach you everything or cover every possible case you might hit during your everyday job. We didn't
+touch a lot of topics, one in particular being form validation. The goal of this series was to show you that
+there is nothing intimidating about Haskell and, even if sometimes the community is accused of navel gazing,
+there are lot of libraries and frameworks to get your everyday job done. Even though this tutorial spanned
+across several months, I wrote the entire code for it in a couple of weeks, showing that even if you are
+a intermediate Haskeller you can be quite productive with the language.</p><h2 id="external-references"><a href="#external-references">External References</a></h2><p>As usual, refer to the official documentations:</p><ul><li><p><a href="http://hackage.haskell.org/package/heist">Heist</a> documentation</p></li><li><p><a href="http://lens.github.io/">Lens</a> documentation</p></li><li><p><a href="http://www.haskellforall.com/2013/05/program-imperatively-using-haskell.html">Blog post</a> from Gabriel
+Gonzalez aka Tekmo which teaches us about &quot;imperative programming&quot; with lenses.</p></li><li><p><a href="http://snapframework.com/docs/tutorials/compiled-splices">Explanation</a> about &quot;Interpreted&quot; vs &quot;Compiled&quot; Splices.</p></li></ul><h2 id="the-code"><a href="#the-code">The code</a></h2><p>Grab the code <a href="https://github.com/cakesolutions/the-pragmatic-haskeller/tree/master/08-dsl">here</a>.
+The example is self contained, just cabal-install it!</p><h2 id="what-about-other-episodes-"><a href="#what-about-other-episodes-">What about other episodes?</a></h2><p>You might notice that we jumped suddently from episode 5 to episode 8 and you might have been wondering
+why. The answer is that episodes 6 and 7 didn't cover enough material for a separate tutorial, so I've
+condensed everything in a final wrapping up tutorial. There is also an extra, unfinished episode called
+<code>realtime</code> where I show a chart which updates itself in realtime calling asynchronously a server
+endpoint. As an exercise, you might want to try to convert all the Javascript used into lovely Haskell
+using, for example, <a href="https://github.com/faylang/fay/wiki">Fay</a>.</p><h2 id="where-to-go-from-here"><a href="#where-to-go-from-here">Where to go from here</a></h2><p>Well, you have two paths:</p><ul><li><p>Keeping exploring the Snap space, building your own <code>Snaplet</code> to solve a particular problem</p></li><li><p>Try a bite of another web framework like <code>Yesod</code> or <code>Happstack</code></p></li></ul><p>Regardless on what you choose, you might also start exploring the fascinating world of FRP maybe
+trying to integrate languages like <code>Elm</code> in your codebase. Good luck!</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/adinapoli/the-pragmatic-haskeller/the-pragmatic-haskeller-6';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

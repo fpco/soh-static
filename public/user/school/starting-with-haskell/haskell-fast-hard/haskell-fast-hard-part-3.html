@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html><head><title>Haskell Fast &amp; Hard  (Part 3) - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/haskell-fast-hard">Haskell Fast &amp; Hard</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/haskell-fast-hard/haskell-fast-hard-part-3">Haskell Fast &amp; Hard  (Part 3)</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Haskell Fast &amp; Hard  (Part 3)</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">18 Aug 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/70/ac92142505a8420d3fbe337bcc19a02b50fd5d73">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/haskell-fast-hard/haskell-fast-hard-part-2">Previous content: Haskell Fast &amp; Hard (Part 2)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/haskell-fast-hard/haskell-fast-hard-part-4">Next content: Haskell Fast &amp; Hard (Part 4)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/haskell-fast-hard">Go up to: Haskell Fast &amp; Hard</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh">See all content by Yann Esposito</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#hard-part">Hard Part</a><ul><li><a href="#functional-style">Functional style</a><ul><li><a href="#higher-order-functions">Higher Order Functions</a><ul><li><a href="#exercise">Exercise</a></li></ul></li></ul></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="hard-part"><a href="#hard-part">Hard Part</a></h2><p>The hard part can now begin.</p><h3 id="functional-style"><a href="#functional-style">Functional style</a></h3><p><img alt="Biomechanical Landscape by H.R. Giger" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fhr_giger_biomechanicallandscape_500.jpg" /></p><p>In this section, I will give a short example of the impressive refactoring ability provided by Haskell.
+We will select a problem and solve it using a standard imperative way.
+Then I will make the code evolve.
+The end result will be both more elegant and easier to adapt.</p><p>Let's solve the following problem:</p><blockquote><p>Given a list of integers, return the sum of the even numbers in the list.</p><p>example:
+<code>[1,2,3,4,5] ⇒  2 + 4 ⇒  6</code></p></blockquote><p>To show differences between the functional and imperative approach,
+I'll start by providing an imperative solution (in Javascript):</p><pre><code class="javascript">function evenSum(list) {
+    var result = 0;
+    for (var i=0; i&lt; list.length ; i++) {
+        if (list[i] % 2 ==0) {
+            result += list[i];
+        }
+    }
+    return result;
+}</code></pre><p>But, in Haskell we don't have mutable variables, nor for loop.
+One solution to achieve the same result without loops is to use recursion.</p><blockquote><p><i>Remark</i>:
+Recursion is generally perceived as slow in imperative languages.
+But it is generally not the case in functional programming.
+Most of the time Haskell will handle recursive functions efficiently.</p></blockquote><p>Here is a <code>C</code> version of the recursive function.
+Note that for simplicity, I assume the int list ends with the first <code>0</code> value.</p><pre><code class="c">int evenSum(int *list) {
+    return accumSum(0,list);
+}
+
+int accumSum(int n, int *list) {
+    int x;
+    int *xs;
+    if (*list == 0) { // if the list is empty
+        return n;
+    } else {
+        x = list[0]; // let x be the first element of the list
+        xs = list+1; // let xs be the list without x
+        if ( 0 == (x%2) ) { // if x is even
+            return accumSum(n+x, xs);
+        } else {
+            return accumSum(n, xs);
+        }
+    }
+}</code></pre><p>Keep this code in mind. We will translate it into Haskell.
+But before, I need to introduce three simple but useful functions we will use:</p><pre><code class="haskell">even :: Integral a =&gt; a -&gt; Bool
+head :: [a] -&gt; a
+tail :: [a] -&gt; [a]</code></pre><p><code>even</code> verifies if a number is even.</p><pre><code class="haskell">even :: Integral a =&gt; a -&gt; Bool
+even 3  ⇒ False
+even 2  ⇒ True</code></pre><p><code>head</code> returns the first element of a list:</p><pre><code class="haskell">head :: [a] -&gt; a
+head [1,2,3] ⇒ 1
+head []      ⇒ ERROR</code></pre><p><code>tail</code> returns all elements of a list, except the first:</p><pre><code class="haskell">tail :: [a] -&gt; [a]
+tail [1,2,3] ⇒ [2,3]
+tail [3]     ⇒ []
+tail []      ⇒ ERROR</code></pre><p>Note that for any non empty list <code>l</code>,
+<code>l ⇔ (head l):(tail l)</code></p><p>The first Haskell solution.
+The function <code>evenSum</code> returns the sum of all even numbers in a list:</p><pre><code class="active haskell">-- Version 1
+evenSum :: [Integer] -&gt; Integer
+
+evenSum l = accumSum 0 l
+
+accumSum n l = if l == []
+                  then n
+                  else let x = head l
+                           xs = tail l
+                       in if even x
+                              then accumSum (n+x) xs
+                              else accumSum n xs
+main = print $ evenSum [1..10]                    </code></pre><p>Here is an example of execution ; (I know I'm cheating. But I will talk about non-strict later) :</p><pre>
+*Main&gt; evenSum [1..5]
+accumSum 0 [1,2,3,4,5]
+<span class="yellow">1 is odd</span>
+accumSum 0 [2,3,4,5]
+<span class="yellow">2 is even</span>
+accumSum (0+2) [3,4,5]
+<span class="yellow">3 is odd</span>
+accumSum (0+2) [4,5]
+<span class="yellow">4 is even</span>
+accumSum (0+2+4) [5]
+<span class="yellow">5 is odd</span>
+accumSum (0+2+4) []
+<span class="yellow">l == []</span>
+0+2+4
+0+6
+6
+</pre><p>Coming from an imperative language all should seem right.
+In reality many things can be improved.
+First, we can generalize the type.</p><pre><code class="haskell">-- show
+evenSum :: Integral a =&gt; [a] -&gt; a
+-- /show
+main = do print $ evenSum [1..10]</code></pre><p>Next, we can use sub functions using <code>where</code> or <code>let</code>.
+This way our <code>accumSum</code> function won't pollute the global namespace.</p><pre><code class="active haskell">-- show
+-- Version 2
+evenSum :: Integral a =&gt; [a] -&gt; a
+
+evenSum l = accumSum 0 l
+    {-hi-} where {-/hi-} accumSum n l =
+            if l == []
+                then n
+                else let x = head l
+                         xs = tail l
+                     in if even x
+                            then accumSum (n+x) xs
+                            else accumSum n xs
+-- /show
+main = print $ evenSum [1..10]</code></pre><p>Next, we can use pattern matching.</p><pre><code class="active haskell">-- show
+-- Version 3
+evenSum l = accumSum 0 l
+    where
+        accumSum {-hi-}n []{-/hi-} = n
+        accumSum {-hi-}n (x:xs){-/hi-} =
+             if even x
+                then accumSum (n+x) xs
+                else accumSum n xs
+-- /show
+main = print $ evenSum [1..10]</code></pre><p>What is pattern matching?
+Use values instead of general parameter names
+(For the brave, a more complete explanation of pattern matching can be found <a href="http://www.cs.auckland.ac.nz/references/haskell/haskell-intro-html/patterns.html">here</a>).</p><p>Instead of saying: <code>foo l = if l == [] then &lt;x&gt; else &lt;y&gt;</code>
+You simply state:</p><pre><code class="haskell">foo [] =  &lt;x&gt;
+foo l  =  &lt;y&gt;</code></pre><p>But pattern matching goes even further.
+It is also able to inspect the inner data of a complex value.
+We can replace</p><pre><code class="haskell">foo l =  let x  = head l
+             xs = tail l
+         in if even x
+             then foo (n+x) xs
+             else foo n xs</code></pre><p>with</p><pre><code class="haskell">foo (x:xs) = if even x
+                 then foo (n+x) xs
+                 else foo n xs</code></pre><p>This is a very useful feature.
+It makes our code both terser and easier to read.</p><p>In Haskell you can simplify function definition by η-reducing them.
+For example, instead of writing:</p><pre><code class="haskell">f x = (some expresion) x</code></pre><p>you can simply write</p><pre><code class="haskell">f = some expression</code></pre><p>Exercise:</p><p>Simplify the function evenSum by η-reducing it.</p><pre><code class="active haskell">-- show
+-- Version 3
+evenSum {-hi-}l{-/hi-} = accumSum 0 {-hi-}l{-/hi-}
+    where
+        accumSum n [] = n
+        accumSum n (x:xs) =
+             if even x
+                then accumSum (n+x) xs
+                else accumSum n xs
+-- /show
+main = print $ evenSum [1..10]</code></pre><div class="hidden" title="Solution (Version 4)"><p>We use this method to remove the <code>l</code>:</p><pre><code class="active haskell">-- show
+-- Version 4
+evenSum :: Integral a =&gt; [a] -&gt; a
+
+evenSum = accumSum 0
+    where
+        accumSum n [] = n
+        accumSum n (x:xs) =
+             if even x
+                then accumSum (n+x) xs
+                else accumSum n xs
+-- /show
+main = print $ evenSum [1..10]</code></pre></div><h4 id="higher-order-functions"><a href="#higher-order-functions">Higher Order Functions</a></h4><p><img alt="Escher" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fescher_polygon.png" /></p><p>To make things even better we should use higher order functions.
+What are these beasts?
+Higher order functions are functions taking functions as parameter.</p><p>Here are some examples:</p><pre><code class="haskell">filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+foldl :: (a -&gt; b -&gt; a) -&gt; a -&gt; [b] -&gt; a</code></pre><p>Let's proceed by small steps.</p><pre><code class="active haskell">-- show
+-- Version 5
+evenSum l = mysum 0 (filter even l)
+    where
+      mysum n [] = n
+      mysum n (x:xs) = mysum (n+x) xs
+-- /show
+main = print $ evenSum [1..10]</code></pre><p>where</p><pre><code class="haskell">filter even [1..10] ⇔  [2,4,6,8,10]</code></pre><p>The function <code>filter</code> takes a function of type (<code>a -&gt; Bool</code>) and a list of type <code>[a]</code>. It returns a list containing only elements for which the function returned <code>true</code>.</p><p>Our next step is to use another way to simulate a loop.
+We will use the <code>foldl</code> function to accumulate a value.
+The function <code>foldl</code> captures a general coding pattern:</p><pre>
+myfunc list = foo <span class="blue">initialValue</span> <span class="green">list</span>
+    foo accumulated []     = accumulated
+    foo tmpValue    (x:xs) = foo (<span class="yellow">binop</span> tmpValue x) xs
+</pre><p>Which can be replaced by:</p><pre>
+myfunc list = foldl <span class="yellow">binop</span> <span class="blue">initialValue</span> <span class="green">list</span>
+</pre><p>If you really want to know how the magic works.
+Here is the definition of <code>foldl</code>.</p><pre><code class="haskell">foldl f z [] = z
+foldl f z (x:xs) = foldl f (f z x) xs</code></pre><pre><code class="haskell">foldl f z [x1,...,xn]
+⇔  f (... (f (f z x1) x2) ...) xn</code></pre><p>But as Haskell is lazy, it doesn't evaluate <code>(f z x)</code> and pushes it to the stack.
+This is why we generally use <code>foldl'</code> instead of <code>foldl</code>;
+<code>foldl'</code> is a <i>strict</i> version of <code>foldl</code>.
+If you don't understand what lazy and strict means,
+don't worry, just follow the code as if <code>foldl</code> and <code>foldl'</code> where identical.</p><p>Now our new version of <code>evenSum</code> becomes:</p><pre><code class="active haskell">-- show
+-- Version 6
+-- foldl' isn't accessible by default
+-- we need to import it from the module Data.List
+import Data.List
+evenSum l = foldl' mysum 0 (filter even l)
+  where mysum acc value = acc + value
+-- /show
+main = print $ evenSum [1..10]</code></pre><p>We can simplify by using directly a lambda notation.
+This way we don't have to create the temporary name <code>mysum</code>.</p><pre><code class="active haskell">-- show
+-- Version 7
+-- Generally it is considered a good practice
+-- to import only the necessary function(s)
+import Data.List (foldl')
+evenSum l = foldl' (\x y -&gt; x+y) 0 (filter even l)
+-- /show
+main = print $ evenSum [1..10]</code></pre><p>And of course, we note that</p><pre><code class="haskell">(\x y -&gt; x+y) ⇔ (+)</code></pre><p>Finally</p><pre><code class="active haskell">-- show
+-- Version 8
+import Data.List (foldl')
+evenSum :: Integral a =&gt; [a] -&gt; a
+evenSum l = foldl' (+) 0 (filter even l)
+-- /show
+main = print $ evenSum [1..10]</code></pre><p><code>foldl'</code> isn't the easiest function to intuit.
+If you are not used to it, you should study it a bit.</p><p>To help you understand what's going on here, a step by step evaluation:</p><pre>
+  <span class="yellow">evenSum [1,2,3,4]</span>
+⇒ foldl' (+) 0 (<span class="yellow">filter even [1,2,3,4]</span>)
+⇒ <span class="yellow">foldl' (+) 0 <span class="blue">[2,4]</span></span>
+⇒ <span class="blue">foldl' (+) (<span class="yellow">0+2</span>) [4]</span>
+⇒ <span class="yellow">foldl' (+) <span class="blue">2</span> [4]</span>
+⇒ <span class="blue">foldl' (+) (<span class="yellow">2+4</span>) []</span>
+⇒ <span class="yellow">foldl' (+) <span class="blue">6</span> []</span>
+⇒ <span class="blue">6</span>
+</pre><h5 id="exercise"><a href="#exercise">Exercise</a></h5><p>Rewrite the following program using <code>foldl'</code></p><pre><code class="active haskell">import Data.List (foldl')
+-- show prod [3,4,5] will return 3*4*5=60
+prod :: [Integer] -&gt; Integer
+prod [] = 1
+prod (x:xs) = x*prod xs
+
+main = print $ prod [3,4,5] </code></pre><div class="hidden" title="Solution"><pre><code class="active haskell">import Data.List (foldl')
+-- show
+prod = foldl' (*) 1
+-- /show
+main = print $ prod [3,4,5] </code></pre></div><hr /><p>Another useful higher order function is <code>(.)</code>.
+The <code>(.)</code> function corresponds to the mathematical composition.</p><pre><code class="haskell">(f . g . h) x ⇔  f ( g (h x))</code></pre><p>We can take advantage of this operator to η-reduce our function:</p><pre><code class="haskell">-- show
+-- Version 9
+import Data.List (foldl')
+evenSum :: Integral a =&gt; [a] -&gt; a
+evenSum = (foldl' (+) 0) . (filter even)
+-- /show
+main = do print $ evenSum [1..10]</code></pre><p>Also, we could rename some parts to make it clearer:</p><pre><code class="haskell">-- show
+-- Version 10
+import Data.List (foldl')
+sum' :: (Num a) =&gt; [a] -&gt; a
+sum' = foldl' (+) 0
+evenSum :: Integral a =&gt; [a] -&gt; a
+evenSum = sum' . (filter even)
+-- /show
+main = do print $ evenSum [1..10]</code></pre><p>It is time to discuss a bit.
+What did we gain by using higher order functions?</p><p>At first, you can say it is terseness.
+But in fact, it has more to do with better thinking.
+Suppose we want to modify slightly our function.
+We want to get the sum of all even square of element of the list.</p><pre><code>[1,2,3,4] ▷ [1,4,9,16] ▷ [4,16] ▷ 20</code></pre><p>Update the version 10 is extremely easy:</p><pre><code class="haskell">squareEvenSum = sum' . (filter even) . (map (^2))
+squareEvenSum' = evenSum . (map (^2))</code></pre><p>We just had to add another &quot;transformation function&quot;[^0216].</p><pre><code>map (^2) [1,2,3,4] ⇔ [1,4,9,16]</code></pre><p>The <code>map</code> function simply apply a function to all element of a list.</p><p>We didn't had to modify anything <i>inside</i> the function definition.
+It feels more modular.
+But in addition you can think more mathematically about your function.
+You can then use your function as any other one.
+You can compose, map, fold, filter using your new function.</p><p>To modify version 1 is left as an exercise to the reader ☺.</p><p>If you believe we reached the end of generalization, then know you are very wrong.
+For example, there is a way to not only use this function on lists but on any recursive type.
+If you want to know how, I suggest you to read this quite fun article: <a href="http://eprints.eemcs.utwente.nl/7281/0
+1/db-utwente-40501F46.pdf">Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire by Meijer, Fokkinga and Paterson</a>. You could also just get a bit of the idea by viewing my <a href="http://yogsototh.github.com/Category-Theory-Presentation">presentation about Category Theory</a>.</p><p>This example should show you how great pure functional programming is.
+Unfortunately, using pure functional programming isn't well suited to all usages.
+Or at least such a language hasn't been found yet.</p><p>One of the great powers of Haskell is the ability to create DSLs
+(Domain Specific Language)
+making it easy to change the programming paradigm.</p><p>In fact, Haskell is also great when you want to write imperative style programming.
+Understanding this was really hard for me when learning Haskell.
+A lot of effort has been done to explain to you how much functional approach is superior.
+Then when you start the imperative style of Haskell, it is hard to understand why and how.</p><p>But before talking about this Haskell super-power, we must talk about another
+essential aspect of Haskell: <i>Types</i>.</p><p><a href="https://www.fpcomplete.com/school/haskell-fast-hard/haskell-fast-hard-part-4">continue to next part</a></p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/haskell-fast-hard/haskell-fast-hard-part-3';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

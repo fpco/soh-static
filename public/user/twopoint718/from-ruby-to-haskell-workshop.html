@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html><head><title>From Ruby to Haskell Workshop - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/twopoint718">twopoint718</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/twopoint718/from-ruby-to-haskell-workshop">From Ruby to Haskell Workshop</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">From Ruby to Haskell Workshop</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">27 Apr 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/twopoint718">twopoint718</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3472/53338e22ce916ed0bcf7b3ebef7fb08f9805497f">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/twopoint718">See all content by twopoint718</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#project-1--sort">Project 1: sort</a><ul><li><a href="#enough-syntax-to-be-dangerous">Enough syntax to be dangerous</a><ul><li><a href="#strings">Strings</a></li><li><a href="#lists">Lists</a><ul><li><a href="#exercise-1">Exercise 1</a></li><li><a href="#solution-1">Solution 1</a></li></ul></li><li><a href="#sorting">Sorting</a></li><li><a href="#lines">Lines</a><ul><li><a href="#exercise-2">Exercise 2</a></li><li><a href="#solution-2">Solution 2</a></li></ul></li><li><a href="#lines-and-unlines">Lines and Unlines</a></li><li><a href="#a-little-bit-of-i-o">A little bit of I/O</a><ul><li><a href="#exercise-3">Exercise 3</a></li><li><a href="#solution-3">Solution 3</a></li></ul></li></ul></li><li><a href="#putting-it-together">Putting it together</a><ul><li><a href="#refactor">Refactor</a><ul><li><a href="#exercise-4">Exercise 4</a></li><li><a href="#solution-4">Solution 4</a></li></ul></li></ul></li></ul></li><li><a href="#project-2-gravatar-downloader-">Project 2 Gravatar Downloader:</a><ul><li><a href="#-pairs--function">&#39;pairs&#39; function</a></li><li><a href="#-main--function">&#39;main&#39; function</a></li><li><a href="#-downloadavatar--function">&#39;downloadAvatar&#39; function</a></li><li><a href="#-gravatar--type-synonym">&#39;Gravatar&#39; type synonym</a></li><li><a href="#where--avatarhashes--comes-from">Where &#39;avatarHashes&#39; comes from</a><ul><li><a href="#hashemail">hashEmail</a></li><li><a href="#formatemail">formatEmail</a></li></ul></li><li><a href="#wrapping-up">Wrapping up</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="project-1--sort"><a href="#project-1--sort">Project 1: sort</a></h1><p>Let's start out by trying to copy a command line utility that's well-known in UNIX-land, <code>sort</code>. If you aren't familiar with sort, it just takes the lines of a file and puts them in ASCIIbetical order. If I had a file that looked like:</p><pre><code>d
+a
+c
+b</code></pre><p>and I ran sort on it, I would get:</p><pre><code>a
+b
+c
+d</code></pre><p>There are a lot of other options that sort takes, but I'll make a couple of simplifying changes:</p><ul><li>Sort only accepts lines on standard in (no files)</li><li>Sort prints directly on standard out</li></ul><p>This is actually rather in keeping with the UNIX tradition of tools that do one simple thing well. If we want file I/O rather than STDIN/STDOUT, we can just use input redirection to wire that up. So we're not really giving anything up and we're making the interface really consistent (as you'll soon see).</p><p>Let's get started:</p><h2 id="enough-syntax-to-be-dangerous"><a href="#enough-syntax-to-be-dangerous">Enough syntax to be dangerous</a></h2><p>We'll need to know a few things about haskell in order to do this project. We have to know about strings, simple I/O, lines, and how to sort things. In all the examples below, you can edit the text and then run it and play around.</p><h3 id="strings"><a href="#strings">Strings</a></h3><pre><code class="active haskell">myString = &quot;Hello, World!&quot;
+
+main = putStrLn myString</code></pre><p>I put a couple of extra things in there because otherwise it wouldn't have been very interesting to look at. I added the <code>main</code> function (which, like C, is the entry point for the program). I also used <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=putStrLn" title="Hoogle search for: putStrLn"><code>putStrLn</code></a> to print out a string with a newline. I'll be using something like this in each example just to show you what's going on.</p><p>A string in Haskell is simply a list of characters:</p><pre><code class="haskell">&quot;Hello, World&quot; :: String</code></pre><p>(click into &quot;String&quot; above to see the type signature)</p><h3 id="lists"><a href="#lists">Lists</a></h3><p>Lists are an ordered collection of the <i>same type</i> of thing. This may differ a bit from some other languages, like Ruby, where a list can be a mix of things.</p><pre><code class="active haskell">myNumbers = [1, 2, 3]
+
+myStrings = [&quot;from&quot;, &quot;ruby&quot;, &quot;to&quot;, &quot;haskell&quot;]
+
+main = do
+    print myStrings
+    print myNumbers</code></pre><p>(you can ignore <code>do</code> for right now, it allows me to run a bunch of actions one after the other). I used <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=print" title="Hoogle search for: print"><code>print</code></a> here because it knows how to print things</p><p>Notice that it is an error to mix types in a list:</p><pre><code class="active haskell">myFail = [26, &quot;biggest number&quot;]
+
+main = print myFail</code></pre><p>The last thing to know about lists is that you can <i>pattern match</i> on them. A list is recursively defined as a first element followed by &quot;the rest&quot;. This is what it looks like:</p><pre><code class="haskell">data [] a = [] | a : [a]</code></pre><p>This says that a list of some type <code>a</code> is either an empty list OR (the pipe, <code>|</code>) it is an <code>a</code> glued (with the &quot;cons&quot; function, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=:" title="Hoogle search for: :"><code>:</code></a>) onto the front of a list of type <code>a</code> (<code>[a]</code>). Pattern matching is where you show haskell each <i>case</i> you want to handle by giving a <i>series of definitions</i>:</p><pre><code class="active haskell">myCount []     = 0
+myCount (x:xs) = 1 + myCount xs
+
+main = print (myCount &quot;chris&quot; == 5)</code></pre><p>Do you see how I matched each case? If the list is empty, the length is zero. Otherwise, if the list is made out of a head element glued onto a body, then the length is the</p><h4 id="exercise-1"><a href="#exercise-1">Exercise 1</a></h4><p>Fix the above value, <code>myFail</code> so that it works. What did you have to do? Why? (Extra credit: what does the error message mean?)</p><h4 id="solution-1"><a href="#solution-1">Solution 1</a></h4><div class="hidden"><p>You'll have to change either 26 into a string or &quot;biggest number&quot; into a number. I think the first one is easier:</p><pre><code class="haskell">myFail = [&quot;26&quot;, &quot;biggest number&quot;]</code></pre><p>(unless of course you know the value of &quot;biggest number&quot;, in that case, send me an email and tell me!)</p></div><h3 id="sorting"><a href="#sorting">Sorting</a></h3><p>Sort is easy: just hoogle it: <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=sort" title="Hoogle search for: sort"><code>sort</code></a>. It is a library function in <code>Data.List</code>, a super-helpful collection of functions for working with lists. Take a look at the type signature:</p><pre><code class="haskell">Ord a =&gt; [a] -&gt; [a]</code></pre><p>Starting at the beginning, <code>Ord</code> is for things that can be put in an order. We start with a list of some type, <code>a</code>, that can be ordered and then we end up with a list of the same type that except that the elements are in order!</p><h3 id="lines"><a href="#lines">Lines</a></h3><p>Since we are sorting lines of input, how can we represent lines to make our job really easy?</p><h4 id="exercise-2"><a href="#exercise-2">Exercise 2</a></h4><p>Fill in the code so that it compiles and runs (<code>undefined</code> is a function that will compile, but will fail if you try to actually use it):</p><pre><code class="active haskell">import Data.List (sort)
+
+myLines = undefined
+
+sortedLines :: [String]
+sortedLines = sort myLines
+
+main = print sortedLines</code></pre><h4 id="solution-2"><a href="#solution-2">Solution 2</a></h4><div class="hidden"><p>Use a list of strings (any strings will do):</p><pre><code class="haskell">myLines = [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;]</code></pre></div><h3 id="lines-and-unlines"><a href="#lines-and-unlines">Lines and Unlines</a></h3><p>If you look carefully in the <code>Data.List</code> library, you'll find <a href="http://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-List.html#v:lines">lines</a> and <a href="http://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-List.html#v:unlines">unlines</a>. Here's what they look like:</p><pre><code class="active haskell">myLines = lines &quot;this\nhas\nnewlines&quot;
+main = print myLines</code></pre><pre><code class="active haskell">myString = unlines [&quot;this&quot;, &quot;will&quot;, &quot;have&quot;, &quot;newlines&quot;]
+main = putStr myString</code></pre><h3 id="a-little-bit-of-i-o"><a href="#a-little-bit-of-i-o">A little bit of I/O</a></h3><p>We almost have all the pieces we need, we can break on lines, sort those lines, and then join them back together. A sketch of this looks like this:</p><p>Do these steps:</p><ol><li>input = getInputSomehow???</li><li>myLines = lines input</li><li>mySortedLines = sort myLines</li><li>mySortedString = unlines mySortedLines</li><li>putStr mySortedString</li></ol><p>What would getting input look like? You may have heard Whenever we want to find Haskell functions, we can look on hoogle for the answer. Let's hoogle the type that we expect to need: <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=:: IO String" title="Hoogle search for: :: IO String"><code>:: IO String</code></a>. <code>IO</code> is the special type in Haskell that means we need to talk to the outside world. Looking a bit <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getContents" title="Hoogle search for: getContents"><code>getContents</code></a> looks like a just what we wanted.</p><p>Next we need to use it to get input. For this we can use a bit of <i>do notation</i>.</p><pre><code class="active haskell">main = do
+    userInput &lt;- getContents
+    putStrLn userInput</code></pre><p>This should just echo the lines that you typed back to you.</p><h4 id="exercise-3"><a href="#exercise-3">Exercise 3</a></h4><p>Print your input twice.</p><h4 id="solution-3"><a href="#solution-3">Solution 3</a></h4><div class="hidden"><pre><code class="active haskell">main = do
+    input &lt;- getContents
+    putStrLn input
+    putStrLn input</code></pre><p>Or something like that.</p></div><h2 id="putting-it-together"><a href="#putting-it-together">Putting it together</a></h2><p>We know everything we need. Let's translate our outline into code:</p><ol><li>input = getInputSomehow???</li><li>myLines = lines input</li><li>mySortedLines = sort myLines</li><li>mySortedString = unlines mySortedLines</li><li>putStr mySortedString</li></ol><pre><code class="active haskell">import Data.List (sort)
+
+main = do
+    input &lt;- getContents
+    let myLines = lines input
+        mySortedLines = sort myLines
+        mySortedString = unlines mySortedLines
+    putStr mySortedString</code></pre><p>That's it! Because of some limitations of this software, you may notice that you have no way to signal that the &quot;input is done&quot;. But here's the code (with a minor change) working:</p><pre><code class="active haskell">{-# START_FILE input.txt #-}
+this
+is
+a
+text
+file
+{-# START_FILE Sort.hs #-}
+import Data.List (sort)
+
+main = do
+    input &lt;- readFile &quot;input.txt&quot;
+    let myLines = lines input
+        mySortedLines = sort myLines
+        mySortedString = unlines mySortedLines
+    putStr mySortedString</code></pre><p>The only change was to replace <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getContents" title="Hoogle search for: getContents"><code>getContents</code></a> with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=readFile" title="Hoogle search for: readFile"><code>readFile</code></a>.</p><h3 id="refactor"><a href="#refactor">Refactor</a></h3><p><i>Note</i> the next section gets a little bit more advanced (as refactoring always is) and I introduce some stuff that you don't really need. Follow along if you're interested :)</p><p>This works fine, but could we pull the logic of sorting out of the main function? Also there is an intermediate variable for each step; do we need that?</p><p>What about pulling out all the sorting functions. We can extract all the <code>let</code> lines because we know by their types that they have no side effects:</p><pre><code class="haskell">import Data.List (sort)
+
+lines
+sort
+unlines</code></pre><h4 id="exercise-4"><a href="#exercise-4">Exercise 4</a></h4><p>Do this transformation. You'll (probably) need <a href="http://zvon.org/other/haskell/Outputsyntax/letQexpressions_reference.html">let..in</a> syntax.</p><h4 id="solution-4"><a href="#solution-4">Solution 4</a></h4><div class="hidden"><pre><code class="active haskell">{-# START_FILE input.txt #-}
+this
+is
+a
+text
+file
+{-# START_FILE Sort.hs #-}
+import Data.List (sort)
+
+sortLines input =
+    let myLines = lines input
+        mySortedLines = sort myLines
+    in unlines mySortedLines
+
+main = do
+    input &lt;- readFile &quot;input.txt&quot;
+    putStr (sortLines input)</code></pre></div><p>Next we can get rid of all the intermediate values. The primary trick here is to notice that the input of one function <i>exactly</i> matches up with the input to the next. And we can use <i>function composition</i></p><pre><code class="haskell">sortLines input = (unlines . sort . lines) input</code></pre><p>Lastly, notice that in <code>sortLines</code> it takes just one argument to the function chain. Using <a href="http://www.haskell.org/haskellwiki/Equational_reasoning_examples">equational reasoning</a> we can simply eliminate it from both sides:</p><pre><code class="haskell">sortLines = unlines . sort . lines</code></pre><p>putting it all together:</p><pre><code class="active haskell">{-# START_FILE input.txt #-}
+this
+is
+a
+text
+file
+{-# START_FILE Sort.hs #-}
+import Data.List (sort)
+
+sortLines = unlines . sort . lines
+
+main = do
+    input &lt;- readFile &quot;input.txt&quot;
+    putStr (sortLines input)</code></pre><p>lastly, getting back to the standard input goal of our original project statement, we can use the library function <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=interact" title="Hoogle search for: interact"><code>interact</code></a> which abstracts almost all the machinery of <code>main</code>. Interact takes a function from <code>String</code> to <code>String</code>, applies it to standard input, and then prints the result on standard out. Since <code>sortLines</code> is now just such a function, we can use it with interact:</p><pre><code class="active haskell">import Data.List (sort)
+
+sortLines = unlines . sort . lines
+
+main = interact sortLines</code></pre><p>Unfortunately, we're back to the problem where it is hard to show in the browser because I don't know how to signal that I'm done typing input. But there you have it. A two or three-line (very simple) version of UNIX sort.</p><h1 id="project-2-gravatar-downloader-"><a href="#project-2-gravatar-downloader-">Project 2 Gravatar Downloader:</a></h1><p>This project is a bit more advanced:</p><pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Data.Digest.OpenSSL.MD5 (md5sum)
+import Network.Curl.Download (openURI)
+import System.Directory (createDirectoryIfMissing)
+
+import qualified Control.Monad.Parallel as MP
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as BL
+
+-- Data
+
+type PairName = B.ByteString
+type HashedPairName = B.ByteString
+type Handle = B.ByteString
+type Gravatar = (PairName, HashedPairName)
+
+bendyworks, gravatarUrl, devPrefix :: B.ByteString
+bendyworks = &quot;@bendyworks.com&quot;
+gravatarUrl = &quot;http://gravatar.com/avatar/&quot;
+devPrefix = &quot;dev+&quot;
+
+subdir :: String
+subdir = &quot;./avatars/&quot;
+
+handles :: [Handle]
+handles = [ &quot;begriffs&quot;
+          , &quot;bendycode&quot;
+          , &quot;bigtiger&quot;
+          , &quot;devn&quot;
+          , &quot;joshuarh&quot;
+          , &quot;listrophy&quot;
+          , &quot;mathias&quot;
+          , &quot;micfunk&quot;
+          , &quot;missingdink&quot;
+          , &quot;ryalnd&quot;
+          , &quot;twopoint718&quot;
+          ]
+
+avatarHashes :: [Gravatar]
+avatarHashes = concatMap hashEmail allPairs
+    where allPairs = pairs handles :: [(Handle, Handle)]
+
+-- Main function
+
+main = do
+    createDirectoryIfMissing False subdir
+    mapM downloadAvatar avatarHashes
+    return ()
+
+-- Support functions
+
+hashEmail :: (Handle, Handle) -&gt; [Gravatar]
+hashEmail = map (\(a, b) -&gt; (a, B.pack . md5sum $ b)) . formatEmail
+
+twin x = (x, x)
+
+-- I want to capture both permutations:
+-- user1 + user2 and user2 + user1
+formatEmail :: (Handle, Handle) -&gt; [(PairName, PairName)]
+formatEmail (p1, p2) = [twin $ fmt (p1, p2), twin $ fmt (p2, p1)]
+    where fmt (a, b) = B.concat [devPrefix, a, &quot;+&quot;, b, bendyworks]
+
+avatarPath :: B.ByteString -&gt; B.ByteString
+avatarPath hash = B.concat [gravatarUrl, hash]
+
+-- names are already sorted
+pairs :: [Handle] -&gt; [(Handle, Handle)]
+pairs []     = []
+pairs (x:xs) = [(x, a) | a &lt;- xs] ++ pairs xs
+
+downloadAvatar :: Gravatar -&gt; IO ()
+downloadAvatar (filename, hash) = do
+    either_image &lt;- openURI path
+    putStrLn $ &quot;Downloading: &quot; ++ path
+    case either_image of
+      Left err -&gt; putStrLn err
+      Right image -&gt; B.writeFile outputPath image
+  where
+    path = B.unpack $ avatarPath hash
+    outputPath =  B.unpack $ B.concat [B.pack subdir, filename, extension]
+    extension = &quot;.jpg&quot;</code></pre><p>But I'll go through a few of the interesting points.</p><h2 id="-pairs--function"><a href="#-pairs--function">'pairs' function</a></h2><p>This is where I started. I figured that I would need a list of all of the possible pairs of github handles that we use at Bendyworks. In the way that I design things, I always start with what data I need and then I try to figure out how to work backwards from that:</p><pre><code class="active haskell">pairs []     = []
+pairs (x:xs) = [(x, a) | a &lt;- xs] ++ pairs xs
+
+main = putStrLn $ pairs [1, 2, 3, 4]</code></pre><p>If you've worked with python you may get what's going on with the square brackets. This is a <i>list comprehension</i>, it describes how to build the list that I want. It says that for some list with a first element <code>x</code>, pair that element with each <code>a</code> (which is taken from the rest of the list, <code>xs</code>). We then recursively combine that with all of the pairs of the second element, and so on. Recursion! In the empty list, there are no pairs.</p><h2 id="-main--function"><a href="#-main--function">'main' function</a></h2><pre><code class="haskell">main = do
+    createDirectoryIfMissing False subdir
+    mapM downloadAvatar avatarHashes
+    return ()</code></pre><p>What's cool about haskell programs, like C programs of yore, is that there's a simple <code>main</code> entry point to the program. Here is no different. When we start we create a directory called <code>avatars</code> and then we do some kind of map over all the avatar hashes, downloading each one. This already tells us everything that the program does! We just have to know about <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mapM" title="Hoogle search for: mapM"><code>mapM</code></a> and the <code>downloadAvatar</code> function.</p><h2 id="-downloadavatar--function"><a href="#-downloadavatar--function">'downloadAvatar' function</a></h2><pre><code class="haskell">downloadAvatar :: Gravatar -&gt; IO ()
+downloadAvatar (filename, hash) = do
+    either_image &lt;- openURI path
+    putStrLn $ &quot;Downloading: &quot; ++ path
+    case either_image of
+      Left err -&gt; putStrLn err
+      Right image -&gt; B.writeFile outputPath image
+  where
+    path = B.unpack $ avatarPath hash
+    outputPath =  B.unpack $ B.concat [B.pack subdir, filename, extension]
+    extension = &quot;.jpg&quot;</code></pre><p>This looks formidable, but it really simple. Since I'm using <code>do</code> notation, you can follow each line in the doc block sequentially. We <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=openURI" title="Hoogle search for: openURI"><code>openURI</code></a> to read the page at the given url (<code>path</code> is described in the <code>where</code> clause). I print a little message saying that we're downloading it then, depending on how the <code>openURI</code> call turned out, <code>Left</code> is an error, and <code>Right</code> is the image data. If I got image data back, I write that to a file based upon the passed-in <code>filename</code>.</p><h2 id="-gravatar--type-synonym"><a href="#-gravatar--type-synonym">'Gravatar' type synonym</a></h2><p>I introduce a few <i>type synonyms</i> at the start of my program to organize the data that I'm using.</p><pre><code class="haskell">type PairName = B.ByteString
+type HashedPairName = B.ByteString
+type Handle = B.ByteString
+type Gravatar = (PairName, HashedPairName)</code></pre><p>This is a very lightweight way to provide some clarity and documentation. Haskell treats the thing on the left as being interchangeable with the thing on the right. This is like a <code>typedef</code>.</p><h2 id="where--avatarhashes--comes-from"><a href="#where--avatarhashes--comes-from">Where 'avatarHashes' comes from</a></h2><p>Based upon the type signature, we know that <code>avatarHashes</code> has a type of <code>[Gravatar]</code>. Let's expand that:</p><pre><code class="haskell">[Gravatar] = [(PairName, HashedPairName)]
+           = [(B.ByteString, B.ByteString)]</code></pre><p>Two functions are used to generate those <code>Gravatar</code>s:</p><pre><code class="haskell">avatarHashes :: [Gravatar]
+avatarHashes = concatMap hashEmail allPairs
+    where allPairs = pairs handles :: [(Handle, Handle)]</code></pre><p>The first is <code>allPairs</code> which generates, well, all the pairs of email addresses by calling <code>pairs</code> on the list of handles.</p><p>The rest of the functions are little helpers that I'll briefly discuss:</p><h3 id="hashemail"><a href="#hashemail">hashEmail</a></h3><pre><code class="haskell">hashEmail :: (Handle, Handle) -&gt; [Gravatar]
+hashEmail = map (\(a, b) -&gt; (a, B.pack . md5sum $ b)) . formatEmail</code></pre><p>This just converts a list of things like:</p><pre><code>(dev+twopoint718+bigtiger@bendyworks.com, dev+twopoint718+bigtiger@bendyworks.com)</code></pre><p>into a list of things like:</p><pre><code>(dev+twopoint718+bigtiger@bendyworks.com, a40912d1ceb0e89380fb978b90936a7e)</code></pre><h3 id="formatemail"><a href="#formatemail">formatEmail</a></h3><p>Some interesting dirty work is performed in <code>formatEmail</code>:</p><pre><code class="haskell">formatEmail :: (Handle, Handle) -&gt; [(PairName, PairName)]
+formatEmail (p1, p2) = [twin $ fmt (p1, p2), twin $ fmt (p2, p1)]
+    where fmt (a, b) = B.concat [devPrefix, a, &quot;+&quot;, b, bendyworks]</code></pre><p>This glues together two handles into the special (and totally arbitrary) email address that we use at Bendyworks as the &quot;author&quot; of git commits. For each pair of handles, I generate two addresses, one where person 1 (<code>p1</code>) is first and another where person 2 (<code>p2</code>) is first. The other bit of plumbing is the tiny <code>twin</code> function:</p><pre><code class="haskell">twin x = (x, x)</code></pre><p>which &quot;doubles&quot; anything into a two-tuple:</p><pre><code>twin 1 == (1, 1)</code></pre><p>This is because when I'm hashing email addresses, I want an unhashed &quot;copy&quot; to label the downloaded image with. The other simple reason is that because this is the input that <code>hashEmail</code> is expecting.</p><h2 id="wrapping-up"><a href="#wrapping-up">Wrapping up</a></h2><p>That should cover the how of this little program. I included in the imports the <code>Control.Monad.Parallel</code> (aliased as <code>MP</code>) package. This lets me change <code>main</code> into this:</p><pre><code class="haskell">main = do
+    createDirectoryIfMissing False subdir
+    MP.mapM downloadAvatar avatarHashes
+    return ()</code></pre><p>Note the <code>MP</code> qualified function name <code>mapM</code>. This lets me run all the <code>downloadAvatar</code> actions in parallel! Try this out. For me this is easily 4 times as fast (it went from about 8 seconds to about 2 on my computer).</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/twopoint718/from-ruby-to-haskell-workshop';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

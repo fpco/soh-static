@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html><head><title>Representation, Operations, and Semantics - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics">Computational Physics</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/conceptual-intro">Conceptual Intro</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/conceptual-intro/representation-operations-and-semantics">Representation, Operations, and Semantics</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Representation, Operations, and Semantics</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">27 Apr 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/Sam567">Samuel Buteau</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5577/35c0293064d3978d46fbee1516fd9eb54aa1f377">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567/computational-physics/conceptual-intro">Go up to: Conceptual Intro</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Sam567">See all content by Samuel Buteau</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#mathematical-discussion--complex-numbers">Mathematical Discussion: Complex Numbers</a></li><li><a href="#cartesian-complex-numbers">Cartesian Complex Numbers</a></li><li><a href="#polar-complex-numbers">Polar Complex Numbers</a></li><li><a href="#cartesian-and-polar">Cartesian and Polar</a></li><li><a href="#different-representations-">Different Representations?</a></li><li><a href="#matrix-complex-numbers">Matrix Complex Numbers</a></li><li><a href="#c-p-m-and-different-computational-paths">C|P|M and different computational paths</a></li><li><a href="#distributivity-and-optimization">Distributivity and Optimization</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#summary">Summary</a><ul><li><a href="#representation">Representation</a></li><li><a href="#operation">Operation</a></li><li><a href="#semantics">Semantics</a></li><li><a href="#implementation">Implementation</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="mathematical-discussion--complex-numbers"><a href="#mathematical-discussion--complex-numbers">Mathematical Discussion: Complex Numbers</a></h1><p>Complex numbers are one of these concepts which keep popping up whether you are a mathematician, a physicist, an engineer, a computer scientist.</p><p>Now, we are going to implement &quot;the complex numbers&quot; in various different ways. Hopefully, you will be very comfortable with them by the time we are done. Keep in mind that this is an example of a much bigger thing: how to take a mathematical idea, and turn it into a computational idea.</p><h1 id="cartesian-complex-numbers"><a href="#cartesian-complex-numbers">Cartesian Complex Numbers</a></h1><pre><code class="active haskell">
+data CComplex = C {re::Double, im::Double} deriving (Show, Eq)
+--this stands for the complex number (a +i b). You would create it like this: z = C a b
+a = 1
+b = 3
+z = C a b
+
+w = C 2 1
+
+--You can add two CCNs
+add (C a b) (C c d) = C (a+c) (b+d)
+--could have been written like this: z1 `add` z2 = C (re z1 + re z2) (im z1 + im z2)
+
+s1 = z `add` w
+
+--You can multiply two CCNs
+mult (C a b) (C c d) =C (a*c - b*d)  (b*c + a*d)
+
+p1 = z `mult` w
+
+--You can do other things as well, but that is enough for now.
+newline = putStrLn &quot;&quot;
+
+main = do  print  &quot;a&quot;
+           print a
+           newline
+           print &quot;b&quot;
+           print b
+           newline
+           print &quot;z&quot;
+           print z
+           newline
+           print &quot;w&quot;
+           print w
+           newline
+           print &quot;z `add` w&quot;
+           print $ z `add` w
+           newline
+           print &quot; z `mult` w&quot;
+           print $  z `mult` w
+</code></pre><p>A little vocabulary:  the <code>data ...</code> statement is an implementation of the <i>Representation</i>. The <code>add ...</code> and <code>mult ...</code> statements are implementations of the <i>Operations</i>.</p><p>Here is what we see: the  <code>add</code> <i>operation</i> is a <i>point-wise</i> operation, which means that is does something to the real parts, and then does something to the imaginary parts. Notice that the order in which we compute these doesn't change the result.</p><p>As a rule of thumb, <i>point-wise</i> operations are simple to understand, implement, and to <i>optimize</i>.</p><p>On the other hand, the <code>mult</code> operation is not point-wise. Granted, the implementation wasn't very hard, and it is clear that it is correct. However, the meaning of it is rather mysterious in this form. What does it do exactly. To answer this question, we turn to our second representation of the day: Polar Complex Numbers</p><h1 id="polar-complex-numbers"><a href="#polar-complex-numbers">Polar Complex Numbers</a></h1><pre><code class="active haskell">
+data PComplex = P {amp::Double, phase::Double} deriving (Show, Eq)
+--this stands for the complex number (r * exp(i theta). You would create it like this: z = P r theta
+r = 1
+theta = 3
+z = P r theta
+
+w = P 2 1
+
+--You can add two PCNs, but it is quite nasty. We will come back to it later.
+add (P a b) (P c d) = error &quot;Too Nasty For Now!&quot;
+
+
+--You can multiply two PCNs
+mult (P a theta) (P b phi) =P (a*b)  (theta + phi)
+--could have been written like this: z1 `mult` z2 = P (amp z1 * amp z2) (phase z1 + phase z2)
+
+p1 = z `mult` w
+
+--You can do other things as well, but that is enough for now.
+newline = putStrLn &quot;&quot;
+
+main = do  print  &quot;r&quot;
+           print r
+           newline
+           print &quot;theta&quot;    
+           print theta
+           newline
+           print &quot;z&quot;
+           print z
+           newline
+           print &quot;w&quot;
+           print w
+           newline
+           print &quot; z `mult` w&quot;
+           print $  z `mult` w
+</code></pre><p>We now see what <code>mult</code> does; it multiplies the amplitudes, and adds the phases. It is a point-wise operation.</p><h1 id="cartesian-and-polar"><a href="#cartesian-and-polar">Cartesian and Polar</a></h1><p>Alone, the polar representation is rather weak (addition is an ugly mess), but if you only want to multiply complex numbers, you are better off with Polars than Cartesians.</p><p>Ok, so we have these two ways of looking at the same thing. A natural question is &quot;what is the relationship between these two representations?&quot;</p><pre><code class="active haskell">main = do print &quot;(c,toPolar c, toCartesian $ toPolar c) &quot;
+          print $ (c,toPolar c, toCartesian $ toPolar c)
+          newline
+          print &quot;(p,toCartesian p,toPolar $ toCartesian p)&quot;
+          print $ (p,toCartesian p,toPolar $ toCartesian p)
+          
+data CComplex = C {re::Double, im::Double} deriving (Show, Eq)
+data PComplex = P {amp::Double, phase::Double} deriving (Show, Eq)
+
+--from geometry, we see:
+toPolar (C x y) = P (sqrt $ x**2 + y**2) (atan (y/x))
+
+toCartesian (P a theta) = C (a* cos theta) (a* sin theta)
+
+
+
+c = C 1 2.3
+p = P 1 (pi/2) --can you see what mathematical object this is?
+
+
+newline =putStrLn &quot;&quot;
+
+</code></pre><p>Great, so we see we can go back and forth between our two representations. We can even go from polar to Cartesian to polar again and get the same number!</p><p>Now, it's time for a mixed representation: we want our polar and Cartesian complex numbers to be to forms of the same thing, like in mathematics.</p><pre><code class="active haskell">data Complex = C {re::Double, im::Double} 
+    | P {amp::Double, phase::Double} deriving (Show, Eq)    
+--you can read this as: a complex is either a C, in which case it has both a re and an im part, or it is a P, in which case it has both an amp and a phase.
+
+toPolar (C x y) = P (sqrt $ x**2 + y**2) (atan (y/x))
+toPolar alreadyPolar = alreadyPolar  -- if the evaluation arives here, it means it is not a cartesian. In our case, it must be a polar then. 
+
+toCartesian (P a theta) = C (a* cos theta) (a* sin theta)
+toCartesian alreadyCartesian = alreadyCartesian 
+
+--fundamental definitions
+addC (C a b) (C c d) = C (a+c) (b+d)
+multP (P a theta) (P b phi) = P (a*b)  (theta + phi)
+
+--full definitions derived from the fundamental ones
+z1 `add` z2 = (toCartesian z1) `addC` (toCartesian z2)
+z1 `mult` z2 = (toPolar z1) `multP` (toPolar z2)
+
+main = do print $ (C 1 3) `add` (P 1 (pi/2))
+          print $ (C 1 3) `mult` (P 1 (pi/2))    
+
+--fundamental definitions (extra)
+oppositeC (C a b) = C (-a) (-b)
+inverseP (P r theta) = P (1/r) (-theta)
+
+minusC z1 z2 = addC z1 (oppositeC z2) --this is dangerous if z1 or z2 are polars, but because it calls functions that fail on polars, it will fail too if you feed it polars. 
+
+divideP z1 z2 = multP z1 (inverseP z2) </code></pre><p>Exercises: 1) implement the full definitions of opposite and inverse; 2) full definition of minus and divide. 3) (bonus) re-implement the fundamental operations in a way that is type-safe (will complain at compile time instead of at execution time). 4) (bonus) make Complex an instance of <code>Num</code> (this should be trivial if you know what <code>Num</code> is)</p><h1 id="different-representations-"><a href="#different-representations-">Different Representations?</a></h1><p>So far, we have seen three representations: C, P, and C|P. We saw that there were links between them. For the record, C|P is called the <i>type sum</i> of C and P. The sum is associated with the intuitive notion of <i>either</i>: C|P is either C or P.</p><p>But let us go deeper. When you come right down to it, C is just a pair of <code>Double</code>, and so is P. They are both pairs of <code>Double</code> for which we have defined <i>operations</i>. For instance, to multiply two pairs of <code>Double</code> which form a P, we use <code>multP (P a theta) (P b phi) = P (a*b)  (theta + phi)</code>, whereas to multiply two pairs of <code>Double</code> which form a C, we use <code>multP (C a b) (C c d) =C (a*c - b*d)  (b*c + a*d)</code>. 
+In fact, Ps and Cs have the same representation, but different operations. We will come back to this later.</p><p>Focusing on <code>C</code>, we said that it was a pair of <code>Double</code>. We can also write it like this: <code>C = Double &amp; Double</code> (this is not valid haskell by the way), and we say that C is the <i>type product</i> of Double and Double. In the same way, we write <code>P = Double &amp; Double</code></p><p>So, in general, a representation can be a <i>type sum of type products</i>, like <code>C|P =(Double&amp;Double)|(Double&amp;Double)</code>. The correct haskell for this is:</p><pre><code class="haskell">
+data Type = Term1 Fact1 Fact2 Fact3 ... FactN | Term2 Fact(N+1) Fact(N+2) ...
+data CP = C Double Double | P Double Double</code></pre><p>We saw that the same representation  with different operations will define a different thing. Here is the third concept for today:</p><p>Supposing you have a representation r and a list of operations ops, the <i>semantics</i> is a function which associates each element of r to a mathematical object in o and each element of ops to a function in fs.</p><p>Here it is for C:</p><pre><code class="haskell">C a b -&gt; a + i b
+addC -&gt; +
+multC -&gt; *
+...</code></pre><p>where the rhs is in the mathematical domain, and the lhs is in the Computational domain.</p><p>For P:</p><pre><code class="haskell">P a b -&gt; a * exp (i b)
+addP -&gt; +
+multP -&gt; *
+...</code></pre><p>For C|P</p><pre><code class="haskell">C a b -&gt; a + i b
+P a b -&gt; a * exp (i b)
+toPolar -&gt; identity
+toCartesian -&gt; identity
+add -&gt; +
+mult -&gt; *
+...</code></pre><p>You might be thinking &quot;well that was useless.&quot; but it wasn't, and to illustrate this, I will show a completely different representation: the matrix representation.</p><h1 id="matrix-complex-numbers"><a href="#matrix-complex-numbers">Matrix Complex Numbers</a></h1><pre><code class="active haskell">import Data.List
+data C = C {re::Double, im::Double} deriving (Show, Eq)    
+
+--normally you would use hmatrix for this, but the package isn't available at this time it seems.
+--this is a really ugly hack, but it illustrates the idea.
+type Mats a = [[a]]
+
+addM = zipWith (zipWith (+)) --pointwise addition
+
+--only for 2 by 2, but easy to generalise
+multM m1 m2 = let m2' = transpose m2
+                  mult i j = sum $ zipWith (*) (m1!!i) (m2'!!j)
+              in [[mult 0 0, mult 0 1],[mult 1 0, mult 1 1]]
+
+data M = M (Mats Double) deriving (Show,Eq)
+
+add (M z1) (M z2) = M $ addM z1 z2
+mult (M z1) (M z2) = M $ multM z1 z2
+
+main = do print $ toCartesian $ (toMatrix (C 0 1)) `mult` (toMatrix (C 0 1))    
+          print $ toCartesian $ (toMatrix (C 0 1)) `add` (toMatrix (C 0 1))              
+
+
+toMatrix (C a b) = (M [[a,-b],[b,a]])
+toCartesian (M [[a,b],_]) = C a (-b)
+</code></pre><p>Exercises: 1) define the semantics of M. 2) implement the opposite and inverse for M. 3) implement C|P|M in the most economical (no redundancy) manner.</p><p>Notice that after we've implemented <code>toMatrix</code>, the addition and multiplication of complex numbers reduces to the addition and multiplication of matrices.</p><p>Furthermore, given <code>toMatrix</code>, we have <code>toMatrix (-z1) = - (toMatrix z1)</code> which means that viewing a matrix as a complex number, the opposite of that matrix corresponds to the opposite of the complex number. We also have <code>toMatrix (1/z1) = (toMatrix z1)^(-1)</code> which states that the matrix inverse corresponds to the complex number inverse.</p><p>Exercise: Go on Wikipedia, and see how to compute the inverse of a two by two matrix. For the opposite, you just have to multiply each component of the matrix by (-1). 1) implement the matrix inverse and opposite. 2) use this code in C|P|M to test the above statement that <code>toMatrix (-z1) = - (toMatrix z1)</code> and <code>toMatrix (1/z1) = (toMatrix z1)^(-1)</code>.</p><h1 id="c-p-m-and-different-computational-paths"><a href="#c-p-m-and-different-computational-paths">C|P|M and different computational paths</a></h1><p>By now, we have seen various ways to perform various computations. For instance, the mathematical idea of (z1 + z2) can be translated in the following manner:</p><pre><code class="haskell">--First way: Cartesian
+z1 + z2 = addC z1 z2
+
+--Second way: Matrix
+z1 + z2 = addM z1 z2
+</code></pre><p>These two ways are strongly related, and here is how:</p><pre><code class="haskell">z1 + z2 = toWhatever $ (toCartesian z1) `addC` (toCartesian z2) 
+        = toWhatever $ (toMatrix z1) `addM` (toMatrix z2)    </code></pre><p>Where <code>toWhatever</code> can be taken as <code>toCartesian</code>, <code>toPolar</code>, or <code>toMatrix</code>; the equation is still valid for each.</p><p>This is our first example of two different computational <i>paths</i> that start with the same input and arrive at the same result.</p><p>Exercise: define two corresponding paths for multiplication.</p><p>These are paths to compute some non-trivial mathematical function (+), but there are also other equivalent paths:</p><pre><code class="haskell">toWhatever1 (toWhatever2 z1) = toWhatever1 z1</code></pre><p>Granted this equality is not exact, but they would be exact given infinite precision in the <code>Double</code> arithmetic. In fact, the rhs is slightly better because there is always less computation involved on this path. On the other hand, the lhs is more likely to occur in human-written code (not that you would write this explicitly, but there are circumstances).</p><p>Here is one such circumstance:</p><pre><code class="haskell">f z1 z2 = toPolar $ z1 `add` z2
+
+show' z1 = let z = toCartesian z1
+           in  show (re z) ++ &quot; + i &quot; ++ show (im z)
+           
+main = putStrLn $ show' $ f z1 z2           </code></pre><p>You see that the <code>main</code> will do something of the form <code>toW1 (toW2 x)</code>. Of course, you could have written <code>f</code> without the conversion, but suppose you wanted to write it this way (maybe it's used a lot in your program).</p><p>In this case, one path is clearly <i>better</i> than the other, so you could imagine a compiler that could systematically replace <code>toW1 (toW2 x)</code> by <code>toW1 x</code> everywhere in your code.</p><p>In more realistic programs, it isn't as easy to choose which path is better, but this example allows us to define what a <i>proper optimization</i> is.</p><p>A <i>proper optimization</i> is a transformation from one path to another for which the semantics of any program is conserved. and</p><p>A <i>monotonic optimization</i> is a transformation from one path to a new path better no matter what.</p><p>As a rule, improper (meaning not proper) optimizations are quite useless in practice, and <i>monotonic optimizations</i> are quite rare.</p><p>By the way, I have cooked up this terminology and do not expect it to be standard.</p><p>In practice, we want proper and quasi-monotonic optimizations (they improve performance almost always), because those can be made by the compiler in a way that beats &quot;by hand optimization&quot;.</p><p>However, in a real program, you have many different optimizations, often they are mutually exclusive, and so you (or the compiler) have to choose between many many many many paths, and the performance of each one can only be estimated. This is a very hard problem, and it will come back to haunt us in the future, but for now we will leave it be.</p><p>But before, I want to show you some non-trivial optimization that we can still hope to make automatically.</p><h1 id="distributivity-and-optimization"><a href="#distributivity-and-optimization">Distributivity and Optimization</a></h1><p>So far, the optimization we saw didn't even relate to the computing of (+) and (*), which is silly because in the C representation (Cartesian), we didn't have all that extra machinery. In fact, the C representation was kind of awesome in terms of performance.</p><p>First of all, the C|P|M representation has advantages too. For instance, we have a great way to compute (*) (in P) that is better than what we had in C in terms of both performance and clarity of semantics. Also, we made a link with matrices. Suppose you have implemented this great library for matrices; then, you can use the C|P|M representation to test your new library. It is true that the matrix representation is always worst than the C representation in terms of performance, but in C|P|M, there is no need to ever use M (C|P is already complete, and so is C).</p><p>In general, understanding multiple representations tells you more about the nature of what you're trying to implement. For instance, now you have a way to relate matrices to complex numbers, so if you get complex numbers, then you get a little bit of matrices for free and vice versa.</p><p>But like I said before, if all you do with your complex numbers is multiplication and inverses, then P is <i>better</i> than C, and that is a common phenomenon: different representations and semantics give rise to good and bad operations. C goes with (+), and P goes with (*). You can still implement the other operation, but it is no longer necessary in C|P.</p><p>So here is a mathematical property that links (+) to (*); this is where to look for optimizations in C|P.</p><pre><code class="haskell">--distributivity.
+w * (z1 + z2) = w * z1 + w * z2</code></pre><p>As you can see, this mathematical relationship gives rise to two computational paths.</p><p>Here are two possible scenarios:</p><pre><code class="haskell">-- w is a P
+-- z1, z2 are Cs
+
+w * (z1 + z2) = w * z1 + w * z2
+w * (z1 `addC` z2) = w `multP` (toP z1) + w `multP` (toP z2)
+w `multP` (toP (z1 `addC` z2)) = toC (w `multP` (toP z1)) `addC` toC (w `multP` (toP z2))
+
+(lhs better than rhs)
+
+--w, z1, z2 are Ps
+w * (z1 + z2) = w * z1 + w * z2
+w * (toC z1 `addC` toC z2) = w `multP` z1 + w `multP` z2
+w `multP` toP (toC z1 `addC` toC z2) = toC (w `multP` z1) `addC` toC (w `multP` z2)
+
+(lhs pretty much the same as rhs)</code></pre><p>Exercise: work out another scenario (ex: all of them are C)</p><p>As you can see, the  optimization <code>rhs -&gt; lhs</code> is much better in some cases, and not useful in other cases (can you find a case where it is worst?)</p><p>Notice that this optimization also exists in C, where it is always effective (always saves one operation) because there is only one case.</p><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>There are two lessons to be learned:</p><p>First, the arithmetic of complex numbers. I hope you got that one.</p><p>Second, there are three concepts (Representation,Operations,Semantics) which allow us to go from a mathematical idea to a computational idea, and back again. Later, we will go from physical ideas to mathematical ones, and so on.</p><p>When implementing a mathematical idea, it doesn't make much sense to discuss the merits of some Representation without the associated operations and semantics. These three things should go together.</p><p>We went rather deep this time, and these concepts will come back time and again. However, we will come back to the surface, and stick to it most of the time. If you learned something today, then you are probably good to continue; to have an easy time too. I wanted to give you an idea of the depth which exists beneath our feet.</p><h1 id="summary"><a href="#summary">Summary</a></h1><p>Given a mathematical idea, you can create a computational idea by specifying three things;</p><h2 id="representation"><a href="#representation">Representation</a></h2><p>The representation is the <i>thing</i> you store while doing your computations. For instance, one can store the real and imaginary part of a complex number (C), or someone else might store the amplitude and the phase of a complex number (P), or yet another person will store an appropriate 2-by-2 matrix (M). These are three different representations.</p><p>If there is a way to go from one representation to another, one can often introduce a mixed representation (C|P|M), and obtain many advantages (understanding, efficiency, validation by testing, etc.)</p><h2 id="operation"><a href="#operation">Operation</a></h2><p>The operations are defined as function on the representation, and there are (roughly speaking) two kinds of operations: 1) the ones which correspond to a non-trivial function in mathematics. 2) the ones which only live in the computational realm (often, those correspond to the identity function in mathematics).</p><p>It is futile to develop the representation and the operations separately---note that this statement is an empirical generalization which is often true in practice, but isn't true in general.</p><p>In very simple cases, it is possible to have a <i>best</i> representation in the sense that the operations you want to define are all clearly better (simpler, more efficient) in this representation than in any other you can think of. However, most cases have the following character: representation <code>C</code> makes the <code>(+)</code> operation optimal in every respect, but representation <code>P</code> makes the <code>(*)</code> operation optimal.</p><p>This fact (that one representation rarely cuts it) justifies mixed representations. However, a mixed representation is inherently more complex, and may introduce some inefficiency (going from C to P to C to P all the time kills the benefits of C over P and P over C)</p><p>If one chooses representation and operations well, the end product is often of much greater quality, and the extra time required in thinking about these things is <i>always</i> regained through the development of sufficiently grand projects.</p><h2 id="semantics"><a href="#semantics">Semantics</a></h2><p>Ok, so now you can do these funny things with 2-by-2 matrices, and somehow, these things &quot;correspond&quot; to the mathematical equations you wanted to compute. The semantics is a way to go from the computational realm back into the mathematical realm. In other words, given a program which does all these funny things to matrices, you use the semantics to figure out &quot;what the hell you are computing&quot;.</p><p>Any useful computational idea corresponds to a mathematical one. By defining the semantics explicitly, it is possible to think about your programs in the mathematical realm (which is much simpler).</p><p>Also, this rule (define the semantics explicitly) gives you a general way to document your programs. In a world of highly optimized pieces of code written by someone else, it is vital to define the semantics explicitly.</p><p>Without this, it becomes harder to use highly optimized code written by someone else than to simply implement your own version (not optimized). This practice (rewriting everything yourself) is unsustainable as problems become bigger and bigger (this is cruelly true in computational physics).</p><p>The sad part of this is that <i>it doesn't have to be that way</i>. If someone defines the semantics of a piece of code, then it becomes as easy to use as any simpler code which has the same semantics. If you do not wish your work to fade into irrelevance the moment you stop working on it, please define the semantics of your code explicitly. Afterwards, you can optimize all you want (if the problem at hand requires such performance), but keep the semantics intact.</p><h2 id="implementation"><a href="#implementation">Implementation</a></h2><p>Once you have your computational idea, you need to write it explicitly in a programming language of your choice.</p><p>haskell (any purely functional language, really, but haskell happens to be the best in my opinion) has the advantage that it expresses computational ideas with extreme fidelity. This allows you to do something even better than to translate math into computational; with haskell, you can develop your computational idea by increments, and see how/if it works. This is not only a lot of fun, it allows you to come up with better ideas. Even if (due to some restraint) your final project doesn't end up in haskell, developing your computational ideas in haskell is by far the best.</p><p>In the &quot;real world&quot;, the computational idea you end up using is often the one with the nicest implementation rather than the nicest structure (representation, operation, semantics). In haskell however, these two nice things (implementation and the idea itself) tend to coincide.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/Sam567/computational-physics/conceptual-intro/representation-operations-and-semantics';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

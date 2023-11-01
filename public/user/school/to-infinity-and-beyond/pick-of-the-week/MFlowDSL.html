@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html><head><title>MFlow as a DSL for Web applications - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/MFlowDSL">MFlow as a DSL for Web applications</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">MFlow as a DSL for Web applications</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/98f08c2da4a9df17e0d10f8ba2777b034710c83c">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/how-haskell-can-solve-the-integration-problem">Previous content: How Haskell can solve the integration problem</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/deamortized-st">Next content: Part I: Deamortized ST</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Go up to: Pick of the Week</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a><ul><li><a href="#the-initial-example--sum-application-with-three-pages">The initial example: Sum application with three pages</a></li><li><a href="#three-pages--using-setsessiondata">Three pages, using setSessionData</a></li><li><a href="#persistent-session-state">Persistent session state</a></li><li><a href="#two-pages--using-formlets">Two pages, using formlets</a></li><li><a href="#single-page--refreshed-in-each-iteration--monadic-formlet-">Single page, refreshed in each iteration, monadic formlet.</a></li><li><a href="#single-page--refreshed-in-each-iteration--monadic-formlet--factoring-out-the-button">Single page, refreshed in each iteration, monadic formlet, factoring out the button</a></li><li><a href="#single-page--refreshed-in-each-iteration--using-wcallback-instead-of-monadic-composition">Single page, refreshed in each iteration, using wcallback instead of monadic composition</a></li><li><a href="#single-page--monadic--autorefreshing-">Single page, monadic, autoRefreshing.</a></li><li><a href="#single-page--autorefreshing--using-push-to-present-the-results">Single page, autoRefreshing. Using push to present the results</a></li><li><a href="#single-page--only-dfield-placeholders-updated">Single page, only dField placeholders updated</a></li><li><a href="#single-page--only-dfield-placeholders-updated--editable-template">Single page, only dField placeholders updated, editable template</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>This tutorial shows some examples of the use of <a href="http://hackage.haskell.org/package/MFlow">MFlow</a> as a DSL for web applications rather than as a web framework as such made of heterogeneous stuff. This tutorial modify step by step a simple application, the canonical application of stateful web frameworks, that ask for two numbers and show the result.</p><p>This initial application is modified with different applicative and monadic combinators to create from a multipage application to a single page application, AJAX driven,  with autorefresh, push, runtime templating and so on.</p><p>The same code can be combined to create very different kinds of applications under the same paradigm. MFlow is essentially a set of applicative and monadic combinators that implement tracking and backtracking effects for navigation, logging for state persistence and an extension of formlets for the user interface. This set of examples do not exhaust the variety of use cases that the model solves.</p><p>For, example, route descriptions as monadic expressions can be seen in this more basic <a href="https://www.fpcomplete.com/user/agocorona/MFlow-tutoria">MFlow Introduction</a>. For more complex examples see the <a href="http://mflowdemo.herokuapp.com">MFlow demos site</a></p><p><i>NOTE: SOH seems to run a single web snippet per user and session. It takes certain time until it reset itself. Otherwise, a previous executed example will stay running instead of the one  you are expecting.</i></p><p><i>NOTE2: Since the SOH uses HTTPS, the browser reject the load of third party scripts, such is JQuery, so look at the notes of each example.</i></p><h2 id="the-initial-example--sum-application-with-three-pages"><a href="#the-initial-example--sum-application-with-three-pages">The initial example: Sum application with three pages</a></h2><p>Two pages  ask for a number.  The third shows the result and a link. Yet, the code(almost) fit in a tweet. If the link is pressed, the first page appears again, since <code>runNavigation</code> runs the navigation in a loop. The back button works.</p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step $ do
+       n  &lt;- page $ getInt Nothing &lt;** submitButton &quot;first&quot;
+       n' &lt;- page $ getInt Nothing &lt;** submitButton &quot;second&quot;
+       page $ p &lt;&lt; ( n+n') ++&gt; wlink () &quot;click&quot;
+</code></pre><p>Note that although <code>getInt</code> is a form field that expect an Int, the <code>&lt;form&gt;</code> tag is not explicit. It is added automatically by MFlow when necessary. However in special cases. in pages with multiple forms, <code>wform</code> can do it explicitly.</p><p>Note also that <code>wlink</code> return a typed value, () in this case. and this is what the last <code>page</code> return to <code>runNavigation</code> as it expects. <code>page</code> present a page made of forms, formatting and links and return the result.</p><p>for a more detailed explanation of the latter, read the <a href="https://www.fpcomplete.com/user/agocorona/MFlow-tutoria">MFlow Introduction</a> , for example.</p><p>The operator <code>&lt;**</code> is like the applicative operator <code>&lt;*</code> but ever execute and present both sides, no matter if the first succeed or fail.</p><p>The operators <code>++&gt;</code> and <code>&lt;++</code> append and prepend rendering markup, respectively, to an active element. In this case the  rendering library is blaze-html, given by the imported module.</p><p>There are also utilities for setting up the header and the footer of the page, as well as other details that will not be shown here. I refer to the links above, with more details and more complex examples. This tutorial is about the different kinds of applications that can be created adding different combinators.</p><p>The session in MFlow  is the monadic procedure in the <code>FlowM</code> monad. The session data is in normal procedure variables. That is a big advantage over MVC frameworks, where pages do not share variable scopes and the concept of flow is inexistent. The session state has to be stored in untyped collections accessed by a key string.</p><h2 id="three-pages--using-setsessiondata"><a href="#three-pages--using-setsessiondata">Three pages, using setSessionData</a></h2><p>But sometimes is necessary to &quot;transport&quot; data among procedures, and to pass variables among multiple procedures is tedious and inelegant. in Haskell, there is the state monad. The programmer is free to use it, but it is too technical for people who want to use MFlow as a DSL to get their application easy and fast. For this purpose exist <code>getSessionData</code> and <code>setSessionData</code>.</p><pre><code class="haskell active web">
+{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step $ do
+       n  &lt;- page $ getInt Nothing &lt;** submitButton &quot;first&quot;
+       n' &lt;- page $ getInt Nothing &lt;** submitButton &quot;second&quot;
+       setSessionData (n,n')
+       computeSum
+
+computeSum= do
+       (n,n') &lt;- getSessionData `onNothing` return (0:: Int,0 ::Int)
+       page $ p &lt;&lt; ( n+n') ++&gt; wlink () &quot;click&quot;</code></pre><p><code>getSessionData</code>, in this case, look for a tuple of two Ints . if <code>setSessionData</code> did not store two integers previously, then <code>onNothing</code> will return (0,0) . That was not the case. computeSum can be called without parameters because the two integers are in the session state. The session state is navigation-wide.</p><p>These primitives can be used in both sides of <code>page</code>. If the user press the back button, the session state may backtrack (recover its previous value) or not depending on if you read it in one side or in the other. When going back, the only code executed is the code in the right of <code>page</code>. If <code>getSessionData</code> is there, it will retrieve the last state no matter if it is going back. This is the way to keep the user-defined state actualized to the last value when pressing the back button. Otherwise, if <code>getSessionData</code>is in the left of <code>page</code>, the session data will be the one that the page had when was presented previously. <a href="http://haskell-web.blogspot.com.es/2013/04/more-on-session-management-in-mflow.html">For more details</a></p><h2 id="persistent-session-state"><a href="#persistent-session-state">Persistent session state</a></h2><p>The same application using persistent session state.</p><p><code>step</code> writes a log and uses it to recover the state. if the process times out or the server shuts dowm, the state is recovered. If the flow is interrupted after asking the first number, when restarted, the application will read the first number from the log and will present the second page to the user, not the first.</p><p>This log/recovery mechanism is used also for stopping processes after a certain timeout and restarting them on demand, in order to reduce the server load.</p><p>The timeout is set with <code>setTimeouts</code> .This example kill the process from memory after 10 seconds of inactivity. when the user send a new request  the process is restarted and the log is used to restore it at the page that he was when stopped. But after 60 seconds of inactivity the server erases the log that contain the user session state, so the process will restart from the beginning when called again. Verify that and change the timeouts if you wish. The second timeout is an <code>Integer</code> so the session state can be kept form months or years. 0 means forever in both cases. That is the default.</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; $ do
+       setTimeouts 10 60
+       n  &lt;- step. page $ getInt Nothing &lt;** submitButton &quot;first&quot;
+       n' &lt;- step. page $ getInt Nothing &lt;** submitButton &quot;second&quot;
+       
+       step . page $ p &lt;&lt; (n+n') ++&gt; wlink () &quot;click&quot;
+</code></pre><p>The <code>setSessionData</code> and <code>getSessionData</code> example can be transformed in a analogous way adding <code>step</code> before <code>page</code>. Then the session data managed by the sessiondata mechanism will persist as well beyond the timeout.</p><h2 id="two-pages--using-formlets"><a href="#two-pages--using-formlets">Two pages, using formlets</a></h2><p>The first page ask for the two numbers with an applicative formlet that generate a 2-tuple, using the applicative operators and adding some line breaks. The second page show the result.</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+import Control.Applicative
+
+main= runNavigation &quot;&quot; . step $ do
+       (n1,n2) &lt;- page $ (,) &lt;$&gt; getInt Nothing &lt;++ br
+                             &lt;*&gt; getInt Nothing &lt;++ br
+                             &lt;** submitButton &quot;send&quot;
+                             
+       page $ p &lt;&lt; (n1+n2) ++&gt; wlink () &quot;click&quot;
+</code></pre><h2 id="single-page--refreshed-in-each-iteration--monadic-formlet-"><a href="#single-page--refreshed-in-each-iteration--monadic-formlet-">Single page, refreshed in each iteration, monadic formlet.</a></h2><p>In this case, a single page is refreshed in each iteration but the content change according with the monadic procedure inside the page, and the user responses. The input boxes and the result appear sequentially. Each step in the monadic execution is a roundtrip to the server. So the server can do whatever with the intermediate result and change the presentation as a result of that. The second input has access to the previous response. After showing the result, changing the inputs again, change the result.</p><p>The <code>do</code> sequence end up in a <code>wlink</code> which is a widget that renders a link tag with the content of the second parameter and return his first parameter when clicked. if the link is pressed the widget/formlet return its value <code>()</code> in this case. And that is what <code>page</code> returns. Since there are no more pages, <code>runNavigation</code> will execute the flow again and will present the page with no data.</p><p><i>Warning: do not execute this code until the previous execution of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; .step . page . pageFlow &quot;s&quot; $ do
+       n  &lt;- getInt Nothing   &lt;** submitButton &quot;first&quot;  &lt;++ br
+       n' &lt;- getInt (Just n)  &lt;** submitButton &quot;second&quot; &lt;++ br
+       p &lt;&lt; (n+n') ++&gt; wlink () &quot;click to repeat&quot;
+</code></pre><h2 id="single-page--refreshed-in-each-iteration--monadic-formlet--factoring-out-the-button"><a href="#single-page--refreshed-in-each-iteration--monadic-formlet--factoring-out-the-button">Single page, refreshed in each iteration, monadic formlet, factoring out the button</a></h2><p>Now a single button is presented out of the monadic computation of the page flow.</p><p>The combinator that compose both is <code>&lt;**</code>. It is like the applicative <code>&lt;*</code> but ever execute and present both sides, no matter if the first succeed or fail. The first  term is between commented parenthesis (really they are not necessary)</p><p>The operator <code>&lt;**</code> return the result of this first parameter. But the first term end with <code>noWidget</code> which is a dumb, invisible widget that ever fails. So the navigation does not progress from that page on. Every invocation of the page with any parameter en up in the refreshing of the same page again and again with new sum results.</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step . page . pageFlow &quot;s&quot; $ 
+--   (
+     do
+       n  &lt;- &quot;First &quot;  ++&gt; getInt Nothing   &lt;++ br
+       n' &lt;- &quot;Second &quot; ++&gt; getInt (Just n)  &lt;++ br
+       p  &lt;&lt; (n+n') ++&gt; noWidget
+--   )
+      &lt;** br ++&gt; pageFlow &quot;button&quot; (submitButton &quot;submit&quot;)
+</code></pre><h2 id="single-page--refreshed-in-each-iteration--using-wcallback-instead-of-monadic-composition"><a href="#single-page--refreshed-in-each-iteration--using-wcallback-instead-of-monadic-composition">Single page, refreshed in each iteration, using <code>wcallback</code> instead of monadic composition</a></h2><p>While monadic sequences present elements is sequence by adding new rendering below the one generated by previous lines of code, <code>wcallback</code> erase the previous rendering and present only the new rendering.</p><p>To figure out how it works, press the back button and look at what happens. Each wcallback perform a rountrip to the server and generates new rendering.</p><p>Note that <code>wcallback</code> has more priority than <code>++&gt;</code> so  the latter takes as parameter only the textboxes, not the thext before them. So only these fields are erased: the <code>getInt</code> fields is erased and is substituted by the result. To erase the text too, enclose the text and the input field together in a parenthes. (Try it)</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">
+{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; .step . page . pageFlow &quot;s&quot; $ 
+        &quot;the first number is &quot;  ++&gt; getInt Nothing 
+       `wcallback` \n  -&gt; b &lt;&lt; n 
+                      ++&gt; br 
+                      ++&gt; &quot;the second number is &quot; 
+                      ++&gt; getInt Nothing
+       `wcallback` \n' -&gt; b &lt;&lt; n'
+                      ++&gt; br 
+                      ++&gt; &quot;the sum is &quot;
+                      ++&gt; b &lt;&lt; (show $ n+n')
+                      ++&gt; br 
+                      ++&gt; wlink () &quot;one more time&quot;
+       </code></pre><p>You can also press the back button and see what happens.</p><p>Run this and see what happens:</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">
+{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step . page . pageFlow &quot;s&quot; $ sums
+ where
+
+ getInt'= getInt Nothing &lt;! [(&quot;size&quot;,&quot;5&quot;)]
+ 
+ sums= do
+      n &lt;- wlink () &quot;one more time&quot;
+           `wcallback` const (&quot;the first number is: &quot;  
+            ++&gt; getInt' 
+                `wcallback` (\n  -&gt; (((b &lt;&lt; n) ++&gt; return n) &lt;++ br))) 
+                      
+                      
+      n' &lt;- &quot;the second number is: &quot;  
+             ++&gt; getInt' 
+                `wcallback` \n  -&gt; b &lt;&lt; n ++&gt; return n &lt;++ br 
+                     
+      br ++&gt; &quot;the sum is &quot;
+         ++&gt; b &lt;&lt;  (n+n' :: Int)
+         ++&gt; br 
+         ++&gt; return ()
+         &lt;++ br
+      sums
+
+</code></pre><p><code>sums</code> is a loop 'within' a page, (in the <code>View</code> monad). The parentheses in the first statement are not necessary (except the outer one). they are there in order to illustrate about the priorities of the operators. The second statement is the same as the previous so they can be factorized.</p><p>Note that <code>return</code> here work as a widget that return its value inmediately.</p><p>The page is fully refreshed in each iteration. It is possible to avoid full page refreshes using <code>appendUpdate</code>, <code>autoRefresh</code> or <code>prependUpdate</code>.</p><h2 id="single-page--monadic--autorefreshing-"><a href="#single-page--monadic--autorefreshing-">Single page, monadic, autoRefreshing.</a></h2><p>No page refresh occur in ths case. The form under <code>autoRefresh</code> is refreshed via AJAX (But see the note)</p><p>However if the first link is pressed, the navigation occur, since the link is outside of  <code>autoRefresh</code>. However,
+Since <code>runNavigation</code> execute the navigation in a loop, the result is the presentation of the same page again.</p><p><i>NOTE: SOH uses HTTP, so latest browsers reject the download of third party Javascript trough  HTTP such is the case with the JQuery code. To make the autorefreshing happens, permit mixed content in this page. (In future versions of MFlow this will be solved). To do so, click the shield on the right of the address bar in Chrome and Mozilla, or the message thar appears below in Explorer).</i></p><p>If JQuery is not loaded, autoRefresh fall back to normal page refreshing and the result are shown as well.</p><p><i>Warning: do not execute this code until the previous example executed of this tutorial dies out. Better execute it in a separate browser (an icon in the top left of the execution box permits so) and wait until SOH say that the example was killed before trying the next example.</i></p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; .step . page $ 
+     &quot;Hi, I'm not refreshed, unless you &quot;
+     ++&gt;  wlink () &quot;click here&quot; 
+     &lt;++ &quot; in which case, navigation happens&quot;
+   
+   &lt;** (autoRefresh .  pageFlow &quot;s&quot; $ do
+          n  &lt;- &quot;First &quot;  ++&gt; getInt Nothing   &lt;++ br
+          n' &lt;- &quot;Second &quot; ++&gt; getInt (Just n)  &lt;++ br
+          p  &lt;&lt; (n+n') ++&gt; noWidget
+         &lt;** br ++&gt; pageFlow &quot;button&quot; (submitButton &quot;submit&quot;))
+</code></pre><p>Using page flows with monadic or <code>wcallback</code> under <code>autoRefresh</code> permit highly dynamic and highly responsive applications since only the widget activated is refreshed in the browser.</p><h2 id="single-page--autorefreshing--using-push-to-present-the-results"><a href="#single-page--autorefreshing--using-push-to-present-the-results">Single page, autoRefreshing. Using push to present the results</a></h2><p>Now the results are  appended via a push widget that get every new sum generated by the autorefrehed monadic widget above. The monadic form writes the sum to a MVar. The push widget wait for the MVar to be filled and append the number to the list of results. the <code>push</code> primitive uses long polling (also called comet) to update its content in real time. In this case <code>Append</code> tell <code>push</code> to append each result to the formers ones.</p><p><i>NOTE: SOH uses HTTP, so latest browsers reject the download of third party Javascript trough HTTP such is the case with the JQuery code. To make the autorefreshing happens, permit mixed content in this page. (In future versions of MFlow this has been solved). To do so, click the shield on the right of the address bar in Chrome and Mozilla, or the message thar appears below in Explorer).</i></p><p><i>NOTE2: In this case, not event this works. My browser keeps warning about insecure content. So I choose to make it inactive. try it in your own computer.</i></p><pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+import System.IO.Unsafe
+import Control.Concurrent.MVar
+
+
+res = unsafePerformIO $ newEmptyMVar :: MVar Int  
+
+main= runNavigation &quot;&quot; . step . page $ do
+   &quot;Hi, I' m not refreshed, unless you &quot;
+     ++&gt;  wlink () &quot;click here&quot; 
+     &lt;++ &quot; in which case, a navigation happens&quot;
+   
+    &lt;** (autoRefresh .  pageFlow &quot;s&quot; $ do
+          n  &lt;- &quot;First  &quot;  ++&gt; getInt Nothing   &lt;++ br
+          n' &lt;- &quot;Second &quot; ++&gt; getInt (Just n)  &lt;++ br
+          liftIO $ putMVar res $ n + n' 
+          noWidget 
+         &lt;** br ++&gt; pageFlow &quot;button&quot; (submitButton &quot;submit&quot;))
+         
+    &lt;** push Append 0  (do
+            n &lt;- liftIO  $ takeMVar res  
+            b &lt;&lt; (show n) ++&gt; br ++&gt; noWidget )
+</code></pre><h2 id="single-page--only-dfield-placeholders-updated"><a href="#single-page--only-dfield-placeholders-updated">Single page, only <code>dField</code> placeholders updated</a></h2><p><i>NOTE: This example does not work with the current (11/09/13) version of MFlow installed in The FP complete site.</i></p><p>Here autoRefresh is not used, but no navigation happens: witerate creats a mask where only the content generated by  <code>dField</code>  is refreshed via implicit AJAX, instead of the whole page.  Here the <code>getInt</code> boxes are refreshed by <code>dField</code> in order to present their validation errors produced (when the entry is not an Int). But otherwise, the dFields for the text boxes can be eliminated (try it).  The sum result is also included in a dField that is refreshed in each iteration.</p><p><code>dField</code> encloses the rendering of his widget parameter within a <code>span</code> tag that is updated in each interaction with the new rendering of the same widget. In this case less than a hundred bytes are interchanged between the server and the browser in each iteration and the page, scripts etc remain.</p><pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+import Data.Monoid
+
+main= do
+  userRegister &quot;user&quot; &quot;user&quot;
+  
+  runNavigation &quot;&quot; . step . page $ 
+     wform wlogin **&gt;
+     ( pageFlow &quot;s&quot; . edTemplate &quot;user&quot; &quot;template.html&quot; .  witerate $ do
+        n  &lt;- dField(getInt Nothing) 
+                &lt;|&gt; return 0 &lt;++ &quot;first&quot;  &lt;&gt; br
+                
+        n' &lt;- dField(getInt Nothing) 
+                &lt;|&gt; return 0 &lt;++ &quot;second&quot; &lt;&gt; br
+                &lt;** submitButton &quot;OK&quot;
+      
+        dField( p &lt;&lt; (n+n') ++&gt; noWidget))
+
+</code></pre><p>Since witerate freezes the rendering of the first interaction and only the dField holes are updated, the rendering of the first interaction must be complete, so the incremental presentation of monadic rendering in the previous examples would not work. To prevent partial presentation, the two input lines return valid responses, either the user reseponse or 0. This is assured with the <code>&lt;|&gt;</code> operator so all the lines are executed.</p><p>Alternatively, a simpler solution is to use the tuple example above with two pages, using applicative formlets:</p><pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-} 
+
+import MFlow.Wai.Blaze.Html.All
+import Data.Monoid
+
+main= do
+  userRegister &quot;user&quot; &quot;user&quot;
+  
+  runNavigation &quot;&quot; . step . page $ 
+     wform wlogin **&gt;
+     ( pageFlow &quot;s&quot; . edTemplate &quot;user&quot; &quot;template.html&quot; .  witerate $ do
+        (n,n') &lt;- page $ (,) &lt;$&gt; dField(getInt Nothing) &lt;++ br
+                             &lt;*&gt; dField(getInt Nothing) &lt;++ br
+                             &lt;** submitButton &quot;send&quot;
+      
+        dField( p &lt;&lt; (n+n') ++&gt; noWidget))
+
+</code></pre><p>like <code>autoRefresh</code>, <code>witerate</code> and <code>dField</code> fall back to normal page refreshing when JavaScript is not available.</p><p>Suggested exercice: Guess what is necessary for forcing an autorefresh/navigation in this application. Yo can also add pages to the flow.</p><h2 id="single-page--only-dfield-placeholders-updated--editable-template"><a href="#single-page--only-dfield-placeholders-updated--editable-template">Single page, only dField placeholders updated, editable template</a></h2><p><i>NOTE: This example does not work with the current (11/09/13) version of MFlow installed in The FP complete site.</i></p><p>This example add <code>edTemplate</code> and user login management to the previous example.</p><p>Since <code>witerate</code> and <code>dField</code> generate a mask with placeholders refreshed with AJAX, such mask can be modified, and the placeholders can be relocated, layout and extra links can be added and so on.  <code>edTemplate</code> allows the edition of the mask at runtime. in this way the programmer does not need to have to insert much detailed rendering at programming/test/integration time. Just add it at a latter time whenever it is convenient.</p><p>In this case the user <i>&quot;user&quot;</i> has the authorization to edit the template. This app register this user with <code>userRegister</code> at initialization time. There is also a login widget  <code>wlogin</code> that permits to login with this user/password and to logout to see how the wysiwyg editor is activated and deactivated depending on the user. The application works even when you are editing the layout!. The layout is stored in the <code>./texts</code> folder. Save your edition and the next time the application will use your layout for all the users. Adding skin functionalities and/or mobile versions is straighforward with <code>edTemplate</code>.</p><p>Take care not to erase the placeholders created by <code>dField</code>. If you want more precise edition beyond adding extra text and links, you can use the HTML edit option to add table layout or whatever.</p><p>In this case the applcation has two forms, one for logging and another for the application itself. That´s why <code>wform</code> must be used explicitly in wlogin since witerate add it automatically. This should be the case of wlogin. This will be fixed in next releases.</p><pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+import Data.Monoid
+
+main= do
+  userRegister &quot;user&quot; &quot;user&quot;
+  runNavigation &quot;&quot; . step . page $ 
+     wform wlogin **&gt;
+     ( pageFlow &quot;s&quot; . edTemplate &quot;user&quot; &quot;template.html&quot; .  witerate $ do
+       n  &lt;- dField(getInt Nothing) 
+                &lt;|&gt; return 0 &lt;++ &quot;first&quot;  &lt;&gt; br
+                
+       n' &lt;- dField(getInt Nothing) 
+                &lt;|&gt; return 0 &lt;++ &quot;second&quot; &lt;&gt; br
+                &lt;** submitButton &quot;OK&quot;
+      
+       dField( p &lt;&lt; (n+n') ++&gt; noWidget))
+</code></pre><p><code>edTemplate</code> can be used without <code>witerate</code>. It makes sense for textual pages with links or input fields where there is nothing dynamic to present. The page can be enriched with more content and layout even at exploitation time. wrap your page or element of page in a <code>edTemplate</code> tag and you will let the designers, editors and even javascript programmers to have freedom to evolve the presentation.</p><p><code>edTemplate</code> also works well when JavaScript is disabled. No edition is possible in this case of course, but the rendering is right.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/MFlowDSL';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

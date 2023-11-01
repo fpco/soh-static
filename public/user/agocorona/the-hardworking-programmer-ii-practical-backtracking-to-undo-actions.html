@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html><head><title>The hardworking programmer II: practical backtracking to undo actions - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">The hardworking programmer II: practical backtracking to undo actions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">The hardworking programmer II: practical backtracking to undo actions</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Jul 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/691f0a3496f1ee8368c7dcfb01e0dac23d4575c8">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/beautiful-parallel-non-determinism-transient-effects-iii">Previous content: Beautiful parallel non-determinism (Transient effects III)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/EDSL-for-hard-working-IT-programmers">Next content: An EDSL for hard working IT programmers</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#intro">Intro</a></li><li><a href="#a-word-on-continuations">A word on continuations</a></li><li><a href="#backtracking">Backtracking</a></li><li><a href="#conclusions-and-future-work">Conclusions and future work</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h1 id="intro"><a href="#intro">Intro</a></h1><p>Compensations are a general mechanism for restoring state that permits to undo even IO actions. I present two primitives for transient:  <code>onUndo</code> that &quot;annotates&quot; undo actions attached to the monadic statements in a monadic sequence. These statements are executed in reverse order when <code>undo</code> is called. It is a kind of backtracking.</p><p><code>onUndo</code>statements can be used to restore state variables, close streams, restore database registers, respond to the back button in a web navigation or whatever. <code>undo</code> can be invoked as part of the execution flow or to express some exceptional condition.</p><p>Additionally, with <code>undoCut</code>  the <code>onUndo</code> statements can fix some problem and resume the execution forward from this point instead of undoing further actions.</p><h1 id="a-word-on-continuations"><a href="#a-word-on-continuations">A word on continuations</a></h1><p>In Haskell, the continuation is the second parameter in the bind operation. Other languages use imperative and eager execution, so they have to resort to continuations to implement special kinds of flows so  a kind of special mechanism is necessary in these languages for capturing continuations. Haskell does not have such problem: It uses continuations natively. The monad instance defines what each kind of computation has to do with these continuations.</p><p>A bind has two parameters: a closure and a continuation.</p><p>So at every moment you know what is in the continuation, in any monad. You don't need any special <code>Cont</code> structure for this. It is in the monad instance: it is the second parameter in the bind operation:</p><pre><code> instance Monad ...
+    x &gt;&gt;= f = ....
+    ...</code></pre><p>In this expression:</p><pre><code>exp= x &gt;&gt;= (f1&gt;&gt;= f2) &gt;&gt;=f3 </code></pre><p>When executing the second <code>&gt;&gt;=</code> in this expression, the closure is the result of the execution of <code>x&gt;&gt;=f1</code> The continuation is <code>f2&gt;&gt;=f3</code>. so that at every point of the execution, the expression is identical to his closure composed with his continuation:</p><pre><code>exp= closure &gt;&gt;= continuation</code></pre><p>while the computation executes, the closure and the continuation changes, but the equality holds.  It is like if the monadic tree were expressed in terms of a <a href="http://learnyouahaskell.com/zippers">zipper</a>.</p><p>What the transient Monad does is to store the closure and the continuation of each bind operation in the state of a state monad. Then each statement, for example <code>f1</code>, can access to both of them to create new effectful primitives. a such statement can modify the execution flow so that it is possible to create new effects without modifying the monad instance neither stacking monad transformers.</p><p>Suppose that in <code>f1</code> depend on two events from a GUI, or, for example, the finalization of two blocking IO operations.</p><pre><code>exp= x &gt;&gt;= ((op1 &lt;|&gt; op2) &gt;&gt;= f2) &gt;&gt;=f3</code></pre><p>then <code>op1</code> and <code>op2</code> share the same closure and the same continuation. since both block, I can set up the watching of both events, stop execution of the current thread and wait. when any of the two events fire, I can store the event value in a buffer, execute the closure with each of the two buffer result  and then execute the continuation. That is how events and non blocking IO can make use of the closure and the continuation. See the first article of this serie for more details.</p><p>The Transient state contains both of them.</p><pre><code class="haskell">data EventF  = forall a b . EventF{xcomp :: (TransientIO a)
+                                  ,fcomp :: [a -&gt; TransientIO b]
+                                  mfData :: M.Map TypeRep SData
+                                  ...
+                                  }</code></pre><p>It also contains a Data.Map of Dynamic values, to store arbitrary data, that can be stored and retrieved by his type. This map can store any programmer-defined data. it also can store continuations of previous statements, this permits to modify the execution of the monadic expression in very sophisticated ways.</p><p>By editing the monadic statements as if they were arrows in a graph, you can construct new effects.  That is what my Transient monad does.  In <a href="https://www.fpcomplete.com/user/agocorona/EDSL-for-hard-working-IT-programmers">the previous article</a> it has been used to implement asynchronous event handling, parallelism and thread control. Now I will use it for another exotic effect, that may be very useful.</p><h1 id="backtracking"><a href="#backtracking">Backtracking</a></h1><p>The Transient monad of <a href="https://www.fpcomplete.com/user/agocorona/EDSL-for-hard-working-IT-programmers">the previous article</a> has user state management, event/signal handling, thread control, parallelism, and early termination effects. But another important effect that I wish to make available for the hard working programmer is backtracking. With this additional effect I can undo transactions and I can express a Web navigation. As I demonstrated <a href="https://www.fpcomplete.com/user/agocorona/how-haskell-can-solve-the-integration-problem">here</a> with the MFlow package. The backtracking in MFlow is done using a different mechanism, explained in this article in <a href="https://themonadreader.wordpress.com/2014/04/23/issue-23/">The monad reader</a>. This time I will use the Transient monad for the implementation of this effect.</p><p>In the previous article I presented the Transient monad, that stores a closure and a continuation in a state monad. Can we implement backtracking without touching the Base package where the Transient monad is defined?. Yes, we can.</p><p>Instead of using intimidating words like &quot;backtracking&quot; as a concept, let's start with an application of it. Let's code some primitives like <code>undo</code> and <code>onUndo</code> so that we can, for example, undo the reservation of some product when the payment process fails because the user gave up for whatever reason. The semantics of these two primitives can be understood by looking at this example:</p><pre><code class="haskell">transaction=   do
+       option &quot;back&quot; &quot;backtracking test&quot; 
+       productNavigation   
+       reserve   
+       payment
+
+       liftIO $ print &quot;done!&quot;
+
+       where
+
+       productNavigation = liftIO $ putStrLn &quot;product navigation&quot;
+
+       reserve= liftIO (putStrLn &quot;product reserved,added to cart&quot;)
+                 `onUndo` liftIO (putStrLn &quot;product un-reserved&quot;)
+
+       payment = do
+           liftIO $ putStrLn &quot;Payment failed&quot;
+           undo</code></pre><p>Instead of undoing the reservation manually when the fail is verified, I call <code>undo</code> and let each action undo itself, I give the responsibility to the actions themselves. The advantage is that the programmer of the flow doesn't need to care about such low level things.</p><p>To implement these primitives I will define a registration method <code>registerUndo</code> that registers a statement to be re-executed when backtracking.</p><p>I need a definition of the backtrack stack, which will contain a flag that indicates if backtracking is being executed and also will contain all the continuations of the backtracking points.</p><p>The call <code>registerUndo</code> (below) gets the continuation and stores it in the Backtrack structure.
+This <code>Backtrack</code> data will be stored in the session state using <code>getSessionData</code> and <code>setSessionData</code></p><pre><code class="haskell">data Backtrack= forall a b.Backtrack{backtracking :: Bool
+                                    ,backStack :: [EventF]}
+
+
+registerUndo :: TransientIO a -&gt; TransientIO a
+registerUndo f  = Transient $ do
+      cont  &lt;- getCont 
+      md  &lt;- getSessionData
+      setSessionData $   case md of
+         Just bs -&gt;  Backtrack b $ cont:bs
+         Nothing -&gt;  Backtrack False [cont]
+      runTrans f</code></pre><p><code>getCont</code> is the Transient primitive that gives the computation state at that point, including the closure and the continuation.</p><p>Then, we define the <code>onUndo</code> primitive, that has two actions as parameters:</p><pre><code class="haskell">    onUndo :: TransientIO a -&gt; TransientIO a -&gt; TransientIO a
+    onUndo ac bac= registerUndo $ do
+       Backtrack back _ &lt;- getSData &lt;|&gt; return (Backtrack False [])
+       if back then bac else ac</code></pre><p>When going forward the first action is executed, but when the flag signals that <code>onUndo</code> is being executed under backtracking, the second action is executed.</p><p>And now the primitive that executes the backtracking:</p><pre><code class="haskell">undo :: TransientIO a
+undo= Transient $ do
+  bs &lt;- getSessionData  `onNothing` return nullBack             
+  goBackt  bs
+
+  where
+  nullBack= Backtrack False []
+  goBackt (Backtrack _ [])= return Nothing                     
+  goBackt (Backtrack b (stack@(first: bs)))= do
+        put first
+        setSData $ Backtrack True stack
+        mr &lt;-  runClosure first
+        Backtrack back _ &lt;- getSessionData `onNothing` return nullBack
+        case back of
+           True -&gt;  goBackt $ Backtrack True bs                
+           False -&gt; case mr of
+                   Nothing -&gt; return Nothing                   
+                   Just x -&gt; runContinuation first x            
+</code></pre><p>First It get the backtracking stack, which contains closures and continuations of different backtracking points. Then it sets the backtracking flag and executes the first closure (that is the last statement registered). If the closure changed the backtracking flag, (False) then the continuation of that closure is executed, so the flow continues forward from that statement on. If the closure returns Nothing (early termination) then <code>undo</code> and stop.</p><p>If the closure doesn't change the backtracking flag, the next backtracking point in the stack is executed in the same way until there is no more backtracking points.</p><p>This code below contains all the programs of the <a href="https://www.fpcomplete.com/user/agocorona/EDSL-for-hard-working-IT-programmers">Hard working programmer 1</a> plus the backtracking example(s).</p><pre><code class="active haskell">
+
+
+{-# START_FILE main.hs #-}
+
+{-# LANGUAGE ScopedTypeVariables #-}
+
+module Main where
+
+import           Base
+import           Backtrack
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Exception
+import           Control.Monad.State
+import           Data.Monoid
+import           System.IO.Unsafe
+
+import           Network.HTTP
+
+import           Network
+import           System.IO
+
+-- show
+
+main=  do
+    runTransient $ do  
+      async inputLoop  &lt;|&gt; return ()
+     
+      option &quot;main&quot; &quot;to return to the main menu&quot;  &lt;|&gt; return &quot;&quot;
+      liftIO $ putStrLn &quot;MAIN MENU&quot;
+
+      transaction &lt;|&gt; transaction2 &lt;|&gt; colors &lt;|&gt;
+        app  &lt;|&gt; sum1 &lt;|&gt; sum2 &lt;|&gt; server &lt;|&gt; menu
+
+    stay
+
+transaction=   do
+       option &quot;back&quot; &quot;backtracking test&quot;
+       productNavigation
+       reserve
+       payment
+      
+transaction2= do
+       option &quot;back2&quot; &quot;backtracking test 2&quot;
+       productNavigation
+       reserveAndSendMsg
+       payment
+
+
+       liftIO $ print &quot;done!&quot;
+
+      
+productNavigation = liftIO $ putStrLn &quot;product navigation&quot;
+
+reserve= liftIO (putStrLn &quot;product reserved,added to cart&quot;)
+                 `onUndo` liftIO (putStrLn &quot;product un-reserved&quot;)
+
+payment = do
+           liftIO $ putStrLn &quot;Payment failed&quot;
+           undo
+
+reserveAndSendMsg= do
+            reserve
+            liftIO $ print &quot;MIDDLE&quot;
+            liftIO  (putStrLn &quot;update other database necesary for the reservation&quot;)
+                 `onUndo` liftIO (putStrLn &quot;database update undone&quot;)
+
+colors :: TransientIO ()
+colors= do
+       option &quot;colors&quot; &quot;choose between three colors&quot;
+       r &lt;-  color 1  &quot;red&quot;  &lt;|&gt; color 2 &quot;green&quot; &lt;|&gt; color 3 &quot;blue&quot;
+       liftIO $ print r
+       where
+       color :: Int -&gt; String -&gt; TransientIO String
+       color n str= option (show n) str &gt;&gt; return  str
+
+app :: TransientIO ()
+app= do
+       option &quot;app&quot; &quot;applicative expression that return a counter in 2-tuples every second&quot;
+       r &lt;-  (,) &lt;$&gt;  number  &lt;*&gt; number
+       liftIO $ putStrLn $ &quot;result=&quot; ++ show r
+       where
+       number= waitEvents $ do
+          threadDelay 1000000
+          n &lt;- takeMVar counter
+          putMVar counter (n+1)
+          return  n
+
+       counter=unsafePerformIO $ newMVar (0 :: Int)
+
+sum1 :: TransientIO ()
+sum1= do
+       option &quot;sum1&quot; &quot;access to two web pages concurrently and sum the number of words using Applicative&quot;
+       (r,r') &lt;- (,) &lt;$&gt; async  (worker &quot;http://www.haskell.org/&quot;)
+                     &lt;*&gt; async  (worker &quot;http://www.google.com/&quot;)
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show (r + r')
+
+getURL= simpleHTTP . getRequest
+
+worker :: String -&gt; IO Int
+worker url=do
+      r &lt;- getURL url
+      body &lt;- getResponseBody r
+      putStrLn $ &quot;number of words in &quot; ++ url ++&quot; is: &quot; ++ show(length (words body))
+      return . length . words $ body
+
+sum2 :: TransientIO ()
+sum2= do
+       option &quot;sum2&quot; &quot;access to N web pages concurrenty and sum the number of words using map-fold&quot;
+       rs &lt;- foldl (&lt;&gt;) (return 0) $ map (async . worker)
+                  [ &quot;http://www.haskell.org/&quot;
+                  , &quot;http://www.google.com/&quot;]
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show rs
+
+instance Monoid Int where
+      mappend= (+)
+      mempty= 0
+
+server :: TransientIO ()
+server=  do
+       option &quot;server&quot; &quot;A web server in the port 8080&quot;
+       liftIO $ print &quot;Server Stated&quot;
+       sock &lt;-  liftIO $  listenOn $ PortNumber 8080
+       (h,_,_) &lt;- spawn $ accept sock
+       liftIO $ do
+           hPutStr h msg
+           putStrLn &quot;new request&quot;
+           hFlush h
+           hClose h
+         `catch` (\(e::SomeException) -&gt; sClose sock)
+
+msg = &quot;HTTP/1.0 200 OK\r\nContent-Length: 5\r\n\r\nPong!\r\n&quot;
+
+
+menu :: TransientIO ()
+menu=  do
+     option &quot;menu&quot;  &quot;a submenu with two options&quot;
+     colors  &lt;|&gt; sum2
+
+-- / show
+
+
+
+
+
+
+{-# START_FILE Backtrack.hs #-}
+
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE ExistentialQuantification #-}
+
+-- show
+module Backtrack (registerUndo, onUndo, undo, retry, undoCut) where
+-- /show
+
+import Base
+import Data.Typeable
+import Control.Applicative
+import Control.Monad.State
+import Unsafe.Coerce
+
+data Backtrack= forall a b.Backtrack{backtracking :: Bool
+                                    ,backStack :: [EventF]}
+                                    deriving Typeable
+
+-- | Assures that backtracking will not go further
+undoCut :: TransientIO ()
+undoCut= Transient $ do
+     delSessionData $ Backtrack False []
+     return $ Just ()
+
+-- | The second parameter will be executed when backtracking
+{-# NOINLINE onUndo #-}
+onUndo :: TransientIO a -&gt; TransientIO a -&gt; TransientIO a
+onUndo ac bac= do
+   r&lt;-registerUndo $ Transient $ do
+     Backtrack back _ &lt;- getSessionData `onNothing` return (Backtrack False [])
+     runTrans $ if back then bac  else ac
+   return r
+  
+-- | Register an action that will be executed when backtracking
+{-# NOINLINE registerUndo #-}
+registerUndo :: TransientIO a -&gt; TransientIO a
+registerUndo f  = Transient $ do
+   cont@(EventF _ _ _ i _ _ )  &lt;- get   !&gt; &quot;backregister&quot;
+   md  &lt;- getSessionData
+   setSessionData $   case md of
+        Just (bss@(Backtrack b (bs@((EventF _ _ _ i' _ _ ):_)))) -&gt; if False then bss else  Backtrack b $ cont:bs
+        Nothing -&gt;  Backtrack False [cont]
+   runTrans f
+
+-- | Restart the flow forward from this point on
+retry :: TransientIO ()
+retry= do
+    Backtrack _ stack &lt;- getSessionData `onNothing` return (Backtrack False [])
+    setSData $ Backtrack False stack
+
+-- | Execute backtracking. It executes the registered actions in reverse order.
+--
+-- If the backtracking flag is changed, the flow proceeds forward from that point on.
+--
+-- If the backtrack stack is finished or undoCut executed, `undo` will stop.
+undo :: TransientIO a
+undo= Transient $ do
+  bs &lt;- getSessionData  `onNothing` return nullBack            !&gt;&quot;GOBACK&quot;
+  goBackt  bs
+
+  where
+  nullBack= Backtrack False []
+  goBackt (Backtrack _ [])= return Nothing                     !&gt; &quot;END&quot;
+  goBackt (Backtrack b (stack@(first@(EventF x fs _ _ _  _ ): bs)))= do
+        put first{replay=True}
+        setSData $ Backtrack True stack
+        mr &lt;-  runClosure first                                !&gt; &quot;RUNCLOSURE&quot;
+        Backtrack back _ &lt;- getSessionData `onNothing` return nullBack
+                                                               !&gt;&quot;END RUNCLOSURE&quot;
+        case back of
+           True -&gt;  goBackt $ Backtrack True bs                !&gt; &quot;BACK AGAIN&quot;
+           False -&gt; case mr of
+                   Nothing -&gt; return empty                     !&gt; &quot;FORWARD END&quot;
+                   Just x -&gt;  runContinuation first x          !&gt; &quot;FORWARD EXEC&quot;
+
+
+{-# START_FILE Base.hs #-}
+
+-----------------------------------------------------------------------------
+--
+-- Module      :  Base
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE ExistentialQuantification,FlexibleContexts,
+             FlexibleInstances, MultiParamTypeClasses #-}
+
+-- show
+module Base  where
+-- /show
+
+import Control.Monad.State
+import Unsafe.Coerce
+import System.IO.Unsafe
+import Control.Applicative
+import qualified Data.Map as M
+import Data.Dynamic
+import Debug.Trace
+import Data.Monoid
+
+--import Data.IORef
+import Control.Concurrent
+import Control.Concurrent.STM
+import GHC.Conc
+import Data.Maybe
+import System.Mem.StableName
+import Data.List
+
+(!&gt;) =  const . id -- flip trace
+infixr 0 !&gt;
+
+data Transient m x= Transient  {runTrans :: m (Maybe x)}
+type SData= ()
+
+type EventId= Int
+
+
+
+data EventF  = forall a b . EventF{xcomp :: TransientIO a
+                                  ,fcomp :: a -&gt; TransientIO b
+                                  ,mfData :: M.Map TypeRep SData
+                                  ,mfSequence :: Int
+                                  ,row :: P RowElem
+                                  ,replay :: Bool
+                                  }
+
+type P= MVar
+
+type Buffer= Maybe ()
+type NodeTuple= (EventId, ThreadId, Buffer)
+
+type Children=  Maybe (P RowElem)
+
+data RowElem=   Node NodeTuple |  RowList Row Children
+
+instance Show RowElem where
+  show (Node (e,_,_))= show e
+  show (RowList r ch)= show ( reverse r)  ++ &quot;-&gt;&quot; ++ show ch
+
+type Row = [P RowElem]
+
+instance Eq NodeTuple where
+     (i,_,_) ==  (i',_,_)= i == i'
+
+
+instance Show x =&gt; Show (MVar x) where
+  show  x = show (unsafePerformIO $ readMVar x)
+
+eventf0= EventF  empty (const  empty) M.empty 0
+          rootRef False
+
+-- {-# NOINLINE topNode #-}
+-- topNode= (-1 :: Int,unsafePerformIO $ myThreadId,False,Nothing)
+
+{-# NOINLINE rootRef #-}
+rootRef :: MVar RowElem
+rootRef=  unsafePerformIO $ newMVar $ RowList []  Nothing                     
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+type StateIO= StateT EventF  IO
+
+type TransientIO= Transient StateIO
+
+--runTrans ::  TransientIO x -&gt; StateT EventF  IO (Maybe x)
+--runTrans (Transient mx) = mx
+
+runTransient :: TransientIO x -&gt; IO (Maybe x, EventF)
+runTransient t= runStateT (runTrans t) eventf0
+
+
+newRow :: MonadIO m =&gt; m (P RowElem)
+newRow= liftIO $ newMVar $ RowList [] Nothing
+
+setEventCont ::   TransientIO a -&gt; (a -&gt; TransientIO b) -&gt; StateIO EventF
+setEventCont x f  = do
+   st@(EventF   _ fs d _  ro r)  &lt;- get
+   n &lt;- if replay st then return $ mfSequence st
+     else  liftIO $ readMVar refSequence
+   ro' &lt;- newRow
+   ro `eat` ro'
+   put $ EventF   x ( \x -&gt; f x &gt;&gt;= unsafeCoerce fs) d n  ro' r !&gt; (&quot;stored &quot; ++ show n)
+   return st
+
+eat ro ro'= liftIO $
+ modifyMVar_  ro $ \(RowList es t) -&gt; return $ RowList (ro':es) t
+
+resetEventCont (EventF x fs _ _  _ _)=do
+   st@(EventF   _ _ d  n  ro r )  &lt;- get
+   put $ EventF  x fs d n  ro r
+
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF  x fs _ _  _ _)= do runIt  x (unsafeCoerce fs); return ()
+   where
+   runIt  x fs= runTrans $ do
+         st &lt;- get
+         --put st{mfSequence=i}
+         r &lt;- x
+         put st
+         fs r
+
+
+runClosure :: EventF -&gt; StateIO (Maybe a)
+runClosure (EventF x _ _ _ _ _) =  unsafeCoerce $ runTrans x
+
+runContinuation ::  EventF -&gt; a -&gt; StateIO (Maybe b)
+runContinuation (EventF _ fs _ _ _ _ ) x= runTrans $  (unsafeCoerce fs) x
+
+instance   Functor TransientIO where
+  fmap f x=   Transient $ fmap (fmap f) $ runTrans x --
+
+
+instance Applicative TransientIO where
+  pure a  = Transient  .  return $ Just a
+  Transient f &lt;*&gt; Transient g= Transient $ do
+       k &lt;- f
+       x &lt;- g
+       return $  k &lt;*&gt; x
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+       k &lt;- f
+       x &lt;- g
+       return $  k &lt;|&gt; x
+
+
+-- | A synonym of empty that can be used in a monadic expression. It stops the
+-- computation.
+stop :: TransientIO a
+stop= Control.Applicative.empty
+
+instance Monoid a =&gt; Monoid (TransientIO a) where
+  mappend x y = mappend &lt;$&gt; x &lt;*&gt; y 
+  mempty= return mempty
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f  = Transient $ do
+        cont &lt;- setEventCont x  f
+        mk &lt;- runTrans x
+        resetEventCont cont
+        case mk of
+           Just k  -&gt; do addDescent' !&gt; &quot;ADDROW&quot; ; runTrans $ f k
+
+           Nothing -&gt; return Nothing
+
+        where
+        addDescent'= do
+            r &lt;- gets row
+            n &lt;- addDescent r
+            modify $ \s -&gt; s{row= n}
+addDescent r=
+            liftIO $ do
+              n &lt;- newMVar $ RowList [] Nothing
+              modifyMVar_ r $ \(RowList ns ch) -&gt;  return $ RowList  ns $ Just n
+             --   case ch of
+             --     Just x -&gt; error $ &quot;children not empty: &quot;++ show x
+             --     Nothing -&gt;  return $ RowList  ns $ Just n
+              return n
+
+addChild row ref= modifyMVar_  row $ \(RowList ns t) -&gt; return $  RowList (ref : ns) t
+  
+instance MonadTrans (Transient ) where
+  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO = lift . liftIO --     let x= liftIO io in x `seq` lift x
+
+
+
+-- | Get the session data of the desired type if there is any.
+getSessionData ::  (MonadState EventF m,Typeable a) =&gt;  m (Maybe a)
+getSessionData =  resp where
+ resp= gets mfData &gt;&gt;= \list  -&gt;
+    case M.lookup ( typeOf $ typeResp resp ) list of
+      Just x  -&gt; return . Just $ unsafeCoerce x
+      Nothing -&gt; return $ Nothing
+ typeResp :: m (Maybe x) -&gt; x
+ typeResp= undefined
+
+-- | getSessionData specialized for the View monad. If Nothing, the monadic computation
+-- does not continue. getSData is a widget that does not validate when there is no data
+--  of that type in the session.
+getSData :: MonadState EventF m =&gt; Typeable a =&gt;Transient m  a
+getSData= Transient getSessionData
+
+
+-- | setSessionData ::  (StateType m ~ MFlowState, Typeable a) =&gt; a -&gt; m ()
+setSessionData  x=
+  modify $ \st -&gt; st{mfData= M.insert  (typeOf x ) (unsafeCoerce x) (mfData st)}
+
+-- | A shorter name for setSessionData.
+setSData ::  ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+setSData= setSessionData
+
+delSessionData x=
+  modify $ \st -&gt; st{mfData= M.delete (typeOf x ) (mfData st)}
+
+delSData :: ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+delSData= delSessionData
+
+withSData ::  ( MonadState EventF m,Typeable a) =&gt; (Maybe a -&gt; a) -&gt; m ()
+withSData f= modify $ \st -&gt; st{mfData=
+    let dat = mfData st
+        mx= M.lookup typeofx dat
+        mx'= case mx of Nothing -&gt; Nothing; Just x -&gt; unsafeCoerce x
+        fx=  f mx'
+        typeofx= typeOf $ typeoff f
+    in  M.insert typeofx  (unsafeCoerce fx) dat}
+    where
+    typeoff :: (Maybe a -&gt; a) -&gt; a
+    typeoff = undefined
+----
+
+genNewId :: MonadIO m =&gt; MonadState EventF m =&gt;  m Int
+genNewId=  do
+      st &lt;- get
+      case replay st of
+        True -&gt; do
+          let n= mfSequence st
+          put $ st{mfSequence= n+1}
+          return n
+        False -&gt; liftIO $
+          modifyMVar refSequence $ \n -&gt; return (n+1,n)
+
+{-# NOINLINE refSequence #-}
+refSequence :: MVar Int
+refSequence= unsafePerformIO $ newMVar 0
+
+
+--- IO events
+
+--buffers :: IORef [(EventId,Dynamic)]
+--buffers= unsafePerformIO $ newIORef []
+
+data Loop= Once | Loop | Multithread deriving Eq
+
+waitEvents ::  IO b -&gt; TransientIO b
+waitEvents= parallel Loop
+
+
+async  :: IO b -&gt; TransientIO b
+async = parallel Once
+
+spawn= parallel Multithread
+
+parallel  ::  Loop -&gt;  IO b -&gt; TransientIO b
+parallel hasloop receive =  Transient $ do
+      cont &lt;- getCont
+      id &lt;- genNewId
+      liftIO $ forkCont id hasloop receive cont
+
+forkCont::  EventId -&gt; Loop -&gt; IO a -&gt; EventF -&gt; IO (Maybe a)
+forkCont id hasloop receive cont= do
+      let currentRow= row cont
+      mnode  &lt;-   liftIO $ lookTree id currentRow !&gt; (&quot;idToLook=&quot;++ show id++ &quot; in: &quot;++ show currentRow)
+     
+      case mnode of
+        Nothing -&gt;do
+                 return () !&gt; &quot;NOT FOUND&quot;
+                 forkCont' id cont hasloop receive
+                 return Nothing
+       
+        Just (node@(id',th', mrec)) -&gt; do
+         -- modify $ \cont -&gt; cont{nodeInfo=Nothing}
+          return $ if isJust mrec then Just $ unsafeCoerce $ fromJust mrec else Nothing
+
+        where
+        forkCont' id cont hasloop receive= liftIO $ forkIO $ do
+                     th &lt;- myThreadId
+                     ref &lt;-newMVar  $  Node (id,th,Nothing)
+                     addChild (row cont) ref
+
+                     loop hasloop  receive $ \r -&gt; do
+                       modifyMVar_  ref $ \(Node(i,th,_)) -&gt; return
+                                       $ Node(i,th,Just $ unsafeCoerce r)
+                       (flip runStateT) cont $ do
+                           cont@(EventF  x fs _  _ _ _) &lt;- get
+                          
+                           put cont{replay= True{-,-mfSequence=i,-}{-nodeInfo=Just ref-}}
+                          
+                           mr &lt;- runClosure cont
+                           case mr  of
+                             Nothing -&gt;return Nothing
+                             Just r -&gt;do
+                               row1 &lt;- gets row
+                               liftIO $ delEvents  row1              !&gt; (&quot;delEvents: &quot;++ show row1)
+                               id &lt;- liftIO $ readMVar refSequence
+                               n &lt;-  addDescent  row1
+                               modify $ \cont -&gt; cont{row=n,replay= False,mfSequence=id } !&gt; (&quot;SEQ=&quot; ++ show(mfSequence cont))
+                               runContinuation cont r
+                       return ()
+
+
+
+        loop Once rec x  = rec &gt;&gt;= x
+        loop Loop rec f = do
+            r &lt;- rec
+            f r
+            loop Loop rec f
+
+        loop Multithread rec f = do
+            r &lt;- rec
+            forkIO $ f r
+            loop Multithread rec f
+
+        lookTree :: EventId -&gt; P RowElem -&gt; IO (Maybe NodeTuple)
+        lookTree id ref=  do
+            RowList ns _&lt;- readMVar ref
+            lookList id ns
+
+
+
+        lookList id mn= case mn of
+              [] -&gt; return Nothing
+              (p:nodes) -&gt; do
+                  me &lt;- readMVar p
+                  case me of
+                    Node(node@((id',_,_))) -&gt;
+                      if id== id'
+                         then return $ Just node
+                         else lookList id nodes
+                    RowList row _ -&gt; do
+                         mx &lt;- lookList id nodes
+                         case mx of
+                           Nothing -&gt; lookList id row
+                           Just x -&gt; return $ Just x
+        delEvents :: P RowElem  -&gt; IO()
+        delEvents ref = do
+            RowList mevs mch &lt;- takeMVar ref
+            maybeDel mch
+            putMVar ref $ RowList mevs Nothing
+
+        maybeDel mch=  case mch of
+              Nothing -&gt; return ()
+              Just p -&gt; do
+                  RowList es mch' &lt;- readMVar p
+                  delList es !&gt; (&quot;toDelete=&quot;++ show es)
+                  maybeDel mch'
+
+
+        delList es=  mapM_ del es where
+          del p = readMVar p &gt;&gt;= del'
+          del' (Node(node@(_,th,_)))= killThread th !&gt; (&quot;DELETING &quot; ++ show node)
+          del' (RowList l mch)= delList l &gt;&gt; maybeDel mch
+
+
+type EventSetter eventdata response= (eventdata -&gt;  IO response) -&gt; IO ()
+type ToReturn  response=  IO response
+react
+  :: Typeable eventdata
+  =&gt; EventSetter eventdata response
+  -&gt; ToReturn  response
+  -&gt; TransientIO eventdata
+
+react setHandler iob= Transient $ do
+        cont    &lt;- getCont
+        mEvData &lt;- getSessionData
+        case mEvData of
+          Nothing -&gt; do
+            liftIO $ setHandler $ \dat -&gt;do
+--              let cont'= cont{mfData = M.insert (typeOf dat)(unsafeCoerce dat) (mfData cont)}
+              runStateT (setSData dat &gt;&gt; runCont cont) cont
+              iob
+            return Nothing
+          Just dat -&gt; delSessionData dat &gt;&gt; return (Just  dat)
+
+
+{-# NOINLINE getLineRef #-}       
+getLineRef= unsafePerformIO $ newTVarIO Nothing
+
+
+option1 x  message=  inputLoop `seq` (waitEvents  $ do
+     liftIO $ putStrLn $ message++&quot;(&quot;++show x++&quot;)&quot;
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       th &lt;- unsafeIOToSTM myThreadId
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r !&gt; (&quot;received &quot; ++  show r ++  show th) of
+            (s,_):_ -&gt; if  s == x  !&gt; (&quot;waiting&quot; ++ show x)
+                     then do
+                       writeTVar  getLineRef Nothing !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry)
+     where
+     reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+option ret message= do
+    liftIO $ putStrLn $&quot;Enter &quot;++show ret++&quot;\tto: &quot; ++ message
+    waitEvents  $ getLine' (==ret)
+    liftIO $do putStrLn $ show ret ++ &quot; chosen&quot;
+    return ret
+   
+getLine' cond=   inputLoop `seq` do
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       th &lt;- unsafeIOToSTM myThreadId
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r !&gt; (&quot;received &quot; ++  show r ++ show th) of
+            (s,_):_ -&gt; if cond s  !&gt; show (cond s)
+                     then do
+                       writeTVar  getLineRef Nothing !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry
+     where
+     reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+inputLoop=  do
+    print &quot;Press end to exit&quot;
+    inputLoop'
+    where
+        inputLoop'= do
+           r&lt;- getLine                      !&gt; &quot;started inputLoop&quot;
+           if r==&quot;end&quot; then putMVar rexit () else do
+              atomically . writeTVar  getLineRef $ Just r
+              inputLoop'
+
+
+rexit= unsafePerformIO newEmptyMVar
+
+stay=  takeMVar rexit
+
+onNothing iox iox'= do
+       mx &lt;- iox
+       case mx of
+           Just x -&gt; return x
+           Nothing -&gt; iox'
+
+          </code></pre><p>If you press the option &quot;back&quot;, it executes the backtracking test, corresponding to the first snippet of code in this article. The sequence portrayed here is the one intended:</p><pre><code>  &quot;back&quot; chosen
+  product navigation
+  product reserved,added to cart
+  Payment failed
+  product un-reserved</code></pre><p>This is a simple <code>undo</code> with one single backtracking point, but suppose that the <code>reserve</code> call updates a database, but, for some reason, it is necessary in the future to update a second database, so you add to <code>reserve</code> this modification without changing the main flow:</p><pre><code class="haskell">reserve= do
+            liftIO (putStrLn &quot;product reserved,added to cart&quot;)
+                 `onUndo` liftIO (putStrLn &quot;product un-reserved&quot;)
+                
+            liftIO  (putStrLn &quot;update other database necessary for the reservation&quot;)
+                 `onUndo` liftIO (putStrLn &quot;database update undone&quot;)</code></pre><p>The <code>undo</code> in the main flow will undo both changes.</p><p>There are two more primitives in the library</p><ul><li><code>undoCut</code> to empty the stack, so previous back points will not be executed by the next <code>undo</code></li><li><code>retry</code> changes the backtracking flag, so the flow will proceed forward from that point on</li></ul><p>You can play with them and tell me the about the results.</p><p>The Transient repo:</p><pre><code>    https://github.com/agocorona/transient</code></pre><h1 id="conclusions-and-future-work"><a href="#conclusions-and-future-work">Conclusions and future work</a></h1><p>With the use of session state and backtracking it is possible to do complex navigations when exploring tree structures and even doing web navigations.  I plan to adapt MFlow to this transient Monad.</p><p>Execution state persistence, like the Workflow and MFlow packages is also necessary for the hardworking programmer. This can be done by storing events and replaying them. Check them out!</p><p>This is one more effect added to my hardworking programmer super-monad. It is intended to super-charge the Haskell newbie with a set of powerful but intuitive primitives ad combinators to give unprecendented expressive power without adding complexity.</p><p>More effects to come!</p><p>Thanks to: Aistis Raulinaitis</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

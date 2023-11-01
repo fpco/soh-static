@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html><head><title>10. Error Handling - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/10_Error_Handling">10. Error Handling</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">10. Error Handling</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 5 Mar 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/29607dda3950552237ecdc82079df1fa3c292a4b">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/9_Evaluator">Previous content: 9. Evaluator</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/12-State-Monad">Next content: 11. State Monad</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#either-may-be-better-than-maybe">Either May Be Better than Maybe</a></li><li><a href="#abstracting-the-either-pattern">Abstracting the Either Pattern</a></li><li><a href="#the-either-monad">The Either Monad</a></li><li><a href="#type-classes">Type Classes</a></li><li><a href="#solution-to-the-expression-problem">Solution to the Expression Problem</a></li><li><a href="#the-monad-typeclass">The Monad Typeclass</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-symbolic-calculator-so-far">The Symbolic Calculator So Far</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>Show me how you handle errors and I'll tell you what programmer you are. Error handling is fundamental to all programming. Language support for error handling varies from none whatsoever (C) to special language extensions (exceptions in C++, Java, etc.). Haskell is unique in its approach because it's expressive enough to let you build your own error handling frameworks. Haskell doesn't need built-in exception support: it implements it in libraries.</p><p>We've seen one way of dealing with errors: calling the <code>error</code> function that terminates the program. This works fine for runtime assertions, which alert us to bugs in the program. But many &quot;errors&quot; are actually expected. We've seen one such example: <code>Data.Map.lookup</code> fails when called with a key that's not present in the map. The possibility of failure is encoded in the <code>Maybe</code> return type of <code>lookup</code>. It's interesting to compare this with similar functions in other languages. In C++, for instance, <code>std::map</code> defines multiple accessor functions varying only in their failure behavior:</p><ul><li><code>at</code> throws an exception</li><li><code>find</code> returns an empty iterator</li><li><code>operator[]</code> inserts a dummy value using a default constructor for it.</li></ul><p>The last one is the most bizarre of the three. Since the array access operator must return a reference, even if the key is not found, it has to create a dummy value. The behavior of <code>at</code> is potentially dangerous if the client forgets to catch the exception. Of the three, <code>find</code> is the safest, since the return type suggests to the client iteration rather than straight dereference; and iteration normally starts with checking for termination.</p><p>In functional programming, failure is another way of saying that the computation is <i>partial</i>; that is, not defined for all values of arguments. In Haskell we always try to use <i>total</i> functions -- functions defined for all values of their arguments. If the domain of a computation is known at compile time, we can often define a restricted data type to be used for its arguments; for instance, an enumeration instead of an integer. This is not always possible or feasible, so the other option is to turn a partial function into a total function by changing its return type. C++ method <code>find</code> does this trick by returning an iterator (it <i>always</i> returns an iterator for <i>any</i> value of its argument); Haskell <code>lookup</code> does it by returning a <code>Maybe</code>.</p><p>This trick of returning a different type in order to turn a non-functional computation into a pure function is used extensively in Haskell and finds its full expression in monads.</p><p>&quot;Computation&quot; or &quot;notion of computation&quot; often describes what we want to do in terms that may or may not have immediate pure function implementation: that is values in, values out. Transforming computations into functions is what functional programming is all about.</p><h2 id="either-may-be-better-than-maybe"><a href="#either-may-be-better-than-maybe">Either May Be Better than Maybe</a></h2><p>The trick with <code>Maybe</code> is a bit limited. All we know about the failure is that it occurred. In practice, we'd like to know more. So the next step in error handling is to use the <code>Either</code> data structure defined in the Prelude:</p><pre><code class="haskell">data Either a b = Left a | Right b</code></pre><p><code>Either</code> is parameterized by two types, not one. A value of the <code>Either</code> type either contains a value of type <code>a</code> or of type <code>b</code>. We can discriminate between the two possibilities by pattern matching on either constructor. <code>Either</code> is mostly used as a generalization of <code>Maybe</code> in which <code>Left</code> not only encodes failure but is accompanied by an error message. <code>Right</code> encodes success and the accompanying value. So <code>a</code> is often fixed to be a <code>String</code>.</p><p>Here's how we can use <code>Either</code> to encode the failure of a lookup without terminating the whole program:</p><pre><code class="haskell">lookUp :: String -&gt; SymTab -&gt; Either String (Double, SymTab)
+lookUp str symTab = 
+    case M.lookup str symTab of
+      Just v  -&gt; Right (v, symTab)
+      Nothing -&gt; Left (&quot;Undefined variable &quot; ++ str)</code></pre><p>Now the burden is on the caller to pattern match the result of any such call and either continue with the successful result, or handle the failure. More often than not, the error is just passed unchanged to the caller, and so on; and somewhere at the top of the call tree, displayed to the user (remember, the very top is always an <code>IO</code> function).</p><p>It's a know phenomenon that error propagation spreads like a disease throughout the code. You could have seen that in C and sometimes even in C++, when exceptions are not an option. And indeed, you can create the same mess in Haskell. Here's a naive implementation of the evaluator of <code>SumNode</code>, which checks for errors that can happen in the evaluation of its children, and propagates them if necessary:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; Either String (Double, SymTab)
+
+evaluate (SumNode op left right) symTab = 
+    case evaluate left symTab of
+      Left msg -&gt; Left msg
+      Right (lft, symTab') -&gt;
+        case evaluate right symTab' of
+          Left msg -&gt; Left msg
+          Right (rgt, symTab'') -&gt;
+            case op of
+              Plus  -&gt; Right (lft + rgt, symTab'')
+              Minus -&gt; Right (lft - rgt, symTab'')</code></pre><p>Notice the creeping indentation. I'm showing you this code so that you know what awaits you if you refuse to learn about monads. However ugly this code is, it works, so the principle is right. We just need some monadic sugar to make it palatable.</p><p>Errors are propagated up, until they are finally dealt with in the main IO loop:</p><pre><code class="haskell">loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks = tokenize str
+          tree = parse toks
+      in
+          case evaluate tree symTab of
+          Left msg -&gt; do
+              putStrLn $ &quot;Error: &quot; ++ msg
+              loop symTab -- use old symTab
+          Right (v, symTab') -&gt; do
+              print v
+              loop symTab'</code></pre><p>The nice thing is that, since we keep around the old copy of the symbol table, we can start the next iteration after a failure as if nothing happened. It's as if one transaction had been aborted and another started from the the same state.</p><div class="hidden" title="Show the (working) evaluator that uses this scheme with no sugar."><pre><code class="active haskell">import Data.Char
+import qualified Data.Map as M
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier :: Char -&gt; String -&gt; [Token]
+identifier c cs = let (name, cs') = span isAlphaNum cs in
+                  TokIdent (c:name) : tokenize cs'
+
+number :: Char -&gt; String -&gt; [Token]
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+---- parser ----
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+lookAhead :: [Token] -&gt; Token
+lookAhead [] = TokEnd
+lookAhead (t:ts) = t
+
+accept :: [Token] -&gt; [Token]
+accept [] = error &quot;Nothing to accept&quot;
+accept (t:ts) = ts
+
+expression :: [Token] -&gt; (Tree, [Token])
+expression toks = 
+   let (termTree, toks') = term toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (exTree, toks'') = expression (accept toks') 
+            in (SumNode op termTree exTree, toks'')
+         TokAssign -&gt;
+            case termTree of
+               VarNode str -&gt; 
+                  let (exTree, toks'') = expression (accept toks') 
+                  in (AssignNode str exTree, toks'')
+               _ -&gt; error &quot;Only variables can be assigned to&quot;
+         _ -&gt; (termTree, toks')
+
+term :: [Token] -&gt; (Tree, [Token])
+term toks = 
+   let (facTree, toks') = factor toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Times, Div] -&gt;
+            let (termTree, toks'') = term (accept toks') 
+            in (ProdNode op facTree termTree, toks'')
+         _ -&gt; (facTree, toks')
+
+factor :: [Token] -&gt; (Tree, [Token])
+factor toks = 
+   case lookAhead toks of
+      (TokNum x)     -&gt; (NumNode x, accept toks)
+      (TokIdent str) -&gt; (VarNode str, accept toks)
+      (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (facTree, toks') = factor (accept toks) 
+            in (UnaryNode op facTree, toks')
+      TokLParen      -&gt; 
+         let (expTree, toks') = expression (accept toks)
+         in
+            if lookAhead toks' /= TokRParen 
+            then error &quot;Missing right parenthesis&quot;
+            else (expTree, accept toks')
+      _ -&gt; error $ &quot;Parse error on token: &quot; ++ show toks
+
+parse :: [Token] -&gt; Tree
+parse toks = let (tree, toks') = expression toks
+             in
+               if null toks' 
+               then tree
+               else error $ &quot;Leftover tokens: &quot; ++ show toks'
+
+---- evaluator ----
+-- show
+
+type SymTab = M.Map String Double
+
+lookUp :: String -&gt; SymTab -&gt; Either String (Double, SymTab)
+lookUp str symTab = 
+    case M.lookup str symTab of
+      Just v  -&gt; Right (v, symTab)
+      Nothing -&gt; Left (&quot;Undefined variable &quot; ++ str)
+
+addSymbol :: String -&gt; Double -&gt; SymTab -&gt; Either String ((), SymTab)
+addSymbol str val symTab = 
+    let symTab' = M.insert str val symTab
+    in Right ((), symTab')
+
+evaluate :: Tree -&gt; SymTab -&gt; Either String (Double, SymTab)
+
+evaluate (SumNode op left right) symTab = 
+    case evaluate left symTab of
+    Left msg -&gt; Left msg
+    Right (lft, symTab') -&gt;
+        case evaluate right symTab' of
+        Left msg -&gt; Left msg
+        Right (rgt, symTab'') -&gt;
+            case op of
+            Plus  -&gt; Right (lft + rgt, symTab'')
+            Minus -&gt; Right (lft - rgt, symTab'')
+
+evaluate (ProdNode op left right) symTab = 
+    case evaluate left symTab of
+    Left msg -&gt; Left msg
+    Right (lft, symTab') -&gt;
+        case evaluate right symTab' of
+        Left msg -&gt; Left msg
+        Right (rgt, symTab'') -&gt;
+            case op of
+            Times -&gt; Right (lft * rgt, symTab)
+            Div   -&gt; Right (lft / rgt, symTab)
+
+evaluate (UnaryNode op tree) symTab =
+    case evaluate tree symTab of
+    Left msg -&gt; Left msg
+    Right (x, symTab') -&gt;
+        case op of
+        Plus  -&gt; Right ( x, symTab')
+        Minus -&gt; Right (-x, symTab')
+
+evaluate (NumNode x) symTab = Right (x, symTab)
+
+evaluate (VarNode str) symTab = lookUp str symTab
+
+evaluate (AssignNode str tree) symTab = 
+    case evaluate tree symTab of
+    Left msg -&gt; Left msg
+    Right (v, symTab') -&gt;
+        case addSymbol str v symTab' of
+        Left msg -&gt; Left msg
+        Right (_, symTab'') -&gt; Right (v, symTab'')
+
+main = do
+   loop (M.fromList [(&quot;pi&quot;, pi)])
+
+loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks = tokenize str
+          tree = parse toks
+      in
+          case evaluate tree symTab of
+          Left msg -&gt; do
+              putStrLn $ &quot;Error: &quot; ++ msg
+              loop symTab -- use old symTab
+          Right (v, symTab') -&gt; do
+              print v
+              loop symTab'</code></pre></div><h2 id="abstracting-the-either-pattern"><a href="#abstracting-the-either-pattern">Abstracting the Either Pattern</a></h2><p>Looking at the code above, you can see a pattern arising. First of all, we have all these functions that return their results wrapped in the <code>Either</code> type. Every time we get an <code>Either</code> value, we pattern match it and fork the computation: When the result is <code>Right</code> we make the value in it available to the rest of the computation. If the result is <code>Left</code>, we skip the rest of the computation and propagate the error. We would like to capture this pattern. We'd like to isolate the boilerplate code, leaving &quot;holes&quot; for the client-provided variables. One such hole is to be filled by the initial <code>Either</code> value. The tricky part is the &quot;skip the rest of the computation&quot; part of the pattern. This can be done if the pattern has another hole for &quot;the rest of the computation&quot; so that it can either execute it or not.</p><p>Let's first identify this pattern in the evaluation of a unary node:</p><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FBasics%2FBindWithHoles.png" /></p><p>The first pattern filler is the value returned by <code>evaluate tree symTab</code>. The &quot;rest of the calculation&quot; filler is the code:</p><pre><code class="haskell">case op of
+   Plus  -&gt; Right ( x, symTab')
+   Minus -&gt; Right (-x, symTab')</code></pre><p>We can abstract this code into a lambda function. Notice that this code uses <code>x</code> and <code>symTab'</code>, which were extracted from the first filler. So when we abstract it, the resulting lambda function should take this tuple as an argument:</p><pre><code class="haskell">\(x, symTab') -&gt; case op of
+   Plus  -&gt; Right ( x, symTab')
+   Minus -&gt; Right (-x, symTab')</code></pre><p>The parameter <code>op</code> is captured by the lambda from the outer environment -- remember, lambdas are <i>closures</i>: they can capture values from the environment in which they are defined.</p><p>Let's call this new pattern <code>bindE</code> and implement it as a function of two arguments. Here's how we would call it from the evaluator:</p><pre><code class="haskell">evaluate (UnaryNode op tree) symTab =
+    bindE (evaluate tree symTab)
+          (\(x, symTab') -&gt;
+              case op of
+                Plus  -&gt; Right ( x, symTab')
+                Minus -&gt; Right (-x, symTab'))</code></pre><p>This is just a straight call to <code>bindE</code> with two arguments -- the second one being a multi-line lambda function.</p><p>The implementation of <code>bindE</code> is pretty straightforward. It just picks the common parts of the pattern and combines them in one function. It deals with the tedium of pattern matching the first argument and propagating the error. In case of success, it calls the continuation with the right arguments:</p><pre><code class="haskell">bindE :: Either String (Double, SymTab) 
+      -&gt; ((Double, SymTab) -&gt; Either String (Double, SymTab))
+      -&gt; Either String (Double, SymTab)
+bindE ev k =
+    case ev of
+      Left msg -&gt; Left msg
+      Right (x, symTab') -&gt; k (x, symTab')</code></pre><p>Have a good look at the signature of <code>bindE</code>. Again, the second argument to <code>bindE</code> is the function that encapsulates the rest of the computation. It takes a pair <code>(Double, SymTab)</code> and returns another pair encapsulated in <code>Either</code>. This function argument is often called a <i>continuation</i>, because it continues the computation. The corresponding argument is often named <code>k</code> (think <i>kontinuation</i>; <code>c</code> would be too generic a name).</p><p>This pattern can be further abstracted by parameterizing it on the type of the contents of <code>Right</code>. In fact we need this if we want to include <code>addSymbol</code> in our scheme (see the unit in the return type):</p><pre><code class="haskell">addSymbol :: String -&gt; Double -&gt; SymTab -&gt; Either String ((), SymTab)</code></pre><p>If we want to bind the result of, say, <code>UnaryNode</code> evaluator to <code>addSymbol</code>, the input will be of type <code>Either String (Double, SymTab)</code> and the result of type <code>Either String ((), SymTab)</code>, so <code>bindE</code> really needs two type parameters, <code>a</code> and <code>b</code>:</p><pre><code class="haskell">bindE :: Either String a
+      -&gt; (a -&gt; Either String b)
+      -&gt; Either String b
+bindE ev k =
+    case ev of
+      Left msg -&gt; Left msg
+      Right v -&gt; k v</code></pre><p>Notice that as long as the client only uses <code>bindE</code> to deal with <code>Either</code> values, they don't have to deal with them directly (e.g., pattern match), except when they have to create them; and in the final unpacking, when they want to display the error message. The creation of <code>Either</code> values can also be abstracted by providing two more functions, <code>return</code> and <code>fail</code>:</p><pre><code class="haskell">return :: a -&gt; Either String a
+return x = Right x
+
+fail :: String -&gt; Either a
+fail msg = Left msg</code></pre><p>We can use these functions in the implementation of <code>lookUp</code></p><pre><code class="haskell">lookUp :: String -&gt; SymTab -&gt; Either String (Double, SymTab)
+lookUpb str symTab = 
+    case M.lookup str symTab of
+      Just v  -&gt; return (v, symTab)
+      Nothing -&gt; fail (&quot;Undefined variable &quot; ++ str)</code></pre><p>We can also replace all <code>Right</code> constructors that are used to return values by calls to <code>return</code>. This way the client code can be written without any knowledge of the fact that values are encapsulated in the <code>Either</code> type.</p><p>Here's, for instance, an improved version of the <code>UnaryNode</code> evaluator, this time with no mention of <code>Either</code> or any of its constructors:</p><pre><code class="haskell">evaluate (UnaryNode op tree) symTab =
+    bindE (evaluate tree symTab)
+          (\(x, symTab') -&gt;
+              case op of
+                Plus  -&gt; return ( x, symTab')
+                Minus -&gt; return (-x, symTab'))</code></pre><p>Maybe it doesn't seem like these transformations buy us much in code size or readability, but they are a step in the direction of hiding the details of error handling.</p><p>But we can do even better, once we realize that we have just defined a monad.</p><h2 id="the-either-monad"><a href="#the-either-monad">The Either Monad</a></h2><p>A monad in Haskell is defined by a type constructor (a type parameterized by another type) and two functions, bind and return (optionally, fail). In our case, the type constructor is based on the <code>Either a b</code> type, with the first type variable fixed to <code>String</code> (yes, it's exactly like currying a type function). Let's formalize it by defining a new (paremeterized) type:</p><pre><code class="haskell">newtype Evaluator a = Ev (Either String a)</code></pre><p>The <code>newtype</code> declaration is a compromise between <code>type</code> alias and a full-blown <code>data</code> declaration. It can be used to define data types that have only one data constructor that takes only one argument -- <code>Ev</code> in this case. (<code>newtype</code> is preferred over similar <code>data</code> declaration because of slightly better performance characteristics.)</p><p>The first change to our code will be to replace the type signature of <code>evaluate</code> from:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; Either String (Double, SymTab)</code></pre><p>to:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; Evaluator (Double, SymTab)</code></pre><p>We can now redefine <code>bindE</code>, <code>return</code>, and <code>fail</code> in terms of <code>Evaluator</code>. Then we have to tell Haskell that we are defining a monad. Why does Haskell need to know about our monad? Because with this knowledge it will allow us to use the <code>do</code> notation -- that's the sugar we've been craving.</p><p><code>Monad</code> is a typeclass -- I'll talk more about typeclasses soon. For now, it's enough to know that, in order to tell Haskell that we are defining a monad, we need to <i>instantiate</i> <code>Monad</code> with our <code>Evaluator</code>. When instantiating a <code>Monad</code> we have to provide the appropriate definitions of bind, return and, optionally, fail. The only tricky one is bind, since <code>Monad</code> defines it as an infix operator, <code>&gt;&gt;=</code> (pronounced bind). Operators are just functions with funny names composed of special characters. An infix operator is a function that takes two arguments, one on the left and one on the right. Without further ado, here's the instance declaration for our first monad:</p><pre><code class="haskell">instance Monad Evaluator where
+    (Ev ev) &gt;&gt;= k =
+        case ev of
+          Left msg -&gt; Ev (Left msg)
+          Right v -&gt; k v
+    return v = Ev (Right v)
+    fail msg = Ev (Left msg)</code></pre><p>These are exactly the definitions we've seen before, except for the additional layer of the <code>Ev</code> constructor. Notice that I used infix notation in defining operator <code>&gt;&gt;=</code>. Its left argument is the pattern <code>(Ev ev)</code>, and its right argument is the continuation <code>k</code>.</p><p>Let's see how this new monad works in the evaluator of <code>SumNode</code> -- first without the <code>do</code> notation:</p><pre><code class="haskell">evaluate (SumNode op left right) symTab = 
+    evaluate left symTab &gt;&gt;= \(lft, symTab') -&gt;
+        evaluate right symTab' &gt;&gt;= \(rgt, symTab'') -&gt;
+            case op of 
+              Plus  -&gt; return (lft + rgt, symTab'')
+              Minus -&gt; return (lft - rgt, symTab'')</code></pre><p>Notice that the second argument to the first <code>&gt;&gt;=</code> is a lambda that continues up to the end of the function. Inside its body there is another <code>&gt;&gt;=</code> with its own lambda. Notice also that the innermost lambda has access not only to <code>rgt</code> -- which is its argument -- but also to the external <code>lft</code> and <code>op</code>, which it captures from its environment.</p><p>Here's <i>the same code</i> in <code>do</code> notation:</p><pre><code class="haskell">evaluate (SumNode op left right) symTab = do
+    (lft, symTab')  &lt;- evaluate left symTab
+    (rgt, symTab'') &lt;- evaluate right symTab'
+    case op of 
+      Plus  -&gt; return (lft + rgt, symTab'')
+      Minus -&gt; return (lft - rgt, symTab'')</code></pre><p>As you can see, the <code>do</code> block hides the binding <code>&gt;&gt;=</code> <i>between</i> the lines, it automatically converts &quot;the rest of the code&quot; to continuations, and it lets you treat the arguments to lambdas as if they were local variables to be assigned to. It's this syntactic sugar that makes <code>do</code> blocks look so convincingly imperative, even though they are purely functional in nature.</p><p>Compare this with our starting point:</p><pre><code class="haskell">evaluate (SumNode op left right) symTab = 
+    case evaluate left symTab of
+      Left msg -&gt; Left msg
+      Right (lft, symTab') -&gt;
+        case evaluate  right symTab' of
+          Left msg -&gt; Left msg
+          Right (rgt, symTab'') -&gt;
+            case op of
+              Plus  -&gt; Right (lft + rgt, symTab'')
+              Minus -&gt; Right (lft - rgt, symTab'')</code></pre><p>That's definitely progress. If we could only get rid of this noise of threading <code>symTab</code> all over the place. Oh, wait, that's the next tutorial and another monad.</p><p>Let's bask in the monadic sunshine some more. Did you notice that we have essentially implemented exceptions? <code>fail</code> behaves very much like <code>throw</code>. It shortcuts the execution of the current function, propagates the error to its caller, who will in turn shortcut its execution and so on, until the &quot;exception is caught.&quot; Catching the exception means unpacking the <code>Evaluator</code> returned by a function, and either retrieving the result or doing something with the error.</p><p>Can you forget to &quot;catch&quot; the exception? Not really -- it's part of the return type. You can't even access the value of your computation without unpacking it. And if your unpacking matches all possible <code>Either</code> patterns, as it should, you'll be forced to deal with the error case anyway.</p><p>Do you remember exception specifications in Java or C++ (currently obsoleted)? In Haskell there's no need for this ad hoc feature because &quot;exception specification&quot; is encoded in the return type of a function. You can't ignore types in Haskell, so you essentially leave it to the  compiler to enforce exception safety.</p><p>There is a full-blown exception library <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Exception" title="Hoogle search for: Control.Exception"><code>Control.Exception</code></a> in Haskell, complete with <code>throw</code>, <code>catch</code>, and a long list of predefined exception types. The Prelude also defines the <code>Monad</code> instance for <code>Either</code>, so we could have used it directly. But I thought &quot;inventing&quot; the monad from scratch would give you a better learning experience.</p><h2 id="type-classes"><a href="#type-classes">Type Classes</a></h2><p>I said that <code>Monad</code> is a typeclass, but I haven't explained what a typeclass is. It's not exactly like a class in OO languages, but there are some similarities.</p><p>If you're familiar with Java or C++, you know that a class may define a set of virtual functions. When you have a polymorphic reference to one of the descendants of such a class, and call one of these virtual functions on it, the function that is called depends on the actual type of the object, which is determined <i>at runtime</i>. This kind of <i>late binding</i> is possible because a polymorphic object carries with it a vtable: an array of function pointers.</p><p>Similarly, in Haskell, a type class let's you define the signatures of a set of functions. You may think of a typeclass as an <i>interface</i>. (Although it is possible for a typeclass to provide default implementations for some of the functions -- the monadic <code>fail</code>, for instance, has such implementation: it calls <code>error</code> by default.) There's even an analog of a vtable that is (invisibly) passed to polymorphic functions.</p><p>The actual implementation of typeclass functions is provided by the client every time they declare some type to be an <code>instance</code> of a typeclass. In Java or C++ this would happen when the client defines concrete classes that implement an interface. In Haskell you define instances instead. The interesting thing is that, in Haskell, the client is able to connect any typeclass with any type (including built-in types) &quot;after the fact.&quot; (In most OO languages you can't make an <code>int</code> a subclass of <code>IFoo</code> -- in Haskell you can.)</p><p>Let's work through an example:</p><pre><code class="active haskell">class Valuable a where
+    evaluate :: a -&gt; Double
+
+data Expr = Const Double | Add Expr Expr
+
+instance Valuable Expr where
+    evaluate (Const x) = x
+    evaluate (Add lft rgt) = evaluate lft + evaluate rgt
+
+instance Valuable Bool where
+    evaluate True  = 1
+    evaluate False = 0
+
+test :: Valuable a =&gt; a -&gt; IO ()
+test v = print $ evaluate v
+
+expr :: Expr
+expr = Add (Const 2) (Add (Const 1.5) (Const 2.5))
+
+main = do
+    test expr
+    test True</code></pre><p>I have defined a typeclass <code>Valuable</code> with one function <code>evaluate</code>, which takes an instance of <code>Valuable</code>, <code>a</code>, and returns a <code>Double</code>. Separately I have defined a data type <code>Expr</code>, which has no knowledge of the class <code>Valuable</code>. Then I realized that <code>Expr</code> is <code>Valuable</code>, so I wrote an <code>instance</code> declaration that makes this connection and provides the &quot;witness&quot; -- the actual implementation of the function <code>evaluate</code>.</p><p>To make things even more exciting, I decided that the built-in type <code>Bool</code> is also <code>Valuable</code> and provided and <code>instance</code> declaration to prove it. Now I was able to write a polymorphic function <code>test</code> that calls <code>evaluate</code> on its argument. But unlike in previous examples of polymorphism, the generic argument to <code>test</code> is constrained: it has to be an instance of the class <code>Valuable</code>. The type expression before the double arrow <code>=&gt;</code> defines class constraints for what follows. In this case we have one constraint, <code>Valuable a</code>, meaning <code>a</code> must be an instance of <code>Valuable</code>. In general there may be several such constraints listed between a set of parentheses and separated by commas.</p><p>Hadn't I provided the type signature for <code>test</code>, the compiler would have figured it out by analyzing the body of <code>test</code> and seeing that I called <code>evaluate</code> on its argument.</p><p>This is an example of a more general mechanism: If you define a function that adds its arguments, the compiler will deduce the <code>Num</code> constraint for them. If you compare arguments for (in-) equality, it will deduce <code>Eq</code> constraints. If you <code>print</code> them, it will deduce <code>Show</code>, etc.</p><p>The C++ Standards Committee almost voted in the <i>concepts</i> proposal in 2011, which would have added constrained polymorphism to C++ templates. But then they gave up because of the tremendous complexity imposed by the requirement of backwards compatibility.</p><h2 id="solution-to-the-expression-problem"><a href="#solution-to-the-expression-problem">Solution to the Expression Problem</a></h2><p>In the previous tutorial I described the expression problem: How can you create a library that would be open to adding new data <i>and</i> new functions. We've seen that, in Haskell, extending a library by adding new functions was easy, but the addition of new varieties of data required modifications to the library. Clever use of typeclasses will let us have the cake and eat it too.</p><p>Let's work the magic on the previous example. First, instead of having one type <code>Expr</code> with many constructors, let's replace it with one typeclass <code>Expr</code> and many individual data types (by many I mean two in this case). We then glue these data types together by making them instances of <code>Expr</code>. <code>Expr</code> itself is empty -- its only purpose is to unify all expression types.</p><pre><code class="haskell">class Expr a
+
+data Const   = Const Double
+data Add a b = Add a b
+
+instance Expr Const
+instance (Expr a, Expr b) =&gt; Expr (Add a b)</code></pre><p>Notice that I used the names <code>Const</code> and <code>Add</code> both to name data types and their constructors. These two namespaces are separate, so if you're running out of names, it's a common practice to reuse them this way. Also, notice the use of two class constraints in the instance definition for <code>Add</code>. Both <code>a</code> and <code>b</code> must be <code>Expr</code> for <code>Add a b</code> to be <code>Expr</code>.</p><p>Now we would like to define the function <code>evaluate</code> for both <code>Const</code> and <code>Add</code> nodes. But these are no longer just two constructors -- they are two different data types. The only way to define <code>evaluate</code> for both is to overload it. This is possible, but only if <code>evaluate</code> is part of a typeclass. The name <code>Valuable</code> for such a class seems natural. Let's make it work for <code>Const</code> and <code>Add</code>:</p><pre><code class="haskell">class (Expr e) =&gt; Valuable e where
+    evaluate :: e -&gt; Double
+
+instance Valuable Const where
+    evaluate (Const x) = x
+instance (Valuable a, Valuable b) =&gt; Valuable (Add a b) where
+    evaluate (Add lft rgt) = evaluate lft + evaluate rgt</code></pre><p>This time we made sure that only expressions can be evaluated: That's the constraint <code>Expr e</code> in the definition of <code>Valuable</code>.</p><p>So that's our library. Let's now see how a client may extend it by, for instance, adding a new expression type: <code>Mul</code>.</p><pre><code class="haskell">data Mul a b = Mul a b
+
+instance (Expr a, Expr b) =&gt; Expr (Mul a b)
+instance (Valuable a, Valuable b) =&gt; Valuable (Mul a b) where
+    evaluate (Mul lft rgt) = evaluate lft * evaluate rgt</code></pre><p>Plugging <code>Mul</code> into the library required only making it the instance of <code>Expr</code> and <code>Valuable</code>. Perfect! Our library is now open to adding new data.</p><p>Let's check if it's still open to new functions. Let's add a pretty printing function to expressions, including the newly defined <code>Mul</code>. The trick is to make <code>pretty</code> a member of a new class <code>Pretty</code> and then make all the expression types its instances:</p><pre><code class="haskell">class (Expr e) =&gt; Pretty e where
+    pretty :: e -&gt; String
+
+instance Pretty Const where
+    pretty (Const x) = show x
+instance (Pretty a, Pretty b) =&gt; Pretty (Add a b) where
+    pretty (Add x y) = &quot;(&quot; ++ pretty x ++ &quot; + &quot; ++ pretty y ++ &quot;)&quot;
+instance (Pretty a, Pretty b) =&gt; Pretty (Mul a b) where
+    pretty (Mul x y) = pretty x ++ &quot; * &quot; ++ pretty y</code></pre><p>Granted, there is a bit of syntactic noise here, but we have accomplished quite a feat: We have overcome the expression problem!</p><div class="hidden" title="Show complete (runnable) example"><pre><code class="active haskell">class Expr a
+
+data Const   = Const Double
+data Add a b = Add a b
+
+instance Expr Const
+instance (Expr a, Expr b) =&gt; Expr (Add a b)
+
+class (Expr e) =&gt; Valuable e where
+    evaluate :: e -&gt; Double
+
+instance Valuable Const where
+    evaluate (Const x) = x
+instance (Valuable a, Valuable b) =&gt; Valuable (Add a b) where
+    evaluate (Add lft rgt) = evaluate lft + evaluate rgt
+
+-- client code
+
+data Mul a b = Mul a b
+
+instance (Expr a, Expr b) =&gt; Expr (Mul a b)
+instance (Valuable a, Valuable b) =&gt; Valuable (Mul a b) where
+    evaluate (Mul lft rgt) = evaluate lft * evaluate rgt
+
+class (Expr e) =&gt; Pretty e where
+    pretty :: e -&gt; String
+
+instance Pretty Const where
+    pretty (Const x) = show x
+instance (Pretty a, Pretty b) =&gt; Pretty (Add a b) where
+    pretty (Add x y) = &quot;(&quot; ++ pretty x ++ &quot; + &quot; ++ pretty y ++ &quot;)&quot;
+instance (Pretty a, Pretty b) =&gt; Pretty (Mul a b) where
+    pretty (Mul x y) = pretty x ++ &quot; * &quot; ++ pretty y
+
+expr = Mul (Const 2) (Add (Const 1.5) (Const 2.5))
+
+main = do
+    putStrLn $ pretty expr
+    print $ evaluate expr
+</code></pre></div><h2 id="the-monad-typeclass"><a href="#the-monad-typeclass">The Monad Typeclass</a></h2><p>Let's go back to the <code>Monad</code> typeclass. This is how it's defined in the Prelude:</p><pre><code class="haskell">class Monad m where
+    (&gt;&gt;=)   :: m a -&gt; (a -&gt; m b) -&gt; m b
+    (&gt;&gt;)    :: m a -&gt; m b -&gt; m b
+    return  :: a -&gt; m a
+    fail    :: String -&gt; m a
+
+    mv &gt;&gt; k =  mv &gt;&gt;= \_ -&gt; k
+    fail s  = error s</code></pre><p>There's something different about this typeclass: it's not a typeclass that unifies types; rather it unifies type <i>constructors</i>. The parameter <code>m</code> is a type constructor. It requires another type parameter to become a type. See how <code>m</code> always acts on either <code>a</code> or <code>b</code>, which are type variables. Going back to the <code>Evaluator</code> in our calculator, it was a type constructor too, with the type parameter <code>a</code>:</p><pre><code class="haskell">newtype Evaluator a = Ev (Either String a)</code></pre><p>That's why we were able to make <code>Evaluator</code> an instance of <code>Monad</code>:</p><pre><code class="haskell">instance Monad Evaluator where</code></pre><p>Specifically, notice that we used <code>Evaluator</code>, not <code>Evaluator a</code> in this definition. You always supply a type constructor to the instance definition of <code>Monad</code>.</p><p><code>Monad</code> also defines operator <code>&gt;&gt;</code>, which ignores the value from its first argument (see its default implementation). You can bind two monadic functions using <code>&gt;&gt;</code> if you're only calling the first one for its &quot;side effects.&quot; This will make more sense in the next tutorial, when we talk about the state monad. Operator <code>&gt;&gt;</code> is often used with the <code>IO</code> monad to sequence output functions, as in:</p><pre><code class="active haskell">main :: IO ()
+main = putStrLn &quot;Hello &quot; &gt;&gt; putStrLn &quot;World&quot;</code></pre><p>which is the same as:</p><pre><code class="active haskell">main :: IO ()
+main = do 
+    putStrLn &quot;Hello &quot;
+    putStrLn &quot;World&quot;</code></pre><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p><b>Ex 1.</b> Define the <code>WhyNot</code> monad:</p><pre><code class="active haskell">data WhyNot a = Nah | Sure a
+  deriving Show
+
+instance Monad WhyNot where
+   ...
+
+safeRoot :: Double -&gt; WhyNot Double
+safeRoot x = 
+    if x &gt;= 0 then 
+      return (sqrt x)
+    else
+      fail &quot;Boo!&quot;
+
+test :: Double -&gt; WhyNot Double
+test x = do
+   y &lt;- safeRoot x
+   z &lt;- safeRoot (y - 4)
+   w &lt;- safeRoot z
+   return w
+
+
+main = do
+    print $ test 9
+    print $ test 400</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">data WhyNot a = Nah | Sure a
+  deriving Show
+
+instance Monad WhyNot where
+   Sure x &gt;&gt;= k = k x
+   Nah    &gt;&gt;= _ = Nah
+   return x     = Sure x
+   fail _       = Nah
+
+safeRoot :: Double -&gt; WhyNot Double
+safeRoot x = 
+    if x &gt;= 0 then 
+      return (sqrt x)
+    else
+      fail &quot;Boo!&quot;
+
+test :: Double -&gt; WhyNot Double
+test x = do
+   y &lt;- safeRoot x
+   z &lt;- safeRoot (y - 4)
+   w &lt;- safeRoot z
+   return w
+
+
+main = do
+    print $ test 9
+    print $ test 400</code></pre></div><p><b>Ex 2.</b> Define a monad instance for <code>Trace</code> (no need to override <code>fail</code>). The idea is to create a trace of execution by sprinkling you code with calls to <code>put</code>. The result of executing this code should look something like this:</p><pre><code>[&quot;fact 3&quot;,&quot;fact 2&quot;,&quot;fact 1&quot;,&quot;fact 0&quot;]
+6</code></pre><p>Hint: List concatenation is done using <code>++</code> (we've seen it used for string concatenation, because <code>String</code> is just a list of <code>Char</code>).</p><pre><code class="active haskell">newtype Trace a = Trace ([String], a)
+
+instance Monad Trace where
+    ...
+
+put :: Show a =&gt; String -&gt; a -&gt; Trace ()
+put msg v = Trace ([msg ++ &quot; &quot; ++ show v], ())
+
+fact :: Integer -&gt; Trace Integer
+fact n = do
+   put &quot;fact&quot; n
+   if n == 0
+       then return 1
+       else do
+           m &lt;- fact (n - 1)
+           return (n * m)
+
+main = let Trace (lst, m) = fact 3
+       in do
+           print lst
+           print m</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">newtype Trace a = Trace ([String], a)
+
+instance Monad Trace where
+    return x = Trace ([], x)
+    (Trace (lst, x)) &gt;&gt;= k =
+        let Trace (lst', y) = k x
+        in Trace (lst ++ lst', y)
+
+put :: Show a =&gt; String -&gt; a -&gt; Trace ()
+put msg v = Trace ([msg ++ &quot; &quot; ++ show v], ())
+
+fact :: Integer -&gt; Trace Integer
+fact n = do
+   put &quot;fact&quot; n
+   if n == 0
+       then return 1
+       else do
+           m &lt;- fact (n - 1)
+           return (n * m)
+
+main = let Trace (lst, m) = fact 3
+       in do
+           print lst
+           print m</code></pre></div><p><b>Ex 3.</b> Instead of <code>deriving Show</code>, define explicit instances of the <code>Show</code> typeclass for <code>Operator</code> and <code>Tree</code> such that <code>expr</code> is displayed as:</p><pre><code>x = (13.0 - 1.0) / y</code></pre><p>It's enough that you provide the implementation of the <code>show</code> function in the instance declaration. This function should take an <code>Operator</code> (or a <code>Tree</code>) and return a string.</p><pre><code class="active haskell">data Operator = Plus | Minus | Times | Div
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+
+instance Show Operator where
+    show Plus  = &quot; + &quot;
+    ...
+
+instance Show Tree where
+    show = undefined
+
+expr = AssignNode &quot;x&quot; (ProdNode Div (SumNode Minus (NumNode 13) (NumNode 1)) (VarNode &quot;y&quot;))
+
+main = print expr</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">data Operator = Plus | Minus | Times | Div
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+
+instance Show Operator where
+    show Plus  = &quot; + &quot;
+    show Minus = &quot; - &quot;
+    show Times = &quot; * &quot;
+    show Div   = &quot; / &quot;
+
+instance Show Tree where
+    show (SumNode op lft rgt) = &quot;(&quot; ++ show lft ++ show op ++ show rgt ++ &quot;)&quot;
+    show (ProdNode op lft rgt) = show lft ++ show op ++ show rgt
+    show (AssignNode str tree) = str ++ &quot; = &quot; ++ show tree
+    show (UnaryNode op tree) = show op ++ show tree
+    show (NumNode x) = show x
+    show (VarNode str) = str
+
+expr = AssignNode &quot;x&quot; (ProdNode Div (SumNode Minus (NumNode 13) (NumNode 1)) (VarNode &quot;y&quot;))
+
+main = print expr</code></pre></div><p><b>Ex 4</b> This is an example that mimics elements of OO programming. Chess pieces are implemented as separate data types: here, for simplicity, just one, <code>Pawn</code>. The constructor of <code>Pawn</code> takes the <code>Color</code> of the piece and its position on the board (0-7 in both dimensions). Pieces are instances of the class <code>Piece</code>, which declares the following functions: <code>color</code>, <code>pos</code>, and <code>moves</code>. The <code>moves</code> function takes a piece and returns a list of possible future positions after one move (without regard to other pieces, but respecting the boundaries of the board). Define both the typeclass and the instance, so that the following program works:</p><pre><code class="active haskell">data Color = White | Black
+    deriving (Show, Eq)
+
+data Pawn = Pawn Color (Int, Int)
+
+class Piece a where
+   ...
+
+instance Piece Pawn where
+   ...
+
+pieces = [Pawn White (3, 1), Pawn Black (4, 1), Pawn White (0, 7), Pawn Black (5, 0)]
+
+main = print $ map moves pieces</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">data Color = White | Black
+    deriving (Show, Eq)
+
+data Pawn = Pawn Color (Int, Int)
+
+class Piece a where
+   color :: a -&gt; Color
+   pos   :: a -&gt; (Int, Int)
+   moves :: a -&gt; [(Int, Int)]
+
+instance Piece Pawn where
+   color (Pawn c _) = c
+   pos (Pawn _ pos) = pos
+   moves pwn = if color pwn == White 
+               then mvs (pos pwn)
+               else map refl (mvs $ refl (pos pwn))
+     where
+       refl (x, y) = (x, 7 - y)
+       mvs (x, y) = if y == 1
+                    then [(x, y + 1), (x, y + 2)]
+                    else if y == 7
+                         then []
+                         else [(x, y + 1)]
+pieces = [Pawn White (3, 1), Pawn Black (4, 1), Pawn White (0, 7), Pawn Black (5, 0)]
+main = do
+   print $ map moves pieces</code></pre></div><h2 id="the-symbolic-calculator-so-far"><a href="#the-symbolic-calculator-so-far">The Symbolic Calculator So Far</a></h2><p>Below is the source code for the current state of the project. Notice how <code>lookUp</code> and <code>addSymbol</code> nicely fit into the monadic scheme. I haven't made any changes to the lexer and parser files.</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+module Main where
+
+import qualified Data.Map as M
+import Lexer (tokenize)
+import Parser (parse)
+import Evaluator
+
+main = do
+   loop (M.fromList [(&quot;pi&quot;, pi), (&quot;e&quot;, exp 1.0)])
+
+loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks  = tokenize str
+          tree  = parse toks
+          Ev ev = evaluate tree symTab
+      in
+          case ev of
+          Left msg -&gt; do
+              putStrLn $ &quot;Error: &quot; ++ msg
+              loop symTab -- use old symTab
+          Right (v, symTab') -&gt; do
+              print v
+              loop symTab'
+{-# START_FILE Lexer.hs #-}
+-- show
+module Lexer (Operator(..), Token(..), tokenize, lookAhead, accept) where
+-- /show
+import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)
+
+lookAhead :: [Token] -&gt; Token
+lookAhead [] = TokEnd
+lookAhead (t:ts) = t
+
+accept :: [Token] -&gt; [Token]
+accept [] = error &quot;Nothing to accept&quot;
+accept (t:ts) = ts
+
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier :: Char -&gt; String -&gt; [Token]
+identifier c cs = let (name, cs') = span isAlphaNum cs in
+                  TokIdent (c:name) : tokenize cs'
+
+number :: Char -&gt; String -&gt; [Token]
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+{-# START_FILE Parser.hs #-}
+-- show
+module Parser (Tree(..), parse) where
+-- /show
+import Lexer
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+parse :: [Token] -&gt; Tree
+parse toks = let (tree, toks') = expression toks
+             in
+               if null toks' 
+               then tree
+               else error $ &quot;Leftover tokens: &quot; ++ show toks'
+
+expression :: [Token] -&gt; (Tree, [Token])
+expression toks = 
+   let (termTree, toks') = term toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (exTree, toks'') = expression (accept toks') 
+            in (SumNode op termTree exTree, toks'')
+         TokAssign -&gt;
+            case termTree of
+               VarNode str -&gt; 
+                  let (exTree, toks'') = expression (accept toks') 
+                  in (AssignNode str exTree, toks'')
+               _ -&gt; error &quot;Only variables can be assigned to&quot;
+         _ -&gt; (termTree, toks')
+
+term :: [Token] -&gt; (Tree, [Token])
+term toks = 
+   let (facTree, toks') = factor toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Times, Div] -&gt;
+            let (termTree, toks'') = term (accept toks') 
+            in (ProdNode op facTree termTree, toks'')
+         _ -&gt; (facTree, toks')
+
+factor :: [Token] -&gt; (Tree, [Token])
+factor toks = 
+   case lookAhead toks of
+      (TokNum x)     -&gt; (NumNode x, accept toks)
+      (TokIdent str) -&gt; (VarNode str, accept toks)
+      (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (facTree, toks') = factor (accept toks) 
+            in (UnaryNode op facTree, toks')
+      TokLParen      -&gt; 
+         let (expTree, toks') = expression (accept toks)
+         in
+            if lookAhead toks' /= TokRParen 
+            then error &quot;Missing right parenthesis&quot;
+            else (expTree, accept toks')
+      _ -&gt; error $ &quot;Parse error on token: &quot; ++ show toks
+
+{-# START_FILE Evaluator.hs #-}
+module Evaluator (evaluate, Evaluator(..)) where
+
+import Lexer
+import Parser
+import qualified Data.Map as M
+
+newtype Evaluator a = Ev (Either String a)
+
+instance Monad Evaluator where
+    (Ev ev) &gt;&gt;= k =
+        case ev of
+          Left msg -&gt; Ev (Left msg)
+          Right v -&gt; k v
+    return v = Ev (Right v)
+    fail msg = Ev (Left msg)
+
+type SymTab = M.Map String Double
+
+evaluate :: Tree -&gt; SymTab -&gt; Evaluator (Double, SymTab)
+
+evaluate (SumNode op left right) symTab = do
+    (lft, symTab')  &lt;- evaluate left symTab
+    (rgt, symTab'') &lt;- evaluate right symTab'
+    case op of 
+        Plus  -&gt; return (lft + rgt, symTab'')
+        Minus -&gt; return (lft - rgt, symTab'')
+
+evaluate (ProdNode op left right) symTab = do
+    (lft, symTab')  &lt;- evaluate left symTab
+    (rgt, symTab'') &lt;- evaluate right symTab'
+    case op of
+        Times -&gt; return (lft * rgt, symTab)
+        Div   -&gt; return (lft / rgt, symTab)
+
+evaluate (UnaryNode op tree) symTab = do
+    (x, symTab') &lt;- evaluate tree symTab
+    case op of
+        Plus  -&gt; return ( x, symTab')
+        Minus -&gt; return (-x, symTab')
+
+evaluate (NumNode x) symTab = return (x, symTab)
+
+evaluate (VarNode str) symTab = lookUp str symTab
+
+evaluate (AssignNode str tree) symTab = do
+    (v, symTab')  &lt;- evaluate tree symTab
+    (_, symTab'') &lt;- addSymbol str v symTab'
+    return (v, symTab'')
+
+lookUp :: String -&gt; SymTab -&gt; Evaluator (Double, SymTab)
+lookUp str symTab = 
+    case M.lookup str symTab of
+      Just v  -&gt; return (v, symTab)
+      Nothing -&gt; fail (&quot;Undefined variable &quot; ++ str)
+
+addSymbol :: String -&gt; Double -&gt; SymTab -&gt; Evaluator ((), SymTab)
+addSymbol str val symTab = 
+    let symTab' = M.insert str val symTab
+    in return ((), symTab')
+</code></pre></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/basics-of-haskell/10_Error_Handling';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html><head><title>IHaskell Architecture: Communicating with IPython - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/gibiansky">Andrew Gibiansky</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/gibiansky/ihaskell">IHaskell Architecture: Communicating with IPython</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">IHaskell Architecture: Communicating with IPython</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Oct 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/gibiansky">Andrew Gibiansky</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/7654/71283e707f3723d189d5d23a772233f53a529665">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/gibiansky">See all content by Andrew Gibiansky</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#ipython-architecture">IPython Architecture</a></li><li><a href="#zeromq">ZeroMQ</a></li><li><a href="#kernel-sockets">Kernel Sockets</a></li><li><a href="#configuring-ipython">Configuring IPython</a></li><li><a href="#reading-messages">Reading Messages</a></li><li><a href="#important-messages">Important Messages</a></li><li><a href="#publishing-output">Publishing Output</a></li><li><a href="#further-development">Further Development</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p><a href="http://ipython.org/">IPython</a>, as many of you may already know, is a set of
+frontends to the Python language and ecosystem which provides powerful
+interactive shells, inline data visualization, support for GUI toolkits, as well
+as a beautiful browser-based notebook interface and a number of other nifty
+features. In particular, I've found that the
+<a href="http://ipython.org/notebook.html">notebook</a> interface with its inline
+documentation and easy re-evaluation is incredibly helpful for development and
+debugging. As I started working more and more with Haskell, I began to miss the
+notebook interface. Luckily, IPython was designed from the start to be
+polymorphic in the language being used: it specifies a protocol and requires a
+language interpreting backend (which it calls a &quot;kernel&quot;) which speaks that
+protocol. So, I set about creating a language kernel for Haskell, which I have
+creatively dubbed <a href="https://github.com/gibiansky/IHaskell">IHaskell</a>. Along the
+way, I found that the documentation for how I should go about creating this
+backend was rather sparse, so in this blog post I'd like to rectify that.</p><p>Before continuing, I'd like to reiterate that this is all regurgitating
+information found elsewhere on the internet in a hopefully useful manner. You
+may find the <a href="http://ipython.org/ipython-doc/dev/development/messaging.html">complete IPython messaging protocol</a>
+and this <a href="http://stackoverflow.com/questions/16240747/sending-messages-from-other-languages-to-an-ipython-kernel">StackOverflow question</a>
+useful as well.</p><h1 id="ipython-architecture"><a href="#ipython-architecture">IPython Architecture</a></h1><p>IPython is designed for a very flexible configuration. Not only do the frontend
+and language kernel communicate entirely asynchronously, but the design allows
+for multiple frontends talking to the same kernel. Although with the advent of
+the multi-user notebook this may become a reality, in my own use I have
+always had a single frontend interacting with a single kernel, so I will stick
+to that for now. Note that making a kernel work with multiple frontends does
+require more work than just a single frontend, and the details are all in the
+complete messaging spec (see above). That said, we can picture the basic IPython
+communication system as follows:</p><p><img alt="Simplified IPython Architecture" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fandrew.gibiansky.com%2Fimages%2Fipython.png" /></p><p>I'm going to refer to these quite often, so keep this diagram handy.</p><p>IPython communicates with its kernel backends using the
+<a href="http://zeromq.org/">ZeroMQ</a> networking and concurrency library. Luckily,
+bindings to ZeroMQ exist for most languages, so using it should cause no
+trouble.</p><h1 id="zeromq"><a href="#zeromq">ZeroMQ</a></h1><p>ZeroMQ allows you to establish generalized sockets for communication.
+Although the word 'socket' usually connotes networking, ZeroMQ sockets are
+slightly more general and are used as a communication and concurrency primitive.
+When creating the socket, it can be declared as a TCP, UDP, or even in-process
+socket which does not do any networking.</p><p>In addition to the method of transportation (TCP, UDP, IPC, and so on), each
+socket has a type which indicates how the socket communicates and what type of
+sockets it can communicate with. Although ZeroMQ defines a number of socket
+types in order to support very distributed and fault tolerant applications, the
+ones we are interested in are as follows:</p><ul><li><b>REP</b>: The only thing this socket does is receive requests and then reply to
+them.</li><li><b>REQ</b>: This socket is the opposite of <b>REP</b> - it sends requests and reads
+replies to them.</li><li><b>PUB</b>: This socket broadcasts (publishes) information to anyone who is listening.</li><li><b>SUB</b>: This socket subscribes to a <b>PUB</b> socket and listens to all its
+broadcasts.</li><li><b>ROUTER</b>: This socket can be used as a multi-user <b>REP</b> socket. It can
+receive requests from many other sockets and reply to all of them. <b>ROUTER</b>
+sockets store the identity of the source of the message before sending the
+message to the application, and the application receives messages from all
+origins. When replying to a message, the <b>ROUTER</b> socket will send the reply
+to the origin of the request.</li><li><b>DEALER</b>: This socket allows round-robin communication between sets of
+sockets. If a message is sent to a <b>DEALER</b>, the <b>DEALER</b> will send to all
+connected peers. This allows sets of sockets to communicate without explicit
+knowledge of all the sockets in the set.</li></ul><h1 id="kernel-sockets"><a href="#kernel-sockets">Kernel Sockets</a></h1><p>Although ZeroMQ is capable of much more, we are interested only in the sockets
+that we'll need for communicating with the IPython frontend. The backend should
+have the following ZeroMQ sockets:</p><ul><li><b>Heartbeat</b>: This is a <i>REP</i> socket which simply echoes anything its given.
+IPython uses this to check up on the kernel - if the heartbeat port does not
+respond within a few seconds, IPython assumes the kernel is dead and restarts
+it (or exits with an error).</li><li><b>Shell</b>, <b>Control</b>: These two <i>ROUTER</i> sockets - which, as far as I can tell, are
+identical for the purpose of single frontend use - are what IPython uses to
+query the language backend. Requests for code evaluation, object inspection,
+and so on are sent through these sockets, and each request must have a
+corresponding reply.</li><li><b>Stdin</b>: This <i>ROUTER</i> socket is a socket which the language backend can use
+to query the frontend for input. For instance, in Python, when <code>raw_input()</code>
+is used, the Python language backend requests input from the frontend.</li><li><b>IOPub</b>: This <i>PUB</i> socket is used to publish all code output. When a block
+of code finishes (or partially finishes) running, messages are sent to all
+subscribed frontends via this socket, so they can display the output. All
+output is sent via this mechanism - the reply messages on the <b>Shell</b>
+messages are very simple and only indicate success and failure.</li></ul><h1 id="configuring-ipython"><a href="#configuring-ipython">Configuring IPython</a></h1><p>We've now covered all the fundamental ideas behind the IPython communication
+framework, but before diving in to the messaging details, let's go over getting
+IPython set up to talk to your kernel. A language kernel should define its own
+IPython profile. When started with this profile, IPython will know to
+communicate with the particular language kernel instead of defaulting to the
+Python backend. In addition, other language-specific configuration (such as
+initialization, extensions, etc) can be added to this profile. You can create
+the profile via the shell commands</p><pre><code class="bash"># Create the profile.
+ipython profile create language-name
+
+# Start IPython with the profile.
+ipython console --profile language-name</code></pre><p>Once you've created the profile, you can edit the profile configuration to set
+the kernel. This will be located in your IPython configuration directory, which
+is going to be <code>~/.config/ipython</code> or <code>~/.ipython</code>, depending on your operating
+system. You will likely want to edit <code>profile_language-name/ipython-config.py</code>.
+In order to set the language kernel, use the following code:</p><pre><code class="python"># Set the kernel command.
+c = get_config()
+c.KernelManager.kernel_cmd = [&quot;/path/to/executable/kernel_exe&quot;,
+                              &quot;{connection_file}&quot;]            
+
+# Disable authentication.
+c.Session.key = b''
+c.Session.keyfile = b''                                </code></pre><p>With this configuration, your kernel will be called with a single command line
+parameter. This command line parameter will be a JSON file that looks like
+this:</p><pre><code class="javascript">{
+    &quot;stdin_port&quot;: 48691,
+    &quot;ip&quot;: &quot;127.0.0.1&quot;,
+    &quot;control_port&quot;: 44808, 
+    &quot;hb_port&quot;: 49691, 
+    &quot;signature_scheme&quot;: &quot;hmac-sha256&quot;, 
+    &quot;key&quot;: &quot;&quot;, 
+    &quot;shell_port&quot;: 40544, 
+    &quot;transport&quot;: &quot;tcp&quot;, 
+    &quot;iopub_port&quot;: 43462
+}</code></pre><p>This scheme defines the ports, IP, transport mechanism, and authentication
+mechanism that the kernel should use for communicating with the frontend. The
+kernel should then create sockets for each of those ports and bind them to the
+appropriate locations. (Note 'bind', as opposed to 'connect' - in ZeroMQ, 
+<a href="http://zeromq.org/area:faq#toc5">there's a difference</a>.)</p><h1 id="reading-messages"><a href="#reading-messages">Reading Messages</a></h1><p>Once IPython is attempting to connect to your kernel and you have sockets
+listening to the correct ports, you can begin parsing and replying to the
+messages IPython sends your kernel. There are one to two dozen different
+messages which are all described in the <a href="http://ipython.org/ipython-doc/dev/development/messaging.html">Messaging Protocol</a>.
+However, only some of them need to be implemented for a useful kernel.</p><p>Each message (except for those on the heartbeat port) is serialized as a stream
+of binary blobs. Quoting the messaging protocol:</p><pre><code class="python">[
+    b'u-u-i-d',         # Zmq identity(ies)
+    b'&lt;IDS|MSG&gt;',       # delimiter
+    b'baddad42',        # HMAC signature
+    b'{header}',        # Serialized header dict
+    b'{parent_header}', # Serialized parent header dict
+    b'{metadata}',      # Serialized metadata dict
+    b'{content}',       # Serialized content dict
+    b'blob',            # extra raw data buffer(s)
+    ...
+]</code></pre><p>The dictionaries are simply serialized JSON, and can be read as such.</p><p>If you are reading directly from ZeroMQ sockets, there are several small things
+to note:</p><ul><li>In order to read the ZeroMQ identities, read all the blobs until the
+identifier delimiter, &quot;\&quot;. This will be in several messages if there
+are several ZeroMQ identities involved, but most of the time this will be a
+single <a href="http://en.wikipedia.org/wiki/Uuid">UUID</a> followed by a &quot;\&quot;
+message.</li><li>The UUIDs are often used for comparison. For instance, the parent header UUID
+may be used by IPython to determine which message or which notebook is being
+replied to. However, IPython uses direct <i>string comparison</i> for UUID
+comparison, so &quot;f47ac10b-58cc-4372-a567-0e02b2c3d479&quot; and
+&quot;F47AC10B58CC4372A5670E02B2C3D479&quot; will be different, although they represent
+the same UUID. In addition, IPython console and IPython notebook will use
+differently formatted UUIDs (console uses the former version, while notebook
+uses the capitalized latter version). Anyway, be careful to always return the
+same UUID in the parent that you get in the request - parsing the UUID and
+later converting it back to a string may not work with all IPython frontends.</li></ul><h1 id="important-messages"><a href="#important-messages">Important Messages</a></h1><p>For a basic language kernel, you must respond to two message types. The first of
+these is <code>&quot;kernel_info_request&quot;</code>. A <code>kernel_info_request</code> message has no
+content, but indicates that a <code>&quot;kernel_info_reply&quot;</code> message should be sent back.
+The <code>kernel_info_reply</code> message will contain information about the kernel, such
+as the IPython version expected, the protocol version, the language, and so on.
+This message <i>must</i> be sent before the IPython frontend finishes its
+initialization, and full detail about what should go into these messages can be
+found <a href="http://ipython.org/ipython-doc/dev/development/messaging.html#kernel-info">here</a>.</p><p>The second and most important message type is <code>&quot;execute_request&quot;</code>. An
+<code>execute_request</code> messages indicates a request to evaluate a block of code. Note
+that this is not necessarily a single <i>line</i> of code - although the console will
+only send a single line, notebook interfaces may send significantly more. The
+full content of the message is available <a href="http://ipython.org/ipython-doc/dev/development/messaging.html#execute">here</a>.</p><p>An <code>&quot;execute_reply&quot;</code> message must eventually be sent in reply to the
+<code>execute_request</code>. The only two fields are the execution counter (so that the
+frontend knows which <code>execute_request</code> is being replied to) and the status of
+the execution, which is either <code>&quot;ok&quot;</code>, <code>&quot;error&quot;</code>, or <code>&quot;abort&quot;</code>. The
+<code>execute_reply</code> indicates that the processing of the source code has been
+completed and that it has been executed.</p><p>Note that the <code>execute_reply</code> message <i>doesn't</i> contain any information about
+the code that was just run! All information about the code and its output is
+sent in separate messages on the IOPub port.</p><h1 id="publishing-output"><a href="#publishing-output">Publishing Output</a></h1><p>When your language kernel receives an <code>execute_request</code>, it needs to send back
+an <code>execute_reply</code> as well as several messages on the IOPub port.</p><p>Before beginning the execution of the code, send a <a href="http://ipython.org/ipython-doc/dev/development/messaging.html#kernel-status">status update</a>
+to the frontend declaring that the kernel is busy. This <code>status</code> message informs
+the frontend that the kernel is currently busy, so that it can potentially
+display that information to the user.  Similarly, when code is done executing,
+you should send another status update, this time informing the frontend that the
+kernel is now idle.</p><p>During code execution, there are two types of data your kernel may want to send
+to the frontend. The <a href="http://ipython.org/ipython-doc/dev/development/messaging.html#display-data">display data message</a>
+message, <code>display_data</code>, allows you to publish multiple representations of your
+data. For instance, if your code outputs a table, it may do so simultaneously as
+printed monospace code, HTML, Latex, or even a PNG or SVG containing an image of
+the table. The kernel will then decide the optimal way to display your data,
+which can lead to beatiful presentations in the IPython notebook.</p><p>However, you will likely also want to publish raw output, such as the output
+from <code>print</code> statements or their equivalent. Although you could do
+this in the <code>display_data</code> messages, you should instead use the simpler output
+message <code>pyout</code>. The <a href="http://ipython.org/ipython-doc/dev/development/messaging.html#python-outputs">Python output</a>
+message indicates that this is the raw output data and <i>not</i> just a
+representation of some data, and this output data is generally presented
+differently in IPython frontends.</p><h1 id="further-development"><a href="#further-development">Further Development</a></h1><p>This describes a very basic IPython language kernel. However, there are many
+other messages required for full capability - things such as object
+introspection, looking up documentation, and so on. You can figure these out by
+thoroughly reading the messaging protocol.</p><p>If you'd like to read a reference implementation in Haskell, I urge you to look
+at (and, if you'd like to, contribute to) the development of <a href="https://github.com/gibiansky/IHaskell">IHaskell</a> - an
+IPython kernel for Haskell.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/gibiansky/ihaskell';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

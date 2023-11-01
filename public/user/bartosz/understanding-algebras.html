@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html><head><title>Understanding F-Algebras - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/understanding-algebras">Understanding F-Algebras</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Understanding F-Algebras</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 1 Oct 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/e75c3fdcaf44153258ff9b038804ffb19348d6d0">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/lenses-stores-and-yoneda">Previous content: Lenses, Stores, and Yoneda</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-essence-of-algebra">The Essence of Algebra</a><ul><li><a href="#the-essence-of-expression">The Essence of Expression</a></li><li><a href="#the-essence-of-evaluation">The Essence of Evaluation</a></li><li><a href="#f-algebras">F-Algebras</a></li></ul></li><li><a href="#initial-algebras">Initial Algebras</a></li><li><a href="#catamorphisms">Catamorphisms</a></li><li><a href="#foldr">foldr</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#acknowledgment">Acknowledgment</a></li><li><a href="#bibliography">Bibliography</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>What is algebra? Naively speaking algebra gives us the ability to perform calculations with numbers and symbols. Abstract algebra treats symbols as elements of a vector space: they can be multiplied by scalars and added to each other. But what makes algebras stand appart from linear spaces is the presence of vector multiplication: a bilinear product of vectors whose result is another vector (as opposed to inner product, which produces a scalar). Complex numbers, for instance, can be described as 2-d vectors, whose components are the real and the imaginary parts.</p><p>But nothing prepares you for this definition of F-algebra from the Haskell package <code>Control.Functor.Algebra</code>:</p><pre><code class="haskell">type Algebra f a = f a -&gt; a</code></pre><p>In this post I will try to bridge the gap between traditional algebras and more powerful F-algebras. F-algebras reduce the notion of an algebra to the bare minimum. It turns out that the three basic ingredients of an algebra are: a functor, a type, and a function. It always amazes me how much you can do with so little. In particular I will explain a very general way of evaluating arbitrary expressions using catamorphisms, which reduces to <code>foldr</code> when applied to lists (which can also be looked at as simple F-algebras).</p><h2 id="the-essence-of-algebra"><a href="#the-essence-of-algebra">The Essence of Algebra</a></h2><p>There are two really essential aspects of an algebra:</p><ol><li>The ability to form expressions and</li><li>The ability to evaluate these expressions</li></ol><h3 id="the-essence-of-expression"><a href="#the-essence-of-expression">The Essence of Expression</a></h3><p>The standard way of generating expressions is to use grammars. Here's an example of a grammar in Haskell:</p><pre><code class="haskell">data Expr = Const Int
+          | Add Expr Expr
+          | Mul Expr Expr</code></pre><p>Like most non-trivial grammars, this one is defined recursively. You may think of <code>Expr</code> as a self-similar fractal. An <code>Expr</code>, as a type, contains not only <code>Const Int</code>, but also <code>Add</code> and <code>Mult</code>, which inside contain <code>Expr</code>s, and so on. It's trees all the way down.</p><p><img alt="1. The fractal nature of an expression type" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fbartosz.com%2Fimages%2FAlgebras%2FFractalExpr.png" /></p><p>But recursion can be abstracted away to uncover the real primitives behind expressions. The trick is to define a non-recursive function and then find its <i>fixed point</i>.</p><p>Since here we are dealing with types, we have to define a <i>type function</i>, otherwise known as <i>type constructor</i>. Here's the non-recursive precursor of our grammar (later you'll see that the F in <code>ExprF</code> stands for functor):</p><pre><code class="haskell">ExprF a = Const Int
+        | Add a a
+        | Mul a a</code></pre><p>The fractally recursive structure of <code>Expr</code> can be generated by repeatedly applying <code>ExprF</code> to itself, as in <code>ExprF (ExprF (ExprF a)))</code>, etc. The more times we apply it, the deeper trees we can generate. After infinitely many iterations we should get to a fix point where further iterations make no difference. It means that applying one more <code>ExprF</code> would't change anything -- a fix point doesn't move under <code>ExprF</code>. It's like adding one to infinity: you get back infinity.</p><p>In Haskell, we can express the fix point of a type constructor <code>f</code> as a type:</p><pre><code class="haskell">newtype Fix f = Fx (f (Fix f))</code></pre><p>If you look at this formula closely, it is exactly what I said: <code>Fix f</code> is the type you get by applying <code>f</code> to itself. It's a fix point of <code>f</code>. (In the literature you'll sometimes see <code>Fix</code> called <code>Mu</code>.)</p><p>We only need one generic recursive type, <code>Fix</code>, to be able to crank out other recursive types from (non-recursive) type constructors.</p><p>One thing to observe about the data constructor of <code>Fix</code>: <code>Fx</code> can be treated as a function that takes an element of type <code>f (Fix f)</code> and produces a <code>Fix f</code>:</p><pre><code class="haskell">Fx :: f (Fix f) -&gt; Fix f</code></pre><p>We'll use this function later.</p><p>With that, we can redefine <code>Expr</code> as a fixed point of <code>ExprF</code>:</p><pre><code class="haskell">type Expr = Fix ExprF</code></pre><p>You might ask yourself: Are there any values of the type <code>Fix ExprF</code> at all? Is this type inhabited? It's a good question and the answer is yes, because there is one constructor of <code>ExprF</code> that doesn't depend on <code>a</code>. This constructor is <code>Const Int</code>. We can bootstrap ourselves because we can always create a leaf <code>Expr</code>, for instance:</p><pre><code class="haskell">val :: Fix ExprF
+val = Fx (Const 12)</code></pre><p>Once we have that ability, we can create more and more complex values using the other two constructors of <code>ExprF</code>, as in:</p><pre><code class="haskell">testExpr = Fx $ (Fx $ (Fx $ Const 2) `Add` 
+                (Fx $ Const 3)) `Mul` (Fx $ Const 4)</code></pre><h3 id="the-essence-of-evaluation"><a href="#the-essence-of-evaluation">The Essence of Evaluation</a></h3><p>Evaluation is a recipe for extracting a single value from an expression. In order to evaluate expressions which are defined recursively, the evaluation has to proceed recursively as well.</p><p>Again, recursion can be abstracted away -- all we really need is an evaluation strategy for each top level construct (generated, for instance, by <code>ExprF</code>) and a way to evaluate its children. Let's call this non-recursive top-level evaluator <code>alg</code> and the recursive one (for evaluating children) <code>eval</code>. Both <code>alg</code> and <code>eval</code> return values of the same type, <code>a</code>.</p><p>First, we need to be able to map <code>eval</code> over the children of an expression. Did somebody mentioned <i>mapping</i>? That means we need a functor!</p><p>Indeed, it's easy to convince ourselves that our <code>ExprF</code> is a functor:</p><pre><code class="haskell">instance Functor ExprF where
+    fmap eval (Const i) = Const i
+    fmap eval (left `Add` right) = (eval left) `Add` (eval right)
+    fmap eval (left `Mul` right) = (eval left) `Mul` (eval right)</code></pre><p>An F-algebra is built on top of a functor -- any functor. (Strictly speaking, an <i>endofunctor</i>: it maps a given category into itself -- in our examples the category refers to <b>Hask</b> -- the category of all Haskell types).</p><p>Now suppose we know how to evaluate all the children of <code>Add</code> and <code>Mul</code> in an <code>Expr</code>, giving us values of some type <code>a</code>. All that's left is to evaluate (<code>Add a a</code>) and (<code>Mul a a</code>) in <code>ExprF a</code>. (We also need to evaluate <code>Const Int</code>, but that doesn't involve recursion.)</p><p>Here's an example of such an evaluator that produces <code>Int</code> values:</p><pre><code class="haskell">alg :: ExprF Int -&gt; Int
+
+alg (Const i)   = i
+alg (x `Add` y) = x + y
+alg (x `Mul` y) = x * y</code></pre><p>(Notice that we are free to add and multiply <code>x</code> and <code>y</code>, since they are just <code>Int</code>s.)</p><p>What I have done here is to pick one particular type, <code>Int</code>, as my evaluation target. This type is called the <i>carrier</i> type of the algebra. I then defined a function <code>alg</code> from the image of <code>Int</code> under the functor <code>ExprF</code> back to <code>Int</code>.</p><p>Just to show that the carrier type is arbitrary, let me define another evaluator that returns a string:</p><pre><code class="haskell">alg' :: ExprF String -&gt; String
+
+alg' (Const i)   = [chr (ord 'a' + i)]
+alg' (x `Add` y) = x ++ y
+alg' (x `Mul` y) = concat [[a, b] | a &lt;- x, b &lt;- y]</code></pre><h3 id="f-algebras"><a href="#f-algebras">F-Algebras</a></h3><p>We are now ready to define F-algebras in the most general terms. First I'll use the language of category theory and then quickly translate it to Haskell.</p><p>An F-algebra consists of:</p><ol><li>an endofunctor F in a category C,</li><li>an object A in that category, and</li><li>a morphism from F(A) to A.</li></ol><p>An F-algebra in Haskell is defined by a functor <code>f</code>, a carrier type <code>a</code>, and a function from (<code>f a</code>) to <code>a</code>. (The underlying category is <b>Hask</b>.)</p><p>Right about now the definition with which I started this post should start making sense:</p><pre><code class="haskell">type Algebra f a = f a -&gt; a</code></pre><p>For a given functor <code>f</code> and a carrier type <code>a</code> the algebra is defined by specifying just one function. Often this function itself is called the algebra, hence my use of the name <code>alg</code> in previous examples.</p><p>Back to our conrete example, the functor is <code>ExprF</code>, the carrier type is <code>Int</code> and the function is <code>alg</code>:</p><pre><code class="haskell">-- My simple algebra
+type SimpleA = Algebra ExprF Int
+
+alg :: SimpleA
+alg (Const i)   = i
+alg (x `Add` y) = x + y
+alg (x `Mul` y) = x * y</code></pre><p>The only thing that's still missing is the definition of the function <code>eval</code>, which takes care of evaluating children of an expression. It turns out this function can be defined in a very general form. To do that we'll need to familiarize ourselves with the notion of the initial algebra.</p><h2 id="initial-algebras"><a href="#initial-algebras">Initial Algebras</a></h2><p>There are many algebras based on a given functor (I've shown you two so far). But there is one algebra to bind them all -- the initial algebra. In fact you've already seen elements of it. Remember the <code>Fix</code> type function?</p><pre><code class="haskell">newtype Fix f = Fx (f (Fix f))</code></pre><p>Given any functor <code>f</code> it defines a new unique type <code>Fix f</code>. We will now lift ourselves by the bootstraps. We'll use this type as a carrier in the definition of another algebra. This will turn out to be our initial algebra.</p><p>First, let's go back to our example and, instead of using <code>Int</code> or <code>String</code>, use (<code>Fix ExprF</code>) as the carrier type:</p><pre><code class="haskell">type ExprInitAlg = Algebra ExprF (Fix ExprF)</code></pre><p>We have the functor and the carrier type. To complete the triple we need to define a function with the following signature:</p><pre><code class="haskell">ex_init_alg :: ExprF (Fix ExprF) -&gt; Fix ExprF</code></pre><p>Guess what, we already have a function of this type. It's the constructor of <code>Fix</code>:</p><pre><code class="haskell">ex_init_alg = Fx</code></pre><p>(Replace <code>f</code> with <code>ExprF</code> in the definition of <code>Fix</code> to see that the type signatures match.)</p><p>But wait! What does this &quot;evaluator&quot; evaluate? Given (<code>ExprF Expr</code>) it produces an <code>Expr</code>. For instance, when given,</p><pre><code class="haskell">Add (Fx $ Const 2) (Fx $ Const 3)</code></pre><p>it will produce an <code>Expr</code>:</p><pre><code class="haskell">Fx $ Add (Fx $ Const 2) (Fx $ Const 3)</code></pre><p>This evaluator doesn't <i>reduce</i> anything like the evaluators we've been using so far. It is not <i>lossy</i>. It preserves all the information passed to it as input. In comparison, all other evaluators potentially <i>lose</i> some information. They return some kind of summary of the information encoded in the data structure. In this sense, the algebra we have just defined is at least as powerful as all other algebras based on the same functor. That's why it's called the <i>initial</i> algebra.</p><p>The word <i>initial</i> has a special meaning in category theory. The initial algebra has the property that there exists a (unique) homomophism from it to any other algebra based on the same functor.</p><p>A homomoprhism is a mapping that preserves certain structure. In the case of algebras, a homomorphism has to preserve the algebraic structure. An algebra consists of a functor, a carrier type, and an evaluator. Since we are keeping the functor fixed, we only need to map carrier types and evaluators.</p><p>In fact, a homomorphism of algebras is fully specified by a function that maps one carrier to another and obeys certain properties. Since the carrier of the intial algebra is <code>Fix f</code>, we need a function:</p><pre><code class="haskell">g :: Fix f -&gt; a</code></pre><p>where <code>a</code> is the carrier for the other algebra. That algebra has an evaluator <code>alg</code> with the signature:</p><pre><code class="haskell">alg :: f a -&gt; a</code></pre><p><img alt="2. Homomorphism from the initial algebra to an arbitrary algebra" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fbartosz.com%2Fimages%2FAlgebras%2FHomomorphism.png" /></p><p>The special property <code>g</code> has to obey is that it shouldn't matter whether we first use the initial algebra's evaluator and then aply <code>g</code>, or first apply <code>g</code> (through <code>fmap</code>) and then the second algebra's evaluator, <code>alg</code>. Let's check the types involved to convince ourselves that this requirement makes sense.</p><p>The first evaluator uses <code>Fx</code> to go from <code>f (Fix f)</code> to <code>Fix f</code>. Then <code>g</code> takes <code>Fix f</code> to <code>a</code>.</p><p>The alternate route uses <code>fmap g</code> to map <code>f (Fix f)</code> to <code>f a</code>, followed by <code>alg</code> from <code>f a</code> to <code>a</code>. Notice that this is the first time that we used the functorial property of <code>f</code>. It allowed us to lift the function <code>g</code> to <code>fmap g</code>.</p><p>The crucial observation is that <code>Fx</code> is a losless transformation and it can be easily inverted. The inverse of <code>Fx</code> is <code>unFix</code>:</p><pre><code class="haskell">unFix :: Fix f -&gt; f (Fix f)
+unFix (Fx x) = x</code></pre><p>With one reversal of the arrow <code>Fx</code> to <code>unFix</code>, it's easy to see that going the route of <code>g</code> is the same as taking the detour through <code>unFix</code>, followed by <code>fmap g</code>, and then <code>alg</code>:</p><p><img alt="3. Defining a catamorphism" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fbartosz.com%2Fimages%2FAlgebras%2FCata.png" /></p><pre><code class="haskell">g = alg . (fmap g) . unFix</code></pre><p>We can use this equation as a recursive definition of <code>g</code>. We know that this definition converges because the application of <code>g</code> through <code>fmap</code> deals with subtrees of the original tree, and they are strictly smaller than the original tree.</p><p>We can abstract the evaluation further by factoring out the dependence on <code>alg</code> (redefining <code>g = cata alg</code>):</p><pre><code class="haskell">cata :: Functor f =&gt; (f a -&gt; a) -&gt; Fix f -&gt; a
+cata alg = alg . fmap (cata alg) . unFix</code></pre><p>The result is a very generic function called a <i>catamorphism</i>. We have constructed the catamorphism from an algebra in order to prove that the fix point of this algebra's functor is the initial algebra. But wait, haven't we just created the recursive evaluator we've been looking for?</p><h2 id="catamorphisms"><a href="#catamorphisms">Catamorphisms</a></h2><p>Look again at the type signature of the catamorphism with some additional (redundant) parentheses:</p><pre><code class="haskell">cata :: Functor f =&gt; (f a -&gt; a) -&gt; (Fix f -&gt; a)</code></pre><p>It takes an arbitrary algebra, which is a non-recursive function <code>f a -&gt; a</code>, and returns an evaluator function, (<code>Fix f -&gt; a</code>). This function takes an expression of the type <code>Fix f</code> and evaluates it down to type <code>a</code>. A catamorphism lets us evaluate arbitrarily nested expressions!</p><p>Let's try it with our simple functor <code>ExprF</code>, which we used to generate nested expressions of the type <code>Fix ExprF</code>.</p><p>We have already defined an <code>alg</code> for it:</p><pre><code class="haskell">type SimpleA = Algebra ExprF Int
+
+alg :: SimpleA
+alg (Const i)   = i
+alg (x `Add` y) = x + y
+alg (x `Mul` y) = x * y</code></pre><p>So our full-blown evaluator is just:</p><pre><code class="haskell">eval :: Fix ExprF -&gt; Int
+-- eval = cata alg = alg . fmap (cata alg) . unFix
+eval = alg . fmap eval . unFix </code></pre><p>Let's analyze it: First, <code>unFix</code> allows us to peek at the top level of the input expression: It's either a leaf <code>Const i</code> or an <code>Add</code> or <code>Mul</code> whose children are, again, full-blown expression, albeit one degree shallower. We evaluate the children by recursively applying <code>eval</code> to them. We end up with a single level tree whose leaves are now evaluated down to <code>Int</code>s. That allows us to apply <code>alg</code> and get the result.</p><p>You can test this on a sample expression:</p><pre><code class="haskell">testExpr = Fx $ (Fx $ (Fx $ Const 2) `Add` 
+                (Fx $ Const 3)) `Mul` (Fx $ Const 4)</code></pre><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor #-}
+data ExprF r = Const Int
+             | Add r r
+             | Mul r r
+    deriving Functor
+
+newtype Fix f = Fx (f (Fix f))
+unFix :: Fix f -&gt; f (Fix f)
+unFix (Fx x) = x
+
+cata :: Functor f =&gt; (f a -&gt; a) -&gt; Fix f -&gt; a
+cata alg = alg . fmap (cata alg) . unFix
+
+alg :: ExprF Int -&gt; Int
+alg (Const i)   = i
+alg (x `Add` y) = x + y
+alg (x `Mul` y) = x * y
+
+eval :: Fix ExprF -&gt; Int
+eval = cata alg
+-- show
+testExpr = Fx $ 
+             (Fx $ (Fx $ Const 2) `Add` (Fx $ Const 3)) `Mul` 
+             (Fx $ Const 4)
+
+main = print $ eval $ testExpr</code></pre><h2 id="foldr"><a href="#foldr">foldr</a></h2><p>Traversing and evaluating a recursive data structure? Isn't that what <code>foldr</code> does for lists?</p><p>Indeed, it's easy to create algebras for lists. We start with a functor:</p><pre><code class="haskell">data ListF a b = Nil | Cons a b
+
+instance Functor (ListF a) where
+    fmap f Nil = Nil
+    fmap f (Cons e x) = Cons e (f x)</code></pre><p>The first type argument to <code>ListF</code> is the type of the element, the second is the one we will recurse into.</p><p>Here's a simple algebra with the carrier type <code>Int</code>:</p><pre><code class="haskell">algSum :: ListF Int Int -&gt; Int
+algSum Nil = 0
+algSum (Cons e acc) = e + acc</code></pre><p>Using the constructor <code>Fx</code> we can recursively generate arbitrary lists:</p><pre><code class="haskell">lst :: Fix (ListF Int)
+lst = Fx $ Cons 2 (Fx $ Cons 3 (Fx $ Cons 4 (Fx Nil)))</code></pre><p>Finally, we can evaluate our list using our generic catamorphism:</p><pre><code class="haskell">cata algSum lst</code></pre><p>Of course, we can do exactly the same thing with a more traditional list and <code>foldr</code>:</p><pre><code class="haskell">foldr (\e acc -&gt; e + acc) 0 [2..4]</code></pre><p>You should see the obvious paralles between the definition of the <code>algSum</code> algebra and the two arguments to <code>foldr</code>. The difference is that the algebraic approach can be generalized beyond lists to any recursive data structure.</p><p>Here's the complete list example:</p><pre><code class="active haskell">newtype Fix f = Fx (f (Fix f))
+
+unFix :: Fix f -&gt; f (Fix f)
+unFix (Fx x) = x
+
+cata :: Functor f =&gt; (f a -&gt; a) -&gt; Fix f -&gt; a
+cata alg = alg . fmap (cata alg) . unFix
+-- show
+data ListF a b = Nil | Cons a b
+
+instance Functor (ListF a) where
+    fmap f Nil = Nil
+    fmap f (Cons e x) = Cons e (f x)
+
+algSum :: ListF Int Int -&gt; Int
+algSum Nil = 0
+algSum (Cons e acc) = e + acc
+
+lst :: Fix (ListF Int)
+lst = Fx $ Cons 2 (Fx $ Cons 3 (Fx $ Cons 4 (Fx Nil)))
+
+main = do
+    print $ (cata algSum) lst
+    print $ foldr (\e acc -&gt; e + acc) 0 [2, 3, 4]</code></pre><h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2><p>Here are the main points of this post:</p><ol><li>Just like recursive functions are defined as fixed points of regular functions, recursive (nested) data structures can be defined as fixed points of regular type constructors.</li><li>Functors are interesting type constructors because they give rise to nested data structures that support recursive evaluation (generalized folding).</li><li>An F-algebra is defined by a functor <code>f</code>, a carrier type <code>a</code>, and a function from <code>f a</code> to <code>a</code>.</li><li>There is one initial algebra that maps into all algebras defined over a given functor. This algebra's carrier type is the fix point of the functor in question.</li><li>The unique mapping between the initial algebra and any other algebra over the same functor is generated by a catamorphism.</li><li>Catamophism takes a simple algebra and creates a recursive evaluator for a nested data structure (the fix point of the functor in question). This is a generalization of list folding to arbitrary recursive data structures.</li></ol><h2 id="acknowledgment"><a href="#acknowledgment">Acknowledgment</a></h2><p>I'm greatful to Gabriel Gonzales for reviewing this post. Gabriel made an interesting observation:</p><p>&quot;Actually, even in Haskell recursion is not completely first class because the compiler does a terrible job of optimizing recursive code.  This is why F-algebras and F-coalgebras are pervasive in high-performance Haskell libraries like <code>vector</code>, because they transform recursive code to non-recursive code, and the compiler does an amazing job of optimizing non-recursive code.&quot;</p><h2 id="bibliography"><a href="#bibliography">Bibliography</a></h2><p>Most examples in my post were taken from the first two publications below:</p><ol><li><a href="http://www.timphilipwilliams.com/posts/2013-01-16-fixing-gadts.html">Fixing GADTs</a> by Tim Philip Williams.</li><li><a href="http://web.cecs.pdx.edu/~sheard/course/AdvancedFP/notes/CoAlgebras/Code.html">Advanced Functional Programming</a>, Tim Sheard's course notes.</li><li><a href="http://research.microsoft.com/en-us/um/people/emeijer/Papers/fpca91.pdf">Functional Programming with Bananas, Lenses, Envelopes, and Barbed Wire</a> by Erik Meijer, Maarten Fokkinga, and Ross Paterson.</li><li><a href="http://homepages.inf.ed.ac.uk/wadler/papers/free-rectypes/free-rectypes.txt">Recursive types for free!</a> by Philip Wadler</li><li><a href="http://www.haskell.org/haskellwiki/Catamorphisms">Catamorphisms</a> in Haskell Wiki</li></ol></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/understanding-algebras';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

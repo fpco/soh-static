@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html><head><title>Basic Syntax Extensions - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/PthariensFlame">Alexander Altman</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions">Guide to GHC Extensions</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/basic-syntax-extensions">Basic Syntax Extensions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Basic Syntax Extensions</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">26 Jan 2016</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/PthariensFlame">Alexander Altman</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5324/358b4b5e030191bfecc5b821d536b6375fad2563">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/language-standards">Previous content: Language Standards</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/pattern-and-guard-extensions">Next content: Pattern and Guard Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions">Go up to: Guide to GHC Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame">See all content by Alexander Altman</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#postfixoperators">PostfixOperators</a></li><li><a href="#tuplesections">TupleSections</a></li><li><a href="#packageimports">PackageImports</a></li><li><a href="#overloadedstrings">OverloadedStrings</a></li><li><a href="#unicodesyntax">UnicodeSyntax</a></li><li><a href="#recursivedo-and-dorec">RecursiveDo and DoRec</a></li><li><a href="#lambdacase">LambdaCase</a></li><li><a href="#emptycase">EmptyCase</a></li><li><a href="#multiwayif">MultiWayIf</a></li><li><a href="#binaryliterals">BinaryLiterals</a></li><li><a href="#negativeliterals">NegativeLiterals</a></li><li><a href="#numdecimals">NumDecimals</a></li><li><a href="#doandifthenelse">DoAndIfThenElse</a></li><li><a href="#nondecreasingindentation">NondecreasingIndentation</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>These extensions simply enhance Haskell’s core syntax without providing any actually new semantic features.</p><h1 id="postfixoperators"><a href="#postfixoperators"><code>PostfixOperators</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>PostfixOperators</code> extension allows you some slight extra leeway with Haskell’s operator section syntax.  Normally, when you write, for example:</p><pre><code class="haskell">(4 !)</code></pre><p>it expands into:</p><pre><code class="haskell">\x -&gt; 4 ! x</code></pre><p>or, equivalently:</p><pre><code class="haskell">\x -&gt; (!) 4 x</code></pre><p><code>PostfixOperators</code> instead expands this left section into:</p><pre><code class="haskell">(!) 4</code></pre><p>which may look the same to you initially, and it behaves the same way where they both compile, but the new form allows GHC to be somewhat more lenient about the type of <code>(!)</code>.</p><p>For example, <code>(!)</code> can now be the factorial function and have the type:</p><pre><code class="haskell">(!) :: Integer -&gt; Integer</code></pre><p>Unfortunately, <code>PostfixOperators</code> does not allow you to <i>define</i> operators in postfix fashion, it just allows you to <i>use</i> them that way.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE PostfixOperators #-}
+
+(!) :: Integer -&gt; Integer
+(!) n | n == 0    = 1
+      | n &gt;  0    = n * ((n - 1) !)
+      | otherwise = error &quot;factorial of a negative number&quot;
+
+main = print (4 !)</code></pre><h1 id="tuplesections"><a href="#tuplesections"><code>TupleSections</code></a></h1><p><b>Available in:  GHC 6.12 and later</b></p><p>The <code>TupleSections</code> extension allows you to omit values from the tuple syntax, unifying the standard tuple sugar with the tuple constructor syntax to form one generalized syntax for tuples.</p><p>Normally, tuples are constructed with the standard tuple sugar, which looks like this:</p><pre><code class="haskell">(1, &quot;hello&quot;, 6.5, Just (), [5, 5, 6, 7])</code></pre><p>This could be considered shorthand for the following explicit tuple constructor use:</p><pre><code class="haskell">(,,,,) 1 &quot;hello&quot; 6.5 (Just ()) [5, 5, 6, 7]</code></pre><p>However, the explicit tuple constructor <code>(,,,,)</code> could just as easily be considered section sugar for tuples, expanding to:</p><pre><code class="haskell">\v w x y z -&gt; (v, w, x, y, z)</code></pre><p>Looking at it this way allows us to ask, “Why can’t we partially section a tuple?  After all, <code>(+)</code> is valid, <code>(,)</code> is valid, and <code>(1 +)</code> is valid, but <code>(1,)</code> is not valid.  The <code>TupleSections</code> extension fixes this oversight.</p><p>With <code>TupleSections</code> you can now write, for example:</p><pre><code class="haskell">(1, &quot;hello&quot;,, Just (),)</code></pre><p>and have it mean the same as</p><pre><code class="haskell">\x y -&gt; (1, &quot;hello&quot;, x, Just (), y)</code></pre><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE TupleSections #-}
+
+main = print $ map (1, &quot;hello&quot;, 6.5,, [5, 5, 6, 7]) [Just (), Nothing]</code></pre><h1 id="packageimports"><a href="#packageimports"><code>PackageImports</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>Let’s say you want to import module <code>Data.Module.X</code> from package <code>package-one</code>, but <code>package-two</code> is also installed and also contains a module named <code>Data.Module.X</code>.  You could try to mess with package hiding, either manually or through cabal, but sometimes you might want some other module from <code>package-two</code>, so hiding it is not an option.</p><p>Enter the <code>PackageImports</code> extension.  Rather than writing:</p><pre><code class="haskell">import Data.Module.X</code></pre><p>and hoping that GHC gets the one from the right package, <code>PackageImports</code> lets you write:</p><pre><code class="haskell">import &quot;package-one&quot; Data.Module.X</code></pre><p>and explicitly specify the package you want to import that module from.  You can even import from a specific package version:</p><pre><code class="haskell">import &quot;package-one-0.1.0.1&quot; Data.Module.X</code></pre><p>You can use <code>PackageImports</code> in combination with any other variant of the <code>import</code> syntax, and you can use both package-qualified imports and regular imports in the same file.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+import Data.Monoid (Sum(..))
+import &quot;base&quot; Data.Foldable (foldMap)
+import qualified &quot;containers&quot; Data.Map as Map
+
+main = print . getSum . foldMap Sum $ Map.fromList [(1, 2), (3, 4)]</code></pre><h1 id="overloadedstrings"><a href="#overloadedstrings"><code>OverloadedStrings</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>By default, Haskell’s numeric literals are polymorphic over <code>Num</code> (in the case of integer literals) or <code>Fractional</code> (in the case of decimal literals).  That is, you can write:</p><pre><code class="haskell">a :: Int
+a = 1
+
+b :: Double
+b = 1
+
+c :: Float
+c = 3.5
+
+d :: Rational
+d = 3.5</code></pre><p>and it just works as expected.</p><p>String literals, on the other hand, are always of type <code>String</code>, and are not polymorphic at all.  The <code>OverloadedStrings</code> extension corrects this, making string literals polymorphic over the <code>IsString</code> type class, which is found in the <code>Data.String</code> module in the <code>base</code> package.  That is, you can write:</p><pre><code class="haskell">a :: String
+a = &quot;hello&quot;
+
+b :: Text
+b = &quot;hello&quot;</code></pre><p><code>OverloadedStrings</code> also adds <code>IsString</code> to the list of defaultable type classes, so you can use types like <code>String</code>, <code>Text</code>, and <code>Bytestring</code> in a <code>default</code> declaration.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+import qualified Data.Text.IO as T
+
+main = do putStrLn   &quot;Hello as String!&quot;
+          T.putStrLn &quot;Hello as Text!&quot;</code></pre><h1 id="unicodesyntax"><a href="#unicodesyntax"><code>UnicodeSyntax</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>With the <code>UnicodeSyntax</code> extension (along with the <a href="https://hackage.haskell.org/package/base-unicode-symbols"><code>base-unicode-symbols</code></a> and <a href="https://hackage.haskell.org/package/containers-unicode-symbols"><code>containers-unicode-symbols</code></a> packages), you can use Unicode alternatives to many of the standard operators.  The <code>UnicodeSyntax</code> extension itself handles just the operators and symbols that are built into the Haskell language, whereas the <code>base-unicode-symbols</code> package handles the operators and functions provided by the <a href="https://hackage.haskell.org/package/base"><code>base</code></a> package and the <code>containers-unicode-symbols</code> package handles the operators and functions provided by the <a href="https://hackage.haskell.org/package/containers"><code>containers</code></a> package.</p><p>For the package-based Unicode symbols, you need to import the appropriate syntax module.  For example, if you wanted to use Unicode symbols when working with <code>Data.Map</code>, you would import <code>Data.Map.Unicode</code>.</p><p>The various aliased ASCII syntax pieces, values, and types, along with their <code>UnicodeSyntax</code> equivalents, are as follows:</p><ul><li>From the <code>UnicodeSyntax</code> extension<ul><li><code>::</code> = <code>∷</code></li><li><code>=&gt;</code> = <code>⇒</code></li><li><code>forall</code> = <code>∀</code></li><li><code>-&gt;</code> = <code>→</code></li><li><code>&lt;-</code> = <code>←</code></li><li><code>-&lt;</code> = <code>⤙</code></li><li><code>&gt;-</code> = <code>⤚</code></li><li><code>-&lt;&lt;</code> = <code>⤛</code></li><li><code>&gt;&gt;-</code> = <code>⤜</code></li><li><code>*</code> = <code>★</code></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols"><code>base-unicode-symbols</code></a> package<ul><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html"><code>Prelude.Unicode</code></a> module<ul><li>Values<ul><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-172-"><code>(¬)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-38--38-"><code>(&amp;&amp;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8744-"><code>(∧)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-124--124-"><code>(||)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8743-"><code>(∨)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>(==)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8801-"><code>(≡)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>(/=)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8800-"><code>(≠)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8802-"><code>(≢)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-60--61-"><code>&lt;=</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8804-"><code>≤</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8815-"><code>≯</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-62--61-"><code>&gt;=</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8805-"><code>≥</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8814-"><code>≮</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:pi"><code>pi</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-960-"><code>π</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-47-"><code>(/)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-247-"><code>(÷)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:-42-"><code>(*)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8901-"><code>(⋅)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:."><code>(.)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8728-"><code>(∘)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:-43--43-"><code>(++)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-10746-"><code>(⧺)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:elem"><code>elem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:notElem"><code>notElem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:undefined"><code>undefined</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#v:-8869-"><code>(⊥)</code></a></li></ul></li><li>Types<ul><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#t:Integer"><code>Integer</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#t:-8484-"><code>ℤ</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#t:Rational"><code>Rational</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Prelude-Unicode.html#t:-8474-"><code>ℚ</code></a></li></ul></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Applicative-Unicode.html"><code>Control.Applicative.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Control-Applicative.html#v:-60--42--62-"><code>(&lt;*&gt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Applicative-Unicode.html#v:-8859-"><code>(⊛)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Applicative.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Applicative-Unicode.html#v:-8709-"><code>(∅)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html"><code>Control.Arrow.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Control-Arrow.html#v:-62--62--62-"><code>(&gt;&gt;&gt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html#v:-8921-"><code>(⋙)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Arrow.html#v:-60--60--60-"><code>(&lt;&lt;&lt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html#v:-8920-"><code>(⋘)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Arrow.html#v:-42--42--42-"><code>(***)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html#v:-8258-"><code>(⁂)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Arrow.html#v:-43--43--43-"><code>(+++)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html#v:-10747-"><code>(⧻)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Arrow.html#v:-124--124--124-"><code>(|||)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Arrow-Unicode.html#v:-10996-"><code>(⫴)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Category-Unicode.html"><code>Control.Category.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Control-Category.html#v:."><code>(.)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Category-Unicode.html#v:-8728-"><code>(∘)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Category.html#v:-62--62--62-"><code>(&gt;&gt;&gt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Category-Unicode.html#v:-8921-"><code>(⋙)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Category.html#v:-60--60--60-"><code>(&lt;&lt;&lt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Category-Unicode.html#v:-8920-"><code>(⋘)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Monad-Unicode.html"><code>Control.Monad.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Control-Monad.html#v:-62--62--61-"><code>(&gt;&gt;=)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Monad-Unicode.html#v:-8811--61-"><code>(≫=)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Monad.html#v:-62--62-"><code>(&gt;&gt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Monad-Unicode.html#v:-8811-"><code>(≫)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Control-Monad.html#v:-61--60--60-"><code>(=&lt;&lt;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Control-Monad-Unicode.html#v:-61--8810-"><code>(=≪)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Bool-Unicode.html"><code>Data.Bool.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Bool.html#v:-38--38-"><code>(&amp;&amp;)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Bool-Unicode.html#v:-8743-"><code>(∧)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Bool.html#v:-124--124-"><code>(||)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Bool-Unicode.html#v:-8744-"><code>(∨)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Bool.html#v:not"><code>not</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Bool-Unicode.html#v:-172-"><code>(¬)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Eq-Unicode.html"><code>Data.Eq.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Eq.html#v:-61--61-"><code>(==)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Eq-Unicode.html#v:-8801-"><code>(≡)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Eq.html#v:-47--61-"><code>(/=)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Eq-Unicode.html#v:-8800-"><code>(≠)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Eq-Unicode.html#v:-8802-"><code>(≢)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Foldable-Unicode.html"><code>Data.Foldable.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Foldable.html#v:elem"><code>elem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Foldable-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Data-Foldable.html#v:elem"><code>elem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Foldable-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Foldable.html#v:notElem"><code>notElem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Foldable-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Data-Foldable.html#v:notElem"><code>notElem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Foldable-Unicode.html#v:-8716-"><code>(∌)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Function-Unicode.html"><code>Data.Function.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Function.html#v:."><code>(.)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Function-Unicode.html#v:-8728-"><code>(∘)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html"><code>Data.List.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:-43--43-"><code>(++)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-10746-"><code>(⧺)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:elem"><code>elem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:elem"><code>elem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:notElem"><code>notElem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:notElem"><code>notElem</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:-92--92-"><code>(\\)</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:union"><code>union</code></a><code> (x </code><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:-92--92-"><code>\\</code></a><code> y) (y </code><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:-92--92-"><code>\\</code></a><code> x)</code> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-List.html#v:intersect"><code>intersect</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-List-Unicode.html#v:-8745-"><code>(∩)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Monoid-Unicode.html"><code>Data.Monoid.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Monoid.html#v:mempty"><code>mempty</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Monoid-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Monoid.html#v:mappend"><code>mappend</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Monoid-Unicode.html#v:-8853-"><code>(⊕)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Ord-Unicode.html"><code>Data.Ord.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/base/docs/Data-Ord.html#v:-60--61-"><code>&lt;=</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Ord-Unicode.html#v:-8804-"><code>≤</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Ord-Unicode.html#v:-8815-"><code>≯</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Data-Ord.html#v:-62--61-"><code>&gt;=</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Ord-Unicode.html#v:-8805-"><code>≥</code></a> = <a href="https://hackage.haskell.org/package/base-unicode-symbols/docs/Data-Ord-Unicode.html#v:-8814-"><code>≮</code></a></li></ul></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols"><code>containers-unicode-symbols</code></a> package<ul><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Sequence-Unicode.html"><code>Data.Sequence.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Sequence.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Sequence-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Sequence.html#v:-60--124-"><code>(&lt;|)</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Sequence-Unicode.html#v:-8882-"><code>(⊲)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Sequence.html#v:-124--62-"><code>(|&gt;)</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Sequence-Unicode.html#v:-8883-"><code>(⊳)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Sequence.html#v:-62--60-"><code>(&gt;&lt;)</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Sequence-Unicode.html#v:-8904-"><code>(⋈)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html"><code>Data.Set.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8745-"><code>(∩)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isSubsetOf"><code>isSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8838-"><code>(⊆)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isSubsetOf"><code>isSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8839-"><code>(⊇)</code></a></li><li><code>\x y -&gt; (x </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>/=</code></a><code> y) </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-38--38-"><code>&amp;&amp;</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> x y)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8840-"><code>(⊈)</code></a></li><li><code>\x y -&gt; (x </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>/=</code></a><code> y) </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-38--38-"><code>&amp;&amp;</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8841-"><code>(⊉)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8834-"><code>(⊂)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbol/docs/Data-Set-Unicode.html#v:-8835-"><code>(⊃)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> x y)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8836-"><code>(⊄)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Set.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Set-Unicode.html#v:-8837-"><code>(⊅)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html"><code>Data.Map.Lazy.Unicode</code></a> module (reexported by the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Unicode.html"><code>Data.Map.Unicode</code></a> module)<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Lazy-Unicode.html#v:-8745-"><code>(∩)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html"><code>Data.Map.Strict.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-Map-Strict-Unicode.html#v:-8745-"><code>(∩)</code></a></li></ul></li><li>From the <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html"><code>Data.IntSet.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8745-"><code>(∩)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isSubsetOf"><code>isSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8838-"><code>(⊆)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isSubsetOf"><code>isSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8839-"><code>(⊇)</code></a></li><li><code>\x y -&gt; (x </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>/=</code></a><code> y) </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-38--38-"><code>&amp;&amp;</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> x y)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8840-"><code>(⊈)</code></a></li><li><code>\x y -&gt; (x </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-47--61-"><code>/=</code></a><code> y) </code><a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:-38--38-"><code>&amp;&amp;</code></a><code> </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8841-"><code>(⊉)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8834-"><code>(⊂)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbol/docs/Data-IntSet-Unicode.html#v:-8835-"><code>(⊃)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> x y)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8836-"><code>(⊄)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:not"><code>not</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntSet.html#v:isProperSubsetOf"><code>isProperSubsetOf</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntSet-Unicode.html#v:-8837-"><code>(⊅)</code></a></li></ul></li><li>From the <a href><code>Data.IntMap.Lazy.Unicode</code></a> module (reexported by the <a href><code>Data.IntMap.Unicode</code></a> module)<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Lazy.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Lazy-Unicode.html#v:-8745-"><code>(∩)</code></a></li></ul></li><li>From the <a href><code>Data.IntMap.Strict.Unicode</code></a> module<ul><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8712-"><code>(∈)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:member"><code>member</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8715-"><code>(∋)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8713-"><code>(∉)</code></a></li><li><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:flip"><code>flip</code></a><code> </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:notMember"><code>notMember</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8716-"><code>(∌)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:empty"><code>empty</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8709-"><code>(∅)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:union"><code>union</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8746-"><code>(∪)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:difference"><code>difference</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8726-"><code>(∖)</code></a></li><li><code>\x y -&gt; </code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:union"><code>union</code></a><code> (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:difference"><code>difference</code></a><code> x y) (</code><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:difference"><code>difference</code></a><code> y x)</code> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8710-"><code>(∆)</code></a></li><li><a href="https://hackage.haskell.org/package/containers/docs/Data-IntMap-Strict.html#v:intersection"><code>intersection</code></a> = <a href="https://hackage.haskell.org/package/containers-unicode-symbols/docs/Data-IntMap-Strict-Unicode.html#v:-8745-"><code>(∩)</code></a></li></ul></li></ul></li></ul><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE UnicodeSyntax #-}
+import Data.List.Unicode ((∪))
+import qualified Data.Map as M
+import Data.Map.Unicode ((∆))
+
+main ∷ IO ()
+main = do print $ [1, 2, 3] ∪ [1, 3, 5]
+          print $ M.fromList [(1, 2), (3, 4)] ∆ M.fromList [(3, 4), (5, 6)]</code></pre><h1 id="recursivedo-and-dorec"><a href="#recursivedo-and-dorec"><code>RecursiveDo</code> and <code>DoRec</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>RecursiveDo</code> extension (as well as its deprecated synonym <code>DoRec</code>) enables syntactic sugar for value recursion in a monadic context.  “What on Earth does that mean?” you might ask.  To explain, let’s take a look at how <code>let</code> behaves in Haskell.</p><p><code>let</code> in Haskell allows lazy recursion; that is, you can write:</p><pre><code class="active haskell">main = print $
+-- show
+    let x = fst y
+        y = (3, x)
+    in  snd y
+-- /show</code></pre><p>However, <code>do</code> in Haskell does not allow lazy recursion; in fact, it doesn’t allow recursion at all.  If you try to write a recursive binding in do notation, it will fail; for example, the following code will cause an error that complains about <code>y</code> not being in scope:</p><pre><code class="active haskell">{-# LANGUAGE StandaloneDeriving #-}
+import Control.Monad.Identity
+
+deriving instance (Show a) =&gt; Show (Identity a)
+
+main = print ((
+-- show
+    do x &lt;- return $ fst y
+       y &lt;- return (3, x)
+       return $ snd y
+-- /show
+    ) :: Identity Integer)</code></pre><p>However, sometimes we want to be able to use value recursion but still need to be within a monad.  The <code>MonadFix</code> type class, from the <code>Control.Monad.Fix</code> module in the <code>base</code> package, provides an <code>mfix</code> function that helps us do exactly that, but the results, while they work, are not very pretty:</p><pre><code class="active haskell">{-# LANGUAGE StandaloneDeriving #-}
+import Control.Monad.Identity
+
+deriving instance (Show a) =&gt; Show (Identity a)
+
+main = print ((
+-- show
+    do y &lt;- mfix $ \y0 -&gt; do x &lt;- return $ fst y0
+                             y1 &lt;- return (3, x)
+                             return y1
+       return $ snd y
+-- /show
+    ) :: Identity Integer)</code></pre><p>The <code>RecursiveDo</code> extension provides sugar for using <code>mfix</code> this way, so that the previous example can be equivalently rewritten as:</p><pre><code class="active haskell">{-# LANGUAGE RecursiveDo, StandaloneDeriving #-}
+import Control.Monad.Identity
+
+main = print ((
+-- show
+    mdo x &lt;- return $ fst y
+        y &lt;- return (3, x)
+        return $ snd y
+-- /show
+    ) :: Identity Integer)</code></pre><p><code>RecursiveDo</code> also provides a second type of syntactic sugar for <code>mfix</code> that uses the <code>rec</code> keyword instead of the <code>mdo</code> keyword.  The <code>rec</code>-based sugar is somewhat more direct and “low-level” than the <code>mdo</code>-based sugar.  In terms of the <code>rec</code> sugar, our running example is expressed as:</p><pre><code class="active haskell">{-# LANGUAGE RecursiveDo, StandaloneDeriving #-}
+import Control.Monad.Identity
+
+main = print ((
+-- show
+    do rec x &lt;- return $ fst y
+           y &lt;- return (3, x)
+       return $ snd y
+-- /show
+    ) :: Identity Integer)</code></pre><p>The two types of sugar are subtly different in meaning, and the difference has to do with something called <i>segmentation</i>.</p><p>When GHC encounters a <code>let</code> binding, rather than naïvely binding all of the variables at once, it will divide (or <i>segment</i>) them into minimal mutually-dependent groups.  For example, take this expression:</p><pre><code class="haskell">let x = 1
+    y = (x, z)
+    z = fst y
+    v = snd w
+    w = (v, y)
+in  (snd y, fst w)</code></pre><p>Instead of just binding everything in a single group, GHC improves the code’s efficiency somewhat by treating it as though you’d actually written something like:</p><pre><code class="haskell">let x = 1
+in  let y = (x, z)
+        z = fst y
+    in  let v = snd w
+            w = (v, y)
+        in  (snd y, fst w)</code></pre><p>In a pure <code>let</code> binding, the only way this might matter is performance; the semantics of the code is guaranteed to not change. However, segmenting monadic code might produce unexpected results, because <code>mfix</code> has to deal with the monadic context somehow during the value recursion, and segmenting a set of bindings into minimal groups could potentially change the meaning of the code.</p><p>Only <code>mdo</code> segments its bindings.  <code>rec</code> does no segmentation at all, instead translating to calls to <code>mfix</code> exactly where you put <code>rec</code>s in the original code.  This means that, in the following example, the first two of the following three expressions are equivalent to each other, but the third one is not equivalent to either of the first two:</p><pre><code class="haskell">-- | expression 1 (equivalent to expression 2)
+mdo x &lt;- return 1
+    y &lt;- return $ (x, z)
+    z &lt;- return $ fst y
+    v &lt;- return $ snd w
+    w &lt;- return (v, y)
+    return (snd y, fst w)
+
+-- | expression 2 (equivalent to expression 1)
+do x &lt;- return 1
+   rec y &lt;- return $ (x, z)
+       z &lt;- return $ fst y
+   rec v &lt;- return $ snd w
+       w &lt;- return (v, y)
+   return (snd y, fst w)
+
+-- | expression 3 (not equivalent to expression 1 or expression 2)
+do rec x &lt;- return 1
+       y &lt;- return $ (x, z)
+       z &lt;- return $ fst y
+       v &lt;- return $ snd w
+       w &lt;- return (v, y)
+   return (snd y, fst w)</code></pre><p>Both <i>expression 1</i> and <i>expression 2</i> translate roughly to:</p><pre><code class="haskell">do x &lt;- return 1
+   (y, z) &lt;- mfix $ \(y0, z0) -&gt; do y1 &lt;- return $ (x, z0)
+                                    z1 &lt;- return $ fst y0
+                                    return (y1, z1)
+   (v, w) &lt;- mfix $ \(v0, w0) -&gt; do v1 &lt;- return $ snd w0
+                                    w1 &lt;- return (v0, y)
+                                    return (v1, w1)
+   return (snd y, fst w)</code></pre><p>On the other hand, <i>expression 3</i> translates roughly to:</p><pre><code class="haskell">do (x, y, z, v, w) &lt;- mfix $ \(x0, y0, z0, v0, w0) -&gt; do x1 &lt;- return 1
+                                                         y1 &lt;- return $ (x0, z0)
+                                                         z1 &lt;- return $ fst y0
+                                                         v1 &lt;- return $ snd w0
+                                                         w1 &lt;- return (v0, y0)
+                                                         return (x1, y1, z1, v1, w1)
+   return (snd y, fst w)</code></pre><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE RecursiveDo #-}
+import Control.Monad.State.Lazy
+
+comp = do x0 &lt;- get
+          modify (+1)
+          x1 &lt;- get
+          rec y &lt;- return $ (x0, fst z)
+              z &lt;- return $ (x1, fst y)
+          put 3
+          return (y, z)
+
+main = print $ runState comp 1</code></pre><p><b>WARNING:</b> In GHC versions before 7.6, there was a lot of churn in the meanings of the <code>RecursiveDo</code> and <code>DoRec</code> extensions and their relationship to each other.  For such older GHC versions, the above discussion may be partially or wholly inaccurate; consult your GHC version’s User’s Guide for more detailed information.</p><h1 id="lambdacase"><a href="#lambdacase"><code>LambdaCase</code></a></h1><p><b>Available in:  GHC 7.6 and later</b></p><p>The <code>LambdaCase</code> extension is very simple.  Any time you would otherwise have written:</p><pre><code class="haskell">\x -&gt; case x of ...</code></pre><p>you can instead simply write</p><pre><code class="haskell">\case ...</code></pre><p>which is both shorter and doesn’t bind <code>x</code> as a name.  The Layout Rule works as usual with <code>LambdaCase</code>, so, for example:</p><pre><code class="haskell">[Just 1, Just 2, Nothing, Just 3] `forM_` \x -&gt; case x of
+    Just v  -&gt; putStrLn (&quot;just a single&quot; ++ show v)
+    Nothing -&gt; putStrLn &quot;no numbers at all&quot;</code></pre><p>can be shortened to:</p><pre><code class="haskell">[Just 1, Just 2, Nothing, Just 3] `forM_` \case
+    Just v  -&gt; putStrLn (&quot;just a single&quot; ++ show v)
+    Nothing -&gt; putStrLn &quot;no numbers at all&quot;</code></pre><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE LambdaCase #-}
+import Control.Monad (forM_)
+
+-- | should print:
+--   @[&quot;just a single 1&quot;,&quot;just a single 2&quot;,&quot;no numbers at all&quot;,&quot;just a single 3&quot;]@
+main = [Just 1, Just 2, Nothing, Just 3] `forM_` \case
+    Just v  -&gt; putStrLn (&quot;just a single &quot; ++ show v)
+    Nothing -&gt; putStrLn &quot;no numbers at all&quot;</code></pre><h1 id="emptycase"><a href="#emptycase"><code>EmptyCase</code></a></h1><p><b>Available in:  GHC 7.8 and later</b></p><p>The <code>EmptyCase</code> extension allows you to write a <code>case</code> statement that has no clauses; the syntax is <code>case </code><i><code>e</code></i><code> of {}</code> (where <i><code>e</code></i> is any expression).  If you also have <a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/basic-syntax-extensions#lambdacase"><code>LambdaCase</code></a> enabled, you can abbreviate <code>\x -&gt; case x of {}</code> to <code>\case {}</code></p><p>This is most useful when you have a type that you <i>know for sure</i> has no values, but Haskell‘s syntax and type system force you to do something with a hypothetical such value anyway.  Without <code>EmptyCase</code>, you could just use <code>error</code> or <code>undefined</code>, or otherwise <a href="https://en.wikipedia.org/wiki/Divergence_%28computer_science%29">diverge</a>, and such an action is still possible; however, using an empty <code>case</code> statement for such things is more indicative of intent, and holds some promise of being <a href="http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf">better supported by the exhaustivity checker in the future.</a></p><h1 id="multiwayif"><a href="#multiwayif"><code>MultiWayIf</code></a></h1><p><b>Available in:  GHC 7.6 and later</b></p><p>The <code>MultiWayIf</code> extension allows you to use the full power of Haskell’s guard syntax in an <code>if</code> expression.  For example, this code:</p><pre><code class="haskell">if x == 1
+   then &quot;a&quot;
+   else if y &lt; 2
+           then &quot;b&quot;
+           else &quot;c&quot;</code></pre><p>can be rewritten as:</p><pre><code class="haskell">if | x == 1    -&gt; &quot;a&quot;
+   | y &lt;  2    -&gt; &quot;b&quot;
+   | otherwise -&gt; &quot;d&quot;</code></pre><p>which is much nicer.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE MultiWayIf #-}
+
+fn :: Int -&gt; Int -&gt; String
+fn x y = if | x == 1    -&gt; &quot;a&quot;
+            | y &lt;  2    -&gt; &quot;b&quot;
+            | otherwise -&gt; &quot;c&quot;
+
+-- | should print:
+--   @c@
+main = putStrLn $ fn 3 4</code></pre><p><b>WARNING:</b> In GHC 7.6, the use of <code>MultiWayIf</code> doesn’t affect <a href="https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-210002.7">layout</a>, instead allowing the previous layout (prior to the <code>if</code> keyword) to remain unchanged.  This was changed shortly afterwards; in GHC 7.8 and later, <code>MultiWayIf</code> affects layout, just like ordinary function guards do.</p><h1 id="binaryliterals"><a href="#binaryliterals"><code>BinaryLiterals</code></a></h1><p><b>Available in:  GHC 7.10 and later</b></p><p>Standard Haskell allows you to write integer literals in decimal (without any prefix), hexadecimal (preceded by <code>0x</code> or <code>0X</code>), and octal (preceded by <code>0o</code> or <code>0O</code>).  The <code>BinaryLiterals</code> extension adds binary (preceded by <code>0b</code> or <code>0B</code>) to the list of acceptable integer literal styles.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE BinaryLiterals #-}
+
+-- | should print:
+--   @(1458,1458,1458,1458)@
+main = print (1458, 0x5B2, 0o2662, 0b10110110010)</code></pre><h1 id="negativeliterals"><a href="#negativeliterals"><code>NegativeLiterals</code></a></h1><p><b>Available in:  GHC 7.8 and later</b></p><p>Standard Haskell desugars negative numeric literals (of either integer or fractional form) by applying the <code>negate</code> function from the <code>Num</code> type class to the corresponding positive numeric literal (which is then expanded again using either <code>fromInteger</code> or <code>fromRational</code>, as appropriate).  That is, the standard full desugaring of the literal <code>-1458</code> is <code>negate (fromInteger 1458)</code>.  The <code>NegativeLiterals</code> extension changes this, making negative numeric literals instead desugar as <code>fromInteger</code> or <code>fromRational</code> applied directly to a negative <code>Integer</code> or <code>Rational</code> value; that is, <code>-1458</code> is desugared as <code>fromInteger (-1458)</code>.  In a sense, <code>NegativeLiterals</code> swaps the positions of negation and conversion in the desugaring of numeric literals.</p><p>This doesn’t make a difference for the common cases, but certain edge cases can behave differently (and usually better) under <code>NegativeLiterals</code> than otherwise.  The example that the <a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/syntax-extns.html#negative-literals">GHC User’s guide</a> gives is 8-bit signed arithmetic, in which <code>128</code> is not representable but <code>-128</code> <i>is</i> representable.  The naïve desugaring of <code>-128</code> to <code>negate (fromInteger 128)</code> results in an overflow from <code>128</code> to <code>-128</code> followed by a negation to <code>128</code> followed by <i>another</i> overflow back to <code>-128</code>; meanwhile, the <code>NegativeLiterals</code> desugaring to <code>fromInteger (-128)</code> doesn’t waste cycles (or risk trapping on some architectures), but instead produces the appropriate value from the start.  Other examples might actually change behavior rather than simply be less efficient; you should make sure that you understand a piece of numeric Haskell code fairly well before enabling or disabling <code>NegativeLiterals</code> for it.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE NegativeLiterals #-}
+
+main = do print (-1 :: ExplicitNegation Integer)
+          print (negate 1 :: ExplicitNegation Integer)
+          print (-1.5 :: ExplicitNegation Rational)
+          print (negate 1 :: ExplicitNegation Rational)
+
+-- /show
+-- this type exists solely to explicitly mark where negation happens
+data ExplicitNegation n = Value n | Negate (ExplicitNegation n) deriving Show
+
+collapseNegation :: Num n =&gt; ExplicitNegation n -&gt; n
+collapseNegation (Value x) = x
+collapseNegation (Negate v) = negate $ collapseNegation v
+
+instance (Eq n, Num n) =&gt; Eq (ExplicitNegation n) where
+    v == w = collapseNegation v == collapseNegation w
+instance (Ord n, Num n) =&gt; Ord (ExplicitNegation n) where
+    v `compare` w = collapseNegation v `compare` collapseNegation w
+instance Num n =&gt; Num (ExplicitNegation n) where
+    v + w = Value $ collapseNegation v + collapseNegation w
+    v * w = Value $ collapseNegation v * collapseNegation w
+    negate = Negate
+    abs = Value . abs . collapseNegation
+    signum = Value . signum . collapseNegation
+    fromInteger = Value . fromInteger
+instance Fractional n =&gt; Fractional (ExplicitNegation n) where
+    recip = Value . recip . collapseNegation
+    fromRational = Value . fromRational</code></pre><h1 id="numdecimals"><a href="#numdecimals"><code>NumDecimals</code></a></h1><p><b>Available in:  GHC 7.8 and later</b></p><p>Standard Haskell gives the polymorphic type <code>(Fractional a) =&gt; a</code> to otherwise-unconstrained fractional numeric literals; however, some such literals are guaranteed to actually be integers, because they have an exponent (whether implicit or explicit) that is larger than the distance from the decimal point at which their last non-zero digit occurs (for example, <code>4.65690e4</code> is “the same number” as <code>46569</code>, which is clearly an integer).  The <code>NumDecimals</code> extension exploits this fact by giving fractional literals which are “really just integers” the more general type <code>(Num a) =&gt; a</code> instead.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE NumDecimals #-}
+
+-- notice that this code will not compile if
+-- '1.6e1' isn't allowed to be an 'Integer'
+main = print (1.6e1 `div` 5 :: Integer)</code></pre><h1 id="doandifthenelse"><a href="#doandifthenelse"><code>DoAndIfThenElse</code></a></h1><p><b>Available in:  GHC 7.0 and later</b></p><p><b>TODO</b></p><h1 id="nondecreasingindentation"><a href="#nondecreasingindentation"><code>NondecreasingIndentation</code></a></h1><p><b>Available in:  GHC 7.2 and later</b></p><p><b>TODO</b></p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "pthariensflameschoolofhaskell"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/PthariensFlame/guide-to-ghc-extensions/basic-syntax-extensions';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

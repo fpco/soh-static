@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html><head><title>Yesod&#39;s Monads - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/snoyberg">Michael Snoyman</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/yesod">Yesod</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/yesod/book">Book</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/yesod/book/advanced">Advanced</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/yesod/book/advanced/yesod-s-monads">Yesod&#39;s Monads</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Yesod&#39;s Monads</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">13 Mar 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/snoyberg">Michael Snoyman</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/1/cb5cec00c21f5d17d8975cc68752427cf7c3e65a">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg/yesod/book/advanced">Go up to: Advanced</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/snoyberg">See all content by Michael Snoyman</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#monad-transformers">Monad Transformers</a></li><li><a href="#the-three-transformers">The Three Transformers</a></li><li><a href="#example--database-driven-navbar">Example: Database-driven navbar</a></li><li><a href="#example--request-information">Example: Request information</a></li><li><a href="#summary">Summary</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>As you've read through this book, there have been a number of monads which have appeared: <code>Handler</code>, <code>Widget</code> and <code>YesodDB</code> (for Persistent). As with most monads, each one provides some specific functionality: <code>Handler</code> gives access to the request and allows you to send responses, a <code>Widget</code> contains HTML, CSS, and Javascript, and <code>YesodDB</code> let's you make database queries. In Model-View-Controller (MVC) terms, we could consider <code>YesodDB</code> to be the model, <code>Widget</code> to be the view, and <code>Handler</code> to be the controller.</p><p>So far, we've presented some very straight-forward ways to use these monads: your main handler will run in <code>Handler</code>, using <code>runDB</code> to execute a <code>YesodDB</code> query, and <code>defaultLayout</code> to return a <code>Widget</code>, which in turn was created by calls to <code>toWidget</code>.</p><p>However, if we have a deeper understanding of these types, we can achieve some fancier results.</p><h2 id="monad-transformers"><a href="#monad-transformers">Monad Transformers</a></h2><blockquote><p>Monads are like onions. Monads are <i>not</i> like cakes.<i>Shrek, more or less</i></p></blockquote><p>Before we get into the heart of Yesod's monads, we need to understand a bit about monad transformers. (If you already know all about monad transformers, you can likely skip this section.) Different monads provide different functionality: <code>Reader</code> allows read-only access to some piece of data throughout a computation, <code>Error</code> allows you to short-circuit computations, and so on.</p><p>Often times, however, you would like to be able to combine a few of these features together. After all, why not have a computation with read-only access to some settings variable, that could error out at any time? One approach to this would be to write a new monad like <code>ReaderError</code>, but this has the obvious downside of exponential complexity: you'll need to write a new monad for every single possible combination.</p><p>Instead, we have monad transformers. In addition to <code>Reader</code>, we have <code>ReaderT</code>, which adds reader functionality to any other monad. So we could represent our <code>ReaderError</code> as (conceptually):</p><pre><code class="haskell">type ReaderError = ReaderT Error
+</code></pre><p>In order to access our settings variable, we can use the <code>ask</code> function. But what about short-circuiting a computation? We'd like to use <code>throwError</code>, but that won't exactly work. Instead, we need to <code>lift</code> our call into the next monad up. In other words:</p><pre><code class="haskell">throwError :: errValue -&gt; Error
+lift . throwError :: errValue -&gt; ReaderT Error
+</code></pre><p>There are a few things you should pick up here:</p><ul><li><p>A transformer can be used to add functionality to an existing monad.</p></li><li><p>A transformer must always wrap around an existing monad.</p></li><li><p>The functionality available in a wrapped monad will be dependent not only on the monad transformer, but also on the inner monad that is being wrapped.</p></li></ul><p>A great example of that last point is the <code>IO</code> monad. No matter how many layers of transformers you have around an <code>IO</code>, there's still an <code>IO</code> at the core, meaning you can perform I/O in any of these <b>monad transformer stacks</b>. You'll often see code that looks like <code>liftIO
+    $ putStrLn &quot;Hello There!&quot;</code>.</p><h2 id="the-three-transformers"><a href="#the-three-transformers">The Three Transformers</a></h2><p>We've already discussed two of our transformers previously: <code>Handler</code> and <code>Widget</code>. Just to recap, there are two special things about these transformers:</p><ol><li><p>In order to simplify error messages, they are not actual transformers. Instead, they are newtypes that hard-code their inner monads. This is why Yesod provides a specialized <code>lift</code> function, which works for <code>Handler</code> and <code>Widget</code>.</p></li><li><p>In reality they have extra type parameters for the sub and master site. As a result, the Yesod libraries provide <code>GHandler sub master a</code> and <code>GWidget sub master
+  a</code>, and each site gets a pair of type synonyms <code>type Handler = GHandler MyApp
+  MyApp</code> and <code>type Widget = GWidget MyApp My App ()</code>.</p></li></ol><p>In <a href="http://hackage.haskell.org/package/persistent">persistent</a>, we have a typeclass called <code>PersistStore</code>. This typeclass defines all of the primitive operations you can perform on a database, like <code>get</code>. This typeclass essentially looks like <code>class (Monad (b m)) =&gt; PersistStore b m</code>. <code>b</code> is the backend itself, and is in fact a monad transformer, while <code>m</code> is the inner monad that <code>b</code> wraps around. Both SQL and MongoDB have their own instances; in the case of SQL, it looks like:</p><pre><code class="haskell">instance MonadBaseControl IO m =&gt; PersistBackend SqlPersist m
+</code></pre><p>This means that you can run a SQL database with any underlying monad, so long as that underlying monad supports <code>MonadBaseControl IO</code>, which allows you to properly deal with exceptions in a monad stack. That basically means any transformer stack built around <code>IO</code> (besides exceptional cases like <code>ContT</code>). Fortunately for us, that includes both <code>Handler</code> and <code>Widget</code>. The takeaway here is that we can layer our Persistent transformer on top of <code>Handler</code> or <code>Widget</code>.</p><p>This wasn't always the case. Before Yesod 0.10, Yesod was built on top of enumerators, which do not support <code>MonadBaseControl</code>. In Yesod 0.10, we moved over to <a href="http://hackage.haskell.org/package/conduit">conduit</a>, which greatly simplified everything we're discussing here.</p><p>In order to make it simpler to refer to the relevant Persistent transformer, the <a href="http://hackage.haskell.org/package/yesod-persistent">yesod-persistent</a> package defines the <code>YesodPersistBackend</code> associated type. For example, if I have a site called <code>MyApp</code> and it uses SQL, I would define something like <code>type instance YesodPersistBackend MyApp =
+   SqlPersist</code>.</p><p>When we want to run our database actions, we'll have a <code>SqlPersist</code> wrapped around a <code>Handler</code> or <code>Widget</code>. We can then use the standard Persistent unwrap functions (like <code>runSqlPool</code>) to run the action and get back a normal <code>Handler</code>/<code>Widget</code>. To automate this, we provide the <code>runDB</code> function. Putting it all together, we can now run database actions inside our handlers and widgets.</p><p>Most of the time in Yesod code, and especially thus far in this book, widgets have been treated as actionless containers that simply combine together HTML, CSS and Javascript. But if you look at that last paragraph again, you'll realize that's not the way things have to be. Since a widget is a transformer on top of a handler, anything you do in a handler can be done in a widget, including database actions. All you have to do is <code>lift</code>.</p><h2 id="example--database-driven-navbar"><a href="#example--database-driven-navbar">Example: Database-driven navbar</a></h2><p>Let's put some of this new knowledge into action. We want to create a <code>Widget</code> that generates its output based on the contents of the database. Previously, our approach would have been to load up the data in a <code>Handler</code>, and then pass that data into a <code>Widget</code>. Now, we'll do the loading of data in the <code>Widget</code> itself. This is a boon for modularity, as this <code>Widget</code> can be used in any <code>Handler</code> we want, without any need to pass in the database contents.</p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings, TypeFamilies, TemplateHaskell, FlexibleContexts,
+             QuasiQuotes, MultiParamTypeClasses, GADTs #-}
+import Yesod
+import Database.Persist.Sqlite
+import Data.Text (Text)
+import Data.Time
+import Control.Monad.Logger (runStderrLoggingT)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateAll&quot;] [persist|
+Link
+    title Text
+    url Text
+    added UTCTime
+|]
+
+data LinksExample = LinksExample ConnectionPool
+
+mkYesod &quot;LinksExample&quot; [parseRoutes|
+/ RootR GET
+/add-link AddLinkR POST
+|]
+
+instance Yesod LinksExample
+
+instance RenderMessage LinksExample FormMessage where
+    renderMessage _ _ = defaultFormMessage
+
+instance YesodPersist LinksExample where
+    type YesodPersistBackend LinksExample = SqlPersist
+    runDB db = do
+        LinksExample pool &lt;- getYesod
+        runSqlPool db pool
+
+getRootR :: Handler RepHtml
+getRootR = defaultLayout [whamlet|
+&lt;form method=post action=@{AddLinkR}&gt;
+    &lt;p&gt;
+        Add a new link to #
+        &lt;input type=url name=url value=http://&gt;
+        \ titled #
+        &lt;input type=text name=title&gt;
+        \ #
+        &lt;input type=submit value=&quot;Add link&quot;&gt;
+&lt;h2&gt;Existing links
+^{existingLinks}
+|]
+
+existingLinks :: Widget
+existingLinks = do
+    links &lt;- lift $ runDB $ selectList [] [LimitTo 5, Desc LinkAdded]
+    [whamlet|
+&lt;ul&gt;
+    $forall Entity _ link &lt;- links
+        &lt;li&gt;
+            &lt;a href=#{linkUrl link}&gt;#{linkTitle link}
+|]
+
+postAddLinkR :: Handler ()
+postAddLinkR = do
+    url &lt;- runInputPost $ ireq urlField &quot;url&quot;
+    title &lt;- runInputPost $ ireq textField &quot;title&quot;
+    now &lt;- liftIO getCurrentTime
+    runDB $ insert $ Link title url now
+    setMessage &quot;Link added&quot;
+    redirect RootR
+
+main :: IO ()
+main = withSqlitePool &quot;links.db3&quot; 10 $ \pool -&gt; do
+    runStderrLoggingT $ runSqlPool (runMigration migrateAll) pool
+    warpEnv $ LinksExample pool
+</code></pre><p>Pay attention in particular to the <code>existingLinks</code> function. Notice how all we needed to do was apply <code>lift</code> to a normal database action. And from within <code>getRootR</code>, we treated <code>existingLinks</code> like any ordinary <code>Widget</code>, no special parameters at all. See the figure for the output of this app.</p><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.yesodweb.com%2Fbook%2Fimage%2Fnavbar" /></p><h2 id="example--request-information"><a href="#example--request-information">Example: Request information</a></h2><p>Likewise, you can get request information inside a <code>Widget</code>. Here we can determine the sort order of a list based on a GET parameter.</p><pre><code class="haskell active web">{-# LANGUAGE OverloadedStrings, TypeFamilies, TemplateHaskell,
+             QuasiQuotes, MultiParamTypeClasses, GADTs #-}
+import Yesod
+import Data.Text (Text)
+import Data.List (sortBy)
+import Data.Ord (comparing)
+
+data Person = Person
+    { personName :: Text
+    , personAge :: Int
+    }
+
+people :: [Person]
+people =
+    [ Person &quot;Miriam&quot; 25
+    , Person &quot;Eliezer&quot; 3
+    , Person &quot;Michael&quot; 26
+    , Person &quot;Gavriella&quot; 1
+    ]
+
+data People = People
+
+mkYesod &quot;People&quot; [parseRoutes|
+/ RootR GET
+|]
+
+instance Yesod People
+
+instance RenderMessage People FormMessage where
+    renderMessage _ _ = defaultFormMessage
+
+
+getRootR :: Handler RepHtml
+getRootR = defaultLayout [whamlet|
+&lt;p&gt;
+    &lt;a href=&quot;?sort=name&quot;&gt;Sort by name
+    \ | #
+    &lt;a href=&quot;?sort=age&quot;&gt;Sort by age
+    \ | #
+    &lt;a href=&quot;?&quot;&gt;No sort
+^{showPeople}
+|]
+
+showPeople :: Widget
+showPeople = do
+    msort &lt;- lift $ runInputGet $ iopt textField &quot;sort&quot;
+    let people' =
+            case msort of
+                Just &quot;name&quot; -&gt; sortBy (comparing personName) people
+                Just &quot;age&quot;  -&gt; sortBy (comparing personAge)  people
+                _           -&gt; people
+    [whamlet|
+&lt;dl&gt;
+    $forall person &lt;- people'
+        &lt;dt&gt;#{personName person}
+        &lt;dd&gt;#{show $ personAge person}
+|]
+
+main :: IO ()
+main = warpEnv People
+</code></pre><p>Once again, all we need to do is <code>lift</code> our normal <code>Handler</code> code (in this case, <code>runInputGet</code>) to have it run in our <code>Widget</code>.</p><h2 id="summary"><a href="#summary">Summary</a></h2><p>If you completely ignore this chapter, you'll still be able to use Yesod to great benefit. The advantage of understanding how Yesod's monads interact is to be able to produce cleaner, more modular code. Being able to perform arbitrary actions in a <code>Widget</code> can be a powerful tool, and understanding how Persistent and your <code>Handler</code> code interact can help you make more informed design decisions in your app.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "snoyberg-soh"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/snoyberg/yesod/book/advanced/yesod-s-monads';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html><head><title>1HaskellADay - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/msrdic">Mladen Srdic</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/msrdic/1haskelladay-1">1HaskellADay</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/msrdic/1haskelladay-1/1haskelladay-1">1HaskellADay</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">1HaskellADay</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">14 May 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/msrdic">Mladen Srdic</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/2625/6f5ecfdd0f45ad2dc4b00ddad090a4691599fafc">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/msrdic/1haskelladay-1">Go up to: 1HaskellADay</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/msrdic">See all content by Mladen Srdic</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#may-14th--2014">May 14th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-18th--2014">April 18th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-15th--2014">April 15th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-8th--2014">April 8th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-4th--2014">April 4th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-3rd--2014">April 3rd, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#april-2nd--2014">April 2nd, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-31st--2014">March 31st, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-24th--2014">March 24th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-19th--2014">March 19th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-17th--2014">March 17th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-13th--2014">March 13th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-12th--2014">March 12th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-11th--2014">March 11th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-10th--2014">March 10th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#march-7th--2014">March 7th, 2014</a><ul><li><a href="#solution">Solution</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>This page contains solutions to <a href="https://twitter.com/1HaskellADay">#1HaskellADay</a> puzzles. It doesn't contain all solutions and it certainly doesn't contain best solutions (whatever it might mean). Solutions to puzzles are ordered by date, descending, and are hidden by default.</p><h2 id="may-14th--2014"><a href="#may-14th--2014">May 14th, 2014</a></h2><p><a href="http://lpaste.net/revision/2870923760335060992">Puzzle</a></p><pre><code class="haskell">{- Find the previous element of a look-and-say sequence element if it exists
+   Look and say is defined here: https://en.wikipedia.org/wiki/Look-and-say_sequence
+
+   Example:
+
+   &gt;&gt;&gt; lookAndSayPrec [4,1,3,7]
+   Just [1,1,1,1,7,7,7]
+
+   &gt;&gt;&gt; lookAndSayPrec []
+   Nothing
+
+-}
+lookAndSayPrec :: [Int] -&gt; Maybe [Int]
+lookAndSayPrec = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+{- Find the previous element of a look-and-say sequence element if it exists
+   Look and say is defined here: https://en.wikipedia.org/wiki/Look-and-say_sequence
+
+   Example:
+
+   &gt;&gt;&gt; lookAndSayPrec [4,1,3,7]
+   Just [1,1,1,1,7,7,7]
+
+   &gt;&gt;&gt; lookAndSayPrec []
+   Nothing
+
+-}
+
+import Data.List
+
+lookAndSayPrec :: [Int] -&gt; Maybe [Int]
+lookAndSayPrec xs
+    | length xs &lt; 2 || (odd $ length xs) = Nothing
+    | otherwise = Just $ lasPrec xs
+
+lasPrec (x1:x2:xs) = replicate x1 x2 ++ lasPrec xs
+lasPrec _ = []
+
+main = do
+    print $ lookAndSayPrec [4, 1, 3, 7]
+    print $ lookAndSayPrec [3, 2, 5, 1, 1, 8]
+    print $ lookAndSayPrec []
+    print $ lookAndSayPrec [1, 3, 6]
+    print $ lookAndSayPrec [4]</code></pre></div><h2 id="april-18th--2014"><a href="#april-18th--2014">April 18th, 2014</a></h2><p><a href="http://lpaste.net/revision/8517000115964084224">Puzzle</a></p><pre><code class="haskell">{- | combinations 
+   Builds all the combinations of length n of the elements of the initial list.
+
+   Examples:
+
+   &gt;&gt;&gt; combinations 2 [0,1]
+   [[0,0],[0,1],[1,0],[1,1]]
+
+   &gt;&gt;&gt; combinations 3 ['a','b']
+   [&quot;aaa&quot;,&quot;aab&quot;,&quot;aba&quot;,&quot;abb&quot;,&quot;baa&quot;,&quot;bab&quot;,&quot;bba&quot;,&quot;bbb&quot;]
+   
+   &gt;&gt;&gt; combinations (-2) ['a'..'z']
+   [&quot;&quot;]
+-}
+combinations :: Int -&gt; [a] -&gt; [[a]]
+combinations = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><p>For point-free solution, I found tremendous help <a href="http://stackoverflow.com/a/13426526/97431">here</a>.</p><div class="hidden"><pre><code class="haskell active">module Main where
+
+{- | combinations
+   Builds all the combinations of length n of the elements of the initial list.
+
+   Examples:
+
+   &gt;&gt;&gt; combinations 2 [0,1]
+   [[0,0],[0,1],[1,0],[1,1]]
+
+   &gt;&gt;&gt; combinations 3 ['a','b']
+   [&quot;aaa&quot;,&quot;aab&quot;,&quot;aba&quot;,&quot;abb&quot;,&quot;baa&quot;,&quot;bab&quot;,&quot;bba&quot;,&quot;bbb&quot;]
+
+   &gt;&gt;&gt; combinations (-2) ['a'..'z']
+   [&quot;&quot;]
+-}
+
+combinations :: Int -&gt; [a] -&gt; [[a]]
+combinations len elems = sequence $ replicate len elems
+
+combinationsPF :: Int -&gt; [a] -&gt; [[a]]
+combinationsPF = (sequence .) . replicate
+
+main = do
+    print $ combinations 2 [0, 1] -- [[0,0],[0,1],[1,0],[1,1]]
+    print $ combinations 3 ['a', 'b'] -- [&quot;aaa&quot;,&quot;aab&quot;,&quot;aba&quot;,&quot;abb&quot;,&quot;baa&quot;,&quot;bab&quot;,&quot;bba&quot;,&quot;bbb&quot;]
+    print $ combinations (-2) ['a' .. 'z'] -- [&quot;&quot;]
+    --
+    print $ combinationsPF 2 [0, 1] -- [[0,0],[0,1],[1,0],[1,1]]
+    print $ combinationsPF 3 ['a', 'b'] -- [&quot;aaa&quot;,&quot;aab&quot;,&quot;aba&quot;,&quot;abb&quot;,&quot;baa&quot;,&quot;bab&quot;,&quot;bba&quot;,&quot;bbb&quot;]
+    print $ combinationsPF (-2) ['a' .. 'z'] -- [&quot;&quot;]</code></pre></div><h2 id="april-15th--2014"><a href="#april-15th--2014">April 15th, 2014</a></h2><p><a href="http://lpaste.net/revision/5805301582249590784">Puzzle</a></p><pre><code class="haskell">{- | lowestFreeInt
+   Find the lowest non-negative integer not in the list
+
+   (Thanks to @clementd for this one)
+
+   Example:
+
+   &gt;&gt;&gt; lowestFreeInt [0..10]
+   11
+
+   &gt;&gt;&gt; lowestFreeInt [1..10]
+   0
+
+   &gt;&gt;&gt; lowestFreeInt $ [0..9] ++ [2000,1999..11]
+   10
+-}
+lowestFreeInt :: [Int] -&gt; Int
+lowestFreeInt = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+{- | lowestFreeInt
+   Find the lowest non-negative integer not in the list
+
+   (Thanks to @clementd for this one)
+
+   Example:
+
+   &gt;&gt;&gt; lowestFreeInt [0..10]
+   11
+
+   &gt;&gt;&gt; lowestFreeInt [1..10]
+   0
+
+   &gt;&gt;&gt; lowestFreeInt $ [0..9] ++ [2000,1999..11]
+   10
+-}
+import Data.List ((\\))
+
+lowestFreeInt :: [Int] -&gt; Int
+lowestFreeInt = head .  (\\) [0..]
+
+main = do
+    print $ lowestFreeInt [0..10] -- 11
+    print $ lowestFreeInt [1..10] -- 0
+    print $ lowestFreeInt $ [0..9] ++ [2000,1999..11] -- 10</code></pre></div><h2 id="april-8th--2014"><a href="#april-8th--2014">April 8th, 2014</a></h2><p><a href="http://lpaste.net/revision/3166527577426755584">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M04.D08.Exercise where
+
+{- | replicateF
+   replicate and chain an endofunction
+
+   Examples:
+
+   prop&gt; x + 10 == replicateF 10 (+1) x
+
+   prop&gt; 10 * x == replicateF 10 (+x) 0
+
+   prop&gt; replicate 10 x == replicateF 10 (x:) []
+-}
+replicateF :: Int -&gt; (a -&gt; a) -&gt; a -&gt; a
+replicateF = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+{- | replicateF
+   replicate and chain an endofunction
+
+   Examples:
+
+   prop&gt; x + 10 == replicateF 10 (+1) x
+
+   prop&gt; 10 * x == replicateF 10 (+x) 0
+
+   prop&gt; replicate 10 x == replicateF 10 (x:) []
+-}
+
+-- common sense solution
+replicateF :: Int -&gt; (a -&gt; a) -&gt; a -&gt; a
+replicateF 0 f zero = zero
+replicateF times f zero = replicateF (times - 1) f (f zero)
+
+-- with fold
+replicateF' :: Int -&gt; (a -&gt; a) -&gt; a -&gt; a
+replicateF' times f zero = foldr (\fn elem -&gt; fn elem) zero (replicate times f)
+
+-- ... which is pretty much
+replicateA :: Int -&gt; (a -&gt; a) -&gt; a -&gt; a
+replicateA times f zero = foldr ($) zero (replicate times f)
+
+main = do
+    print $ replicateF 10 (+1) 0 -- 10
+    print $ replicateF 10 (+ 3) 0 -- 30
+    print $ replicateF 10 (1:) [] -- [1,1,1,1,1,1,1,1,1,1]
+    print $ replicateF' 10 (+1) 0 -- 10
+    print $ replicateF' 10 (+ 3) 0 -- 30
+    print $ replicateF' 10 (1:) [] -- [1,1,1,1,1,1,1,1,1,1]
+    print $ replicateA 10 (+1) 0 -- 10
+    print $ replicateA 10 (+ 3) 0 -- 30
+    print $ replicateA 10 (1:) [] -- [1,1,1,1,1,1,1,1,1,1]
+</code></pre></div><h2 id="april-4th--2014"><a href="#april-4th--2014">April 4th, 2014</a></h2><p><a href="http://lpaste.net/revision/5976894132839251968">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M04.D04.Exercise where
+
+-- | countFigures count the different figures that composes a number
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; countFigures 1
+-- 1
+-- &gt;&gt;&gt; countFigures 1000000
+-- 2
+-- &gt;&gt;&gt; countFigures 123
+-- 3
+-- &gt;&gt;&gt; countFigures (-12)
+-- 2
+-- &gt;&gt;&gt; countFigures 1234567890
+-- 10
+-- &gt;&gt;&gt; countFigures 00001
+-- 1
+-- &gt;&gt;&gt; countFigures 0
+-- 1
+--
+countFigures :: Integral a =&gt; a -&gt; Int
+countFigures = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | countFigures count the different figures that composes a number
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; countFigures 1
+-- 1
+-- &gt;&gt;&gt; countFigures 1000000
+-- 2
+-- &gt;&gt;&gt; countFigures 123
+-- 3
+-- &gt;&gt;&gt; countFigures (-12)
+-- 2
+-- &gt;&gt;&gt; countFigures 1234567890
+-- 10
+-- &gt;&gt;&gt; countFigures 00001
+-- 1
+-- &gt;&gt;&gt; countFigures 0
+-- 1
+--
+
+import Data.List
+
+countFigures :: Integral a =&gt; a -&gt; Int
+countFigures = length . group . sort . show . abs . fromIntegral
+
+main = do
+    print $ countFigures 1
+    print $ countFigures 1000000
+    print $ countFigures 123
+    print $ countFigures (-12)
+    print $ countFigures 1234567890
+    print $ countFigures 0001
+    print $ countFigures 0</code></pre></div><h2 id="april-3rd--2014"><a href="#april-3rd--2014">April 3rd, 2014</a></h2><p><a href="http://lpaste.net/revision/1109818273681113088">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M04.D03.Exercise where
+
+-- | foo
+-- Types. Powerful enough to get it right.
+--
+foo :: (a -&gt;  b) -&gt; [a] -&gt; [(a,b)]
+foo = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | foo
+-- Types. Powerful enough to get it right.
+--
+
+foo :: (a -&gt;  b) -&gt; [a] -&gt; [(a, b)]
+foo f list = zip list $ map f list</code></pre></div><h2 id="april-2nd--2014"><a href="#april-2nd--2014">April 2nd, 2014</a></h2><p><a href="http://lpaste.net/revision/2754796237017317376">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M04.D02.Exercise where
+
+-- | update update the nth element of a list
+-- if the index is not a valid index, it leaves the list unchanged
+--
+-- Examples
+--
+-- &gt;&gt;&gt; update (-2) 10 [0..4]
+-- [0,1,2,3,4]
+--
+-- &gt;&gt;&gt; update 6 10 [0..4]
+-- [0,1,2,3,4]
+--
+-- &gt;&gt;&gt; update 2 10 [0..4]
+-- [0,1,10,3,4]
+--
+update :: Int -&gt; a -&gt; [a] -&gt; [a]
+update = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | update update the nth element of a list
+-- if the index is not a valid index, it leaves the list unchanged
+--
+-- Examples
+--
+-- &gt;&gt;&gt; update (-2) 10 [0..4]
+-- [0,1,2,3,4]
+--
+-- &gt;&gt;&gt; update 6 10 [0..4]
+-- [0,1,2,3,4]
+--
+-- &gt;&gt;&gt; update 2 10 [0..4]
+-- [0,1,10,3,4]
+--
+update :: Int -&gt; a -&gt; [a] -&gt; [a]
+update pos elem list
+    | pos &gt;= len || pos &lt; 0 = list
+    | otherwise             = take pos list ++ [elem] ++ drop (pos + 1) list
+    where len = length list
+
+main = do
+    print $ update (-2) 10 [0..4]
+    print $ update 6 10 [0..4]
+    print $ update 2 10 [0..4]
+    print $ update 4 10 [0..4]
+    print $ update 0 10 [0..4]</code></pre></div><h2 id="march-31st--2014"><a href="#march-31st--2014">March 31st, 2014</a></h2><p><a href="http://lpaste.net/revision/8924126783280775168">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M02.D31.Exercise where
+
+-- $setup
+-- &gt;&gt;&gt; import Control.Applicative
+
+-- | emptyIndices List the indices of a list of maybes that contains Nothing
+--
+-- prop&gt; (all (isNothing) .) . map . (!!) &lt;*&gt; emptyIndices $ xs
+--
+emptyIndices :: [Maybe a] -&gt; [Int]
+emptyIndices = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- $setup
+-- &gt;&gt;&gt; import Control.Applicative
+
+-- | emptyIndices List the indices of a list of maybes that contains Nothing
+--
+-- prop&gt; (all (isNothing) .) . map . (!!) &lt;*&gt; emptyIndices $ xs
+--
+
+import Data.Maybe
+
+emptyIndices :: [Maybe a] -&gt; [Int]
+emptyIndices = map fst . filter (isNothing . snd) . zip [0..]
+
+main = do
+    print $ emptyIndices []
+    print $ emptyIndices [Just 1, Just 2, Just 3]
+    print $ emptyIndices [Just 1, Nothing, Just 2, Nothing, Nothing]</code></pre></div><h2 id="march-24th--2014"><a href="#march-24th--2014">March 24th, 2014</a></h2><p><a href="http://lpaste.net/7140908906611474432">Puzzle</a></p><pre><code class="haskell">module HAD.Y2014.M03.D24.Exercise where
+
+-- | squareList builds a list of x lists of size x from a given list of elements
+-- If there aren't enough elements, fill the square with the second parameter
+-- Examples:
+--
+-- &gt;&gt;&gt; squareList 2  0 [0..]
+-- [[0,1],[2,3]]
+--
+-- &gt;&gt;&gt; squareList 2 0 [1]
+-- [[1,0],[0,0]]
+--
+-- &gt;&gt;&gt; squareList 3 () $ repeat ()
+-- [[(),(),()],[(),(),()],[(),(),()]]
+--
+squareList :: Int -&gt; a -&gt; [a] -&gt; [[a]] 
+squareList = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | squareList builds a list of x lists of size x from a given list of elements
+-- If there aren't enough elements, fill the square with the second parameter
+-- Examples:
+--
+-- &gt;&gt;&gt; squareList 2  0 [0..]
+-- [[0,1],[2,3]]
+--
+-- &gt;&gt;&gt; squareList 2 0 [1]
+-- [[1,0],[0,0]]
+--
+-- &gt;&gt;&gt; squareList 3 () $ repeat ()
+-- [[(),(),()],[(),(),()],[(),(),()]]
+--
+squareList :: Int -&gt; a -&gt; [a] -&gt; [[a]] 
+squareList size spare list = take size $ squareList' size (list ++ repeat spare)
+
+squareList' :: Int -&gt; [a] -&gt; [[a]]
+squareList' 0 _ = []
+squareList' size list = head:tail where
+    head = head'
+    tail = squareList' size tail'
+    (head', tail') = splitAt size list
+
+main = do
+    print $ squareList 2 0 [0..]
+    print $ squareList 2 0 [1]
+    print $ squareList 3 () $ repeat ()
+    print $ squareList 4 0 []</code></pre></div><h2 id="march-19th--2014"><a href="#march-19th--2014">March 19th, 2014</a></h2><p><a href="http://codepad.org/QollsjCw">Puzzle</a></p><pre><code class="haskell">-- $setup
+-- &gt;&gt;&gt; import Control.Applicative ((&lt;*&gt;))
+-- &gt;&gt;&gt; import Data.List (isInfixOf)
+-- &gt;&gt;&gt; import Test.QuickCheck
+
+-- Level: Easy
+-- Pointfree: yes
+
+
+-- | mostRepeatedElem
+-- Returns the element with the longest (consecutive) repetition and the
+-- repetition number
+-- If there are tie, the last most repeated element is returned
+-- It returns error on empty string
+-- 
+-- Examples:
+--
+-- &gt;&gt;&gt; mostRepeatedElem &quot;hello world!&quot;
+-- ('l',2)
+--
+-- &gt;&gt;&gt; mostRepeatedElem [1,1,2,2]
+-- (2,2)
+--
+-- prop&gt; (flip isInfixOf &lt;*&gt; uncurry (flip replicate) . mostRepeatedElem) . getNonEmpty
+
+mostRepeatedElem :: Eq a =&gt; [a] -&gt; (a,Int)
+mostRepeatedElem = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- $setup
+-- &gt;&gt;&gt; import Control.Applicative ((&lt;*&gt;))
+-- &gt;&gt;&gt; import Data.List (isInfixOf)
+-- &gt;&gt;&gt; import Test.QuickCheck
+
+-- Level: Easy
+-- Pointfree: yes
+
+
+-- | mostRepeatedElem
+-- Returns the element with the longest (consecutive) repetition and the
+-- repetition number
+-- If there are tie, the last most repeated element is returned
+-- It returns error on empty string
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; mostRepeatedElem &quot;hello world!&quot;
+-- ('l',2)
+--
+-- &gt;&gt;&gt; mostRepeatedElem [1,1,2,2]
+-- (2,2)
+--
+-- prop&gt; (flip isInfixOf &lt;*&gt; uncurry (flip replicate) . mostRepeatedElem) . getNonEmpty
+
+import Data.List
+import Control.Applicative
+
+mostRepeatedCmp :: Eq a =&gt; (a, Int) -&gt; (a, Int) -&gt; Ordering
+mostRepeatedCmp (_, fc) (_, sc) = fc `compare` sc
+
+mostRepeatedElem :: Eq a =&gt; [a] -&gt; (a, Int)
+mostRepeatedElem ls = maximumBy mostRepeatedCmp $ zip heads lengths
+    where grouped      = group ls
+          heads        = map head grouped
+          lengths      = map length grouped
+
+main = do
+    print $ mostRepeatedElem &quot;hello world&quot;
+    print $ mostRepeatedElem [1, 1, 2, 2]
+    print $ mostRepeatedElem [1,1,1,3,3,3,6,6,6,9,9,9,9,9,9,1,1]
+    print $ mostRepeatedElem [1,1,1,3,3,3,6,6,6,9,9,9,9,9,9,1,1,1,1,1,1,1,1]</code></pre></div><h2 id="march-17th--2014"><a href="#march-17th--2014">March 17th, 2014</a></h2><p><a href="http://codepad.org/4ZT5ZCwH">Puzzle</a></p><pre><code class="haskell">-- | maximumList replace each element in a list by its maximum so far
+-- 
+-- Examples:
+--
+-- &gt;&gt;&gt; maximumList [1..4]
+-- [1,2,3,4]
+--
+-- &gt;&gt;&gt; maximumList [10,9..7]
+-- [10,10,10,10]
+--
+-- prop&gt; and . (zipWith (&lt;=) &lt;*&gt; tail) . maximumList
+
+-- maximumList :: Find a general signature
+maximumList = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><p>A common sense solution:</p><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | maximumList replace each element in a list by its maximum so far
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; maximumList [1..4]
+-- [1,2,3,4]
+--
+-- &gt;&gt;&gt; maximumList [10,9..7]
+-- [10,10,10,10]
+--
+-- prop&gt; and . (zipWith (&lt;=) &lt;*&gt; tail) . maximumList
+
+maximumList :: Ord a =&gt; [a] -&gt; [a]
+maximumList [] = []
+maximumList xs = maximumList' (head xs) xs
+
+maximumList' :: Ord a =&gt; a -&gt; [a] -&gt; [a]
+maximumList' _ [] = []
+maximumList' max (x:xs)
+  | max &gt; x   = max:maximumList' max xs
+  | otherwise = x:maximumList' x xs
+
+main = do
+    print $ take 10 $ maximumList [100, 99..]
+    print $ maximumList [10, 9.. 7]
+    print $ maximumList [1..4]</code></pre></div><h2 id="march-13th--2014"><a href="#march-13th--2014">March 13th, 2014</a></h2><p><a href="http://codepad.org/gXEcCgBI">Puzzle</a></p><pre><code class="haskell">-- | pairToList Transform a pair of same type elements in a list of two
+-- elements.
+--
+-- Of course, the major challenge is to find a point free function
+-- (without lambda). And, if you want more fun, do it without (++).
+--
+-- prop&gt; replicate 2 (x :: Int) == pairToList (x,x)
+--
+-- prop&gt; (\(f,s) -&gt; [f,s]) x == pairToList x
+--
+pairToList :: (a,a) -&gt; [a]
+pairToList = undefined</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><p>Couldn't really come up with a point-free solution, although it seemed like it won't be hard.</p><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | pairToList Transform a pair of same type elements in a list of two
+-- elements.
+--
+-- Of course, the major challenge is to find a point free function
+-- (without lambda). And, if you want more fun, do it without (++).
+--
+-- additional challenge: don't use flip or reverse
+--
+-- prop&gt; replicate 2 (x :: Int) == pairToList (x,x)
+--
+-- prop&gt; (\(f,s) -&gt; [f,s]) x == pairToList x
+--
+
+-- simple solution
+pairToList :: (a,a) -&gt; [a]
+pairToList (f, s) = [f,s]
+
+-- second
+pairToList2 :: (a,a) -&gt; [a]
+pairToList2 p = fst p : [snd p]
+
+-- third
+pairToList3 :: (a,a) -&gt; [a]
+pairToList3 arg = map ($ arg) [fst, snd]
+
+-- fourth
+pairToList4 :: (a,a) -&gt; [a]
+pairToList4 arg = flip map [fst, snd] ($ arg)
+
+main = do
+    print $ pairToList (1, 2)
+    print $ pairToList2 (1, 2)
+    print $ pairToList3 (1, 2)
+    print $ pairToList4 (1, 2)</code></pre></div><h2 id="march-12th--2014"><a href="#march-12th--2014">March 12th, 2014</a></h2><p><a href="http://codepad.org/PL9JcBz5">Puzzle</a></p><pre><code class="haskell">-- | localMax Given an entry list, it outputs the its list of local maxima.
+-- A Local maximum is a an element greater than its predecessor and than its
+-- successor.
+--
+-- No point-free today, at least for my solution.
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; localMax [0 .. 1000]
+-- []
+--
+-- &gt;&gt;&gt; localMax [1000 .. 0]
+-- []
+--
+-- &gt;&gt;&gt; localMax [2,2,1,5,4]
+-- [5]
+--
+-- &gt;&gt;&gt; take 4 . localMax $ [0..] &gt;&gt;= (\y -&gt; [y,y+2])
+-- [2,3,4,5]
+--
+localMax :: Ord a =&gt; [a] -&gt; [a]
+localMax = undefined
+
+main = print $ localMax [2,2,1,5,4] -- [5]</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+-- | localMax Given an entry list, it outputs the its list of local maxima.
+-- A Local maximum is a an element greater than its predecessor and than its
+-- successor.
+--
+-- No point-free today, at least for my solution.
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; localMax [0 .. 1000]
+-- []
+--
+-- &gt;&gt;&gt; localMax [1000 .. 0]
+-- []
+--
+-- &gt;&gt;&gt; localMax [2,2,1,5,4]
+-- [5]
+--
+-- &gt;&gt;&gt; take 4 . localMax $ [0..] &gt;&gt;= (\y -&gt; [y,y+2])
+-- [2,3,4,5]
+--
+localMax :: Ord a =&gt; [a] -&gt; [a]
+-- | take lists of length 3, filter those by min criteria and take the middle element
+localMax = map (!! 1) . filter hasMin . threes
+
+threes :: [a] -&gt; [[a]]
+threes (x:y:z:rest) = [x,y,z] : threes (y:z:rest)
+threes _ = []
+
+hasMin :: Ord a =&gt; [a] -&gt; Bool
+hasMin [x,y,z] = y &gt; x &amp;&amp; y &gt; z
+hasMin _ = False
+
+main = do
+  print $ localMax [2,2,1,5,4] -- [5]
+  print $ take 4 . localMax $ [0..] &gt;&gt;= (\y -&gt; [y,y+2])</code></pre></div><h2 id="march-11th--2014"><a href="#march-11th--2014">March 11th, 2014</a></h2><p><a href="http://codepad.org/l3Eyjdzs">Puzzle</a></p><pre><code class="haskell">-- | lcAlphabetFrom
+-- Display the alaphabet in lower cas, starting from the letter given in
+-- parameter.
+-- If the parameter is not a lowercase letter, displays the alphabet from 'a'
+--
+-- Point-free is quite easy
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; lcAlphabetFrom 'a'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom 'e'
+-- &quot;efghijklmnopqrstuvwxyzabcd&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom '`'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom '{'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+
+lcAlphabetFrom :: Char -&gt; String
+lcAlphabetFrom = undefined
+
+main = do
+  print $ lcAlphabetFrom 'a' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+  print $ lcAlphabetFrom 'e' -- &quot;efghijklmnopqrstuvwxyzabcd&quot;
+  print $ lcAlphabetFrom '`' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+  print $ lcAlphabetFrom '{' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+import Data.Char
+
+-- | lcAlphabetFrom
+-- Display the alaphabet in lower cas, starting from the letter given in
+-- parameter.
+-- If the parameter is not a lowercase letter, displays the alphabet from 'a'
+--
+-- Point-free is quite easy
+--
+-- Examples:
+--
+-- &gt;&gt;&gt; lcAlphabetFrom 'a'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom 'e'
+-- &quot;efghijklmnopqrstuvwxyzabcd&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom '`'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+--
+-- &gt;&gt;&gt; lcAlphabetFrom '{'
+-- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+
+lcAlphabetFrom :: Char -&gt; String
+lcAlphabetFrom c
+  | isAsciiLower c = prettyAlphabet c
+  | otherwise = ['a'..'z']
+
+prettyAlphabet :: Char -&gt; String
+prettyAlphabet from = head ++ tail
+  where head = [from .. 'z']
+        tail = ['a' .. pred $ from]
+
+main = do
+  print $ lcAlphabetFrom 'a' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+  print $ lcAlphabetFrom 'e' -- &quot;efghijklmnopqrstuvwxyzabcd&quot;
+  print $ lcAlphabetFrom '`' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;
+  print $ lcAlphabetFrom '{' -- &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre></div><h2 id="march-10th--2014"><a href="#march-10th--2014">March 10th, 2014</a></h2><p><a href="http://codepad.org/XRnantkj">Puzzle</a></p><pre><code class="haskell">-- $setup
+-- &gt;&gt;&gt; import Test.QuickCheck
+-- &gt;&gt;&gt; import Control.Applicative
+
+-- | maybeReadPositiveInt Try to parse a positive Int
+-- Can be done point-free (and it's probably funnier this way).
+--
+-- Examples:
+--
+-- prop&gt; (==) &lt;$&gt; Just &lt;*&gt; maybeReadPositiveInt . show $ getNonNegative x
+--
+-- prop&gt; Nothing == (maybeReadPositiveInt . show . negate . getPositive $ x)
+--
+-- &gt;&gt;&gt; maybeReadPositiveInt &quot;foo&quot;
+-- Nothing
+--
+-- &gt;&gt;&gt; maybeReadPositiveInt &quot;12 &quot;
+-- Nothing
+
+
+maybeReadPositiveInt :: String -&gt; Maybe Int
+maybeReadPositiveInt = undefined
+
+main = do
+  print $ maybeReadPositiveInt &quot;12&quot; -- Just 12
+  print $ maybeReadPositiveInt &quot;-12&quot; -- Nothing
+  print $ maybeReadPositiveInt &quot;12 a&quot; -- Nothing
+  print $ maybeReadPositiveInt &quot;12 &quot; -- Nothing</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+
+import Data.Char
+
+-- $setup
+-- &gt;&gt;&gt; import Test.QuickCheck
+-- &gt;&gt;&gt; import Control.Applicative
+
+-- | maybeReadPositiveInt Try to parse a positive Int
+-- Can be done point-free (and it's probably funnier this way).
+--
+-- Examples:
+--
+-- prop&gt; (==) &lt;$&gt; Just &lt;*&gt; maybeReadPositiveInt . show $ getNonNegative x
+--
+-- prop&gt; Nothing == (maybeReadPositiveInt . show . negate . getPositive $ x)
+--
+-- &gt;&gt;&gt; maybeReadPositiveInt &quot;foo&quot;
+-- Nothing
+--
+-- &gt;&gt;&gt; maybeReadPositiveInt &quot;12 &quot;
+-- Nothing
+
+
+maybeReadPositiveInt :: String -&gt; Maybe Int
+maybeReadPositiveInt str
+  | allDigits str = return $ tryInt str
+  | otherwise = Nothing
+
+allDigits :: String -&gt; Bool
+allDigits &quot;&quot; = False
+allDigits str = foldr (&amp;&amp;) True $ map isDigit str
+
+tryInt str = read str :: Int
+
+main = do
+  print $ maybeReadPositiveInt &quot;12&quot; -- Just 12
+  print $ maybeReadPositiveInt &quot;-12&quot; -- Nothing
+  print $ maybeReadPositiveInt &quot;12 a&quot; -- Nothing
+  print $ maybeReadPositiveInt &quot;12 &quot; -- Nothing</code></pre></div><h2 id="march-7th--2014"><a href="#march-7th--2014">March 7th, 2014</a></h2><p><a href="http://codepad.org/3A1QmmdN">Puzzle</a></p><pre><code class="haskell">-- | trueIndexes produce an infinite list where only the index given in the list
+
+-- in parameter are true.
+-- The parameter list is supposed to be sorted set of positive numbers
+--
+-- Point-free: Probably hard to find!
+-- Level: HARD
+--
+-- Examples:
+-- &gt;&gt;&gt; take 2 $ trueIndexes [1]
+-- [False,True]
+--
+-- &gt;&gt;&gt; take 6 $ trueIndexes [0,2,4]
+-- [True,False,True,False,True,False]
+--
+-- &gt;&gt;&gt; take 3 $ trueIndexes []
+-- [False, False, False]
+--
+trueIndexes :: [Int] -&gt; [Bool]
+trueIndexes = undefined
+
+main = print $ take 6 $ trueIndexes [0,2,4]</code></pre><h3 id="solution"><a href="#solution">Solution</a></h3><div class="hidden"><pre><code class="haskell active">module Main where
+-- | trueIndexes produce an infinite list where only the index given in the list
+
+-- in parameter are true.
+-- The parameter list is supposed to be sorted set of positive numbers
+--
+-- Point-free: Probably hard to find!
+-- Level: HARD
+--
+-- Examples:
+-- &gt;&gt;&gt; take 2 $ trueIndexes [1]
+-- [False,True]
+--
+-- &gt;&gt;&gt; take 6 $ trueIndexes [0,2,4]
+-- [True,False,True,False,True,False]
+--
+-- &gt;&gt;&gt; take 3 $ trueIndexes []
+-- [False, False, False]
+--
+trueIndexes :: [Int] -&gt; [Bool]
+trueIndexes [] = repeat False
+trueIndexes (x:xs)
+  | xs == []  = head ++ [True] ++ repeat False
+  | otherwise = head ++ [True] ++ trueIndexes newInd
+  where head   = replicate x False
+        newInd = map (subtract offset) xs
+        offset = x + 1
+-- trueIndexes [x]    = replicate x False ++ [True] ++ repeat False
+-- trueIndexes (x:xs) = replicate x False ++ [True] ++ trueIndexes (map (subtract (x + 1)) xs)
+
+main = do
+  print $ take 6 $ trueIndexes []
+  print $ take 6 $ trueIndexes [2]
+  print $ take 2 $ trueIndexes [1]
+  print $ take 6 $ trueIndexes [0, 2, 4]
+  print $ take 20 $ trueIndexes [0, 3 ..]</code></pre></div></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/msrdic/1haskelladay-1/1haskelladay-1';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

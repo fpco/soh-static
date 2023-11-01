@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html><head><title>4. The Santa Claus problem - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell">Advanced Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency">Beautiful Concurrency</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency/4-the-santa-claus-problem">4. The Santa Claus problem</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">4. The Santa Claus problem</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 2 Apr 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/simonpj">Simon Peyton Jones</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5556/195e3dd480ba17b51cd359965148a52820ad6fee">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/advanced-haskell/beautiful-concurrency/3-software-transactional-memory">Previous content: 3. Software Transactional Memory</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/advanced-haskell/beautiful-concurrency/5-reflections-on-haskell">Next content: 5. Reflections on Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency">Go up to: Beautiful Concurrency</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/simonpj">See all content by Simon Peyton Jones</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#4-1-reindeer-and-elves">4.1 Reindeer and elves</a></li><li><a href="#4-2-gates-and-groups">4.2 Gates and Groups</a></li><li><a href="#4-3-the-main-program">4.3 The main program</a></li><li><a href="#4-4-implementing-santa">4.4 Implementing Santa</a></li><li><a href="#4-5-compiling-and-running-the-program">4.5 Compiling and running the program</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>I want to show you a complete, runnable concurrent program using STM. A
+well-known example is the so-called Santa Claus problem<sup>10</sup>, originally due to
+Trono [14]:</p><blockquote><p>Santa repeatedly sleeps until wakened by either all of his nine reindeer, back from their holidays, or by a group of three of his ten elves.
+If awakened by the reindeer, he harnesses each of them to his sleigh,
+delivers toys with them and finally unharnesses them (allowing them
+to go off on holiday). If awakened by a group of elves, he shows each
+of the group into his study, consults with them on toy R&amp;D and
+finally shows them each out (allowing them to go back to work).
+Santa should give priority to the reindeer in the case that there is
+both a group of elves and a group of reindeer waiting.</p></blockquote><p>Using a well-known example allows you to directly compare my solution with
+well-described solutions in other languages. In particular, Trono’s paper gives
+a semaphore-based solution which is partially correct; Ben-Ari gives a solution
+in Ada95 and in Ada [1]; Benton gives a solution in Polyphonic C# [2].</p><h2 id="4-1-reindeer-and-elves"><a href="#4-1-reindeer-and-elves">4.1 Reindeer and elves</a></h2><p>The basic idea of the STM Haskell implementation is this. Santa makes one
+“<code>Group</code>” for the elves and one for the reindeer. Each elf (or reindeer) tries to join
+its <code>Group</code>. If it succeeds, it gets two “<code>Gate</code>s” in return. The first <code>Gate</code> allows
+Santa to control when the elf can enter the study, and also lets Santa know
+when they are all inside. Similarly, the second <code>Gate</code> controls the elves leaving
+the study. Santa, for his part, waits for either of his two <code>Group</code>s to be ready, and
+then uses that <code>Group</code>’s <code>Gate</code>s to marshal his helpers (elves or reindeer) through
+their task. Thus the helpers spend their lives in an infinite loop: try to join
+a group, move through the gates under Santa’s control, and then delay for a
+random interval before trying to join a group again.</p><p>Rendering this informal description in Haskell gives the following code for an
+elf<sup>11</sup>:</p><pre><code class="haskell">elf1 :: Group -&gt; Int -&gt; IO ()
+elf1 group elf_id = do
+    (in_gate, out_gate) &lt;- joinGroup group
+    passGate in_gate
+    meetInStudy elf_id
+    passGate out_gate</code></pre><p>The <code>elf</code> is passed its <code>Group</code>, and an <code>Int</code> that specifies its elfin identity. This
+identity is used only in the call to <code>meetInStudy</code>, which simply prints out a
+message to say what is happening<sup>12</sup></p><pre><code class="haskell">meetInStudy :: Int -&gt; IO ()
+meetInStudy id = putStr (&quot;Elf &quot; ++ show id ++ &quot; meeting in the study\n&quot;)</code></pre><div class="hidden" title="Try it..."><pre><code class="active haskell">meetInStudy :: Int -&gt; IO ()
+meetInStudy id = putStr (&quot;Elf &quot; ++ show id ++ &quot; meeting in the study\n&quot;)
+
+main = meetInStudy 3</code></pre></div><p>The elf calls <code>joinGroup</code> to join its group, and <code>passGate</code> to pass through each
+of the gates:</p><pre><code class="haskell">joinGroup :: Group -&gt; IO (Gate, Gate)
+passGate  :: Gate -&gt; IO ()</code></pre><p>The code for reindeer is identical, except that reindeer deliver toys rather than
+meeting in the study:</p><pre><code class="haskell">deliverToys :: Int -&gt; IO ()
+deliverToys id = putStr (&quot;Reindeer &quot; ++ show id ++ &quot; delivering toys\n&quot;)</code></pre><div class="hidden" title="Try it..."><pre><code class="active haskell">deliverToys :: Int -&gt; IO ()
+deliverToys id = putStr (&quot;Reindeer &quot; ++ show id ++ &quot; delivering toys\n&quot;)
+
+main = deliverToys 4</code></pre></div><p>Since <code>IO</code> actions are first-class, we can abstract over the common pattern, like
+this:</p><pre><code class="haskell">helper1 :: Group -&gt; IO () -&gt; IO ()
+helper1 group do_task = do
+    (in_gate, out_gate) &lt;- joinGroup group
+    passGate in_gate
+    do_task
+    passGate out_gate</code></pre><p>The second argument of <code>helper1</code> is an <code>IO</code> action that is the helper’s task, which
+the helper performs between the two <code>passGate</code> calls. Now we can specialise
+<code>helper1</code> to be either an elf or a reindeer:</p><pre><code class="haskell">elf1, reindeer1 :: Group -&gt; Int -&gt; IO ()
+elf1      gp id = helper1 gp (meetInStudy id)
+reindeer1 gp id = helper1 gp (deliverToys id)</code></pre><div class="hidden" title="Try it..."><p>In order to test <code>helper1</code> we will jump ahead just a bit by defining dummy <code>Group</code> and <code>Gate</code>:</p><pre><code class="active haskell">data Group = MkGroup
+data Gate  = MkGate
+
+joinGroup :: Group -&gt; IO (Gate, Gate)
+joinGroup group = do putStr &quot;joinGroup\n&quot;
+                     return (MkGate, MkGate)
+
+passGate :: Gate -&gt; IO ()
+passGate gate = putStr &quot;passGate\n&quot;
+
+meetInStudy :: Int -&gt; IO ()
+meetInStudy id = putStr (&quot;Elf &quot; ++ show id ++ &quot; meeting in the study\n&quot;)
+
+deliverToys :: Int -&gt; IO ()
+deliverToys id = putStr (&quot;Reindeer &quot; ++ show id ++ &quot; delivering toys\n&quot;)
+
+helper1 :: Group -&gt; IO () -&gt; IO ()
+helper1 group do_task = do
+    (in_gate, out_gate) &lt;- joinGroup group
+    passGate in_gate
+    do_task
+    passGate out_gate
+
+elf1, reindeer1 :: Group -&gt; Int -&gt; IO ()
+elf1 gp id = helper1 gp (meetInStudy id)
+reindeer1 gp id = helper1 gp (deliverToys id)
+
+main = do
+    elf1 MkGroup 3
+    reindeer1 MkGroup 4
+</code></pre></div><h2 id="4-2-gates-and-groups"><a href="#4-2-gates-and-groups">4.2 Gates and Groups</a></h2><p>The first abstraction is a <code>Gate</code>, which supports the following interface:</p><pre><code class="haskell">newGate     :: Int -&gt; STM Gate
+passGate    :: Gate -&gt; IO ()
+operateGate :: Gate -&gt; IO ()</code></pre><p>A <code>Gate</code> has a fixed <i>capacity</i>, <i>n</i>, which we specify when we make a new <code>Gate</code>, and a
+mutable <i>remaining capacity</i>. This remaining capacity is decremented whenever
+a helper calls <code>passGate</code> to go through the gate; if the remaining capacity is
+zero, <code>passGate</code> blocks. A <code>Gate</code> is created with zero remaining capacity, so that
+no helpers can pass through it. Santa opens the gate with <code>operateGate</code>, which
+sets its remaining capacity back to <i>n</i>.</p><p>Here, then, is a possible implementation of a <code>Gate</code>:</p><pre><code class="haskell">data Gate = MkGate Int (TVar Int)
+
+newGate :: Int -&gt; STM Gate
+newGate n = do
+    tv &lt;- newTVar 0
+    return (MkGate n tv)
+
+passGate :: Gate -&gt; IO ()
+passGate (MkGate n tv)
+  = atomically (do n_left &lt;- readTVar tv
+                   check (n_left &gt; 0)
+                   writeTVar tv (n_left-1))
+
+operateGate :: Gate -&gt; IO ()
+operateGate (MkGate n tv) = do
+    atomically (writeTVar tv n)
+    atomically (do n_left &lt;- readTVar tv
+                   check (n_left == 0))</code></pre><p>The first line declares <code>Gate</code> to be a new <i>data type</i>, with a single <i>data constructor</i>
+<code>MkGate</code><sup>13</sup>. The constructor has two <i>fields</i>: an <code>Int</code> giving the gate capacity, and
+a <code>TVar</code> whose contents says how many helpers can go through the gate before
+it closes. If the <code>TVar</code> contains zero, the gate is closed.</p><p>The function <code>newGate</code> makes a new <code>Gate</code> by allocating a <code>TVar</code>, and building a
+<code>Gate</code> value by calling the <code>MkGate</code> constructor. Dually, <code>passGate</code> uses pattern-matching to take apart the <code>MkGate</code> constructor; then it decrements the contents
+of the <code>TVar</code>, using <code>check</code> to ensure there is still capacity in the gate, as we
+did with <code>withdraw</code> (Section 3.4). Finally, <code>operateGate</code> first opens the <code>Gate</code>
+by writing its full capacity into the <code>TVar</code>, and then waits for the <code>TVar</code> to be
+decremented to zero.</p><p>A <code>Group</code> has the following interface:</p><pre><code class="haskell">newGroup   :: Int -&gt; IO Group
+joinGroup  :: Group -&gt; IO (Gate,Gate)
+awaitGroup :: Group -&gt; STM (Gate,Gate)</code></pre><p>Again, a <code>Group</code> is created empty, with a specified capacity. An elf may join
+a group by calling <code>joinGroup</code>, a call that blocks if the group is full. Santa
+calls <code>awaitGroup</code> to wait for the group to be full; when it is full he gets the
+<code>Group</code>’s gates, and the <code>Group</code> is immediately re-initialised with fresh <code>Gate</code>s, so
+that another group of eager elves can start assembling.</p><p>Here is a possible implementation:</p><pre><code class="haskell">data Group = MkGroup Int (TVar (Int, Gate, Gate))
+
+newGroup n = atomically (do g1 &lt;- newGate n; g2 &lt;- newGate n
+                            tv &lt;- newTVar (n, g1, g2)
+                            return (MkGroup n tv))</code></pre><p>Again, <code>Group</code> is declared as a fresh data type, with constructor <code>MkGroup</code> and
+two fields: the <code>Group</code>’s full capacity, and a <code>TVar</code> containing its number of empty
+slots and its two <code>Gate</code>s. Creating a new <code>Group</code> is a matter of creating new <code>Gate</code>s,
+initialising a new <code>TVar</code>, and returning a structure built with <code>MkGroup</code>.</p><p>The implementations of <code>joinGroup</code> and <code>awaitGroup</code> are now more or less determined by these data structures:</p><pre><code class="haskell">joinGroup (MkGroup n tv)
+  = atomically (do (n_left, g1, g2) &lt;- readTVar tv
+                   check (n_left &gt; 0)
+                   writeTVar tv (n_left-1, g1, g2)
+                   return (g1,g2))
+
+awaitGroup (MkGroup n tv) = do
+    (n_left, g1, g2) &lt;- readTVar tv
+    check (n_left == 0)
+    new_g1 &lt;- newGate n; new_g2 &lt;- newGate n
+    writeTVar tv (n,new_g1,new_g2)
+    return (g1,g2)</code></pre><p>Notice that <code>awaitGroup</code> makes new gates when it re-initialises the <code>Group</code>. This
+ensures that a new group can assemble while the old one is still talking to Santa
+in the study, with no danger of an elf from the new group overtaking a sleepy
+elf from the old one.</p><div class="hidden" title="Try it..."><p>Let's test the functionality so far:</p><pre><code class="active haskell">import Control.Concurrent.STM
+import Control.Concurrent
+
+-- capacity, TVar ()
+data Group = MkGroup Int (TVar (Int, Gate, Gate))
+
+newGroup :: Int -&gt; IO Group
+newGroup n = atomically (do g1 &lt;- newGate n
+                            g2 &lt;- newGate n
+                            tv &lt;- newTVar (n, g1, g2)
+                            return (MkGroup n tv))
+
+joinGroup :: Group -&gt; IO (Gate,Gate)
+joinGroup (MkGroup n tv)
+  = atomically (do (n_left, g1, g2) &lt;- readTVar tv
+                   check (n_left &gt; 0)
+                   writeTVar tv (n_left-1, g1, g2)
+                   return (g1,g2))
+
+awaitGroup :: Group -&gt; STM (Gate,Gate)
+awaitGroup (MkGroup n tv) = do
+    (n_left, g1, g2) &lt;- readTVar tv
+    check (n_left == 0)
+    new_g1 &lt;- newGate n; new_g2 &lt;- newGate n
+    writeTVar tv (n,new_g1,new_g2)
+    return (g1,g2)
+
+-----
+data Gate = MkGate Int (TVar Int)
+
+newGate :: Int -&gt; STM Gate
+newGate n = do
+    tv &lt;- newTVar 0
+    return (MkGate n tv)
+
+passGate :: Gate -&gt; IO ()
+passGate (MkGate n tv)
+  = atomically (do n_left &lt;- readTVar tv
+                   check (n_left &gt; 0)
+                   writeTVar tv (n_left-1))
+
+operateGate :: Gate -&gt; IO ()
+operateGate (MkGate n tv) = do
+    atomically (writeTVar tv n)
+    atomically (do n_left &lt;- readTVar tv
+                   check (n_left == 0))
+----
+meetInStudy :: Int -&gt; IO ()
+meetInStudy id = putStr (&quot;Elf &quot; ++ show id ++ &quot; meeting in the study\n&quot;)
+
+deliverToys :: Int -&gt; IO ()
+deliverToys id = putStr (&quot;Reindeer &quot; ++ show id ++ &quot; delivering toys\n&quot;)
+
+helper1 :: Group -&gt; IO () -&gt; IO ()
+helper1 group do_task = do
+    (in_gate, out_gate) &lt;- joinGroup group
+    passGate in_gate
+    do_task
+    passGate out_gate
+
+elf1, reindeer1 :: Group -&gt; Int -&gt; IO ()
+elf1 gp id = helper1 gp (meetInStudy id)
+reindeer1 gp id = helper1 gp (deliverToys id)
+
+main = do
+    grp &lt;- newGroup 1    -- group of capacity 1
+    forkIO (elf1 grp 13) -- elf 13 wants to talk
+    (in_gate, out_gate) &lt;- atomically (awaitGroup grp) -- Santa waits
+    operateGate in_gate  -- let the elf in
+    operateGate out_gate -- let the elf out</code></pre></div><p>Reviewing this section, you may notice that I have given some of the <code>Group</code>
+and <code>Gate</code> operations <code>IO</code> types (e.g. <code>newGroup</code>, <code>joinGroup</code>), and some <code>STM</code> types
+(e.g. <code>newGate</code>, <code>awaitGroup</code>). How did I make these choices? For example,
+<code>newGroup</code> has an <code>IO</code> type, which means that I can never call it from within an
+<code>STM</code> action. But this is merely a matter of convenience: I could instead have
+given <code>newGroup</code> an <code>STM</code> type, by omitting the <code>atomically</code> in its definition. In
+exchange, I would have had to write <code>atomically (newGroup n)</code> at each call
+site, rather than merely <code>newGroup n</code>. The merit of giving <code>newGate</code> an <code>STM</code> type
+is that it is more composable, a generality that <code>newGroup</code> did not need in this
+program. In contrast, I wanted to call <code>newGate</code> inside <code>newGroup</code>, and so I gave
+<code>newGate</code> an <code>STM</code> type.</p><p>In general, when designing a library, you should give the functions <code>STM</code> types
+wherever possible. You can think of <code>STM</code> actions as Lego bricks that can be
+glued together, using <code>do ...</code>, <code>retry</code>, and <code>orElse</code>, to make bigger <code>STM</code> actions.
+However, as soon as you wrap a block in <code>atomically</code>, making it an <code>IO</code> type, it
+can no longer be combined atomically with other actions. There is a good reason
+for that: a value of <code>IO</code> type can perform arbitrary, irrevocable input/output
+(such as <code>launchMissiles</code>).</p><p>It is therefore good library design to export <code>STM</code> actions (rather than <code>IO</code> actions)
+whenever possible, because they are composable; their type advertises that they
+do no irrevocable effects. The library client can readily get from <code>STM</code> to <code>IO</code> (using
+<code>atomically</code>), but not vice versa.</p><p>Sometimes, however, it is <i>essential</i> to use an <code>IO</code> action. Look at <code>operateGate</code>.
+The two calls to <code>atomically</code> cannot be combined into one, because the first
+has an externally-visible side effect (opening the gate), while the second blocks
+until all the elves have woken up and gone through it. So <code>operateGate</code> must
+have an <code>IO</code> type.</p><h2 id="4-3-the-main-program"><a href="#4-3-the-main-program">4.3 The main program</a></h2><p>We will first implement the outer structure of the program, although we have
+not yet implemented Santa himself. Here it is.</p><pre><code class="haskell">main = do
+    elf_group &lt;- newGroup 3
+    sequence_ [ elf elf_group n | n &lt;- [1..10] ]
+          
+    rein_group &lt;- newGroup 9
+    sequence_ [ reindeer rein_group n | n &lt;- [1..9] ]
+          
+    forever (santa elf_group rein_group)</code></pre><p>The first line creates a <code>Group</code> for the elves with capacity 3. The second line is
+more mysterious: it uses a so-called <i>list comprehension</i> to create a list of <code>IO</code> actions and calls <code>sequence_</code> to execute them in sequence. The list comprehension
+<code>[e|x&lt;-xs]</code> is read “the list of all <i>e</i> where <i>x</i> is drawn from the list <i>xs</i>”. So the
+argument to <code>sequence_</code> is the list</p><pre><code class="haskell">[elf elf_group 1, elf elf_group 2, ..., elf elf_group 10]</code></pre><p>Each of these calls yields an <code>IO</code> action that spawns an elf thread. The function
+<code>sequence_</code> takes a list of <code>IO</code> actions and returns an action that, when performed,
+runs each of the actions in the list in order<sup>14</sup>:</p><pre><code class="haskell">sequence_ :: [IO a] -&gt; IO ()</code></pre><p>An <code>elf</code> is built from <code>elf1</code>, but with two differences. First, we want the elf to
+loop indefinitely, and second, we want it to run in a separate thread:</p><pre><code class="haskell">elf :: Group -&gt; Int -&gt; IO ThreadId
+elf gp id = forkIO (forever (do elf1 gp id
+                                randomDelay))</code></pre><p>The <code>forkIO</code> part spawns its argument as a separate Haskell thread (Section 3.1).
+In turn, <code>forkIO</code>’s argument is a call to <code>forever</code>, which runs <i>its</i> argument repeatedly (compare the definition of <code>nTimes</code> in Section 3.1):</p><pre><code class="haskell">forever :: IO () -&gt; IO ()
+-- Repeatedly perform the action
+forever act = do
+    act
+    forever act</code></pre><div class="hidden" title="Try it..."><p>This is a test version of <code>forever</code> that doesn't (thankfuly!) go forever:</p><pre><code class="active haskell">forever :: IO () -&gt; IO ()
+-- Repeatedly perform the action
+forever act = forever' act 10
+  where -- cheating here to make it stop eventually
+    forever' :: IO () -&gt; Int -&gt; IO ()
+    forever' act 0 = return ()
+    forever' act n = do act
+                        forever' act (n - 1)
+
+main = forever (putStr &quot;Are we there yet?\n&quot;)</code></pre></div><p>Finally the expression <code>(elf1 gp id)</code> is an <code>IO</code> action, and we want to repeat
+that action indefinitely, followed each time by a random delay:</p><pre><code class="haskell">randomDelay :: IO ()
+-- Delay for a random time between 1 and 1,000,000 microseconds
+randomDelay = do waitTime &lt;- getStdRandom (randomR (1, 1000000))
+                 threadDelay waitTime</code></pre><div class="hidden" title="Try it..."><p>Run this program several times to experience random delays of up to 5 seconds:</p><pre><code class="active haskell">import System.Random
+import Control.Concurrent
+
+randomDelay :: IO ()
+
+randomDelay = do
+    waitTime &lt;- getStdRandom (randomR (1, 5000000))
+    threadDelay waitTime
+
+randomOp = do
+    n &lt;- getStdRandom (randomR (0, 3))
+    return ([&quot;+&quot;, &quot;-&quot;, &quot;*&quot;, &quot;/&quot;] !! n)
+
+main = do
+    putStr &quot;All our operators are currently busy...\n&quot;
+    randomDelay
+    op &lt;- randomOp
+    putStr (&quot;Operator (&quot; ++ op ++ &quot;) here, how may I help you?\n&quot;)</code></pre></div><p>The rest of the main program should be self-explanatory. We make nine reindeer
+in the same way that we made ten elves, except that we call <code>reindeer</code> instead
+of <code>elf</code>:</p><pre><code class="haskell">reindeer :: Group -&gt; Int -&gt; IO ThreadId
+reindeer gp id = forkIO (forever (do reindeer1 gp id
+                                     randomDelay))</code></pre><p>The code for <code>main</code> finishes by re-using <code>forever</code> to run <code>santa</code> repeatedly. All
+that remains is to implement Santa himself.</p><h2 id="4-4-implementing-santa"><a href="#4-4-implementing-santa">4.4 Implementing Santa</a></h2><p>Santa is the most interesting participant of this little drama, because he makes
+choices. He must wait until there is <i>either</i> a group of reindeer waiting, <i>or</i> a
+group of elves. Once he has made his choice of which group to attend to, he
+must take them through their task. Here is his code:</p><pre><code class="haskell">santa :: Group -&gt; Group -&gt; IO ()
+santa elf_gp rein_gp = do
+    putStr &quot;----------\n&quot;
+    (task, (in_gate, out_gate)) &lt;- atomically (orElse
+                     (chooseGroup rein_gp &quot;deliver toys&quot;)
+                     (chooseGroup elf_gp &quot;meet in my study&quot;))
+    putStr (&quot;Ho! Ho! Ho! let’s &quot; ++ task ++ &quot;\n&quot;)
+    operateGate in_gate
+              -- Now the helpers do their task
+    operateGate out_gate
+  where
+    chooseGroup :: Group -&gt; String -&gt; STM (String, (Gate,Gate))
+    chooseGroup gp task = do gates &lt;- awaitGroup gp
+                             return (task, gates)</code></pre><p>The choice is made by the <code>orElse</code>, which first attempts to choose the reindeer (thereby giving them priority), and otherwise choosing the elves. The
+<code>chooseGroup</code> function does an <code>awaitGroup</code> call on the appropriate group, and
+returns a pair consisting of a string indicating the task (delivering toys or meeting in the study) and the gates that Santa must operate to take the group
+through the task. Once the choice is made, Santa prints out a message and
+operates the two gates in sequence.</p><p>This implementation works fine, but we will also explore an alternative, more
+general version, because <code>santa</code> demonstrates a very common programming pattern. The pattern is this: a thread (Santa in this case) makes a choice in one
+atomic transaction, followed by one or more further consequential transactions.
+Another typical example might be: take a message from one of several message
+queues, act on the message, and repeat. In this case, the consequential action
+was very similar for elves and reindeer — in both cases, Santa had to print a
+message and operate two gates. But that would not work if Santa should do
+very different things for elves and reindeer. One approach would be to return
+a boolean indicating which was chosen, and dispatch on that boolean after the
+choice; but that becomes inconvenient as more alternatives are added. Here is
+another approach that works better:</p><pre><code class="haskell">santa :: Group -&gt; Group -&gt; IO ()
+santa elf_gp rein_gp = do
+    putStr &quot;----------\n&quot;
+    choose [(awaitGroup rein_gp, run &quot;deliver toys&quot;),
+            (awaitGroup elf_gp, run &quot;meet in my study&quot;)]
+  where
+    run :: String -&gt; (Gate,Gate) -&gt; IO ()
+    run task (in_gate,out_gate) = do
+        putStr (&quot;Ho! Ho! Ho! let’s &quot; ++ task ++ &quot;\n&quot;)
+        operateGate in_gate
+        operateGate out_gate</code></pre><p>The function <code>choose</code> is like a guarded command: it takes a list of pairs, waits
+until the first component of a pair is ready to “fire”, and then executes the
+second component. So <code>choose</code> has this type<sup>15</sup>:</p><pre><code class="haskell">choose :: [(STM a, a -&gt; IO ())] -&gt; IO ()</code></pre><p>The guard is an <code>STM</code> action delivering a value of type <code>a</code>; when the <code>STM</code> action
+is ready (that is, does not retry), <code>choose</code> can pass the value to the second
+component, which must therefore be a function expecting a value of type <code>a</code>.
+With this in mind, <code>santa</code> should be easy reading. He uses <code>awaitGroup</code> to
+wait for a ready <code>Group</code>; the <code>choose</code> function gets the pair of <code>Gate</code>s returned by
+<code>awaitGroup</code> and passes it to the <code>run</code> function. The latter operates the two gates
+in succession – recall that <code>operateGate</code> blocks until all the elves (or reindeer)
+have gone through the gate.</p><p>The code for <code>choose</code> is brief, but a little mind-bending:</p><pre><code class="haskell">choose :: [(STM a, a -&gt; IO ())] -&gt; IO ()
+choose choices = do
+    act &lt;- atomically (foldr1 orElse actions)
+    act
+  where
+    actions :: [STM (IO ())]
+    actions = [ do val &lt;- guard
+                   return (rhs val)
+              | (guard, rhs) &lt;- choices ]</code></pre><p>First, it forms a list, <code>actions</code>, of <code>STM</code> actions, which it then combines with
+<code>orElse</code>. (The call <code>foldr1</code> ⊕ [<i>x</i><sub>1</sub>, . . . , <i>x</i><sub>n</sub>] returns <i>x</i><sub>1</sub> ⊕ <i>x</i><sub>2</sub> ⊕ . . . ⊕ <i>x</i><sub>n</sub>.) Each
+of these <code>STM</code> actions itself returns an <code>IO</code> action, namely <i>the thing to be done
+when the choice is made</i>. That is why each action in the list has the cool type
+<code>STM (IO ())</code>. The code for <code>choose</code> first makes an atomic choice among the
+list of alternatives, getting the action <code>act</code>, with type <code>IO (</code>) in return; and then
+performs the action <code>act</code>. The list <code>actions</code> is defined in the <code>where</code> clause by
+taking each pair <code>(guard,rhs)</code> from the list <code>choices</code>, running the guard (an
+<code>STM</code> action), and returning the <code>IO</code> action gotten by applying the <code>rhs</code> to the
+<code>guard</code>’s return value.</p><h2 id="4-5-compiling-and-running-the-program"><a href="#4-5-compiling-and-running-the-program">4.5 Compiling and running the program</a></h2><p>I have presented <i>all</i> the code for this example. If you simply add the appropriate
+import statements at the top, you should be good to go<sup>16</sup>:</p><pre><code class="haskell">module Main where
+import Control.Concurrent.STM
+import Control.Concurrent
+import System.Random</code></pre><p>Try it:</p><pre><code class="active haskell">import Control.Concurrent.STM
+import Control.Concurrent
+import System.Random
+
+main = do
+    elf_gp &lt;- newGroup 3
+    sequence_ [ elf elf_gp n | n &lt;- [1..10]]
+    rein_gp &lt;- newGroup 9
+    sequence_ [ reindeer rein_gp n | n &lt;- [1..9]]
+    forever (santa elf_gp rein_gp)
+  where
+    elf      gp id = forkIO (forever (do elf1 gp id
+                                         randomDelay))
+    reindeer gp id = forkIO (forever (do reindeer1 gp id
+                                         randomDelay))
+
+santa :: Group -&gt; Group -&gt; IO ()
+santa elf_group rein_group = do
+    putStr &quot;----------\n&quot;
+    choose [(awaitGroup rein_group, run &quot;deliver toys&quot;), 
+            (awaitGroup elf_group,  run &quot;meet in my study&quot;)]
+  where
+    run :: String -&gt; (Gate,Gate) -&gt; IO ()
+    run task (in_gate,out_gate) = do 
+        putStr (&quot;Ho! Ho! Ho! let's &quot; ++ task ++ &quot;\n&quot;)
+        operateGate in_gate
+        operateGate out_gate
+
+helper1 :: Group -&gt; IO () -&gt; IO ()
+helper1 group do_task = do
+    (in_gate, out_gate) &lt;- joinGroup group
+    passGate in_gate
+    do_task
+    passGate out_gate
+
+elf1, reindeer1 :: Group -&gt; Int -&gt; IO ()
+elf1      group id = helper1 group (meetInStudy id)
+reindeer1 group id = helper1 group (deliverToys id)
+
+
+meetInStudy id = putStr (&quot;Elf &quot; ++ show id ++ &quot; meeting in the study\n&quot;)
+deliverToys id = putStr (&quot;Reindeer &quot; ++ show id ++ &quot; delivering toys\n&quot;)
+
+---------------
+data Group = MkGroup Int (TVar (Int, Gate, Gate))
+
+newGroup :: Int -&gt; IO Group
+newGroup n = atomically (do g1 &lt;- newGate n
+                            g2 &lt;- newGate n
+                            tv &lt;- newTVar (n, g1, g2)
+                            return (MkGroup n tv))
+
+joinGroup :: Group -&gt; IO (Gate,Gate)
+joinGroup (MkGroup n tv) 
+  = atomically (do (n_left, g1, g2) &lt;- readTVar tv
+                   check (n_left &gt; 0) 
+                   writeTVar tv (n_left-1, g1, g2)
+                   return (g1,g2))
+
+awaitGroup :: Group -&gt; STM (Gate,Gate)
+awaitGroup (MkGroup n tv) = do
+    (n_left, g1, g2) &lt;- readTVar tv
+    check (n_left == 0) 
+    new_g1 &lt;- newGate n
+    new_g2 &lt;- newGate n
+    writeTVar tv (n,new_g1,new_g2)
+    return (g1,g2)
+
+---------------
+data Gate  = MkGate Int (TVar Int)
+
+newGate :: Int -&gt; STM Gate
+newGate n = do
+    tv &lt;- newTVar 0
+    return (MkGate n tv)
+
+passGate :: Gate -&gt; IO ()
+passGate (MkGate n tv) 
+  = atomically (do n_left &lt;- readTVar tv
+                   check (n_left &gt; 0)
+                   writeTVar tv (n_left-1))
+
+operateGate :: Gate -&gt; IO ()
+operateGate (MkGate n tv) = do
+    atomically (writeTVar tv n)
+    atomically (do n_left &lt;- readTVar tv
+                   check (n_left == 0))
+
+----------------
+forever :: IO () -&gt; IO ()
+-- Repeatedly perform the action
+forever act = forever' act 10
+  where -- cheating here to make it stop eventually
+    forever' :: IO () -&gt; Int -&gt; IO ()
+    forever' act 0 = return ()
+    forever' act n = do
+        act
+        forever' act (n - 1)
+
+randomDelay :: IO ()
+-- Delay for a random time between 1 and 1000,000 microseconds
+randomDelay = do
+    waitTime &lt;- getStdRandom (randomR (1, 1000000))
+    threadDelay waitTime
+
+choose :: [(STM a, a -&gt; IO ())] -&gt; IO ()
+choose choices = do 
+    to_do &lt;- atomically (foldr1 orElse stm_actions)
+    to_do
+  where
+    stm_actions :: [STM (IO ())]
+    stm_actions = [ do val &lt;- guard
+                       return (rhs val)
+                  | (guard, rhs) &lt;- choices ] 
+</code></pre><div class="hidden" title="Note..."><p>Since you can run this program directly from within the FP Complete version of this article, the following description might be of less interest than it was in the original publication.</p></div><p>To compile the code, use the Glasgow Haskell Compiler, GHC<sup>17</sup>:</p><pre><code>$ ghc Santa.hs -package stm -o santa</code></pre><p>Finally you can run the program:</p><pre><code>$ ./santa
+----------
+Ho! Ho! Ho! let’s deliver toys
+Reindeer 8 delivering toys
+Reindeer 7 delivering toys
+Reindeer 6 delivering toys
+Reindeer 5 delivering toys
+Reindeer 4 delivering toys
+Reindeer 3 delivering toys
+Reindeer 2 delivering toys
+Reindeer 1 delivering toys
+Reindeer 9 delivering toys
+----------
+Ho! Ho! Ho! let’s meet in my study
+Elf 3 meeting in the study
+Elf 2 meeting in the study
+Elf 1 meeting in the study
+...and so on...</code></pre><p>» <a href="5-reflections-on-haskell">Next: Reflections on Haskell</a>.</p><hr /><p> <sup>10</sup> My choice was influenced by the fact that I am writing these words on 22 December.</p><p> <sup>11</sup> I have given this function a suffix “1” because it only deals with one iteration of the elf,
+whereas in reality the elves re-join the fun when they are done with their task. We will define <code>elf</code> in Section 4.3.</p><p> <sup>12</sup> The function <code>putStr</code> is a library function that calls <code>hPutStr stdout</code>.</p><p> <sup>13</sup> A data type declaration is not unlike a C <code>struct</code> declaration, with <code>MkGate</code> being the
+structure tag.</p><p> <sup>14</sup> The type <code>[IO a]</code> means “a list of values of type <code>IO a</code>”. You may also wonder about the
+underscore in the name <code>sequence_</code> : it’s because there is a related function <code>sequence</code> whose
+type is <code>[IO a] -&gt; IO [a]</code>, that gathers the results of the argument actions into a list. Both
+<code>sequence</code> and <code>sequence_</code> are defined in the <code>Prelude</code> library, which is imported by default.</p><p> <sup>15</sup> In Haskell, the type <code>[</code><i>ty</i><code>]</code> means a list whose elements have type <i>ty</i>. In this case <code>choose</code>’s
+argument is a list of pairs, written <i>(ty<sub>1</sub>,ty<sub>2</sub>)</i>; the first component of the pair has type <code>STM a</code>,
+while the second is a function with type <code>a-&gt;IO ()</code>.</p><p> <sup>16</sup> You can get the code online at  <a href="http://research.microsoft.com/~simonpj/papers/stm/Santa.hs.gz">http://research.microsoft.com/~simonpj/papers/stm/Santa.hs.gz</a></p><p> <sup>17</sup>GHC is available for free at <a href="http://haskell.org/ghc">http://haskell.org/ghc</a></p><hr /><p>[1] Mordechai Ben-Ari. How to solve the Santa Claus problem. <i>Concurrency:
+Practice and Experience</i>, 10(6):485–496, 1998.</p><p>[2] Nick Benton. Jingle bells: Solving the Santa Claus problem in Polyphonic
+C#. Technical report, Microsoft Research, 2003.</p><p>[14] JA Trono. A new exercise in concurrency. <i>SIGCSE Bulletin</i>, 26:8–10, 1994.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/advanced-haskell/beautiful-concurrency/4-the-santa-claus-problem';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

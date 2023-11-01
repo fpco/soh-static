@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html><head><title>12. The List Monad - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/13-the-list-monad">12. The List Monad</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">12. The List Monad</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">25 Dec 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/8cc708e0105a8e8a4ea641bdeeeb834a5b9e1967">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/basics-of-haskell/12-State-Monad">Previous content: 11. State Monad</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-anatomy-of-a-monad">The Anatomy of a Monad</a></li><li><a href="#the-list-monad">The List Monad</a><ul><li><a href="#non-deterministic-computations">Non-Deterministic Computations</a></li><li><a href="#handcrafted-list-monad">Handcrafted List Monad</a></li><li><a href="#functor">Functor</a></li></ul></li><li><a href="#list-bind">List Bind</a></li><li><a href="#list-monad-and-list-comprehension">List Monad and List Comprehension</a></li><li><a href="#exercises">Exercises</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="the-anatomy-of-a-monad"><a href="#the-anatomy-of-a-monad">The Anatomy of a Monad</a></h2><p>The goal of programming is to write programs that perform computations. When complexity reaches a certain level, we start decomposing larger computations into smaller ones. The quality of this decomposition is measured by how much coupling there is between the pieces, and how well we -- and the compiler -- can control and verify it. There is overwhelming evidence that hidden couplings are a major source of bugs in both single-threaded and (even more so!) multi-threaded code.</p><p>Pure functional programming reduces couplings to the very minimum -- it's just plugging the output of one function to the input of another. However, many traditional <i>notions of computation</i> are expressed in a pseudo-functional way: with procedures that take arguments and return results but also do some non-functional shenanigans. There is a surprisingly large class of such computations that can be turned into pure functions by just modifying their return types.</p><p>A monad describes the way of transforming the return <i>type</i> of a particular kind of computation into a fancier <i>monadic type</i>. Functions that return a monadic type are called <i>monadic functions</i>. Each monad provides a mechanism for composing such monadic functions.</p><p>As we have seen, the <code>do</code> notation simplifies the syntax of composing multiple monadic functions.</p><h2 id="the-list-monad"><a href="#the-list-monad">The List Monad</a></h2><p>Let's illustrate this on a particular type of computation: the non-deterministic computation. It's the kind of computation that, instead of producing a single result, might produce many.</p><h3 id="non-deterministic-computations"><a href="#non-deterministic-computations">Non-Deterministic Computations</a></h3><p>Think of a chess program that evaluates future moves. It has to anticipate the moves of a non-deterministic opponent. Only one such move will materialize, but all of them have to be taken into account in planning the strategy. The basic routine in such a program would likely be called <code>move</code>: it would take a state of the chessboard and return a new state after a move has been made. In order to make two moves, you would compose two such compuatations, etc. But what should <code>move</code> return? There are many possible moves in almost every situation. The result of <code>move</code> is non-deterministic.</p><p>A computation returning a non-deterministic result of type <code>a</code> is not a pure function, but it can be made into one by transforming its result type from <code>a</code> to a list of <code>a</code>. In essence, we create a function that returns all possible results at once. Our chess program would probably have many such non-deterministic functions as well as some regular ones. In order to be able to compose them, we define a monad.</p><h3 id="handcrafted-list-monad"><a href="#handcrafted-list-monad">Handcrafted List Monad</a></h3><p>A monadic function returns a monadic type. Let's define the monadic type, <code>List a</code>, for non-deterministic computations. For the purpose of illustration, I'm not going to use the built-in list type, since it already is an instance of a monad and we would run into name conflicts. So here's our private version of the list:</p><pre><code class="haskell">data List a = Nil | Cons a (List a)
+    deriving Show</code></pre><p>Let's think about composing non-deterministic functions. How do we want to calculate the result of two chess moves? If the first move returns a list of options, we should apply the second move to each of the resulting positions in turn. We'll end up with a list of lists of options. If we want a composition of two monadic functions to be another monadic functions, we have to somehow turn this list of lists into a single list. We need to <code>join</code> them. With built-in lists we would just use the function <code>concat</code>:</p><pre><code class="haskell">concat :: [[a]] -&gt; [a]</code></pre><p>For our private implementation of <code>List</code> we have to code it ourselves:</p><pre><code class="active haskell">data List a = Nil | Cons a (List a)
+    deriving Show
+
+join :: List (List a) -&gt; List a
+join Nil = Nil
+join (Cons xs xss) =  cat xs (join xss)
+
+cat :: List a -&gt; List a -&gt; List a
+cat Nil ys = ys
+cat (Cons x xs) ys = Cons x (cat xs ys)
+
+l1 = Cons 1 (Cons 2 Nil)
+l2 = Cons 3 Nil
+
+main = print $ join $ Cons l1 (Cons l2 Nil)</code></pre><p>Now let's implement monadic bind. In the chess example, I said that we wanted to apply the second <code>move</code> to each of the options returned by the first <code>move</code>. We know how to do it with regular lists: we just apply <code>map</code> to it:</p><pre><code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code></pre><p>We can easily implement an analogous function for our <code>List</code>, but let's use this opportunity to talk about another important pattern: Type constructors that let you apply functions to their content. Then we'll come back to defining bind.</p><h3 id="functor"><a href="#functor">Functor</a></h3><p>This pattern is called a <i>functor</i> and is defined in Haskell as a type class with one function <code>fmap</code></p><pre><code class="haskell">class Functor fr where
+    fmap :: (a -&gt; b) -&gt; fr a -&gt; fr b</code></pre><p>Here, <code>fr</code> is a type constructor. <code>fmap</code> takes a function that transforms <code>a</code> into <code>b</code> and applies it to the type <code>fr a</code>, producing <code>fr b</code>. The intuition is that <code>fmap</code> <i>reaches inside</i> <code>f a</code> to transform its contents. A regular list constructor <code>[a]</code> is a <code>Functor</code> with <code>fmap</code> being just the Prelude <code>map</code>. Our own <code>List</code> is also a functor:</p><pre><code class="haskell">instance Functor List where
+    fmap f Nil = Nil
+    fmap f (Cons x xs) = Cons (f x) (fmap f xs)</code></pre><p>It turns out that <i>every monad is a functor</i>, although, for historical reasons this important information is not encoded into the definition of the <code>Monad</code> typeclass. (The reverse though is not true: there are functors that are not monads.)</p><p>Let's verify this statement with some of the monads that we've seen so far. Here's the instance of <code>Functor</code> for <code>Maybe</code>:</p><pre><code class="haskell">instance Functor Maybe where
+    fmap f Nothing = Nothing
+    fmap f (Just x) = Just (f x)</code></pre><p>You can see how <code>f</code> gets <i>under the skin</i> of <code>Maybe</code>.</p><p>This is the <code>Functor</code> instance for <code>State</code>:</p><pre><code class="haskell">instance Functor (State s) where
+    fmap f act = state $ \st -&gt; 
+        let (x, st') = runState act st
+        in (f x, st')</code></pre><p>Here, the work is a little harder, because you have to create an action that, when the state becomes available, runs the original action and applies the function <code>f</code> to its result. State is changed from <code>st</code> to <code>st'</code> as a side effect of running the first action.</p><p>There are some simple functor laws that must be satisfied by every functor's <code>fmap</code>. One is that doint the <code>fmap</code>with the identity function doesn't change anything:</p><pre><code class="haskell">fmap id fra = fra</code></pre><p>and the other is that <code>fmap</code> preserves function composition:</p><pre><code class="haskell">fmap (f . g) fra = fmap f (fmap g fra)</code></pre><p>(<code>id</code> is the identity function, <code>id x = x</code>.)</p><h2 id="list-bind"><a href="#list-bind">List Bind</a></h2><p>As I said before, to bind two non-deterministic functions, we have to apply the second one to each element of the list returned by the first one and then collapse the results into a single list using <code>join</code>:</p><pre><code class="haskell">xs &gt;&gt;= k = join (fmap k xs)</code></pre><p>The other monadic function <code>return</code> simply produces a one-element list:</p><pre><code class="haskell">return x = Cons x Nil</code></pre><p>We can test this monad in action:</p><pre><code class="active haskell">data List a = Nil | Cons a (List a)
+
+instance (Show a) =&gt; Show (List a) where
+    show Nil = &quot;&quot;
+    show (Cons x xs) = show x ++ &quot;, &quot; ++ show xs
+
+instance Functor List where
+    fmap f Nil = Nil
+    fmap f (Cons x xs) = Cons (f x) (fmap f xs)
+
+instance Monad List where
+    return x = Cons x Nil
+    xs &gt;&gt;= k = join $ fmap k xs
+
+join :: List (List a) -&gt; List a
+join Nil = Nil
+join (Cons xs xss) =  cat xs (join xss)
+
+cat :: List a -&gt; List a -&gt; List a
+cat Nil ys = ys
+cat (Cons x xs) ys = Cons x (cat xs ys)
+
+neighbors :: (Num a) =&gt; a -&gt; a -&gt; List a
+neighbors x dx = Cons (x - dx) (Cons x (Cons (x + dx) Nil))
+
+
+test = do
+    x &lt;- neighbors 0 100
+    y &lt;- neighbors x 1
+    return y
+    
+main = print $ test</code></pre><p>Here's an interesting tidbit: the definition of bind in terms of <code>fmap</code> and <code>join</code> works for every monad <code>m</code>:</p><pre><code class="haskell">ma &gt;&gt;= k = join $ fmap k ma</code></pre><p>where <code>join</code> is defined to have the following signature:</p><pre><code class="haskell">join :: m (m a) -&gt; m a</code></pre><p><code>join</code> converts the double application of the monadic type constructor into a single application -- it <i>flattens</i> it. In terms of lists, <code>join</code> converts a list of lists into a single list.</p><p>The opposite is also true: you can define <code>join</code> in terms of bind. Remember, bind has a way of extracting a value from its first argument and applying the continuation to it. So if you start with a doubly wrapped argument, bind will extract a singly wrapped center. You can then pick <code>id</code> as the continuation, et voila!</p><pre><code class="haskell">join mma = mma &gt;&gt;= id</code></pre><p>It turns out that mathematicians prefer the definition of a monad as a functor with join and return, whereas programmers prefer to use the one with bind and return. As you can see, it doesn't really matter.</p><p><b>Ex 1.</b> Define <code>join</code> for <code>Maybe</code> (don't be surprised how simple it is):</p><pre><code class="active haskell">join :: Maybe (Maybe a) -&gt; Maybe a
+join = undefined
+
+test1, test2, test3 :: Maybe (Maybe String)
+test1 = Nothing
+test2 = Just Nothing
+test3 = Just (Just &quot;a little something&quot;)
+
+main = do
+    print $ join test1
+    print $ join test2
+    print $ join test3</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">join :: Maybe (Maybe a) -&gt; Maybe a
+join Nothing = Nothing
+join (Just mb) = mb
+
+test1, test2, test3 :: Maybe (Maybe String)
+test1 = Nothing
+test2 = Just Nothing
+test3 = Just (Just &quot;a little something&quot;)
+
+main = do
+    print $ join test1
+    print $ join test2
+    print $ join test3</code></pre></div><p><b>Ex 2.</b> Define functions <code>listBind</code> and <code>listReturn</code> for regular lists in a way analogous to <code>&gt;&gt;=</code> and <code>return</code> for our private lists (again, it's pretty simple):</p><pre><code class="active haskell">import Data.Char
+
+listBind :: ...
+listBind = undefined
+
+listReturn :: a -&gt; [a]
+listReturn = undefined
+
+neighbors x = [x - 1, x, x + 1]
+
+main = do
+    print $ listBind [10, 20, 30] neighbors
+    print $ listBind &quot;string&quot; (listReturn . ord)</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+listBind :: [a] -&gt; (a -&gt; [b]) -&gt; [b]
+listBind xs k = concat (map k xs)
+
+listReturn :: a -&gt; [a]
+listReturn x = [x]
+
+neighbors x = [x - 1, x, x + 1]
+
+main = do
+    print $ listBind [10, 20, 30] neighbors
+    print $ listBind &quot;string&quot; (listReturn . ord)</code></pre></div><p>Since we are exploring different ways of representing a monad, there's another one that stresses composability. On several occasions I described a monad as a means to compose functions whose return types are embellished. This can be implemented by <i>bind</i>ing the result of the first function to the second function. But it can also be done by composing two monadic functions using a special composition operator.</p><p>Regular functions are composed right to left using the dot operator, as in <code>g . f</code> (pass the result of <code>f</code> to <code>g</code>). Here's the signature of dot:</p><pre><code class="haskell">(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)</code></pre><p>It takes a function from <code>b</code> to <code>c</code> and a function from <code>a</code> to <code>b</code> and composes them into one function that goes straight from <code>a</code> to <code>c</code>.</p><p>Monadic functions can be composed likewise using the so called Kleisli operator, colloquially known as the <i>fish</i> operator: <code>g &lt;=&lt; f</code>. The fish is easily defined using bind:</p><pre><code class="haskell">(&lt;=&lt;) :: Monad m =&gt; (b -&gt; m c) -&gt; (a -&gt; m b) -&gt; (a -&gt; m c)
+g &lt;=&lt; f = \x -&gt; f x &gt;&gt;= g</code></pre><div class="hidden" title="Explain!"><p>First, I replaced regular functions in the signature of <code>(.)</code> with monadic functions. The fish applied to two such functions must produce another function, so it's natural to return a lambda. This lambda is supposed to take <code>x</code> of type <code>a</code>. The only thing we can do with such an <code>x</code> is to apply <code>f</code> to it -- it has the right signature. This gives us a result of the type <code>m b</code>. We have to somehow apply our <code>g</code> to it. That's what <code>&gt;&gt;=</code> is for. It has the right signature.</p><p>It's amazing how sometimes you can derive the implementation of a generic function just from type signatures. It's like a jigsaw puzzle where pieces can only fit together one way.</p></div><p>Here it is applied to the list monad:</p><pre><code class="active haskell">(&lt;=&lt;) :: Monad m =&gt; (b -&gt; m c) -&gt; (a -&gt; m b) -&gt; (a -&gt; m c)
+g &lt;=&lt; f = \x -&gt; f x &gt;&gt;= g
+
+f x = [x, x + 1]
+g x = [x * x]
+
+test = g &lt;=&lt; f
+
+main = print $ test 7</code></pre><p><b>Ex 3.</b> Implement the other fish operator that composes from left to right:</p><pre><code class="active haskell">(&gt;=&gt;) :: Monad m =&gt; ...
+f &gt;=&gt; g = undefined
+
+f x = [x, x + 1]
+g x = [x * x]
+
+test = f &gt;=&gt; g
+
+main = print $ test 7</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">(&gt;=&gt;) :: Monad m =&gt;  (a -&gt; m b) -&gt; (b -&gt; m c) -&gt; (a -&gt; m c)
+f &gt;=&gt; g = \x -&gt; f x &gt;&gt;= g
+
+f x = [x, x + 1]
+g x = [x * x]
+
+test = f &gt;=&gt; g
+
+main = print $ test 7</code></pre></div><p>You can also start with the (right or left) fish and define bind in terms of it:</p><pre><code class="haskell">ma &gt;&gt;= k = (\x -&gt; ma) &gt;=&gt; k</code></pre><div class="hidden" title="Explain!"><p>This is another jigsaw puzzle. The signatures tell it all:</p><pre><code class="haskell">ma     :: m a
+k      :: a -&gt; m b
+result :: m b
+(&gt;=&gt;)  :: (a -&gt; ma) -&gt; (a -&gt; mb) -&gt; (a -&gt; mb)</code></pre><p>Notice that the lambda we used as the first argument to <code>&gt;=&gt;</code> ignores its argument <code>x</code>. A function that ignores its argument is called a constant function. You can create a constant function using <code>const</code> from Prelude:</p><pre><code class="haskell">-- const ma = \x -&gt; ma
+ma &gt;&gt;= k = const ma &gt;=&gt; k</code></pre></div><p>As you can see, these formulations are equivalent. What's nice about the last one is that it's very easy to express monadic laws in it. Monadic laws (also called <i>axioms</i>) are additional conditions that must be fulfilled by every monad implementation in order to, for instance, make the <code>do</code> notation unambiguous. In terms of <code>return</code> and the fish operator, these laws simply state that the fish must be associative and that <code>return</code> is an identity of fish:</p><pre><code class="haskell">(f &gt;=&gt; g) &gt;=&gt; h = f &gt;=&gt; (g &gt;=&gt; h)
+return &gt;=&gt; f = f
+f &gt;=&gt; return = f</code></pre><p>Notice an interesting thing: If you replace the fish with <code>*</code> and <code>return</code> with <code>1</code>, you get the laws of multiplication:</p><pre><code class="haskell">(a * b) * c = a * (b * c)
+1 * a = a
+a * 1 = a</code></pre><p>Consider this a useful mnemonic, but there is actually a nice theory behind it.</p><p><b>Ex 4.</b> Express the fish operator for standard lists considering the non-deterministic function interpretation (the solution is totally unsurprising):</p><pre><code class="active haskell">import Data.Char
+
+(&gt;=&gt;) :: ...
+f &gt;=&gt; g = undefined
+
+modCase c = [toLower c, toUpper c]
+camelize = modCase &gt;=&gt; modCase
+
+main = print $ fmap camelize &quot;Hump&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+
+(&gt;=&gt;) :: (a -&gt; [b]) -&gt; (b -&gt; [c]) -&gt; (a -&gt; [c])
+f &gt;=&gt; g = \x -&gt; concat (map g (f x))
+
+modCase c = [toLower c, toUpper c]
+camelize = modCase &gt;=&gt; modCase
+
+main = print $ fmap camelize &quot;Hump&quot;</code></pre></div><h2 id="list-monad-and-list-comprehension"><a href="#list-monad-and-list-comprehension">List Monad and List Comprehension</a></h2><p>As I mentioned before, the standard Prelude defines the instance of <code>Monad</code> for built-in lists. This lets us use the <code>do</code> notation to compose list operations. Here's a function <code>squares</code> that squares each element of a list:</p><pre><code class="active haskell">squares lst = do
+    x &lt;- lst
+    return (x * x)
+
+main = print $ squares [1, 2, 3]</code></pre><p>We can desugar this code to see how it works internally:</p><pre><code class="haskell">squares lst = lst &gt;&gt;= \x -&gt; return (x * x)</code></pre><p>Let's expand <code>&gt;&gt;=</code> and <code>return</code>:</p><pre><code class="haskell">squares lst = 
+    concat $ fmap k lst
+  where
+    k = \x -&gt; [x * x]</code></pre><p>Here, <code>fmap k</code> produces a list of one-element lists of squares. This list of lists is then squashed into a single list by <code>concat</code>.</p><p>At a higher abstraction level, you may think of a <code>do</code> block as producing a list. The last <code>return</code> shows you how to generate an element of this list. The line <code>x &lt;- lst</code> draws an element from <code>lst</code>.</p><p>Of course, <code>squares</code> can be implemented simply by using <code>fmap</code>:</p><pre><code class="haskell">squares = fmap sq
+  where sq x = x * x</code></pre><p>A more interesting example is when you draw from more than one list:</p><pre><code class="active haskell">pairs l1 l2 = do
+    x &lt;- l1
+    y &lt;- l2
+    return (x, y)
+
+main = print $ pairs [1, 2, 3] &quot;abc&quot;</code></pre><p>There is a shortcut notation for <code>do</code> blocks that deals with lists called <i>list comprehension</i>. List comprehension is based on a mathematical notation for defining sets. For instance, our first example can be written as:</p><pre><code class="haskell">[x * x | x &lt;- lst]</code></pre><p>You read it as &quot;a list of <code>x * x</code> where <code>x</code> is drawn from <code>lst</code>.&quot; Similarly, the second example reduces to:</p><pre><code class="active haskell">main = print $ [(x, y) | x &lt;- [1..3], y &lt;- &quot;abc&quot;]</code></pre><p>The clauses to the right of the vertical bar (pronounced &quot;where&quot;) are processed in order, just like lines in the <code>do</code> block. So, for instance, the second clause may depend on the result of the first one, as in this example that prints ordered pairs of integers:</p><pre><code class="active haskell">main = 
+  print $ [(x, y) | x &lt;- [1..4], y &lt;- [x..4]]</code></pre><p>Moreover, you may filter the elements of lists, which is not easy to accomplish using the <code>do</code> notation (there is a <code>guard</code> function for that, but it's a bit tricky so I won't explain it here). For instance, in this example we use a guard that only allows Pythagorean triples to pass through:</p><pre><code class="active haskell">triples =
+  [(x, y, z) | z &lt;- [1..]
+             , x &lt;- [1..z]
+             , y &lt;- [x..z]
+             , x * x + y * y == z * z]
+
+main = print $ take 4 triples</code></pre><p>Notice that we are using an infinite list of <code>z</code>s (with no upper bound) so the resulting list is also infinite. However, since Haskell is lazy, the program will terminate after the first 4 results are printed. In an imperative language this list comprehension would probably be expressed as a deeply nested loop.</p><pre><code>void printNTriples(int n) {
+    int i = 0;
+    for (int z = 1;; ++z) {
+        for (int x = 1; x &lt;= z; ++x) {
+            for (int y = x; y &lt;= z; ++y){
+                if (x * x + y * y == z * z){
+                    printf (&quot;(%d, %d, %d)\n&quot;, x, y, z);
+                    if (++i == n)
+                        return;
+                }
+            }
+        }
+    }
+}</code></pre><p>Haskell's use of infinite lists or streams is a powerful idiom for structuring code. In C++ it's very hard to separate the algorithm for generating Pythagorean triples from the algorithm that prints the first n of them. For instance, in the above C++ code the control over the length of the result list happens at the innermost level of the loop. Alternatively, you could define your own lazy C++ iterator, but then you'd end up with another form of inversion of control in the implementation of <code>operator++</code> (you'd have to turn the loop inside out). If you're a C++ programmer you should try it.</p><p>In the next tutorial we'll go back to the symbolic calculator project and consolidate our monads.</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p><b>Ex 5.</b> Each card in a deck has a rank between 1 (Ace) and 13 (King) and a Suit (Club, Diamond, Heart, Spade). Write a list comprehension that generates all cards in a deck. Hint: You can encode suit as an enumeration deriving <code>Show</code> and <code>Enum</code>. The <code>Enum</code> type class will let you create ranges like <code>[Club .. Spade]</code> (put space before <code>..</code> or the parser will be confused).</p><pre><code class="active haskell">data Suit = ...
+
+data Rank = Rank Int
+
+instance Show Rank where
+   ...
+
+deck = ...
+
+main = print deck</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">data Suit = Club | Diamond | Heart | Spade
+    deriving (Show, Enum)
+
+data Rank = Rank Int
+
+instance Show Rank where
+    show (Rank 1)  = &quot;Ace&quot;
+    show (Rank 11) = &quot;Jack&quot;
+    show (Rank 12) = &quot;Queen&quot;
+    show (Rank 13) = &quot;King&quot;
+    show (Rank i)  = show i
+
+deck = [(Rank r, s) | s &lt;- [Club .. Spade]
+                    , r &lt;- [1..13]]
+
+main = print deck</code></pre></div><p><b>Ex 6.</b> What does this function do?</p><pre><code class="haskell">f [] = []
+f (p:xs) = f [x | x &lt;- xs, x &lt; p] 
+        ++   [p]
+        ++ f [x | x &lt;- xs, x &gt;= p]</code></pre><div class="hidden" title="Show answer"><p>It's a (very inefficient, but extremely pedagogical) implementation of quicksort.</p><pre><code class="active haskell">f [] = []
+f (p:xs) = f [x | x &lt;- xs, x &lt; p] 
+        ++   [p]
+        ++ f [x | x &lt;- xs, x &gt;= p]
+
+main = print $ f [2, 5, 1, 3, 4]</code></pre></div></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/basics-of-haskell/13-the-list-monad';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

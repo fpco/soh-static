@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html><head><title>Building up to a Point via Adjunctions - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/gbaz">gbaz</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/gbaz/building-up-to-a-point-via-adjunctions">Building up to a Point via Adjunctions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Building up to a Point via Adjunctions</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">12 May 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/gbaz">gbaz</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5988/9815ba02ea8dec6539d6557f80b1b3a834ce9434">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/gbaz">See all content by gbaz</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#extra-credit">Extra Credit</a></li><li><a href="#one-more-tricky-bit">One more tricky bit</a></li><li><a href="#future-work">Future Work</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><pre><code class="haskell">{-# LANGUAGE RankNTypes #-}</code></pre><p>For some time, there's been a strange creature, <code>Pointed</code>, that was folks have been proposing. Originating in Edward Kmett's category extras, it looks like this:</p><pre><code class="haskell">class Pointed f where
+    point :: a -&gt; f a</code></pre><p>The notion behind it was that one could decompose, e.g., <code>Applicative</code> into an instance of the <code>Pointed</code> typeclass and an instance of the <code>Apply</code> typeclass (giving <code>apply :: f (a -&gt; b) -&gt; f a -&gt; f b</code>) and an instance of Pointed, such that the two interact properly.</p><p>The basic problem is that point is too general and lawless. The only &quot;law&quot; one can give is that if <code>f</code> is both <code>Functor</code> and <code>Pointed</code>, then <code>fmap f . point === point . f</code> -- but, by parametricity, this comes for free! It provides no guidance on what <code>point</code> does or how. Rather, it follows for all functions <code>a -&gt; f a</code> as a consequence of the functor laws.</p><p>Another way to think of this in universal algebra we think relationally, in terms of operations. We define first a semigroup with an associative operation <code>(*)</code>, and then we can 'complete' it by providing it with an identity. The identity object is defined uniquely up to isomorphism by the properties it possess -- we don't define operations by what objects provide them identities. The way to see &quot;point&quot; as really yielding a unit object is to define</p><pre><code class="haskell">class Inhabited f where
+    unit :: f ()</code></pre><p>Now, for f a functor we have <code>unit = point ()</code> and <code>point x = fmap (const x) unit</code>.</p><p>Dan Doel has provided some <a href="http://www.haskell.org/pipermail/libraries/2013-May/020085.html">truly weird examples</a> of legitimate pointeds.</p><p>It so happens that there is another typeclass, already in base, which also has no laws, although there's a good deal of &quot;intuition&quot; behind it. This typeclass is Foldable.</p><p>We typically think of foldable as such:</p><pre><code class="haskell">class Foldable f where
+    foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; f a -&gt; b</code></pre><p>However, its equally powerful (and I find more convenient) to think of Foldable simply giving a function <code>toList :: f a -&gt; [a]</code>.</p><p>Just like <code>Pointed</code>, <code>Foldable</code> has no laws other than, for <code>f</code> a <code>Functor</code>, the free theorem <code>fmap f . toList === toList . fmap f</code>. This in fact flows directly from the fact that for <code>f</code> a <code>Functor</code>, <code>toList</code> has the type of a natural transformation between endofunctors on Hask: <code>type NatTrans f g = (Functor f, Functor g) =&gt; forall a. f a -&gt; g a</code>.</p><p>Every instance of Traversable is also an instance of Folded. Traversable can be given as</p><pre><code class="haskell">class Traversable f where
+    traverse :: Applicative f =&gt; (a -&gt; f b) -&gt; t a -&gt; f (t b)</code></pre><p>Traversable has two laws:</p><ol><li>(Identity) : traverse Identity === Identity</li><li>(Composition) : traverse (Compose . fmap g . f) === Compose . fmap (traverse g) . traverse f</li></ol><p>Incidentally, the first law ensures that <code>getId . traverse (Id . f) === fmap f</code> The second in turn specializes to give the composition law for functors. This leads me to suspect that we can define (in a categorical sense) Traversable as a special type of functor and capture the fashion in which it is &quot;genuinely&quot; a subclass of Functor -- i.e. a functor preserving certain special morphisms intrinsic to  Hask, just as Applicative is a functor preserving the monoidalness (and closedness) of Hask.</p><p>Given <code>traverse</code>, we can define <code>toList = getConst . traverse (const . (:[]))</code></p><p>So for any given <code>f</code> that is both <code>Foldable</code> and <code>Traversable</code>, we can give the law that its definition of <code>toList</code> must coincide with that given by <code>Traversable</code>. And this gives at least <i>some</i> sort of law on Foldable. Intuitively, the composition law gives us that &quot;every a in f a that is traversed must be traversed at most once&quot; (linearity). Hence a lawful foldable gives us no duplication or results in our <code>toList</code>.</p><p>However, there are many things that are <code>Foldable</code> but not <code>Traversable</code>! <code>Set</code> is not traversable, because it is not a Functor on all of Hask, only that subcategory subject to the Ord constraint.  As another example, the unwrapped reader Functor/Monad/Applicative <code>((-&gt;) r)</code> is not traversable. Hence <code>data Store r a = Store (r -&gt; a) r</code> has an obvious <code>toList</code> but is also not traversable.</p><p>Are the <code>Foldable</code> instances for such things doomed to be lawless? Obviously, since Foldable only has one method, we can't define laws by the <i>interaction</i> of methods. Similarly, since the one method of <code>Foldable</code> eliminates the <code>f</code>, we can't define a law by the composition of its methods.</p><p>What is necessary is a further subclass of <code>Foldable</code>, such that it harbors a useful relationship to <code>Foldable</code> without simply specializing it. Fortunately, such a subclass exists, and gives us the 'point' of <code>Pointed</code> along the way! <code>Foldable</code> can be thought of as yielding a natural transformation to list. And since list is the free monoid generated by a type, this gives in fact, by composition, a natural transformation to any monoid generated by a Haskell type (such as <code>Set</code>, <code>Sum</code>, <code>First</code>, etc.) A slight generalization of this is what is captured by the fact that <code>foldMap :: Monoid m -&gt; (a -&gt; m) -&gt; t a -&gt; m</code>, <code>foldr</code>, and <code>toList</code> are equivalent in power (nb: this is a lie if you give foldMap an instance of <code>Monoid</code> that is unlawful). Thus the fact that list is such a prevalent data structure in Haskell is really a first-order reflection of the fact that fold is such a fundamental operation in functional programming in general.</p><p>In any case, what I suggest is that we provide the following typeclass, dual to <code>Foldable</code>:</p><pre><code class="haskell">class Buildable f where
+    fromList :: [a] -&gt; f a
+    fromList xs = build (\cons unit -&gt; foldr cons unit xs)
+
+    build :: (forall b. (a -&gt; b -&gt; b) -&gt; b -&gt; b) -&gt; f a
+    build g = fromList . g (:) []
+
+    singleton :: a -&gt; f a
+    singleton = fromList . (:[])</code></pre><p>The <code>singleton</code> function is now our desired &quot;point&quot; operation. <code>Foldable</code> and <code>Buildable</code>, each individually lawless, together can be given a strong set of laws, though not strong enough to always determine their implementations up to unique isomorphism.</p><p>The key is that foldr and build on typical lists are subject to a very strong set of laws, which we typically refer to as short cut fusion:</p><pre><code class="haskell">foldr c n (build g) === g c n</code></pre><p>We can understand short cut fusion as follows:</p><pre><code class="haskell">type FoldList a = forall b. (a -&gt; b -&gt; b) -&gt; b -&gt; b
+
+toFoldList :: [a] -&gt; FoldList a
+toFoldList xs = \cons unit -&gt; foldr cons unit xs
+
+fromFoldList :: FoldList a -&gt; [a]
+fromFoldList fl = fl (:) []</code></pre><p>Note that <code>fromFoldList</code> is a synonym for build, and by equational reasoning, <code>foldr c n === ($ c) . ($ n) . toFoldList</code>. This we can rewrite the fusion rule as:</p><pre><code class="haskell">($ c) . ($ n) . toFoldList . fromFoldList === ($ c) . ($ n)</code></pre><p>Which derives directly from <code>toFoldList . fromFoldList === id</code>.</p><p>This works because lists are basically isomorphic to the catamorphism over them (ignoring some hairiness with <code>seq</code>) -- this is at the heart of church encoding and much else. For Foldable/Buildable we aren't necessarily dealing with isomorphisms, but ideally we can formulate rules <i>along</i> the same lines, if not quite as strong. What should such rules be? Let's look at some examples. For <code>Set</code>, we have</p><pre><code class="haskell">fromList . toList === id</code></pre><p>Similarly for <code>Last</code>, <code>First</code>, <code>Sequence</code>, etc.</p><p>We can view this property as given by the fact that [a] is the free monoid generated by a type. Since all these other type constructors also give monoids generated by a type, there is an adjunction, with fromList universally the right (forgetful) adjoint.</p><p>However, this law is too strong for all cases. Consider:</p><pre><code class="haskell">data Tree a = Nil | Leaf a | Branch (Tree a) (Tree a)</code></pre><p>Now give it an &quot;append&quot; as such:</p><pre><code class="haskell">append = Branch</code></pre><p>This &quot;append&quot; is not associative. It contains <i>more</i> information than a list, not less. But our forgetful functor -- fromList -- doesn't have to generate <i>every</i> value in our target category. In fact, &quot;opening up&quot; isomorphisms into a broader class of almost-equivalences is in one sense the point of adjunctions.</p><p>What really matters is that we get</p><pre><code class="haskell">toList . fromList . toList === toList
+fromList . toList . fromList === fromList</code></pre><p>where there is a transformation from <code>toList . fromList</code> to <code>id</code> that is natural (i.e. anything we do on the a <code>to . fro</code> of a list via some structure can be mapped to something we do on lists directly), and a transformation from <code>id</code> to <code>fromList . toList</code> that is natural (i.e. anything that we do on a structure directly can be mapped to something we do on that structure as munged through a list).</p><p>In any case these laws capture a rather intuitive notion -- any information that we &quot;throw away&quot; will only be &quot;discarded&quot; once.</p><p>However, such laws don't determine Foldable or Buildable uniquely. A simple example is the following:</p><pre><code class="haskell">newtype Goofy a = Goofy [a]
+
+instance Foldable Goofy where
+         toList (Goofy g) = go
+           where go (_:x:xs) = x : toList xs
+                 go _ = []
+
+instance Buildable Goofy where
+         fromList = Goofy . go
+           where go (x:xs) = x:x:go xs
+                 go _ = []</code></pre><p>Here, we arbitrarily double every element going &quot;into&quot; Goofy, and strip half of Goofy going back out. Our laws are obeyed, but not in the expected way. Other examples should be easy to generate.</p><p>Now, anything can be made Foldable, since in the worst case we can just send all objects to the empty list. However, not anything can be made Buildable. Here's a simple example:</p><pre><code class="haskell">instance Foldable (,) a where
+    toList (_,x) = [x]
+
+instance Buildable (,) a where
+    fromList = ???</code></pre><p>(We can of course fix this by adding a monoid constraint to <code>a</code> in the Buildable instance)</p><p>In any case, our two laws have nice consequences as far as interaction between themselves and with other typeclasses as well. We get properties such as the following:</p><pre><code class="haskell">Foldable law:
+fold f === fold f . toList
+Buildable extension:
+fold f === fold f . fromList . toList
+
+Foldable law:
+fmap toList . traverse f === traverse f . toList
+Buildable extension:
+fmap toList . traverse f === fmap toList . traverse f . fromList . toList
+
+Monoid/Buildable law:
+(Buildable f, Monoid f a) =&gt; fromList xs `mappend` fromList ys === fromList (xs ++ ys)</code></pre><p>I'm sure there are some other nice properties that I haven't arrived at either.</p><p>Also note that <code>Buildable</code> is not only a nice construction to work with, but also can allow a few efficiencies that we don't currently have. In particular, if I have a <code>Sequence a</code> and wish to turn it to a <code>Set a</code>, I have two &quot;obvious&quot; avenues. A) I map <code>Set.singleton</code> over it and then call <code>fold</code>. B) I simply call <code>Set.fromList . Sequence.toList</code>.</p><p>The &quot;right&quot; thing is in fact to <code>foldr</code> a set-builder function such as <code>Set.insert</code>, beginning with the empty set. This is <i>exactly</i> what the build for Set does!</p><p>So we can write a general function:</p><pre><code class="haskell">fromFoldable :: (Foldable f, Buildable g) =&gt; f a -&gt; g a
+fromFoldable x = build (\cons nil -&gt; foldr cons nil x)</code></pre><p>and assuming our <code>Foldable</code> and <code>Buildable</code> instances are defined well, this will be quite efficient, avoiding the creation of unnecessary intermediate structures!</p><p>So what's the punchline here?</p><ul><li>Foldable is handy, but lawless.</li><li>Pointed is considered handy, but lawless.</li><li>Buildable generalized Pointed strictly -- everything Buildable is Pointed, and everything Pointed is Buildable (to get the latter, just always build from a one element list).</li><li>Buildable is even more handy than pointed (it lets us generalize a range of, though not all, existing fromList functions).</li><li>Buildable and Foldable together form a nice dual pair that has very nice laws.</li><li>These nice laws get even nicer in conjunction with other lawful typeclasses (and I suspect there's more I haven't worked out yet here too).</li><li>Perhaps we should consider creating a nice Buildable package for potential inclusion in the platform.</li></ul><h4 id="extra-credit"><a href="#extra-credit">Extra Credit</a></h4><p>Given that we've established a family of adjunctions, the obvious question to ask is what monads we get out of them, and what we can say about such monads in general. I have some suspicions, but haven't bothered to work it through.</p><h4 id="one-more-tricky-bit"><a href="#one-more-tricky-bit">One more tricky bit</a></h4><p>There is one class of things that are <code>Pointed</code> that <code>Buildable</code> does not generalize -- those things such that they require <i>at least</i> one <code>a</code> -- e.g. <code>Identity</code>, <code>NonEmptyList</code>, <code>Pair</code>, or infinite streams. There are a few solutions here -- none great.</p><p>The most principled thing is to define <code>Buildable1</code> as a dual to <code>Foldable1</code> (in the semigroups package).</p><pre><code class="haskell">class Foldable1 f where
+   toNEL :: f a -&gt; NEL a
+
+class Buildable1 f where
+   fromNEL :: NEL a -&gt; f a
+   singleton :: a -&gt; f a</code></pre><p>Due to contravariance, while <i>fewer</i> things are <code>Foldable1</code> than <code>Foldable</code>, <i>more</i> things are <code>Buildable1</code> than <code>Buildable</code>. For those which are both <code>Foldable1</code> and <code>Buildable1</code> we can provide the same adunction laws regarding <code>toNEL . fromNEL . toNEL === toNEL</code>, etc. This group of things includes <code>Identity</code> and <code>NonEmptyList</code>, but excludes many other common types like <code>Set</code>, <code>First</code>, and even <code>List</code>.</p><p>The most practical solution, despite its ickiness, seems to be to provide both <code>fromList</code> and <code>fromNonEmptyList</code> in <code>Buildable</code>, noting that the former is partial in some instances. On the one hand, partial functions are terrible. On the other, this mirrors most closely how we've already structured many other functions in Haskell, and it allows those who so choose to only work in the total subset.</p><h4 id="future-work"><a href="#future-work">Future Work</a></h4><p>For types like <code>Set</code> we would need some sort of constraint kinds -- I have yet to work out the story for that, though it doesn't look terrible, I suspect.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/gbaz/building-up-to-a-point-via-adjunctions';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html><head><title>Querying an existing database - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell">Advanced Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/persistent-in-detail">Persistent in Detail</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/persistent-in-detail/existing-database">Querying an existing database</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Querying an existing database</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">29 Nov 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/school">School of Haskell</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/30/9343ab16c9da1b582365fd053e17e642c31feace">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/advanced-haskell/persistent-in-detail/persistent-time-values">Previous content: Time values in persistent</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/persistent-in-detail">Go up to: Persistent in Detail</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a></li><li><a href="#the-schema">The Schema</a></li><li><a href="#the-entity-defintion">The entity defintion</a><ul><li><a href="#entities">Entities</a><ul><li><a href="#attributes">Attributes</a></li><li><a href="#id-field">Id field</a></li></ul></li><li><a href="#fields">Fields</a><ul><li><a href="#types">Types</a></li><li><a href="#attributes">Attributes</a></li></ul></li><li><a href="#and-the-rest">And the rest</a></li><li><a href="#examining-it-">Examining it.</a></li><li><a href="#using-it">Using it</a></li></ul></li><li><a href="#translating-to-csv">Translating to CSV</a></li><li><a href="#feedback">Feedback</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>While most database programming tutorials walk you through creating, populating, querying and modifying a database, as that covers the subject, a far more common assignment is to extract data from an existing database in order to create a report, load it into some other application, etc.</p><p>The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistent" title="Hoogle search for: persistent"><code>persistent</code></a> database package uses template haskell to translate <i>entity definitions</i> into Haskell data declarations that can be mapped to SQL types.  In this tutorial, we'll look at a (relatively simple) real-world schema, and show how to translate it to a persistent entity definition. We will then check the definition to insure that nothing changes, and use it to extract the table in CSV format. Finally, we'll provide a summary of the features available when creating an entity definition.</p><h1 id="the-schema"><a href="#the-schema">The Schema</a></h1><p>The schema we're going to work with is a schema from a now obsolete application, but it was in production for over a decade. It was used for providing a list of web pages, noting when they were added, when someone followed them and how many times they were followed, and the last time it was verified that the URL in question actually worked. Of course, it kept the URL and a description to go with it. There are a number of sites on the web for which such a table might be useful, though they would typically want more information than this.</p><pre><code class="sql">create table hotlist (
+    id          int not null ,      -- The index counter
+    count       int default 0 ,     -- and the click counter
+    added       timestamp default now() ,       -- when it was added
+    followed    timestamp ,     -- last time it was followed
+    checked     timestamp ,     -- last time it was verified
+    description varchar not null,           -- What the link is to
+    URL         varchar not null,           -- And how to get there
+    primary key (id)
+    ) ;</code></pre><h1 id="the-entity-defintion"><a href="#the-entity-defintion">The entity defintion</a></h1><p>In order to access this table with persistent, we need an entity definition, which will be used by the template haskell quasiQuoter <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistLowerCase" title="Hoogle search for: persistLowerCase"><code>persistLowerCase</code></a> to create the appropriate Haskell data types. The code for the above table looks like:</p><pre><code class="haskell">share [mkPersist sqlSettings, mkMigrate &quot;migrateAll&quot;] [persistLowerCase|
+Link sql=hotlist
+   count Int default=0 sqltype=int
+   added UTCTime default=now()
+   followed UTCTime Maybe
+   checked UTCTime Maybe
+   description Text
+   url Text
+   UniqueUrl url
+   deriving Show
+|]</code></pre><p>The input to <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistLowerCase" title="Hoogle search for: persistLowerCase"><code>persistLowerCase</code></a> is a set of entity definitions.  An <i>entity</i> corresponds to an SQL table.  The various Haskell data types needed to deal with the table will also be created.</p> <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistLowerCase" title="Hoogle search for: persistLowerCase"><code>persistLowerCase</code></a> translates the Haskell names into SQL by turning upper case to lower case and inserting an underscore before them if they aren't the first character, effectively turning CamelCase into camel_case. The alternative is to use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistUpperCase" title="Hoogle search for: persistUpperCase"><code>persistUpperCase</code></a>, which leaves the names intact. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mkPersist" title="Hoogle search for: mkPersist"><code>mkPersist</code></a> creates the Haskell data types from the output of <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistLowerCase" title="Hoogle search for: persistLowerCase"><code>persistLowerCase</code></a>. The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=sqlSettings" title="Hoogle search for: sqlSettings"><code>sqlSettings</code></a> causes it to generate code for an SQL database.  The set of available back ends changes with time, though at least <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.MongoDB" title="Hoogle search for: Database.Persist.MongoDB"><code>Database.Persist.MongoDB</code></a> for MongoDB should be available. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mkMigrate" title="Hoogle search for: mkMigrate"><code>mkMigrate</code></a> creates a description of the SQL expected on the back end based on the output of <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistLowerCase" title="Hoogle search for: persistLowerCase"><code>persistLowerCase</code></a>. That can be passed to a number of functions that query the back end, and adjust the database as needed - including creating any missing tables.<p>Finally, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=share" title="Hoogle search for: share"><code>share</code></a> runs the list of processes in it's first argument over it's second argument.</p><h2 id="entities"><a href="#entities">Entities</a></h2><p>An entity starts with an name that starts with an uppercase letter (<code>Link</code> in our example above), and includes all the following lines that are indented. Python programmers will feel right at home with these.</p><h3 id="attributes"><a href="#attributes">Attributes</a></h3><p>The name  starts with an uppercase letter because it's going to be used as a constructor for a Haskell record composed of values from the following lines. After the name are attributes for the constructor. In this case, the <code>sql=hotlist</code> causes the resulting data types to be associated with the table <code>hotlist</code>.  The complete list of entity attributes is:</p><table align="center" border="1">
+<tr><th>Attribute<th>Affect
+<tr><td>sql=<i>name</i><td>The name of the table for this entity
+<tr><td>id=<i>name</i><td>The name of the id column for this entity 
+<tr><td>json<td>create toJSON and fromJSON instances for this entity
+</td></td></tr></td></td></tr></td></td></tr></th></th></tr></table><h3 id="id-field"><a href="#id-field">Id field</a></h3><p>Every entity type must have an <i>id</i> field. By default, it's name is <code>id</code>, it has type <code>integer</code> and it will be unique. That's a fairly common thing to find in an SQL table, though the name may be different. In an existing table, if the name isn't <code>id</code>, you can use the <code>id=*name*</code> attribute to set it to <i>name</i>.</p><p>As with other fields, you get a constructor called <code>*Entity*Id</code>. However, unlike other fields, this one is not part of the <code>*Entity*</code> type. That would make it difficult to construct an entity to insert into the database. Instead, <code>*Entity*Id</code> values are returned from the database by queries, and when you insert entities into the database. You can then use them to get the actual entity back from the database with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.get" title="Hoogle search for: Database.Persist.get"><code>get</code></a>.</p><h2 id="fields"><a href="#fields">Fields</a></h2><p>The indented lines, down to the one that starts <code>URL</code>, create field definitions. A <i>field</i> corresponds to a column in the table. These all start with lower case letters. Each field will have two visible names, both constructed from the entity and field name.  Both consist of the field name appended to the entity name. One is the a Haskell field name for this field in the entity, so it starts with lower case (i.e. - <code>linkCount</code>). The other is a constructor that will be used in selects, and thus starts with upper case (<code>LinkCount</code>).</p><h3 id="types"><a href="#types">Types</a></h3><p>The fields in the entity definition are pretty much in one-to-one correspondence with the columns in the table, except that <code>id</code> is missing.  Each name is followed by the type for that field. This should match the type in the table column of that name, so that Haskell's type checking will work.</p><p>The Haskell types recognized by <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistent" title="Hoogle search for: persistent"><code>persistent</code></a>, and the PostGreSQL types they map to, are:</p><table align="center" border="1">
+<tr><th>Haskell<th>SQL
+<tr><td>Text<td>VARCHAR
+<tr><td>ByteString<td>BYTEA
+<tr><td>Int<td>INT8
+<tr><td>Double<td>DOUBLE PRECISION
+<tr><td>Rational<td>NUMERIC(22, 12)
+<tr><td>Bool<td>BOOLEAN
+<tr><td>Day<td>DATE
+<tr><td>TimeOfDay<td>TIME
+<tr><td>UTCTime<td>TIMESTAMP
+<tr><td>ZonedTime<td>TIMESTAMP+TIMEZONE
+</td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></th></th></tr></table><h3 id="attributes"><a href="#attributes">Attributes</a></h3><p>After the type there is an optional list of attributes for each field. Except for <code>Maybe</code>, they generally are used to control the connection to the database, adopting it for an existing database, adopting what gets used, or changing the database table.</p><table align="center" border="1">
+<tr><th>Attribute<th>Affect
+<tr><td>sql=<i>name</i><td>The name of the column for this field
+<tr><td>sqltype=<i>type</i><td>The sql type of this column
+<tr><td>Maybe<td>Wrap this field in a <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Maybe" title="Hoogle search for: Maybe"><code>Maybe</code></a> to handle SQL `NULL`s
+<tr><td>MigrationOnly<td>This disabled the creation of the Haskell type for fields needed by other applications but not by Haskell.
+<tr><td>SafeToRemove<td>This will cause the column to be removed from the database.
+</td></td></tr></td></td></tr></td></td></tr></td></td></tr></td></td></tr></th></th></tr></table><h2 id="and-the-rest"><a href="#and-the-rest">And the rest</a></h2><p>The next to last line <code>UniqueUrl url</code> - adds a uniqueness constraint to the table. It also creates a type constructor <code>UniqueUrl which takes arguments of the type of </code>url<code>. This can be used in queries to fetch the single </code>Link<code> from the table that matches the given </code>url<code>. You can use multiple fields here, so this could be, for instance, </code>UniqueCounters count description<code> which would create a constructor </code>UniqueCounters<code> that takes an integer (</code>count<code>) and a string (</code>description`).  They are distinguished by starting with an upper-case letter.</p><p>The last line <code>deriving Show</code> adds the <code>Show</code> typeclass to the list of typeclasses that are automatically derived for the <code>Link</code> type.</p><h2 id="examining-it-"><a href="#examining-it-">Examining it.</a></h2><p>So lets go through the fields for the <code>Link</code> type.</p><p>The <code>description</code> and <code>url</code> fields are simple fields of <code>Text</code> type. We also add the <code>UniqueUrl</code> constraint, which will mark <code>url</code> as unique.</p><p><code>followed</code> and <code>checked</code> are <code>UTCTime</code> fields, which means they are going to be an sql <code>TIMESTAMP</code>. Both of them are also flagged as <code>Maybe</code>, so they can have <code>NULL</code> values, and the Haskell values will either be <code>Nothing</code> (for <code>NULL</code>'s), or <code>Just UTCTime</code>.</p><p><code>added</code> is also a <code>UTCTime</code>, so the column should be an sql <code>TIMESTAMP</code>. No <code>Maybe</code> attribute, so it's a <code>NOT NULL</code> column. The <code>default=now()</code> attribute means that it will be set to the time of insertion if we don't specify one.</p><p>Finally, the <code>count</code> field is an Int defaulting to 0. The attribute <code>sqltype</code> forces the type to be an sql <code>int</code>, as <code>persist</code> will otherwise try and make it an sql <code>INT8</code>, which is larger than what the table currently uses. So we need the attribute to get it to use the proper type.</p><h2 id="using-it"><a href="#using-it">Using it</a></h2><p>Now, we can watch how this works with our actual table.</p><pre><code class="active haskell">{-# LANGUAGE QuasiQuotes, TypeFamilies, GeneralizedNewtypeDeriving, TemplateHaskell,
+             OverloadedStrings, GADTs, FlexibleContexts, ScopedTypeVariables #-}
+import Database.Persist
+import Database.Persist.Postgresql
+import Database.Persist.TH
+import Control.Monad.IO.Class (liftIO)
+import Data.Time (UTCTime)
+import Data.Text (Text)
+import Control.Monad.Logger
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateAll&quot;] [persistLowerCase|
+Link sql=hotlist
+   count Int default=0 sqltype=int
+   added UTCTime default=now()
+   followed UTCTime Maybe
+   checked UTCTime Maybe
+   description Text
+   url Text
+   URL url
+   deriving Show
+|]
+
+connStr = &quot;dbname=tutorial host=tutorial-db.fpcomplete.com user=tutorial password=tutorial port=5432&quot;
+
+main :: IO ()
+main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -&gt;
+     liftIO $ flip runSqlPersistMPool pool $ do
+        printMigration migrateAll
+        res  :: [Entity Link] &lt;- selectList [] [LimitTo 1] 
+        liftIO $ print res</code></pre><p>We'll get to the connection setup later, but for now, let's talk about the output. You should see a string of SQL DDL statements to modify tables, then a Haskell list with one (messy) element in it. <b>Don't panic</b> - we haven't modified the table. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=printMigration" title="Hoogle search for: printMigration"><code>printMigration</code></a> takes the table descriptions created by <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mkMigrate" title="Hoogle search for: mkMigrate"><code>mkMigrate</code></a> and tells you what it needs to do to the database in order to make the tables the way it thinks they ought to be.</p><p>What you should see are <code>update</code>s to the <code>count</code> and <code>added</code> columns to set <code>NULL</code>s to the default value, and then make them <code>not null</code>. Those are arguably fixing bugs in the schema, as those two columns shouldn't have <code>NULL</code>s in them. We can get rid of these messages by adding the <code>Maybe</code> attribute to those fields. The type on <code>count</code> is changed to <code>int</code> as well, which is a no-op, as it was <code>int</code> in the schema.</p><p>It also thinks that the <code>URL</code> and <code>description</code> columns should be of type <code>VARCHAR</code>. For PostgreSQL, this is ok - they were <code>Text</code>, which is a synonym for <code>VARCHAR</code>. To get rid of these, add an <code>sqltype=text</code> attribute to the fields.</p><p>Finally, it adds the <code>u_r_l</code> constraint for uniqueness, which we've added to the type for pedagogical purposes.</p><h1 id="translating-to-csv"><a href="#translating-to-csv">Translating to CSV</a></h1><p>We now want to get CSV output from the table. Since we're going to do this for production, now is a good time to deal with the connection setup.</p><pre><code class="haskell">main :: IO ()
+main = withPostgresqlPool connStr 10 $ \pool -&gt; 
+     flip runSqlPersistMPool pool $</code></pre> <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=withPostgresqlPool" title="Hoogle search for: withPostgresqlPool"><code>withPostgresqlPool</code></a> creates a pool of connections to the the database specified by `connStr`. In this case, 10 of them.  It passes that pool to it's last argument, which is the lambda that runs <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=runSqlPersistMPool" title="Hoogle search for: runSqlPersistMPool"><code>runSqlPersistMPool</code></a> using that argument, running it's last argument with the connections take from a pool. In this case - since we're just going to run one query and then exit - the pool probably isn't necessary. If you were going to run a web server or some other application that would be making concurrent requests, then the pool would be the right choice, and you should see how to do that.<p>For best performance, we're going to use a conduit to process the results of the query. This avoids loading the entire table in memory at once, allowing arbitrary sized tables to be processed and downloaded. If you're not familiar with conduits, read the <a href="https://www.fpcomplete.com/school/advanced-haskell/conduit-overview">overview</a>.</p><pre><code class="haskell">        selectSource [] [] $$
+            CL.map toRow =$
+            (writeHeaders defCSVSettings &gt;&gt; fromCSV defCSVSettings) =$
+            sinkHandle stdout</code></pre><p>The change to the persist code is the use of <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=selectSource" title="Hoogle search for: selectSource"><code>selectSource</code></a> instead of <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=selectList" title="Hoogle search for: selectList"><code>selectList</code></a>. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=selectSource" title="Hoogle search for: selectSource"><code>selectSource</code></a> has the same arguments, but returns a conduit <code>source</code> instead of a list.</p><p>We then use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Conduit.List.map" title="Hoogle search for: Data.Conduit.List.map"><code>Data.Conduit.List.map</code></a> to process each row with <code>toRow</code>, which we'll show you in a bit.  <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=writeHeaders" title="Hoogle search for: writeHeaders"><code>writeHeaders</code></a> is then used to add a CSV header to the rows, and finally <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=sinkHandle" title="Hoogle search for: sinkHandle"><code>sinkHandle</code></a> writes the resulting data to <code>stdout</code>.</p><p>We have to provide our own conversion from SQL results to CSV rows, which is what <code>toRow</code> does:</p><pre><code class="haskell">            toRow (Entity _ Link {..}) = fromList
+                [(&quot;count&quot; :: Text, pack $ show linkCount),
+                 (&quot;added&quot;, pack $ show linkAdded),
+                 (&quot;followed&quot;, pack $ show linkFollowed),
+                 (&quot;checked&quot;, pack $ show linkChecked),
+                 (&quot;description&quot;, linkDescription),
+                 (&quot;url&quot;, linkUrl)]
+</code></pre><p><code>toRow</code> uses the <code>RecordWildCards</code> extension to easiy get the various linkXxx fields from the record. Those are then converted to text, and become the second element of a tuple whose first element is the name for this column in the CSV rows. Each row in the database will be converted into a list of such tuples, and then <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=fromList" title="Hoogle search for: fromList"><code>fromList</code></a> will convert that into a CSV row.</p><p>Putting it all together, we get:</p><pre><code class="active haskell">{-# LANGUAGE QuasiQuotes, TypeFamilies, GeneralizedNewtypeDeriving, TemplateHaskell,
+             OverloadedStrings, GADTs, FlexibleContexts, ScopedTypeVariables, RecordWildCards #-}
+import qualified Data.Conduit.List as CL
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.CSV.Conduit
+import Database.Persist
+import Database.Persist.Postgresql
+import Database.Persist.TH
+import Control.Monad.IO.Class (liftIO)
+import Data.Time (UTCTime)
+import Data.Text (Text, pack)
+import Data.Map (fromList)
+import System.IO (stdout)
+import Control.Monad.Logger (runStdoutLoggingT)
+
+share [mkPersist sqlSettings] [persistLowerCase|
+Link sql=hotlist
+   count Int default=0 sqltype=int
+   added UTCTime default=now()
+   followed UTCTime Maybe
+   checked UTCTime Maybe
+   description Text
+   url Text
+   URL url
+   deriving Show
+|]
+
+connStr = &quot;dbname=tutorial host=tutorial-db.fpcomplete.com user=tutorial password=tutorial port=5432&quot;
+
+main :: IO ()
+main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -&gt;
+     liftIO $ flip runSqlPersistMPool pool $
+        selectSource [] [] $$
+            CL.map toRow =$
+            (writeHeaders defCSVSettings &gt;&gt; fromCSV defCSVSettings) =$
+            sinkHandle stdout
+        where
+            toRow (Entity _ Link {..}) = fromList
+                [(&quot;count&quot; :: Text, pack $ show linkCount),
+                 (&quot;added&quot;, pack $ show linkAdded),
+                 (&quot;followed&quot;, pack $ show linkFollowed),
+                 (&quot;checked&quot;, pack $ show linkChecked),
+                 (&quot;description&quot;, linkDescription),
+                 (&quot;url&quot;, linkUrl)]</code></pre><p>This version drops the <code>migration</code> facilities so we don't get that in our output.</p><h1 id="feedback"><a href="#feedback">Feedback</a></h1><p>If you have questions about this tutorial, you can discuss it on the <a href="https://plus.google.com/100162554869434148021/posts/MuoZMDz1Tv7">Google+ Forum</a>.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/advanced-haskell/persistent-in-detail/existing-database';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

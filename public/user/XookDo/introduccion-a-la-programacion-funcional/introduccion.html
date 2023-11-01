@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html><head><title>Introducción - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/introduccion">Introducción</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Introducción</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">20 Sep 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/e87dc1b602a5d94b91cc6521c6b17e243efabe17">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Go up to: Introducción a la Programación Funcional</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#reconomiento">Reconomiento</a></li><li><a href="#-por-qu--estudiar-programaci-n-funcional-pura-">¿Por qué estudiar programación funcional pura?</a><ul><li><a href="#-qu--es-ser-funcional-">¿Qué es ser funcional?</a></li><li><a href="#-qu--es-ser-puro-">¿Qué es ser puro?</a></li><li><a href="#-qu--es-ser-fuertemente-tipado-">¿Qué es ser fuertemente tipado?</a></li><li><a href="#-qu--es-ser-flojo-">¿Qué es ser flojo?</a></li><li><a href="#-c-mo-es-la-abstracci-n-en-un-lenguaje-funcional-">¿Cómo es la abstracción en un lenguaje funcional?</a></li><li><a href="#-c-mo-es-la-refactorizaci-n-en-un-lenguaje-funcional-">¿Cómo es la refactorización en un lenguaje funcional?</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>Este es el primer tutorial de la serie <i>Introducción a la Programación Funcional</i>. A lo largo del curso, se concocerán los fundamentos de dicho paradigma y, al usar <b>Haskell</b> como nuestro lenguaje, obtendremos las bases para usar Haskell en producción o el conocimiento necesario para usar librerías funcionales en lenguajes tradicionales (Java, C#, Javascript, etc.) y ser prolífico en lenguajes más funcionales como F#, Scala, etcétera.
+Los temas que se abarcarán en el curso son:</p><ul><li><a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-1/tutorial">Un primer vistazo a Haskell</a></li><li><a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-2/tutorial">Funciones y tipos de datos algebraicos</a></li><li><a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-3/tutorial">Algo sobre listas y todo sobre funciones</a></li><li><a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-4/tutorial">Azúcar sintáctico y otros artilugios</a></li><li><a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-5/tutorial">Clases de tipos</a></li><li>Mónadas</li><li>Testeo</li></ul><p>En cursos subsecuentes de Haskell, iremos más allá de las bases y abordaremos todo lo necesario para usar Haskell en producción; <i>desde</i> crear APIs, páginas web dinámicas, multithreading <i>hasta</i> hacer simulaciones sobre un modelo matemático.</p><p>En cursos subsequentes de <i>programación funcional</i>, veremos como podemos usar otros lenguajes funcionales como F# para crear aplicaciones móviles nativas.</p><p>Si no tienes mucha experiencia con la programación funcional, tienes mucho que aprender y por lo tanto tomaré como responsabilidad ser lo más sucinto posible. Mi objetivo es que puedas trabajar expresándote de manera formal y elegante.</p><p>Si algo no queda del todo claro al leerlo, seguramente es por diseño y será aclarado más adelante en el mismo tutorial o en tutoriales siguientes. Si crees que algo no está bien, puedes mandarme un correo a laygr@outlook.com.</p><p>Para realizar los ejercicios, puedes crear una cuenta en <a href="https://www.fpcomplete.com">fpcomplete</a> y así poder ir utilizando los templates preparados para los tutoriales.</p><h3 id="reconomiento"><a href="#reconomiento">Reconomiento</a></h3><p>La mayoría de la información fue tomada de documentos publicados en <a href>Internet</a> y de algunos libros: <a href="http://www.amazon.com/Haskell-School-Expression-Functional-Programming/dp/0521644089/ref=mt_paperback">The Haskell School Of Expression</a> por <a href="http://haskell.cs.yale.edu/people/paul-hudak/">Paul Hudak</a> y <a href="http://www.amazon.com/Automata-Computability-Complexity-Theory-Applications/dp/0132288060">Automata, Computability and Complexity: Theory and Applications</a> por <a href="http://www.cs.utexas.edu/~ear/">Elaine Rich</a>. Mi labor ha sido simplemente la de recabar y sintetizar la información; quizás lo único que hacemos todos en realidad. Otras cosas las recuerdo de mis tiempos de estudiante en el <a href="http://www.itesm.mx/wps/wcm/connect/Campus/MTY/Monterrey">ITESM</a>; particularmente la clase de Lenguajes de Programación, con <a href="http://homepages.mty.itesm.mx/sconant/">Santiago Conant</a> y Matemáticas Discretas, con <a href="http://cs.mty.itesm.mx/portal/sites.google.com/site/mtycs1/Listado_de_Profesores/alejandra-gonzales.html">Alejandra González</a>.</p><h2 id="-por-qu--estudiar-programaci-n-funcional-pura-"><a href="#-por-qu--estudiar-programaci-n-funcional-pura-">¿Por qué estudiar programación funcional pura?</a></h2><h3 id="-qu--es-ser-funcional-"><a href="#-qu--es-ser-funcional-">¿Qué es ser funcional?</a></h3><p>Un programa es algo que recibe una entrada y computa una salida. Por ejemplo, un programa que calcula la edad promedio de una familia recibiría como entrada los datos de la familia y produciría como salida la edad promedio.
+Este sencillo programa se puede modelar como una función <code>avg</code> en Haskell. Si modelamos la edad como un entero (<code>Int</code>), la función tendría como entrada una <i>lista de edades</i> (<code>[Int]</code>) y como salida una <i>edad promedio</i> (<code>Int</code>). La signatura de esta función sería <code>avg :: [Int] -&gt; Int</code>.</p><p>Un <b>lenguaje funcional puro</b> es aquel cuyas aplicaciones son una composición de funciones puras. La interacción entre el software y el mundo real se hace entonces, en el caso de Haskell, mediante el uso del <b><i>I/O monad</i></b> (<code>IO ()</code>) que veremos a detalle más adelante en el tutorial dedicado a los mónadas.</p><p>En Haskell, la ejecución de un programa es la ejecución de su función <code>main :: IO ()</code> y todas las subllamadas que deriven de esta. La función main es de tipo <code>IO ()</code> y por lo tanto puede interactuar con el mundo real (base de datos, interfáz humano-computadora, etc.).</p><h3 id="-qu--es-ser-puro-"><a href="#-qu--es-ser-puro-">¿Qué es ser <i>puro</i>?</a></h3><p>Un lenguaje <i>puro</i> (<i>pure</i>) es aquel cuyas expresiones</p><ul><li>siempre se evaluan al mismo resultado dados los mismos argumentos. Es decir, su resultado no depende de un entorno global, e.g. variables estáticas.</li><li>no causan efectos secundarios al ser evaluadas.</li><li>son inmutables, o sea, que el significado de una expresion no puede cambiar en tiempo de ejecución.</li></ul><p>Esto nos obliga a separar claramente el estado del comportamiento, lo cual es bueno. Por otro lado, mantener el estado de manera eficiente es el principal reto de programar en Haskell, pero hay librerias que nos harán el trabajo sencillo.</p><h3 id="-qu--es-ser-fuertemente-tipado-"><a href="#-qu--es-ser-fuertemente-tipado-">¿Qué es ser fuertemente tipado?</a></h3><p>Un lenguaje <i>fuertemente tipado</i> (<i>strongly typed</i>) es aquel cuyos tipos no cambian en tiempo de ejecución. Esto implica que con sólo ver los tipos de una función, ya podemos saber mucho de su intención.</p><p>En Haskell, declarar los tipos de una función es casi siempre opcional, pues el compilador (al menos <a href="https://www.haskell.org/ghc/">GHC</a>) inferirá todos los tipos posibles de inferir. Esto nos ahorrará mucha escritura sin perder los beneficios de un lenguaje fuertemente tipado. A partir de ahora, <b>omitiré la declaracón de la <i>signatura</i></b> (declaración de tipos o &quot;firma&quot;) de las funciones y valores cuando sea apropiado.</p><p>Ser fuertemente tipado nos evita <i>errores de tipo</i> en tiempo de ejecución pues el compilador los detecta en tiempo de compilación. A continuación, declararemos una funcion que recibe un <code>Int</code>, pero le pasaremos un <code>String</code> para <b>provocar un <i>type error</i></b> en tiempo de compilación.</p><pre><code class="active haskell">increaseOne :: Int -&gt; Int
+increaseOne x = x + 1
+
+main = do
+    putStr &quot;increaseOne \&quot;¡Hola!\&quot; = &quot;
+    putStrLn (show (increaseOne &quot;¡Hola!&quot;))</code></pre><p>&gt;El error mencionará un problema con un <code>[Char]</code>; El tipo <code>String</code> en Haskell es un sinónimo para una lista de caracteres o en otras palabras, en Haskell, <code>String</code> y <code>[Char]</code> son sinónimos.</p><p><b>Siempre</b> es mejor detectar un error en nuestro código en <i>tiempo de compilación</i> que en <i>tiempo de ejecución</i>.</p><h3 id="-qu--es-ser-flojo-"><a href="#-qu--es-ser-flojo-">¿Qué es ser <i>flojo</i>?</a></h3><p>Un lenguaje <i>flojo</i> (<i>lazy</i>) es aquel cuyas expresiones no son evaluadas hasta ser necesario. Esto implica que podemos pasar funciones en los parámetros y estas podrían nunca ser evaluadas.</p><p>En este ejemplo, los parámetros <i>first</i> y <i>second</i> sólo se evaluan cuando es necesario. Cuando llamamos la función <code>f</code> con el tercer parámetro {<code>True</code>|<code>False</code>}, el {primer|segundo} parámetro es devuelto y el
+{segundo|primero} nunca es evaluado. Esto nos permite componer funciones de manera eficiente.</p><pre><code class="active haskell">f first second True = first
+f first second False = second
+
+main =
+  do
+    putStr &quot;f (putStrLn \&quot;hello\&quot;) (putStrLn \&quot;goodbye\&quot;) True = &quot;
+    f (putStrLn &quot;hello&quot;) (putStrLn &quot;goodbye&quot;) True
+    putStr &quot;f (putStrLn \&quot;hello\&quot;) (putStrLn \&quot;goodbye\&quot;) False = &quot;
+    f (putStrLn &quot;hello&quot;) (putStrLn &quot;goodbye&quot;) False</code></pre><p>Ser flojo también facilita trabajar con <i>Streams</i>, es decir, series infinitas de datos, pues, al ser flojo, se pueden expresar datos infinitos sin tener que calcularlos. Por ejemplo, podemos expresar una lista infinita de enteros y sólo usar los primeros 3 elementos:</p><pre><code class="active haskell">infinite_list = [1, 2 ..] -- [1, 2, 3, etc...]
+
+main = putStrLn (show (take 3 infinite_list))</code></pre><p>Si Haskell no fuera flojo, antes de usar la lista se tendría que calcular toda esta y, al ser esta infinita, tomaría una infinidad de tiempo.</p><h3 id="-c-mo-es-la-abstracci-n-en-un-lenguaje-funcional-"><a href="#-c-mo-es-la-abstracci-n-en-un-lenguaje-funcional-">¿Cómo es la abstracción en un lenguaje funcional?</a></h3><p>Básicamente, la abstracción consiste en parametrizar una función. A la función <code>increaseOne</code> se le puede parametrizar el valor <code>1</code> y llamarse entonces <code>increaseN</code>, como lo haremos a continuación.</p><pre><code class="active haskell">{-
+Antes:
+increaseOne :: Int -&gt; Int
+increaseOne x = x + 1
+-}
+
+increaseN :: Int -&gt; Int -&gt; Int
+increaseN x n = x + n
+
+main =
+  do
+    putStr &quot;increaseN 1 2 = &quot;
+    putStrLn (show (increaseN 1 2))</code></pre><p>Podemos notar que ahora la función <code>increaseN</code> recibe <i>dos</i> argumentos en vez de <i>uno</i> y por lo tanto el tipo de la función cambió de ser <code>Int -&gt; Int</code> (recibe un <code>Int</code> y produce un <code>Int</code>) a <code>Int -&gt; Int -&gt; Int</code> (recibe dos <code>Int</code>s y produce un <code>Int</code>).</p><blockquote><p>Técnicamente, todas las funciones en Haskell reciben un solo argumento y producen un solo valor, ya sea otra función o un valor sencillo. En el siguiente tutorial veremos el tema de <i>partial application</i> con más detalle; para leer más, visita <a href="https://wiki.haskell.org/Partial_application">Haskel.org - Partial application</a>.</p></blockquote><p>Para continuar con el proceso de abstracción, podríamos abstraer la suma de la función <code>increaseN</code> y llamarla <code>binOpApp</code> (aplicación de un operador binario o en inglés &quot;binary operator <a href>application</a>&quot;) de la siguiente manera.</p><pre><code class="active haskell">binOpApp :: Int -&gt; Int -&gt; (Int -&gt; Int -&gt; Int) -&gt; Int
+binOpApp x y binOp = binOp x y
+
+main =
+  do
+    putStr &quot;binopApp 1 2 (+) = &quot;
+    putStrLn (show (binOpApp 1 2 (+)))
+    putStr &quot;binOpApp 1 2 (-) = &quot;
+    putStrLn (show (binOpApp 1 2 (-)))</code></pre><p>Lo más destacable es que el tipo de la función <code>binOpApp</code> nos indica que su tercer parámetro es una funcion que recibe dos <code>Int</code>s y produce un <code>Int</code>.</p><h3 id="-c-mo-es-la-refactorizaci-n-en-un-lenguaje-funcional-"><a href="#-c-mo-es-la-refactorizaci-n-en-un-lenguaje-funcional-">¿Cómo es la refactorización en un lenguaje funcional?</a></h3><p>Existen varias refactorizaciones válidas (<i>semantic preserving</i>) en Haskell. Algunos ejemplos son:</p><ul><li><p>Movimiento del orden de parámetros. Podemos modificar <code>binOpApp</code> para que <code>binOp</code> sea su primer parámetro.</p></li></ul><pre><code class="active haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; Int -&gt; Int -&gt; Int
+binOpApp binOp x y = binOp x y
+
+main =
+  do
+    putStr &quot;binOpApp (+) 1 2 = &quot;
+    putStrLn (show (binOpApp (+) 1 2))
+    putStr &quot;binOpApp (-) 1 2 = &quot;
+    putStrLn (show (binOpApp (-) 1 2))</code></pre><ul><li><p>Después podemos hacer <i>eta reduction</i> al remover la <code>x</code> y la <code>y</code> en ambos lados:</p></li></ul><pre><code class="active haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; Int -&gt; Int -&gt; Int
+binOpApp binOp = binOp
+
+main =
+  do
+    putStr &quot;binOpApp (+) 1 2 = &quot;
+    putStrLn (show (binOpApp (+) 1 2))
+    putStr &quot;binOpApp (-) 1 2 = &quot;
+    putStrLn (show (binOpApp (-) 1 2))</code></pre><blockquote><p>En esta definición de <code>binOpApp</code>, la signatura de su tipo es crucial para su funcionamiento; si no fuera por la signatura, podría ser ambiguo el número de parámetros que recibe y por lo tanto su significado dependería de como <code>binOpApp</code> sea usada y de lo que el compilador infiera de dicho uso. Al menos en este ejemplo, el código funciona sin la signatura de <code>binOpApp</code>.</p></blockquote><p>Ahora debe de quedar claro que <code>binOpApp</code> es completamente redundante y que se ha utilizado simplemente como herramienta pedagógica.</p><p>Otras refactorizaciones (más no todas) son:</p><ul><li>la introducción de lambdas (funciones anónimas) (<i>lambda abstraction</i>)</li><li>renombramiento de variables (<i>alpha conversion</i>)</li><li>la aplicación de un valor a una función (<i>beta reduction</i>)</li></ul><p>Lo especial de Haskell es que su sistema de tipos nos facilita mucho las refactorizaciones por detectar muchos errores en tiempo de compilación; algunos dicen que dado un programa que funciona, una refactorización que compila probablemente sea correcta. Otros simplemente dicen que si el código compila, probablemente funciona. <a href="https://wiki.haskell.org/Why_Haskell_just_works">Why Haskell just works</a>.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/introduccion';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

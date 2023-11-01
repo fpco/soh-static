@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html><head><title>Part 4 - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell">Advanced Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/building-a-file-hosting-service-in-yesod">Building a File Hosting Service in Yesod</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/building-a-file-hosting-service-in-yesod/part%204">Part 4</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part 4</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 Dec 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/school">School of Haskell</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/30/0f7f9999aeb8af68d8d82a4bd901e887b05a8c17">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/advanced-haskell/building-a-file-hosting-service-in-yesod/part%203">Previous content: Part 3</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/building-a-file-hosting-service-in-yesod">Go up to: Building a File Hosting Service in Yesod</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#using-unique-identifiers">Using Unique Identifiers</a><ul><li><a href="#step-1--access-files-by-int">Step 1: Access Files by Int</a><ul><li><a href="#getlist">getList</a></li><li><a href="#addfile">addFile</a></li><li><a href="#routing-configuration">routing configuration</a></li><li><a href="#getpreviewr">getPreviewR</a></li><li><a href="#home-page-template">home page template</a></li><li><a href="#posthomer">postHomeR</a></li></ul></li><li><a href="#step-2--store-files-in-an-intmap">Step 2: Store Files in an IntMap</a></li><li><a href="#an-overview">An Overview</a></li></ul></li><li><a href="#serving-files">Serving Files</a><ul><li><a href="#storing-content-types">Storing Content Types</a></li><li><a href="#file-download-links">File Download Links</a></li></ul></li><li><a href="#image-previews">Image Previews</a></li><li><a href="#summary">Summary</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>This is the last entry in a series where we write a file serving web
+application from start to finish. Today we're going to add two user-facing
+features. One of these will be an addition to the preview page so that images
+can be viewed. The other will be to place a download link on the preview page.</p><h1 id="using-unique-identifiers"><a href="#using-unique-identifiers">Using Unique Identifiers</a></h1><p>Before adding any features, I want to improve the way files are stored in
+memory. Right now, each file's name and contents are stored in an association
+list, <code>[(Text, ByteString)]</code>. It's possible for multiple entries to share the
+same name. This is a problem because <code>getById</code> operates on the assumption that
+files can be uniquely looked up by name.</p><p>If we were to continue expanding this application there would be other
+problems with our list of files as well. We might at some point want to add
+the ability to rename files, for example. File names are part of each
+URL. Renaming them would break web links.</p><h2 id="step-1--access-files-by-int"><a href="#step-1--access-files-by-int">Step 1: Access Files by Int</a></h2><p>What we need is a pool of unique numbers, and the best place to store it is in
+the foundation type. Let's go a step further and define a data type for
+uploaded files as well. We'll continue using an association list, but file
+names and contents will now be keyed on their unique number as a group.</p><pre><code class="haskell">-- type StoredFile = (Text, ByteString)
+-- type Store = [StoredFile]
+-- data App = App (TVar Store)
+{-hi-}data StoredFile = StoredFile !Text !ByteString
+type Store = [(Int, StoredFile)]
+data App = App (TVar Int) (TVar Store){-/hi-}</code></pre><p>We'll need a way to generate these unique numbers. The following STM action will be
+put in &quot;Foundation.hs&quot; along with other accessor functions.</p><pre><code class="haskell">getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId</code></pre><p>These are not very invasive changes. We're still using an association list to
+keep track of files. The only difference is that they are keyed on an <code>Int</code>
+rather than a <code>Text</code>. In cases like this I like to update obvious things such
+as type signatures first, and then work through compiler errors to make all
+the needed adjustments in function bodies.</p><pre><code class="active haskell web">{-# START_FILE Dispatch.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Dispatch where
+
+import Yesod
+
+import Foundation
+import Handler.Home
+import Handler.Preview
+
+mkYesodDispatch &quot;App&quot; resourcesApp
+{-# START_FILE Foundation.hs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+-- show
+-- type StoredFile = (Text, ByteString)
+-- type Store = [StoredFile]
+-- data App = App (TVar Store)
+{-hi-}data StoredFile = StoredFile !Text !ByteString
+type Store = [(Int, StoredFile)]
+data App = App (TVar Int) (TVar Store){-/hi-}
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+{-hi-}getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId{-/hi-}
+
+-- getList :: Handler [StoredFile]
+{-hi-}getList :: Handler [(Int, StoredFile)]{-/hi-}
+getList = do
+    App _ tstore &lt;- getYesod
+    liftIO $ readTVarIO tstore
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+addFile app@(App _ tstore) file =
+    liftIO . atomically $ do
+        nextId &lt;- getNextId app
+        modifyTVar tstore $ \ files -&gt; (nextId, file) : files
+
+-- getById :: Text -&gt; Handler ByteString
+{-hi-}getById :: Int -&gt; Handler StoredFile{-/hi-}
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    case lookup ident store of
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+-- /show
+{-# START_FILE Main.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Control.Concurrent.STM
+
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+    tnextid &lt;- newTVarIO 1
+    tstore &lt;- newTVarIO []
+    warpEnv $ App tnextid tstore
+{-# START_FILE Handler/Home.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Handler.Home where
+
+import Control.Monad.Trans.Resource
+import qualified Data.ByteString.Lazy as L
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.Default
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getHomeR :: Handler Html
+getHomeR = do
+    (formWidget, formEncType) &lt;- generateFormPost uploadForm
+    storedFiles &lt;- getList
+    defaultLayout $ do
+        setTitle &quot;File Processor&quot;
+        $(widgetFileNoReload def &quot;home&quot;)
+
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+        addFile app $ StoredFile (fileName fi) fileBytes
+      _ -&gt; return ()
+    redirect HomeR
+
+uploadForm = renderDivs $ fileAFormReq &quot;file&quot;
+{-# START_FILE Handler/Preview.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Handler.Preview where
+
+import Control.Exception hiding (Handler)
+import qualified Data.ByteString.Lazy as LB
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text.Lazy.Encoding as LT
+import Text.Blaze
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+-- show
+-- getPreviewR :: Text -&gt; Handler Html
+{-hi-}getPreviewR :: Int -&gt; Handler Html{-/hi-}
+getPreviewR fileid = do
+    StoredFile filename bytes &lt;- getById fileid
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+        previewBlock &lt;- liftIO $ preview bytes
+        $(widgetFileNoReload def &quot;preview&quot;)
+
+preview :: LB.ByteString -&gt; IO Widget
+preview bytes = do
+    eText &lt;- try . evaluate $ LT.decodeUtf8 bytes :: IO (Either SomeException LT.Text)
+    return $ case eText of
+      Left _ -&gt; errorMessage
+      Right text -&gt; [whamlet|&lt;pre&gt;#{text}|]
+  where
+    errorMessage = [whamlet|&lt;pre&gt;Unable to display file contents.|]
+-- /show
+{-# START_FILE templates/default-layout.cassius #-}
+-- show
+-- /show
+body
+    font-family: Tahoma, Geneva, sans-serif
+    font-size: 1pc
+form
+    clear: both
+    margin:auto
+    position:relative
+    text-decoration: none
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    padding:1em
+    border: 1pt solid #999
+    border: inset 1pt solid #333
+    /* Force form elements to be consistent with each other */
+    input, textarea, select, button
+        margin: 1pt
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+    select
+        width: 100%
+    input
+        display:block
+        border: 1pt solid #999
+    input[type=submit]
+        float: right
+        background: #09C
+        color: #fff
+        -webkit-border-radius: 5pt
+        -moz-border-radius: 5pt
+        border-radius: 5pt
+        border: 1pt solid #999
+    /* Change color on mouseover */
+    input[type=submit]:hover
+        background:#fff
+        color:#09c
+
+/* force bottom border to extend below floating elements */
+form::after
+    content: &quot;&quot;
+    display: block
+    visibility: hidden
+    clear: both
+
+/* add rounded grey box around text */
+pre
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    border: 1pt solid #999
+    background: #DDD
+    margin: 1em
+    padding: 1em
+    white-space: pre-wrap
+{-# START_FILE templates/default-layout.hamlet #-}
+-- show
+-- /show
+^{widget}
+{-# START_FILE templates/default-layout-wrapper.hamlet #-}
+-- show
+-- /show
+$newline never
+$doctype 5
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;#{pageTitle pc}
+    ^{pageHead pc}
+  &lt;body&gt;
+    ^{pageBody pc}
+{-# START_FILE templates/home.hamlet #-}
+-- show
+-- /show
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+    $forall (fileid, StoredFile filename _) &lt;- storedFiles
+      &lt;li&gt;
+        &lt;a href=@{PreviewR fileid}&gt;#{filename}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;
+{-# START_FILE templates/preview.hamlet #-}
+-- show
+-- /show
+&lt;a href=@{HomeR}&gt;home
+&lt;h1&gt;#{filename}
+&lt;p&gt;
+  ^{previewBlock}
+{-# START_FILE config/routes #-}
+/          HomeR    GET POST
+{-hi-}/file/#Int PreviewR GET{-/hi-}</code></pre><p>The example listed above is an active code sample so that you can work through
+the function bodies with me as we get them to compile.</p><h3 id="getlist"><a href="#getlist">getList</a></h3><p>The <code>getList</code> action is used on the main page to display a list of links to
+file summary pages. Generating these links will require an additional piece of
+information from now on. We'll need the unique identifier of each file to
+generate link targets.</p><pre><code class="haskell">-- getList :: Handler [StoredFile]
+{-hi-}getList :: Handler [(Int, StoredFile)]{-/hi-}
+getList = do
+--    App tstore &lt;- getYesod
+{-hi-}    App _ tstore &lt;- getYesod{-/hi-}
+    liftIO $ readTVarIO tstore</code></pre><h3 id="addfile"><a href="#addfile">addFile</a></h3><p>The <code>addFile</code> action needs to generate a unique identifier before adding
+anything to the store. The <code>getNextId</code> STM action operates within the same
+transaction used to modify our file store.</p><pre><code class="haskell">addFile :: App -&gt; StoredFile -&gt; Handler ()
+-- addFile (App tstore) file =
+{-hi-}addFile app@(App _ tstore) file ={-/hi-}
+    liftIO . atomically $ do
+--        modifyTVar tstore $ \files -&gt; file : files
+{-hi-}        ident &lt;- getNextId app
+        modifyTVar tstore $ \files -&gt; (ident, file) : files{-/hi-}</code></pre><h3 id="routing-configuration"><a href="#routing-configuration">routing configuration</a></h3><p>Our routing file needs to be updated. The preview route now takes an <code>Int</code>
+rather than a <code>Text</code> to designate files. Making this change will mean that our
+<code>getPreviewR</code> must be updated as well.</p><pre><code class="haskell">{-# START_FILE config/routes #-}
+/          HomeR    GET POST
+{-hi-}/file/#Int PreviewR GET{-/hi-}</code></pre><h3 id="getpreviewr"><a href="#getpreviewr">getPreviewR</a></h3><p>The <code>getPreviewR</code> handler takes an identifier instead of a file name. The name
+of the file is now returned by <code>getById</code> along with its contents.</p><pre><code class="haskell">-- getPreviewR :: Text -&gt; Handler Html
+{-hi-}getPreviewR :: Int -&gt; Handler Html{-/hi-}
+-- getPreviewR filename = do
+--    bytes &lt;- getById filename
+{-hi-}getPreviewR ident = do
+    StoredFile filename bytes &lt;- getById ident{-/hi-}
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+        previewBlock &lt;- liftIO $ preview bytes
+        $(widgetFileNoReload def &quot;preview&quot;)</code></pre><h3 id="home-page-template"><a href="#home-page-template">home page template</a></h3><p>The home page template needs to be updated. Our <code>storedFiles</code> binding used to
+hold a <code>[Text]</code> representing all file names. It now contains a <code>[(Int,
+StoredFile)]</code> representing the mapping between unique identifiers and files.</p><pre><code class="haskell">{-# START_FILE templates/home.hamlet #-}
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+$#    $forall filename &lt;- storedFiles
+$#      &lt;li&gt;
+$#        &lt;a href=@{PreviewR filename}&gt;#{filename}
+{-hi-}    $forall (ident, StoredFile filename _) &lt;- storedFiles
+      &lt;li&gt;
+        &lt;a href=@{PreviewR ident}&gt;#{filename}{-/hi-}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;</code></pre><h3 id="posthomer"><a href="#posthomer">postHomeR</a></h3><p>A minor update needs to be made to <code>postHomeR</code>. The <code>addFile</code> action takes a
+<code>StoredFile</code> rather than a <code>(Text, ByteString)</code>.</p><pre><code class="haskell">postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+--        addFile app (fileName fi, fileBytes)
+{-hi-}        addFile app $ StoredFile (fileName fi) fileBytes{-/hi-}
+      _ -&gt; return ()
+    redirect HomeR</code></pre><h2 id="step-2--store-files-in-an-intmap"><a href="#step-2--store-files-in-an-intmap">Step 2: Store Files in an IntMap</a></h2><p>There is a further improvement that can be made now that our application
+accesses files by <code>Int</code>. Right now all of the files are stored in an
+association list. I would rather use a data type that prevents the possibility
+of duplicate keys.</p><p>I split these changes into 2 steps to reduce the chance of making a
+mistake. Switching from <code>[(Int, StoredFile)]</code> to <code>IntMap StoredFile</code> should
+not require any changes outside of accessor functions and <code>main</code> where the state is initialized.</p><pre><code class="haskell">{-# START_FILE Foundation.hs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+-- show
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+{-hi-}import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap{-/hi-}
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+data StoredFile = StoredFile !Text !ByteString
+-- type Store = [(Int, StoredFile)]
+{-hi-}type Store = IntMap StoredFile{-/hi-}
+data App = App (TVar Int) (TVar Store)
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId
+
+getList :: Handler [(Int, StoredFile)]
+getList = do
+    App _ tstore &lt;- getYesod
+--    liftIO $ readTVarIO tstore
+{-hi-}    store &lt;- liftIO $ readTVarIO tstore
+    return $ IntMap.toList store{-/hi-}
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+addFile app@(App _ tstore) file =
+    liftIO . atomically $ do
+        ident &lt;- getNextId app
+--        modifyTVar tstore $ \files -&gt; (ident, file) : files
+{-hi-}        modifyTVar tstore $ IntMap.insert ident file{-/hi-}
+
+getById :: Int -&gt; Handler StoredFile
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+--    case lookup ident store of
+{-hi-}    case IntMap.lookup ident store of{-/hi-}
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+{-# START_FILE Main.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+-- show
+module Main where
+
+import Control.Concurrent.STM
+import Data.IntMap
+
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+--    tstore &lt;- atomically $ newTVar []
+{-hi-}    tstore &lt;- atomically $ newTVar empty{-/hi-}
+    tident &lt;- atomically $ newTVar 0
+    warpEnv $ App tident tstore
+-- /show</code></pre><h2 id="an-overview"><a href="#an-overview">An Overview</a></h2><p>Here is a listing of all the changes that have been made in this section. We're now
+ready to resume adding user-visible features.</p><pre><code class="active haskell web">{-# START_FILE Dispatch.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Dispatch where
+
+import Yesod
+
+import Foundation
+import Handler.Home
+import Handler.Preview
+
+mkYesodDispatch &quot;App&quot; resourcesApp
+{-# START_FILE Foundation.hs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+-- show
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+{-hi-}import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap{-/hi-}
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+-- type StoredFile = (Text, ByteString)
+-- type Store = [StoredFile]
+-- data App = App (TVar Store)
+{-hi-}data StoredFile = StoredFile !Text !ByteString
+type Store = IntMap StoredFile
+data App = App (TVar Int) (TVar Store){-/hi-}
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+{-hi-}getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId{-/hi-}
+
+-- getList :: Handler [StoredFile]
+{-hi-}getList :: Handler [(Int, StoredFile)]{-/hi-}
+getList = do
+--    App tstore &lt;- getYesod
+--    liftIO $ readTVarIO tstore
+{-hi-}    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    return $ IntMap.toList store{-/hi-}
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+-- addFile (App tstore) file =
+{-hi-}addFile app@(App _ tstore) file ={-/hi-}
+    liftIO . atomically $ do
+--        modifyTVar tstore $ \files -&gt; file : files
+{-hi-}        ident &lt;- getNextId app
+        modifyTVar tstore $ IntMap.insert ident file{-/hi-}
+
+-- getBd :: Text -&gt; Handler ByteString
+{-hi-}getById :: Int -&gt; Handler StoredFile{-/hi-}
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+--    case lookup ident store of
+{-hi-}    case IntMap.lookup ident store of{-/hi-}
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+-- /show
+{-# START_FILE Main.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+-- show
+module Main where
+
+import Control.Concurrent.STM
+import Data.IntMap
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+--    tstore &lt;- atomically $ newTVar []
+{-hi-}    tstore &lt;- atomically $ newTVar empty{-/hi-}
+    tident &lt;- atomically $ newTVar 0
+    warpEnv $ App tident tstore
+-- /show
+{-# START_FILE Handler/Home.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+-- show
+module Handler.Home where
+
+import Control.Monad.Trans.Resource
+import qualified Data.ByteString.Lazy as L
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.Default
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getHomeR :: Handler Html
+getHomeR = do
+    (formWidget, formEncType) &lt;- generateFormPost uploadForm
+    storedFiles &lt;- getList
+    defaultLayout $ do
+        setTitle &quot;File Processor&quot;
+        $(widgetFileNoReload def &quot;home&quot;)
+
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+--        addFile app (fileName fi, fileBytes)
+{-hi-}        addFile app $ StoredFile (fileName fi) fileBytes{-/hi-}
+      _ -&gt; return ()
+    redirect HomeR
+
+uploadForm = renderDivs $ fileAFormReq &quot;file&quot;
+-- /show
+{-# START_FILE Handler/Preview.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+-- show
+module Handler.Preview where
+
+import Control.Exception hiding (Handler)
+import qualified Data.ByteString.Lazy as LB
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text.Lazy.Encoding as LT
+import Text.Blaze
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+-- getPreviewR :: Text -&gt; Handler Html
+{-hi-}getPreviewR :: Int -&gt; Handler Html{-/hi-}
+-- getPreviewR filename = do
+--    bytes &lt;- getById filename
+{-hi-}getPreviewR ident = do
+    StoredFile filename bytes &lt;- getById ident{-/hi-}
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+        previewBlock &lt;- liftIO $ preview bytes
+        $(widgetFileNoReload def &quot;preview&quot;)
+
+preview :: LB.ByteString -&gt; IO Widget
+preview bytes = do
+    eText &lt;- try . evaluate $ LT.decodeUtf8 bytes :: IO (Either SomeException LT.Text)
+    return $ case eText of
+      Left _ -&gt; errorMessage
+      Right text -&gt; [whamlet|&lt;pre&gt;#{text}|]
+  where
+    errorMessage = [whamlet|&lt;pre&gt;Unable to display file contents.|]
+-- /show
+{-# START_FILE templates/default-layout.cassius #-}
+-- show
+-- /show
+body
+    font-family: Tahoma, Geneva, sans-serif
+    font-size: 1pc
+form
+    clear: both
+    margin:auto
+    position:relative
+    text-decoration: none
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    padding:1em
+    border: 1pt solid #999
+    border: inset 1pt solid #333
+    /* Force form elements to be consistent with each other */
+    input, textarea, select, button
+        margin: 1pt
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+    select
+        width: 100%
+    input
+        display:block
+        border: 1pt solid #999
+    input[type=submit]
+        float: right
+        background: #09C
+        color: #fff
+        -webkit-border-radius: 5pt
+        -moz-border-radius: 5pt
+        border-radius: 5pt
+        border: 1pt solid #999
+    /* Change color on mouseover */
+    input[type=submit]:hover
+        background:#fff
+        color:#09c
+
+/* force bottom border to extend below floating elements */
+form::after
+    content: &quot;&quot;
+    display: block
+    visibility: hidden
+    clear: both
+
+/* add rounded grey box around text */
+pre
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    border: 1pt solid #999
+    background: #DDD
+    margin: 1em
+    padding: 1em
+    white-space: pre-wrap
+{-# START_FILE templates/default-layout.hamlet #-}
+-- show
+-- /show
+^{widget}
+{-# START_FILE templates/default-layout-wrapper.hamlet #-}
+-- show
+-- /show
+$newline never
+$doctype 5
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;#{pageTitle pc}
+    ^{pageHead pc}
+  &lt;body&gt;
+    ^{pageBody pc}
+{-# START_FILE templates/home.hamlet #-}
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+$#    $forall filename &lt;- storedFiles
+$#      &lt;li&gt;
+$#        &lt;a href=@{PreviewR filename}&gt;#{filename}
+{-hi-}    $forall (ident, StoredFile filename _) &lt;- storedFiles
+      &lt;li&gt;
+        &lt;a href=@{PreviewR ident}&gt;#{filename}{-/hi-}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;
+{-# START_FILE templates/preview.hamlet #-}
+-- show
+-- /show
+&lt;a href=@{HomeR}&gt;home
+&lt;h1&gt;#{filename}
+&lt;p&gt;
+  ^{previewBlock}
+{-# START_FILE config/routes #-}
+/          HomeR    GET POST
+{-hi-}/file/#Int PreviewR GET{-/hi-}</code></pre><h1 id="serving-files"><a href="#serving-files">Serving Files</a></h1><p>One of the primary features which I've delayed adding until now is the ability
+to download files. My reason for doing this is that we have to consider the
+reality that competing web browsers behave differently from each other.</p><p>Most operating systems decide how to interpret a file based on the last part
+of its name. It's natural to assume that this logic would carry over to files
+accessed through a URL, but not all devices that can run web browsers store files with names. When our
+application sends a file, it should include a header designating the file's
+type. The browser, whether it be Internet Explorer, a mobile browser, or
+some other HTTP-enabled application, will use this to decide what to do with
+it. It won't matter whether the URL ends in something that looks like a
+well-known file type.</p><h2 id="storing-content-types"><a href="#storing-content-types">Storing Content Types</a></h2><p>What should our files' type designations, their MIME types, be? There is a
+list of common MIME types, but all of the popular web browser and operating
+system combinations expect different strings. For this application we will use
+whichever MIME type was supplied when the file was uploaded. As with HTTP
+response headers, requests also supply a header to declare file types. Yesod
+makes this available to us as the file's <code>fileContentType</code>. We will store this
+along with the file name and content. The following example will hide all but
+the few blocks of text that change.</p><pre><code class="active haskell web">{-# START_FILE Dispatch.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Dispatch where
+
+import Yesod
+
+import Foundation
+import Handler.Home
+import Handler.Preview
+
+mkYesodDispatch &quot;App&quot; resourcesApp
+{-# START_FILE Foundation.hs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+-- show
+-- data StoredFile = StoredFile !Text !ByteString
+{-hi-}data StoredFile = StoredFile !Text !Text !ByteString{-/hi-}
+type Store = IntMap StoredFile
+data App = App (TVar Int) (TVar Store)
+-- /show
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId
+
+getList :: Handler [(Int, StoredFile)]
+getList = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    return $ IntMap.toList store
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+addFile app@(App _ tstore) file =
+    liftIO . atomically $ do
+        ident &lt;- getNextId app
+        modifyTVar tstore $ IntMap.insert ident file
+
+getById :: Int -&gt; Handler StoredFile
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    case IntMap.lookup ident store of
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+{-# START_FILE Main.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Control.Concurrent.STM
+import Data.IntMap
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+    tstore &lt;- atomically $ newTVar empty
+    tident &lt;- atomically $ newTVar 0
+    warpEnv $ App tident tstore
+{-# START_FILE Handler/Home.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Handler.Home where
+
+import Control.Monad.Trans.Resource
+import qualified Data.ByteString.Lazy as L
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.Default
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getHomeR :: Handler Html
+getHomeR = do
+    (formWidget, formEncType) &lt;- generateFormPost uploadForm
+    storedFiles &lt;- getList
+    defaultLayout $ do
+        setTitle &quot;File Processor&quot;
+        $(widgetFileNoReload def &quot;home&quot;)
+
+-- show
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+--        addFile app $ StoredFile (fileName fi) fileBytes
+{-hi-}        addFile app $ StoredFile (fileName fi) (fileContentType fi) fileBytes{-/hi-}
+      _ -&gt; return ()
+    redirect HomeR
+-- /show
+
+uploadForm = renderDivs $ fileAFormReq &quot;file&quot;
+{-# START_FILE Handler/Preview.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Handler.Preview where
+
+import Control.Exception hiding (Handler)
+import qualified Data.ByteString.Lazy as LB
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text.Lazy.Encoding as LT
+import Text.Blaze
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+-- show
+getPreviewR :: Int -&gt; Handler Html
+getPreviewR ident = do
+--    StoredFile filename bytes &lt;- getById ident
+{-hi-}    StoredFile filename _ bytes &lt;- getById ident{-/hi-}
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+        previewBlock &lt;- liftIO $ preview bytes
+        $(widgetFileNoReload def &quot;preview&quot;)
+-- /show
+
+preview :: LB.ByteString -&gt; IO Widget
+preview bytes = do
+    eText &lt;- try . evaluate $ LT.decodeUtf8 bytes :: IO (Either SomeException LT.Text)
+    return $ case eText of
+      Left _ -&gt; errorMessage
+      Right text -&gt; [whamlet|&lt;pre&gt;#{text}|]
+  where
+    errorMessage = [whamlet|&lt;pre&gt;Unable to display file contents.|]
+{-# START_FILE templates/default-layout.cassius #-}
+-- show
+-- /show
+body
+    font-family: Tahoma, Geneva, sans-serif
+    font-size: 1pc
+form
+    clear: both
+    margin:auto
+    position:relative
+    text-decoration: none
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    padding:1em
+    border: 1pt solid #999
+    border: inset 1pt solid #333
+    /* Force form elements to be consistent with each other */
+    input, textarea, select, button
+        margin: 1pt
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+    select
+        width: 100%
+    input
+        display:block
+        border: 1pt solid #999
+    input[type=submit]
+        float: right
+        background: #09C
+        color: #fff
+        -webkit-border-radius: 5pt
+        -moz-border-radius: 5pt
+        border-radius: 5pt
+        border: 1pt solid #999
+    /* Change color on mouseover */
+    input[type=submit]:hover
+        background:#fff
+        color:#09c
+
+/* force bottom border to extend below floating elements */
+form::after
+    content: &quot;&quot;
+    display: block
+    visibility: hidden
+    clear: both
+
+/* add rounded grey box around text */
+pre
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    border: 1pt solid #999
+    background: #DDD
+    margin: 1em
+    padding: 1em
+    white-space: pre-wrap
+{-# START_FILE templates/default-layout.hamlet #-}
+-- show
+-- /show
+^{widget}
+{-# START_FILE templates/default-layout-wrapper.hamlet #-}
+-- show
+-- /show
+$newline never
+$doctype 5
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;#{pageTitle pc}
+    ^{pageHead pc}
+  &lt;body&gt;
+    ^{pageBody pc}
+{-# START_FILE templates/home.hamlet #-}
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+$#    $forall (ident, StoredFile filename _) &lt;- storedFiles
+{-hi-}    $forall (ident, StoredFile filename _ _) &lt;- storedFiles{-/hi-}
+      &lt;li&gt;
+        &lt;a href=@{PreviewR ident}&gt;#{filename}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;
+{-# START_FILE templates/preview.hamlet #-}
+-- show
+-- /show
+&lt;a href=@{HomeR}&gt;home
+&lt;h1&gt;#{filename}
+&lt;p&gt;
+  ^{previewBlock}
+{-# START_FILE config/routes #-}
+-- show
+-- /show
+/          HomeR    GET POST
+/file/#Int PreviewR GET</code></pre><h2 id="file-download-links"><a href="#file-download-links">File Download Links</a></h2><p>In order to serve files we will create a new route along with a custom
+handler. The process will be much the same as when we added the preview
+page. We'll create a new entry in the &quot;config/routes&quot; file, a new module
+within the &quot;Handlers&quot; directory which the &quot;Dispatch&quot; module will import, and
+a new handler for when the route is accessed.</p><pre><code class="active haskell web">{-# START_FILE Dispatch.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+-- show
+module Dispatch where
+
+import Yesod
+
+import Foundation
+{-hi-}import Handler.Download{-/hi-}
+import Handler.Home
+import Handler.Preview
+
+mkYesodDispatch &quot;App&quot; resourcesApp
+-- /show
+{-# START_FILE Foundation.hs #-}
+-- show
+-- /show
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+data StoredFile = StoredFile !Text !Text !ByteString
+type Store = IntMap StoredFile
+data App = App (TVar Int) (TVar Store)
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId
+
+getList :: Handler [(Int, StoredFile)]
+getList = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    return $ IntMap.toList store
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+addFile app@(App _ tstore) file =
+    liftIO . atomically $ do
+        ident &lt;- getNextId app
+        modifyTVar tstore $ IntMap.insert ident file
+
+getById :: Int -&gt; Handler StoredFile
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    case IntMap.lookup ident store of
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+{-# START_FILE Main.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Control.Concurrent.STM
+import Data.IntMap
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+    tstore &lt;- atomically $ newTVar empty
+    tident &lt;- atomically $ newTVar 0
+    warpEnv $ App tident tstore
+{-# START_FILE Handler/Download.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+-- show
+{-hi-}module Handler.Download where
+
+import qualified Data.Text as Text
+import qualified Data.Text.Encoding as Text
+
+import Yesod
+
+import Foundation
+
+getDownloadR :: Int -&gt; Handler TypedContent
+getDownloadR ident = do
+    StoredFile filename contentType bytes &lt;- getById ident
+    addHeader &quot;Content-Disposition&quot; $ Text.concat
+        [ &quot;attachment; filename=\&quot;&quot;, filename, &quot;\&quot;&quot;]
+    sendResponse (Text.encodeUtf8 contentType, toContent bytes){-/hi-}
+-- /show
+{-# START_FILE Handler/Home.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Handler.Home where
+
+import Control.Monad.Trans.Resource
+import qualified Data.ByteString.Lazy as L
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.Default
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getHomeR :: Handler Html
+getHomeR = do
+    (formWidget, formEncType) &lt;- generateFormPost uploadForm
+    storedFiles &lt;- getList
+    defaultLayout $ do
+        setTitle &quot;File Processor&quot;
+        $(widgetFileNoReload def &quot;home&quot;)
+
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+        addFile app $ StoredFile (fileName fi) (fileContentType fi) fileBytes
+      _ -&gt; return ()
+    redirect HomeR
+
+uploadForm = renderDivs $ fileAFormReq &quot;file&quot;
+{-# START_FILE Handler/Preview.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Handler.Preview where
+
+import Control.Exception hiding (Handler)
+import qualified Data.ByteString.Lazy as LB
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text.Lazy.Encoding as LT
+import Text.Blaze
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getPreviewR :: Int -&gt; Handler Html
+getPreviewR ident = do
+    StoredFile filename _ bytes &lt;- getById ident
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+        previewBlock &lt;- liftIO $ preview bytes
+        $(widgetFileNoReload def &quot;preview&quot;)
+
+preview :: LB.ByteString -&gt; IO Widget
+preview bytes = do
+    eText &lt;- try . evaluate $ LT.decodeUtf8 bytes :: IO (Either SomeException LT.Text)
+    return $ case eText of
+      Left _ -&gt; errorMessage
+      Right text -&gt; [whamlet|&lt;pre&gt;#{text}|]
+  where
+    errorMessage = [whamlet|&lt;pre&gt;Unable to display file contents.|]
+{-# START_FILE templates/default-layout.cassius #-}
+-- show
+-- /show
+body
+    font-family: Tahoma, Geneva, sans-serif
+    font-size: 1pc
+form
+    clear: both
+    margin:auto
+    position:relative
+    text-decoration: none
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    padding:1em
+    border: 1pt solid #999
+    border: inset 1pt solid #333
+    /* Force form elements to be consistent with each other */
+    input, textarea, select, button
+        margin: 1pt
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+    select
+        width: 100%
+    input
+        display:block
+        border: 1pt solid #999
+    input[type=submit]
+        float: right
+        background: #09C
+        color: #fff
+        -webkit-border-radius: 5pt
+        -moz-border-radius: 5pt
+        border-radius: 5pt
+        border: 1pt solid #999
+    /* Change color on mouseover */
+    input[type=submit]:hover
+        background:#fff
+        color:#09c
+
+/* force bottom border to extend below floating elements */
+form::after
+    content: &quot;&quot;
+    display: block
+    visibility: hidden
+    clear: both
+
+/* add rounded grey box around text */
+pre
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    border: 1pt solid #999
+    background: #DDD
+    margin: 1em
+    padding: 1em
+    white-space: pre-wrap
+{-# START_FILE templates/default-layout.hamlet #-}
+-- show
+-- /show
+^{widget}
+{-# START_FILE templates/default-layout-wrapper.hamlet #-}
+-- show
+-- /show
+$newline never
+$doctype 5
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;#{pageTitle pc}
+    ^{pageHead pc}
+  &lt;body&gt;
+    ^{pageBody pc}
+{-# START_FILE templates/home.hamlet #-}
+-- show
+-- /show
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+    $forall (ident, StoredFile filename _ _) &lt;- storedFiles
+      &lt;li&gt;
+        &lt;a href=@{PreviewR ident}&gt;#{filename}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;
+{-# START_FILE templates/preview.hamlet #-}
+&lt;a href=@{HomeR}&gt;home
+&lt;h1&gt;#{filename}
+{-hi-}&lt;a href=@{DownloadR ident}&gt;download{-/hi-}
+&lt;p&gt;
+  ^{previewBlock}
+{-# START_FILE config/routes #-}
+/                   HomeR     GET POST
+/file/#Int          PreviewR  GET
+{-hi-}/file/#Int/download DownloadR GET{-/hi-}</code></pre><p>Try executing the previous example to see how it works. Upload a file, and
+then download it using the link on the preview page. Your web browser should
+prompt you to download a file with the original name even though the URL may
+be something like &quot;http://something.fpcomplete.com/file/0/download&quot;. Now
+delete the two lines starting with <code>addHeader</code> in <code>getDownloadR</code>, and try
+running through the same test to see whether anything changes.</p><p>The &quot;Content-Disposition&quot; header hints to your web browser that it should
+download the resource as a file rather than trying to display it within the
+browser window. Yesod's <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=addHeader" title="Hoogle search for: addHeader"><code>addHeader</code></a> is able to add any custom
+header you need. Browsers are not required to observe the
+&quot;Content-Disposition&quot; header, so we included the content type of our file as
+well.</p><p>If the file does end up being saved on visitors' computers, their operating
+system will determine what to do with the file based on browser settings and
+file associations that may be in place.</p><p>Consider a PDF file as an example. If the &quot;Content-Disposition&quot; header is set
+and acknowledged by the browser, then it will be downloaded as a file. Some
+web browsers will prompt the user to open or save it. It will then be up to
+the operating system to decide what to do. It's likely that the file will
+be opened with Adobe Reader or some other .pdf handler.</p><p>In the case where the &quot;Content-Disposition&quot; header is ignored or not set, the
+browser will be supplied a content type. This string will probably be
+&quot;application/pdf&quot;, but in the case of our application the content type will be
+whatever was supplied when the file was uploaded. In any case, the browser
+will determine what do based on &quot;application/pdf&quot;. Google Chrome has a
+built-in .pdf reader. Internet Explorer will rely on the Adobe Reader plugin
+if that is available. Any web browser may choose open the file externally
+or fail to display it at their option.</p><h1 id="image-previews"><a href="#image-previews">Image Previews</a></h1><p>In part 3 we wrote a somewhat complicated function to preview the contents of
+text files. We did this by attempting to parse the byte stream as text, and
+failing if an exception is raised. I mentioned that we would later expand it
+to support image previews as well.</p><p>When files are uploaded, the web browser supplies an extra bit of information
+which hints at the file's contents. Yesod makes this available to us as the
+file's content type. Content type designations vary depending on which web
+browser is being used. In the case of image files, the content type can
+generally be relied on to start with &quot;image/&quot;.</p><p>Our strategy will be to use the content type that was supplied when the file
+was uploaded. Our <code>preview</code> action will then return different blocks of HTML
+depending on what the content type is. Using this method we could create
+sensible previews of a variety of file types.</p><p>The <code>preview</code> action blindly tries to convert any file to a text
+block. Instead of this, let's make it run through a list of alternative
+possibilities. Attempting to parse the file as text should be a last resort.</p><pre><code class="active haskell web">{-# START_FILE Dispatch.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Dispatch where
+
+import Yesod
+
+import Foundation
+import Handler.Download
+import Handler.Home
+import Handler.Preview
+
+mkYesodDispatch &quot;App&quot; resourcesApp
+{-# START_FILE Foundation.hs #-}
+-- show
+-- /show
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Foundation where
+
+import Control.Concurrent.STM
+import Data.ByteString.Lazy (ByteString)
+import Data.Default
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
+import Data.Text (Text)
+import qualified Data.Text as Text
+import Text.Hamlet
+import Yesod
+import Yesod.Default.Util
+
+data StoredFile = StoredFile !Text !Text !ByteString
+type Store = IntMap StoredFile
+data App = App (TVar Int) (TVar Store)
+
+instance Yesod App where
+  defaultLayout widget = do
+    pc &lt;- widgetToPageContent $ $(widgetFileNoReload def &quot;default-layout&quot;)
+    withUrlRenderer $(hamletFile &quot;templates/default-layout-wrapper.hamlet&quot;)
+
+instance RenderMessage App FormMessage where
+  renderMessage _ _ = defaultFormMessage
+
+mkYesodData &quot;App&quot; $(parseRoutesFile &quot;config/routes&quot;)
+
+getNextId :: App -&gt; STM Int
+getNextId (App tnextId _) = do
+    nextId &lt;- readTVar tnextId
+    writeTVar tnextId $ nextId + 1
+    return nextId
+
+getList :: Handler [(Int, StoredFile)]
+getList = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    return $ IntMap.toList store
+
+addFile :: App -&gt; StoredFile -&gt; Handler ()
+addFile app@(App _ tstore) file =
+    liftIO . atomically $ do
+        ident &lt;- getNextId app
+        modifyTVar tstore $ IntMap.insert ident file
+
+getById :: Int -&gt; Handler StoredFile
+getById ident = do
+    App _ tstore &lt;- getYesod
+    store &lt;- liftIO $ readTVarIO tstore
+    case IntMap.lookup ident store of
+      Nothing -&gt; notFound
+      Just file -&gt; return file
+{-# START_FILE Main.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Control.Concurrent.STM
+import Data.IntMap
+import Yesod
+
+import Dispatch ()
+import Foundation
+
+main :: IO ()
+main = do
+    tstore &lt;- atomically $ newTVar empty
+    tident &lt;- atomically $ newTVar 0
+    warpEnv $ App tident tstore
+{-# START_FILE Handler/Download.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+
+module Handler.Download where
+
+import qualified Data.Text as Text
+import qualified Data.Text.Encoding as Text
+
+import Yesod
+
+import Foundation
+
+getDownloadR :: Int -&gt; Handler TypedContent
+getDownloadR ident = do
+    StoredFile filename contentType bytes &lt;- getById ident
+    addHeader &quot;Content-Disposition&quot; $ Text.concat
+        [ &quot;attachment; filename=\&quot;&quot;, filename, &quot;\&quot;&quot;]
+    sendResponse (Text.encodeUtf8 contentType, toContent bytes)
+{-# START_FILE Handler/Home.hs #-}
+-- show
+-- /show
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Handler.Home where
+
+import Control.Monad.Trans.Resource
+import qualified Data.ByteString.Lazy as L
+import Data.Conduit
+import Data.Conduit.Binary
+import Data.Default
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+getHomeR :: Handler Html
+getHomeR = do
+    (formWidget, formEncType) &lt;- generateFormPost uploadForm
+    storedFiles &lt;- getList
+    defaultLayout $ do
+        setTitle &quot;File Processor&quot;
+        $(widgetFileNoReload def &quot;home&quot;)
+
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, _), _) &lt;- runFormPost uploadForm
+    case result of
+      FormSuccess fi -&gt; do
+        app &lt;- getYesod
+        fileBytes &lt;- runResourceT $ fileSource fi $$ sinkLbs
+        addFile app $ StoredFile (fileName fi) (fileContentType fi) fileBytes
+      _ -&gt; return ()
+    redirect HomeR
+
+uploadForm = renderDivs $ fileAFormReq &quot;file&quot;
+{-# START_FILE Handler/Preview.hs #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Handler.Preview where
+
+import Control.Exception hiding (Handler)
+import qualified Data.ByteString.Lazy as LB
+import Data.Default
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LT
+import qualified Data.Text.Lazy.Encoding as LT
+import Text.Blaze
+import Yesod
+import Yesod.Default.Util
+
+import Foundation
+
+-- show
+getPreviewR :: Int -&gt; Handler Html
+getPreviewR ident = do
+--    StoredFile filename _ bytes &lt;- getById ident
+{-hi-}    StoredFile filename contentType bytes &lt;- getById ident{-/hi-}
+    defaultLayout $ do
+        setTitle . toMarkup $ &quot;File Processor - &quot; `Text.append` filename
+--        previewBlock &lt;- liftIO $ preview bytes
+{-hi-}        previewBlock &lt;- liftIO $ preview ident contentType bytes{-/hi-}
+        $(widgetFileNoReload def &quot;preview&quot;)
+
+-- preview :: LB.ByteString -&gt; IO Widget
+-- preview bytes = do
+{-hi-}preview :: Int -&gt; Text -&gt; LB.ByteString -&gt; IO Widget
+preview ident contentType bytes
+--    = do
+  | &quot;image/&quot; `Text.isPrefixOf` contentType =
+    return [whamlet|&lt;img src=@{DownloadR ident}&gt;|]
+  | otherwise = do{-/hi-}
+    eText &lt;- try . evaluate $ LT.decodeUtf8 bytes :: IO (Either SomeException LT.Text)
+    return $ case eText of
+      Left _ -&gt; errorMessage
+      Right text -&gt; [whamlet|&lt;pre&gt;#{text}|]
+  where
+    errorMessage = [whamlet|&lt;pre&gt;Unable to display file contents.|]
+-- /show
+{-# START_FILE templates/default-layout.cassius #-}
+-- show
+-- /show
+body
+    font-family: Tahoma, Geneva, sans-serif
+    font-size: 1pc
+form
+    clear: both
+    margin:auto
+    position:relative
+    text-decoration: none
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    padding:1em
+    border: 1pt solid #999
+    border: inset 1pt solid #333
+    /* Force form elements to be consistent with each other */
+    input, textarea, select, button
+        margin: 1pt
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+    select
+        width: 100%
+    input
+        display:block
+        border: 1pt solid #999
+    input[type=submit]
+        float: right
+        background: #09C
+        color: #fff
+        -webkit-border-radius: 5pt
+        -moz-border-radius: 5pt
+        border-radius: 5pt
+        border: 1pt solid #999
+    /* Change color on mouseover */
+    input[type=submit]:hover
+        background:#fff
+        color:#09c
+
+/* force bottom border to extend below floating elements */
+form::after
+    content: &quot;&quot;
+    display: block
+    visibility: hidden
+    clear: both
+
+/* add rounded grey box around text */
+pre
+    -webkit-border-radius: 5pt
+    -moz-border-radius: 5pt
+    border-radius: 5pt
+    border: 1pt solid #999
+    background: #DDD
+    margin: 1em
+    padding: 1em
+    white-space: pre-wrap
+{-# START_FILE templates/default-layout.hamlet #-}
+-- show
+-- /show
+^{widget}
+{-# START_FILE templates/default-layout-wrapper.hamlet #-}
+-- show
+-- /show
+$newline never
+$doctype 5
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;#{pageTitle pc}
+    ^{pageHead pc}
+  &lt;body&gt;
+    ^{pageBody pc}
+{-# START_FILE templates/home.hamlet #-}
+-- show
+-- /show
+&lt;h2&gt;Previously submitted files
+$if null storedFiles
+  &lt;p&gt;No files have been uploaded yet.
+$else
+  &lt;ul&gt;
+    $forall (ident, StoredFile filename _ _) &lt;- storedFiles
+      &lt;li&gt;
+        &lt;a href=@{PreviewR ident}&gt;#{filename}
+&lt;h2&gt;Submit new file
+&lt;form method=post action=@{HomeR} enctype=#{formEncType}&gt;
+  ^{formWidget}
+  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;
+{-# START_FILE templates/preview.hamlet #-}
+-- /show
+&lt;a href=@{HomeR}&gt;home
+&lt;h1&gt;#{filename}
+&lt;a href=@{DownloadR ident}&gt;download
+&lt;p&gt;
+  ^{previewBlock}
+{-# START_FILE config/routes #-}
+-- show
+-- /show
+/                   HomeR     GET POST
+/file/#Int          PreviewR  GET
+/file/#Int/download DownloadR GET</code></pre><p>Try uploading a file ending in &quot;.png&quot;, &quot;.jpg&quot;, &quot;.bmp&quot;, or some other common
+image format. You should see the image displayed.</p><h1 id="summary"><a href="#summary">Summary</a></h1><p>We've written a web application that lets us upload files to a server, and
+then download those files using a generated URL. Uploaded files are only
+temporarily stored in memory, and disappear when the application
+restarts. You are welcome to modify and extend this application for your own
+use. A project template is available within the <a href="https://www.fpcomplete.com/school/project-templates/file-server">FP Haskell Center</a>.</p><p>There are a few obvious ways in which this project could be improved. You may
+wish to have the application state persist when the server restarts. For this,
+I would recommend using the &quot;persistent&quot; library. You would then want to add a
+way to delete files from the main screen or preview page.</p><p>Another feature that would be nice to have is the ability to restrict files to
+authenticated users. There are many login systems available, and Yesod makes
+it easy to integrate them. When it comes to serving files there are a few
+things to be aware of. Some web browsers pass off file download actions to a
+separate process. Since authentication is handled with cookies, the download
+request comes from a separate, unauthenticated client agent. Android's default
+web browser works this way. Certain media players which have built-in web
+streaming capabilities will also cause this to happen. The way around this
+would be to generate temporary download links that the official download link
+redirects to.</p><p>Thank you for following along. I hope you found this tutorial useful, and will
+be able to integrate some part of it in your own projects.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/advanced-haskell/building-a-file-hosting-service-in-yesod/part%204';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

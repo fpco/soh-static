@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html><head><title>Funtores, funtores aplicativos y monoides - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-6">Parte 6</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-6/tutorial">Funtores, funtores aplicativos y monoides</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Funtores, funtores aplicativos y monoides</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">26 Sep 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/60b23aef904413689265344ef9d28916dc604491">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-6">Go up to: Parte 6</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#funtores--functor-">Funtores (Functor)</a><ul><li><a href="#leyes-de-los-funtores">Leyes de los funtores</a></li><li><a href="#listas-como-funtores">Listas como funtores</a></li><li><a href="#maybe-como-funtor">Maybe como funtor</a></li><li><a href="#nuestra-implementaci-n-de-functor-para-un--rbol-binario-etiquetado">Nuestra implementación de Functor para un árbol binario etiquetado</a></li></ul></li><li><a href="#funtores-aplicativos--applicative-functor-">Funtores aplicativos (Applicative Functor)</a><ul><li><a href="#leyes-de-los-funtores-aplicativos">Leyes de los funtores aplicativos</a></li><li><a href="#maybe-como-funtor-aplicativo">Maybe como funtor aplicativo</a></li><li><a href="#listas-como-funtor-aplicativo">Listas como funtor aplicativo</a></li><li><a href="#m-s-all--de-funciones-de-un-solo-par-metro">Más allá de funciones de un solo parámetro</a></li></ul></li><li><a href="#semigrupos">Semigrupos</a><ul><li><a href="#leyes-de-los-semigrupos">Leyes de los semigrupos</a></li></ul></li><li><a href="#monoides">Monoides</a><ul><li><a href="#leyes-de-los-monoides">Leyes de los monoides</a></li><li><a href="#multiples-instancias-de-la-misma-clase-para-el-mismo-tipo">Multiples instancias de la misma clase para el mismo tipo</a></li><li><a href="#listas-como-instancias-de-monoid">Listas como instancias de Monoid</a></li></ul></li><li><a href="#ejercicios">Ejercicios</a></li><li><a href="#siguiente-tutorial">Siguiente tutorial</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>En este tutorial veremos clases de tipos un poco más avanzadas. Comenzaremos con la clase <code>Functor</code>, continuaremos con la clase <code>Applicative</code>, después <code>Semigroup</code> y al final <code>monoid</code>. Estudiar las clases <code>Functor</code> y <code>Applicative</code> nos prepararán para el siguiente tutorial sobre la clase <code>Monad</code>. En Haskell, es común que la definición de una clase de tipo esté acompañada de &quot;leyes&quot; que se tienen que cumplir a implementar dichas clases. Las leyes de la clase <code>Functor</code> y <code>Applicative</code> no son las más sencillas, por lo que también estudiaremos en este tutorial las clases <code>Semigroup</code> y <code>Monoid</code>, cuyas leyes son bastante simples. También existe una relación entre los monoides y los mónadas comúnmente expresada con la frase: &quot;Un mónada es sólo un monoide en la categoría de endofuntores&quot;, eso pertenece a la rama de teoría de categorías, lo cual es un tema muy aparte.</p><h2 id="funtores--functor-"><a href="#funtores--functor-">Funtores (Functor)</a></h2><p>La clase <code>Functor</code> puede ser implementada por todas aquellas estructuras de datos a las cuales se les pueda aplicar una función a todos sus elementos.</p><p>La especificación de la clase <code>Functor</code> es la siguiente:</p><pre><code class="haskell">class Functor f where
+  fmap :: (a -&gt; b) -&gt; f a -&gt; f b</code></pre><p><code>fmap</code> es la función que <i>mapea</i> una función a todos los elementos del tipo que implemente la clase. En el tipo de <code>fmap</code> (<code>(a -&gt; b) -&gt; f a -&gt; f b </code>), se puede ver que el primer parámetro es una función <code>a -&gt; b</code>, esa es la que se aplica a todos los elementos dentro de <code>f</code> y el segundo parámetro es el functor, <code>f a</code>.</p><h3 id="leyes-de-los-funtores"><a href="#leyes-de-los-funtores">Leyes de los funtores</a></h3><p>A veces no basta con dar una implementación para las funciones de una clase; a veces se tienen que seguir ciertas <i>leyes</i>. La clase <code>Functor</code> tiene dos leyes:</p><ul><li>Ley de identidad
+<code>fmap id = id</code>, es decir, si intentamos mapear <code>id</code> sobre los elementos de algún contenedor, nos debe de dar lo mismo a que si no hubiésemos hecho nada (sin efectos secundarios).</li><li><code>fmap (f.g) x = fmap f (fmap g x)</code>
+En teoría, cada implementación de una clase debe de venir acompañada de demostraciones matemáticas que demuestren que se cumplen las leyes. En el último tutorial veremos como usar QuickCheck para demostrar con cierta confiabilidad que se cumplen las leyes; es decir, no son demostraciones sino simples pruebas con alta probabilidad de confiabilidad.</li></ul><h3 id="listas-como-funtores"><a href="#listas-como-funtores">Listas como funtores</a></h3><p>Un ejemplo que ahora debería de ser fácil de entender son las listas; de hecho, la única razón por la que la función se llama <code>fmap</code> y no simplemente <code>map</code> es porque <code>map</code> ya está reservado para listas, pero hacen exactamente lo mismo.</p><p>Si la función <code>map</code> no existiera, podríamos implementar <code>Functor</code> para listas de esta manera:</p><pre><code class="haskell">instance Functor [] where
+  fmap _ [] = []
+  fmap f (x:xs) = f x : fmap xs</code></pre><p>Pero <code>map</code> sí existe y esta es precísamente su definición:</p><pre><code class="haskell">map _ [] = []
+map f (x:xs) = f x : fmap xs</code></pre><p>Por lo que la implementación de <code>fmap</code> para listas es simplemente:</p><pre><code class="haskell">instance Functor [] where
+  fmap = map</code></pre><p>Un ejemplo de su uso:</p><pre><code class="active haskell">main =
+  do
+    print $ fmap (+ 1) []
+    print $ fmap (+ 1) [1,2,3]</code></pre><p>En el <i>prelude</i> de Haskell ya viene incluida la implementación de <code>Functor</code> para <code>[]</code>, por lo que uno no tiene que escribirla para usarla.</p><h3 id="maybe-como-funtor"><a href="#maybe-como-funtor">Maybe como funtor</a></h3><p>El tipo <code>Maybe</code> es otra instancia de <code>Functor</code>. En el <i>prelude</i> de Haskell también ya viene incluida la implementación de <code>Functor</code> para <code>Maybe</code>, por lo que uno no tienes que escribirla para usarla.</p><p>Su implementación es obvia:</p><pre><code class="haskell">instance Functor Mabye where
+  fmap _ Nothing = Nothing
+  fmap f (Just x) = Just (f x)</code></pre><p>Un ejemplo de su uso:</p><pre><code class="active haskell">main =
+  do
+    print $ fmap (+ 1) Nothing
+    print $ fmap (+ 1) (Just 0)</code></pre><h3 id="nuestra-implementaci-n-de-functor-para-un--rbol-binario-etiquetado"><a href="#nuestra-implementaci-n-de-functor-para-un--rbol-binario-etiquetado">Nuestra implementación de Functor para un árbol binario etiquetado</a></h3><p>Si modelamos un árbol binario etiquetado así:</p><pre><code class="haskell">data LBTree a = InternalNode a (LBTree a) (LBTree a) | Leaf (Maybe a)</code></pre><p>Podriamos hacerlo miembro de la clase <code>Functor</code> de la siguiente manera:</p><pre><code class="haskell">instance Functor LBTree where
+fmap f (InternalNode x left right) = InternalNode (f x) (fmap f left) (fmap f right)
+fmap f (Leaf Nothing) = Leaf Nothing
+fmap f (Leaf (Just x)) = Leaf (Just f x)</code></pre><p>Y para demostrar su funcionalidad, reutilizaremos <a href="https://en.wikipedia.org/wiki/Binary_tree#/media/File:Binary_tree.svg">este ejemplo</a></p><pre><code class="active haskell">data LBTree a = InternalNode a (LBTree a) (LBTree a) | Leaf (Maybe a) deriving Show
+
+instance Functor LBTree where
+  fmap f (InternalNode x left right) = InternalNode (f x) (fmap f left) (fmap f right)
+  fmap _ (Leaf Nothing) = Leaf Nothing
+  fmap f (Leaf (Just x)) = Leaf (Just (f x))
+
+example = InternalNode 2
+            (InternalNode 7
+              (Leaf (Just 2))
+              (InternalNode 6
+                (Leaf (Just 5))
+                (Leaf (Just 11))))
+            (InternalNode 5
+              (Leaf Nothing)
+              (InternalNode 9
+                (Leaf (Just 4))
+                (Leaf Nothing)))
+
+main = print $ fmap (* 10) example</code></pre><h2 id="funtores-aplicativos--applicative-functor-"><a href="#funtores-aplicativos--applicative-functor-">Funtores aplicativos (Applicative Functor)</a></h2><p>Los funtores aplicativos son parecidos a los funtores, pero con la diferencia de que el &quot;contenedor&quot; puede albergar funciones también y que el operador <code>&lt;*&gt;</code>, lo que sería <code>fmap</code>, pero para funtores, mapea una función que se encuentra en un contenedor; quizás quede más claro si comparamos los tipos de <code>fmap</code> y <code>&lt;*&gt;</code>:
+<code>&lt;*&gt; :: {-h-}f{-/h-} (a -&gt; b) -&gt; f a -&gt; f b</code>
+<code>fmap ::  (a -&gt; b) -&gt; f a -&gt; f b</code></p><p>Dado que <code>Maybe</code> es una instancia de un funtor, además de poder hacer esto:</p><pre><code class="haskell">fmap (+ 1) (Just 2) = Just 3</code></pre><p>También podemos hacer esto:</p><pre><code class="haskell">(&lt;*&gt;) (Just (+ 1)) (Just 2) = Just 3
+-- Or in its more natural usage, as an infix operator:
+Just (+ 1) &lt;*&gt; Just 2 = Just 3</code></pre><p>Para poder introducir una función dentro de un contenedor, usamos la función <code>pure</code> que junto con <code>&lt;*&gt;</code> forman la clase <code>Applicative</code>.</p><p>Pudimos haber escrito el ejemplo pasado como:</p><pre><code class="haskell">pure (+ 1) &lt;*&gt; Just 2 = Just 3</code></pre><p>La definición completa de <code>Applicative</code> es:</p><pre><code class="haskell">class Functor f =&gt; Applicative f where
+  pure :: (a -&gt; b) -&gt; f (a -&gt; b)
+
+  &lt;*&gt; :: f (a -&gt; b) -&gt; f a -&gt; f b
+
+  &lt;$&gt; :: (a -&gt; b) -&gt; f a -&gt; f b
+  h &lt;$&gt; f = pure h &lt;*&gt; f</code></pre><p>El operador <code>&lt;$&gt;</code> contiene una definición default que se deriva de <code>pure</code> y <code>&lt;*&gt;</code>, por lo que no es necesario implementarla, basta con implementar <code>pure</code> y <code>&lt;*&gt;</code>. La utilidad de <code>&lt;$&gt;</code> es la de ahorrarnos tener que llamar primero a <code>pure</code> antes de poder aplicarle un valor usando <code>&lt;*&gt;</code>a la función que deseamos meter dentro del contenedor. Por ejemplo:</p><pre><code class="active haskell">import Control.Applicative  -- The Applicative class is defined in the Control.Applicative module
+main =
+  do
+    print $ {-hi-}pure{-/hi-} (+ 1) {-hi-}&lt;*&gt;{-/hi-} Just 2
+    print $ (+ 1) {-hi-}&lt;$&gt;{-/hi-} Just 2</code></pre><h3 id="leyes-de-los-funtores-aplicativos"><a href="#leyes-de-los-funtores-aplicativos">Leyes de los funtores aplicativos</a></h3><p>Además de las leyes inherentes de ser un funtor, un funtor aplicativo debe de cumplir con estas leyes:</p><ul><li><p>Ley de identidad</p><p><code>pure id &lt;*&gt; x = x</code>, similar a la primer ley de los functores</p></li><li><code>fmap g x = pure g &lt;*&gt; x</code></li></ul><p>Esta otra ley relaciona a los functores con los functores aplicativos al poner a <code>fmap</code>, <code>pure</code> y a <code>&lt;*&gt;</code> en la misma ecuación:</p><ul><li><p>Homomorfismo</p><p>El término homomorfismo proviene de teoría de categorías; un homomorfismo es una función que mapea de un objeto a otro con la misma estructura matemática. Esta es la ley:
+<code>pure f &lt;*&gt; pure x = pure (f x)</code></p></li><li><p>Intercambio</p><p>En la expresión <code>u &lt;*&gt; pure y</code> no debe importar si primero se ejecuta <code>(&lt;*&gt;) u</code> o si primero se ejecuta <code>pure y</code>, la ley dice así: <code>u &lt;*&gt; pure y = pure (\f -&gt; f y) &lt;*&gt; u</code></p></li><li><p>Composición</p><p>Esta es la ley: <code>u &lt;*&gt; (v &lt;*&gt; w) = pure (.) &lt;*&gt; u &lt;*&gt; v &lt;*&gt; w</code>, pero no queda muy clara su intención. Yo la reescribiría de esta manera:
+<code>C f1 &lt;*&gt; (C f2 &lt;*&gt; C x) = pure ((f1.f2) x)</code> donde <code>C</code> es el contenedor. Así queda más claro que la intención de la ley es expresar que se podría primero realizar la composición entre <code>f1</code> y <code>f2</code>, después la aplicación de <code>x</code> y al final meter todo en un contenedor con <code>pure</code>, pues a pesar de que en Haskell no existen sentencias, solo expresiones, al momento de la verdad (al momento de la ejecución) sí existe cierto orden de ejecución, por lo que a veces es necesario expresiar que el orden de ejecución de las partes de una expresión <b>no</b> debería de importar.</p></li></ul><h3 id="maybe-como-funtor-aplicativo"><a href="#maybe-como-funtor-aplicativo">Maybe como funtor aplicativo</a></h3><p>Ya hemos usado a <code>Maybe</code> como funtor y su implementación no debe resultar extraña:</p><pre><code class="haskell">import Control.Applicative
+
+instance Applicative Maybe where
+  pure f = Just f
+  Nothing &lt;*&gt; _ = Nothing
+  _ &lt;*&gt; Nothing = Nothing
+  Just f &lt;*&gt; Just x = Just (f x)</code></pre><p>Y aquí un ejemplo de cada caso:</p><pre><code class="active haskell">import Control.Applicative
+import Data.Char
+
+e1 :: Maybe String
+e1 = Nothing &lt;*&gt; Just &quot;hi&quot;      
+
+e2 :: Maybe String
+e2 = Just (map toUpper) &lt;*&gt; Nothing
+
+e3 :: Maybe String
+e3 = Just (map toUpper) &lt;*&gt; Just &quot;hi&quot;
+
+e4 :: Maybe String
+e4 = pure (map toUpper) &lt;*&gt; Just &quot;hi&quot;
+
+e5 :: Maybe String
+e5 = map toUpper &lt;$&gt; Just &quot;hi&quot;
+
+main =
+  do
+    print e1
+    print e2
+    print e3
+    print e4
+    print e5</code></pre><h3 id="listas-como-funtor-aplicativo"><a href="#listas-como-funtor-aplicativo">Listas como funtor aplicativo</a></h3><p><code>Maybe</code> nos permitió poner una función dentro de un contenedor, pero ¿cuál sería el comportamiento de aplicar una lista de funciones a una lista de valores? Primero veamos un ejemplo y después lo explicaremos presentando la definición de los funtores aplicativos para listas.</p><pre><code class="active haskell">import Control.Applicative
+import Data.Char
+main =
+  do
+    print $ [(+ 1), (* 2)] &lt;*&gt; [3,4,5]
+    print $ [Prelude.map toUpper, (\x -&gt; x ++ &quot;, world!&quot;)] &lt;*&gt; [&quot;hello&quot;, &quot;hi&quot;]
+</code></pre><p>Podemos ver que cada función en la lista de la izquierda se aplica a cada elemento de la lista de la derecha. Si ahora vemos la implementación de de <code>Applicative</code> para listas, podemos comprobarlo:</p><pre><code class="haskell">import Control.Applicative
+
+instance Applicative [] where
+  pure x = [x]
+  fs &lt;*&gt; xs = [f x | f &lt;- fs, x &lt;- xs] -- for each f in fs, for ecah x in xs</code></pre><h3 id="m-s-all--de-funciones-de-un-solo-par-metro"><a href="#m-s-all--de-funciones-de-un-solo-par-metro">Más allá de funciones de un solo parámetro</a></h3><p>El tipo del operador <code>&lt;*&gt;</code> es <code>f (a -&gt; b) -&gt; f a -&gt; f b</code>, pero eso no significa que sólo se puedan usar funciones de un sólo parámetro, pues la <code>b</code> podría sustituirse por otra función, digamos, <code>c -&gt; d</code>. Por ejemplo:</p><pre><code class="active haskell">import Control.Applicative
+
+-- here we can see that f (a -&gt; {-hi-}b{-/hi-}) gets substituted by Just (Int -&gt; (Int -&gt; Int)),
+--   where f = Maybe, a = Int and {-hi-}b = (Int -&gt; Int){-/hi-}
+f1 :: Maybe (Int -&gt; (Int -&gt; Int))
+f1 = pure (+)
+
+f2 :: Maybe (Int -&gt; Int)
+f2 = f1 &lt;*&gt; Just 1
+
+f3 :: Maybe Int
+f3 = f2 &lt;*&gt; Just 2
+
+main =
+  do
+    print $ f3
+-- or all together
+    print $ pure (+) &lt;*&gt; Just 1 &lt;*&gt; Just 2
+-- and even simplier
+    print $      (+) &lt;$&gt; Just 1 &lt;*&gt; Just 2</code></pre><h2 id="semigrupos"><a href="#semigrupos">Semigrupos</a></h2><p>Los semigrupos son un concepto del algebra que se representa en Haskell con la clase <code>Semigroup</code>, definida en <code>Data.Semigroup</code>. Un semigrupo es un conjunto de valores cerrados por una operación asociativa, es decir, que dados dos elementos del semigrupo, la operación asociativa regresa otro elemento del mismo semigrupo. En Haskell, la operación asociativa de un semigrupo es <code>&lt;&gt;</code>; esta es la definición completa de un semigrupo:</p><pre><code class="haskell">class Semigroup a where
+  (&lt;&gt;) :: a -&gt; a -&gt; a
+
+  sconcat :: NonEmpty a -&gt; a
+  sconcat (a :| as) = go a as where
+    go b (c:cs) = b &lt;&gt; go c cs
+    go b []     = b</code></pre><p><code>NonEmpty a</code> representa una lista no vacia: <code>NonEmpty v = x :| xss</code> donde <code>xss</code> es una listá común (posiblemente vacía). Entonces, <code>sconcat</code> es una función que dada una lista no vacía de <code>a</code>s, los combina en un solo valor mediante <code>&lt;&gt;</code>.</p><h3 id="leyes-de-los-semigrupos"><a href="#leyes-de-los-semigrupos">Leyes de los semigrupos</a></h3><p>La única regla que deben de cumplir los semigrupos es que <b><code>&lt;&gt;</code> debe de ser asociativa</b>, por lo que los enteros junto con la resta, no pueden formar un semigrupo, pues no es lo mismo <code>(1-2)-3 = -4</code> que <code>1-(2-3) = 2</code>.</p><p>A continuación, una instancia de <code>Semigroup</code> que sí cumple con la ley de asociatividad para <code>&lt;&gt;</code>:</p><pre><code class="active haskell">import Data.Semigroup
+import Data.List.NonEmpty
+
+instance Semigroup Int where
+  (&lt;&gt;) = (+)
+
+aNonEmptyList = (1 :| [2,3]) :: NonEmpty Int
+
+main =
+  do
+    print $ (1::Int) &lt;&gt; 2
+    print $ sconcat aNonEmptyList
+    -- It is only necessary to specify the type of one number, the compiler will infer the rest</code></pre><h2 id="monoides"><a href="#monoides">Monoides</a></h2><p>Los monoides son un concepto de algebra que se representa en Haskell con la clase <code>Monoid</code> definida en <code>Data.Monoid</code>:</p><pre><code class="haskell">class Monoid a where
+  mempty  :: a
+  mappend :: a -&gt; a -&gt; a
+ 
+  mconcat :: [a] -&gt; a
+  mconcat = foldr mappend mempty</code></pre><p><code>mappend</code> es un operador binario que dado dos <code>a</code>s regresa otra <code>a</code>, es decir, un monoide <code>a</code> está cerrado bajo la operación <code>mappend</code>.</p><h3 id="leyes-de-los-monoides"><a href="#leyes-de-los-monoides">Leyes de los monoides</a></h3><p>Además de ofrecer implementaciones para <code>mempty</code> y <code>mappend</code>, se deben de cumplir dos leyes:</p><ul><li>Identidad de <code>mempty</code> para el lado izquierdo y derecho:
+- <code>mappend mempty x = x</code>
+- <code>mappend x mempty = x</code></li><li>Asociatividad de <code>mappend</code>. <code>mappend (mappend x y) z = mappend x (mappend y z)</code></li></ul><p>Por ejemplo, <code>Int</code> y la función <code>+</code> forman un monoide, donde <code>Int</code> es <code>a</code>, <code>+</code> es <code>mappend</code> y el <code>0</code> es <code>mempty</code>. Se podría comprobar facilmente que <code>(+) 0 = id</code> por lo que <code>0</code> cumple con los requisitos para ser el <code>mempty</code> de <code>Int</code> y <code>(+)</code>. A continuación la <a href="https://es.wikipedia.org/wiki/Inducci%C3%B3n_matem%C3%A1tica">demostración por inducción</a> (probablemente la instancia mas senilla de la inducción matemática):</p><pre><code class="haskell">-- base case:
+(+) 0 0 = 0           -- e1
+-- for any n:
+(+) 0 n = n           -- e2, since 0 + n = n
+-- now we need to show that &quot;(+) 0 (n + 1) = n + 1&quot; holds:
+(+) 0 (n + 1) = n + 1 -- e3, to be shown
+  -- we know that (n + 1) = (0 + n) + 1 and that (0 + n) = (+) 0 n,
+  -- so (+) 0 (n + 1) equals to:
+  ((+) 0 n) + 1
+  -- replacing ((+) 0 n) by the right hand side of e2:
+  n + 1 -- which is what we wanted to proof of e3</code></pre><p>La implementación de <code>Monoid</code> para <code>Int</code>, <code>0</code> y <code>(+)</code> es:</p><pre><code class="haskell">import Data.Monoid
+
+instance Monoid Int where
+  mempty = 0
+  mappend = (+)</code></pre><p>¿Qué crees que haga <code>mconcat</code>?</p><pre><code class="active haskell">import Data.Monoid
+
+instance Monoid Int where
+  mempty = 0
+  mappend = (+)
+
+listOfInts = [1,2,3] :: [Int] -- we need to specify that those Nums are Ints.
+main = print $ mconcat listOfInts</code></pre><p>Así es, intuitivamente se podría decir que los junta a todos en un solo valor; formalmente se dice que <code>mconcat</code> hace, pues, lo que dice su definición: <code>foldr mappend mempty</code>.</p><h3 id="multiples-instancias-de-la-misma-clase-para-el-mismo-tipo"><a href="#multiples-instancias-de-la-misma-clase-para-el-mismo-tipo">Multiples instancias de la misma clase para el mismo tipo</a></h3><p><code>Int</code> también se podría hacer una instancia de <code>Monoid</code> usando <code>(*)</code> como <code>mappend</code> y <code>1</code> como <code>mempty</code>:</p><pre><code class="active haskell">import Data.Monoid
+
+instance Monoid Int where
+  mempty = 1
+  mappend = (*)
+
+listOfInts = [1,2,3] :: [Int] -- we need to specify that those Nums are Ints.
+main = print $ mconcat listOfInts</code></pre><p>Pero, ¿qué pasa si queremos ambas instancias de <code>Monoid</code> para <code>Int</code>? una con <code>mappend = (+)</code> y otra con <code>mappend = (*)</code>. No se puede, intentémoslo:</p><pre><code class="active haskell">import Data.Monoid
+
+instance Monoid Int where
+  mempty = 0
+  mappend = (+)
+  
+instance Monoid Int where
+  mempty = 0
+  mappend = (-)
+
+listOfInts = [1,2,3] :: [Int]
+main = print $ mconcat listOfInts
+               -- ummm, do you mean &quot;mconcat = foldr {-hi-}(+){-/hi-} 0 listOfInts&quot;
+               -- or &quot;mconcat = foldr {-hi-}(-){-/hi-} 0 listOfInts&quot;</code></pre><p>El compilador dice algo de &quot;instancias duplicadas de la clase Monoid para Int&quot;. Afortunadamente existe una solución, utilizar <code>newtype</code>.</p><p><code>newtype</code> nos permite crear un tipo nuevo (no un simple sinónimo de tipo como con <code>type</code>); podemos entonces crear dos tipos nuevos a partir de <code>Int</code> y hacer cada uno una instancia de <code>Monoid</code>, uno con <code>mappend</code> a base de <code>(+)</code> y otro con <code>mappend</code> a base de <code>(*)</code>:</p><pre><code class="active haskell">import Data.Monoid
+
+newtype IntMP = IntMP Int  -- for Monoid Int with mappend based on (+)
+newtype IntMT = IntMT Int  -- for Monoid Int with mappend based on (*)
+
+instance Show IntMP where
+  show (IntMP x) = show x
+
+instance Show IntMT where
+  show (IntMT x) = show x
+
+instance Monoid IntMP where
+  mempty = IntMP 0
+  IntMP x `mappend` IntMP y = IntMP (x + y)
+  
+instance Monoid IntMT where
+  mempty = IntMT 0
+  IntMT x `mappend` IntMT y = IntMT (x - y)
+
+intsMPs = [IntMP 1, IntMP 2, IntMP 3]
+intsMTs = [IntMT 1, IntMT 2, IntMT 3]
+
+main =
+  do
+    print $ mconcat intsMPs
+    print $ mconcat intsMTs</code></pre><p>De hecho ya existe algo similar a <code>IntMP</code> y que no sólo es para <code>Int</code>s sino para toda la clase <code>Num</code>; se llaman <code>Sum</code> y funciona así</p><pre><code class="active haskell">import Data.Monoid
+
+intsAsSum = [0,1,2] :: [Sum Int]
+floatsAsSum = [0,1,2] :: [Sum Float]
+doublesAsSum = [0,1,2] :: [Sum Double]
+
+main =
+  do
+    print $ mconcat intsAsSum
+    print $ mconcat floatsAsSum
+    print $ mconcat doublesAsSum</code></pre><p>También existe <code>Product</code>:</p><pre><code class="active haskell">import Data.Monoid
+
+intsAsProduct = [0,1,2] :: [Product Int]
+floatsAsProduct = [0,1,2] :: [Product Float]
+doublesAsProduct = [0,1,2] :: [Product Double]
+
+main =
+  do
+    print $ mconcat intsAsProduct
+    print $ mconcat floatsAsSum
+    print $ mconcat doublesAsSum</code></pre><h3 id="listas-como-instancias-de-monoid"><a href="#listas-como-instancias-de-monoid">Listas como instancias de Monoid</a></h3><p>Una vez sabiendo que las listas pueden ser instancias de <code>Monoid</code>, no debe de ser muy difícil imaginar que valor será <code>mempty</code> y cual <code>mconcat</code>. ¿Qué función recibe dos listas y produce una lista? <code>(++)</code>, entonces <code>(++)</code> puede ser <code>mconcat</code>. Si <code>(++)</code> es <code>mconcat</code>, ¿cuál valor podría ser <code>mempty</code> tal que <code>(++) mempty xs = xs</code> para todo <code>xs</code>? La lista vacía (<code>[]</code>), obviamente.</p><p>Esta es la instancia de <code>Monoid</code> para las listas:</p><pre><code class="haskell">instance Monoid [] where
+  mempty = []
+  mconcat = (++)</code></pre><p>Ahora podemos crear expresiones que son compatibles con cualquier monoide:</p><pre><code class="active haskell">import Data.Monoid
+
+f m1 m2 m3 m4 = (mappend m1 m2, mappend m3 m4)
+
+main =
+  do
+    print $ f (1::Sum Int) (2::Sum Int) (3::Sum Int) (4::Sum Int)
+    print $ f [1] [2] [3,4] [5]</code></pre><h2 id="ejercicios"><a href="#ejercicios">Ejercicios</a></h2><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-6/ejercicios">Ejercicios</a></p><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-6/soluciones">Soluciones</a></p><h2 id="siguiente-tutorial"><a href="#siguiente-tutorial">Siguiente tutorial</a></h2><p>Mónadas. <a href="http://imgc.allpostersimages.com/images/P-473-488-90/61/6169/X3SG100Z/posters/man-waving-from-empire-state-building-construction-site.jpg">Work in progress</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/parte-6/tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

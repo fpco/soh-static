@@ -1,0 +1,248 @@
+Hi! This is about completing an example from a Gabriel Gonzalez' splendid article [Comonads are objects](http://www.haskellforall.com/2013/02/you-could-have-invented-comonads.html), section "The command pattern" that I couldn't make it work.
+
+With the Comonad *[extend](http://hackage.haskell.org/package/comonad/docs/Control-Comonad.html#v:extend)* method, you can turn a getter method `(w a -> b)` into an *object* transformer `(w a -> w b)`, and thus you may use them to sequence multiple transformations. The *object* type must be a Functor instance ([Comonads are Functors](http://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)).
+
+### Rewriting the example
+
+The *object* type in the article was `(Kelvin, Kelvin -> a)`, but using it like this, the Comonad instance taken by the compiler was the Tuple-2 one where the inner type is its second element one, and the example didn't compile.
+
+Defining a *newtype* around it, with instances for Functor and Comonad, makes the example work.
+
+Using the "stack" template "simple", paste the following on `Main.hs`
+
+```haskell
+{-# LANGUAGE PackageImports, GeneralizedNewtypeDeriving, FlexibleInstances #-}
+
+module Main where
+
+import Data.Function ((&))   -- (&): backwards application
+import "HUnit" Test.HUnit
+
+import "comonad" Control.Comonad (Comonad(..))
+
+-- 
+
+newtype Kelvin = Kelvin { getKelvin :: Double } deriving (Num, Fractional, Show)
+
+newtype Celsius = Celsius { getCelsius :: Double }
+    deriving (Num, Fractional, Show)
+
+
+-- wrapping the (data, function) pair
+
+newtype Thermostat a = Thermo (Kelvin, Kelvin -> a)
+
+instance Functor Thermostat where
+
+    -- fmap :: (a -> b) -> w a -> w b
+    
+    fmap g (Thermo (k, f)) = Thermo (k, g . f)
+
+
+instance Comonad Thermostat where
+
+    -- the dual of monad's return
+    extract (Thermo (k, f)) = f k
+    
+    -- the dual of join
+    duplicate (Thermo (k, f)) = Thermo (k, \k' -> Thermo (k', f))
+    
+    -- laws:
+    -- extract . duplicate = id
+    -- fmap extract . duplicate = id
+    -- duplicate . duplicate = fmap duplicate . duplicate
+
+---
+
+kelvinToCelsius :: Kelvin -> Celsius
+kelvinToCelsius (Kelvin t) = Celsius (t - 273.15)
+
+initialThermostat :: Thermostat Celsius
+initialThermostat = Thermo (298.15, kelvinToCelsius)
+
+up :: Thermostat a -> a
+up (Thermo (t, f)) = f (t + 1)
+
+down :: Thermostat a -> a
+down (Thermo (t, f)) = f (t - 1)
+
+toString :: Thermostat Celsius -> String
+toString (Thermo (t, f)) = show (getCelsius (f t)) ++ " Celsius"
+
+mymethod :: Thermostat Celsius -> String
+mymethod obj = obj 
+                  & extend up 
+                  & extend up 
+                  & toString
+
+test1 = TestCase $ assertEqual "for the initial obj.:" (initialThermostat & toString) "25.0 Celsius"
+test2 = TestCase $ assertEqual "for the extended obj.:" (initialThermostat & mymethod) "27.0 Celsius"
+
+tests = TestList [TestLabel "test1" test1, TestLabel "test2" test2]
+
+main :: IO Counts
+main = runTestTT tests
+
+```
+Then add the packages *comonad* and *HUnit* to the project .cabal file.
+
+```bash
+$ stack exec myproject
+Cases: 2  Tried: 2  Errors: 0  Failures: 0
+
+```
+### Observing types and the `extend up` transformation
+
+Using *ghci* we can show the types of applying the Comonad `extend` method to the getters:
+```
+$ stack ghci
+GHCi, version 8.4.4: http://www.haskell.org/ghc/  :? for help
+[1 of 1] Compiling Main ...  
+Ok, one module loaded.
+Loaded GHCi configuration from ...
+
+*Main> :t up
+up :: Thermostat a -> a
+
+*Main> :t extend up
+extend up :: Thermostat b -> Thermostat b
+
+*Main> :t toString
+toString :: Thermostat Celsius -> String
+
+*Main> :t extend toString
+extend toString :: Thermostat Celsius -> Thermostat String
+
+*Main> 
+
+```
+Let's see how `extend up` transforms `Thermo (k, f)` through its simplification:
+
+```haskell
+
+extend up $ Thermo (k, f)
+
+-- since `extend f = fmap f . duplicate`
+
+fmap up $ duplicate $ Thermo (k, f)
+
+-- from the Comonad instance
+
+fmap up $ Thermo (k, \k' -> Thermo (k', f))
+
+-- from the Functor instance
+
+ Thermo (k, up . (\k' -> Thermo (k', f)))
+ 
+ Thermo (k, \k' -> up (Thermo (k', f)))
+ 
+ -- from the definition of `up`
+
+ Thermo (k, \k' -> f (k' +1))
+
+```
+
+### Checking the Comonad laws on our instance
+
+I follow the second group of [Comonad laws](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html#t:Comonad) over `duplicate` based definitions
+
+#### Let's check `extract . duplicate = id`
+
+```haskell
+extract $ duplicate $ Thermo (k, f)
+
+-- from the Comonad instance
+
+extract $ Thermo (k, \k' -> Thermo (k', f))
+
+(\k' -> Thermo (k', f)) k
+
+Thermo (k, f)
+```
+
+#### Checking `fmap extract . duplicate = id`
+
+```haskell
+
+fmap extract $ duplicate $ Thermo (k, f)
+
+-- from the Comonad instance
+
+fmap extract $ Thermo (k, \k' -> Thermo (k', f))
+
+-- from the Functor instance
+
+Thermo (k, extract . (\k' -> Thermo (k', f)))
+
+Thermo (k, \k' -> extract (Thermo (k', f)))
+
+-- from the Comonad instance
+
+Thermo (k, \k' -> f k')
+
+-- eta reduction
+
+Thermo (k, f)
+
+```
+
+#### Checking `duplicate . duplicate = fmap duplicate . duplicate`
+
++ one side:
+
+```haskell
+fmap duplicate $ duplicate $ Thermo (k, f)
+
+-- from the Comonad instance
+
+fmap duplicate $ Thermo (k, \k' -> Thermo (k', f))
+
+-- from the Functor instance
+
+Thermo (k, \k' -> duplicate (Thermo (k', f)))
+
+Thermo (k, \k' -> Thermo (k', \k'' -> Thermo (k'', f)))
+```
++ and the other:
+
+```haskell
+duplicate $ duplicate $ Thermo (k, f)
+
+duplicate $ Thermo (k, \k' -> Thermo (k', f))
+
+-- let's name `(\k' -> Thermo (k', f))` as `g`
+
+duplicate $ Thermo (k, g)
+
+Thermo (k, \k' -> Thermo (k', g))
+
+-- substituting g
+
+Thermo (k, \k' -> Thermo (k', \k'' -> Thermo (k'', f)))
+
+```
+
+### Looking at some Monad / Comonad symmetry
+
+<table>
+  <tr>
+    <th colspan=2><a href=https://hackage.haskell.org/package/base/docs/Control-Monad.html#t:Monad>Monad<a></th><td>...</td>
+    <th colspan=2><a href=https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html#t:Comonad>Comonad</a></th>
+  </tr>
+  <tr>
+    <th>return</th><td>:: a -> m a</td><td/>
+    <th>extract</th><td>:: w a -> a</td>
+  </tr>
+  <tr>
+     <th>join</th><td>:: m (m a) -> m a</td><td/>
+     <th>duplicate</th><td>:: w a -> w (w a)</td> 
+  </tr>
+  <tr>
+    <th>(>>=)</th><td>::  m a -> (a -> m b) -> m b </td><td/>
+    <th>extend</th><td>:: (w a -> b) -> w a -> w b</td>
+  </tr>
+  <tr>
+    <td>(>>= f)</td><td>= join . fmap f</td><td/>
+    <td>extend f</td><td>= fmap f . duplicate</td>
+  </tr>
+</table>  

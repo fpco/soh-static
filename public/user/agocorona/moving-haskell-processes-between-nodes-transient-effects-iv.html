@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html><head><title>Moving Haskell processes between nodes (Transient effects IV) - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/moving-haskell-processes-between-nodes-transient-effects-iv">Moving Haskell processes between nodes (Transient effects IV)</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Moving Haskell processes between nodes (Transient effects IV)</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">26 Oct 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/9ef11a0b8642aad25bfe460ff080f823dca4615e">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/publish-subscribe-variables-transient-effects-v">Previous content: Publish-subscribe Variables. Transient effects V</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/beautiful-parallel-non-determinism-transient-effects-iii">Next content: Beautiful parallel non-determinism (Transient effects III)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#motivation--yours-not-mine-">Motivation (yours not mine)</a></li><li><a href="#a-sad-story">A sad story</a></li><li><a href="#composable-distributed-computing">Composable distributed computing</a></li><li><a href="#the-plan">The plan</a><ul><li><a href="#level-1--basic-calls-for-node-node-commmunication">Level 1: basic calls for node-node commmunication</a></li></ul></li><li><a href="#map-reduce">Map-reduce</a></li><li><a href="#forwarding-events-across-the-network">forwarding events across the network</a><ul><li><a href="#level-2">Level 2</a><ul><li><a href="#distributed-chat-application-in-four-lines">distributed Chat application in four lines</a></li></ul></li></ul></li><li><a href="#how-it-works">How it works</a><ul><li><a href="#logging">Logging</a></li></ul></li><li><a href="#implementation-details">Implementation details</a></li><li><a href="#supervision">Supervision</a></li><li><a href="#the-example-program--how-to-run-it">The example program, how to run it</a></li><li><a href="#current-limitations-and-future-plans">Current limitations and future plans</a></li><li><a href="#moving-code">Moving code</a></li><li><a href="#comparison-with-cloud-haskell-and-erlang">Comparison with Cloud Haskell and Erlang</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>This article has been rewritten the 19/08/2015</p><h2 id="motivation--yours-not-mine-"><a href="#motivation--yours-not-mine-">Motivation (yours not mine)</a></h2><p>The distributed framework that I´m developing is a completely different way to consider distributed computing in the same sense that Transient is a different way to program in Haskell or in any other language. It is so straightforward that is difficult to understand after decades of inversion of control, programming state machines, objects frameworks, routes, configurations and callbacks. If you dare to think different you will benefit from this higher level way of programming that I'm convinced that is the future.</p><p>It is the future because it is functionality oriented, not object oriented. A software functionality is a business process, that naturally compose with other business processes. A process is like physiology, while OOP is like anatomy. Functional programming is about composability, whether efectful or not. Transient is deeply functional and can express business functionalities in compact category theoretical expressions that compose. Have you seen two distributed programs that can be composed to create a wider one?</p><p>The main obstacle for such composability is events and blocking. events are asynchronous and need callbacks. Alternatively the process may avoid callback spagettization if the thread blocks and wait for events. That is what the synchronous IO call does.</p><p>And this is what Erlang does. but that impairs composability, since to handle other events it is necessary to spawn another thread. Both threads would need to communicate and so on. That is why an Erlang program is made of many small independent distributed elements. But then synchronizations and extra communications and monitorizations are necessary. That accidental complexity complicate the development and the code is again difficult to understand.</p><p>A third solution is to use continuations. But continuations are either hard to master or have a akward syntax or are hard to impossible to serialize in order to save state or to transport them. In particular, haskell has no support for the serialization of continuations. That is the reason why continuation frameworks have been not accepted neither in haskell neither in other languages, except perhaps in the lisp family where these problems are less critical. A remaining problem not solved by continuations is the composition of parallel programs.</p><p>Transient <i>does</i> compose arbitrary pieces of software in concurrent parallel and sequential arangements not by communicating them trough channels neither by means of special constructions or configurations, but by means of standard Haskell combinators. Therefore these compositions are checked at compilation time, even if the elements will run in different machines.</p><h1 id="a-sad-story"><a href="#a-sad-story">A sad story</a></h1><p>Two years ago I created <a href="http://mflowdemo.herokuapp.com">MFlow</a>, the only web framework that uses <a href="https://themonadreader.files.wordpress.com/2014/04/mflow.pdf">Haskell category theoretical abstractions</a> for the creation of the high level elements of web applications such are routes and navigations among other things. For the first time navigation elements are composable. For example:</p><pre><code>   login &gt;&gt; navigateCatalog &gt;&gt;= shoppingCartManagement &gt;&gt;= payment</code></pre><p>This is an application, assembled with four navigations. Back button  and arbitrary URLs entered works fine. It has not the problems associated with continuations because it does not use continuations as such.</p><p>Besides having more features than the widely used frameworks and more innovative ones, apart from the above mentioned, MFlow has not been sucessful. What was the cause? My careless and clumsy English? My lack of attention to details? Lack of social skills? For sure.</p><p>But there are other reasons why this framework or other early continuation frameworks like WASH has not gained support; For example, the haskellers that program web apps comes from other languages and find that strange.</p><p>But there is also a fear of novelty, a reluctance to think different and a fear to do things in a different way than what is academically or industrially established.</p><p>There is also a tendency to wait and see. &quot;mmm is interesting... let's look what happens... this guy does interesting things but nobody knows him... I will not shoot myself in the foot. I will not risk my investments; The more traditional path is more sure&quot;.</p><p>And finally, there's tradition of inversion of control that is a second nature in the programming community since the invention of OOP and the mouse. The invention of the mouse, and then a second source of input, ended the golden age of imperfect but effective composability with the console apps and the unix pipes. Simply, the unix pipes model, that composed single streams was not valid because a second stream of events was added. The solution was the state machine, divided in small pieces each one called classes and objects. That was OOP. But objects are not composable.</p><p>Later on, I created <a href="http://tryplayg.herokuapp.com">hplayground</a>, a client side framework with the same characteristics of composability. For this purpose I created the Transient monad. Transient is <a href="https://www.fpcomplete.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">a new way of using continuations and a new way of looking at the Monad instance, as a manipulation of continuations</a>. Again, a different way to think about both concepts. The whole history is narrated in the series of articles in FPComplete.</p><p>The history repeated with hplayground sadly, since again, it is the only fully composable FRP, 100% category theoretical standard haskell for programming the shortest and cleanest code ever seen in a Web Browser.</p><p>But I don't care because <b>this is THE future</b>. I did not invented it. It was there and there is no better way. Perhaps someone will reinvent it in Java 14 or in  Scala 10 and composable de-inverted programming gain acceptance. I will see it from Heaven.</p><h1 id="composable-distributed-computing"><a href="#composable-distributed-computing">Composable distributed computing</a></h1><p>Having the possibility to express multithreaded programs that deal with IO in a composable way, I was persuaded that a composable form of distributed computing was possible using the non-blocking calls of transient. Composable in this context means that a distributed computing functionality can be invoked within a monadic, monoidal, applicative or alternative expression to create a wider application that are composable too.</p><p>In mathematical terms, composability means that there is a form of algebra for combining the elements of the domain problem. In this case, it is the abstract algebra that include monads, applicatives, alternatives and monoids. Composable programming is like teaching the computer to do maths without greek letters. In the same way that we combine numbers in complicated algebraic expressions -every  programming language know how to do that algebra- we can teach computers to create expressions that include concurrent, parallel, sequential and distributed computations. And we can combine these expressions to create even more complex expressions.</p><p>For example, a map-reduce operation that may involve many nodes can be inserted in a monadic expression to access data that later will feed a  browser application. All this programmed in a single expression of beautiful haskell code with standard combinators.</p><p>And it is possible as you may verify below. Not only because map-reduce is now doable that way, but because in the future I will integrate MFlow and hplayground, the web frameworks, with Transient.</p><h1 id="the-plan"><a href="#the-plan">The plan</a></h1><p>I plan to develop various levels of distributed computing, all of them composable:</p><ul><li><p>Level 1: basic calls for node-to-node communication: <code>beamTo</code>, <code>forkTo</code>, <code>callTo</code>, <code>beamInit</code>, <code>listen</code></p></li><li><p>Level 2: clusted oriented computing: process execution replicated in al connected nodes:  <code>clustered</code>, <code>asynchronize</code>, <code>connect</code></p></li><li><p>level 3: location independent communications: processes are connected without mention of the hosts and ports. Process location static and stablished at configuration time.</p></li><li><p>level 4: location independent, processes movable from node to node depending on run-time conditions according with programmer defined strategies. (A cloud monad)</p></li></ul><p>At this moment I have developed the two first levels</p><p>The repository is at:</p><p><a href="https://github.com/agocorona/transient">https://github.com/agocorona/transient</a></p><h2 id="level-1--basic-calls-for-node-node-commmunication"><a href="#level-1--basic-calls-for-node-node-commmunication">Level 1: basic calls for node-node commmunication</a></h2><p>I defined three  primitives, the level 1 of the distributed framework, but at the level in which they are defined are quite powerful:</p><pre><code class="haskell">beamTo :: HostName -&gt; PortID -&gt; TransientIO ()
+forkTo :: HostName -&gt; PortID -&gt; TransientIO ()
+callTo :: HostName -&gt; PortID -&gt; TransientIO a -&gt; TransientIO a
+</code></pre><p>The second action execute a copy of the running process in the other node with the same execution state.</p><p>The first continue the execution of the monadic sequence in other node, but &quot;destroy the original&quot;. That means that the running process continues in the other node.</p><p>The first two send the process and forget about it. The third call a procedure in the other node, and  receive the result.</p><p>There are other auxiliary primitives that I will detail.</p><p><code>beamTo</code> can be used for that kind of sequential process that may need to do different things in different nodes. and perhaps may return with the results. Web applications can start in the data tier, continue in the server and migrate to the browser for a long interaction, then can return to the server and so on.</p><p><code>forkTo</code> may be used for example, to  configure a node interactively and then clone that configuration and execution state in many nodes.</p><h1 id="map-reduce"><a href="#map-reduce">Map-reduce</a></h1><p><code>callTo</code> may be used for fast roundtrip calls and also to start subtasks in other nodes. Combined with the monoid instance of Transient, it can be used to create  mapreduce calls which spawn worker task to other nodes:</p><pre><code class="haskell">rs &lt;- foldl (&lt;&gt;) mempty $ map (\(h,p) -&gt; callTo h p worker) nodes</code></pre><p>The three primitives can be combined for complex scenarios.</p><p>NOTE: the reduce operation in this case is a fold in the receiving node. For largue volumes of data this is not realistic. The reduction should be also distributed. That is something that [I did here] (https://www.fpcomplete.com/user/agocorona/estimation-of-using-distributed-computing-streaming-transient-effects-vi-1#distributed-datasets)</p><h1 id="forwarding-events-across-the-network"><a href="#forwarding-events-across-the-network">forwarding events across the network</a></h1><p><code>callTo</code> is not a simple remote call by various reasons. Not only it works in de-inverted mode, it means that it does not set any callback. Instead, the result return to the routine that called it. That permit much more understandable code.</p><p>But that is not done sacrificing composability since it is also non blocking when used with applicative, alternative and monoidal expressions, since the rest of the expression does not depend on the result of <code>callTo</code> to continue. The map-reduce snippet would not work in parallel if not for this property.</p><p>But there is more. Since <code>callTo</code> uses the Transient monad, that is inherently non deterministic and multithreaded. the local node uses <code>parallel</code> to receive successive responses, each one in a different thread. This avoid buffer overruns and contentions. An example, running below, is as follows:</p><pre><code class="haskell">networkEvents rh rp= do
+     r &lt;- callTo rh rp $ do
+                         option &quot;fire&quot;  &quot;fire event&quot;
+                         return &quot;event fired&quot;
+     putStrLnhp  rp $ r ++ &quot; in remote node&quot;
+
+putStrLnhp p msg= liftIO $ putStr (show p) &gt;&gt; putStr &quot; -&gt;&quot; &gt;&gt; putStrLn msg</code></pre><p><code>option</code>is executed in the remote node, when the user write &quot;fire&quot; the remote node return the message to the caller node and another message appears in the local node.</p><p>since <code>option</code> produces an event for each &quot;fire&quot; entered, callTo works here as an event pipeline between the two nodes.</p><p>As an example, a single <code>callTo</code> can be used to interact with a client side widget or it can retrieve chunks from a query to a large database.</p><h2 id="level-2"><a href="#level-2">Level 2</a></h2><p>The higher level cloud primitives that I am developping now are:</p><p><code>connect</code> will connect a new node to a network of nodes in a Wide Area Network. It will connect to one of the nodes and all the rest will receive notifications about it.</p><pre><code class="haskell">connect :: Node -&gt; TransientIO ()</code></pre><p><code>clustered</code> will execute a computation in all the connected nodes, like for example, to update/query a distributed database. This will not return until all computations succeed. It gets the return values and <code>mconcat</code> them.</p><pre><code class="haskell">clustered :: Monoid a =&gt; TransientIO a -&gt; TransientIO a</code></pre><p>it is the map-reduce snippet of the second paragraph, but applied to all the connected nodes. Later on, a system of capabilities will filter the nodes, so that the nodes will specialize in some calls. For example, some nodes may store data and other can process the data and respond to user requests.</p><p><code>asynchronize</code> Will do the same that clustered, but asynchronously. The primitive will schedule the remote execution, but it will return immediately.</p><pre><code class="haskell">asynchronize :: TransientIO () -&gt; TransientIO ()</code></pre><p><code>connect</code> can be expressed in terms of clustered:</p><pre><code class="haskell">connect (host,port) = do
+     nodes &lt;- callTo host port $ clustered $ do
+                           updateNodeList 
+                           myNode &lt;- getMyNode
+                           return [myNode]
+     setNodes nodes</code></pre><p>Since one of the nodes in the list is the local one, reentrant invocation of <code>callTo</code> is necessary</p><p>That's all for the moment.</p><h3 id="distributed-chat-application-in-four-lines"><a href="#distributed-chat-application-in-four-lines">distributed Chat application in four lines</a></h3><p>Wow. Perhaps this may be too mind blowing. So much that may be anticlimactic, but this snippet is a distributed chat application. If  <code>nodes</code> contain all the connected chat programs:</p><pre><code class="haskell">chat :: [(HostName, PortID)] -&gt; Transient StateIO ()
+chat nodes = do 
+    name  &lt;- step $ do liftIO $ putStrLn &quot;Name?&quot; ; input (const True)
+    text  &lt;- step $ waitEvents  $ putStr &quot;&gt;&quot; &gt;&gt;hFlush stdout &gt;&gt; getLine' (const True)
+    let line= name ++&quot;: &quot;++ text 
+    foldl (&lt;&gt;) mempty $ map (\(h,n) -&gt; callTo h  n  . liftIO $ putStrLn line) nodes </code></pre><p>This is part of the executable examples below.</p><p><code>input</code> is a non-blocking execute-once version of getLine. It has a parameter that is the validator.
+<code>getLine'</code> is a non-blocking version of <code>getLine</code> .<br /><code>waitEvents</code> is another Transient primitive that executes the continuation for each input. So it will execute the last line for each line entered with the keyboard.</p><p>The last line uses the Monoid instance of Transient to execute <code>callTo</code> in parallel for all the nodes.</p><p>This would also do it:</p><pre><code class="haskell">mapM_ (\(h,n) -&gt; callTo h  n  . liftIO $ putStrLn line) nodes</code></pre><p>But this last one does not do it in parallel, but sequentially.</p><h1 id="how-it-works"><a href="#how-it-works">How it works</a></h1><p>This may  be a case of the <a href="https://en.wikipedia.org/wiki/Egg_of_Columbus">egg of Columbus</a> . The migration of the program is done through logging and replaying. The first who used replaying to transport thread execution trough the network - that I may know - is Jeff Epstein using Cloud Haskell and my <a href="http://hackage.haskell.org/Workflow">Workflow</a> library. The workflow library log the intermediate results of a monadic sequence. Using the log it is possible to recover the execution state. After replaying the log, the program will be executing a closure identical to the one that was when it was interrupted.</p><p>Migration of continuations or strong mobility of the kind of <code>beamTo</code> was done at an early time in Haskell by <a href="http://www.dcs.gla.ac.uk/~trinder/papers/strongm.pdf">Dubois et al</a>. It is a shame that this project was not continued. Probably one of the reasons of the abandonment is related with something that is mentioned in the paper in the point 3; Moving the execution state includes everything, upto registers, stack and memory. This happens also for every language that compiles to machine code. The binary serialization of state may be huge and this cause many problems. Moreover, the source and destination architecture, and the binary program must be identical. Static closures or to be more mundane, pointers to static functions, defined at compilation time can be transmitted to invoke foreign code provided that both source and destination are two identical binary executables. That is the mechanism used in Cloud Haskell.</p><p>logging and replaying is lighter than execution state serialization and deserialization. It is also architecture independent and the effect is the same. The replaying of the log reconstruct the execution state. That includes the values of all the local variables. If the log is transferred, the state can be recovered in another node, even if it has different architecture.</p><p>It is important to understand the freedom that this mechanism gives. For example <code>callTo</code> is not a RPC call, as is the case in cloud haskell. The remotely executed routine has access to all the local variables (that have been logged) of the caller, so I can do this:</p><pre><code class="haskell">do 
+    name &lt;- step input
+    callTo host  node  $ writeIORef refname name
+    callTo host' node' $ writeIORef refname name
+    ...</code></pre><p>This example writes the value of <code>name</code> in the variables of each remote node and resume the execution of the calling action.</p><p>The above code is executed sequentially. To do it in parallel for all the nodes:</p><pre><code class="haskell">do 
+    name &lt;- step input
+    (,) &lt;$&gt; callTo host node (writeIORef refname name) &lt;*&gt; callTo host' node' (writeIORef refname name) </code></pre><p>or more generally, using the monoid instance of Transient:</p><pre><code class="haskell">do 
+    name &lt;- step input
+    fold (&lt;&gt;) mempty $ map (\(h,n) -&gt; callTo h  n  . writeIORef $ refname name) nodes</code></pre><p><code>step</code> is the primitive that update the log and replay it.  It must appear explicitly in all the previous monadic statements before the moving primitives. In this toy implementation step is not enforced, so if a monadic statement has no step, it will be executed in the receiving node. That may be intended, in order to access remote variables for example.</p><h2 id="logging"><a href="#logging">Logging</a></h2><p>Logging as an effect in the Transient monad. It is implemented now in the <code>Transient.Logged</code> module. Currently it is only used for remote execution, but it will be used for other purposes. It has sophisticated optimizations: for example when a long action return a value, it is possible to erase his log and replace it with the value returned, so the log/replay mechanism must not  store and execute each and every intermediate result but only the top level ones. But if a failure happens deeper inside this action, then the detail log of this particular action will be saved.</p><h1 id="implementation-details"><a href="#implementation-details">Implementation details</a></h1><p>I did it using the Transient monad. It permits a much cleaner code, since it does manage state, events and threading implicitly, without breaking the specification in separate actions.</p><p>The user program executes in two ways: directly at the main procedure and when a request arrive. This is in the first line of this Transient expression.</p><pre><code class="haskell">beamInit port program=   do
+    listen port  &lt;|&gt; return ()
+    (program &gt;&gt; empty)  &lt;|&gt; close
+    where
+    close= do
+       (h,sock) &lt;- getSData
+       liftIO $ hClose h  `catch` (\(e::SomeException) -&gt; sClose sock)</code></pre><p><code>beamInit</code> initialize the user program in these two modes.</p><p>in the first line, <code>listen</code> generates a thread and continues the execution when a request arrives. the second operand, return() just executes the continuation in &quot;normal&quot; mode, not when a request arrive. This means that in this mode <code>program</code> will be executed without a log, so the statements of the programs will be executed and logged. In the other side, when <code>listen</code> receive a log, the <code>program</code> is replayed from the log.</p><p>The next sentence is the user program. At the end, if the thread was initiated by listen, the handle is closed.  If there is no such data, <code>getSData</code> will stop the execution.</p><p>To see the execution model of Transient, see the previous articles of transient in my FPcomplete space. A Transient process can be stopped in a thread and be continued in another thread when an event arrives.</p><p><code>listen</code> is defined as:</p><pre><code class="haskell">listen :: PortID -&gt; TrasientIO ()
+listen  port = do
+       sock &lt;- liftIO $ listenOn  port
+       (h,_,_) &lt;- spawn $ accept sock
+       liftIO $ hSetBuffering h LineBuffering
+       slog &lt;- liftIO $ hGetLine  h
+       setSData (h,sock)
+       setSData $ Log True $ read slog</code></pre><p><code>spawn</code> is the Transient primitive that launch a thread for each <code>accept</code>ed message. the process continues within this new thread. The message has an execution log, that is stored in the session state. The (handler,socket) is also stored.</p><p>More info about the mechanism of logging and recovery below.</p><p>This is <code>beamTo</code>:</p><pre><code class="haskell">beamTo :: HostName -&gt; PortID -&gt; TransientIO ()
+beamTo node port= do
+      Log rec log &lt;- getSData &lt;|&gt; return (Log False [])
+      if rec then return () else do
+          h &lt;- liftIO $ connectTo node port
+          liftIO $ do
+             hSetBuffering h LineBuffering
+             hPutStrLn h (show $ reverse log)  &gt;&gt; hFlush h
+             hClose h
+          delSData h
+          stop</code></pre><p>The other two moving primitives are similar.</p><p><code>beamTo</code> get the log, if it is running in normal mode (that means not in recovery mode) it just send the log to the receiving node. Then it closes the handler and remove the handler from the session state. Then it finish.</p><h1 id="supervision"><a href="#supervision">Supervision</a></h1><p>all the network processes are initiated by <code>listen</code> responding to received messages. <code>listen</code> and all the running processes will be killed if the parent thread or any of their ancestors call a kill childs primitive or if they die.</p><p>Typically as the name indicates, the Transient processes, including the distributed ones are short lived. Since there is no inversion of control, the processes and the communications are created and destroyed for the needs of the main monadic process while it advance in the execution.</p><p>For example, the map-reduce snippet does not need some special receiving dispatcher processes waiting permanently in the remote node. The only watching process is the one of <code>listen</code> which can schedule many different calls downstream. Once finished the work, the process dies.</p><p>There is no need of monitoring for long living processes although it is necessary the detection of failed communications in order to reschedule them.</p><h1 id="the-example-program--how-to-run-it"><a href="#the-example-program--how-to-run-it">The example program, how to run it</a></h1><p>The program has two options: one uses <code>callTo</code> to read an IORef in the other program. The other uses <code>beamTo</code> to input a string locally and then moves to the other node where it print a message and update the IORef. The other two are the ones mentioned above.</p><p>In this example the other node is not only in the same machine, but in the same executable. In the example <code>listen</code> is invoked and later some distribute primitives are invoked against the <code>listen</code> port. A single machine is not the rigth environment for testing distributed computing but this is all I can do with here in the School of Haskell. I´m very grateful to you, FP guys. You are doing a great job and a big service to the Haskell community.</p><p>By executing the options in this order   call -&gt; move -&gt; call, you can see how the interaction among nodes takes place. This demo was intended for two different processes instead of one, but the FPcomplete environment does not permit it.</p><p>As always, the distributed examples have been mixed with the previous ones that demonstrate other effects of the transient monad. This show the wonderful composability of this way of programming.</p><p>simply press &quot;distr&quot; and choose one of the examples.</p><p>You can also intentionally provoke some errors to see how the absence of monad transformers simplify the task of solving bugs.</p><pre><code class="active haskell">
+{-# START_FILE Main.hs #-}
+
+{-# LANGUAGE ScopedTypeVariables #-}
+
+{-# LANGUAGE DeriveDataTypeable  #-}
+
+module Main where
+
+import           Data.Typeable
+import           Base
+import           Backtrack
+import           Indeterminism
+import           Logged
+import           Move
+import           Vars
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Exception
+import           Control.Monad.State
+import           Data.Monoid
+import           System.IO.Unsafe
+import           System.Directory
+import           System.FilePath
+import           Network.HTTP
+import           Network
+import           System.IO
+import           Data.IORef
+
+import Data.List hiding (find,map, group)
+
+-- show
+main= keep $ do
+      oneThread $ option &quot;main&quot; &quot;to kill previous spawned processes and return to the main menu&quot;   &lt;|&gt; return &quot;&quot;
+      liftIO $ putStrLn &quot;MAIN MENU&quot;
+
+      nonDeterminsm &lt;|&gt; trans &lt;|&gt;
+             colors &lt;|&gt; app   &lt;|&gt;
+            futures &lt;|&gt; server &lt;|&gt; 
+            distributed &lt;|&gt; pubSub
+
+-- /show
+
+solveConstraint=  do
+      x &lt;- choose  [1,2,3]
+      y &lt;- choose  [4,5,6]
+
+      guard $ x * y == 8
+
+      return (x,y)
+
+pythags = freeThreads $ do
+  x &lt;- choose [1..50]
+  y &lt;- choose ([1..x] :: [Int])
+  z &lt;- choose [1..round $ sqrt(fromIntegral $ 2*x*x)]
+
+  guard (x*x+y*y==z*z)
+  th &lt;- liftIO $  myThreadId
+  return (x, y, z, th)
+
+example1= do
+    option &quot;ex1&quot; &quot;example 1&quot;
+    r &lt;- threads 4 solveConstraint
+    liftIO $ print r
+
+example2= do
+    option &quot;pyt&quot; &quot;pythagoras&quot;
+    r&lt;- threads 2 pythags
+    liftIO $ print r
+
+collectSample= threads 4 $ do
+    option &quot;coll&quot; &quot;group sample: return results in a list&quot;
+    r &lt;- collect 0 $ do
+      x &lt;- choose  [1,2,3]
+      y &lt;- choose  [4,5,6]
+      th &lt;- liftIO $ threadDelay 1000 &gt;&gt; myThreadId
+
+      return (x,y,th)
+
+    liftIO $ print r
+
+threadSample= do
+     option &quot;th&quot; &quot;threads sample&quot;
+     liftIO $ print &quot;number of threads? (&lt; 10)&quot;
+
+     n &lt;- input  ( &lt; 10)
+
+     threads n $ do
+        x &lt;- choose  [1,2,3]
+        y &lt;- choose  [4,5,6]
+        th &lt;- liftIO $ myThreadId
+        liftIO $ print (x,y,th)
+
+nonDeterminsm= do
+      option &quot;nondet&quot; &quot;Non determinism examples&quot;
+      example1 &lt;|&gt; example2
+               &lt;|&gt; collectSample
+               &lt;|&gt; threadSample
+               &lt;|&gt; fileSearch
+
+
+
+find' :: String -&gt; FilePath -&gt; TransientIO FilePath
+find' s d = do
+  fs &lt;- liftIO $ getDirectoryContents d
+       `catch` \(e:: SomeException) -&gt; return []       -- 1
+  let fs' = sort $ filter (`notElem` [&quot;.&quot;,&quot;..&quot;]) fs    -- 2
+  if any (== s) fs'                                    -- 3
+     then do
+       liftIO $ print $ d &lt;/&gt; s
+       return $ d&lt;/&gt; s
+     else do
+       f &lt;- choose fs'                                 -- 4
+       let d' = d &lt;/&gt; f                                -- 6
+       isdir &lt;- liftIO $ doesDirectoryExist d'         -- 7
+       if isdir then find' s d'                        -- 8
+                else stop
+
+
+------------------
+
+fileSearch=   do
+    option &quot;file&quot; &quot;example of file search&quot;
+    r&lt;- threads 3 $ collect 10 $ find' &quot;Main.hs&quot;  &quot;.&quot;
+    liftIO $ putStrLn $ &quot;SOLUTION= &quot;++ show  r
+--    exit
+
+
+
+
+
+
+
+trans= do
+       option &quot;trans&quot; &quot;transaction examples with backtracking for undoing actions&quot;
+       transaction &lt;|&gt; transaction2
+
+transaction=   do
+       option &quot;back&quot; &quot;backtracking test&quot;
+       productNavigation
+       reserve
+       payment
+
+transaction2= do
+       option &quot;back2&quot; &quot;backtracking test 2&quot;
+       productNavigation
+       reserveAndSendMsg
+       payment
+
+
+       liftIO $ print &quot;done!&quot;
+
+
+productNavigation = liftIO $ putStrLn &quot;product navigation&quot;
+
+reserve= liftIO (putStrLn &quot;product reserved,added to cart&quot;)
+                 `onUndo` liftIO (putStrLn &quot;product un-reserved&quot;)
+
+payment = do
+           liftIO $ putStrLn &quot;Payment failed&quot;
+           undo
+
+reserveAndSendMsg= do
+            reserve
+            liftIO  (putStrLn &quot;update other database necesary for the reservation&quot;)
+                 `onUndo` liftIO (putStrLn &quot;database update undone&quot;)
+
+
+
+colors :: TransientIO ()
+colors= do
+       option &quot;colors&quot; &quot;choose between three colors&quot;
+       r &lt;-  color 1  &quot;red&quot;  &lt;|&gt; color 2 &quot;green&quot; &lt;|&gt; color 3 &quot;blue&quot;
+       liftIO $ print r
+       where
+       color :: Int -&gt; String -&gt; TransientIO String
+       color n str= do
+         option (show n) str
+         liftIO . print $ str ++ &quot; color&quot;
+         return  str
+
+app :: TransientIO ()
+app= do
+       option &quot;app&quot; &quot;applicative expression that return a counter in 2-tuples every second&quot;
+       liftIO $ putStrLn &quot;to stop the sequence, write main(enter)&quot;
+       counter &lt;- liftIO $ newMVar 0
+
+       r &lt;-  (,) &lt;$&gt;  number  counter 1 &lt;*&gt; number counter 1
+
+
+       liftIO $ putStrLn $ &quot;result=&quot; ++ show r
+       where
+       number counter n= waitEvents $ do
+          threadDelay $ n * 1000000
+          n &lt;- takeMVar counter
+          putMVar counter (n+1)
+          return n
+
+futures= do
+       option &quot;async&quot; &quot;for parallelization of IO actions with applicative and monoidal combinators&quot;
+       sum1 &lt;|&gt; sum2
+
+sum1 :: TransientIO ()
+sum1= do
+       option &quot;sum1&quot; &quot;access to two web pages concurrently and sum the number of words using Applicative&quot;
+       liftIO $ print &quot; downloading data...&quot;
+       (r,r') &lt;- (,) &lt;$&gt; async  (worker &quot;http://www.haskell.org/&quot;)
+                     &lt;*&gt; async  (worker &quot;http://www.google.com/&quot;)
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show  (r + r')
+
+getURL= simpleHTTP . getRequest
+
+worker :: String -&gt; IO Int
+worker url=do
+      r &lt;- getURL url
+      body &lt;- getResponseBody r
+      putStrLn $ &quot;number of words in &quot; ++ url ++&quot; is: &quot; ++ show(length (words body))
+      return . length . words $ body
+
+sum2 :: TransientIO ()
+sum2= do
+      option &quot;sum2&quot; &quot;access to N web pages concurrenty and sum the number of words using map-fold&quot;
+      liftIO $ print &quot; downloading data...&quot;
+      rs &lt;- foldl (&lt;&gt;) (return 0) $ map (async . worker)
+                  [ &quot;http://www.haskell.org/&quot;
+                  , &quot;http://www.google.com/&quot;]
+
+      liftIO $ putStrLn $ &quot;result=&quot;  ++ show rs
+
+instance Monoid Int where
+      mappend= (+)
+      mempty= 0
+
+server :: TransientIO ()
+server=  do
+       option &quot;server&quot; &quot;A web server in the port 8080&quot;
+       liftIO $ print &quot;Server Stated&quot;
+       sock &lt;-  liftIO $  listenOn $ PortNumber 8080
+
+       (h,_,_) &lt;- spawn $ accept sock `catch` (\(e::SomeException) -&gt; sClose sock &gt;&gt; throw e)
+       liftIO $ do
+           hPutStr h msg
+           putStrLn &quot;new request&quot;
+           hFlush h
+           hClose h
+         `catch` (\(e::SomeException) -&gt; sClose sock)
+
+msg = &quot;HTTP/1.0 200 OK\r\nContent-Length: 5\r\n\r\nPong!\r\n&quot;
+
+
+-- show
+
+-- distributed computing
+
+distributed= do
+      option &quot;distr&quot; &quot;examples of distributed computing&quot;
+      let port1 = PortNumber 2000
+
+
+      addNodes [(host,port1)]
+      listen port1 &lt;|&gt; return ()-- conn port1 port1 &lt;|&gt; conn port2 port1
+
+      examples' host port1
+      where
+      host= &quot;localhost&quot;
+      conn p p'=  connect host p host p'
+
+examples' remoteHost remotePort= do
+   logged $ option &quot;maind&quot;  &quot;to see this menu&quot; &lt;|&gt; return &quot;&quot;
+   r &lt;-logged    $ option &quot;move&quot; &quot;move to another node&quot;
+               &lt;|&gt; option &quot;call&quot; &quot;call a function in another node&quot;
+               &lt;|&gt; option &quot;chat&quot; &quot;chat&quot;
+               &lt;|&gt; option &quot;netev&quot; &quot;events propagating trough the network&quot;
+   case r of
+       &quot;call&quot;  -&gt; callExample remoteHost remotePort
+       &quot;move&quot;  -&gt; moveExample remoteHost remotePort
+       &quot;chat&quot;  -&gt; chat
+       &quot;netev&quot; -&gt; networkEvents remoteHost remotePort
+
+
+callExample host port= do
+   logged $ putStrLnhp  port &quot;asking for the remote data&quot;
+   s &lt;- callTo host port $ liftIO $ do
+                       putStrLnhp  port &quot;remote callTo request&quot;
+                       readIORef environ
+
+
+   liftIO $ putStrLn $ &quot;resp=&quot; ++ show s
+
+
+environ= unsafePerformIO $ newIORef &quot;Not Changed&quot;
+
+moveExample host port= do
+   logged $ putStrLnhp  port &quot;enter a string. It will be inserted in the other node by a migrating program&quot;
+   name &lt;- logged $ input (const True)
+   beamTo host port
+   putStrLnhp  port &quot;moved!&quot;
+   putStrLnhp  port $ &quot;inserting &quot;++ name ++&quot; as new data in this node&quot;
+   liftIO $ writeIORef environ name
+   return()
+
+
+chat ::  TransIO ()
+chat  = do
+    name  &lt;- logged $ do liftIO $ putStrLn &quot;Name?&quot; ; input (const True)
+    text &lt;- logged $  waitEvents  $ putStr &quot;&gt;&quot; &gt;&gt; hFlush stdout &gt;&gt; getLine' (const True)
+    let line= name ++&quot;: &quot;++ text
+    clustered $   liftIO $ putStrLn line
+
+
+networkEvents rh rp= do
+     logged $  do
+       putStrLnhp  rp &quot;callTo is not  a simole remote call. it stablish a connection&quot;
+       putStrLnhp  rp &quot;between transient processes in different nodes&quot;
+       putStrLnhp  rp &quot;in this example, events are piped back from a remote node to the local node&quot;
+
+     r &lt;- callTo rh rp $ do
+                         option &quot;fire&quot;  &quot;fire event&quot;
+                         return &quot;event fired&quot;
+     putStrLnhp  rp $ r ++ &quot; in remote node&quot;
+
+putStrLnhp p msg= liftIO $ putStr (show p) &gt;&gt; putStr &quot; -&gt;&quot; &gt;&gt; putStrLn msg
+
+-- /show
+
+pubSub=  do
+  option &quot;pubs&quot; &quot;an example of publish-suscribe using Event Vars (EVars)&quot;
+  v &lt;- newEVar  :: TransIO (EVar String)
+  suscribe v &lt;|&gt; publish v
+  where  
+  publish v= do
+    liftIO $ putStrLn &quot;Enter a message to publish&quot;
+    msg &lt;- input(const True)
+    writeEVar v msg
+    liftIO $ print &quot;after writing the EVar&quot;
+
+  suscribe :: EVar String -&gt; TransIO ()
+  suscribe v= proc1 v  &lt;|&gt;  (proc2 v)
+   
+
+  proc1 v=  do
+    msg &lt;- readEVar v 
+    liftIO $ putStrLn $  &quot;proc1 readed var: &quot; ++ show msg
+    
+  proc2 v= do
+    msg &lt;- readEVar v 
+    liftIO $ putStrLn $ &quot;proc2 readed var: &quot; ++ show msg
+
+{-# START_FILE Base.hs #-}
+-- show
+-- /show
+{-# LANGUAGE ScopedTypeVariables #-}
+-----------------------------------------------------------------------------
+--
+-- Module      :  Base
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE FlexibleContexts          #-}
+{-# LANGUAGE FlexibleInstances         #-}
+{-# LANGUAGE MultiParamTypeClasses     #-}
+{-# LANGUAGE DeriveDataTypeable        #-}
+
+module Base  where
+
+
+import           Control.Applicative
+import           Control.Monad.State
+import           Data.Dynamic
+import qualified Data.Map               as M
+import           Data.Monoid
+import           Debug.Trace
+import           System.IO.Unsafe
+import           Unsafe.Coerce
+import           Control.Exception
+import           Control.Concurrent
+import           Control.Concurrent.STM
+import           System.Mem.StableName
+import           Data.Maybe
+import           GHC.Conc
+import           Data.List
+import           Data.IORef
+
+
+{-# INLINE (!&gt;) #-}
+(!&gt;) = const. id --  flip trace
+infixr 0 !&gt;
+
+data TransIO  x = Transient  {runTrans :: StateT EventF IO (Maybe x)}
+type SData= ()
+
+type EventId= Int
+
+type TransientIO= TransIO
+
+data EventF  = forall a b . EventF{xcomp       :: TransientIO a
+                                  ,fcomp       :: [b -&gt; TransientIO b]
+                                  ,mfData      :: M.Map TypeRep SData
+                                  ,mfSequence  :: Int
+                                  ,threadId    :: ThreadId
+                                  ,freeTh      :: Bool
+                                  ,parent      :: Maybe EventF
+                                  ,children    :: TVar[EventF]
+                                  ,maxThread   :: Maybe (P Int)
+                                  }
+                                  deriving Typeable
+
+type P= IORef
+newp= newIORef
+
+
+--(=:) :: P a  -&gt; (a -&gt; a) -&gt; IO()
+(=:) n f= liftIO $ atomicModifyIORef' n $  \v -&gt;  ((f v),())
+
+addr x= show $ unsafePerformIO $ do
+       st &lt;- makeStableName $! x
+       return $ hashStableName st
+
+
+
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+type StateIO= StateT EventF  IO
+
+--type TransientIO= Transient StateIO
+
+--runTrans ::  TransientIO x -&gt; StateT EventF  IO (Maybe x)
+--runTrans (Transient mx) = mx
+
+
+runTransient :: TransientIO x -&gt; IO (Maybe x, EventF)
+runTransient t= do
+
+  th &lt;- myThreadId
+  let eventf0=  EventF  empty [] M.empty 0
+          th False  Nothing  (unsafePerformIO $ newTVarIO []) Nothing
+
+
+  runStateT (runTrans t) eventf0{threadId=th} !&gt; &quot;MAIN=&quot;++show th
+
+
+
+
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF  x fs _ _  _ _  _ _ _)= runTrans ((unsafeCoerce x') &gt;&gt;= compose ( fs)) &gt;&gt; return ()
+    where
+    x'=  do
+--           modify $ \s -&gt; s{replay=True}
+           r&lt;- x
+--           modify $ \s -&gt; s{replay=False}
+           return r
+
+{-
+runCont cont= do
+     mr &lt;- runClosure cont
+     case mr of
+         Nothing -&gt; return Nothing
+         Just r -&gt; runContinuation cont r
+-}
+
+compose []= const empty
+compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs
+
+
+
+runClosure :: EventF -&gt; StateIO (Maybe a)
+runClosure (EventF x _ _ _ _ _ _ _ _) =  unsafeCoerce $ runTrans x
+
+runContinuation ::  EventF -&gt; a -&gt; StateIO (Maybe b)
+runContinuation (EventF _ fs _ _ _ _  _ _ _) x= runTrans $  (unsafeCoerce $ compose $  fs) x
+
+instance   Functor TransientIO where
+  fmap f mx=   -- Transient $ fmap (fmap f) $ runTrans mx
+    do
+     x &lt;- mx
+     return $ f x
+
+instance Applicative TransientIO where
+  pure a  = Transient . return $ Just a
+
+
+  f &lt;*&gt; g = Transient $ do
+
+         rf &lt;- liftIO $ newIORef Nothing
+         rg &lt;- liftIO $ newIORef Nothing   -- !&gt; &quot;NEWIOREF&quot;
+
+         cont@(EventF _ fs a b c d peers children g1) &lt;- get   -- !&gt; &quot;APLICATIVE DOIT&quot;
+
+         let
+             appg x = Transient $  do
+                   liftIO $ writeIORef rg $ Just x :: StateIO ()
+                   k &lt;- liftIO $ readIORef rf
+                   return $ k &lt;*&gt; Just x  -- !&gt; &quot;RETURNED: &quot; ++ show(isJust k)++ show(isJust x)
+
+
+             appf k = Transient $  do
+                   liftIO $ writeIORef rf  $ Just k :: StateIO ()
+                   x&lt;- liftIO $ readIORef rg
+                   return $ Just k &lt;*&gt; x  --  !&gt; &quot;RETURNED: &quot; ++ show(isJust k)++ show(isJust x)
+
+
+
+         put $ EventF f (unsafeCoerce appf:  fs)
+                                          a b c d peers children g1
+         k &lt;- runTrans f
+         was &lt;- getSessionData `onNothing` return NoRemote
+         if was== WasRemote
+           then  return Nothing
+           else do
+             liftIO $ writeIORef rf  k -- :: StateIO ()
+
+             mfdata &lt;- gets mfData
+             put $ EventF g (unsafeCoerce appg :  fs) mfdata b c d peers  children g1
+
+
+             x &lt;- runTrans g              !&gt; &quot;RUN g&quot;
+             liftIO $ writeIORef rg  x
+             return $ k &lt;*&gt; x
+
+
+data IDynamic= IDyns String | forall a.(Read a, Show a,Typeable a) =&gt; IDynamic a
+
+instance Show IDynamic where
+  show (IDynamic x)= show $ show x
+  show (IDyns s)= show s
+
+instance Read IDynamic where
+  readsPrec n str= map (\(x,s) -&gt; (IDyns x,s)) $ readsPrec n str
+
+
+type Recover= Bool
+type CurrentPointer= [LogElem]
+type LogEntries= [LogElem]
+data LogElem=  WaitRemote | Exec | Step IDynamic deriving (Read,Show)
+data Log= Log Recover  CurrentPointer LogEntries deriving Typeable
+
+
+instance  Alternative TransientIO where
+  empty = Transient $ return  Nothing
+  (&lt;|&gt;) = mplus
+
+--  Transient f &lt;|&gt; Transient g= Transient $ do
+--         k &lt;-   f
+--         x &lt;-   g
+--         return $ k &lt;|&gt; x
+
+data RemoteStatus=  WasRemote | NoRemote deriving (Typeable, Eq)
+
+instance MonadPlus TransientIO where
+    mzero= empty
+    mplus  x y=  Transient $ do
+         mx &lt;- runTrans x    -- !&gt; &quot;RUNTRANS11111&quot;
+         was &lt;- getSessionData `onNothing` return NoRemote
+         if was== WasRemote
+           then return Nothing
+           else case mx of
+             Nothing -&gt; runTrans y   --  !&gt; &quot;RUNTRANS22222&quot;
+             justx -&gt; return justx
+
+-- | a sinonym of empty that can be used in a monadic expression. it stop the
+-- computation
+stop :: TransientIO a
+stop= Control.Applicative.empty
+
+instance Monoid a =&gt; Monoid (TransientIO a) where
+  mappend x y = mappend &lt;$&gt; x &lt;*&gt; y
+  mempty= return mempty
+
+-- | set the current closure and continuation for the current statement
+setEventCont ::   TransientIO a -&gt; (a -&gt; TransientIO b) -&gt; StateIO ()
+setEventCont x f  = do
+   st@(EventF   _ fs d n  r applic  ch rc bs)  &lt;- get
+   put $ EventF x ( unsafeCoerce f : fs) d n  r applic  ch rc bs
+
+
+-- | reset the closure and continuation. remove inner binds than the prevous computations may have stacked
+-- in the list of continuations.
+resetEventCont :: Maybe a -&gt; StateIO ()
+resetEventCont mx =do
+   st@(EventF _ fs d n  r nr  ch rc bs)  &lt;- get
+
+   let f= \mx -&gt;  case mx of
+                       Nothing -&gt; empty
+                       Just x  -&gt; (unsafeCoerce $ head fs)  x
+   put $ EventF  (f mx) ( tailsafe fs)d n  r nr  ch rc bs
+   where
+   tailsafe []=[]
+   tailsafe (x:xs)= xs
+
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f  = Transient $ do
+        setEventCont x  f
+
+        mk &lt;- runTrans x
+        resetEventCont mk
+        case mk of
+           Just k  -&gt; do
+               runTrans $ f k
+
+           Nothing -&gt; return Nothing
+
+
+
+
+--instance MonadTrans (Transient ) where
+--  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO x = Transient $ liftIO x &gt;&gt;= return . Just --     let x= liftIO io in x `seq` lift x
+
+
+
+
+-- Threads
+
+waitQSemB sem= atomicModifyIORef' sem $ \n -&gt; if n &gt; 0 then(n-1,True) else (n,False)
+signalQSemB sem= atomicModifyIORef' sem  $ \n -&gt;  (n + 1,())
+
+-- | set the maximun number of threads for a procedure. It is useful for the
+threads :: Int -&gt; TransientIO a -&gt; TransientIO a
+threads n proc= Transient $ do
+   msem &lt;- gets maxThread
+   sem &lt;- liftIO $ newIORef n
+   modify $ \s -&gt; s{maxThread= Just sem}
+   r &lt;- runTrans proc
+   modify $ \s -&gt; s{maxThread = msem} -- restore it
+   return r
+-- | delete all the previous childs generated by the expressions and continue execution
+-- of the current thread.
+oneThread :: TransientIO a -&gt; TransientIO a
+oneThread comp=  do
+   chs &lt;- liftIO $ newTVarIO []
+   r &lt;- comp
+   modify $ \ s -&gt; s{children= chs}
+   killChilds
+   return r
+
+
+
+-- | The threads generated in the process passed as parameter will not be killed.
+freeThreads :: TransientIO a -&gt; TransientIO a
+freeThreads proc= Transient $ do
+     st &lt;- get
+     put st{freeTh= True}
+     r &lt;- runTrans proc
+     modify $ \st -&gt; st{freeTh= freeTh st}
+     return r
+
+-- | The threads will be killed when the parent thread dies. That is the default
+-- This can be invoked to revert the effect of `freeThreads`
+hookedThreads :: TransientIO a -&gt; TransientIO a
+hookedThreads proc= Transient $ do
+     st &lt;- get
+     put st{freeTh= False}
+     r &lt;- runTrans proc
+     modify $ \st -&gt; st{freeTh= freeTh st}
+     return r
+
+
+-- | kill all the child processes
+killChilds :: TransientIO()
+killChilds= Transient $  do
+   cont &lt;- get
+   liftIO $  killChildren cont
+   return $ Just ()
+
+
+-- | Get the session data of the desired type if there is any.
+getSessionData ::  (MonadState EventF m,Typeable a) =&gt;  m (Maybe a)
+getSessionData =  resp where
+ resp= gets mfData &gt;&gt;= \list  -&gt;
+    case M.lookup ( typeOf $ typeResp resp ) list  of
+      Just x  -&gt; return . Just $ unsafeCoerce x
+      Nothing -&gt; return $ Nothing
+ typeResp :: m (Maybe x) -&gt; x
+ typeResp= undefined
+
+-- | getSessionData specialized for the View monad. if Nothing, the
+-- monadic computation does not continue. getSData is a widget that does
+-- not validate when there is no data of that type in the session.
+--
+-- If there is no such data, `getSData`  silently stop the computation.
+-- That may or may not be the desired behaviour.
+-- To make sure that this does not get unnoticed, use this construction:
+--
+-- &gt;  getSData &lt;|&gt; error &quot;no data&quot;
+getSData ::  Typeable a =&gt; TransIO  a
+getSData= Transient getSessionData
+
+
+-- | set session data for this type. retrieved with getSessionData orr getSData
+setSessionData ::  (MonadState EventF m, Typeable a) =&gt; a -&gt; m ()
+setSessionData  x= do
+  let t= typeOf x in  modify $ \st -&gt; st{mfData= M.insert  t (unsafeCoerce x) (mfData st)}
+
+-- | a shorter name for setSessionData
+setSData ::  ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+setSData= setSessionData
+
+delSessionData x=
+  modify $ \st -&gt; st{mfData= M.delete (typeOf x ) (mfData st)}
+
+delSData :: ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+delSData= delSessionData
+
+withSData ::  ( MonadState EventF m,Typeable a) =&gt; (Maybe a -&gt; a) -&gt; m ()
+withSData f= modify $ \st -&gt; st{mfData=
+    let dat = mfData st
+        mx= M.lookup typeofx dat
+        mx'= case mx of Nothing -&gt; Nothing; Just x -&gt; unsafeCoerce x
+        fx=  f mx'
+        typeofx= typeOf $ typeoff f
+    in  M.insert typeofx  (unsafeCoerce fx) dat}
+    where
+    typeoff :: (Maybe a -&gt; a) -&gt; a
+    typeoff = undefined
+----
+
+genNewId :: MonadIO m =&gt; MonadState EventF m =&gt;  m Int
+genNewId=  do
+          st &lt;- get
+
+          let n= mfSequence st
+          put $ st{mfSequence= n+1}
+          return n
+
+refSequence :: IORef Int
+refSequence= unsafePerformIO $ newp 0
+
+
+
+data Loop= Once | Loop | Multithread deriving Eq
+
+waitEvents ::   IO b -&gt; TransientIO b
+waitEvents io= do
+   r &lt;- parallel (Right &lt;$&gt; io)
+   killChilds
+   return r
+
+
+async  ::  IO b -&gt; TransientIO b
+async io= do
+   r &lt;- parallel  (Left &lt;$&gt;io)
+   killChilds
+   return r
+
+spawn ::  IO b -&gt; TransientIO b
+spawn io= freeThreads $ do
+   r &lt;- parallel (Right &lt;$&gt;io)
+   return r
+
+data EventValue= EventValue SData deriving Typeable
+
+parallel  ::    IO (Either b b) -&gt; TransientIO b
+parallel  ioaction= Transient$   do
+    cont &lt;- getCont                    -- !&gt; &quot;PARALLEL&quot;
+    mv &lt;- getSessionData
+    case mv  of
+     Just (EventValue v)  -&gt; do
+        delSessionData $ EventValue () -- !&gt; &quot;ISJUST &quot;
+        return  $ Just $ unsafeCoerce v
+     Nothing -&gt; do
+        liftIO  $ loop cont    ioaction
+        return Nothing
+
+
+
+
+loop (cont'@(EventF x fs a b c d peers childs g))  rec  =  do
+  chs &lt;- liftIO $ newTVarIO []
+  let cont = EventF x fs a b c d (Just cont') chs g
+      iocont dat=
+          runStateT ( do
+             setSessionData . EventValue $ unsafeCoerce dat
+             runCont cont
+             ) cont
+             &gt;&gt; return ()
+      loop'= do
+        mdat &lt;- rec
+        case mdat of
+         Left dat -&gt; iocont dat
+
+         Right dat -&gt; do
+              forkMaybe cont $ iocont dat
+              loop'
+
+  forkMaybe  cont loop'
+  where
+      forkMaybe cont proc = do
+         dofork &lt;- case maxThread cont of
+                  Nothing -&gt; return True
+                  Just sem -&gt; do
+                    dofork &lt;- waitQSemB sem
+                    if dofork then  return True else return False
+
+         if dofork
+            then  do
+                 th &lt;- forkFinally proc $ \me -&gt; do
+                         case me of -- !&gt; &quot;THREAD ENDED&quot; of
+                          Left  e -&gt; do
+                           when (fromException e /= Just ThreadKilled)$ liftIO $ print e
+                           killChildren  cont  !&gt; &quot;KILL RECEIVED&quot; ++ (show $ unsafePerformIO myThreadId)
+
+                          Right _ -&gt; do
+                             --  if parent is alive
+                             --  then remove himself from the list (with free)
+                             --  and pass his active children to his parent
+                             return ()
+                             th &lt;- myThreadId
+                             mparent &lt;- free th cont
+                             case mparent of
+                              Nothing  -&gt;  return()
+                              Just parent -&gt; atomically $ do
+                                     chs' &lt;- readTVar $ children cont
+                                     chs  &lt;- (readTVar $ children parent)
+                                     writeTVar (children parent)$ chs ++ chs'
+                                     return ()
+
+                         case maxThread cont of
+                           Just sem -&gt; signalQSemB sem
+                           Nothing -&gt; return ()
+
+
+                 addThread cont' cont{threadId=th}  -- !&gt;  &quot;thread created: &quot;++ show th
+
+            else proc  -- !&gt; &quot;NO THREAD&quot;
+
+
+
+
+
+free th env= do
+  if isNothing $ parent env
+   then  return Nothing  !&gt;  show th ++ &quot; orphan&quot;
+   else do
+    let msibling= fmap children $ parent env
+
+    case msibling of
+     Nothing -&gt; return Nothing
+     Just sibling  -&gt; do
+       found &lt;- atomically $ do
+                sbs &lt;- readTVar sibling
+                let (sbs', found) = drop [] th  sbs -- !&gt; &quot;search &quot;++show th ++ &quot; in &quot; ++ show (map threadId sbs)
+                when found $ writeTVar sibling sbs'
+                return found
+       if (not found &amp;&amp; isJust (parent env))
+         then free th $ fromJust $ parent env -- !&gt; &quot;toparent&quot;
+         else return $ Just env
+
+   where
+   drop processed th []= (processed,False)
+   drop processed th (ev:evts)| th == threadId ev= (processed ++ evts, True)
+                    | otherwise= drop (ev:processed) th evts
+
+
+addThread parent child = when(not $ freeTh parent) $ do
+   let headpths= children parent
+   atomically $ do
+       ths &lt;- readTVar headpths
+       writeTVar headpths $  child:ths
+
+killChildren  cont = do
+     forkIO $ do
+        let childs= children cont   !&gt; &quot;killChildren list= &quot;++ addr (children cont)
+        ths &lt;- atomically $ do
+           ths &lt;- readTVar childs
+           writeTVar childs []
+           return ths
+        mapM_ (killThread . threadId) ths  !&gt; &quot;KILLEVENT &quot; ++ show (map threadId ths)
+     return ()
+
+
+type EventSetter eventdata response= (eventdata -&gt;  IO response) -&gt; IO ()
+type ToReturn  response=  IO response
+react
+  :: Typeable eventdata
+  =&gt; EventSetter eventdata response
+  -&gt; ToReturn  response
+  -&gt; TransientIO eventdata
+
+react setHandler iob= Transient $ do
+        cont    &lt;- getCont
+        mEvData &lt;- getSessionData
+        case mEvData of
+          Nothing -&gt; do
+            liftIO $ setHandler $ \dat -&gt;do
+--              let cont'= cont{mfData = M.insert (typeOf dat)(unsafeCoerce dat) (mfData cont)}
+              runStateT (setSData dat &gt;&gt; runCont cont) cont
+              iob
+            return Nothing
+          Just dat -&gt; delSessionData dat &gt;&gt; return (Just  dat)
+
+
+-- * non-blocking keyboard input
+
+getLineRef= unsafePerformIO $ newTVarIO Nothing
+
+
+roption= unsafePerformIO $ newMVar []
+
+-- | install a event receiver that wait for a string and trigger the continuation when this string arrives.
+option :: (Typeable b, Show b, Read b, Eq b) =&gt;
+     b -&gt; [Char] -&gt; TransientIO b
+option ret message= do
+    let sret= show ret
+
+    liftIO $ putStrLn $ &quot;Enter  &quot;++sret++&quot;\tto: &quot; ++ message
+    liftIO $ modifyMVar_ roption $ \msgs-&gt; return $ sret:msgs
+    waitEvents  $ getLine' (==ret)
+    liftIO $ putStrLn $ show ret ++ &quot; chosen&quot;
+    return ret
+
+
+-- | validates an input entered in the keyboard in non blocking mode. non blocking means that
+-- the user can enter also anything else to activate other option
+-- unlike `option`, input only wait for one valid response
+input :: (Typeable a, Read a) =&gt; (a -&gt; Bool) -&gt; TransientIO a
+input cond= Transient . liftIO . atomically $ do
+       mr &lt;- readTVar getLineRef
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r  of
+            (s,_):_ -&gt; if cond s  --  !&gt; show (cond s)
+                     then do
+                       writeTVar  getLineRef Nothing -- !&gt;&quot;match&quot;
+                       return $ Just s
+
+                     else return Nothing
+            _ -&gt; return Nothing
+
+
+getLine' cond=    do
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r of --  !&gt; (&quot;received &quot; ++  show r ++ show (unsafePerformIO myThreadId)) of
+            (s,_):_ -&gt; if cond s -- !&gt; show (cond s)
+                     then do
+                       writeTVar  getLineRef Nothing -- !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry
+
+reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+inputLoop=  do
+    putStrLn &quot;Press end to exit&quot;
+    inputLoop'  -- !&gt; &quot;started inputLoop&quot;
+    where
+
+    inputLoop'= do
+           r&lt;- getLine
+           if r==&quot;end&quot; then putMVar rexit () else do
+              let rs = breakSlash [] r
+              mapM_ (\ r -&gt; do threadDelay 1000
+                               atomically . writeTVar  getLineRef $ Just r) rs
+              inputLoop'
+
+    breakSlash :: [String] -&gt; String -&gt; [String]
+    breakSlash s &quot;&quot;= s
+    breakSlash res s=
+      let (r,rest) = span(/= '/') s
+      in breakSlash (res++[r]) $ tail1 rest
+      where
+      tail1 []=[]
+      tail1 x= tail x
+
+rexit= unsafePerformIO newEmptyMVar
+
+stay=  takeMVar rexit
+
+keep mx = do
+   forkIO $ inputLoop
+   forkIO $ runTransient mx  &gt;&gt; return ()
+   stay
+
+exit :: TransientIO a
+exit= do
+  liftIO $ putStrLn &quot;Tempus fugit: exit&quot;
+  liftIO $ putMVar rexit   True
+  return undefined
+
+onNothing iox iox'= do
+       mx &lt;- iox
+       case mx of
+           Just x -&gt; return x
+           Nothing -&gt; iox'
+
+{-# START_FILE Backtrack.hs #-}
+-- show
+-- /show
+
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE ExistentialQuantification #-}
+module Backtrack (registerUndo, onUndo, undo, retry, undoCut) where
+
+import Base
+import Data.Typeable
+import Control.Applicative
+import Control.Monad.State
+import Unsafe.Coerce
+import System.Mem.StableName
+
+data Backtrack= forall a b.Backtrack{backtracking :: Bool
+                                    ,backStack :: [EventF]}
+                                    deriving Typeable
+
+-- | assures that backtracking will not go further
+undoCut :: TransientIO ()
+undoCut= Transient $ do
+     delSessionData $ Backtrack False []
+     return $ Just ()
+
+-- | the secod parameter will be executed when backtracking 
+{-# NOINLINE onUndo #-}
+onUndo :: TransientIO a -&gt; TransientIO a -&gt; TransientIO a
+onUndo ac bac= do
+   r&lt;-registerUndo $ Transient $ do 
+     Backtrack back _ &lt;- getSessionData `onNothing` return (Backtrack False [])
+     runTrans $ if back then bac  else ac 
+   return r
+   
+-- | register an actions that will be executed when backtracking
+{-# NOINLINE registerUndo #-}
+registerUndo :: TransientIO a -&gt; TransientIO a
+registerUndo f  = Transient $ do
+   cont@(EventF x _ _ _ _ _ _ _ _)  &lt;- get   !&gt; &quot;backregister&quot;
+   md  &lt;- getSessionData 
+   ss &lt;- case md of
+        Just (bss@(Backtrack b (bs@((EventF x'  _ _ _ _ _ _ _ _):_)))) -&gt; do
+            addrx  &lt;- addr x
+            addrx' &lt;- addr x'         -- to avoid duplicate backtracking points
+            return $ if addrx == addrx' then bss else  Backtrack b $ cont:bs
+        Nothing -&gt;  return $ Backtrack False [cont]
+   setSessionData ss
+   runTrans f
+   where
+   addr x = liftIO $ return . hashStableName =&lt;&lt; (makeStableName $! x)
+
+-- | restart the flow forward from this point on
+retry :: TransientIO ()
+retry= do
+    Backtrack _ stack &lt;- getSessionData `onNothing` return (Backtrack False [])
+    setSData $ Backtrack False stack
+
+-- | execute backtracking. It execute the registered actions in reverse order. 
+--
+-- If the backtracking flag is changed the flow proceed  forward from that point on. 
+--
+--If the backtrack stack is finished or undoCut executed, `undo` will stop.
+undo :: TransientIO a
+undo= Transient $ do
+  bs &lt;- getSessionData  `onNothing` return nullBack            !&gt;&quot;GOBACK&quot;
+  goBackt  bs
+
+  where
+  nullBack= Backtrack False []
+  goBackt (Backtrack _ [])= return Nothing                     !&gt; &quot;END&quot;
+  goBackt (Backtrack b (stack@(first@(EventF x fs _ _  _ _ _ _ _): bs)))= do
+--        put first{replay=True} 
+        setSData $ Backtrack True stack
+        mr &lt;-  runClosure first                                !&gt; &quot;RUNCLOSURE&quot;
+        Backtrack back _ &lt;- getSessionData `onNothing` return nullBack 
+                                                               !&gt;&quot;END RUNCLOSURE&quot;
+        case back of
+           True -&gt;  goBackt $ Backtrack True bs                !&gt; &quot;BACK AGAIN&quot;
+           False -&gt; case mr of
+                   Nothing -&gt; return empty                     !&gt; &quot;FORWARD END&quot;
+                   Just x -&gt;  runContinuation first x          !&gt; &quot;FORWARD EXEC&quot;
+
+
+{-# START_FILE Indeterminism.hs #-}
+
+-- show
+-- /show
+
+-----------------------------------------------------------------------------
+--
+-- Module      :  Transient.Indeterminism
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE BangPatterns #-}
+
+
+module Indeterminism (
+choose, choose', collect, group --, found
+) where
+
+import Base
+import Control.Monad.IO.Class
+import Data.IORef
+import Control.Applicative
+import Data.Monoid
+import Control.Concurrent
+import Data.Typeable
+import Control.Monad.State
+import Control.Concurrent.STM as STM
+import GHC.Conc
+
+
+-- | slurp a list of values and process them in parallel . To limit the number of processing
+-- threads, use `threads`
+choose  ::  [a] -&gt; TransientIO a
+choose []= empty
+choose   xs = do
+    evs &lt;- liftIO  $ newIORef xs
+    parallel   $ do
+           es &lt;- atomicModifyIORef' evs $ \es -&gt; let !tes= tail es in (tes,es)
+           case es of
+            [x]  -&gt; return $ Left $ head es
+            x:_  -&gt; return $ Right x
+
+-- | group the output of a possible mmultithreaded process in groups of n elements.
+group :: Int -&gt; TransientIO a -&gt; TransientIO [a]
+group num proc =  do
+    v &lt;- liftIO $ newIORef (0,[])
+    x &lt;- proc
+    n &lt;- liftIO $ atomicModifyIORef' v $ \(n,xs) -&gt; let !n'=n +1 in ((n', x:xs),n')
+    if n &lt; num
+      then stop
+      else liftIO $ atomicModifyIORef v $ \(n,xs) -&gt;  ((0,[]),xs)
+
+choose' :: [a] -&gt; TransientIO a
+choose'  xs = foldl (&lt;|&gt;) empty $ map (parallel . return . Left) xs
+
+
+--newtype Collect a= Collect (MVar (Int, [a])) deriving Typeable
+
+-- collect the results of a search done in parallel, usually initiated by
+-- `choose` . The results are added to the collection with `found`
+--
+--
+
+
+-- execute a process and get the first n solutions.
+-- if the process end without finding the number of solutions requested, it return the fond ones
+-- if he find the number of solutions requested, it kill the threads of the process and return
+-- It works monitoring the solutions found and the number of active threads.
+-- If the first parameter is 0, collect will return all the results
+collect ::  Int -&gt; TransientIO a -&gt; TransientIO [a]
+collect n search=  do
+  rv &lt;- liftIO $ atomically $ newTVar (0,[]) !&gt; &quot;NEWMVAR&quot;
+  endflag &lt;- liftIO $ newTVarIO False
+  st &lt;- get
+  let any1 = do
+        r &lt;- search   !&gt; &quot;ANY&quot;
+        liftIO $ atomically $ do
+            (n1,rs) &lt;- readTVar rv
+            writeTVar  rv (n1+1,r:rs) !&gt; &quot;MODIFY&quot;
+        stop
+
+      detect= freeThreads $ do
+          xs &lt;- async $ do
+             threadDelay 1000 -- to allow some activity before monitoring it
+             atomically $ do
+                (n',xs) &lt;- readTVar rv
+                ns &lt;- readTVar $ children st
+
+                if (n &gt; 0 &amp;&amp; n' &gt;= n) ||  null ns  !&gt; show (n,n') !&gt; (show $ length ns)
+                  then return xs
+                  else retry
+
+          th &lt;- liftIO $ myThreadId !&gt; &quot;KILL&quot;
+          stnow &lt;- get
+          liftIO $ killChildren st
+          liftIO $ addThread st stnow
+          return  xs
+
+  (any1 &gt;&gt; stop)  &lt;|&gt; detect
+
+{-# START_FILE Logged.hs #-}
+
+-- show
+-- /show
+
+-----------------------------------------------------------------------------
+--
+-- Module      :  Transient.Logged
+-- Copyright   :
+-- License     :  GPL-3
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE  ExistentialQuantification #-}
+module Logged  where
+
+import Data.Typeable
+import Unsafe.Coerce
+import Base
+import Control.Applicative
+import Control.Monad.IO.Class
+
+
+
+fromIDyn :: (Read a, Show a, Typeable a) =&gt; IDynamic -&gt; a
+fromIDyn (IDynamic x)= unsafeCoerce x
+
+fromIDyn (IDyns s)=r where r= read s !&gt; &quot;read &quot; ++ s ++ &quot;to type &quot;++ show (typeOf r)
+
+toIDyn x= IDynamic x
+
+-- | synonymous of `step`
+logged :: (Show a, Read a, Typeable a) =&gt; TransientIO a -&gt; TransientIO a
+logged= step
+
+
+
+-- | write the result of the computation in the log and return it.
+-- but if there is data in the internal log, it read the data from the log and
+-- do not execute the computation.
+--
+-- It accept nested step's. The effect is that if the outer step is executed completely
+-- the log of the inner steps are erased. If it is not the case, the inner steps are logged
+-- this reduce the log of large computations to the minimum. That is a feature not present
+-- in the package Workflow.
+--
+-- &gt;  r &lt;- step $ do
+-- &gt;          step this :: TransIO ()
+-- &gt;          step that :: TransIO ()
+-- &gt;          step thatOther
+-- &gt;  liftIO $ print r
+--
+--  when `print` is executed, the log is just the value of r.
+--
+--  but when `thatOther` is executed the log is: [Exec,(), ()]
+--
+step :: (Show a, Read a, Typeable a) =&gt; TransientIO a -&gt; TransientIO a
+step mx=  do
+    Log recover rs full &lt;- getSData &lt;|&gt; return ( Log False  [][])
+
+    case (recover,rs) of
+      (True, Step x: rs') -&gt; do
+            setSData $ Log recover rs' full
+            return $ fromIDyn x  !&gt;  &quot;read in step:&quot; ++ show x
+
+      (True,Exec:rs') -&gt; do
+            setSData $ Log recover rs' full
+            mx
+
+      (True, WaitRemote:rs') -&gt; do
+            setSData (Log recover rs' full) !&gt; &quot;waitRemote2&quot;
+            empty
+
+      _ -&gt; do
+            let add= Exec:  full
+            setSData $ Log False add add
+            r &lt;-  mx
+            let add= Step (toIDyn r): full
+            setSData $ Log False add add
+            return  r
+
+{-# START_FILE Move.hs #-}
+
+--show
+-- /show
+
+-----------------------------------------------------------------------------
+--
+-- Module      :  Transient.Move
+-- Copyright   :
+-- License     :  GPL-3
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE DeriveDataTypeable , ExistentialQuantification
+    ,ScopedTypeVariables, StandaloneDeriving #-}
+module Move where
+import Base
+import Logged
+import Data.Typeable
+import Control.Applicative
+import Network
+import Network.HTTP
+import Control.Monad.IO.Class
+import System.IO
+import Control.Exception
+import Data.Maybe
+import Unsafe.Coerce
+import System.Process
+import System.Directory
+import Control.Monad
+import Network.Info
+import System.IO.Unsafe
+import Control.Concurrent.STM as STM
+import Data.Monoid
+import qualified Data.Map as M
+import Data.List (nub)
+
+
+
+-- | install in a remote node a haskell package with an executable transient service initialized with `listen`
+-- the package, the git repository and the main exectable must have the same name
+installService node port servport package= do
+  beamTo node port
+  liftIO $ do
+     let packagename= name package
+     exist &lt;- doesDirectoryExist  packagename
+     when (not exist) $ do
+         runCommand $ &quot;git clone &quot;++ package
+         runCommand $ &quot;cd &quot;++ packagename
+         runCommand &quot;cabal install&quot;
+         createProcess $ shell $ &quot;./dist/build/&quot;++ packagename++&quot;/&quot;++packagename
+                                       ++ &quot; &quot; ++ show port
+         return()
+  where
+  name path=
+     let x= dropWhile (/= '/') path
+     in if x== &quot;&quot; then tail path else name $ tail    x
+
+
+beamTo :: HostName -&gt; PortID -&gt; TransientIO ()
+beamTo host port= do
+  Log rec log _ &lt;- getSData &lt;|&gt; return (Log False [][])
+  if rec then return () else do
+      h &lt;- liftIO $ connectTo host port
+      liftIO $ hSetBuffering h LineBuffering
+      liftIO $ hPutStrLn h (show $ reverse log) &gt;&gt; hFlush h
+      liftIO $ hClose h
+      delSData h
+      stop
+
+forkTo  :: HostName -&gt; PortID -&gt; TransientIO ()
+forkTo host port= do
+  Log rec log _&lt;- getSData &lt;|&gt; return (Log False [][])
+  if rec then return () else do
+      h &lt;- liftIO $ connectTo host port
+      liftIO $ hSetBuffering h LineBuffering
+      liftIO $ hPutStrLn h (show $ reverse log)  &gt;&gt; hFlush h
+      liftIO $ hClose h
+      delSData h
+
+
+callTo :: (Show a, Read a,Typeable a) =&gt; HostName -&gt; PortID -&gt; TransIO a -&gt; TransIO a
+callTo host port remoteProc= logged $ Transient $ do
+--      liftIO $ print &quot;callto&quot;
+      Log rec log fulLog &lt;- getSessionData `onNothing` return (Log False [][])
+      if rec
+         then
+          runTrans $ do
+
+               Connection port  h sock &lt;- getSData &lt;|&gt; error &quot;callto: no hander&quot;
+               r &lt;- remoteProc !&gt; &quot;executing remoteProc&quot; !&gt; &quot;CALLTO REMOTE&quot; -- LOg=&quot;++ show fulLog
+               liftIO $ hPutStrLn h (show r) --  `catch` (\(e::SomeException) -&gt; sClose sock)
+                -- !&gt; &quot;sent response, HANDLE=&quot;++ show h
+               setSData WasRemote
+               stop
+
+
+         else do
+
+            h &lt;- liftIO $ connectTo host port
+            liftIO $ hPutStrLn h (show $ reverse fulLog) &gt;&gt; hFlush h !&gt; &quot;CALLTO LOCAL&quot; -- send &quot;++ show  log
+            let log'= WaitRemote:tail log
+            setSessionData $ Log rec log' log'
+            runTrans $ waitEvents $ do -- local side
+                   liftIO $ hSetBuffering h LineBuffering
+                   s &lt;- hGetLine h
+--                   hClose h
+
+                   let r = read s
+
+                   return r   !&gt; &quot;read: &quot; ++ s ++&quot; response type= &quot;++show( typeOf r)
+
+
+
+
+data Connection= Connection PortID Handle Socket deriving Typeable
+
+-- | Wait for messages and replay the rest of the monadic sequence with the log received.
+listen :: PortID -&gt;  TransIO ()
+listen  port = do
+       setSData $ Log False [] []
+       sock &lt;- liftIO $ withSocketsDo $ listenOn  port
+
+       (h,host,port1) &lt;- parallel $ Right &lt;$&gt; accept sock
+                          `catch` (\(e::SomeException) -&gt; sClose sock &gt;&gt; throw e)
+
+       liftIO $  hSetBuffering h LineBuffering  -- !&gt; &quot;LISTEN in &quot;++ show (h,host,port1)
+
+       slog &lt;- Transient $ liftIO $ (Just &lt;$&gt; hGetLine  h)
+                          `catch` (\(e::SomeException) -&gt; print &quot;ERR&quot; &gt;&gt;  return Nothing)
+
+       setSData $ Connection port h sock  -- !&gt; &quot;setdata port=&quot; ++ show port
+
+       let log= read slog   -- !&gt; &quot;read1 &quot; ++ slog
+       setSData $ Log True log (reverse log)
+
+
+-- | init a Transient process in a interactive as well as in a replay mode.
+-- It is intended for twin processes that interact among them in different nodes.
+beamInit :: PortID -&gt; TransIO a -&gt; IO b
+beamInit port program=  keep $ do
+    listen port   &lt;|&gt; return ()
+    program
+--    (program &gt;&gt; stop)   &lt;|&gt; close
+--    where
+--    close= do
+--       Connection _ h sock &lt;- getSData
+--       liftIO $ hClose h  `catch` (\(e::SomeException) -&gt; sClose sock)
+
+
+
+
+instance Read PortNumber where
+  readsPrec n str= let [(n,s)]=   readsPrec n str in [(fromIntegral n,s)]
+
+
+deriving instance Read PortID
+deriving instance Typeable PortID
+
+-- * Level 2: connections node lists and operations with the node list
+
+type Node= (HostName,PortID)
+
+nodeList :: TVar  [Node]
+nodeList = unsafePerformIO $ newTVarIO []
+
+deriving instance Ord PortID
+
+getNodes :: TransIO [Node]
+getNodes  = Transient $ Just &lt;$&gt; (liftIO $ atomically $ readTVar  nodeList)
+
+
+
+
+addNodes   nodes= Transient . liftIO . atomically $ do
+  prevnodes &lt;- readTVar nodeList
+
+  writeTVar nodeList $ nub $ prevnodes ++  nodes
+  return $ Just ()
+
+
+
+-- | execute a Transient action in each of the nodes connected. The results are mappend'ed
+clustered :: (Typeable a, Show a, Read a) =&gt; Monoid a =&gt; TransIO a -&gt; TransIO a
+clustered proc= logged $ do
+     nodes &lt;- logged getNodes
+     logged $ foldr (&lt;&gt;) mempty $ map (\(h,p) -&gt; callTo h p proc) nodes !&gt; &quot;fold&quot;
+
+-- | Connect to a new node to another. The other node will notify about this connection to
+-- all the nodes connected to him. the new connected node will receive the list of connected nodes
+-- the nodes will be updated with this list. it can be retrieved with `getNodes`
+connect ::   HostName -&gt;  PortID -&gt;  HostName -&gt;  PortID -&gt; TransientIO ()
+connect host  port   remotehost remoteport=  do
+    listen port &lt;|&gt; return ()
+    logged $ do
+        logged $ addNodes [(host,port)]
+        logged $ liftIO $ putStrLn $ &quot;connecting to: &quot;++ show (remotehost,remoteport)
+        host &lt;- logged $ return host
+        port &lt;- logged $ return port
+        nodes &lt;- callTo remotehost remoteport   $ do
+                   clustered $  addNodes [(host, port)]
+                   getNodes
+
+        logged $ addNodes nodes
+        logged $ liftIO $ putStrLn $ &quot;Connected to modes: &quot; ++ show nodes
+
+
+{-# START_FILE Vars.hs #-}
+-- show
+-- /show
+
+{-# LANGUAGE DeriveDataTypeable #-}
+module Vars where
+
+import Base
+import qualified Data.Map as M
+import Data.Typeable
+
+import Control.Concurrent
+import Control.Applicative
+import Data.IORef
+import Control.Monad.IO.Class
+import Control.Monad.State
+
+newtype EVars= EVars  (IORef (M.Map Int [EventF])) deriving Typeable
+
+data EVar a= EVar Int (IORef (Maybe a))
+
+-- * concurrency effect 
+-- Evars are event vars. `writeEVar` trigger the execution of all the continuations associated to the  `readEVar` of this variable
+-- (the code that is after them) as  stack: the most recent reads are executed first.
+--
+-- It is like the publish-suscribe pattern but without inversion of control, since a readEVar can be inserted at any place in the
+-- Transient flow.
+--
+-- EVars are created upstream and can be used to communicate two subbranches of the monad. Following the Transient philosophy they 
+-- do not block his own thread if used with alternative operators, unlike the IO and STM vars. 
+-- 
+
+newEVar ::  TransientIO (EVar a)
+newEVar  = Transient $ do
+   EVars ref &lt;- getSessionData `onNothing`  do
+                            ref &lt;- liftIO $ newIORef M.empty
+                            setSData $ EVars ref
+                            return  (EVars ref) 
+   id &lt;- genNewId
+   ref &lt;- liftIO $ newIORef Nothing
+   return . Just $ EVar id ref
+
+readEVar :: EVar a -&gt; TransIO a
+readEVar (EVar id ref1)= Transient $ do 
+         cont &lt;- getCont
+         EVars ref &lt;- getSessionData `onNothing` error &quot;No Events context&quot;
+         map &lt;- liftIO $ readIORef ref
+         let Just conts=  M.lookup  id map &lt;|&gt; Just []
+         liftIO $ writeIORef ref $  M.insert id (cont:conts) map
+         return Nothing
+         liftIO $ readIORef ref1
+         
+writeEVar (EVar id ref1) x= Transient $ do
+   EVars ref &lt;- getSessionData `onNothing`  error &quot;No Events context&quot; 
+   liftIO $ writeIORef ref1 $ Just x
+   map &lt;- liftIO $ readIORef ref
+   let Just conts= M.lookup id map &lt;|&gt; Just []
+   mapM runCont conts 
+   return $ Just ()
+ 
+</code></pre><p><code>step</code> (<code>logged</code> is a synonym) is the primitive that perform the logging and recovery. it add entries to the log. But when a log has been received, it return the corresponding entry in the log instead of executing his action. Until there is no more entries in the log. In this case it resumes normal execution and logging.</p><pre><code class="haskell">step :: (Show a, Read a, Typeable a) =&gt; TransientIO a -&gt; TransientIO a
+step mx= do
+
+    Log recover rs &lt;- getSData &lt;|&gt; return (Log False [])
+
+    if recover &amp;&amp; not (null rs)
+      then do
+        setSData $ Log recover $ tail rs
+        return $ fromIDyn $ head rs
+      else do
+        r &lt;- mx
+        setSData . Log False $ toIDyn r:rs
+        return r</code></pre><p>Note that the user program is a single monadic expression. there is no callbacks neither handlers, there is no routing, no registering of remote procedures, no dispatching.</p><p>The dispatching is done by the replaying of the log. As always, I use the Transient philosophy of a complete de-inversion of control.</p><p>To execute the example clone the transient package:</p><pre><code>git clone https://github.com/agocorona/transient</code></pre><p>the user program is in the file main.hs at the end. There is another test program called move.hs that contains some tests of distributed computing for N nodes.  The moving services are defined in the module &quot;Transient.Move&quot; in the &quot;src&quot; folder.</p><p>The move.hs program can be executed in two or more nodes. The program need three parameters:</p><pre><code>program  localPort  remoteHost remotePort</code></pre><p>I use it locally in two instances. If I name the program &quot;move&quot;:</p><pre><code>   runghc -isrc move 8080 localhost 8081
+   runghc -isrc move 8081 localhost 8080</code></pre><p>Each node can act as master and operate with the other node.</p><h1 id="current-limitations-and-future-plans"><a href="#current-limitations-and-future-plans">Current limitations and future plans</a></h1><p>At this moment, the  program must be running in all the nodes, but the first remote service that I will develop with this basic infrastructure will be for moving code.  It is not necessary to have all the code in the other node, just the code that will be called remotely. For example, for a web application, the code that interact with the user interface can be in a haskell file. it can be compiled with Haste or GHCJS before sending it to the browser. In cloud applications, if the nodes have different architectures, the remote node will receive the source code and will compile it locally.</p><p>Hot swapping of code is also a goal. Once a program is substituted by a new version, replaying from the log would recover the node state.</p><p>In the medium-long term my goal is to develop the level 3 and 4 services that can move executions among nodes at runtime, depending on runtime conditions, capabilities of the nodes, failure events, changes in the topology of the network etc. the monitor would execute continuations in any location. That is why the code need to be seamless. The code must not reflect the topology of the network, it must be abstracted from it. That is why all the program is a single monadic expression executed in different nodes, in the same way that currently Transient execute a single monadic expression in different threads. The distributed mechanism just extend it to run the thread in a different node.</p><h1 id="moving-code"><a href="#moving-code">Moving code</a></h1><p>Installing a new service that respond requests in a remote node is easy in the era of Internet: it is a matter of impersonating in the other node with <code>beamTo</code> and install the corresponding package:</p><pre><code class="haskell">-- | install in a remote node a haskell package with an executable transient service initialized with `listen`
+-- the package, the git repository and the main exectable must have the same name
+
+installService node port servport gitrepo= do
+  beamTo node port
+  liftIO $ do
+     let packagename= name gitrepo
+     exist &lt;- doesDirectoryExist  packagename
+     when (not exist) $ do
+         runCommand $ &quot;git clone &quot;++ gitrepo
+         runCommand $ &quot;cd &quot;++ packagename
+         runCommand &quot;cabal install&quot;
+         createProcess $ shell $ &quot;./dist/build/&quot;++ packagename++&quot;/&quot;++packagename
+                                       ++ &quot; &quot; ++ show port
+</code></pre><h1 id="comparison-with-cloud-haskell-and-erlang"><a href="#comparison-with-cloud-haskell-and-erlang">Comparison with Cloud Haskell and Erlang</a></h1><p>I don't know erlang neither cloud haskell very well. This development is at the beginning and the erlang model is mature.
+The Erlang model is intentionally low level, it tries to make the network and the communication costs visible. It focuses on reliability</p><p>Mine tries to make the network transparent and emphasizes composability and high level programming. An example of composability is in the mapReduce snippet. My goal is to make the network transparent, in the way of <a href="http://akka.io">Akka</a> .</p><p>But akka and Erlang OTP are asynchronous and blocking. Well, akka is event-based. The green threads of Erlang is a higher level way of using callbacks, where the callback is managed by the threads library. That permits a code more readable, since the flow does continue after the blocking call. But that does not change the fact that both Erlang OTP and Akka use a blocking semantics for synchronous calls. That precludes parallel composition of the kind of my mapReduce snippet: simply, there is no way to combine two Erlang or akka elements that work in parallel within the same expression. All the seaming has to be done by hand. Usually by means of auxiliary monitor processes that execute what in haskell would be an applicative expression where the elements are embedded.</p><p>For this reason, the Actor model is asynchronous, in order to avoid blocking. Transient does not enforce asynchronous communications since it is non blocking, this permits more integrated and seamless code, more readable and robust since the compiler can verify more invariants.</p><p>In fact <b>a distributed transient program is a single monadic, seamless expression or a subexpression of the whole Transient program</b>, replicated in all the nodes totally or partially. This expression is not monolithic as is the case of other reactive frameworks, but made of pieces, each one with a functional meaning.</p><p>For example, <i>a sender has no meaning without the receiver. However, they are separate expressions in all the other frameworks. Even if both computations are part of the same object. To use them, the programmer has to do some manual wiring to glue them together. In Transient both sender and receiver are codified in a single expression, that is type checked and composable</i>. That splitting of sender and receiver in Erlang and other cloud solutions is not a feature as such, but the result of a necessity, due to the lack of composability associated with inversion of control.</p><p>These are two examples of the ping-pong app in Transient, using the latest version in gitHub:</p><pre><code class="haskell">pingPong :: TransIO ()
+pingPong= do
+     (node1, node2) &lt;- logged $ return (node1,node2) -- will work with the node1 context
+     beamTo node2
+     step $ liftIO $ putStrLn &quot;PING&quot;
+
+     beamTo node1
+     step $ liftIO $ putStrLn &quot;PONG&quot;</code></pre><pre><code class="haskell">pingPong :: TransIO ()
+pingPong= callTo node2  liftIO (putStrLn &quot;PING&quot;) &gt;&gt; liftIO (putStrLn &quot;PONG&quot;)</code></pre><p>It is also the opposite of what Erlang and other similar distributed architectures propose but maintaining their advantages. Transient implement a shared nothing semantics, and the transported data is explicitly labeled with logging calls, but it behaves as if sharing actually happens. Once eliminated the surprise, there is very little cognitive impedance in doing a distributed call using Transient.</p><p>The final objective is a cloud monad, or a cloud effect where distribution of resources happens automatically depending on an strategy for the distribution of resources that will be defined by the programmer. The software will be the one that will evaluate the costs. The platform will be agnostic about the concrete architecture; This will depend on the application and will be dynamic.</p><p>For example, if a database program has too much load, it can split into two shards in two different nodes, the requests will be redirected to the appropriate node, but this is upto the application logic. The framework will provide facilities for request forwarding and moving code and data.</p><p>Concerning inversion of control, the approach is more close to this: http://lampwww.epfl.ch/~odersky/papers/jmlc06.pdf. This paper seems to be a precursor of more advanced works in scala, like the Scala futures and Akka. Although Scala  can do half of the inversion of control since the handling code can never return to the main flow, since this main flow is imperative (And the paper makes this clear). They use typically monoidal (List like) processing using futures. flatMap, is concatMap in Haskell, the bind (&gt;&gt;=) of the list monad.</p><p>However this kind of processing can not return the result to the main imperative procedure that called him, since it is not monadic. So it need to use callbacks.</p><p>Concerning mobility of the software and functionality, It is more closer to Objectspace Voyager: http://www.inf.fu-berlin.de/lehre/WS99/VS/Misc/Voyager/API/doc/orb.pdf</p><p>I dedicate this software to Graham Glass, the genius behind Objectspace Voyager that developed a cloud platform 15 years ago that is still years ahead of anything else.</p><p><a href="https://github.com/agocorona/transient">https://github.com/agocorona/transient</a></p><p>AMDG</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/moving-haskell-processes-between-nodes-transient-effects-iv';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

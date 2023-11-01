@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html><head><title>Introductory Haskell Materials - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/FPguy">Aaron Contorer</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/FPguy/DevBeat2013">Introductory Haskell Materials</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Introductory Haskell Materials</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">23 Sep 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/FPguy">Aaron Contorer</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/7/3ddc9986aa77a36211d74073be5b35ae3a106050">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/FPguy/document-is-ide">Next content: This document is sort of an IDE</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/FPguy">See all content by Aaron Contorer</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#http---bit-ly-hintro">http://bit.ly/hintro</a><ul><li><a href="#materials">Materials</a></li></ul></li><li><a href="#agenda---code-illustrations">Agenda + code illustrations</a><ul><li><a href="#haskell-features">Haskell features</a></li><li><a href="#haskell-benefits">Haskell benefits</a></li><li><a href="#typical-uses-of-haskell">Typical uses of Haskell</a></li><li><a href="#concise-syntax">Concise syntax</a></li><li><a href="#some-interesting-types">Some interesting types</a></li><li><a href="#making-a-function">Making a function</a></li><li><a href="#higher-order-functions">Higher-order functions</a></li><li><a href="#eliminating-iterators">Eliminating iterators</a></li><li><a href="#monads">Monads</a></li><li><a href="#i-o">I/O</a></li><li><a href="#sample-analytics-app--and-deployment">Sample analytics app, and deployment</a></li><li><a href="#sample-web-app">Sample web app</a></li><li><a href="#parallel-processing">Parallel Processing</a></li><li><a href="#some-interesting-packages">some interesting packages</a></li></ul></li><li><a href="#resources-to-learn-and-use-haskell">Resources to learn and use Haskell</a></li><li><a href="#sample-commercial-uses-of-haskell">Sample commercial uses of Haskell</a></li><li><a href="#about-the-speaker">About the speaker</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="http---bit-ly-hintro"><a href="#http---bit-ly-hintro"><b><a href="http://bit.ly/hintro">http://bit.ly/hintro</a></b></a></h1><p>Description from the <a href="http://venturebeat.com/events/devbeat2013/">DevBeat 2013 site</a></p><p><i>Wednesday, November 13, 2013, Master Class: Haskell</i></p><p>Nearly everyone who learns Haskell seems to turn into a raving Haskell fan. They say things like “I can write 80% less code and still get native multicore performance” and “I can easily understand code I wrote two years ago” and “my programs often work the first time they compile&quot; and “now when I have to use Java, I feel like I’m being punished.” What makes Haskell so productive, fast, maintainable, and bug-free? And can you learn it without your head exploding? In this talk Aaron, a raving fan himself, will walk you through the basics of Haskell. You’ll see how to use interactive Haskell tools to become productive and learn quickly. By the end of the talk you will know what Haskell’s about AND you’ll be ready to use free online Haskell resources to easily learn more.</p><h2 id="materials"><a href="#materials">Materials</a></h2><p>In addition to this article, I used some code in the IDE during this lecture. The IDE is browser-based; <a href="https://www.fpcomplete.com/business/haskell-center/overview/">get your account here</a> so you can follow along.</p><ul><li><a href="https://www.fpcomplete.com/user/FPguy/devbeat13-samples">Code snippets</a></li><li><a href="https://www.fpcomplete.com/user/FPguy/sudoku-devbeat">Simple Sudoku solver</a></li></ul><h1 id="agenda---code-illustrations"><a href="#agenda---code-illustrations">Agenda + code illustrations</a></h1><p><i>Credits: In preparing this material I made use of contributions to the School of Haskell by Yann Esposito, Bartosz Milewski, and Brent Yorgey.</i></p><h2 id="haskell-features"><a href="#haskell-features">Haskell features</a></h2><ul><li>Purely functional, no side effects</li><li>Powerful type system</li><li>Laziness</li><li>Use of monads</li></ul><h2 id="haskell-benefits"><a href="#haskell-benefits">Haskell benefits</a></h2><ul><li>Fast time to initial working version</li><li>Maintainability, abstraction, reuse</li><li>Low bugs, mostly caught at compile time</li><li>Native C++ like performance</li></ul><h2 id="typical-uses-of-haskell"><a href="#typical-uses-of-haskell">Typical uses of Haskell</a></h2><ul><li>Fundamental data analysis for Web and Mobile<ul><li>Bump</li><li>Facebook</li></ul></li><li>Unique/competitive [big] data analysis<ul><li>New York Times</li></ul></li><li>Financial analysis<ul><li>Netrium</li><li>Standard Chartered Bank</li><li>OTAS Technologies</li></ul></li><li>Scientific modeling<ul><li>Amgen</li></ul></li><li>Adding headroom to Ruby/Python projects<ul><li>Janrain</li></ul></li></ul><h2 id="concise-syntax"><a href="#concise-syntax">Concise syntax</a></h2><ul><li>low punctuation, significant indentation</li><li>function call syntax</li></ul><pre><code class="active haskell">add a b = a + b 
+main = do
+  print (add 6 5)
+  print (6 `add` 5)
+ </code></pre><ul><li>Operators like <code>+</code> are just functions with names made of symbol characters</li><li>Defaults to infix notation for traditional nice syntax</li><li>!#$%&amp;*+./&lt;=&gt;?@\^|-~ (and non-ascii Unicode symbol or punctuation)</li></ul><pre><code class="active haskell">a !@ b = a + b
+a ∆ b = a - b
+
+main = do
+  print (6 !@ 5)
+  print ((!@) 6 5)
+  print (6 ∆ 5)
+ </code></pre><ul><li><p><code>a $ b c d e</code> sugar for <code>a (b c d e)</code></p></li></ul><pre><code class="active haskell">main = do
+  print (5 + 2 * 3)
+  print $ 5 + 2 * 3</code></pre><ul><li><p>Function composition: <code>(a . b) c</code> means <code>a (b c)</code></p></li></ul><pre><code class="active haskell">double x = x + x
+sixteenTimes = double . double . double . double
+main = do
+  print $ double 2
+  print $ (double . double . double) 2
+  print $ sixteenTimes 2
+</code></pre><ul><li><p>Type definitions can be omitted &amp; deduced</p></li></ul><h2 id="some-interesting-types"><a href="#some-interesting-types">Some interesting types</a></h2><ul><li><p>Numbers: Integer Int Float Double Complex and more, all in type class Num</p></li></ul><pre><code class="active haskell">import Data.Ratio   -- defines type Rational in type class Num
+oneThird = 1 % 3
+fiveEighths = 5 % 8
+main = print (2 * oneThird * fiveEighths)
+</code></pre><ul><li>Lists [a,b,c] or [n1,n2..nn]</li><li>Infinite lists (note: lazy evaluation) [n1,n2..]</li><li>List comprehensions</li></ul><pre><code class="active haskell">ns = [1..20]
+evens = [2,4..20]
+allPos = [1,2..]
+favoritePos = [x | x &lt;- allPos, x `mod` 10 == 0]
+main = do
+  print $ take 5 ns
+  print $ take 5 allPos
+  print $ take 5 favoritePos
+  </code></pre><ul><li>Huge set of utility functions <code>import Data.List</code></li><li>Tuples</li></ul><pre><code class="active haskell">a = (5,2)
+b = (10,1)
+items = a : (replicate 3 b)
+main = do
+  print items</code></pre><ul><li><code>type</code> creates synonyms of existing types</li><li><code>data</code> creates new types</li></ul><pre><code class="active haskell">data Breakfast = Cereal | Yogurt | Egg Integer 
+  deriving (Show, Eq)
+  
+a = Yogurt
+b = Egg 3
+
+moreEgg (Egg n) = Egg (n+1)
+moreEgg x = x -- Adding an egg to anything else has no effect
+
+addEggs k (Egg n) = if k &lt; 1 then Egg n else addEggs (k-1) (Egg (n+1))
+addEggs k x = x 
+
+main = do
+  print a
+  print b
+  print $ moreEgg a
+  print $ moreEgg b
+  print $ (moreEgg . moreEgg . moreEgg) b
+  print $ addEggs 14 (Egg 2)
+  print $ (map moreEgg) [Yogurt, Yogurt, Egg 4, Cereal, Egg 1]</code></pre><ul><li>constructors are functions</li><li><code>Maybe</code> can be <code>Just a</code> (where a is some type) or <code>Nothing</code></li></ul><pre><code class="active haskell">import Data.Maybe
+x = Just 5
+y = Nothing
+safeAdd :: Maybe Int -&gt; Maybe Int -&gt; Maybe Int
+safeAdd (Just a) (Just b) = Just (a+b)
+safeAdd _ _ = Nothing
+main = do
+  print $ safeAdd x y
+  print $ safeAdd (Just 2) (Just 5)</code></pre><ul><li><code>Either</code> can be <code>Left a</code> or <code>Right b</code> (e.g. use Left String for errors, Right Int for answers)</li><li>Record syntax, accessors</li><li>Recursive types</li><li><code>deriving</code> is like inheritance</li></ul><h2 id="making-a-function"><a href="#making-a-function">Making a function</a></h2><ul><li>Function types</li><li>Styles of handling inputs</li></ul><pre><code class="haskell">tryDivi :: Double -&gt; Double -&gt; Maybe Double
+tryDivi a b = if b==0 then Nothing else Just (a / b)   -- conditional
+
+tryDivide :: Double -&gt; Double -&gt; Maybe Double
+tryDivide _ 0 = Nothing      -- pattern matching
+trydivide a b = Just (a / b)
+
+tryDiv :: Double -&gt; Double -&gt; Maybe Double
+tryDiv a b 
+  | b==0 = Nothing           -- guards
+  | otherwise = Just (a / b)</code></pre><ul><li><p>Eliminating final argument (&quot;eta reduction&quot;)</p></li></ul><pre><code class="active haskell">inc x = x + 1
+inc' = (+ 1)     -- final arg on left = final arg on right
+add a b = a + b
+addFive = add 5  -- partial evaluation returns a function: &quot;Currying&quot;
+inc'' = add 1
+main = do
+  print $ inc' 10
+  print $ addFive 10
+  </code></pre><h2 id="higher-order-functions"><a href="#higher-order-functions">Higher-order functions</a></h2><ul><li><p>Function as parameter</p></li></ul><pre><code class="active haskell">increment = (+ 1)
+doTwice f x = f (f x)
+main = do
+  print $ increment 5
+  print $ doTwice increment 5
+  print $ map increment [1..9]</code></pre><ul><li><p>Lambda (written as backslash) for anonymous functions</p></li></ul><pre><code class="active haskell">main = do
+  print $ map (\x -&gt; x * x + 1)  [1..9]</code></pre><h2 id="eliminating-iterators"><a href="#eliminating-iterators">Eliminating iterators</a></h2><ul><li><p>Recursion, tail recursion</p></li></ul><pre><code class="active haskell">-- Apply a function to every list element using recursion
+-- Works for a list of any type a and returns a list of any type b
+--   assuming that f is a function that takes an a and returns a b
+-- Note: this trivial function is equivalent to map
+apply :: (a -&gt; b) -&gt; [a] -&gt; [b]
+apply f [] = []
+apply f [x] = [f x]
+apply f (x : xs) = (f x) : (apply f xs)
+main = do
+  print $ apply (* 2) [1..5]
+  print $ apply (* 2) []
+  print $ apply (\x -&gt; x * x) [1..5]
+  print $ take 20 $ apply show [10,20..]</code></pre><ul><li><code>fold</code> reduces a whole list to a single result</li><li>Important to choose a variant that doesn't use huge temporary memory</li></ul><h2 id="monads"><a href="#monads">Monads</a></h2><ul><li>A burrito: a value-added container for oblivious but valuable contents</li><li>A typeclass (keyword <code>class</code>) is like an <code>interface</code> in OOP</li><li><code>Monad</code> is a typeclass using <code>&gt;&gt;=</code> (&quot;bind&quot;) and <code>return</code> and <code>&gt;&gt;</code></li><li>Wrap a type into a value-added type</li><li>Used for sequencing and passing on value-added state</li></ul><h2 id="i-o"><a href="#i-o">I/O</a></h2><ul><li>Uses the IO () monad</li><li>Special <code>do</code> syntax for sequences of monads looks like imperative code</li><li>Separates side-effectful code from purely functional code</li><li><code>putStr</code> and <code>putStrLn</code></li><li><code>print</code> for <code>(putStrLn . show)</code></li></ul><h2 id="sample-analytics-app--and-deployment"><a href="#sample-analytics-app--and-deployment">Sample analytics app, and deployment</a></h2><ul><li>Simple Sudoku solver <a href="https://www.fpcomplete.com/user/FPguy/sudoku-devbeat">(Open in IDE)</a></li><li>Running in the IDE / Console</li><li>Application Server: easily deploy and manage</li></ul><h2 id="sample-web-app"><a href="#sample-web-app">Sample web app</a></h2><ul><li>&quot;Gravity Fun&quot; physics simulation</li><li>JavaScript front end</li><li>JSON to communicate with server-based physics model</li><li>Run in the IDE / Browser tab</li><li>Application Server: easily deploy and manage</li></ul><h2 id="parallel-processing"><a href="#parallel-processing">Parallel Processing</a></h2><ul><li>Native high-performance threads</li><li>Lack of side effects means safe concurrency</li><li>Software Transactional Memory</li><li>Parallel Haskell</li><li>Cloud Haskell</li><li>Get started trivially:</li></ul><pre><code class="active haskell">import Control.Parallel.Strategies
+
+slowFib x = if x&lt;3 then 1 else (slowFib (x-1)) + (slowFib (x-2))
+inputs = [17, 7, 15, 5, 18, 2, 15, 3, 24]
+
+main = do
+  print $ map slowFib inputs            -- sequential
+  print $ (parMap rpar) slowFib inputs  -- parallel</code></pre><h2 id="some-interesting-packages"><a href="#some-interesting-packages">some interesting packages</a></h2><ul><li>Yesod or Happstack to make a Web server</li><li>Fay or GHCJS or Haste to make JavaScript</li><li>Database access</li></ul><h1 id="resources-to-learn-and-use-haskell"><a href="#resources-to-learn-and-use-haskell">Resources to learn and use Haskell</a></h1><p>To learn Haskell, from beginner through advanced topics, I strongly recommend the free but powerful online <a href="https://www.fpcomplete.com/school">School of Haskell</a> including its <a href="https://www.fpcomplete.com/school/starting-with-haskell">Starting with Haskell</a> section.</p><p>The commercial IDE for Haskell, which you can try for free in your browser, is <a href="https://www.fpcomplete.com/business/haskell-center/overview/">FP Haskell Center.</a>. <a href="http://www.youtube.com/watch?v=ZHSBwlm5C8U">Here</a> is a screencast by me showing how it works.</p><p>If you prefer your learning in book form, the text <a href="http://learnyouahaskell.com">Learn You a Haskell for Great Good</a> is a good choice and so is <a href="http://book.realworldhaskell.org">Real World Haskell</a>. These sites include the full text of the the books online, as well as links to order the e-book or dead-tree version.</p><p>Online Haskell discussions are found notably <a href="http://haskell.reddit.com">on reddit</a> and <a href="http://stackoverflow.com/questions/tagged/haskell">on Stack Overflow</a>. There are also <a href="http://www.haskell.org/haskellwiki/Mailing_lists">Haskell mailing lists.</a></p><p>On-site Haskell classes for companies are available from FP Complete and from Well-Typed.</p><p>Online headquarters for the Haskell open-source community is <a href="http://www.haskell.org">haskell.org</a>. The site includes a wiki of diverse Haskell information, and links for downloading open-source Haskell tools.</p><p>The main online database of Haskell packages is Hackage. There is a compatibility-checked subset called Stackage, also used in FP Haskell Center.</p><p>The main online help repository for Haskell is Hoogle. It is available as a website and within FP Haskell Center.</p><p>The biggest Haskell conference is the annual <a href="http://www.haskell.org/haskell-symposium/2013/">ACM SIGPLAN Haskell Symposium.</a></p><p><a href="http://www.youtube.com/watch?v=Fqi0Xu2Enaw">Here</a> is a video introducing Haskell at an overview/manager level. Show it to your manager!</p><h1 id="sample-commercial-uses-of-haskell"><a href="#sample-commercial-uses-of-haskell">Sample commercial uses of Haskell</a></h1><p>Haskell is used commercially in various industries including finance, biotechnology, defense, and a range of Internet companies.</p><p><a href="https://www.fpcomplete.com/page/case-studies">Detailed commercial case studies</a> are published by FP Complete.</p><p><a href="http://source.opennews.org/en-US/articles/model-analysis/">Another interesting case study</a> about Haskell usage at the New York Times.</p><p>The <a href="http://www.haskell.org/haskellwiki/Haskell_in_industry">Haskell in Industry</a> Wiki page lists further examples.</p><p><a href="https://www.fpcomplete.com/business/blogs/video-blog/">Haskell Talks</a> is a recently started series of video interviews with Haskell users.</p><h1 id="about-the-speaker"><a href="#about-the-speaker">About the speaker</a></h1><p><img alt="Picture of the Author" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F591dcad7-fdf1-4d8f-b3d6-ad4d61a94511.jpeg" /></p><p>Aaron Contorer is CEO and founder of FP Complete, specializing in Haskell tools and services.  His longer bio is <a href="https://www.fpcomplete.com/business/about/leadership/">here</a>.</p><p>Dr. Dobb's Journal recently published his article <a href="http://www.drdobbs.com/architecture-and-design/in-praise-of-haskell/240163246">In Praise of Haskell.</a></p><p>Aaron <a href="https://twitter.com/Contorer">tweets as @contorer</a> and <a href="https://www.linkedin.com/in/acontorer">is also on LinkedIn</a>. You can contact him personally at aaron <i>//at//</i> fpcomplete <i>//dot//</i> com.</p><p><i>(c) 2013 FP Complete Corporation.</i></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/FPguy/DevBeat2013';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

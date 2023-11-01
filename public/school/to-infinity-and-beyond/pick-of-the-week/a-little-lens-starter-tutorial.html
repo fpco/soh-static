@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html><head><title>A Little Lens Starter Tutorial - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial">A Little Lens Starter Tutorial</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">A Little Lens Starter Tutorial</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Jul 2018</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/tel">Joseph Abrahamson</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/1503/438745fafbddc1667be936cdf803edbc3871c536">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/compiled-heist-insight-with-no-snap-in-sight">Previous content: Compiled Heist insight, with no Snap in sight</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/web-application-with-concurrency">Next content: Web application with concurrency</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Go up to: Pick of the Week</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/tel">See all content by Joseph Abrahamson</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#what-is-lens-">What is lens?</a></li><li><a href="#why-do-i-care-">Why do I care?</a></li><li><a href="#okay--what-is-a-lens-">Okay, what is a Lens?</a></li><li><a href="#the-lens-laws-">The lens laws?</a></li><li><a href="#what-does-it-look-like-to-use-a-lens-">What does it look like to use a lens?</a><ul><li><a href="#-sidenote--what-is-that-forall-thing--">(Sidenote: What is that forall thing?)</a></li><li><a href="#any-more-examples-">Any more examples?</a></li></ul></li><li><a href="#what-are-some-large-scale--practical-examples-of-lens-">What are some large scale, practical examples of lens?</a></li><li><a href="#wait-a-second--ghci-is-telling-me-the-types-of-these-things-are-absurd-">Wait a second, GHCi is telling me the types of these things are absurd!</a></li><li><a href="#four-type-parameters--isn-t-that-a-bit-much-">Four type parameters? Isn&#39;t that a bit much?</a></li><li><a href="#okay--that-makes-sense--didn-t-you-say-we-can-compose-lenses-">Okay, that makes sense. Didn&#39;t you say we can compose lenses?</a></li><li><a href="#lenses-compose-backwards--can-t-we-make-----behave-like-functions-">Lenses compose backwards. Can&#39;t we make (.) behave like functions?</a><ul><li><a href="#that-s-still-pretty-annoying">That&#39;s still pretty annoying</a></li></ul></li><li><a href="#what-is-that------">What is that (^.)?</a><ul><li><a href="#actually-there-are-a-whole-lot-of-operators-in-lens">Actually there are a whole lot of operators in lens</a></li></ul></li><li><a href="#actually-there-are-a-whole-lot-of-operators-in-lens---over-100">Actually there are a WHOLE LOT of operators in lens---over 100</a><ul><li><a href="#is-that-really-worth-it-">Is that really worth it?</a></li><li><a href="#----some-examples-would-be-nice">... Some examples would be nice</a></li><li><a href="#what-about-combinators-with------do-they-show-up-anywhere-else-">What about combinators with (^)? Do they show up anywhere else?</a></li></ul></li><li><a href="#okay--what-are-prisms-">Okay. What are Prisms?</a><ul><li><a href="#what-does-that-mean-">What does that mean?</a></li><li><a href="#so-we-use-maybe-instead--right-">So we use Maybe instead, right?</a></li></ul></li><li><a href="#okay--what-are-prisms---take-two-">Okay. What are Prisms? (Take Two)</a><ul><li><a href="#right--a-lens-splits-out-one-subpart-of-a-whole--a-prism-takes-one-subbranch-">Right, a Lens splits out one subpart of a whole. A Prism takes one subbranch.</a></li><li><a href="#a-sum-type-can-be-broken-into-some-particular-subbranch-and-all-the-other-ones">A sum type can be broken into some particular subbranch and all-the-other-ones</a></li><li><a href="#oh--there-s-another-----like-operator-">Oh, there&#39;s another (^)-like operator!</a></li></ul></li><li><a href="#are-there-any-other-interesting-prisms---printer-parsers-">Are there any other interesting Prisms? [Printer/Parsers]</a><ul><li><a href="#no-it-isn-t--it-s-just-a-list-again-">No it isn&#39;t. It&#39;s just a List again.</a></li><li><a href="#okay--sure--is-that-important-">Okay, sure. Is that important?</a></li></ul></li><li><a href="#i-think-i-understand-prisms-now--what-are-traversals-">I think I understand Prisms now. What are Traversals?</a><ul><li><a href="#that-s-pretty-boring-">That&#39;s pretty boring.</a></li><li><a href="#that-s-no-big-deal--though--it-s-just-another-way-to-use-data-traversable">That&#39;s no big deal, though. It&#39;s just another way to use Data.Traversable</a></li><li><a href="#do-we-have-another-----like-operator-for-traversals-at-least-">Do we have another (^)-like operator for Traversals at least?</a></li></ul></li><li><a href="#what-else-can-we-do-with-traversals---how-do-they-relate-to-prisms-lenses--">What else can we do with Traversals? [How do they relate to Prisms/Lenses?]</a><ul><li><a href="#why-does-it-use-maybe-">Why does it use Maybe?</a></li><li><a href="#is-this-like-preview-">Is this like preview?</a></li><li><a href="#but-i-thought-preview-was-preview---and-that-it-was-specialized-to-prisms-">But I thought preview was preview---and that it was specialized to Prisms?</a></li><li><a href="#can-i-use-view-on-traversals-too-">Can I use view on Traversals too?</a></li><li><a href="#what-is-monoid-doing-here-">What is Monoid doing here?</a></li><li><a href="#so-we-can-use-view-if-our-targets-are-monoids-">So we can use view if our targets are Monoids?</a></li><li><a href="#the-monoid-product-of-the-items----hello-world-">The Monoid product of the items---&quot;hello world&quot;</a></li><li><a href="#an-ambiguous-type-error-">An ambiguous type error!</a></li><li><a href="#the-empty-string----">The empty string, &quot;&quot;</a></li><li><a href="#whatever-mempty-is-for-m">Whatever mempty is for m</a></li></ul></li><li><a href="#so--traversals-generalize-prisms-and-lenses-somehow-">So, Traversals generalize Prisms and Lenses somehow?</a></li><li><a href="#is-this-subtyping-">Is this subtyping?</a><ul><li><a href="#but-haskell-doesn-t-have-subtyping">But Haskell doesn&#39;t have subtyping</a></li></ul></li><li><a href="#what-s-the-best-part-about-the-subtyping-hack-">What&#39;s the best part about the subtyping hack?</a></li><li><a href="#what-are-isos-">What are Isos?</a><ul><li><a href="#isos-are-in-the-lens-subtyping-hierarchy-">Isos are in the lens subtyping hierarchy?</a></li><li><a href="#how-do-isos-compose-with-lenses-and-prisms-">How do Isos compose with Lenses and Prisms?</a></li></ul></li><li><a href="#what-are-some-example-isos-">What are some example Isos?</a></li><li><a href="#what-is--from--doing-there---iso-laws-">What is &quot;from&quot; doing there? [Iso Laws]</a><ul><li><a href="#that-s-pretty-cool">That&#39;s pretty cool</a></li></ul></li><li><a href="#what-if-i-have-any-more-questions-">What if I have any more questions?</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h1 id="what-is-lens-"><a href="#what-is-lens-">What is lens?</a></h1><p><code>lens</code> is a package which provides the type synonym <code>Lens</code> which is one of a few implementations of the concept of lenses, or functional references. <code>lens</code> also provides a number of generalizations of lenses including <code>Prism</code>s, <code>Traversal</code>s, <code>Iso</code>s, and <code>Fold</code>s.</p><h1 id="why-do-i-care-"><a href="#why-do-i-care-">Why do I care?</a></h1><p>Lenses and their cousins are a way of declaring how to focus deeply into a complex structure. They form a combinator library with sensible, general behavior for things like composition, failure, multiplicity, transformation, and representation.</p><p>Lenses let you apply some of the power of libraries like <code>hxt</code> to all data types in all programs that you write. As this comparison suggests, the initial steps might be very complicated, but, unlike <code>hxt</code>, lenses are ubiquitous enough to make learning the complexity pay off over time.</p><p>Eventually, you can use lenses to bring things like record syntax, lookups in lists or maps, pattern matching, <code>Data.Traversable</code>, scrap your boilerplate, the <code>newtype</code> library, and all kinds of type isomorphisms all together under the same mental model.</p><p>The end result is a way to efficiently construct and manipulate &quot;methods of poking around inside things&quot; as simple first-class values.</p><h1 id="okay--what-is-a-lens-"><a href="#okay--what-is-a-lens-">Okay, what is a Lens?</a></h1><p>A lens is a first-class reference to a subpart of some data type. For instance, we have <code>_1</code> which is the lens that &quot;focuses on&quot; the first element of a pair. Given a lens there are essentially three things you might want to do</p><ol><li>View the subpart</li><li>Modify the whole by changing the subpart</li><li>Combine this lens with another lens to look even deeper</li></ol><p>The first and the second give rise to the idea that lenses are getters and setters like you might have on an object. This intuition is often morally correct and it helps to explain the lens laws.</p><h1 id="the-lens-laws-"><a href="#the-lens-laws-">The lens laws?</a></h1><p>Yep. Like the monad laws, these are expectations you should have about lenses. Lenses that violate them are <i>weird</i>. Here they are</p><ol><li>Get-Put: If you modify something by changing its subpart to exactly what it was before... then nothing happens</li><li>Put-Get: If you modify something by inserting a particular subpart and then viewing the result... you'll get back exactly that subpart</li><li>Put-Put: If you modify something by inserting a particular subpart <code>a</code>, and then modify it again inserting a different subpart <code>b</code>... it's exactly as if you only did the second step.</li></ol><p>Lenses that follow these laws are called &quot;very well-behaved&quot;.</p><h1 id="what-does-it-look-like-to-use-a-lens-"><a href="#what-does-it-look-like-to-use-a-lens-">What does it look like to use a lens?</a></h1><p>Well, let's look at <code>_1</code> again, the lens focusing on the first part of a tuple. We view the first part of the tuple using <code>view</code></p><pre><code>&gt;&gt;&gt; view _1 (&quot;goal&quot;, &quot;chaff&quot;)
+&quot;goal&quot;
+
+&gt;&gt;&gt; forall $ \tuple -&gt; view _1 tuple == fst tuple
+True</code></pre><p>We modify <code>_1</code>'s focused subpart by using <code>over</code> (mnemonic: we're mapping our modification &quot;over&quot; the focal point of <code>_1</code>).</p><pre><code>&gt;&gt;&gt; over _1 (++ &quot;!!!&quot;) (&quot;goal&quot;, &quot;the crowd goes wild&quot;)
+(&quot;goal!!!&quot;, &quot;the crowd goes wild&quot;)
+
+&gt;&gt;&gt; forall $ \tuple -&gt; over _1 f tuple == (\(fst, snd) -&gt; (f fst, snd)) tuple
+True</code></pre><p>As a special case of modification, we can set the subpart to be a new subpart. This is called <code>set</code></p><pre><code>&gt;&gt;&gt; set _1 &quot;set&quot; (&quot;game&quot;, &quot;match&quot;)
+(&quot;set&quot;, &quot;match&quot;)
+
+&gt;&gt;&gt; forall $ \tuple -&gt; set _1 x tuple = over _1 (const x) tuple
+True</code></pre><h2 id="-sidenote--what-is-that-forall-thing--"><a href="#-sidenote--what-is-that-forall-thing--">(Sidenote: What is that <code>forall</code> thing?)</a></h2><p>It's actually a lie, sorry about that. It's meant to be read as a sentence, a statement of fact, like &quot;forall tuples <code>tuple</code>, <code>view _1 tuple == fst tuple</code>&quot;. You can simulate this behavior by using <a href="http://hackage.haskell.org/package/QuickCheck-2.6/docs/Test-QuickCheck.html">QuickCheck's <code>quickCheck</code> function</a> but <code>forall</code> is much stronger.</p><h2 id="any-more-examples-"><a href="#any-more-examples-">Any more examples?</a></h2><p>Yeah, here are the lens laws again written using actual code. Below, <code>l</code> is any &quot;very well-behaved&quot; lens.</p><pre><code>-- Get-Put
+&gt;&gt;&gt; forall $ \whole -&gt; set l (view l whole) whole == whole
+True
+
+-- Put-Get
+&gt;&gt;&gt; forall $ \whole part -&gt; view l (set l part whole) == part
+True
+
+-- Put-Put
+&gt;&gt;&gt; forall $ \whole part1 part2 -&gt; set l part2 (set l part1 whole) = set l part2 whole</code></pre><h1 id="what-are-some-large-scale--practical-examples-of-lens-"><a href="#what-are-some-large-scale--practical-examples-of-lens-">What are some large scale, practical examples of lens?</a></h1><p>Don't expect to be able to read the code yet, but here's an example from <code>lens-aeson</code> which queries and modifies JSON data.</p><pre><code>-- Returns all of the major versions of an 
+-- array of JSON objects.
+someString ^.. _JSON        -- a parser/printer prism
+             . _Array       -- another prism
+             . traverse     -- a traversal (using Data.Traversable on Aeson's Vector)
+             . _Object      -- another another prism
+             . ix &quot;version&quot; -- a traversal across a &quot;map-like thing&quot;
+             . _1           -- a lens into a tuple (major, minor, patch)
+
+-- Increments all of the versions above
+someString &amp; _JSON
+           . _Array
+           . traverse
+           . _Object
+           . ix &quot;version&quot;
+           . _1
+           %~ succ          -- apply a function to our deeply focused lens
+
+-- We can factor out the lens
+allVersions :: Traversal' ByteString Int
+allVersions = _JSON . _Array . traverse . _Object . ix &quot;version&quot; . _1
+
+-- and then rewrite the two examples quickly
+
+someString ^.. allVersions
+someString &amp; allVersions %~ succ
+
+
+-- Because lenses, prisms, traversals, are all first class in Haskell!</code></pre><h1 id="wait-a-second--ghci-is-telling-me-the-types-of-these-things-are-absurd-"><a href="#wait-a-second--ghci-is-telling-me-the-types-of-these-things-are-absurd-">Wait a second, GHCi is telling me the types of these things are absurd!</a></h1><p>Yeah, sorry about that. &quot;It'll make sense eventually&quot;, but the types start out tricky.</p><p>Try to look at the type synonyms only. We can use <code>:info</code> to make sure that GHCi tells us the type synonym instead of the really funky fully expanded types.</p><p>I'd show you <code>_1</code> but it's not a great example of an understandable type. It uses some weird extra machinery. Instead, how about an example.</p><pre><code>{-# LANGUAGE TemplateHaskell #-}
+
+type Degrees = Double
+type Latitude = Degrees
+type Longitude = Degrees
+
+data Meetup = Meetup { _name :: String, _location :: (Latitude, Longitude) }
+makeLenses ''Meetup</code></pre><p>Let's assume we have lenses <code>name</code> and <code>location</code> which focus on the slots <code>_name</code> and <code>_location</code> respectively. The underscores are a convention only, but you see them a lot because the Template Haskell magic going on in <code>makeLenses</code> will automatically make <code>name</code> and <code>location</code> if use underscores like that.</p><p>The type of these lenses is</p><pre><code>&gt;&gt;&gt; :info name
+name :: Lens Meetup Meetup String String
+
+&gt;&gt;&gt; :info location
+location  :: Lens Meetup Meetup (Latitude, Longitude) (Latitude, Longitude)
+
+&gt;&gt;&gt; :type location
+location  :: Functor f =&gt; ((Latitude, Longitude) -&gt; f (Latitude, Longitude)) -&gt; (Meetup -&gt; f Meetup)
+
+-- whoops! Ignore that for now please</code></pre><h1 id="four-type-parameters--isn-t-that-a-bit-much-"><a href="#four-type-parameters--isn-t-that-a-bit-much-">Four type parameters? Isn't that a bit much?</a></h1><p>You're right, we'll use the simplified forms for now. This is highly recommended until you get the hang of things. The simplified types are appended with apostrophes. Now the types of <code>name</code> and <code>location</code> are</p><pre><code>name :: Lens' Meetup String
+location  :: Lens' Meetup (Latitude, Longitude)</code></pre><p>These types tell us that, for instance, the <code>name</code> lens focuses <i>from</i> a <code>Meetup</code> and <i>to</i> a <code>String</code>. Generally we write <code>Lens' s a</code> and throughout the documentation <code>s</code> and <code>t</code> tend to be where a lens is focusing <i>from</i> and <code>a</code> or <code>b</code> tend to be where the lens is focusing <i>to</i>.</p><h1 id="okay--that-makes-sense--didn-t-you-say-we-can-compose-lenses-"><a href="#okay--that-makes-sense--didn-t-you-say-we-can-compose-lenses-">Okay, that makes sense. Didn't you say we can compose lenses?</a></h1><p>Yup, if we've got a <code>Lens' s x</code> and another lens <code>Lens' x a</code> we can stick them together to get <code>Lens' s a</code>. Strangely, we just use regular old <code>(.)</code> to do it.</p><pre><code>la :: Lens' s x
+lb :: Lens' x a
+
+la . lb :: Lens' s a</code></pre><p>Or, more concretely.</p><pre><code>meetupLat = location . _1 :: Lens' Meetup Latitude
+meetupLon = location . _2 :: Lens' Meetup Longitude</code></pre><h1 id="lenses-compose-backwards--can-t-we-make-----behave-like-functions-"><a href="#lenses-compose-backwards--can-t-we-make-----behave-like-functions-">Lenses compose backwards. Can't we make (.) behave like functions?</a></h1><p>You're right, we could. We don't for various reasons, but the intuition is right. Lenses should combine just like functions. One thing that's important about that is <code>id</code> can either pre- or post- compose with any lens without affecting it.</p><pre><code>forall $ \lens -&gt; lens . id == lens
+forall $ \lens -&gt; id . lens == lens</code></pre><p>(N.B. If you're categorically inclined, lenses-with-apostrophes would form a <code>Category</code> if we did somehow reverse the composition order---<code>flip (.)</code> would do it. The instance still cannot be made without a newtype which <code>lens</code> trades off for uses mentioned below.)</p><h2 id="that-s-still-pretty-annoying"><a href="#that-s-still-pretty-annoying">That's still pretty annoying</a></h2><p>It's true. On the bright side, lenses often feel a whole lot like OO-style slot access like <code>Person.name</code>. The reversed composition thing can be thought of as punning on that.</p><pre><code>&gt;&gt;&gt; Meetup { ... } ^. location . _1
+80.3 :: Latitude</code></pre><p>Furthermore, we can do composition using a convenient syntax without using <code>import Prelude hiding ...</code>.</p><h1 id="what-is-that------"><a href="#what-is-that------">What is that (^.)?</a></h1><p>Oh, it's just <code>view</code> written infix. Here's the Put-Get law again</p><pre><code>&gt;&gt;&gt; forall $ \lens whole part -&gt; (set lens part whole) ^. lens == part
+True</code></pre><h2 id="actually-there-are-a-whole-lot-of-operators-in-lens"><a href="#actually-there-are-a-whole-lot-of-operators-in-lens">Actually there are a whole lot of operators in lens</a></h2><p>Yup, some people find them convenient.</p><h1 id="actually-there-are-a-whole-lot-of-operators-in-lens---over-100"><a href="#actually-there-are-a-whole-lot-of-operators-in-lens---over-100">Actually there are a WHOLE LOT of operators in lens---over 100</a></h1><p>Very convenient! But that <i>is</i> a lot. To make it bearable, there are some tricks for remembering them.</p><ol><li>Operators that begin with <code>^</code> are kinds of <code>view</code>s. The only example we've seen so far is <code>(^.)</code> which is... well, it's just <code>view</code> exactly.</li><li>Operators that end with <code>~</code> are like <code>over</code> or <code>set</code>. In fact, <code>(.~) == set</code> and <code>(%~)</code> is <code>over</code>.</li><li>Operators that have <code>.</code> in them are usually somehow &quot;basic&quot;</li><li>Operators that have <code>%</code> in them usually take functions</li><li>Operators that have <code>=</code> in them are just like their cousins where <code>=</code> is replaced by <code>~</code>, but instead of taking the whole object as an argument, they apply their modifications in a <code>State</code> monad.</li></ol><h2 id="is-that-really-worth-it-"><a href="#is-that-really-worth-it-">Is that really worth it?</a></h2><p>Maybe. Who knows!</p><p>If you don't like them, then all of the operators have regular named functions as well.</p><h2 id="----some-examples-would-be-nice"><a href="#----some-examples-would-be-nice">... Some examples would be nice</a></h2><p>Ok.</p><pre><code>(.~) :: Lens' s a -&gt; a        -&gt; (s -&gt; s)
+(.=) :: Lens' s a -&gt; a        -&gt; State s ()
+(%~) :: Lens' s a -&gt; (a -&gt; a) -&gt; (s -&gt; s)
+(%=) :: Lens' s a -&gt; (a -&gt; a) -&gt; State s ()</code></pre><p>Sometimes we get new operators by augmenting tried and true operators like <code>(&amp;&amp;)</code> with <code>~</code> and <code>=</code></p><pre><code>(&amp;&amp;~) :: Lens' s Bool -&gt; Bool -&gt; (s -&gt; s)
+(&amp;&amp;=) :: Lens' s Bool -&gt; Bool -&gt; State s ()
+
+lens &amp;&amp;~ bool = lens %~ (bool &amp;&amp;)
+lens &amp;&amp;= bool = lens %= (bool &amp;&amp;)
+
+(&lt;&gt;~) :: Monoid m =&gt; Lens' s m -&gt; m -&gt; (s -&gt; s)
+lens &lt;&gt;~ m = lens %~ (m &lt;&gt;)</code></pre><h2 id="what-about-combinators-with------do-they-show-up-anywhere-else-"><a href="#what-about-combinators-with------do-they-show-up-anywhere-else-">What about combinators with (^)? Do they show up anywhere else?</a></h2><p>Yes, but we have to talk about <code>Prism</code>s and <code>Traversal</code>s first.</p><h1 id="okay--what-are-prisms-"><a href="#okay--what-are-prisms-">Okay. What are Prisms?</a></h1><p>They're like lenses for sum types.</p><h2 id="what-does-that-mean-"><a href="#what-does-that-mean-">What does that mean?</a></h2><p>Well, what happens if we try to make lenses for a sum type?</p><pre><code>-- This doesn't work... or exist
+_left :: Lens' (Either a b) a
+
+&gt;&gt;&gt; view _left (Left ())
+()                           -- okay, I buy that
+
+&gt;&gt;&gt; view _left (Right ())
+error!                       -- oh, there's no subpart there</code></pre><p><code>Prism</code>s are kind of like <code>Lens</code>es that can fail or miss.</p><h2 id="so-we-use-maybe-instead--right-"><a href="#so-we-use-maybe-instead--right-">So we use Maybe instead, right?</a></h2><p>We could try that.</p><pre><code>_left :: Lens' (Either a b) (Maybe a)
+
+&gt;&gt;&gt; view _left (Left ())
+Just ()
+
+&gt;&gt;&gt; view _left (Right ())
+Nothing</code></pre><p>But it doesn't compose well.</p><pre><code>_left . name :: Lens (Either Meetup Meetup) ???   -- String? Maybe String?</code></pre><p>We'd need a <code>Lens</code> that looks into <code>Maybe</code>:</p><pre><code>_just :: Lens' (Maybe a) (Maybe a)
+_just = id</code></pre><p>Oh. That doesn't get us anywhere. Let's start over.</p><h1 id="okay--what-are-prisms---take-two-"><a href="#okay--what-are-prisms---take-two-">Okay. What are Prisms? (Take Two)</a></h1><p>Prisms are the duals of lenses. While lenses pick apart some subpart of a product type like a tuple, prisms go down one branch of a sum type like <code>Either</code>... Or else they fail.</p><h2 id="right--a-lens-splits-out-one-subpart-of-a-whole--a-prism-takes-one-subbranch-"><a href="#right--a-lens-splits-out-one-subpart-of-a-whole--a-prism-takes-one-subbranch-">Right, a Lens splits out one subpart of a whole. A Prism takes one subbranch.</a></h2><p>Exactly!</p><p>Think of a product type as being made of both a subpart and a &quot;whole with a hole in it&quot; where the subpart used to go.</p><pre><code>product           =       (a, b)
+subpart           =        a
+whole-with-a-hole = \x -&gt; (x, b)</code></pre><p>Whenever we can do that, we can make a lens that focuses just on that subpart.</p><h2 id="a-sum-type-can-be-broken-into-some-particular-subbranch-and-all-the-other-ones"><a href="#a-sum-type-can-be-broken-into-some-particular-subbranch-and-all-the-other-ones">A sum type can be broken into some particular subbranch and all-the-other-ones</a></h2><p>That's how prisms are dual to lenses. They select just one branch to go down.</p><pre><code>preview :: Prism' s a -&gt; s -&gt; Maybe a</code></pre><p>Which also lets us &quot;go back up&quot; that one branch.</p><pre><code>review :: Prism' s a -&gt; a -&gt; s</code></pre><p>For instance</p><pre><code>_Left :: Prism' (Either a b) a
+
+&gt;&gt;&gt; preview _Left (Left &quot;hi&quot;)
+Just &quot;hi&quot;
+
+&gt;&gt;&gt; preview _Left (Right &quot;hi&quot;)
+Nothing
+
+&gt;&gt;&gt; review _Left &quot;hi&quot;
+Left &quot;hi&quot;
+
+_Just :: Prism' (Maybe a) a
+
+&gt;&gt;&gt; preview _Just (Just &quot;hi&quot;)
+Just &quot;hi&quot;
+
+&gt;&gt;&gt; review _Just &quot;hi&quot;
+Just &quot;hi&quot;
+
+&gt;&gt;&gt; Left &quot;hi&quot; ^? _Left
+Just &quot;hi&quot;</code></pre><h2 id="oh--there-s-another-----like-operator-"><a href="#oh--there-s-another-----like-operator-">Oh, there's another (^)-like operator!</a></h2><p>Yep, <code>(^?)</code> is like <code>(^.)</code> for <code>Prism'</code>s.</p><h1 id="are-there-any-other-interesting-prisms---printer-parsers-"><a href="#are-there-any-other-interesting-prisms---printer-parsers-">Are there any other interesting Prisms? [Printer/Parsers]</a></h1><p>Here's a simple one. We can deconstruct <code>[]</code>s using <code>Prism'</code>s.</p><pre><code>_Cons :: Prism' [a] (a, [a])
+
+&gt;&gt;&gt; preview _Cons []
+Nothing
+
+&gt;&gt;&gt; preview _Cons [1,2,3]
+Just (1, [2,3])
+
+_Nil :: Prism' [a] ()
+
+&gt;&gt;&gt; preview _Nil []
+Just ()
+
+&gt;&gt;&gt; preview _Nil [1,2,3]
+Nothing</code></pre><p>Here's a strange one. <code>String</code> is a very strange sum type.</p><h2 id="no-it-isn-t--it-s-just-a-list-again-"><a href="#no-it-isn-t--it-s-just-a-list-again-">No it isn't. It's just a List again.</a></h2><p>But <code>Char</code> can be thought of as the sum of all characters. And if we &quot;flatten&quot; <code>Char</code> into <code>[]</code> we can think of <code>String</code> as being the &quot;sum of all possible strings&quot;</p><pre><code>data String = &quot;a&quot; | &quot;b&quot; | &quot;c&quot; | &quot;europe&quot; | &quot;curry&quot; | &quot;dosa&quot; | &quot;applejacks&quot; ...</code></pre><h2 id="okay--sure--is-that-important-"><a href="#okay--sure--is-that-important-">Okay, sure. Is that important?</a></h2><p>What if we make <code>Prism'</code>s that focus on particular branches of <code>String</code>?</p><pre><code>_ParseTrue  :: Prism' String Bool
+_ParseFalse :: Prism' String Bool
+
+&gt;&gt;&gt; preview _ParseTrue &quot;True&quot;
+Just True
+
+&gt;&gt;&gt; preview _ParseFalse &quot;True&quot;
+Nothing
+
+&gt;&gt;&gt; review _ParseTrue True
+&quot;True&quot;</code></pre><p>This is how printer-parsers can sometimes be valid Prisms.</p><h1 id="i-think-i-understand-prisms-now--what-are-traversals-"><a href="#i-think-i-understand-prisms-now--what-are-traversals-">I think I understand Prisms now. What are Traversals?</a></h1><p>Traversals are Lenses which focus on multiple targets simultaneously. We actually don't know how many targets they might be focusing on: it could be exactly 1 (like a Lens) or maybe 0 (like a Prism) or 300.</p><p>A very simple <code>Traversal'</code> traverses all of the items in a list.</p><pre><code>items :: Traversal' [a] a
+items = traverse               -- from Data.Traversable, actually
+                               -- this is our first implementation of anything in `lens`
+                               -- but don't worry about it right now</code></pre><p>In fact, <code>Traversal'</code>s are intimately related to lists since if we have a list we also may have either 1, or 0, or many elements. That's one way to <code>view</code> a <code>Traversal</code>.</p><pre><code>toListOf items :: [a] -&gt; [a]
+
+&gt;&gt;&gt; toListOf items [1,2,3]
+[1,2,3]</code></pre><h2 id="that-s-pretty-boring-"><a href="#that-s-pretty-boring-">That's pretty boring.</a></h2><p>It is. We can define <code>items</code> for any <code>Traversable</code> though using the exact same definition.</p><pre><code>items :: Traversable t =&gt; Traversal' (t a) a
+items = traverse
+
+flatten :: Tree a -&gt; [a]
+flatten = toListOf items</code></pre><h2 id="that-s-no-big-deal--though--it-s-just-another-way-to-use-data-traversable"><a href="#that-s-no-big-deal--though--it-s-just-another-way-to-use-data-traversable">That's no big deal, though. It's just another way to use Data.Traversable</a></h2><p>For now, but <code>Traversal</code> will eventually show a close relationship with <code>Lens</code> and <code>Prism</code>.</p><h2 id="do-we-have-another-----like-operator-for-traversals-at-least-"><a href="#do-we-have-another-----like-operator-for-traversals-at-least-">Do we have another (^)-like operator for Traversals at least?</a></h2><p>Yep! It's just <code>toListOf</code>.</p><pre><code>&gt;&gt;&gt; [1,2,3] ^.. items
+[1,2,3]</code></pre><h1 id="what-else-can-we-do-with-traversals---how-do-they-relate-to-prisms-lenses--"><a href="#what-else-can-we-do-with-traversals---how-do-they-relate-to-prisms-lenses--">What else can we do with Traversals? [How do they relate to Prisms/Lenses?]</a></h1><p>We can get just the first target.</p><pre><code>firstOf :: Traversal' s a -&gt; Maybe a
+firstOf items :: Traversable t =&gt; t a -&gt; Maybe a</code></pre><p>Or the last target</p><pre><code>lastOf :: Traversal' s a -&gt; Maybe a
+
+&gt;&gt;&gt; lastOf items [1,2,3] 
+Just 3</code></pre><h2 id="why-does-it-use-maybe-"><a href="#why-does-it-use-maybe-">Why does it use Maybe?</a></h2><p>The <code>Traversal</code> could have no targets.</p><h2 id="is-this-like-preview-"><a href="#is-this-like-preview-">Is this like <code>preview</code>?</a></h2><p>Yeah, <code>firstOf</code> is <code>preview</code>.</p><h2 id="but-i-thought-preview-was-preview---and-that-it-was-specialized-to-prisms-"><a href="#but-i-thought-preview-was-preview---and-that-it-was-specialized-to-prisms-">But I thought preview was preview---and that it was specialized to Prisms?</a></h2><p>Nope, <code>preview</code> just handles access that focuses on either 0 or 1 targets.</p><h2 id="can-i-use-view-on-traversals-too-"><a href="#can-i-use-view-on-traversals-too-">Can I use view on Traversals too?</a></h2><p>Actually, yes, but you might be in for a surprise.</p><pre><code>&gt;&gt;&gt; view items &quot;hello world&quot;
+
+&lt;interactive&gt;:56:6:
+    No instance for (Data.Monoid.Monoid Char)
+      arising from a use of `items'
+    Possible fix:
+      add an instance declaration for (Data.Monoid.Monoid Char)
+    In the first argument of `view', namely `items'
+    In the expression: view items &quot;hello world&quot;
+    In an equation for `it': it = view items &quot;hello world&quot;</code></pre><h2 id="what-is-monoid-doing-here-"><a href="#what-is-monoid-doing-here-">What is Monoid doing here?</a></h2><p>It represents the notion of failure. It's just like that <code>Maybe</code> we tried to use earlier when investigating <code>Prism</code>.</p><p>Moreover its a way to handle the &quot;0, 1, or many&quot; nature of the targets of a <code>Traversal</code>. If you think of <code>toListOf</code> as the canonical way to view a <code>Traversal</code>, then <code>Monoid</code> is a canonical way to compress lists into single values.</p><h2 id="so-we-can-use-view-if-our-targets-are-monoids-"><a href="#so-we-can-use-view-if-our-targets-are-monoids-">So we can use view if our targets are Monoids?</a></h2><p>Yep. What do you think <code>[&quot;hello &quot;, &quot;world&quot;] ^. items</code> gets us?</p><h2 id="the-monoid-product-of-the-items----hello-world-"><a href="#the-monoid-product-of-the-items----hello-world-">The Monoid product of the items---&quot;hello world&quot;</a></h2><p>Exactly! What about <code>[] ^. items</code>?</p><h2 id="an-ambiguous-type-error-"><a href="#an-ambiguous-type-error-">An ambiguous type error!</a></h2><p>Okay, yes. What about <code>[] ^. items :: String</code>?</p><h2 id="the-empty-string----"><a href="#the-empty-string----">The empty string, &quot;&quot;</a></h2><p>And <code>[] ^. items :: Monoid m =&gt; m</code>?</p><h2 id="whatever-mempty-is-for-m"><a href="#whatever-mempty-is-for-m">Whatever mempty is for m</a></h2><p>Bingo.</p><h1 id="so--traversals-generalize-prisms-and-lenses-somehow-"><a href="#so--traversals-generalize-prisms-and-lenses-somehow-">So, Traversals generalize Prisms and Lenses somehow?</a></h1><p>Yeah. It works because <code>Prism</code>, <code>Lens</code>, and <code>Traversal</code> are all just type synonyms---Those scary types that GHCi sometimes prints out actually do line up. That's a big reason why they're left in.</p><h1 id="is-this-subtyping-"><a href="#is-this-subtyping-">Is this subtyping?</a></h1><p>Kind of! That's what <a href="http://hackage.haskell.org/package/lens">the scary chart on the lens Hackage page</a> shows.</p><h2 id="but-haskell-doesn-t-have-subtyping"><a href="#but-haskell-doesn-t-have-subtyping">But Haskell doesn't have subtyping</a></h2><p>It's a big clever hack, really. Without it there'd be completely separate combinators for <code>Lens</code>, <code>Prism</code>, <code>Traversal</code>, and all the other things in <code>lens</code> that we haven't talked about yet... even though they all end up with identical code at their core.</p><p>That's not even the best part yet.</p><h1 id="what-s-the-best-part-about-the-subtyping-hack-"><a href="#what-s-the-best-part-about-the-subtyping-hack-">What's the best part about the subtyping hack?</a></h1><p>We can compose <code>Lens</code>es and <code>Prism</code>s and <code>Traversal</code>s all together and the types will &quot;just work out&quot;. Admittedly at this point all that means is that compositions of Lenses are Lenses, compositions of Prisms are Prisms, and everything else is a Traversal.</p><p>But there are other things in this subtyping hierarchy, like <code>Iso</code>s.</p><h1 id="what-are-isos-"><a href="#what-are-isos-">What are Isos?</a></h1><p>Isos are isomorphisms, connections between types that are equivalent in every way.</p><p>More concretely, an Iso is a forward mapping and a backward mapping such that the forward mapping inverts the backward mapping and the backward mapping inverts the forward mapping.</p><pre><code>fw . bw = id
+bw . fw = id</code></pre><p>(N.B. This is again exactly a <code>Category</code> isomorphism.)</p><h2 id="isos-are-in-the-lens-subtyping-hierarchy-"><a href="#isos-are-in-the-lens-subtyping-hierarchy-">Isos are in the lens subtyping hierarchy?</a></h2><p>Yep! They are more primitive than either <code>Lens</code> or <code>Prism</code>.</p><p>If we think of a <code>Lens' s a</code> as a type which splits the product type <code>s</code> into its subpart <code>a</code> and the context of that subpart, <code>a -&gt; s</code>, an <code>Iso</code> is a trivial lens where the context is just <code>id</code>.</p><p>If we think of a <code>Prism' s a</code> as a type which splits the sum type <code>s</code> into a privileged branch and &quot;all the other&quot; branches then an <code>Iso</code> is a trivial <code>Prism</code> where there's just one branch and we're privileging exactly it.</p><h2 id="how-do-isos-compose-with-lenses-and-prisms-"><a href="#how-do-isos-compose-with-lenses-and-prisms-">How do Isos compose with Lenses and Prisms?</a></h2><p>They can compose on either end of a lens or a prism and the result is a lens or a prism respectively. Isos are &quot;iso&quot; (unchanging) because no matter where you put them in a lens pipeline they leave things as they were.</p><h1 id="what-are-some-example-isos-"><a href="#what-are-some-example-isos-">What are some example Isos?</a></h1><p>How about between <code>Maybe</code> and <code>Either ()</code>?</p><pre><code>someIso :: Iso' (Maybe a) (Either () a)
+
+&gt;&gt;&gt; Just &quot;hi&quot; ^. someIso
+Right &quot;hi&quot;</code></pre><p>That's a little boring. How about between strict and lazy <code>ByteString</code>s?</p><pre><code>strict :: Iso' Lazy.ByteString Strict.ByteString
+
+&gt;&gt;&gt; &quot;foobar&quot; ^. strict
+&quot;foobar&quot;
+
+&gt;&gt;&gt; &quot;foobar&quot; ^. strict . from strict
+&quot;foobar&quot;</code></pre><p>Also kind of boring. <a href="http://hackage.haskell.org/package/hexpat-lens-0.0.7/docs/Text-XML-Expat-Lens-Names.html">How about between an XML tree treating element names as strings and an XML tree treating element names as Qualified Names</a>?</p><pre><code>qualified :: Iso' (Node String String) (Node (QName String) String)
+
+&gt;&gt;&gt; Element &quot;foaf:Person&quot; [(&quot;foaf:name&quot;, &quot;Ernest&quot;)] [] ^. qualified
+
+Element (QName { qnPrefix = Just &quot;foaf&quot;
+               , qnLocalPart = &quot;Person&quot;
+               }) 
+        [ (QName { qnPrefix = Just &quot;foaf&quot;
+                 , qnLocalPart = &quot;name&quot;
+                 }
+          ,&quot;Ernest&quot;)
+        ] 
+        []
+
+&gt;&gt;&gt; Element &quot;foaf:Person&quot; [(&quot;foaf:name&quot;, &quot;Ernest&quot;)] [] ^? qualified 
+                                                        . attributes 
+                                                        . _head . _1 . localPart
+Just &quot;name&quot;</code></pre><h1 id="what-is--from--doing-there---iso-laws-"><a href="#what-is--from--doing-there---iso-laws-">What is &quot;from&quot; doing there? [Iso Laws]</a></h1><p><code>from</code> &quot;turns an iso around&quot;. Since <code>Iso</code>s are equivalences they're symmetric and we can treat them as maps in both directions between types. In fact, the <code>Iso</code> laws stated above are just that for any iso, <code>iso</code></p><pre><code>view (iso . from iso) == id
+view (from iso . iso) == id</code></pre><h2 id="that-s-pretty-cool"><a href="#that-s-pretty-cool">That's pretty cool</a></h2><p><code>Iso</code>s are pretty cool. They're one of my favorite parts of <code>lens</code>.</p><h1 id="what-if-i-have-any-more-questions-"><a href="#what-if-i-have-any-more-questions-">What if I have any more questions?</a></h1><p>This list may grow over time. Please ask them and leave any comments.</p><p>But for now, go get yourself a peanut butter and marmalade sandwich.</p><hr /><p>With help from Reddit users penguinland, kqr, markus1189, MitchellSalad, DR6, NruJaC, and rwbarton.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html><head><title>Simple examples - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/Simple%20examples">Simple examples</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Simple examples</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">29 Oct 2017</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/eriks">Erik Salaj</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/6170/e6ed3e6f43459bb134948a6053e1000237a06aa2">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/part-3">Previous content: Part III: A World in a Bottle</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/part-2">Next content: Part II: PNGs and Moore</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Go up to: Pick of the Week</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/eriks">See all content by Erik Salaj</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#simple-application">Simple application</a></li><li><a href="#system-info">System info</a></li><li><a href="#system-environment">System environment</a></li><li><a href="#system-environment-for-web-application">System environment for web application</a></li><li><a href="#directories">Directories</a></li><li><a href="#current-date-and-time">Current date and time</a></li><li><a href="#simple-http-conduit">Simple HTTP conduit</a></li><li><a href="#streaming-http-conduit">Streaming HTTP conduit</a></li><li><a href="#yesod-version">Yesod version</a></li><li><a href="#yesod-application">Yesod application</a></li><li><a href="#snap-application">Snap application</a></li><li><a href="#happstack-application">Happstack application</a></li><li><a href="#javascript-minification">JavaScript minification</a></li><li><a href="#lists">Lists</a></li><li><a href="#tuples">Tuples</a></li><li><a href="#data-list">Data.List</a></li><li><a href="#data-char">Data.Char</a></li><li><a href="#data-map">Data.Map</a></li><li><a href="#data-set">Data.Set</a></li><li><a href="#data-array">Data.Array</a></li><li><a href="#data-complex">Data.Complex</a></li><li><a href="#data-hashset">Data.HashSet</a></li><li><a href="#data-hashmap">Data.HashMap</a></li><li><a href="#data-graph">Data.Graph</a></li><li><a href="#show-and-read">Show and read</a></li><li><a href="#sqlite-database">SQLite database</a></li><li><a href="#files">Files</a></li><li><a href="#random-numbers">Random numbers</a></li><li><a href="#base16-encoding">Base16 encoding</a></li><li><a href="#base64-encoding">Base64 encoding</a></li><li><a href="#json">JSON</a></li><li><a href="#email-validation">Email validation</a></li><li><a href="#functor">Functor</a></li><li><a href="#applicative">Applicative</a></li><li><a href="#type-class">Type class</a></li><li><a href="#record">Record</a></li><li><a href="#threads">Threads</a></li><li><a href="#cpu-time">CPU time</a></li><li><a href="#external-command">External command</a></li><li><a href="#trace">Trace</a></li><li><a href="#sections">Sections</a></li><li><a href="#c-application">C application</a></li><li><a href="#java-application">Java application</a></li><li><a href="#python-application">Python application</a></li><li><a href="#unique-values">Unique values</a></li><li><a href="#automatic-testing">Automatic testing</a></li><li><a href="#utf-8">UTF-8</a></li><li><a href="#type-representations">Type representations</a></li><li><a href="#modules">Modules</a></li><li><a href="#numeric">Numeric</a></li><li><a href="#data-tree">Data.Tree</a></li><li><a href="#binary-serialization">Binary serialization</a></li><li><a href="#integral">Integral</a></li><li><a href="#data-ioref">Data.IORef</a></li><li><a href="#transactions">Transactions</a></li><li><a href="#data-tuple">Data.Tuple</a></li><li><a href="#byte-order">Byte order</a></li><li><a href="#byte-dump">Byte dump</a></li><li><a href="#uuid">UUID</a></li><li><a href="#cpu-information">CPU information</a></li><li><a href="#hostname">HostName</a></li><li><a href="#sha">SHA</a></li><li><a href="#md5">MD5</a></li><li><a href="#punycode">Punycode</a></li><li><a href="#dimensional">Dimensional</a></li><li><a href="#java-parser">Java parser</a></li><li><a href="#javascript-parser">JavaScript parser</a></li><li><a href="#crypto-hash">Crypto.Hash</a></li><li><a href="#diff">Diff</a></li><li><a href="#zlib">Zlib</a></li><li><a href="#gzip">GZip</a></li><li><a href="#linear-algebra">Linear Algebra</a></li><li><a href="#data-matrix">Data.Matrix</a></li><li><a href="#towers-of-hanoi">Towers of Hanoi</a></li><li><a href="#c-parser">C parser</a></li><li><a href="#data-either">Data.Either</a></li><li><a href="#data-maybe">Data.Maybe</a></li><li><a href="#fibonacci">Fibonacci</a></li><li><a href="#coin-changes">Coin changes</a></li><li><a href="#queens">Queens</a></li><li><a href="#ghc-options">GHC options</a></li><li><a href="#packageimports">PackageImports</a></li><li><a href="#monoid">Monoid</a></li><li><a href="#data-vector">Data.Vector</a></li><li><a href="#cellular-automaton">Cellular automaton</a></li><li><a href="#enum">Enum</a></li><li><a href="#ski-calculus">SKI calculus</a></li><li><a href="#sieve-of-eratosthenes">Sieve of Eratosthenes</a></li><li><a href="#bounded">Bounded</a></li><li><a href="#data-bits">Data.Bits</a></li><li><a href="#math-constants">Math constants</a></li><li><a href="#polynomial">Polynomial</a></li><li><a href="#statistics">Statistics</a></li><li><a href="#collatz-sequence">Collatz sequence</a></li><li><a href="#monad">Monad</a></li><li><a href="#state-monad">State monad</a></li><li><a href="#reader-monad">Reader monad</a></li><li><a href="#writer-monad">Writer monad</a></li><li><a href="#church-numerals">Church numerals</a></li><li><a href="#version">Version</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h3 id="simple-application"><a href="#simple-application">Simple application</a></h3><pre><code class="active haskell">main = putStrLn &quot;Hello, world!&quot;</code></pre><h3 id="system-info"><a href="#system-info">System info</a></h3><pre><code class="active haskell">import System.Info
+
+main = do
+    print os
+    print arch
+    print compilerName
+    print compilerVersion</code></pre><h3 id="system-environment"><a href="#system-environment">System environment</a></h3><pre><code class="active haskell">import System.Environment
+
+main = do
+    getArgs &gt;&gt;= print
+    getProgName &gt;&gt;= print
+    getEnvironment &gt;&gt;= print</code></pre><h3 id="system-environment-for-web-application"><a href="#system-environment-for-web-application">System environment for web application</a></h3><pre><code class="active haskell web">import Happstack.Server.Env
+import System.Environment
+
+main = do
+    environment &lt;- getEnvironment
+    simpleHTTP nullConf $ ok $ show environment</code></pre><h3 id="directories"><a href="#directories">Directories</a></h3><pre><code class="active haskell">import System.Directory
+
+main = do
+    getCurrentDirectory &gt;&gt;= print 
+    getHomeDirectory &gt;&gt;= print
+    getUserDocumentsDirectory &gt;&gt;= print</code></pre><h3 id="current-date-and-time"><a href="#current-date-and-time">Current date and time</a></h3><pre><code class="active haskell">import Data.Time
+
+main = getCurrentTime &gt;&gt;= print</code></pre><h3 id="simple-http-conduit"><a href="#simple-http-conduit">Simple HTTP conduit</a></h3><pre><code class="active haskell">import Network.HTTP.Conduit
+import qualified Data.ByteString.Lazy as L
+
+main = simpleHttp &quot;http://www.winsoft.sk&quot; &gt;&gt;= L.putStr</code></pre><h3 id="streaming-http-conduit"><a href="#streaming-http-conduit">Streaming HTTP conduit</a></h3><pre><code class="active haskell">import Network.HTTP.Conduit
+import Control.Monad.IO.Class (liftIO)
+
+main = withManager $ \manager -&gt; do
+    request &lt;- parseUrl &quot;http://www.winsoft.sk&quot;
+    liftIO $ print request
+    response &lt;- httpLbs request manager
+    liftIO $ print response</code></pre><h3 id="yesod-version"><a href="#yesod-version">Yesod version</a></h3><pre><code class="active haskell">import Yesod
+
+main = putStrLn yesodVersion</code></pre><h3 id="yesod-application"><a href="#yesod-application">Yesod application</a></h3><pre><code class="active haskell web">{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
+import Yesod
+
+data WebApp = WebApp
+
+instance Yesod WebApp
+
+mkYesod &quot;WebApp&quot; [parseRoutes|
+  / HomeR GET
+|]
+
+getHomeR = defaultLayout [whamlet|
+  &lt;div&gt;Hello, world!
+|]
+
+main = warpEnv WebApp</code></pre><h3 id="snap-application"><a href="#snap-application">Snap application</a></h3><pre><code class="active haskell web">{-# LANGUAGE OverloadedStrings #-}
+
+import Snap.Http.Server.Env
+import Snap.Core
+
+main = httpServe defaultConfig $ writeBS &quot;Hello, world!&quot;</code></pre><h3 id="happstack-application"><a href="#happstack-application">Happstack application</a></h3><pre><code class="active haskell web">import Happstack.Server.Env
+
+main = simpleHTTP nullConf $ ok &quot;Hello, world!&quot;</code></pre><h3 id="javascript-minification"><a href="#javascript-minification">JavaScript minification</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Text.Jasmine
+import Data.ByteString.Lazy.Char8
+
+main = print $ unpack $ minify &quot;function test() { alert('Hello, world!'); }&quot;</code></pre><h3 id="lists"><a href="#lists">Lists</a></h3><pre><code class="active haskell">list = [1, 2, 3, 4, 5]
+
+main = do
+    print list
+
+    print $ head list
+    print $ tail list
+    print $ last list
+    print $ init list
+
+    print $ list !! 3
+    print $ elem 3 list
+
+    print $ length list
+    print $ null list
+    print $ reverse list
+
+    print $ take 2 list
+    print $ drop 2 list
+
+    print $ minimum list
+    print $ maximum list
+
+    print $ sum list
+    print $ product list
+
+    print [1..10]
+    print ['A'..'Z']
+    print [2,4..20]
+
+    print $ take 10 $ cycle [1..4]
+    print $ map (+1) list
+
+    print $ filter (&gt;3) list
+    print $ all even list
+    print $ any odd list
+
+    print $ foldr (+) 0 list
+    print $ foldr1 (+) list
+
+    print $ foldl (+) 0 list
+    print $ foldl1 (+) list
+
+    print $ scanr (+) 0 list
+    print $ scanr1 (+) list
+
+    print $ scanl (+) 0 list
+    print $ scanl1 (+) list
+
+    print $ take 10 $ repeat 0
+    print $ replicate 10 0
+    print $ drop 3 list
+
+    print $ ['a', 'b'] ++ ['c']
+    print $ zip [1, 2, 3] ['a', 'b', 'c']
+    print $ unzip [(1, 'a'), (2, 'b'), (3, 'c')]
+    print $ zipWith (+) [1, 2, 3] [4, 5, 6]
+    print $ [(x, y) | x &lt;- [1..5], y &lt;- ['a'..'e']]
+
+    print $ words &quot;Hello world&quot;
+    print $ unwords [&quot;Hello&quot;, &quot;world&quot;] </code></pre><h3 id="tuples"><a href="#tuples">Tuples</a></h3><pre><code class="active haskell">tuple = (1, 2)
+
+tuple3 = (1, 2, 3)
+
+first (a, _, _) = a
+second (_, b, _) = b
+third (_, _, c) = c
+
+main = do
+    print tuple
+    print $ fst tuple
+    print $ snd tuple
+
+    print tuple3
+    print $ first tuple3
+    print $ second tuple3
+    print $ third tuple3</code></pre><h3 id="data-list"><a href="#data-list">Data.List</a></h3><pre><code class="active haskell">import Data.List
+
+main = do
+    print $ intersperse '.' &quot;Erik&quot;
+    print $ intercalate &quot; &quot; [&quot;abc&quot;,&quot;efg&quot;,&quot;x&quot;]
+    print $ transpose [&quot;abc&quot;,&quot;efg&quot;]
+    print $ subsequences &quot;abc&quot;
+    print $ permutations &quot;abc&quot;
+
+    print $ foldl' (+) 0 [1..1000000]
+    print $ foldl1' (+) [1..1000000]
+
+    print $ concat [&quot;abc&quot;,&quot;efg&quot;]
+    print $ any (== 'a') &quot;abcd&quot;
+    print $ all (== 'a') &quot;abcd&quot;
+    print $ take 10 $ iterate (+1) 1
+    print $ replicate 10 'x'
+    print $ splitAt 3 &quot;abcdefgh&quot;
+    print $ takeWhile (&lt; 3) [1..]
+    print $ span (&lt; 3) [1..10]
+    print $ break (&gt; 3) [1..10]
+    print $ stripPrefix &quot;ab&quot; &quot;abcdefg&quot;
+    print $ isPrefixOf &quot;ab&quot; &quot;abcdefg&quot;
+    print $ elem 'c' &quot;abcdefg&quot;
+    print $ lookup 'c' [('a', 1), ('b', 2), ('c', 3)]
+    print $ find (&gt; 2) [1..]
+    print $ partition (&gt; 2) [1..10]
+    print $ nub [1, 1, 3, 2, 1, 2, 4, 6]
+    print $ sort [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    print $ elemIndex 2 [1, 2, 3, 4, 2]
+    print $ elemIndices 2 [1, 2, 3, 4, 2]
+    print $ findIndex (&lt; 3) [1, 2, 3, 4, 2]
+    print $ findIndices (&lt; 3) [1, 2, 3, 4, 2]</code></pre><h3 id="data-char"><a href="#data-char">Data.Char</a></h3><pre><code class="active haskell">import Data.Char
+
+main = do
+    print $ isAlpha 'c'
+    print $ isDigit '4'
+    print $ toUpper 'a'
+    print $ toLower 'E'
+    print $ digitToInt '2'
+    print $ intToDigit 9
+    print $ intToDigit 12
+    print $ ord('A')
+    print $ chr(61)</code></pre><h3 id="data-map"><a href="#data-map">Data.Map</a></h3><pre><code class="active haskell">import qualified Data.Map as Map
+
+phoneBook = Map.fromList [(1234, &quot;Erik&quot;), (5678, &quot;Patrik&quot;)]
+
+main = do
+    print phoneBook
+    print $ Map.lookup 1234 phoneBook
+    print $ (Map.empty :: Map.Map Int Int)
+    print $ Map.singleton 3 5
+    print $ Map.insert 1 &quot;abc&quot; Map.empty
+    print $ Map.null phoneBook
+    print $ Map.size phoneBook
+    print $ Map.toList phoneBook
+    print $ Map.keys phoneBook
+    print $ Map.elems phoneBook</code></pre><h3 id="data-set"><a href="#data-set">Data.Set</a></h3><pre><code class="active haskell">import qualified Data.Set as Set
+
+set = Set.fromList &quot;erik salaj&quot;
+
+main = do
+    print set
+    print $ Set.null set
+    print $ Set.size set
+    print $ Set.member 'a' set</code></pre><h3 id="data-array"><a href="#data-array">Data.Array</a></h3><pre><code class="active haskell">import Data.Array
+
+myArray = array (1, 3) [(1, &quot;a&quot;), (2, &quot;b&quot;), (3, &quot;c&quot;)]
+
+main = do
+    print myArray
+    print $ myArray ! 2
+    print $ bounds myArray
+    print $ indices myArray
+    print $ elems myArray
+    print $ assocs myArray</code></pre><h3 id="data-complex"><a href="#data-complex">Data.Complex</a></h3><pre><code class="active haskell">import Data.Complex
+
+number = 3 :+ 4
+
+main = do
+    print number
+    print $ realPart number
+    print $ imagPart number
+    print $ polar number
+    print $ magnitude number
+    print $ phase number
+    print $ conjugate number</code></pre><h3 id="data-hashset"><a href="#data-hashset">Data.HashSet</a></h3><pre><code class="active haskell">import Prelude hiding (null, map, filter)
+import Data.HashSet
+import Data.Char
+
+hashSet = fromList ['a', 'b', 'c']
+
+main = do
+    print $ hashSet
+
+    print $ null hashSet
+    print $ size hashSet
+
+    print $ member 'a' hashSet
+    print $ member 'e' hashSet
+
+    print $ insert 'd' hashSet
+    print $ delete 'b' hashSet
+
+    print $ map (toUpper) hashSet
+    print $ filter (&gt; 'a') hashSet</code></pre><h3 id="data-hashmap"><a href="#data-hashmap">Data.HashMap</a></h3><pre><code class="active haskell">import Prelude hiding (null, lookup, map, filter)
+import Data.HashMap.Lazy
+import Data.Char
+
+hashMap = fromList [(1 :: Int, 'a'), (2, 'b'), (3, 'c')]
+
+main = do
+    print $ hashMap
+    print $ keys hashMap
+    print $ elems hashMap
+
+    print $ null hashMap
+    print $ size hashMap
+
+    print $ member 1 hashMap
+    print $ member 5 hashMap
+
+    print $ lookup 1 hashMap
+    print $ lookup 5 hashMap
+
+    print $ hashMap ! 1
+    print $ lookupDefault 'N' 5 hashMap
+
+    print $ insert 4 'd' hashMap
+    print $ delete 2 hashMap
+
+    print $ map (toUpper) hashMap
+    print $ filter (&gt; 'a') hashMap</code></pre><h3 id="data-graph"><a href="#data-graph">Data.Graph</a></h3><pre><code class="active haskell">import Data.Graph
+
+graph = buildG (1, 6) [(1, 2), (1, 3), (2, 4), (5, 6)]
+
+main = do
+    print graph
+    print $ vertices graph
+    print $ edges graph
+    print $ edges $ transposeG graph
+
+    print $ outdegree graph
+    print $ indegree graph
+
+    print $ topSort graph
+    print $ reachable graph 1
+
+    print $ path graph 1 4
+    print $ path graph 1 5
+
+    print $ components graph
+    print $ scc graph
+    print $ bcc graph
+
+    print $ dff graph
+    print $ dfs graph [2]</code></pre><h3 id="show-and-read"><a href="#show-and-read">Show and read</a></h3><pre><code class="active haskell">main = do
+    print $ show 3
+    print $ show [1, 2, 3]
+    print $ show (1, False)
+
+    print $ (read &quot;34&quot; :: Int)
+    print $ (read &quot;(1, False)&quot; :: (Int, Bool))</code></pre><h3 id="sqlite-database"><a href="#sqlite-database">SQLite database</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Database.Sqlite
+
+printRows stmt = do
+    row &lt;- step stmt
+    if row == Done then
+        return ()
+    else do
+        col &lt;- column stmt 0
+        print col
+        printRows stmt
+
+main = do
+    conn &lt;- open &quot;database.db&quot;
+
+    stmt &lt;- prepare conn &quot;DROP TABLE IF EXISTS MyTable;&quot;
+    step stmt
+    finalize stmt
+
+    stmt &lt;- prepare conn &quot;CREATE TABLE IF NOT EXISTS MyTable (Name VARCHAR(20));&quot;
+    step stmt
+    finalize stmt
+
+    stmt &lt;- prepare conn &quot;INSERT INTO MyTable(Name) VALUES('Erik');&quot;
+    step stmt
+    finalize stmt
+
+    stmt &lt;- prepare conn &quot;INSERT INTO MyTable(Name) VALUES('Patrik');&quot;
+    step stmt
+    finalize stmt
+
+    stmt &lt;- prepare conn &quot;SELECT * FROM MyTable;&quot;
+    printRows stmt
+    finalize stmt
+
+    close conn</code></pre><h3 id="files"><a href="#files">Files</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+main = readFile &quot;file.txt&quot; &gt;&gt;= putStr
+
+{-# START_FILE file.txt #-}
+Hello, world!</code></pre><pre><code class="active haskell">{-# START_FILE main.hs #-}
+main = do
+    contents &lt;- readFile &quot;file.txt&quot;
+    putStr contents
+
+{-# START_FILE file.txt #-}
+Hello, world!</code></pre><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import System.IO
+
+main = do
+    handle &lt;- openFile &quot;file.txt&quot; ReadMode
+    contents &lt;- hGetContents handle
+    putStr contents
+    hClose handle
+
+{-# START_FILE file.txt #-}
+Hello, world!</code></pre><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import System.IO
+
+main = withFile &quot;file.txt&quot; ReadMode $ \handle -&gt; do
+    contents &lt;- hGetContents handle
+    putStr contents
+
+{-# START_FILE file.txt #-}
+Hello, world!</code></pre><pre><code class="active haskell">main = do
+    writeFile &quot;file.txt&quot; &quot;Hello, world!&quot;
+    readFile &quot;file.txt&quot; &gt;&gt;= print</code></pre><h3 id="random-numbers"><a href="#random-numbers">Random numbers</a></h3><pre><code class="active haskell">import System.Random
+
+main = (randomRIO (1, 100) :: IO Int) &gt;&gt;= print</code></pre><h3 id="base16-encoding"><a href="#base16-encoding">Base16 encoding</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.ByteString.Base16
+import Data.ByteString.Char8
+
+main = do
+    print $ unpack $ encode &quot;Hello, world!&quot;
+    print $ decode &quot;48656c6c6f2c20776f726c6421&quot;</code></pre><h3 id="base64-encoding"><a href="#base64-encoding">Base64 encoding</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.ByteString.Base64
+import Data.ByteString.Char8
+
+main = do
+    print $ unpack $ encode &quot;Hello, world!&quot;
+    print $ decode &quot;SGVsbG8sIHdvcmxkIQ==&quot;</code></pre><h3 id="json"><a href="#json">JSON</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
+
+import Data.Aeson
+import Data.ByteString.Lazy.Char8
+import GHC.Generics
+
+data MyData = MyData { text :: String, number :: Int } deriving (Show, Generic)
+
+instance FromJSON MyData
+instance ToJSON MyData
+
+myData = MyData &quot;Hello&quot; 123
+
+main = do
+    print myData
+    print $ unpack $ encode myData
+    print $ (decode &quot;{ \&quot;number\&quot; : 123, \&quot;text\&quot; : \&quot;Hello\&quot; }&quot; :: Maybe MyData)</code></pre><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Aeson
+import Control.Applicative
+import Data.ByteString.Lazy.Char8 hiding (empty)
+
+data MyData = MyData { text :: String, number :: Int } deriving Show
+
+instance ToJSON MyData where
+    toJSON (MyData text number) = object [&quot;text&quot; .= text, &quot;number&quot; .= number]
+
+instance FromJSON MyData where
+    parseJSON (Object v) = MyData &lt;$&gt; v .: &quot;text&quot; &lt;*&gt; v .: &quot;number&quot;
+    parseJSON _          = empty
+
+myData = MyData &quot;Hello&quot; 123
+
+main = do
+    print myData
+    print $ unpack $ encode myData
+    print $ (decode &quot;{ \&quot;number\&quot; : 123, \&quot;text\&quot; : \&quot;Hello\&quot; }&quot; :: Maybe MyData)</code></pre><h3 id="email-validation"><a href="#email-validation">Email validation</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Text.Email.Validate
+
+email = &quot;eriksalaj@gmail.com&quot;
+
+main = do
+    print $ isValid email
+    print $ validate email
+    print $ emailAddress email
+    print $ canonicalizeEmail email
+
+    let Just address = emailAddress email
+    print $ localPart address
+    print $ domainPart address</code></pre><h3 id="functor"><a href="#functor">Functor</a></h3><pre><code class="active haskell">main = do
+    print $ fmap (+ 1) Nothing
+    print $ fmap (+ 1) $ Just 2
+
+    print $ fmap (+ 1) [1, 2, 3]
+    print $ fmap (* 2) (+ 5) 2 </code></pre><h3 id="applicative"><a href="#applicative">Applicative</a></h3><pre><code class="active haskell">import Control.Applicative
+
+main = do
+    print $ (pure 1 :: Maybe Int)
+
+    print $ Just (+ 1) &lt;*&gt; Nothing
+    print $ Just (+ 1) &lt;*&gt; Just 2
+
+    print $ [(+ 1), (* 2)] &lt;*&gt; []
+    print $ [(+ 1), (* 2)] &lt;*&gt; [1, 2, 3]
+
+    print $ Just 1 &lt;* Just 2
+    print $ Just 1 *&gt; Just 2
+
+    print $ (+ 1) &lt;$&gt; Nothing
+    print $ (+ 1) &lt;$&gt; Just 2
+
+    print $ 1 &lt;$ Nothing
+    print $ 1 &lt;$ Just 2
+
+    print $ Nothing &lt;**&gt; Just (+ 2)
+    print $ Just 1 &lt;**&gt; Just (+ 2)
+
+    print $ liftA (+ 1) Nothing
+    print $ liftA (+ 1) $ Just 2
+
+    print $ liftA2 (+) Nothing Nothing
+    print $ liftA2 (+) (Just 1) (Just 2)
+
+    print $ (+) &lt;$&gt; Just 1 &lt;*&gt; Nothing
+    print $ (+) &lt;$&gt; Just 1 &lt;*&gt; Just 2</code></pre><h3 id="type-class"><a href="#type-class">Type class</a></h3><pre><code class="active haskell">class MyClass a where
+    myFunc :: a -&gt; String
+
+instance MyClass Bool where
+    myFunc n = &quot;Bool: &quot; ++ show n
+
+instance MyClass Char where
+    myFunc n = &quot;Char: &quot; ++ show n
+
+myShow :: MyClass a =&gt; a -&gt; String
+myShow n = myFunc n
+
+main = do
+    print $ myFunc True
+    print $ myFunc 'a'
+
+    print $ myShow True
+    print $ myShow 'a'</code></pre><h3 id="record"><a href="#record">Record</a></h3><pre><code class="active haskell">data Person = Person { firstName :: String, lastName :: String } deriving Show
+
+person = Person &quot;Erik&quot; &quot;Salaj&quot;
+
+main = do
+    print person
+    print Person { firstName = &quot;Erik&quot;, lastName = &quot;Salaj&quot; }
+    print $ firstName person
+    print $ lastName person</code></pre><h3 id="threads"><a href="#threads">Threads</a></h3><pre><code class="active haskell">import Control.Concurrent
+
+main = do
+    getNumCapabilities &gt;&gt;= print
+    print rtsSupportsBoundThreads
+
+    forkIO $ sequence_ $ replicate 3 $ do { print &quot;Thread 1&quot;; threadDelay 1 }
+    forkIO $ sequence_ $ replicate 3 $ do { print &quot;Thread 2&quot;; threadDelay 1 }
+    forkIO $ sequence_ $ replicate 3 $ do { print &quot;Thread 3&quot;; threadDelay 1 }
+    threadDelay 10000</code></pre><h3 id="cpu-time"><a href="#cpu-time">CPU time</a></h3><pre><code class="active haskell">import System.CPUTime
+
+main = do
+    print cpuTimePrecision
+    getCPUTime &gt;&gt;= print</code></pre><h3 id="external-command"><a href="#external-command">External command</a></h3><pre><code class="active haskell">import System.Process
+
+main = do
+    system &quot;echo Hello, world!&quot;
+
+    system &quot;uname -a&quot;
+    system &quot;cat /proc/version&quot;
+    system &quot;cat /proc/cpuinfo&quot;
+    system &quot;lsb_release -a&quot;
+
+    system &quot;ghc --version&quot;
+    system &quot;cc --version&quot;
+    system &quot;java -version&quot;
+    system &quot;python --version&quot;</code></pre><h3 id="trace"><a href="#trace">Trace</a></h3><pre><code class="active haskell">import Debug.Trace
+
+main = do
+    print $ trace &quot;Calling 1 + 1&quot; (1 + 1)
+
+    traceIO &quot;Calling 1 + 1&quot;
+    print $ 1 + 1
+
+    let x = 1
+    print $ traceShow (x, x + x) (x + x)</code></pre><h3 id="sections"><a href="#sections">Sections</a></h3><pre><code class="active haskell">main = do
+    print $ (1 /) 2
+    print $ (/ 1) 2</code></pre><h3 id="c-application"><a href="#c-application">C application</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import System.Process
+
+main = do
+    system &quot;cc main.c&quot;
+    system &quot;./a.out&quot;
+
+{-# START_FILE main.c #-}
+#include &lt;stdio.h&gt;
+
+int main() {
+    printf(&quot;Hello, world!\n&quot;);
+    return 0;
+}</code></pre><h3 id="java-application"><a href="#java-application">Java application</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import System.Process
+
+main = do
+    system &quot;javac Main.java&quot;
+    system &quot;java Main&quot;
+
+{-# START_FILE Main.java #-}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, world!&quot;);
+    }
+}</code></pre><h3 id="python-application"><a href="#python-application">Python application</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import System.Process
+
+main = system &quot;python hello.py&quot;
+{-# START_FILE hello.py #-}
+print &quot;Hello, world!&quot;</code></pre><h3 id="unique-values"><a href="#unique-values">Unique values</a></h3><pre><code class="active haskell">import Data.Unique
+
+main = do
+    unique &lt;- newUnique
+    print $ hashUnique unique
+
+    unique &lt;- newUnique
+    print $ hashUnique unique
+
+    unique &lt;- newUnique
+    print $ hashUnique unique</code></pre><h3 id="automatic-testing"><a href="#automatic-testing">Automatic testing</a></h3><pre><code class="active haskell">import Test.QuickCheck
+
+check x = x == (reverse . reverse) x
+
+main = do
+    print stdArgs
+    sample (vector 3 :: Gen [Int])
+    sample (orderedList :: Gen [Int])
+
+    quickCheck (check :: [Int] -&gt; Bool)
+    verboseCheck (check :: [Int] -&gt; Bool)</code></pre><h3 id="utf-8"><a href="#utf-8">UTF-8</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import qualified Data.ByteString.UTF8 as UTF8
+import Data.ByteString.Char8
+
+main = do
+    print &quot;áéí&quot;
+    print $ UTF8.fromString &quot;áéí&quot;
+    print $ UTF8.length &quot;\195\161\195\169\195\173&quot;
+    print $ UTF8.toString &quot;\195\161\195\169\195\173&quot;</code></pre><h3 id="type-representations"><a href="#type-representations">Type representations</a></h3><pre><code class="active haskell">import Data.Typeable
+
+main = do
+    print $ typeOf 'a'
+    print $ typeOf &quot;Hello, world!&quot;
+    print $ typeOf putStrLn
+
+    print $ (cast True :: Maybe Int)
+    print $ (cast True :: Maybe Bool)</code></pre><h3 id="modules"><a href="#modules">Modules</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import Test
+
+main = helloWorld
+
+{-# START_FILE Test.hs #-}
+module Test where
+
+helloWorld = putStrLn &quot;Hello, world!&quot;</code></pre><h3 id="numeric"><a href="#numeric">Numeric</a></h3><pre><code class="active haskell">import Numeric
+import Data.Char
+
+main = do
+    print $ showInt 123 &quot;&quot;
+    print $ showHex 123 &quot;&quot;
+    print $ showOct 123 &quot;&quot;
+    print $ showIntAtBase 2 intToDigit 123 &quot;&quot;
+
+    print $ showFloat 123.456 &quot;&quot;
+    print $ showEFloat (Just 2) 123.456 &quot;&quot;
+    print $ showFFloat (Just 2) 123.456 &quot;&quot;
+    print $ showGFloat (Just 2) 123.456 &quot;&quot;
+    print $ floatToDigits 10 123.456
+    print $ floatToDigits 16 123.456</code></pre><h3 id="data-tree"><a href="#data-tree">Data.Tree</a></h3><pre><code class="active haskell">import Data.Tree
+
+tree = Node &quot;A&quot; [Node &quot;B&quot; [], Node &quot;C&quot; [Node &quot;D&quot; [], Node &quot;E&quot; []]]
+
+main = do
+    print tree
+    putStrLn $ drawTree tree
+    putStrLn $ drawForest $ subForest tree
+
+    print $ flatten tree
+    print $ levels tree</code></pre><h3 id="binary-serialization"><a href="#binary-serialization">Binary serialization</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Serialize
+import Data.Word
+import Data.ByteString.Char8
+
+main = do
+    print $ encode (123 :: Word8)
+    print $ (decode &quot;{&quot; :: Either String Word8)
+
+    print $ encode (123 :: Word16)
+    print $ (decode &quot;\NUL{&quot; :: Either String Word16)
+
+    print $ encode 'a'
+    print $ (decode &quot;a&quot; :: Either String Char)
+
+    print $ encode (&quot;abc&quot; :: String)
+    print $ (decode &quot;\NUL\NUL\NUL\NUL\NUL\NUL\NUL\ETXabc&quot; :: Either String String)</code></pre><h3 id="integral"><a href="#integral">Integral</a></h3><pre><code class="active haskell">main = do
+    print $ 123 `quot` 4
+    print $ 123 `quot` (-4)
+
+    print $ 123 `div` 4
+    print $ 123 `div` (-4)
+
+    print $ 123 `mod` 4
+    print $ 123 `mod` (-4)
+
+    print $ 123 `quotRem` 4
+    print $ 123 `quotRem` (-4)
+
+    print $ 123 `divMod` 4
+    print $ 123 `divMod` (-4)</code></pre><h3 id="data-ioref"><a href="#data-ioref">Data.IORef</a></h3><pre><code class="active haskell">import Data.IORef
+
+main = do
+    ref &lt;- newIORef 0
+    value &lt;- readIORef ref
+    print value
+
+    writeIORef ref $ value + 1
+    readIORef ref &gt;&gt;= print
+
+    modifyIORef ref (+ 2)
+    readIORef ref &gt;&gt;= print</code></pre><h3 id="transactions"><a href="#transactions">Transactions</a></h3><pre><code class="active haskell">import Control.Concurrent.STM
+
+type Account = TVar Integer
+
+credit account amount = do
+    current &lt;- readTVar account
+    writeTVar account (current + amount)
+
+debit account amount = do
+    current &lt;- readTVar account
+    writeTVar account (current - amount)
+
+transfer from to amount =
+    atomically $ do
+        debit from amount
+        credit to amount
+
+main = do
+    account1 &lt;- atomically $ newTVar 10
+    account2 &lt;- atomically $ newTVar 20
+
+    transfer account1 account2 5
+
+    balance1 &lt;- atomically $ readTVar account1
+    balance2 &lt;- atomically $ readTVar account2
+    print balance1
+    print balance2</code></pre><h3 id="data-tuple"><a href="#data-tuple">Data.Tuple</a></h3><pre><code class="active haskell">import Data.Tuple
+
+main = print $ swap (1, 2)</code></pre><h3 id="byte-order"><a href="#byte-order">Byte order</a></h3><pre><code class="active haskell">import System.ByteOrder
+
+main = print byteOrder</code></pre><h3 id="byte-dump"><a href="#byte-dump">Byte dump</a></h3><pre><code class="active haskell">import Text.Bytedump
+
+main = do
+    print $ hexString 100
+    print $ dumpRawS &quot;Hello, world!&quot;
+    print $ dumpS &quot;Hello, world!&quot;</code></pre><h3 id="uuid"><a href="#uuid">UUID</a></h3><pre><code class="active haskell">import Prelude hiding (null)
+import Data.UUID
+import Data.UUID.V1
+import Data.UUID.V3 as V3
+import Data.UUID.V4
+import Data.UUID.V5 as V5
+
+main = do
+    print nil
+    print $ null nil
+    print $ toWords nil
+    print $ fromWords 1 2 3 4
+    print $ toString nil
+    print $ fromString &quot;00000000-0000-0000-0000-000000000000&quot;
+
+    uuid &lt;- nextUUID
+    print uuid
+
+    random &lt;- nextRandom
+    print random
+
+    print $ V3.namespaceDNS
+    print $ V3.namespaceURL
+    print $ V3.namespaceOID
+    print $ V3.namespaceX500
+    print $ V3.generateNamed V3.namespaceDNS [1, 2, 3]
+
+    print $ V5.namespaceDNS
+    print $ V5.namespaceURL
+    print $ V5.namespaceOID
+    print $ V5.namespaceX500
+    print $ V5.generateNamed V5.namespaceDNS [1, 2, 3]</code></pre><h3 id="cpu-information"><a href="#cpu-information">CPU information</a></h3><pre><code class="active haskell">import System.Arch
+import System.Endian
+
+main = do
+    print $ getSystemArch
+    print $ getSystemEndianness
+    print $ toBE32 0xFF000000</code></pre><h3 id="hostname"><a href="#hostname">HostName</a></h3><pre><code class="active haskell">import Network.HostName
+
+main = getHostName &gt;&gt;= print</code></pre><h3 id="sha"><a href="#sha">SHA</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Digest.Pure.SHA
+import Data.ByteString.Lazy.Char8
+
+main = do
+    print $ sha1 &quot;Hello, world!&quot;
+    print $ sha224 &quot;Hello, world!&quot;
+    print $ sha256 &quot;Hello, world!&quot;
+    print $ sha384 &quot;Hello, world!&quot;
+    print $ sha512 &quot;Hello, world!&quot;
+
+    print $ hmacSha1 &quot;key&quot; &quot;Hello, world!&quot;
+    print $ hmacSha224 &quot;key&quot; &quot;Hello, world!&quot;
+    print $ hmacSha256 &quot;key&quot; &quot;Hello, world!&quot;
+    print $ hmacSha384 &quot;key&quot; &quot;Hello, world!&quot;
+    print $ hmacSha512 &quot;key&quot; &quot;Hello, world!&quot;</code></pre><h3 id="md5"><a href="#md5">MD5</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Digest.Pure.MD5
+import Data.ByteString.Lazy.Char8
+
+main = print $ md5 &quot;Hello, world!&quot;</code></pre><h3 id="punycode"><a href="#punycode">Punycode</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Text.Punycode
+import Data.ByteString.Char8
+
+main = do
+    print $ encode &quot;Slovenský jazyk&quot;
+    print $ decode &quot;Slovensk jazyk-2sb&quot;</code></pre><h3 id="dimensional"><a href="#dimensional">Dimensional</a></h3><pre><code class="active haskell">import Numeric.Units.Dimensional.Prelude
+import qualified Prelude
+
+main = do
+    print $ 1 *~ kilo meter
+    print $ 1 *~ (kilo meter / hour)
+    print $ 1 *~ newton
+    print $ 1 *~ pascal</code></pre><h3 id="java-parser"><a href="#java-parser">Java parser</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import Language.Java.Lexer
+import Language.Java.Parser
+import Language.Java.Pretty
+
+main = do
+    source &lt;- readFile &quot;Main.java&quot;
+    print $ lexer source
+    print $ parser compilationUnit source
+
+    let result = parser compilationUnit source
+    case result of
+        Left error -&gt; print error
+        Right ast -&gt; putStrLn $ prettyPrint ast
+{-# START_FILE Main.java #-}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, world!&quot;);
+    }
+}</code></pre><h3 id="javascript-parser"><a href="#javascript-parser">JavaScript parser</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import Language.JavaScript.Parser
+
+main = do
+    source &lt;- readFile &quot;Main.js&quot;
+    print $ parse source &quot;Main.js&quot;
+
+    let result = parse source &quot;Main.js&quot;
+    case result of
+        Left error -&gt; print error
+        Right ast -&gt; putStrLn $ renderToString ast
+{-# START_FILE Main.js #-}
+function test() {
+    alert('Hello, world!');
+}</code></pre><h3 id="crypto-hash"><a href="#crypto-hash">Crypto.Hash</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Crypto.Hash.MD2 as MD2
+import Crypto.Hash.MD4 as MD4
+import Crypto.Hash.MD5 as MD5
+import Crypto.Hash.RIPEMD160 as RIPEMD160
+import Crypto.Hash.SHA1 as SHA1
+import Crypto.Hash.SHA224 as SHA224
+import Crypto.Hash.SHA256 as SHA256
+import Crypto.Hash.SHA384 as SHA384
+import Crypto.Hash.SHA512 as SHA512
+import Crypto.Hash.Tiger as Tiger
+import Crypto.Hash.Whirlpool as Whirlpool
+import Data.ByteString.Base16
+
+main = do
+    print $ encode $ MD2.hash &quot;Hello, world!&quot;
+    print $ encode $ MD4.hash &quot;Hello, world!&quot;
+    print $ encode $ MD5.hash &quot;Hello, world!&quot;
+
+    print $ encode $ RIPEMD160.hash &quot;Hello, world!&quot;
+
+    print $ encode $ SHA1.hash &quot;Hello, world!&quot;
+    print $ encode $ SHA224.hash &quot;Hello, world!&quot;
+    print $ encode $ SHA256.hash &quot;Hello, world!&quot;
+    print $ encode $ SHA384.hash &quot;Hello, world!&quot;
+    print $ encode $ SHA512.hash &quot;Hello, world!&quot;
+
+    print $ encode $ Tiger.hash &quot;Hello, world!&quot;
+
+    print $ encode $ Whirlpool.hash &quot;Hello, world!&quot;</code></pre><h3 id="diff"><a href="#diff">Diff</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import Data.Algorithm.Diff
+import Data.Algorithm.DiffOutput
+
+main = do
+    file1 &lt;- readFile &quot;file1.txt&quot;
+    file2 &lt;- readFile &quot;file2.txt&quot;
+
+    let
+        lines1 = lines file1
+        lines2 = lines file2
+    print $ getDiff lines1 lines2
+    print $ getGroupedDiff lines1 lines2
+    putStrLn $ ppDiff $ getGroupedDiff lines1 lines2
+{-# START_FILE file1.txt #-}
+first line
+second line
+{-# START_FILE file2.txt #-}
+first line
+hello
+third line</code></pre><h3 id="zlib"><a href="#zlib">Zlib</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Codec.Compression.Zlib
+import Data.ByteString.Lazy.Char8
+
+main = do
+    print $ compress &quot;Hello, world!&quot;
+    print $ decompress &quot;x\156\243H\205\201\201\215Q(\207/\202IQ\EOT\NUL ^\EOT\138&quot;</code></pre><h3 id="gzip"><a href="#gzip">GZip</a></h3><pre><code class="active haskell">{-# LANGUAGE OverloadedStrings #-}
+
+import Codec.Compression.GZip
+import Data.ByteString.Lazy.Char8
+
+main = do
+    print $ compress &quot;Hello, world!&quot;
+    print $ decompress &quot;\US\139\b\NUL\NUL\NUL\NUL\NUL\NUL\ETX\243H\205\201\201\215Q(\207/\202IQ\EOT\NUL\230\198\230\235\r\NUL\NUL\NUL&quot;</code></pre><h3 id="linear-algebra"><a href="#linear-algebra">Linear Algebra</a></h3><pre><code class="active haskell">import Linear
+
+main = do
+    print $ V0
+
+    print $ V1 1
+    print $ V1 1 + V1 2
+    print $ V1 1 - V1 2
+    print $ V1 1 * V1 2
+    print $ V1 1 / V1 2
+
+    print $ V2 1 2
+    print $ V2 1 2 + V2 3 4
+    print $ V2 1 2 - V2 3 4
+    print $ V2 1 2 * V2 3 4
+    print $ V2 1 2 / V2 3 4
+    print $ perp $ V2 0 1
+
+    print $ V3 1 2 3
+    print $ V3 1 2 3 + V3 4 5 6
+    print $ V3 1 2 3 - V3 4 5 6
+    print $ V3 1 2 3 * V3 4 5 6
+    print $ V3 1 2 3 / V3 4 5 6
+    print $ cross (V3 1 2 3) (V3 4 5 6)
+
+    print $ V4 1 2 3 4
+    print $ V4 1 2 3 4 + V4 5 6 7 8
+    print $ V4 1 2 3 4 - V4 5 6 7 8
+    print $ V4 1 2 3 4 * V4 5 6 7 8
+    print $ V4 1 2 3 4 / V4 5 6 7 8
+    print $ vector $ V3 1 2 3
+    print $ point $ V3 1 2 3
+
+    print $ (zero :: V3 Double)
+    print $ negated $ V3 1 2 3
+    print $ V3 1 2 3 ^* V3 4 5 6
+    print $ V3 1 2 3 *^ V3 4 5 6
+    print $ V3 1 2 3 ^/ 2
+    print $ sumV [V3 1 2 3, V3 4 5 6, V3 7 8 9]
+    print $ (basis :: [V3 Int])
+    print $ basisFor $ V3 1 2 3
+    print $ kronecker $ V3 1 2 3
+    print $ outer (V3 1 2 3) (V3 4 5 6)
+
+    print $ nearZero (1e-10 :: Double)
+    print $ nearZero (1e-15 :: Double)
+
+    print $ trace $ V3 (V3 1 2 3) (V3 4 5 6) (V3 7 8 9)
+    print $ diagonal $ V3 (V3 1 2 3) (V3 4 5 6) (V3 7 8 9)
+
+    print $ dot (V3 1 2 3) (V3 4 5 6)
+    print $ quadrance $ V3 1 2 3
+    print $ qd (V3 1 2 3) (V3 4 5 6)
+    print $ distance (V3 1 2 3) (V3 4 5 6)
+    print $ norm $ V3 1 2 3
+    print $ signorm $ V3 1 2 3
+    print $ normalize (V3 1 2 3 :: V3 Double)</code></pre><h3 id="data-matrix"><a href="#data-matrix">Data.Matrix</a></h3><pre><code class="active haskell">import Data.Matrix
+
+m1 = matrix 3 4 $ \(r, c) -&gt; 4 * (r - 1) + c
+m2 = fromList 3 4 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+m3 = fromLists [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+
+main = do
+    print m1
+    print m2
+    print m3
+
+    print $ zero 3 4
+    print $ identity 3
+    print $ permMatrix 3 1 2
+
+    print $ nrows m1
+    print $ ncols m1
+
+    print $ getElem 2 3 m1
+    print $ m1 ! (2, 3)
+    print $ getRow 2 m1
+    print $ getCol 3 m1
+    print $ getDiag m1
+
+    print $ setElem 13 (2, 3) m1
+    print $ transpose m1
+    print $ extendTo 0 4 8 m1
+    print $ mapRow (\c x -&gt; 2 * x) 3 m1
+
+    print $ submatrix 2 3 1 2 m1
+    print $ minorMatrix 1 2 m1
+    print $ splitBlocks 2 3 m1
+
+    print $ m1 &lt;|&gt; zero 3 2
+    print $ m1 &lt;-&gt; zero 2 4
+
+    print $ multStd m1 (identity 4)
+
+    print $ scaleMatrix 2 m1
+    print $ scaleRow 2 3 m1
+    print $ combineRows 3 2 1 m1
+    print $ switchRows 1 2 m1
+
+    print $ luDecomp $ fromLists [[1.0, 2.0], [3.0, 4.0]]
+    print $ trace m1
+    print $ diagProd m1
+
+    print $ detLaplace $ identity 3
+    print $ detLU $ fromLists [[1.0, 2.0], [3.0, 4.0]]</code></pre><h3 id="towers-of-hanoi"><a href="#towers-of-hanoi">Towers of Hanoi</a></h3><pre><code class="active haskell">data Tower = Tower1 | Tower2 | Tower3 deriving Show
+
+move 0 from to temp = []
+move n from to temp = move (n - 1) from temp to ++ [(from, to)] ++ move (n - 1) temp to from
+
+main = print $ move 3 Tower1 Tower2 Tower3</code></pre><h3 id="c-parser"><a href="#c-parser">C parser</a></h3><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import Language.C
+
+main = do
+    result &lt;- parseCFilePre &quot;test.c&quot;
+    case result of
+        Left error -&gt; print error
+        Right ast -&gt; do
+            print ast
+            print $ pretty ast
+{-# START_FILE test.c #-}
+int main() {
+    printf(&quot;Hello, world!\n&quot;);
+    return 0;
+}</code></pre><h3 id="data-either"><a href="#data-either">Data.Either</a></h3><pre><code class="active haskell">import Data.Either
+import Prelude hiding (error)
+
+type ErrorOrValue = Either String Int
+
+error = Left &quot;MyError&quot; :: ErrorOrValue
+value = Right 123 :: ErrorOrValue
+
+main = do
+    print error
+    print value
+
+    print $ isLeft error
+    print $ isLeft value
+
+    print $ isRight error
+    print $ isRight value
+
+    case error of
+        Left x -&gt; print $ &quot;Error: &quot; ++ x
+        Right x -&gt; print $ &quot;Value: &quot; ++ show x
+
+    case value of
+        Left x -&gt; print $ &quot;Error: &quot; ++ x
+        Right x -&gt; print $ &quot;Value: &quot; ++ show x
+
+    print $ either show (show.(+ 1)) error
+    print $ either show (show.(+ 1)) value
+
+    print $ either (\_ -&gt; 0) id error
+    print $ either (\_ -&gt; 0) id value
+
+    print $ lefts [error, value]
+    print $ rights [error, value]
+    print $ partitionEithers [error, value]</code></pre><h3 id="data-maybe"><a href="#data-maybe">Data.Maybe</a></h3><pre><code class="active haskell">import Data.Maybe
+import Data.Char
+
+nothing = Nothing :: Maybe String
+just = Just &quot;Hello, world!&quot; :: Maybe String
+
+main = do
+    print nothing
+    print just
+
+    print $ isNothing nothing
+    print $ isNothing just
+
+    print $ isJust nothing
+    print $ isJust just
+
+    case nothing of
+        Nothing -&gt; print &quot;Nothing&quot;
+        Just x -&gt; print x
+
+    case just of
+        Nothing -&gt; print &quot;Nothing&quot;
+        Just x -&gt; print x
+
+    print $ maybe &quot;Default&quot; (map toUpper) nothing
+    print $ maybe &quot;Default&quot; (map toUpper) just
+
+    print $ fromJust just
+
+    print $ fromMaybe &quot;Default&quot; nothing
+    print $ fromMaybe &quot;Default&quot; just
+
+    print $ listToMaybe ([] :: [Int])
+    print $ listToMaybe [1, 2, 3]
+
+    print $ maybeToList nothing
+    print $ maybeToList just
+
+    print $ catMaybes [nothing, just]
+
+    print $ mapMaybe (\_ -&gt; (Nothing :: Maybe Int)) [1, 2, 3]
+    print $ mapMaybe (\x -&gt; Just x) [1, 2, 3]</code></pre><h3 id="fibonacci"><a href="#fibonacci">Fibonacci</a></h3><pre><code class="active haskell">fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
+
+main = print $ take 20 fibonacci</code></pre><pre><code class="active haskell">fib a b = a : fib b (a + b)
+
+fibonacci = fib 0 1
+
+main = print $ take 20 fibonacci</code></pre><pre><code class="active haskell">fib n m a b
+    | n == m = a
+    | otherwise = fib n (m + 1) b (a + b)
+
+fibonacci n = fib n 0 0 1
+
+main = print [fibonacci n | n &lt;- [0..19]]</code></pre><pre><code class="active haskell">fib 0 a b = a
+fib n a b = fib (n - 1) b (a + b)
+
+fibonacci n = fib n 0 1
+
+main = print [fibonacci n | n &lt;- [0..19]]</code></pre><h3 id="coin-changes"><a href="#coin-changes">Coin changes</a></h3><pre><code class="active haskell">changeCount 0 _ = 1
+changeCount _ [] = 0
+changeCount n (coin : coins)
+    | n &gt; 0 = changeCount (n - coin) (coin : coins) + changeCount n coins
+    | otherwise = 0
+
+main = print $ changeCount 10 [8, 5, 1]</code></pre><pre><code class="active haskell">import Data.List
+import Data.Ord
+
+allChanges 0 _ = [[]]
+allChanges _ [] = []
+allChanges n (coin : coins)
+    | n &gt; 0 = map (coin :) (allChanges (n - coin) (coin : coins)) ++ allChanges n coins
+    | otherwise = []
+
+shortest = minimumBy $ comparing length
+
+optimalChange n coins = shortest $ allChanges n coins
+
+main = do
+    print $ allChanges 10 [8, 5, 1]
+    print $ optimalChange 10 [8, 5, 1]</code></pre><pre><code class="active haskell">bestChange 0 _ = Just []
+bestChange _ [] = Nothing
+bestChange n (coin : coins)
+    | n &gt; 0 = shorter (fmap (coin :) (bestChange (n - coin) (coin : coins))) (bestChange n coins)
+    | otherwise = Nothing
+
+shorter Nothing Nothing = Nothing
+shorter (Just a) Nothing = Just a
+shorter Nothing (Just b) = Just b
+shorter (Just a) (Just b) = if length a &lt; length b then Just a else Just b
+
+main = print $ bestChange 10 [8, 5, 1]</code></pre><h3 id="queens"><a href="#queens">Queens</a></h3><pre><code class="active haskell">queens n = queens' n n
+
+queens' n 0 = [[]]
+queens' n k = [x:xs | xs &lt;- queens' n (k - 1), x &lt;- [1..n], isSafeColumn x xs, isSafeDiagonal x xs]
+
+isSafeColumn x xs = not $ elem x xs
+
+isSafeDiagonal x xs = all (\(a, b) -&gt; abs(x - a) /= b) $ zip xs [1..]
+
+showLine n k = replicate (k - 1) '.' ++ &quot;X&quot; ++ replicate (n - k) '.'
+
+showSolution s = (mapM_ putStrLn [showLine (length s) k | k &lt;- s]) &gt;&gt; putStrLn &quot;&quot;
+
+main = mapM_ showSolution $ queens 4</code></pre><h3 id="ghc-options"><a href="#ghc-options">GHC options</a></h3><pre><code class="active haskell">{-# OPTIONS_GHC -fwarn-missing-signatures #-}
+
+main = putStrLn &quot;Hello, world!&quot;</code></pre><h3 id="packageimports"><a href="#packageimports">PackageImports</a></h3><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import &quot;unordered-containers&quot; Data.HashSet
+
+main = print $ singleton 'a'</code></pre><h3 id="monoid"><a href="#monoid">Monoid</a></h3><pre><code class="active haskell">import Data.Monoid
+
+main = do
+    print $ Sum 10
+    print $ getSum $ Sum 10
+    print $ (mempty :: Sum Int)
+    print $ mappend (Sum 10) (Sum 20)
+    print $ Sum 10 &lt;&gt; Sum 20
+    print $ mconcat [Sum 10, Sum 20, Sum 30]
+
+    print $ Product 10
+    print $ getProduct $ Product 10
+    print $ Product 10 &lt;&gt; Product 20
+
+    print $ First (Just 10) &lt;&gt; First (Just 20)
+    print $ First Nothing &lt;&gt; First (Just 20)
+
+    print $ Last (Just 10) &lt;&gt; Last (Just 20)
+    print $ Last Nothing &lt;&gt; Last (Just 20)
+
+    print $ Any False &lt;&gt; Any False
+    print $ Any False &lt;&gt; Any True
+
+    print $ All False &lt;&gt; All True
+    print $ All True &lt;&gt; All True
+
+    print $ Dual (First (Just 10)) &lt;&gt; Dual (First (Just 20))
+    print $ Dual (First (Just 20)) &lt;&gt; Dual (First (Just 10))
+
+    print $ appEndo (Endo (+ 10)) 1
+    print $ appEndo (Endo (+ 10) &lt;&gt; (Endo (+ 20))) 2</code></pre><h3 id="data-vector"><a href="#data-vector">Data.Vector</a></h3><pre><code class="active haskell">import Prelude hiding (replicate, enumFromTo, enumFromThenTo, length, null)
+import Data.Vector
+
+main = do
+    print $ (empty :: Vector Char)
+    print $ singleton 'a'
+    print $ replicate 10 'b'
+    print $ generate 10 (* 2)
+    print $ iterateN 10 (+ 1) 100
+    print $ enumFromN 10 5
+    print $ enumFromStepN 2 3 10
+    print $ enumFromTo 10 20
+    print $ enumFromThenTo 10 12 20
+
+    print $ fromList [1..5]
+    print $ fromListN 3 [1..5]
+    print $ toList $ replicate 10 'c'
+
+    let vector = fromList [1..10]
+
+    print $ length vector
+    print $ null vector
+    print $ null $ fromList []
+
+    print $ vector ! 0
+    print $ vector !? 0
+    print $ vector !? 10</code></pre><h3 id="cellular-automaton"><a href="#cellular-automaton">Cellular automaton</a></h3><pre><code class="active haskell">rule ' ' ' ' ' ' = ' '
+rule ' ' ' ' 'X' = 'X'
+rule ' ' 'X' ' ' = ' '
+rule ' ' 'X' 'X' = 'X'
+rule 'X' ' ' ' ' = 'X'
+rule 'X' ' ' 'X' = ' '
+rule 'X' 'X' ' ' = 'X'
+rule 'X' 'X' 'X' = ' '
+
+start n = replicate n ' ' ++ &quot;X&quot; ++ replicate n ' '
+
+next (a : b : c : rest) = rule a b c : next (b : c : rest)
+next _ = &quot; &quot;
+
+rows n = take n $ iterate (\x -&gt; ' ' : next x) $ start n
+
+main = mapM_ putStrLn $ rows 32</code></pre><h3 id="enum"><a href="#enum">Enum</a></h3><pre><code class="active haskell">main = do
+    print $ succ 'a'
+    print $ pred 'b'
+    print $ (toEnum 65 :: Char)
+    print $ fromEnum 'B'
+
+    print $ take 10 $ enumFrom 'a'
+    print $ take 10 $ ['a'..]
+
+    print $ take 10 $ enumFromThen 'a' 'c'
+    print $ take 10 $ ['a', 'c'..]
+
+    print $ enumFromTo 'a' 'e'
+    print $ ['a'..'e']
+
+    print $ enumFromThenTo 'a' 'c' 's'
+    print $ ['a', 'c'..'s']</code></pre><h3 id="ski-calculus"><a href="#ski-calculus">SKI calculus</a></h3><pre><code class="active haskell">data SKI = S | K | I | App SKI SKI | Var String deriving (Show, Eq)
+
+eval (App I x) = eval x
+eval (App (App K x) y) = eval x
+eval (App (App (App S x) y) z) = eval (App (App x z) (App y z))
+eval (App x y) =
+    if (App x y) == app then
+        app
+    else
+        eval app
+    where
+        app = App (eval x) (eval y)
+eval x = x
+
+main = do
+    print $ eval $ App I $ Var &quot;x&quot;
+    print $ eval $ App (App K $ App I $ Var &quot;x&quot;) $ Var &quot;y&quot;
+    print $ eval $ App (App (App S I) I) $ Var &quot;x&quot;
+    print $ eval $ App (App I I) (Var &quot;x&quot;)</code></pre><h3 id="sieve-of-eratosthenes"><a href="#sieve-of-eratosthenes">Sieve of Eratosthenes</a></h3><pre><code class="active haskell">sieve (p : xs) = p : sieve [x | x &lt;- xs, x `mod` p /= 0]
+
+primes = sieve [2..]
+
+main = print $ take 20 primes</code></pre><h3 id="bounded"><a href="#bounded">Bounded</a></h3><pre><code class="active haskell">import Data.Int
+import Data.Word
+
+main = do
+    print $ (minBound :: Bool)
+    print $ (maxBound :: Bool)
+
+    print $ (minBound :: Char)
+    print $ (maxBound :: Char)
+
+    print $ (minBound :: Int)
+    print $ (maxBound :: Int)
+
+    print $ (minBound :: Int8)
+    print $ (maxBound :: Int8)
+
+    print $ (minBound :: Word8)
+    print $ (maxBound :: Word8)</code></pre><h3 id="data-bits"><a href="#data-bits">Data.Bits</a></h3><pre><code class="active haskell">import Data.Bits
+
+main = do
+    print $ bitSizeMaybe (0 :: Int)
+    print $ isSigned (0 :: Int)
+
+    print $ (2 .&amp;. 3 :: Int)
+    print $ (2 .|. 3 :: Int)
+    print $ (xor 2 3 :: Int)
+    print $ complement (2 :: Int)
+
+    print $ (bit 2 :: Int)
+    print $ popCount (123 :: Int)
+    print $ testBit (2 :: Int) 1
+    print $ setBit (2 :: Int) 0
+    print $ clearBit (2 :: Int) 1
+    print $ complementBit (2 :: Int) 1
+
+    print $ shift (2 :: Int) 10
+    print $ shift (2 :: Int) (-10)
+    print $ shiftL (2 :: Int) 10
+    print $ shiftL (2 :: Int) (-10)
+    print $ shiftR (2 :: Int) 10
+    print $ shiftR (2 :: Int) (-10)
+
+    print $ rotate (2 :: Int) 10
+    print $ rotate (2 :: Int) (-10)
+    print $ rotateL (2 :: Int) 10
+    print $ rotateL (2 :: Int) (-10)
+    print $ rotateR (2 :: Int) 10
+    print $ rotateR (2 :: Int) (-10)</code></pre><h3 id="math-constants"><a href="#math-constants">Math constants</a></h3><pre><code class="active haskell">import Numeric.MathFunctions.Constants
+
+main = do
+    print m_epsilon
+    print m_huge
+    print m_tiny
+    print m_max_exp
+    print m_pos_inf
+    print m_neg_inf
+    print m_NaN
+
+    print m_1_sqrt_2
+    print m_2_sqrt_pi
+    print m_ln_sqrt_2_pi
+    print m_sqrt_2
+    print m_sqrt_2_pi
+    print m_eulerMascheroni</code></pre><h3 id="polynomial"><a href="#polynomial">Polynomial</a></h3><pre><code class="active haskell">import Numeric.Polynomial
+import Data.Vector
+
+polynomial = fromList [1, 2, 3]
+
+main = do
+    print polynomial
+    print $ evaluatePolynomial 10 polynomial
+    print $ evaluateOddPolynomial 10 polynomial
+    print $ evaluateEvenPolynomial 10 polynomial</code></pre><h3 id="statistics"><a href="#statistics">Statistics</a></h3><pre><code class="active haskell">import Statistics.Sample
+import Data.Vector
+import qualified Statistics.Distribution as D
+import Statistics.Distribution.Normal
+
+sample = fromList [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+weightedSample = fromList [(1, 10), (2, 1), (3, 1), (4, 1), (5, 1)]
+
+main = do
+    print sample
+    print weightedSample
+
+    print $ range sample
+
+    print $ mean sample
+    print $ meanWeighted weightedSample
+    print $ harmonicMean sample
+    print $ geometricMean sample
+
+    print $ variance sample
+    print $ fastVariance sample
+    print $ varianceWeighted weightedSample
+    print $ varianceUnbiased sample
+    print $ fastVarianceUnbiased sample
+    print $ meanVariance sample
+    print $ meanVarianceUnb sample
+
+    print $ stdDev sample
+    print $ fastStdDev sample
+
+    print $ standard
+    print $ normalDistr 10 5
+
+    print $ D.cumulative standard 0
+    print $ D.quantile standard 0.5
+    print $ D.density standard 0
+    print $ D.mean standard
+    print $ D.variance standard
+    print $ D.stdDev standard</code></pre><h3 id="collatz-sequence"><a href="#collatz-sequence">Collatz sequence</a></h3><pre><code class="active haskell">collatz 1 = [1]
+collatz n
+    | n `mod` 2 == 0 = n : collatz (n `div` 2)
+    | otherwise = n : collatz (3 * n + 1)
+    
+main = do
+    print $ collatz 5
+    print $ collatz 17</code></pre><h3 id="monad"><a href="#monad">Monad</a></h3><pre><code class="active haskell">inc n = Just (n + 1)
+
+add1 n = [n + 1]
+
+main = do
+    print $ Nothing &gt;&gt; (Just 0)
+    print $ (Just 0) &gt;&gt; (Nothing :: Maybe Int)
+    print $ (Just 0) &gt;&gt; Nothing &gt;&gt; (Just 1)
+    print $ (Just 0) &gt;&gt; (Just 1) &gt;&gt; (Just 2)
+
+    print $ Nothing &gt;&gt;= inc &gt;&gt;= inc &gt;&gt;= inc
+    print $ (Just 0) &gt;&gt;= inc &gt;&gt;= inc &gt;&gt;= inc
+
+    print $ [] &gt;&gt; [1, 2]
+    print $ [1, 2] &gt;&gt; ([] :: [Int])
+    print $ [1] &gt;&gt; [3, 4, 5]
+    print $ [1, 2] &gt;&gt; [3, 4, 5]
+    print $ [1, 2, 3] &gt;&gt; [3, 4, 5]
+
+    print $ [] &gt;&gt;= add1 &gt;&gt;= add1 &gt;&gt;= add1
+    print $ [1, 2, 3] &gt;&gt;= add1
+    print $ [1, 2, 3] &gt;&gt;= add1 &gt;&gt;= add1
+    print $ [1, 2, 3] &gt;&gt;= add1 &gt;&gt;= add1 &gt;&gt;= add1</code></pre><h3 id="state-monad"><a href="#state-monad">State monad</a></h3><pre><code class="active haskell">import Control.Monad.State
+
+inc :: State Int Int
+inc = do
+    n &lt;- get
+    put (n + 1)
+    return n
+
+incBy :: Int -&gt; State Int Int
+incBy x = do
+    n &lt;- get
+    modify (+x)
+    return n
+
+main = do
+    print $ evalState inc 1
+    print $ execState inc 1
+    print $ runState inc 1
+    print $ runState (withState (+3) inc) 1
+    print $ runState (mapState (\(a, s) -&gt; (a + 3, s + 4)) inc) 1
+
+    print $ runState (incBy 5) 10</code></pre><h3 id="reader-monad"><a href="#reader-monad">Reader monad</a></h3><pre><code class="active haskell">import Control.Monad.Reader
+
+data Environment = Environment { text1 :: String, text2 :: String }
+
+getText :: Reader Environment String
+getText = do
+    text1 &lt;- asks text1
+    text2 &lt;- asks text2
+    return $ text1 ++ &quot;, &quot; ++ text2
+
+main = print $ runReader getText $ Environment &quot;Hello&quot; &quot;world!&quot;</code></pre><h3 id="writer-monad"><a href="#writer-monad">Writer monad</a></h3><pre><code class="active haskell">import Control.Monad.Writer
+
+write :: Int -&gt; Writer [Int] String
+write n = do
+    tell [1..n]
+    return &quot;Done&quot;
+
+main = do
+    print $ runWriter $ write 10
+    print $ execWriter $ write 10</code></pre><h3 id="church-numerals"><a href="#church-numerals">Church numerals</a></h3><pre><code class="active haskell">import Prelude hiding(succ, exp)
+
+zero s z = z
+one s z = s z
+two s z = s $ s z
+three s z = s $ s $ s z
+four s z = s $ s $ s $ s z
+
+five s z = s $ four s z
+six s z = s $ five s z
+seven s z = s $ six s z
+
+succ x s z = s $ x s z
+add x y s z = x s $ y s z
+mul x y s z = x (y s) z
+exp x y s z = (y x) s z
+
+main = do
+    print $ zero (+1) 0
+    print $ one (+1) 0
+    print $ two (+1) 0
+    print $ three (+1) 0
+    print $ four (+1) 0
+    print $ five (+1) 0
+    print $ six (+1) 0
+    print $ seven (+1) 0
+    print $ succ seven (+1) 0
+    print $ add four six (+1) 0
+    print $ mul four six (+1) 0
+    print $ exp two five (+1) 0
+
+    print $ zero ('*':) &quot;&quot;
+    print $ one ('*':) &quot;&quot;
+    print $ two ('*':) &quot;&quot;
+    print $ three ('*':) &quot;&quot;
+    print $ four ('*':) &quot;&quot;
+    print $ five ('*':) &quot;&quot;
+    print $ six ('*':) &quot;&quot;
+    print $ seven ('*':) &quot;&quot;
+    print $ succ seven ('*':) &quot;&quot;
+    print $ add four six ('*':) &quot;&quot;
+    print $ mul four six ('*':) &quot;&quot;
+    print $ exp two five ('*':) &quot;&quot;</code></pre><h3 id="version"><a href="#version">Version</a></h3><pre><code class="active haskell">import Data.Version
+
+main = print $ showVersion
+    Version {
+        versionBranch = [1, 2, 3, 4],
+        versionTags = [&quot;Tag1&quot;, &quot;Tag2&quot;, &quot;Tag3&quot;]
+    }</code></pre><p>Visit <a href="http://www.winsoft.sk">Winsoft</a> web site.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/Simple%20examples';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

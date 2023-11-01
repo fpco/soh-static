@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html><head><title>Haskell Fast &amp; Hard (Part 5) - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard">Haskell Fast &amp; Hard</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-5">Haskell Fast &amp; Hard (Part 5)</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Haskell Fast &amp; Hard (Part 5)</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">30 Jan 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/70/2074518939f8a2f66d3c8bc33bd3591e5f5c1d82">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-4">Previous content: Haskell Fast &amp; Hard (Part 4)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard">Go up to: Haskell Fast &amp; Hard</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh">See all content by Yann Esposito</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#hell-difficulty-part">Hell Difficulty Part</a><ul><li><a href="#deal-with-io">Deal With IO</a></li><li><a href="#io-trick-explained">IO trick explained</a></li><li><a href="#monads">Monads</a><ul><li><a href="#maybe-is-a-monad">Maybe is a monad</a></li><li><a href="#the-list-monad">The list monad</a></li></ul></li></ul></li><li><a href="#appendix">Appendix</a><ul><li><a href="#more-on-infinite-tree">More on Infinite Tree</a></li></ul></li><li><a href="#thanks">Thanks</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="hell-difficulty-part"><a href="#hell-difficulty-part">Hell Difficulty Part</a></h2><p>Congratulations for getting so far!
+Now, some of the really hardcore stuff can start.</p><p>If you are like me, you should get the functional style.
+You should also understand a bit more the advantages of laziness by default.
+But you also don't really understand where to start in order to make a real
+program.
+And in particular:</p><ul><li>How do you deal with effects?</li><li>Why is there a strange imperative-like notation for dealing with IO?</li></ul><p>Be prepared, the answers might be complex.
+But they all be very rewarding.</p><h3 id="deal-with-io"><a href="#deal-with-io">Deal With IO</a></h3><p><img alt="Magritte, Carte blanche" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fmagritte_carte_blanche.jpg" /></p><hr /><p>Too long; didn't read:</p><p>A typical function doing <code>IO</code> looks a lot like an imperative program:</p><pre><code class="haskell">f :: IO a
+f = do
+  x &lt;- action1
+  action2 x
+  y &lt;- action3
+  action4 x y</code></pre><ul><li>To set a value to an object we use <code>&lt;-</code> .</li><li><p>The type of each line is <code>IO *</code>;
+in this example:</p><ul><li><code>action1     :: IO b</code></li><li><code>action2 x   :: IO ()</code></li><li><code>action3     :: IO c</code></li><li><code>action4 x y :: IO a</code></li><li><code>x :: b</code>, <code>y :: c</code></li></ul></li><li>Few objects have the type <code>IO a</code>, this should help you choose.
+In particular you cannot use pure functions directly here.
+To use pure functions you could do <code>action2 (purefunction x)</code> for example.</li></ul><hr /><p>In this section, I will explain how to use IO, not how it works.
+You'll see how Haskell separates the pure from the impure parts of the program.</p><p>Don't stop because you're trying to understand the details of the syntax.
+Answers will come in the next section.</p><p>What to achieve?</p><blockquote><p>Ask a user to enter a list of numbers.
+Print the sum of the numbers</p></blockquote><pre><code class="active haskell">toList :: String -&gt; [Integer]
+toList input = read (&quot;[&quot; ++ input ++ &quot;]&quot;)
+
+main = do
+  putStrLn &quot;Enter a list of numbers (separated by comma):&quot;
+  input &lt;- getLine
+  print $ sum (toList input)</code></pre><p>It should be straightforward to understand the behavior of this program.
+Let's analyze the types in more detail.</p><pre><code>putStrLn :: String -&gt; IO ()
+getLine  :: IO String
+print    :: Show a =&gt; a -&gt; IO ()</code></pre><p>Or more interestingly, we note that each expression in the <code>do</code> block has a type of <code>IO a</code>.</p><pre>
+main = do
+  putStrLn &quot;Enter ... &quot; :: <span class="high">IO ()</span>
+  getLine               :: <span class="high">IO String</span>
+  print Something       :: <span class="high">IO ()</span>
+</pre><p>We should also pay attention to the effect of the <code>&lt;-</code> symbol.</p><pre><code>do
+ x &lt;- something</code></pre><p>If <code>something :: IO a</code> then <code>x :: a</code>.</p><p>Another important note about using <code>IO</code>.
+All lines in a do block must be of one of the two forms:</p><pre><code>action1             :: IO a
+                    -- in this case, generally a = ()</code></pre><p>or</p><pre><code>value &lt;- action2    -- where
+                    -- bar z t :: IO b
+                    -- value   :: b</code></pre><p>These two kinds of line will correspond to two different ways of sequencing actions.
+The meaning of this sentence should be clearer by the end of the next section.</p><p>Now let's see how this program behaves.
+For example, what occur if the user enter something strange?
+Try to write <code>foo</code> instead of a list of integer:</p><pre><code class="active haskell">toList :: String -&gt; [Integer]
+toList input = read (&quot;[&quot; ++ input ++ &quot;]&quot;)
+
+main = do
+  putStrLn &quot;Enter a list of numbers (separated by comma):&quot;
+  input &lt;- getLine
+  print $ sum (toList input)</code></pre><p>Argh! An evil error message and a crash!
+The first evolution will be to answer with a more friendly message.</p><p>In order to do this, we must detect that something went wrong.
+Here is one way to do this.
+Use the type <code>Maybe</code>.
+It is a very common type in Haskell.</p><pre><code class="haskell">import Data.Maybe</code></pre><p>What is this thing? <code>Maybe</code> is a type which takes one parameter.
+Its definition is:</p><pre><code class="haskell">data Maybe a = Nothing | Just a</code></pre><p>This is a nice way to tell there was an error while trying to create/compute
+a value.
+The <code>maybeRead</code> function is a great example of this.
+This is a function similar to the function <code>read</code>[^1],
+but if something goes wrong the returned value is <code>Nothing</code>.
+If the value is right, it returns <code>Just &lt;the value&gt;</code>.
+Don't try to understand too much of this function.
+I use a lower level function than <code>read</code>; <code>reads</code>.</p><pre><code class="haskell">maybeRead :: Read a =&gt; String -&gt; Maybe a
+maybeRead s = case reads s of
+                  [(x,&quot;&quot;)]    -&gt; Just x
+                  _           -&gt; Nothing</code></pre><p>Now to be a bit more readable, we define a function which goes like this:
+If the string has the wrong format, it will return <code>Nothing</code>.
+Otherwise, for example for &quot;1,2,3&quot;, it will return <code>Just [1,2,3]</code>.</p><pre><code class="haskell">getListFromString :: String -&gt; Maybe [Integer]
+getListFromString str = maybeRead $ &quot;[&quot; ++ str ++ &quot;]&quot;</code></pre><p>We simply have to test the value in our main function.</p><pre><code class="active haskell">import Data.Maybe
+maybeRead :: Read a =&gt; String -&gt; Maybe a
+maybeRead s = case reads s of
+                  [(x,&quot;&quot;)]    -&gt; Just x
+                  _           -&gt; Nothing
+getListFromString :: String -&gt; Maybe [Integer]
+getListFromString str = maybeRead $ &quot;[&quot; ++ str ++ &quot;]&quot;
+main :: IO ()
+-- show
+main = do
+  putStrLn &quot;Enter a list of numbers (separated by comma):&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; print (sum l)
+          Nothing -&gt; error &quot;Bad format. Good Bye.&quot;
+-- /show</code></pre><p>In case of error, we display a nice error message.</p><p>Note that the type of each expression in the main's do block remains of the form <code>IO a</code>.
+The only strange construction is <code>error</code>.
+I'll say <code>error msg</code> will simply take the needed type (here <code>IO ()</code>).</p><p>One very important thing to note is the type of all the functions defined so far.
+There is only one function which contains <code>IO</code> in its type: <code>main</code>.
+This means main is impure.
+But main uses <code>getListFromString</code> which is pure.
+It is then clear just by looking at declared types which functions are pure and
+which are impure.</p><p>Why does purity matter?
+I certainly forget many advantages, but the three main reasons are:</p><ul><li>It is far easier to think about pure code than impure one.</li><li>Purity protects you from all the hard to reproduce bugs due to side effects.</li><li>You can evaluate pure functions in any order or in parallel without risk.</li></ul><p>This is why you should generally put as most code as possible inside pure functions.</p><p>Our next evolution will be to prompt the user again and again until she enters a valid answer.
+We create a function which will ask the user for an list of integers
+until the input is right.</p><pre><code class="haskell">askUser :: IO [Integer]
+askUser = do
+  putStrLn &quot;Enter a list of numbers (separated by comma):&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; return l
+          Nothing -&gt; askUser</code></pre><p>This function is of type <code>IO [Integer]</code>.
+Such a type means that we retrieved a value of type <code>[Integer]</code> through some IO actions.
+Some people might explain while waving their hands:</p><blockquote><p>«This is an <code>[Integer]</code> inside an <code>IO</code>»</p></blockquote><p>If you want to understand the details behind all of this, you'll have to read the next section.
+But sincerely, if you just want to <i>use</i> IO.
+Just practice a little and remember to think about the type.</p><p>Finally our main function is quite simpler:</p><pre><code class="active haskell">import Data.Maybe
+
+maybeRead :: Read a =&gt; String -&gt; Maybe a
+maybeRead s = case reads s of
+                  [(x,&quot;&quot;)]    -&gt; Just x
+                  _           -&gt; Nothing
+getListFromString :: String -&gt; Maybe [Integer]
+getListFromString str = maybeRead $ &quot;[&quot; ++ str ++ &quot;]&quot;
+askUser :: IO [Integer]
+askUser = do
+  putStrLn &quot;Enter a list of numbers (separated by comma):&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; return l
+          Nothing -&gt; askUser
+-- show
+main :: IO ()
+main = do
+  list &lt;- askUser
+  print $ sum list
+-- /show</code></pre><p>We have finished with our introduction to <code>IO</code>.
+This was quite fast. Here are the main things to remember:</p><ul><li>in the <code>do</code> bloc, each expression must have the type <code>IO a</code>.
+You are then limited in the number of expressions available.
+For example, <code>getLine</code>, <code>print</code>, <code>putStrLn</code>, etc...</li><li>Try to externalize the pure functions as much as possible.</li><li>the <code>IO a</code> type means: an IO <i>action</i> which returns an element of type <code>a</code>.
+<code>IO</code> represents actions; under the hood, <code>IO a</code> is the type of a function.
+Read the next section if you are curious.</li></ul><p>If you practice a bit, you should be able to <i>use</i> <code>IO</code>.</p><blockquote><p><i>Exercises</i>:</p><ul><li>Make a program that sums all of its arguments. Hint: use the function <code>getArgs</code>.</li></ul></blockquote><h3 id="io-trick-explained"><a href="#io-trick-explained">IO trick explained</a></h3><p><img alt="Magritte, ceci n'est pas une pipe" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fmagritte_pipe.jpg" /></p><hr /><p>Here is a tldr for this section.</p><p>To separate pure and impure parts,
+<code>main</code> is defined as a function
+which modifies the state of the world</p><pre><code>main :: World -&gt; World</code></pre><p>A function is guaranteed to have side effects only if it has this type.
+But look at a typical main function:</p><pre><code>main w0 =
+    let (v1,w1) = action1 w0 in
+    let (v2,w2) = action2 v1 w1 in
+    let (v3,w3) = action3 v2 w2 in
+    action4 v3 w3</code></pre><p>We have a lot of temporary elements (here <code>w1</code>, <code>w2</code> and <code>w3</code>)
+which must be passed on to the next action.</p><p>We create a function <code>bind</code> or <code>(&gt;&gt;=)</code>.
+With <code>bind</code> we don't need temporary names anymore.</p><pre><code>main =
+  action1 &gt;&gt;= action2 &gt;&gt;= action3 &gt;&gt;= action4</code></pre><p>Bonus: Haskell has syntactical sugar for us:</p><pre><code>main = do
+  v1 &lt;- action1
+  v2 &lt;- action2 v1
+  v3 &lt;- action3 v2
+  action4 v3</code></pre><hr /><p>Why did we use this strange syntax, and what exactly is this <code>IO</code> type?
+It looks a bit like magic.</p><p>For now let's just forget all about the pure parts of our program, and focus
+on the impure parts:</p><pre><code class="haskell">askUser :: IO [Integer]
+askUser = do
+  putStrLn &quot;Enter a list of numbers (separated by commas):&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; return l
+          Nothing -&gt; askUser
+
+main :: IO ()
+main = do
+  list &lt;- askUser
+  print $ sum list</code></pre><p>First remark; it looks like an imperative structure.
+Haskell is powerful enough to make impure code look imperative.
+For example, if you wish you could create a <code>while</code> in Haskell.
+In fact, for dealing with <code>IO</code>, imperative style is generally more appropriate.</p><p>But you should had noticed the notation is a bit unusual.
+Here is why, in detail.</p><p>In an impure language, the state of the world can be seen as a huge hidden global variable.
+This hidden variable is accessible by all functions of your language.
+For example, you can read and write a file in any function.
+The fact that a file exists or not can be seen as different states of the world.</p><p>For Haskell this state is not hidden.
+It is explicitly said <code>main</code> is a function that <i>potentially</i> changes the state of the world.
+Its type is then something like:</p><pre><code class="haskell">main :: World -&gt; World</code></pre><p>Not all functions may have access to this variable.
+Those which have access to this variable are impure.
+Functions to which the world variable isn't provided are pure[2].</p><p>Haskell considers the state of the world as an input variable to <code>main</code>.
+But the real type of main is closer to this one[3]:</p><pre><code class="haskell">main :: World -&gt; ((),World)</code></pre><p>The <code>()</code> type is the null type.
+Nothing to see here.</p><p>Now let's rewrite our main function with this in mind:</p><pre><code class="haskell">main w0 =
+    let (list,w1) = askUser w0 in
+    let (x,w2) = print (sum list,w1) in
+    x</code></pre><p>First, we note that all functions which have side effects must have the type:</p><pre><code class="haskell">World -&gt; (a,World)</code></pre><p>Where <code>a</code> is the type of the result.
+For example, a <code>getChar</code> function should have the type <code>World -&gt; (Char,World)</code>.</p><p>Another thing to note is the trick to fix the order of evaluation.
+In Haskell, in order to evaluate <code>f a b</code>, you have many choices:</p><ul><li>first eval <code>a</code> then <code>b</code> then <code>f a b</code></li><li>first eval <code>b</code> then <code>a</code> then <code>f a b</code>.</li><li>eval <code>a</code> and <code>b</code> in parallel then <code>f a b</code></li></ul><p>This is true, because we should work in a pure language.</p><p>Now, if you look at the main function, it is clear you must eval the first
+line before the second one since, to evaluate the second line you have
+to get a parameter given by the evaluation of the first line.</p><p>Such trick works nicely.
+The compiler will at each step provide a pointer to a new real world id.
+Under the hood, <code>print</code> will evaluate as:</p><ul><li>print something on the screen</li><li>modify the id of the world</li><li>evaluate as <code>((),new world id)</code>.</li></ul><p>Now, if you look at the style of the main function, it is clearly awkward.
+Let's try to do the same to the askUser function:</p><pre><code class="haskell">askUser :: World -&gt; ([Integer],World)</code></pre><p>Before:</p><pre><code class="haskell">askUser :: IO [Integer]
+askUser = do
+  putStrLn &quot;Enter a list of numbers:&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; return l
+          Nothing -&gt; askUser</code></pre><p>After:</p><pre><code class="haskell">askUser w0 =
+    let (_,w1)     = putStrLn &quot;Enter a list of numbers:&quot; in
+    let (input,w2) = getLine w1 in
+    let (l,w3)     = case getListFromString input of
+                      Just l   -&gt; (l,w2)
+                      Nothing  -&gt; askUser w2
+    in
+        (l,w3)</code></pre><p>This is similar, but awkward.
+Look at all these temporary <code>w?</code> names.</p><p>The lesson, is, naive IO implementation in Pure functional languages is awkward!</p><p>Fortunately, there is a better way to handle this problem.
+We see a pattern.
+Each line is of the form:</p><pre><code class="haskell">let (y,w') = action x w in</code></pre><p>Even if for some line the first <code>x</code> argument isn't needed.
+The output type is a couple, <code>(answer, newWorldValue)</code>.
+Each function <code>f</code> must have a type similar to:</p><pre><code class="haskell">f :: World -&gt; (a,World)</code></pre><p>Not only this, but we can also note that we always follow the same usage pattern:</p><pre><code class="haskell">let (y,w1) = action1 w0 in
+let (z,w2) = action2 w1 in
+let (t,w3) = action3 w2 in
+...</code></pre><p>Each action can take from 0 to n parameters.
+And in particular, each action can take a parameter from the result of a line above.</p><p>For example, we could also have:</p><pre><code class="haskell">let (_,w1) = action1 x w0   in
+let (z,w2) = action2 w1     in
+let (_,w3) = action3 x z w2 in
+...</code></pre><p>And of course <code>actionN w :: (World) -&gt; (a,World)</code>.</p><blockquote><p>IMPORTANT, there are only two important patterns to consider:</p><pre><code>let (x,w1) = action1 w0 in
+let (y,w2) = action2 x w1 in</code></pre><p>and</p><pre><code>let (_,w1) = action1 w0 in
+let (y,w2) = action2 w1 in</code></pre></blockquote><p><img alt="Jocker pencil trick" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fjocker_pencil_trick.jpg" /></p><p>Now, we will do a magic trick.
+We will make the temporary world symbol &quot;disappear&quot;.
+We will <code>bind</code> the two lines.
+Let's define the <code>bind</code> function.
+Its type is quite intimidating at first:</p><pre><code class="haskell">bind :: (World -&gt; (a,World))
+        -&gt; (a -&gt; (World -&gt; (b,World)))
+        -&gt; (World -&gt; (b,World))</code></pre><p>But remember that <code>(World -&gt; (a,World))</code> is the type for an IO action.
+Now let's rename it for clarity:</p><pre><code class="haskell">type IO a = World -&gt; (a, World)</code></pre><p>Some example of functions:</p><pre><code class="haskell">getLine :: IO String
+print :: Show a =&gt; a -&gt; IO ()</code></pre><p><code>getLine</code> is an IO action which takes a world as parameter and returns a couple <code>(String,World)</code>.
+Which can be summarized as: <code>getLine</code> is of type <code>IO String</code>.
+Which we also see as, an IO action which will return a String &quot;embeded inside an IO&quot;.</p><p>The function <code>print</code> is also interesting.
+It takes one argument which can be shown.
+In fact it takes two arguments.
+The first is the value to print and the other is the state of world.
+It then returns a couple of type <code>((),World)</code>.
+This means it changes the state of the world, but doesn't yield anymore data.</p><p>This type helps us simplify the type of <code>bind</code>:</p><pre><code class="haskell">bind :: IO a
+        -&gt; (a -&gt; IO b)
+        -&gt; IO b</code></pre><p>It says that <code>bind</code> takes two IO actions as parameter and return another IO action.</p><p>Now, remember the <i>important</i> patterns. The first was:</p><pre><code class="haskell">let (x,w1) = action1 w0 in
+let (y,w2) = action2 x w1 in
+(y,w2)</code></pre><p>Look at the types:</p><pre><code class="haskell">action1  :: IO a
+action2  :: a -&gt; IO b
+(y,w2)   :: IO b</code></pre><p>Doesn't it seem familiar?</p><pre><code class="haskell">(bind action1 action2) w0 =
+    let (x, w1) = action1 w0
+        (y, w2) = action2 x w1
+    in  (y, w2)</code></pre><p>The idea is to hide the World argument with this function. Let's go:
+As an example imagine if we wanted to simulate:</p><pre><code class="haskell">let (line1,w1) = getLine w0 in
+let ((),w2) = print line1 in
+((),w2)</code></pre><p>Now, using the bind function:</p><pre><code class="haskell">(res,w2) = (bind getLine (\l -&gt; print l)) w0</code></pre><p>As print is of type <code>(World -&gt; ((),World))</code>, we know <code>res = ()</code> (null type).
+If you didn't see what was magic here, let's try with three lines this time.</p><pre><code class="haskell">let (line1,w1) = getLine w0 in
+let (line2,w2) = getLine w1 in
+let ((),w3) = print (line1 ++ line2) in
+((),w3)</code></pre><p>Which is equivalent to:</p><pre><code class="haskell">(res,w3) = bind getLine (\line1 -&gt;
+             bind getLine (\line2 -&gt;
+               print (line1 ++ line2)))</code></pre><p>Didn't you notice something?
+Yes, no temporary World variables are used anywhere!
+This is <i>MA</i>. <i>GIC</i>.</p><p>We can use a better notation.
+Let's use <code>(&gt;&gt;=)</code> instead of <code>bind</code>.
+<code>(&gt;&gt;=)</code> is an infix function like
+<code>(+)</code>; reminder <code>3 + 4 ⇔ (+) 3 4</code></p><pre><code class="haskell">(res,w3) = getLine &gt;&gt;=
+           \line1 -&gt; getLine &gt;&gt;=
+           \line2 -&gt; print (line1 ++ line2)</code></pre><p>Ho Ho Ho! Happy Christmas Everyone!
+Haskell has made syntactical sugar for us:</p><pre><code class="haskell">do
+  x &lt;- action1
+  y &lt;- action2
+  z &lt;- action3
+  ...</code></pre><p>Is replaced by:</p><pre><code class="haskell">action1 &gt;&gt;= \x -&gt;
+action2 &gt;&gt;= \y -&gt;
+action3 &gt;&gt;= \z -&gt;
+...</code></pre><p>Note you can use <code>x</code> in <code>action2</code> and <code>x</code> and <code>y</code> in <code>action3</code>.</p><p>But what about the lines not using the <code>&lt;-</code>?
+Easy, another function <code>blindBind</code>:</p><pre><code class="haskell">blindBind :: IO a -&gt; IO b -&gt; IO b
+blindBind action1 action2 w0 =
+    bind action (\_ -&gt; action2) w0</code></pre><p>I didn't simplify this definition for clarity purpose.
+Of course we can use a better notation, we'll use the <code>(&gt;&gt;)</code> operator.</p><p>And</p><pre><code class="haskell">do
+    action1
+    action2
+    action3</code></pre><p>Is transformed into</p><pre><code class="haskell">action1 &gt;&gt;
+action2 &gt;&gt;
+action3</code></pre><p>Also, another function is quite useful.</p><pre><code class="haskell">putInIO :: a -&gt; IO a
+putInIO x = IO (\w -&gt; (x,w))</code></pre><p>This is the general way to put pure values inside the &quot;IO context&quot;.
+The general name for <code>putInIO</code> is <code>return</code>.
+This is quite a bad name when you learn Haskell. <code>return</code> is very different from what you might be used to.</p><p>To finish, let's translate our example:</p><pre><code class="active haskell">import Data.Maybe
+
+maybeRead :: Read a =&gt; String -&gt; Maybe a
+maybeRead s = case reads s of
+                  [(x,&quot;&quot;)]    -&gt; Just x
+                  _           -&gt; Nothing
+getListFromString :: String -&gt; Maybe [Integer]
+getListFromString str = maybeRead $ &quot;[&quot; ++ str ++ &quot;]&quot;
+-- show
+askUser :: IO [Integer]
+askUser = do
+  putStrLn &quot;Enter a list of numbers (separated by commas):&quot;
+  input &lt;- getLine
+  let maybeList = getListFromString input in
+      case maybeList of
+          Just l  -&gt; return l
+          Nothing -&gt; askUser
+
+main :: IO ()
+main = do
+  list &lt;- askUser
+  print $ sum list
+-- /show  </code></pre><p>Is translated into:</p><pre><code class="active haskell">import Data.Maybe
+
+maybeRead :: Read a =&gt; String -&gt; Maybe a
+maybeRead s = case reads s of
+                  [(x,&quot;&quot;)]    -&gt; Just x
+                  _           -&gt; Nothing
+getListFromString :: String -&gt; Maybe [Integer]
+getListFromString str = maybeRead $ &quot;[&quot; ++ str ++ &quot;]&quot;
+-- show
+askUser :: IO [Integer]
+askUser =
+    putStrLn &quot;Enter a list of numbers (sep. by commas):&quot; &gt;&gt;
+    getLine &gt;&gt;= \input -&gt;
+    let maybeList = getListFromString input in
+      case maybeList of
+        Just l -&gt; return l
+        Nothing -&gt; askUser
+
+main :: IO ()
+main = askUser &gt;&gt;=
+  \list -&gt; print $ sum list
+-- /show  </code></pre><p>You can compile this code to verify it keeps working.</p><p>Imagine what it would look like without the <code>(&gt;&gt;)</code> and <code>(&gt;&gt;=)</code>.</p><h3 id="monads"><a href="#monads">Monads</a></h3><p><img alt="Dali, reve. It represents a weapon out of the mouth of a tiger, itself out of the mouth of another tiger, itself out of the mouth of a fish itself out of a grenade. I could have choosen a picture of the Human centipede as it is a very good representation of what a monad really is. But just to thing about it, I find this disgusting and that wasn't the purpose of this document." src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fdali_reve.jpg" /></p><p>Now the secret can be revealed: <code>IO</code> is a <i>monad</i>.
+Being a monad means you have access to some syntactical sugar with the <code>do</code> notation.
+But mainly, you have access to a coding pattern which will ease the flow of your code.</p><blockquote><p><b>Important remarks</b>:</p><ul><li>Monad are not necessarily about effects!
+There are a lot of <i>pure</i> monads.</li><li>Monad are more about sequencing</li></ul></blockquote><p>For the Haskell language <code>Monad</code> is a type class.
+To be an instance of this type class, you must provide the functions <code>(&gt;&gt;=)</code> and <code>return</code>.
+The function <code>(&gt;&gt;)</code> will be derived from <code>(&gt;&gt;=)</code>.
+Here is how the type class <code>Monad</code> is declared (mostly):</p><pre><code class="haskell">class Monad m  where
+  (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b
+  return :: a -&gt; m a
+
+  (&gt;&gt;) :: m a -&gt; m b -&gt; m b
+  f &gt;&gt; g = f &gt;&gt;= \_ -&gt; g
+
+  -- You should generally safely ignore this function
+  -- which I believe exists for historical reason
+  fail :: String -&gt; m a
+  fail = error</code></pre><blockquote><p>Remarks:</p><ul><li>the keyword <code>class</code> is not your friend.
+A Haskell class is <i>not</i> a class like in object model.
+A Haskell class has a lot of similarities with Java interfaces.
+A better word should have been <code>typeclass</code>.
+That means a set of types.
+For a type to belong to a class, all functions of the class must be provided for this type.</li><li>In this particular example of type class, the type <code>m</code> must be a type that takes an argument.
+for example <code>IO a</code>, but also <code>Maybe a</code>, <code>[a]</code>, etc...</li><li><p>To be a useful monad, your function must obey some rules.
+If your construction does not obey these rules strange things might happens:</p><pre><code>return a &gt;&gt;= k  ==  k a
+m &gt;&gt;= return  ==  m
+m &gt;&gt;= (\x -&gt; k x &gt;&gt;= h)  ==  (m &gt;&gt;= k) &gt;&gt;= h</code></pre></li></ul></blockquote><h4 id="maybe-is-a-monad"><a href="#maybe-is-a-monad">Maybe is a monad</a></h4><p>There are a lot of different types that are instance of <code>Monad</code>.
+One of the easiest to describe is <code>Maybe</code>.
+If you have a sequence of <code>Maybe</code> values, you can use monads to manipulate them.
+It is particularly useful to remove very deep <code>if..then..else..</code> constructions.</p><p>Imagine a complex bank operation. You are eligible to gain about 700€ only
+if you can afford to follow a list of operations without being negative.</p><pre><code class="active haskell">deposit  value account = account + value
+withdraw value account = account - value
+
+eligible :: (Num a,Ord a) =&gt; a -&gt; Bool
+eligible account =
+  let account1 = deposit 100 account in
+    if (account1 &lt; 0)
+    then False
+    else
+      let account2 = withdraw 200 account1 in
+      if (account2 &lt; 0)
+      then False
+      else
+        let account3 = deposit 100 account2 in
+        if (account3 &lt; 0)
+        then False
+        else
+          let account4 = withdraw 300 account3 in
+          if (account4 &lt; 0)
+          then False
+          else
+            let account5 = deposit 1000 account4 in
+            if (account5 &lt; 0)
+            then False
+            else
+              True
+
+main = do
+  print $ eligible 300 -- True
+  print $ eligible 299 -- False</code></pre><p>Now, let's make it better using Maybe and the fact that it is a Monad</p><pre><code class="active haskell">deposit :: (Num a) =&gt; a -&gt; a -&gt; Maybe a
+deposit value account = Just (account + value)
+
+withdraw :: (Num a,Ord a) =&gt; a -&gt; a -&gt; Maybe a
+withdraw value account = if (account &lt; value)
+                         then Nothing
+                         else Just (account - value)
+
+eligible :: (Num a, Ord a) =&gt; a -&gt; Maybe Bool
+eligible account = do
+  account1 &lt;- deposit 100 account
+  account2 &lt;- withdraw 200 account1
+  account3 &lt;- deposit 100 account2
+  account4 &lt;- withdraw 300 account3
+  account5 &lt;- deposit 1000 account4
+  Just True
+
+main = do
+  print $ eligible 300 -- Just True
+  print $ eligible 299 -- Nothing</code></pre><p>Not bad, but we can make it even better:</p><pre><code class="active haskell">deposit :: (Num a) =&gt; a -&gt; a -&gt; Maybe a
+deposit value account = Just (account + value)
+
+withdraw :: (Num a,Ord a) =&gt; a -&gt; a -&gt; Maybe a
+withdraw value account = if (account &lt; value)
+                         then Nothing
+                         else Just (account - value)
+
+eligible :: (Num a, Ord a) =&gt; a -&gt; Maybe Bool
+eligible account =
+  deposit 100 account &gt;&gt;=
+  withdraw 200 &gt;&gt;=
+  deposit 100  &gt;&gt;=
+  withdraw 300 &gt;&gt;=
+  deposit 1000 &gt;&gt;
+  return True
+
+main = do
+  print $ eligible 300 -- Just True
+  print $ eligible 299 -- Nothing</code></pre><p>We have proven that Monads are a good way to make our code more elegant.
+Note this idea of code organization, in particular for <code>Maybe</code> can be used
+in most imperative language.
+In fact, this is the kind of construction we make naturally.</p><blockquote><p>An important remark:</p><p>The first element in the sequence being evaluated to <code>Nothing</code> will stop
+the complete evaluation.
+This means you don't execute all lines.
+You have this for free, thanks to laziness.</p></blockquote><p>You could also replay these example with the definition of <code>(&gt;&gt;=)</code> for <code>Maybe</code>
+in mind:</p><pre><code class="haskell">instance Monad Maybe where
+    (&gt;&gt;=) :: Maybe a -&gt; (a -&gt; Maybe b) -&gt; Maybe b
+    Nothing  &gt;&gt;= _  = Nothing
+    (Just x) &gt;&gt;= f  = f x
+
+    return x = Just x</code></pre><p>The <code>Maybe</code> monad proved to be useful while being a very simple example.
+We saw the utility of the <code>IO</code> monad.
+But now a cooler example, lists.</p><h4 id="the-list-monad"><a href="#the-list-monad">The list monad</a></h4><p><img alt="Golconde de Magritte" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fgolconde.jpg" /></p><p>The list monad helps us to simulate non deterministic computations.
+Here we go:</p><pre><code class="active haskell">import Control.Monad (guard)
+
+allCases = [1..10]
+
+resolve :: [(Int,Int,Int)]
+resolve = do
+              x &lt;- allCases
+              y &lt;- allCases
+              z &lt;- allCases
+              guard $ 4*x + 2*y &lt; z
+              return (x,y,z)
+
+main = do
+  print resolve</code></pre><p>MA. GIC.</p><p>For the list monad, there is also a syntactical sugar:</p><pre><code class="haskell">  print $ [ (x,y,z) | x &lt;- allCases,
+                      y &lt;- allCases,
+                      z &lt;- allCases,
+                      4*x + 2*y &lt; z ]</code></pre><p>I won't list all the monads, but there are many monads.
+Using monads simplifies the manipulation of several notions in pure languages.
+In particular, monad are very useful for:</p><ul><li>IO,</li><li>non deterministic computation,</li><li>generating pseudo random numbers,</li><li>keeping configuration state,</li><li>writing state,</li><li>...</li></ul><p>If you have followed me until here, then you've done it!
+You know monads (Well, you'll certainly need to practice a bit to get used to them and to understand when you can use them and create your own. But you already made a big step in this direction.)!</p><h2 id="appendix"><a href="#appendix">Appendix</a></h2><p>This section is not so much about learning Haskell.
+It is just here to discuss some details further.</p><h3 id="more-on-infinite-tree"><a href="#more-on-infinite-tree">More on Infinite Tree</a></h3><p>In the section <a href="#infinite-structures">Infinite Structures</a> we saw some simple
+constructions.
+Unfortunately we removed two properties from our tree:</p><ol><li>no duplicate node value</li><li>well ordered tree</li></ol><p>In this section we will try to keep the first property.
+Concerning the second one, we must relax it but we'll discuss how to
+keep it as much as possible.</p><p>Our first step is to create some pseudo-random number list:</p><pre><code class="haskell">shuffle = map (\x -&gt; (x*3123) `mod` 4331) [1..]</code></pre><p>Just as a reminder, here is the definition of <code>treeFromList</code></p><pre><code class="haskell">treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList []    = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))</code></pre><p>and <code>treeTakeDepth</code>:</p><pre><code class="haskell">treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr</code></pre><p>See the result of:</p><pre><code class="active haskell">import Data.List
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    treeshow pref Empty = &quot;&quot;
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- show a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replace &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replace on char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+shuffle = map (\x -&gt; (x*3123) `mod` 4331) [1..]
+
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList []    = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr
+-- show
+main = do
+      putStrLn &quot;take 10 shuffle&quot;
+      print $ take 10 shuffle
+      putStrLn &quot;\ntreeTakeDepth 4 (treeFromList shuffle)&quot;
+      print $ treeTakeDepth 4 (treeFromList shuffle)
+-- /show</code></pre><p>Yay! It ends!
+Beware though, it will only work if you always have something to put into a branch.</p><p>For example</p><pre><code class="haskell">treeTakeDepth 4 (treeFromList [1..])</code></pre><p>will loop forever.
+Simply because it will try to access the head of <code>filter (&lt;1) [2..]</code>.
+But <code>filter</code> is not smart enought to understand that the result is the empty list.</p><p>Nonetheless, it is still a very cool example of what non strict programs have to offer.</p><p>Left as an exercise to the reader:</p><ul><li>Prove the existence of a number <code>n</code> so that <code>treeTakeDepth n (treeFromList shuffle)</code> will enter an infinite loop.</li><li>Find an upper bound for <code>n</code>.</li><li>Prove there is no <code>shuffle</code> list so that, for any depth, the program ends.</li></ul><p>In order to resolve these problem we will modify slightly our
+<code>treeFromList</code> and <code>shuffle</code> function.</p><p>A first problem, is the lack of infinite different number in our implementation of <code>shuffle</code>.
+We generated only <code>4331</code> different numbers.
+To resolve this we make a slightly better <code>shuffle</code> function.</p><pre><code class="haskell">shuffle = map rand [1..]
+          where
+              rand x = ((p x) `mod` (x+c)) - ((x+c) `div` 2)
+              p x = m*x^2 + n*x + o -- some polynome
+              m = 3123
+              n = 31
+              o = 7641
+              c = 1237</code></pre><p>This shuffle function has the property (hopefully) not to have an upper nor lower bound.
+But having a better shuffle list isn't enough not to enter an infinite loop.</p><p>Generally, we cannot decide whether <code>filter (&lt;x) xs</code> is empty.
+Then to resolve this problem, I'll authorize some error in the creation of our binary tree.
+This new version of code can create binary tree which don't have the following property for some of its nodes:</p><blockquote><p>Any element of the left (resp. right) branch must all be strictly inferior (resp. superior) to the label of the root.</p></blockquote><p>Remark it will remains <i>mostly</i> an ordered binary tree.
+Furthermore, by construction, each node value is unique in the tree.</p><p>Here is our new version of <code>treeFromList</code>. We simply have replaced <code>filter</code> by <code>safefilter</code>.</p><pre><code class="haskell">treeFromList :: (Ord a, Show a) =&gt; [a] -&gt; BinTree a
+treeFromList []    = Empty
+treeFromList (x:xs) = Node x left right
+          where
+              left = treeFromList $ safefilter (&lt;x) xs
+              right = treeFromList $ safefilter (&gt;x) xs</code></pre><p>This new function <code>safefilter</code> is almost equivalent to <code>filter</code> but don't enter infinite loop if the result is a finite list.
+If it cannot find an element for which the test is true after 10000 consecutive steps, then it considers to be the end of the search.</p><pre><code class="haskell">safefilter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+safefilter f l = safefilter' f l nbTry
+  where
+      nbTry = 10000
+      safefilter' _ _ 0 = []
+      safefilter' _ [] _ = []
+      safefilter' f (x:xs) n =
+                  if f x
+                     then x : safefilter' f xs nbTry
+                     else safefilter' f xs (n-1)</code></pre><p>Now run the program and be happy:</p><pre><code class="active haskell">
+import Debug.Trace (trace)
+import Data.List
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    treeshow pref Empty = &quot;&quot;
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- show a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replace &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (&quot; &quot; ++ show x)
+
+    -- replace on char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr
+shuffle = map rand [1..]
+          where
+              rand x = ((p x) `mod` (x+c)) - ((x+c) `div` 2)
+              p x = m*x^2 + n*x + o -- some polynome
+              m = 3123
+              n = 31
+              o = 7641
+              c = 1237
+treeFromList :: (Ord a, Show a) =&gt; [a] -&gt; BinTree a
+treeFromList []    = Empty
+treeFromList (x:xs) = Node x left right
+          where
+              left = treeFromList $ safefilter (&lt;x) xs
+              right = treeFromList $ safefilter (&gt;x) xs
+safefilter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+safefilter f l = safefilter' f l nbTry
+  where
+      nbTry = 10000
+      safefilter' _ _ 0 = []
+      safefilter' _ [] _ = []
+      safefilter' f (x:xs) n =
+                  if f x
+                     then x : safefilter' f xs nbTry
+                     else safefilter' f xs (n-1)
+-- show
+main = do
+      putStrLn &quot;take 10 shuffle&quot;
+      print $ take 10 shuffle
+      putStrLn &quot;\ntreeTakeDepth 8 (treeFromList shuffle)&quot;
+      print $ treeTakeDepth 8 (treeFromList $ shuffle)
+-- /show</code></pre><p>You should realize the time to print each value is different.
+This is because Haskell compute each value when it needs it.
+And in this case, this is when asked to print it on the screen.</p><p>Impressively enough, try to replace the depth from <code>8</code> to <code>100</code>.
+It will work without killing your RAM!
+The flow and the memory management is done naturally by Haskell.</p><p>Left as an exercise to the reader:</p><ul><li>Even with large constant value for <code>deep</code> and <code>nbTry</code>, it seems to work nicely. But in the worst case, it can be exponential.
+Create a worst case list to give as parameter to <code>treeFromList</code>.
+<i>hint</i>: think about (<code>[0,-1,-1,....,-1,1,-1,...,-1,1,...]</code>).</li><li><p>I first tried to implement <code>safefilter</code> as follow:</p><pre>
+safefilter' f l = if filter f (take 10000 l) == []
+                  then []
+                  else filter f l
+</pre>
+Explain why it doesn't work and can enter into an infinite loop.</li><li>Suppose that <code>shuffle</code> is real random list with growing bounds.
+If you study a bit this structure, you'll discover that with probability 1,
+this structure is finite.
+Using the following code
+(suppose we could use <code>safefilter'</code> directly as if was not in the where of safefilter)
+find a definition of <code>f</code> such that with probability <code>1</code>,
+treeFromList' shuffle is infinite. And prove it.
+Disclaimer, this is only a conjecture.</li></ul><pre><code class="haskell">treeFromList' []  n = Empty
+treeFromList' (x:xs) n = Node x left right
+    where
+        left = treeFromList' (safefilter' (&lt;x) xs (f n)
+        right = treeFromList' (safefilter' (&gt;x) xs (f n)
+        f = ???</code></pre><h2 id="thanks"><a href="#thanks">Thanks</a></h2><p>Thanks to <a href="http://reddit.com/r/haskell"><code>/r/haskell</code></a> and
+<a href="http://reddit.com/r/programming"><code>/r/programming</code></a>.
+Your comment were most than welcome.</p><p>Particularly, I want to thank <a href="https://github.com/Emm">Emm</a> a thousand times
+for the time he spent on correcting my English.
+Thank you man.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-5';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

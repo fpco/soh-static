@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html><head><title>Part II: PNGs and Moore - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata">Cellular Automata</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata/part-2">Part II: PNGs and Moore</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part II: PNGs and Moore</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">10 Jun 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/604212fe84a3e9f477c2f975737b8e05d70a941f">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata/part-1">Previous content: Part I: From Theory to Pretty Pictures</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata/part-3">Next content: Part III: A World in a Bottle</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata">Go up to: Cellular Automata</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#folds">Folds</a></li><li><a href="#a-scary-digression">A Scary Digression</a></li><li><a href="#folding-via-comonad-transformers">Folding via Comonad Transformers</a></li><li><a href="#moore-machines">Moore Machines</a></li><li><a href="#feeding-machines-and-folds">Feeding Machines and Folds</a></li><li><a href="#what-does-the-comonad-for-fold-mean-">What does the Comonad for Fold mean?</a></li><li><a href="#resuming-a-hash-function">Resuming a Hash Function</a></li><li><a href="#uncompressed-pngs">Uncompressed PNGs</a></li><li><a href="#automata--please">Automata, Please</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p><a href="https://www.fpcomplete.com/user/edwardk/cellular-automata/part-1">Last time</a> I showed how we can render an automaton in your browser using existing tools.</p><p>This time we're going to roll a few of our own, so we can render fancier things. The SVG 
+we generated last time was just too slow for many users and some folks complained that they couldn't see it at all on an iPad, or that it crashed Firefox.</p><p>To rectify those concerns, we'll start off by writing a PNG generator!</p><h1 id="folds"><a href="#folds">Folds</a></h1><p>... but I'll take a bit of a circuitous path to get there.</p><p>A couple of weeks back, Gabriel Gonzales posted about his <code>foldl</code> library. In that he used the following type to capture the essence of a left fold:</p><pre><code class="haskell">data Fold a b = forall x . Fold (x -&gt; a -&gt; x) x (x -&gt; b)</code></pre><p>I want to take a bit of a digression to note a few things about this type, and then show that it is just a presentation of something we already know pretty well in computer science!</p><p>Gabriel proceeded to supply an <code>Applicative</code> for his <code>Fold</code> type that looked something like:</p><pre><code class="haskell">instance Functor (Fold a) where
+  fmap f (Fold rar r rb) = Fold rar r (f.rb)
+
+data Pair a b = Pair !a !b
+
+instance Applicative (Fold a) where
+  pure b = Fold (\() _ -&gt; ()) () (\() -&gt; b)
+  {-# INLINABLE pure #-}
+  Fold sas s0 s2f &lt;*&gt; Fold rar r0 r2x = Fold 
+    (\(Pair s r) a -&gt; Pair (sas s a) (rar r a)) 
+    (Pair s0 r0) 
+    (\(Pair s r) -&gt; s2f s (r2x r))
+  {-# INLINABLE (&lt;*&gt;) #-}</code></pre><p>But there is actually a fair bit more we can say about this type!</p><p>Being <code>Applicative</code>, we can lift numeric operations directly into it:</p><pre><code class="haskell">instance Num b =&gt; Num (Fold a b) where
+  (+) = liftA2 (+)
+  (-) = liftA2 (-)
+  (*) = liftA2 (*)
+  abs = fmap abs
+  signum = fmap signum
+  fromInteger = pure . fromInteger
+
+instance Fractional b =&gt; Fractional (Fold a b) where
+  recip = fmap recip
+  (/) = liftA2 (/)
+  fromRational = pure . fromRational</code></pre><p>But we can also note that it is contravariant in its first argument and covariant in its second, and therefore it <a href="http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html">must form</a> a <a href="http://hackage.haskell.org/packages/archive/profunctors/3.3.0.1/doc/html/Data-Profunctor.html"><code>Profunctor</code></a>.</p><pre><code class="haskell">instance Profunctor Fold where
+  dimap f g (Fold rar r0 rb) = Fold (\r -&gt; rar r . f) r0 (g . rb)</code></pre><p>All this does is let us tweak the inputs and/or outputs to our <code>Fold</code>.</p><p>But what perhaps isn't immediately obvious is that <code>Fold a</code> forms a <code>Comonad</code>!</p><pre><code class="haskell">instance Comonad (Fold a) where
+  extract (Fold _ r rb) = rb r
+  duplicate (Fold rar r0 rb) = Fold rar r0 $ \r -&gt; Fold rar r rb</code></pre><p>Notice that the <code>duplicate :: Fold b a -&gt; Fold b (Fold b a)</code> sneaks in and generates a nested fold <i>before</i>  the final tweak at the end that destroys our accumulator is applied! It works a bit like a last second pardon from the governor, a stay of execution if you will.</p><h1 id="a-scary-digression"><a href="#a-scary-digression">A Scary Digression</a></h1><p>(this is skippable)</p><p>It also forms a somewhat scarier sounding (strong) lax semimonoidal comonad, which just is to say that <code>(&lt;*&gt;)</code> is well behaved with regards to extract, so we can say:</p><pre><code class="haskell">instance ComonadApply (Fold a) where
+  (&lt;@&gt;) = (&lt;*&gt;)</code></pre><p>This enables our <code>Comonad</code> to work with the <code>codo</code> sugar in Dominic Orchard's <a href="http://hackage.haskell.org/package/codo-notation"><code>codo-notation</code></a> package. I won't be doing that today, but you may want to download and modify one of the later examples to use it, just to get a feel for it. It is pretty neat.</p><h1 id="folding-via-comonad-transformers"><a href="#folding-via-comonad-transformers">Folding via Comonad Transformers</a></h1><p>(this part of mostly skippable too)</p><p>I'll get back to the actual usecases for this <code>Comonad</code> shortly, but first I want to start with ways I could have come up with the definition.</p><p>It turns out there are a few comonads very closely related to Gabriel's left <code>Fold</code>!</p><p>If we take the definition of Gabriel's <code>Fold</code> and rip off the existential, we get:</p><pre><code class="haskell">data FoldX x a b = Fold (x -&gt; a -&gt; x) x (x -&gt; b)</code></pre><p>If we look through the menagerie supplied by the <code>comonad-transformers</code> package, we can pattern match on that with some effort and find:</p><p><code>FoldX x a b</code> is isomorphic to both <code>EnvT (x -&gt; a -&gt; x) (Store x) b</code> and <code>StoreT x (Env (x -&gt; a -&gt; x)) b</code>. That it matches both of these types isn't surprising.</p><p>With <code>Monad</code> transformers, <code>State</code>, <code>Reader</code> and <code>Writer</code> all commute. In the space of <code>Comonad</code> transformers, <code>Store</code>, <code>Env</code>, and <code>Traced</code> all commute similarly.</p><p><code>Store</code> is our old friend from the previous post, but <code>Env</code> and <code>EnvT</code> is something we haven't looked at before.</p><p><code>Env</code> is also pretty much the easiest comonad to derive yourself.</p><p>Give it a shot!</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor, ScopedTypeVariables #-}
+-- show
+import Control.Comonad
+-- /show
+import Control.Exception
+import Control.Monad
+-- show
+data Env e a = Env e a deriving (Eq,Ord,Show,Read,Functor)
+
+instance Comonad (Env e) where
+  -- extract :: Env e a -&gt; a
+  extract (Env e a) = error &quot;unimplemented exercise&quot;
+  
+  -- duplicate :: Env e a -&gt; Env e (Env e a)
+  duplicate (Env e a) = error &quot;unimplemented exercise&quot;
+-- /show
+
+main = do
+  test &quot;extract&quot; $ extract (Env 1 2) == 2
+  test &quot;duplicate&quot; $ duplicate (Env 1 2) == Env 1 (Env 1 2)
+  
+test :: String -&gt; Bool -&gt; IO ()
+test s b = try (return $! b) &gt;&gt;= \ ec -&gt; case ec of
+  Left (e :: SomeException) -&gt; putStrLn $ s ++ &quot; failed: &quot; ++ show e
+  Right True -&gt; putStrLn $ s ++ &quot; is correct!&quot;
+  Right False -&gt; putStrLn $ s ++ &quot; is not correct!&quot;</code></pre><p>When we bolt an extra bit of environment onto our <code>Store</code> from the first part, we get</p><pre><code class="haskell">data StoreAndEnv s e a = StoreAndEnv e (s -&gt; a) s</code></pre><p>If we fix <code>e = (s -&gt; b -&gt; s)</code>, we get</p><pre><code class="haskell">data StoreAndStep s b a = StoreAndStep (s -&gt; b -&gt; s) (s -&gt; a) s</code></pre><p>then if we existentially tie off the <code>s</code> parameter to keep the end-user from fiddling with it we get back to</p><pre><code class="haskell">data Fold a b = forall s. Fold (s -&gt; b -&gt; s) (s -&gt; a) s</code></pre><p>which we could shuffle around into the right place.</p><p>You can view tying off <code>s</code> as taking a coend if you are so categorically inclined.</p><p>It was somewhat unsatisfying that we had to take a coend and make something existential in that type. Can we do without it?</p><p>It turns out we can, as noted by Elliott Hird, we just need to turn to another <code>Comonad</code>!</p><h1 id="moore-machines"><a href="#moore-machines">Moore Machines</a></h1><p>A <a href="http://en.wikipedia.org/wiki/Moore_machine">Moore machine</a> is one of the two classic ways to represent a <a href="http://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton (DFA)</a>. The definition we'll use here is going to allow for deterministic infinite automata for free.</p><p>That sort of thing happens a lot in Haskell.</p><p>A Moore machine gives you a result associated with each state in the automaton rather than each edge. We'll make the Moore machine itself represent the state implicitly.</p><pre><code class="haskell">data Moore b a = Moore a (b -&gt; Moore b a)</code></pre><p>You can play around deriving its <code>extract</code> method below:</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor, ScopedTypeVariables #-}
+-- show
+import Control.Comonad
+-- /show
+import Control.Exception
+import Control.Monad
+-- show
+data Moore b a = Moore a (b -&gt; Moore b a) deriving Functor
+
+instance Comonad (Moore b) where
+  -- extract :: Moore b a -&gt; a
+  extract (Moore a as) = error &quot;unimplemented exercise&quot;
+  
+  -- duplicate :: Moore b a -&gt; Moore b (Moore b a)
+  duplicate w@(Moore _ as) = Moore w (duplicate &lt;$&gt; as)
+
+  -- extend :: (Moore b a -&gt; c) -&gt; Moore b a -&gt; Moore b c
+  extend f w@(Moore _ as)  = Moore (f w) (extend f &lt;$&gt; as)
+-- /show
+
+main = do
+  test &quot;extract&quot; $ 1 == extract (Moore 1 $ error &quot;you don't need to look in the tail&quot;)
+  
+test :: String -&gt; Bool -&gt; IO ()
+test s b = try (return $! b) &gt;&gt;= \ ec -&gt; case ec of
+  Left (e :: SomeException) -&gt; putStrLn $ s ++ &quot; failed: &quot; ++ show e
+  Right True -&gt; putStrLn $ s ++ &quot; is correct!&quot;
+  Right False -&gt; putStrLn $ s ++ &quot; is not correct!&quot;</code></pre><p>If you have an eye for this sort of thing, you may have noted that <code>Moore</code> is a <code>Cofree Comonad</code>!</p><p>That is to say, <code>Moore b a ~ Cofree ((-&gt;) b) a</code>.</p><p><code>Moore</code> machines are supplied in my <code>machines</code> package.</p><p>We can also derive an <code>Applicative</code> for <code>Moore</code> and all the machinery from the <code>Fold</code> package, plus our new toys above.</p><p>Here is where I'd love to be able to say that, reformulating things in this simpler way pays off and everything gets faster from using this encoding. Alas, that is not to be.</p><p>The <code>Moore</code> machine formulation is about 50% slower than the <code>Fold</code> representation in part due to the fact that it has hidden information about the environment for our machine from the optimizer. With <code>Fold</code>, the explicit <code>s</code> can be manipulated by the inliner very easily.</p><p>Moreover applying an <code>fmap</code> is clearly done at the end, and so you pay no real cost for it until after the last iteration of the loop.</p><p>However, with the <code>Moore</code> representation, we pay for each <code>fmap</code>, because it winds up entangled in our core loop forever and we have to 'step over it' to get to the actual core of work we want to do. If we apply the co-<code>Yoneda</code> lemma to our Moore machine, we get</p><pre><code class="haskell">data YonedaMoore a b = forall r. YonedaMoore (r -&gt; a) (Moore a r)</code></pre><p>Then you get rid of the overhead for each <code>fmap</code>, but we've brought back the existential and just made the optimizer's job harder.</p><p>What we do gain is flexibility in exchange for a bit of speed and no need for extensions.</p><p>A <code>Moore</code> machine can represent a mixture of strict and lazy left folds without extra boxes. The <code>Fold</code> type we started with can only represent one or the other easily, but otherwise must use a box around the intermediate value type. The choice is made when you go to apply the <code>Fold</code>. Gabriel has chosen (rightly) to focus on strict left folds.</p><p>With <code>Moore</code> we can define the embedding to either be lazy</p><pre><code class="haskell">moorel :: (a -&gt; b -&gt; a) -&gt; a -&gt; Moore b a
+moorel f = go where 
+  go a = Moore a (go . f a)</code></pre><p>or strict</p><pre><code class="haskell">moorel' :: (a -&gt; b -&gt; a) -&gt; a -&gt; Moore b a
+moorel' f = go where 
+  go !a = Moore a (go . f a)</code></pre><p>and because we don't have an explicit 's' parameter, we don't have to put a <code>Box</code> around it if we want the lazy version.</p><p>Then the kinds of combinators supplied by <code>Fold</code> can be implemented as</p><pre><code class="haskell">total :: Num a =&gt; Moore a a
+total = moorel' (+) 0
+
+count :: Num a =&gt; Moore b a
+count = moorel' (\a _ -&gt; a + 1) 0</code></pre><p><code>Fold</code> and <code>Moore</code> are equivalent in expressive power, so another way to think about a <code>Fold</code> is as <code>Cofree ((-&gt;) a)</code> represented with an explicit seed in the style of <code>Nu</code> from my <a href="http://hackage.haskell.org/package/recursion-schemes"><code>recursion-schemes</code></a> package!</p><h1 id="feeding-machines-and-folds"><a href="#feeding-machines-and-folds">Feeding Machines and Folds</a></h1><p>If we redefine our <code>Moore</code> machine using record syntax:</p><pre><code class="haskell">data Moore b a = Moore { this :: a, less :: b -&gt; Moore b a }</code></pre><p>then we can run one of our <code>Moore</code> machines by continually calling <code>less</code> with new inputs and then extracting the answer for its final result state.</p><pre><code class="haskell">more :: Foldable t =&gt; t b -&gt; Moore b a -&gt; a
+more xs m = extract (F.foldl' less m xs)</code></pre><p>Note that even though I'm using foldl' here, the thing that is being strictly updated is the Moore machine, not its member, which is only strict if you <i>built</i> the Moore machine using <code>moorel'</code> above.</p><p><code>more xs</code> is now a <code>Cokleisli</code> arrow for our <code>Comonad</code>, just like <code>rule 110</code> was for our <code>Store</code> <code>Comonad</code> in the last post.</p><p>We can construct a similar version of <code>more</code> for <code>Fold</code> using Gabriel's <code>fold</code> combinator.</p><pre><code class="haskell">more :: Foldable t =&gt; t b -&gt; Fold b a -&gt; a
+more xs m = extract (fold m xs)</code></pre><h1 id="what-does-the-comonad-for-fold-mean-"><a href="#what-does-the-comonad-for-fold-mean-">What does the Comonad for Fold mean?</a></h1><p>The <code>Comonad</code> for <code>Fold a</code> or <code>Moore</code> enables us to partially apply a <code>Fold</code> or <code>Moore</code> machine to some input and then resume it later.</p><p>If we <code>extend (more xs)</code> we get the ability to resume it with additional input, having partially driven our <code>Fold</code>!</p><p>If we turn to <code>(=&lt;=)</code> from <code>Control.Comonad</code>.</p><pre><code class="haskell">(=&lt;=) :: Comonad w =&gt; (w b -&gt; c) -&gt; (w a -&gt; b) -&gt; w a -&gt; c
+f =&lt;= g = f . extend g</code></pre><p>Then we can express the laws for <code>more</code>:</p><pre><code class="haskell">extract = more []
+more as =&lt;= more bs = more (as ++ bs)</code></pre><p>So <code>more</code> provides us a monoid homomorphism between Cokleisli composition and concatenation.</p><p>Operationally, it sneaks in before you apply the last step to convert from your intermediate accumulator to the final result and lets you continue to do more work on the accumulator.</p><p>This strikes me as not intuitively obvious, because unless you look at it carefully, it isn't immediately obvious that you can resume something like a hash function because at the end, you usually tweak the result before giving it to the user. Here because we have access to the internals of the Comonad, we can <code>duplicate</code> them into the result before closing it off.</p><p>This is where the explicit seed pays off, because that <code>duplicate</code> incurs no overhead during the actual traversal under Gabriel's representation.</p><p>This same existential construction works for <code>foldMap</code>- and <code>foldr</code>-based folds as well, though most of the &quot;stream fusion&quot; benefits require you to be able to stream and so <code>foldMap</code>-like structures, sadly, get little benefit.</p><h1 id="resuming-a-hash-function"><a href="#resuming-a-hash-function">Resuming a Hash Function</a></h1><p>Let us consider a couple of CRC-like functions, to have something non-trivial to fold.</p><pre><code class="haskell">data Adler32 = Adler32 {-# UNPACK #-} !Word32 {-# UNPACK #-} !Word32
+
+adler32 :: Moore Word8 Word32
+adler32 = done &lt;$&gt; moorel' step (Adler32 1 0) where
+  step (Adler32 s1 s2) x = Adler32 s1' s2' where
+    s1' = mod (s1 + fromIntegral x) 65521
+    s2' = mod (s1' + s2) 65521
+  done (Adler32 s1 s2) = unsafeShiftL s2 16 + s1</code></pre><p>In <a href="http://en.wikipedia.org/wiki/Adler-32">Adler32</a>, the final step of hashing destroys the separation of information between <code>s1</code> and <code>s2</code>, but we can sneak in with the comonad before we destroy it and resume!</p><p>Similarly, but less catastrophically, in <a href="http://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC32</a> the final step is to complement the input.</p><pre><code class="haskell">crc32 :: Moore Word8 Word32
+crc32 = complement &lt;$&gt; moorel' step 0xffffffff where
+  step r b = unsafeShiftR r 8 `xor` (crcs Unboxed.! fromIntegral (xor r (fromIntegral b) .&amp;. 0xff))
+
+crcs :: Unboxed.Vector Word32
+crcs = Unboxed.generate 256 (go.go.go.go.go.go.go.go.fromIntegral) where
+  go c = unsafeShiftR c 1 `xor` if c .&amp;. 1 /= 0 then 0xedb88320 else 0</code></pre><p>We can describe similar <code>Moore</code> machines (or <code>Fold</code>s) for common hashing functions, and then we don't need to make up separate functions for initializing the state, feeding them some incremental additional data and finally cleaning up when we're done.</p><p>The <code>Moore</code> machine provides you with all of that, and the entire API necessary to interact with them comes down to feeding it <code>more</code>, extending after doing so to accept more input!</p><p>This strikes me as an incredibly clean implementation pattern for HMACs such as <a href="http://en.wikipedia.org/wiki/MD5">MD5</a> and <a href="http://en.wikipedia.org/wiki/SHA-1">SHA</a> in Haskell. You don't need to name 3 separate pieces.</p><p>You just name the HMAC itself as the Moore machine that produces it. Then you can feed it <code>more</code> data, extending it as needed until you finally go to look at the last result.</p><h1 id="uncompressed-pngs"><a href="#uncompressed-pngs">Uncompressed PNGs</a></h1><p>So let's put our code where our mouth is and show that we can use this to do some software engineering by writing some code to produce a <a href="http://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a> image from scratch in Haskell.</p><p>A bit over a year ago, Keegan McAllister wrote a nice <a href="http://mainisusuallyafunction.blogspot.com/2012/04/minimal-encoder-for-uncompressed-pngs.html">post</a> on how to generate a minimal uncompressed PNG using python. We'll copy his development here, except we'll switch out to the nicer table-based crc32 above.</p><p>As he noted, you need to implement two hash functions to actually get through writing an uncompressed PNG. Hrmm. We appear to have those.</p><p>We'll use <code>Data.Binary</code> to write out the results, mostly because PNG is an annoyingly introspective format, so we'll have to talk about the lengths of fragments we're generating as we go.</p><p>We can write the ability to put a PNG 'chunk' out, which consists of a 4 byte header followed by some data, but which first encodes the length of just the data, then emits the header, then the data, and finally closes off the chunk with the CRC32 of both.</p><p>Let's generalize more to work over any <code>Fold</code> (in the <code>lens</code> sense this time!) that yields the input type.</p><pre><code class="haskell">moreOf :: Getting (Endo (Endo (Moore b a))) s b -&gt; s -&gt; Moore b a -&gt; a
+moreOf l xs m = extract (foldlOf' l less m xs)</code></pre><p>That somewhat baroque seeming type can be read as a more liberal version of:</p><pre><code class="haskell">moreOf :: Fold s b -&gt; s -&gt; Moore b a -&gt; a</code></pre><p>that just happens to get better inference due to the lack of rank-2 types.</p><p>Now we can use it directly on the lazy bytestring fragments we get along the way</p><pre><code class="haskell">putChunk :: Lazy.ByteString -&gt; Put -&gt; Put
+putChunk h (runPut -&gt; b) = do
+  putWord32be $ fromIntegral (Lazy.length b)
+  putLazyByteString h
+  putLazyByteString b
+  putWord32be $ moreOf bytes h =&lt;= moreOf bytes b $ crc32</code></pre><p>To write out a PNG file, we need to be able to emit the <code>IHDR</code> chunk, 1 or more <code>IDAT</code> chunks of zlib compressed data, and an <code>IEND</code> chunk.</p><p>We can break up our zlib data into uncompressed blocks. However, zlib only allows uncompressed runs of 64k at a time, so we let's define the encoding for a nested uncompressed deflate block.</p><pre><code class="haskell">deflated :: Bool -&gt; Lazy.ByteString -&gt; Put
+deflated final b | l &lt;- fromIntegral (Lazy.length b) = do
+  putWord8 $ if final then 1 else 0
+  putWord16le l -- yep, now it's little endian!
+  putWord16le (complement l)
+  putLazyByteString b</code></pre><p>Then we just rip our input up into 64k blocks, embed each of those blocks in one enormous <code>IDAT</code> block, then finally seal everything up with the <code>Adler32</code> checksum that we so helpfully supplied as an example above!</p><pre><code class="haskell">zlibbed :: Lazy.ByteString -&gt; Put
+zlibbed bs = do
+  putWord8 0x78
+  putWord8 0x01
+  go bs
+  putWord32be $ moreOf bytes bs adler32
+  where
+    go (Lazy.splitAt 0xffff -&gt; (xs, ys)) | done &lt;- Lazy.null ys = do
+      deflated done xs
+      M.unless done (go ys)</code></pre><p>Now we can write out a PNG header, loop through the data, state that we're not applying any transformation for each row:</p><pre><code class="haskell">png :: Int -&gt; [Int -&gt; (Word8, Word8, Word8)] -&gt; Lazy.ByteString
+png w fs = runPut $ do
+  putLazyByteString &quot;\x89PNG\r\n\x1a\n&quot;
+  putChunk &quot;IHDR&quot; $ do
+    putWord32be $ fromIntegral w
+    putWord32be $ fromIntegral (List.length fs)
+    putWord8 8 -- 8 bit color depth
+    putWord8 2 -- RGB
+    putWord8 0
+    putWord8 0
+    putWord8 0
+  putChunk &quot;IDAT&quot; $ zlibbed (runPut rows)
+  putChunk &quot;IEND&quot; $ return ()
+  where
+    rows = forM_ fs $ \f -&gt; do
+      putWord8 0
+      forM_ [0..w-1] (put . f)</code></pre><p>Here I've chosen to tell the PNG the width, but leave height implicit in the length of the list of functions from horizontal position to pixel color. I may revisit that later, but it was the fastest thing I could think of to write.</p><p>This lets <code>png</code> nicely fit into the recursion pattern from the previous post.</p><p>But we've written a lot of code, so it'd be nice to check that we generated a valid PNG.</p><pre><code class="active haskell web">-- show
+{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -Wall #-}
+import Control.Applicative
+import Control.Comonad
+import Control.Lens
+import qualified Control.Monad as M
+import Data.Bits
+import Data.Binary
+import Data.Binary.Put
+import qualified Data.ByteString.Lazy as Lazy
+import Data.ByteString.Lens
+import Data.Monoid
+import qualified Data.Vector.Unboxed as Unboxed
+import Data.Foldable as F
+import Data.List as List
+import Yesod
+
+-- * Moore machines
+
+data Moore b a = Moore { this :: a, less :: b -&gt; Moore b a }
+
+instance Num a =&gt; Num (Moore b a) where
+  (+) = liftA2 (+)
+  (-) = liftA2 (-)
+  (*) = liftA2 (*)
+  abs = fmap abs
+  signum = fmap signum
+  fromInteger = pure . fromInteger
+
+instance Fractional a =&gt; Fractional (Moore b a) where
+  recip = fmap recip
+  (/) = liftA2 (/)
+  fromRational = pure . fromRational
+
+instance Functor (Moore b) where
+  fmap f = go where go (Moore a k) = Moore (f a) (go . k)
+
+instance Comonad (Moore b) where
+  extract = this
+  duplicate w@(Moore _ as) = Moore w (duplicate . as)
+
+instance ComonadApply (Moore b) where
+  (&lt;@&gt;) = (&lt;*&gt;)
+
+instance Applicative (Moore b) where
+  pure a = as where as = Moore a (const as)
+  Moore f fs &lt;*&gt; Moore a as = Moore (f a) $ \b -&gt; fs b &lt;*&gt; as b
+
+instance Profunctor Moore where
+  dimap f g (Moore a as) = Moore (g a) (dimap f g . as . f)
+
+moorel :: (a -&gt; b -&gt; a) -&gt; a -&gt; Moore b a
+moorel f = go where go a = Moore a (go . f a)
+
+moorel' :: (a -&gt; b -&gt; a) -&gt; a -&gt; Moore b a
+moorel' f = go where go !a = Moore a (go . f a)
+
+moreOf :: Getting (Endo (Endo (Moore b a))) s b -&gt; s -&gt; Moore b a -&gt; a
+moreOf l xs m = extract (foldlOf' l less m xs)
+
+-- * Adler 32
+
+data Adler32 = Adler32 {-# UNPACK #-} !Word32 {-# UNPACK #-} !Word32
+
+adler32 :: Moore Word8 Word32
+adler32 = done &lt;$&gt; moorel' step (Adler32 1 0) where
+  step (Adler32 s1 s2) x = Adler32 s1' s2' where
+    s1' = mod (s1 + fromIntegral x) 65521
+    s2' = mod (s1' + s2) 65521
+  done (Adler32 s1 s2) = unsafeShiftL s2 16 + s1
+
+-- * CRC32
+
+crc32 :: Moore Word8 Word32
+crc32 = complement &lt;$&gt; moorel' step 0xffffffff where
+  step r b = unsafeShiftR r 8 `xor` crcs Unboxed.! fromIntegral (xor r (fromIntegral b) .&amp;. 0xff)
+
+crcs :: Unboxed.Vector Word32
+crcs = Unboxed.generate 256 (go.go.go.go.go.go.go.go.fromIntegral) where
+  go c = unsafeShiftR c 1 `xor` if c .&amp;. 1 /= 0 then 0xedb88320 else 0
+
+-- * PNG
+
+putChunk :: Lazy.ByteString -&gt; Put -&gt; Put
+putChunk h (runPut -&gt; b) = do
+  putWord32be $ fromIntegral (Lazy.length b)
+  putLazyByteString h
+  putLazyByteString b
+  putWord32be $ moreOf bytes h =&lt;= moreOf bytes b $ crc32
+
+deflated :: Bool -&gt; Lazy.ByteString -&gt; Put
+deflated final b | l &lt;- fromIntegral (Lazy.length b) = do
+  putWord8 $ if final then 1 else 0
+  putWord16le l -- yep, now it's little endian!
+  putWord16le (complement l)
+  putLazyByteString b
+
+zlibbed :: Lazy.ByteString -&gt; Put
+zlibbed bs = do
+  putWord8 0x78
+  putWord8 0x01
+  go bs
+  putWord32be $ moreOf bytes bs adler32
+  where
+    go (Lazy.splitAt 0xffff -&gt; (xs, ys)) | done &lt;- Lazy.null ys = do
+      deflated done xs
+      M.unless done (go ys)
+
+png :: Int -&gt; [Int -&gt; (Word8, Word8, Word8)] -&gt; Lazy.ByteString
+png w fs = runPut $ do
+  putLazyByteString &quot;\x89PNG\r\n\x1a\n&quot;
+  putChunk &quot;IHDR&quot; $ do
+    putWord32be $ fromIntegral w
+    putWord32be $ fromIntegral (List.length fs)
+    putWord8 8 -- 8 bit color depth
+    putWord8 2 -- RGB
+    putWord8 0
+    putWord8 0
+    putWord8 0
+  putChunk &quot;IDAT&quot; $ zlibbed (runPut rows)
+  putChunk &quot;IEND&quot; $ return ()
+  where
+    rows = forM_ fs $ \f -&gt; do
+      putWord8 0
+      forM_ [0..w-1] (put . f)
+
+-- * Yesod
+
+data App = App
+
+instance Yesod App
+
+mkYesod &quot;App&quot; [parseRoutes| / ImageR GET |]
+
+main :: IO ()
+main = warpEnv App
+-- /show
+
+-- show
+getImageR :: MonadHandler m =&gt; m TypedContent
+getImageR = sendResponse $ toTypedContent (typePng, toContent img) where
+  img = png 500 $ take 300 $ pixel &lt;$&gt; [0..]
+  pixel y x = (fromIntegral x,fromInteger y,0)
+-- /show</code></pre><p>That image matches up byte for byte with the output of Keegan's sample, so we seem to have an end-to-end test that works.</p><p>A lot of this code is redundant, however.</p><p>For instance all of the <code>Moore</code> code could be taken from the <code>machines</code> package, which provides <code>Data.Machine.Moore</code> along with all of these instances! Then with a bit of tightening of exposition and removing unnecessary detours we could generate the whole thing in a lot less code.</p><h1 id="automata--please"><a href="#automata--please">Automata, Please</a></h1><p>Of course, this is supposed to be a series about cellular automata. So let's draw one.</p><p>1.) I'll be switching to a 4 line minimalist version of Gabriel's <code>foldl</code> library, rather than using the <code>Moore</code> representation, since we don't need any of the instances. I've renamed his <code>Fold</code> to <code>L</code> here to avoid conflicts with the <code>Lens</code> library.</p><p>2.) We don't <i>need</i> to use the <code>Comonad</code> for the fold type we spent all that time above building up. Here we're working with lazy bytestrings, so let's just append them in the one case we need!</p><p>2.) I'll also be using the <code>Context</code> comonad from the <code>lens</code> package rather than continuing to roll our own <code>Store</code>. That'll be useful next time when I want to abuse the separate indices.</p><p>3.) 
+  I've tweaked the memoization rule to use</p><p>  <code>`haskell
+  loop f = iterate (tab . extend f) . tab
+  </code>`</p><p>  instead of</p><p>  <code>`haskell
+  loop f = iterate (extend f . tab) 
+  </code>`</p><p>  to get slightly better memoization. I also switched to <code>representable-tries</code>, 
+  because it'll make it easier to switch to new topologies later.</p><p>4.) Finally, to reduce the footprint of the PNGs we generate we'll let the existing <code>zlib</code> bindings for Haskell do the compression rather than manually deflate. This reduces the footprint of the generated images a great deal.</p><p>Click Run!</p><pre><code class="active haskell web">{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE Rank2Types #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TypeFamilies #-}
+import Control.Applicative
+import Control.Comonad
+import Codec.Compression.Zlib
+import Control.Lens.Internal.Context
+import Control.Lens as L
+import Data.Bits
+import Data.Bits.Lens as L
+import Data.Monoid
+import Data.Binary
+import Data.Binary.Put
+import qualified Data.ByteString.Lazy as Lazy
+import qualified Data.Vector.Unboxed as Unboxed
+import Data.Foldable as F
+import Data.MemoTrie
+import Yesod
+
+rule :: Num s =&gt; Word8 -&gt; Context s s Bool -&gt; Bool
+rule w (Context f s) = testBit w $ 0 L.&amp; partsOf L.bits .~ [f (s+1), f s, f (s-1)]
+
+loop :: HasTrie s =&gt; (Context s s a -&gt; a) -&gt; Context s s a -&gt; [Context s s a]
+loop f = iterate (tab . extend f) . tab where
+  tab (Context k s) = Context (memo k) s
+
+data L b a = forall x. L (x -&gt; b -&gt; x) x (x -&gt; a)
+
+more :: Lazy.ByteString -&gt; L Word8 a -&gt; a
+more bs (L xbx x xa) = xa (Lazy.foldl' xbx x bs)
+
+crc32 :: L Word8 Word32
+crc32 = L step 0xffffffff complement where
+  step r b = unsafeShiftR r 8 `xor` crcs Unboxed.! fromIntegral (xor r (fromIntegral b) .&amp;. 0xff)
+
+crcs :: Unboxed.Vector Word32
+crcs = Unboxed.generate 256 (go.go.go.go.go.go.go.go.fromIntegral) where
+  go c = unsafeShiftR c 1 `xor` if c .&amp;. 1 /= 0 then 0xedb88320 else 0
+
+putChunk :: Lazy.ByteString -&gt; Lazy.ByteString -&gt; Put
+putChunk h b = do
+  putWord32be $ fromIntegral (Lazy.length b)
+  putLazyByteString h
+  putLazyByteString b
+  putWord32be $ more (h &lt;&gt; b) crc32
+
+png :: Int -&gt; Int -&gt; [Int -&gt; (Word8, Word8, Word8)] -&gt; Lazy.ByteString
+png w h fs = runPut $ do
+  putLazyByteString &quot;\x89PNG\r\n\x1a\n&quot;
+  putChunk &quot;IHDR&quot; $ runPut $ do
+    putWord32be (fromIntegral w)
+    putWord32be (fromIntegral h)
+    putWord8 8 -- 8 bit color depth
+    putWord8 2 -- RGB
+    putWord8 0
+    putWord8 0
+    putWord8 0
+  putChunk &quot;IDAT&quot; $
+    compressWith defaultCompressParams { compressLevel = bestSpeed } $
+    runPut $ forM_ (take h fs) $ \f -&gt; do
+      putWord8 0
+      forM_ [0..w-1] (put . f)
+  putChunk &quot;IEND&quot; mempty
+
+data App = App
+instance Yesod App
+mkYesod &quot;App&quot; [parseRoutes| / ImageR GET |]
+main = warpEnv App
+-- /show
+
+-- show
+getImageR :: MonadHandler m =&gt; m TypedContent
+getImageR = sendResponse $ toTypedContent (typePng, toContent img) where
+  img = png 150 150 $ draw &lt;$&gt; loop (rule 110) (Context (==149) 149)
+  draw (Context p _) x = if p x then (0,0,0) else (255,255,255)
+-- /show</code></pre><p>That weighs in somewhere around 75 lines, and includes our compressed PNG generator, all the logic for running Wolfram's 2-color rules as before, and our embedded Yesod server. You can feel free to tweak the output above.</p><p>In the real world you'd probably just use <a href="http://hackage.haskell.org/packages/archive/JuicyPixels/3.1/doc/html/Codec-Picture-Png.html">JuicyPixels</a>.</p><p>Now that we're not shackled by the SVG rendering speed we can generalize this to other topologies and maybe try to improve on our other bottlenecks in future updates.</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>September 1, 2013</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/cellular-automata/part-2';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

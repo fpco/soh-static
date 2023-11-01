@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html><head><title>XML Processing with Error checking - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell">Advanced Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell/xml-parsing-with-validation">XML Processing with Error checking</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">XML Processing with Error checking</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">18 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/school">School of Haskell</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/30/63e70f741b32ba98e9d95d20bcea9b59263a2636">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/advanced-haskell/the-mother-of-all-monads">Next content: The Mother of all Monads</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/advanced-haskell">Go up to: Advanced Haskell</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a><ul><li><a href="#the-application">The application</a></li><li><a href="#the-software">The software</a></li><li><a href="#a-note-on-dtd-s--schemas-and-xml">A note on DTD&#39;s, schemas and XML</a></li></ul></li><li><a href="#the-schema">The schema</a><ul><li><a href="#in-xml">In XML</a></li><li><a href="#w3c-xml-version">W3C XML Version</a></li></ul></li><li><a href="#processing">Processing</a><ul><li><a href="#reading-the-file">Reading the file</a></li><li><a href="#a-list-of-transaction-s">A list of Transaction&#39;s</a></li><li><a href="#selecting-our-elements">Selecting our elements</a></li><li><a href="#constructing-the-data-type-we-want">Constructing the data type we want</a></li><li><a href="#getting-haskell-data">Getting Haskell data</a></li><li><a href="#putting-it-all-together">Putting it all together</a></li></ul></li><li><a href="#handling-errors">Handling errors</a><ul><li><a href="#with-validation">With validation</a></li><li><a href="#without-validation">Without validation</a></li><li><a href="#catching-errors">Catching errors</a></li></ul></li><li><a href="#bidirectional-conversion">Bidirectional conversion</a></li><li><a href="#feedback">Feedback</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>One of the most basic XML parsing tasks in web applications is reformatting XML data for display on a web page - basically using it as a markup language. For such chores, silently ignoring an invalid element is a minor problem. You get a missing or garbled row of data in output that's being read by a human, who can figure out what it should say, or ignore it, or even get the data from another source if it's the bit they're looking for.</p><p>If that describes your application, you might consider using <code>xml-conduit</code> package, which has less complicated combinators. It is described in in our <a href="https://www.fpcomplete.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/tagsoup">HTML parsing tutorial</a>, which uses the same set of functions and operators, parsing the document with the HTML parser instead of an XML parser.</p><p>Other applications of XML, like using it to hold program configuration information or data being collected in the field, are less tolerant of errors. A program misconfiguration can cause no end of problems, over and above missing data. If your application is processing financial data, that error could turn into a loss of money. If it's handling medical data - or worse yet, controlling medical equipment - then those errors could turn into a loss of life.</p><p>XML provides tools for dealing with such conditions, and this tutorial is going to explore some of those.</p><h2 id="the-application"><a href="#the-application">The application</a></h2><p>Let's build a simple financial application. It will process transactions made at a single ATM during the course of the day. A transaction consists of an account, the type of transaction (either a deposit or a withdrawal), and the amount. A real-world version of this would have a database back end, and update the accounts in the database as it processed them, but we're going to skip that. We'll just print the Haskell data structures in the document so we can verify that the XML was processed correctly.</p><h2 id="the-software"><a href="#the-software">The software</a></h2><p>We're going to be using the Haskell XML library <code>HXT</code>, as it provides the validation and processing features we need. The processing paradigm is <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=arrows" title="Hoogle search for: arrows"><code>arrows</code></a>, which are very powerful, but unfortunately very complicated. This means we're going to be writing a lot of functions that are arrows, but we'll introduce the features we need.</p><h2 id="a-note-on-dtd-s--schemas-and-xml"><a href="#a-note-on-dtd-s--schemas-and-xml">A note on DTD's, schemas and XML</a></h2><p>If you're not familiar with schemas at all, then the nickel tour is that they describe the structure of a valid document. For each tag, they list the valid attributes, contents and types for the tag. An XML document is said to be <i>well-formed</i> if it is syntactically correct XML, and the open and close tags pair up properly. An XML document is <i>valid</i> if it conforms to a schema. A document that isn't well-formed is called <i>ill-formed</i>, though <i>not XML</i> is also correct. An XML document that doesn't conform to a schema is <i>invalid</i>.</p><p>The oldest format for schemas - predating XML - is the <a href="http://www.w3schools.com/dtd/">Document Type Definition</a>, or <i>DTD</i>. A modern, more expressive format is the <a href="http://www.w3.org/TR/2001/REC-xmlschema-0-20010502/">W3C XML Schema</a>, which is XML. We're working with <a href="http://relaxng.org/tutorial-20011203.html">RelaxNG</a>, because it has a <a href="http://relaxng.org/compact-tutorial-20030326.html">compact form</a> based on regular expressions that is easy for humans to read and edit as well as an XML form that is simpler than a W3C XML Schema, while having similar expressive power.</p><p>The tool <a href="http://www.thaiopensource.com/relaxng/trang.html">trang</a> can be used to convert between these formats, and will warn you when you try using features of one that won't work in the other. It also has the ability to read XML files and create a schema for them.</p><h1 id="the-schema"><a href="#the-schema">The schema</a></h1><p>In this case, we're fortunate enough to get to define schema we want to use. It's not at all unusual to be either given the schema, or worse, not be given the schema, and expected to figure out what is and isn't valid.</p><p>The XML file will pretty much directly reflect our data structures. The RNC schema is:</p><pre><code>start = element transactions {
+   (element deposit { info } | element withdrawal { info })+
+}
+
+info = ( attribute account { xsd:positiveInteger },
+         attribute amount { xsd:decimal { pattern = &quot;\d+.\d\d&quot; }},
+         text )</code></pre><p>The root element is <code>transactions</code>. It contains a list of one or more (as denoted by the <code>+</code>) elements, each of which is either a <code>withdrawal</code> or (the <code>|</code>) a <code>deposit</code> element. Both those elements contain <code>info</code>, meaning they have <code>account</code> and <code>amount</code> atributes, and allow arbitrary text as content. The <code>account</code> attribute is a positive integer, and the <code>amount</code> attribute is a decimal number of dollars and cents.</p><h2 id="in-xml"><a href="#in-xml">In XML</a></h2><p>As mentioned, this can be translated into a RelaxNG XML schema, and in fact that is what is required by <code>HXT</code>. It looks like:</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;grammar xmlns=&quot;http://relaxng.org/ns/structure/1.0&quot; datatypeLibrary=&quot;http://www.w3.org/2001/XMLSchema-datatypes&quot;&gt;
+  &lt;start&gt;
+    &lt;element name=&quot;transactions&quot;&gt;
+      &lt;oneOrMore&gt;
+        &lt;choice&gt;
+          &lt;element name=&quot;deposit&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+          &lt;element name=&quot;withdrawal&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+        &lt;/choice&gt;
+      &lt;/oneOrMore&gt;
+    &lt;/element&gt;
+  &lt;/start&gt;
+  &lt;define name=&quot;info&quot;&gt;
+    &lt;attribute name=&quot;account&quot;&gt;
+      &lt;data type=&quot;positiveInteger&quot;/&gt;
+    &lt;/attribute&gt;
+    &lt;attribute name=&quot;amount&quot;&gt;
+      &lt;data type=&quot;decimal&quot;&gt;
+        &lt;param name=&quot;pattern&quot;&gt;\d+.\d\d&lt;/param&gt;
+      &lt;/data&gt;
+    &lt;/attribute&gt;
+    &lt;text/&gt;
+  &lt;/define&gt;
+&lt;/grammar&gt;</code></pre><h2 id="w3c-xml-version"><a href="#w3c-xml-version">W3C XML Version</a></h2><p>If your software requires it, you can also translate it into a W3C XML Schema. While we won't use it, this looks like:</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;qualified&quot;&gt;
+  &lt;xs:element name=&quot;transactions&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:choice maxOccurs=&quot;unbounded&quot;&gt;
+        &lt;xs:element ref=&quot;deposit&quot;/&gt;
+        &lt;xs:element ref=&quot;withdrawal&quot;/&gt;
+      &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name=&quot;deposit&quot;&gt;
+    &lt;xs:complexType mixed=&quot;true&quot;&gt;
+      &lt;xs:attributeGroup ref=&quot;info&quot;/&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name=&quot;withdrawal&quot;&gt;
+    &lt;xs:complexType mixed=&quot;true&quot;&gt;
+      &lt;xs:attributeGroup ref=&quot;info&quot;/&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:attributeGroup name=&quot;info&quot;&gt;
+    &lt;xs:attribute name=&quot;account&quot; use=&quot;required&quot; type=&quot;xs:positiveInteger&quot;/&gt;
+    &lt;xs:attribute name=&quot;amount&quot; use=&quot;required&quot;&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:decimal&quot;&gt;
+          &lt;xs:pattern value=&quot;\d+.\d\d&quot;/&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:attribute&gt;
+  &lt;/xs:attributeGroup&gt;
+&lt;/xs:schema&gt;</code></pre><p>As you can see, those are both harder to read than the RNC format. However, this is the last time we'll be using them. The RelaxNG schema will be in each example, but it won't change, so you can ignore it.</p><h1 id="processing"><a href="#processing">Processing</a></h1><p>The pieces are almost in place to start processing the data. But first, let's look at the sample data:</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdrawal account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdrawal account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;</code></pre><p>The first example should give us back this input - give or take some formatting.</p><h2 id="reading-the-file"><a href="#reading-the-file">Reading the file</a></h2><p>Parsing the XML - with or without validation - is done by the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=readDocument" title="Hoogle search for: readDocument"><code>readDocument</code></a> function. It expects two arguments. One is a list of options for parsing XML, and the other is a file name to read. Since we can't provide command line arguments, we hardcode the file name:</p><pre><code class="haskell">readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;</code></pre><p>For now, we'll just write the data out in XML again. That uses <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=writeDocument" title="Hoogle search for: writeDocument"><code>writeDocument</code></a>, which also takes two arguments, a list of options and a file name. In this case, we're going to use the file name <code>&quot;&quot;</code> to cause output to go to standard out:</p><pre><code class="haskell">writeDocument [withIndent True, withOutputEncoding utf8] &quot;&quot;</code></pre><p>The two options give us nicely formatted output in UTF-8.</p><p>Both of these functions return arrows, so can be combined with the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=&gt;&gt;&gt;" title="Hoogle search for: &gt;&gt;&gt;"><code>&gt;&gt;&gt;</code></a> operator to produce a third arrow. This is just function composition (<a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=(.)" title="Hoogle search for: (.)"><code>(.)</code></a>) with arrows, so input values are passed to the first arrow, and the output of that to the second.</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+import Text.XML.HXT.Core
+import Text.XML.HXT.RelaxNG
+
+main :: IO ()
+main = do
+  runX $ readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;
+         &gt;&gt;&gt; writeDocument [withIndent True, withOutputEncoding utf8] &quot;&quot;
+  return ()
+
+{-# START_FILE transactions.rng #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;grammar xmlns=&quot;http://relaxng.org/ns/structure/1.0&quot; datatypeLibrary=&quot;http://www.w3.org/2001/XMLSchema-datatypes&quot;&gt;
+  &lt;start&gt;
+    &lt;element name=&quot;transactions&quot;&gt;
+      &lt;zeroOrMore&gt;
+        &lt;choice&gt;
+          &lt;element name=&quot;deposit&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+          &lt;element name=&quot;withdrawal&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+        &lt;/choice&gt;
+      &lt;/zeroOrMore&gt;
+    &lt;/element&gt;
+  &lt;/start&gt;
+  &lt;define name=&quot;info&quot;&gt;
+    &lt;attribute name=&quot;account&quot;&gt;
+      &lt;data type=&quot;positiveInteger&quot;/&gt;
+    &lt;/attribute&gt;
+    &lt;attribute name=&quot;amount&quot;&gt;
+      &lt;data type=&quot;decimal&quot;&gt;
+        &lt;param name=&quot;pattern&quot;&gt;\d+.\d\d&lt;/param&gt;
+      &lt;/data&gt;
+    &lt;/attribute&gt;
+    &lt;text/&gt;
+  &lt;/define&gt;
+&lt;/grammar&gt;
+{-# START_FILE transactions.xml #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdrawal account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdrawal account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;</code></pre><h2 id="a-list-of-transaction-s"><a href="#a-list-of-transaction-s">A list of <code>Transaction</code>'s</a></h2><p>Now that we can parse the XML transaction list, let's turn it into a list of Haskell <code>Transaction</code>'s. A transaction is:</p><pre><code class="haskell">import Data.Fixed (Centi)
+import Data.Text (Text, pack)
+
+type Comment = Maybe Text
+data Transaction = Deposit !Text !Centi !Comment
+                 | Withdrawal !Text !Centi !Comment
+                 deriving Show</code></pre><p>We introduce a type alias for <code>Comment</code>, which may or may not be present.</p><p>For the actual data type, we use <code>Centi</code> instead of <code>Float</code> or <code>Double</code> because  dollars and cents are a <code>Centi</code> values, and an obvious choice if we want to avoid the various issues with floating point representations. The account number could be an <code>Integer</code>, but making it <code>Text</code> leaves room for future changes. We also force all the values in the record to be strict with the <code>!</code> prefix.</p><h2 id="selecting-our-elements"><a href="#selecting-our-elements">Selecting our elements</a></h2><p>HXT processes XML documents as lists of nodes. It provides a set of functions - specifically arrows - that transform an input list of nodes into an output list of nodes. Our select function will use those functions to produce a list of just the elements we want to process.</p><p>The document element of an XML document has as it's children information about the document as well as the parsed XML document, which we can extract with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Arrow.ArrowTree.getChildren" title="Hoogle search for: Control.Arrow.ArrowTree.getChildren"><code>getChildren</code></a>. We want only the transactions element from those, so we use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Text.XML.HXT.Arrow.XmlArrow.hasName" title="Hoogle search for: Text.XML.HXT.Arrow.XmlArrow.hasName"><code>hasName</code></a> to select that. The <code>transactions</code> children are the elements of interest. However, it also has text children from the whitespace between the elements, so we use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Text.XML.HXT.Arrow.XmlArrow.isElem" title="Hoogle search for: Text.XML.HXT.Arrow.XmlArrow.isElem"><code>isElem</code></a> to get only the XML elements from the childre. So we select only the elements:</p><pre><code class="haskell">select = getChildren &gt;&gt;&gt; hasName &quot;transactions&quot; &gt;&gt;&gt; getChildren &gt;&gt;&gt; isElem</code></pre><p>Since we're using a validated document, we could replace the <code>hasName &quot;transactions&quot;</code> with <code>isElem</code> and get the same result. We could also leave it off entirely, but that would then process all the children of the document root through the second <code>getChildren</code>, rather than just the element we want.</p><h2 id="constructing-the-data-type-we-want"><a href="#constructing-the-data-type-we-want">Constructing the data type we want</a></h2><p>Since <code>HXT</code> is going to provide a string for the tag name, we need a function to map those to the appropriate constructors:</p><pre><code class="haskell">make &quot;deposit&quot; = Deposit
+make &quot;withdrawal&quot; = Withdrawal
+make trans = error $ &quot;Invalid transaction type: &quot; ++ trans</code></pre><p>The final case isn't strictly necessary, as the validation will insure that it's never invoked. However, leaving the function definition partial is a sufficiently bad idea that we'll provide it anyway.</p><h2 id="getting-haskell-data"><a href="#getting-haskell-data">Getting Haskell data</a></h2><p>In order to turn the elements into Haskell data, we're going to use the features enabled by the <code>Arrows</code> extension:</p><pre><code class="haskell">transform = proc el -&gt; do
+  trans &lt;- getName -&lt; el
+  account &lt;- getAttrValue &quot;account&quot; -&lt; el
+  amount &lt;- getAttrValue &quot;amount&quot; -&lt; el
+  comment &lt;- withDefault (Just . pack ^&lt;&lt; getText &lt;&lt;&lt; getChildren) Nothing -&lt; el
+  returnA -&lt; (make trans) (pack account) (read amount) comment</code></pre><p>Here the Arrows keyword <code>proc</code>, like <code>do</code>, provides syntactic sugar but builds a function that is an arrow. It takes arguments simular to a lambda, in this case one, <code>el</code>, and passes it to the defined arrow. Inside the arrow, the Arrows syntax <code>-&lt;</code> can be used to process values through arrows.  If one of the internal arrows should fail for some reason, then processing stops.</p><p>This arrow uses <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Text.XML.HXT.Arrow.XmlArrow.getName" title="Hoogle search for: Text.XML.HXT.Arrow.XmlArrow.getName"><code>getName</code></a> to get the name of the transaction, then <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Text.XML.HXT.Arrow.XmlArrow.getAttrValue" title="Hoogle search for: Text.XML.HXT.Arrow.XmlArrow.getAttrValue"><code>getAttrValue</code></a> to get the account and amount attribues.</p><p>To get the comment, we use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Text.XML.HXT.Arrow.XmlArrow.getText" title="Hoogle search for: Text.XML.HXT.Arrow.XmlArrow.getText"><code>getText</code></a> on the nodes children (provided by <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Arrow.ArrowTree.getChildren" title="Hoogle search for: Control.Arrow.ArrowTree.getChildren"><code>getChildren</code></a>) to extract the text. That is then passed to <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Text.pack" title="Hoogle search for: Data.Text.pack"><code>pack</code></a>  and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Just" title="Hoogle search for: Just"><code>Just</code></a> to get a <code>Maybe Text</code> value, using the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=^&lt;&lt;" title="Hoogle search for: ^&lt;&lt;"><code>^&lt;&lt;</code></a> combinator to combine <code>Just . pack</code> with an arrow. The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=withDefault" title="Hoogle search for: withDefault"><code>withDefault</code></a> function is used to return the text if available, or <code>Nothing</code> if there is no text available.</p><p>The last step is to use the previously defined <code>make</code> function to create a transaction from that data, and pass it to <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Arrow.returnA" title="Hoogle search for: Control.Arrow.returnA"><code>returnA</code></a> to get it back to our arrow monad.</p><h2 id="putting-it-all-together"><a href="#putting-it-all-together">Putting it all together</a></h2><p>With all that in place, all we need to do is modify <code>main</code> to pass the data through <code>select</code> and then <code>transform</code> to get a list of <code>Transaction</code>s, which will will them <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mapM_" title="Hoogle search for: mapM_"><code>mapM_</code></a> <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=print" title="Hoogle search for: print"><code>print</code></a> over to demonstrate the results.</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+{-# LANGUAGE Arrows #-}
+
+import Text.XML.HXT.Core
+import Text.XML.HXT.RelaxNG
+import Data.Text (Text, pack)
+import Data.Fixed (Centi)
+
+type Comment = Maybe Text
+data Transaction = Deposit !Text !Centi !Comment
+                 | Withdrawal !Text !Centi !Comment
+                 deriving Show
+
+make &quot;deposit&quot; = Deposit
+make &quot;withdrawal&quot; = Withdrawal
+make trans = error $ &quot;Invalid transaction type: &quot; ++ trans
+
+select = getChildren &gt;&gt;&gt;  hasName &quot;transactions&quot; &gt;&gt;&gt; getChildren &gt;&gt;&gt; isElem
+
+transform = proc el -&gt; do
+  trans &lt;- getName -&lt; el
+  account &lt;- getAttrValue &quot;account&quot; -&lt; el
+  amount &lt;- getAttrValue &quot;amount&quot; -&lt; el
+  comment &lt;- withDefault (Just . pack ^&lt;&lt; getText &lt;&lt;&lt; getChildren) Nothing -&lt; el
+  returnA -&lt; (make trans) (pack account) (read amount) comment
+
+main :: IO ()
+main = do
+  tl &lt;- runX $ readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;
+               &gt;&gt;&gt; select &gt;&gt;&gt; transform
+  mapM_ print tl
+
+{-# START_FILE transactions.rng #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;grammar xmlns=&quot;http://relaxng.org/ns/structure/1.0&quot; datatypeLibrary=&quot;http://www.w3.org/2001/XMLSchema-datatypes&quot;&gt;
+  &lt;start&gt;
+    &lt;element name=&quot;transactions&quot;&gt;
+      &lt;zeroOrMore&gt;
+        &lt;choice&gt;
+          &lt;element name=&quot;deposit&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+          &lt;element name=&quot;withdrawal&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+        &lt;/choice&gt;
+      &lt;/zeroOrMore&gt;
+    &lt;/element&gt;
+  &lt;/start&gt;
+  &lt;define name=&quot;info&quot;&gt;
+    &lt;attribute name=&quot;account&quot;&gt;
+      &lt;data type=&quot;positiveInteger&quot;/&gt;
+    &lt;/attribute&gt;
+    &lt;attribute name=&quot;amount&quot;&gt;
+      &lt;data type=&quot;decimal&quot;&gt;
+        &lt;param name=&quot;pattern&quot;&gt;\d+.\d\d&lt;/param&gt;
+      &lt;/data&gt;
+    &lt;/attribute&gt;
+    &lt;text/&gt;
+  &lt;/define&gt;
+&lt;/grammar&gt;
+{-# START_FILE transactions.xml #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdrawal account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdrawal account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;</code></pre><h1 id="handling-errors"><a href="#handling-errors">Handling errors</a></h1><p>So now let's see what happens if we have an error in the data. For example, what happoens if a  <code>withdrawal</code> tag has been shorted to <code>withdraw</code>, possibly from a data transmission or entry error.</p><h2 id="with-validation"><a href="#with-validation">With validation</a></h2><p>Here's the exact same code as above, with the change in the data:</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+{-# LANGUAGE Arrows #-}
+
+import Text.XML.HXT.Core
+import Text.XML.HXT.RelaxNG
+import Data.Text (Text, pack)
+import Data.Fixed (Centi)
+
+type Comment = Maybe Text
+data Transaction = Deposit !Text !Centi !Comment
+                 | Withdrawal !Text !Centi !Comment
+                 deriving Show
+
+make &quot;deposit&quot; = Deposit
+make &quot;withdrawal&quot; = Withdrawal
+make trans = error $ &quot;Invalid transaction type: &quot; ++ trans
+
+select = getChildren &gt;&gt;&gt;  hasName &quot;transactions&quot; &gt;&gt;&gt; getChildren &gt;&gt;&gt; isElem
+
+transform = proc el -&gt; do
+  trans &lt;- getName -&lt; el
+  account &lt;- getAttrValue &quot;account&quot; -&lt; el
+  amount &lt;- getAttrValue &quot;amount&quot; -&lt; el
+  comment &lt;- withDefault (Just . pack ^&lt;&lt; getText &lt;&lt;&lt; getChildren) Nothing -&lt; el
+  returnA -&lt; (make trans) (pack account) (read amount) comment
+
+main :: IO ()
+main = do
+  tl &lt;- runX $ readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;
+               &gt;&gt;&gt; select &gt;&gt;&gt; transform
+  mapM_ print tl
+
+{-# START_FILE transactions.rng #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;grammar xmlns=&quot;http://relaxng.org/ns/structure/1.0&quot; datatypeLibrary=&quot;http://www.w3.org/2001/XMLSchema-datatypes&quot;&gt;
+  &lt;start&gt;
+    &lt;element name=&quot;transactions&quot;&gt;
+      &lt;zeroOrMore&gt;
+        &lt;choice&gt;
+          &lt;element name=&quot;deposit&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+          &lt;element name=&quot;withdrawal&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+        &lt;/choice&gt;
+      &lt;/zeroOrMore&gt;
+    &lt;/element&gt;
+  &lt;/start&gt;
+  &lt;define name=&quot;info&quot;&gt;
+    &lt;attribute name=&quot;account&quot;&gt;
+      &lt;data type=&quot;positiveInteger&quot;/&gt;
+    &lt;/attribute&gt;
+    &lt;attribute name=&quot;amount&quot;&gt;
+      &lt;data type=&quot;decimal&quot;&gt;
+        &lt;param name=&quot;pattern&quot;&gt;\d+.\d\d&lt;/param&gt;
+      &lt;/data&gt;
+    &lt;/attribute&gt;
+    &lt;text/&gt;
+  &lt;/define&gt;
+&lt;/grammar&gt;
+{-# START_FILE transactions.xml #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdrawal account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdraw account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;</code></pre><p>As expected, the validation caught the error, and printed it for us with enough information to identify the problem.</p><h2 id="without-validation"><a href="#without-validation">Without validation</a></h2><p>So what happens if we don't validate? Well, this version of the code disables validation (highlighted in the code) in the <code>readDocument</code> options list:</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+{-# LANGUAGE Arrows #-}
+
+import Text.XML.HXT.Core
+import Text.XML.HXT.RelaxNG
+import Data.Text (Text, pack)
+import Data.Fixed (Centi)
+
+type Comment = Maybe Text
+data Transaction = Deposit !Text !Centi !Comment
+                 | Withdrawal !Text !Centi !Comment
+                 deriving Show
+
+make &quot;deposit&quot; = Deposit
+make &quot;withdrawal&quot; = Withdrawal
+make trans = error $ &quot;Invalid transaction type: &quot; ++ trans
+
+select = getChildren &gt;&gt;&gt;  hasName &quot;transactions&quot; &gt;&gt;&gt; getChildren &gt;&gt;&gt; isElem
+
+transform = proc el -&gt; do
+  trans &lt;- getName -&lt; el
+  account &lt;- getAttrValue &quot;account&quot; -&lt; el
+  amount &lt;- getAttrValue &quot;amount&quot; -&lt; el
+  comment &lt;- withDefault (Just . pack ^&lt;&lt; getText &lt;&lt;&lt; getChildren) Nothing -&lt; el
+  returnA -&lt; (make trans) (pack account) (read amount) comment
+
+main :: IO ()
+main = do
+  tl &lt;- runX $ readDocument [{-hi-}withValidate no{-/hi-}] &quot;transactions.xml&quot;
+               &gt;&gt;&gt; select &gt;&gt;&gt; transform
+  mapM_ print tl
+{-# START_FILE transactions.xml #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdraw account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdrawal account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;
+</code></pre><p>In this case, the XML parser passed the XML through just fine, and the error caused processing to stop with no error message. While we could catch this case - and  others - by adding code similar to the handling of comments to every arrow in <code>proc</code>, that would result in noticably longer, more opaque code. The ad hoc nature of such additions would lead to more errors and more fragile code.</p><p>I suggest you play with the above two examples, feeding them various errors to see how the two handle the different cases. Errors that make the XML ill-formed as well as invalid, and errors in the data - non-numeric <code>account</code> values, or non-dollar types for <code>amount</code> - are all worth investigating.</p><h2 id="catching-errors"><a href="#catching-errors">Catching errors</a></h2><p>For use cases where errors <b>must</b> be handled, we normally want to provide special handling for errors - for instance, logging them so the correct data can be entered, and the source of the errors corrected.</p><p>The first thing we need is to decide how to handle errors. Passing the XML document instance created by <code>HXT</code> to the handler provides lots of flexibility. For our case, we're just going to print the file name:</p><pre><code class="haskell">handleError = getAttrValue a_source &gt;&gt;&gt; arrIO (putStrLn . (&quot;Error in document: &quot; ++))</code></pre><p>This is another arrow. We just extract the file name, and then print a message. We use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=arrIO" title="Hoogle search for: arrIO"><code>arrIO</code></a> to invoke an IO function as part of an arrow.</p><p>Since we want run either the error handler, <b>or</b> the standard processing, we need to convert processing - printing the transactions - to an arrow. Since it's in an arrow, this function wil be called on each transaction, so all we have to do is invoke <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=print" title="Hoogle search for: print"><code>print</code></a> as an arrow. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=arrIO" title="Hoogle search for: arrIO"><code>arrIO</code></a> comes in handy there as well.</p><pre><code class="haskell">process = arrIO print</code></pre><p>The last step is to fix the arrow in main to use the two new arrows:</p><pre><code class="haskell">main = do
+  runX $ readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;
+         &gt;&gt;&gt; ((select &gt;&gt;&gt; transform &gt;&gt;&gt; process) `orElse` handleError)
+  return ()</code></pre><p>This  uses the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Arrow.ArrowIf.orElse" title="Hoogle search for: Control.Arrow.ArrowIf.orElse"><code>orElse</code></a> combinator to run the error handler should the document processing fail. We need a <code>return ()</code> because the type of the arrow is <code>IO [()]</code>.</p><p>So, tying that together:</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+{-# LANGUAGE Arrows #-}
+import Text.XML.HXT.Core
+import Text.XML.HXT.RelaxNG
+import Data.Fixed (Centi)
+import Data.Text (Text, pack)
+
+
+type Comment = Maybe Text
+data Transaction = Deposit !Text !Centi !Comment
+                 | Withdrawal !Text !Centi !Comment
+                 deriving Show
+
+make &quot;deposit&quot; = Deposit
+make &quot;withdrawal&quot; = Withdrawal
+make trans = error $ &quot;Invalid transaction type: &quot; ++ trans
+
+select = getChildren &gt;&gt;&gt;  hasName &quot;transactions&quot; &gt;&gt;&gt; getChildren &gt;&gt;&gt; isElem
+
+transform = proc el -&gt; do
+  trans &lt;- getName -&lt; el
+  account &lt;- getAttrValue &quot;account&quot; -&lt; el
+  amount &lt;- getAttrValue &quot;amount&quot; -&lt; el
+  comment &lt;- withDefault (Just . pack ^&lt;&lt; getText &lt;&lt;&lt; getChildren) Nothing -&lt; el
+  returnA -&lt; (make trans) (pack account) (read amount) comment
+
+process = arrIO print
+
+handleError = getAttrValue a_source &gt;&gt;&gt; arrIO (putStrLn . (&quot;Error in document: &quot; ++))
+
+main :: IO ()
+main = do
+  runX $ readDocument [withRelaxNG &quot;transactions.rng&quot;] &quot;transactions.xml&quot;
+         &gt;&gt;&gt; ((select &gt;&gt;&gt; transform &gt;&gt;&gt; process) `orElse` handleError)
+  return ()
+
+{-# START_FILE transactions.rng #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;grammar xmlns=&quot;http://relaxng.org/ns/structure/1.0&quot; datatypeLibrary=&quot;http://www.w3.org/2001/XMLSchema-datatypes&quot;&gt;
+  &lt;start&gt;
+    &lt;element name=&quot;transactions&quot;&gt;
+      &lt;zeroOrMore&gt;
+        &lt;choice&gt;
+          &lt;element name=&quot;deposit&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+          &lt;element name=&quot;withdrawal&quot;&gt;
+            &lt;ref name=&quot;info&quot;/&gt;
+          &lt;/element&gt;
+        &lt;/choice&gt;
+      &lt;/zeroOrMore&gt;
+    &lt;/element&gt;
+  &lt;/start&gt;
+  &lt;define name=&quot;info&quot;&gt;
+    &lt;attribute name=&quot;account&quot;&gt;
+      &lt;data type=&quot;positiveInteger&quot;/&gt;
+    &lt;/attribute&gt;
+    &lt;attribute name=&quot;amount&quot;&gt;
+      &lt;data type=&quot;decimal&quot;&gt;
+        &lt;param name=&quot;pattern&quot;&gt;\d+.\d\d&lt;/param&gt;
+      &lt;/data&gt;
+    &lt;/attribute&gt;
+    &lt;text/&gt;
+  &lt;/define&gt;
+&lt;/grammar&gt;
+{-# START_FILE transactions.xml #-}
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;transactions&gt;
+  &lt;deposit account=&quot;1&quot; amount=&quot;156.83&quot;&gt;Payday!&lt;/deposit&gt;
+  &lt;withdrawal account=&quot;1&quot; amount=&quot;50.00&quot; /&gt;
+  &lt;deposit account=&quot;2&quot; amount=&quot;218.12&quot; /&gt;
+  &lt;withdrawal account=&quot;2&quot; amount=&quot;20.00&quot; /&gt;
+  &lt;deposit account=&quot;3&quot; amount=&quot;123.45&quot; /&gt;
+  &lt;withdraw account=&quot;3&quot; amount=&quot;100.00&quot; /&gt;
+  &lt;deposit account=&quot;4&quot; amount=&quot;1022.51&quot; /&gt;
+&lt;/transactions&gt;</code></pre><p>As you can see, <code>errorHandler</code> gets called with the document instance and prints the file name. Since the file name is fixed, it won't ever do anything else here. You might verify that you get that behavior with all the various errors you tried above.</p><h1 id="bidirectional-conversion"><a href="#bidirectional-conversion">Bidirectional conversion</a></h1><p>If you're converting to/from XML, then the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=HXT" title="Hoogle search for: HXT"><code>HXT</code></a> toolbox includes tools for building <i>pickler/unpickler</i> pairs for converting to and from XML with about as much code as it takes to write one of the pair. This is documented <a href="http://www.haskell.org/haskellwiki/HXT/Conversion_of_Haskell_data_from/to_XML">on the Haskell wiki</a></p><h1 id="feedback"><a href="#feedback">Feedback</a></h1><p><a href="https://plus.google.com/100162554869434148021/posts/QLaGuo8Sy9m">Discuss</a> this tutorial in the FP Complete Google+ Community.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/advanced-haskell/xml-parsing-with-validation';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

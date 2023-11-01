@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html><head><title>Part 2: Open-Ended Fibonacci Search - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci">Fibonacci</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci/search">Part 2: Open-Ended Fibonacci Search</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part 2: Open-Ended Fibonacci Search</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">13 Oct 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/ef3bb842b9000d78432bcff461f73bed06069b8d">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci/leonardo">Previous content: Part 1: Leonardo Random Access Lists</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/fibonacci">Go up to: Fibonacci</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#integral-domains">Integral Domains</a></li><li><a href="#homogeneous-linear-recurrences">Homogeneous Linear Recurrences</a></li><li><a href="#r---">R[φ]</a></li><li><a href="#putting-r----in-order">Putting R[φ] in Order</a></li><li><a href="#the-fast-fibonacci-transform">The Fast Fibonacci Transform</a></li><li><a href="#fibonacci-search">Fibonacci Search</a></li><li><a href="#open-ended-fibonacci-search">Open-Ended Fibonacci Search</a></li><li><a href="#ripping-out-all-the-math">Ripping Out All The Math</a></li><li><a href="#further-thoughts">Further Thoughts</a></li><li><a href="#why-care-">Why Care?</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p><a href="https://www.fpcomplete.com/user/edwardk/fibonacci/leonardo">Last time</a>, I built a form of random access list with <i>O(1)</i> cons using the Leonardo numbers and emphasized that the slight skew in the tree could be a good thing.</p><p>Now I want to do some searching, but after all, I'm a functional programmer and everybody knows all we do all day is play with ways to write <code>fib</code>, so we'll start by building an industrial strength version of the <code>fib</code> function to get a feel for how the Fibonacci numbers fit together, and then maybe we can turn it into something with which we can perform efficient searches.</p><h1 id="integral-domains"><a href="#integral-domains">Integral Domains</a></h1><p>To avoid lying, let's stop and define the notion of an integral domain, which is any non-zero commutative ring in which there are no non-zero zero divisors; if <code>a*b = 0</code> then either <code>a = 0</code>, or <code>b = 0</code>.</p><pre><code class="haskell">class Num a =&gt; IntegralDomain a</code></pre><pre><code class="haskell">instance IntegralDomain Integer
+instance IntegralDomain Rational
+instance IntegralDomain Float
+instance IntegralDomain Double</code></pre><p>The latter only pass the no non-zero zero divisors test if you ignore underflow, and I'd probably be beaten up for pretending they are a ring. For the sake of the code at hand we're okay with them, but delete these instances if they make you uncomfortable! I'm not using them.</p><h1 id="homogeneous-linear-recurrences"><a href="#homogeneous-linear-recurrences">Homogeneous Linear Recurrences</a></h1><p>I mentioned last time that you could compute Leonardo and Fibonacci numbers in logarithmic time using the fact that they were linear recurrence relationships. Bill Gosper and Richard Schroeppel called this technique the <a href="http://www.inwap.com/pdp10/hbaker/hakmem/recurrence.html">&quot;Fast Fibonacci Transform&quot;</a> in HAKMEM, a collection of number theoretic computing tricks from the MIT AI Lab from back in the early 70s.</p><p>Now, I confess, I lied a little bit by saying this. Technically you need the fact that you have a <i>homogeneous</i> linear recurrence relationship.</p><pre><code class="haskell">F(N) = X*F(N-1) + Y*(F(N-2))</code></pre><p>Note how no additional constant is being added in. While the Leonardo recurrence doesn't meet this criterion, it is fortunate that the related recurrence</p><pre><code class="haskell">leo n = leonardo n + 1 = leonardo (n-1) + leonardo (n-2) + 2 = leo (n-1) + leo (n-2)</code></pre><p>does. In fact, <code>leo</code> satisfies the same recurrence as in the Fibonacci numbers, and after plugging in some constants we find that</p><pre><code class="haskell">leo n = 2 * fib (n+1)</code></pre><p>which gives rise to the formula for Leonardo numbers in terms of Fibonacci numbers that I gave last time:</p><pre><code class="haskell">leonardo n = 2 * fib (n+1) - 1</code></pre><p>Dijkstra talks more about this specific relationship between the Fibonacci and Leonardo sequences in <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD07xx/EWD797.html">EWD797</a>.</p><h1 id="r---"><a href="#r---">R[φ]</a></h1><p>The HAKMEM writeup gives a form of multiplication for an arbitrary homogeneous linear recurrence relationship, but we only need the Fibonacci recurrence today. We can take the number type described in HAKMEM and turn it directly into a Haskell data type.</p><p>I'm interested in numbers of the form <code>aφ+b</code>, where <code>φ ~ 1.6180339887...</code> is the golden ratio.</p><pre><code class="haskell">φ = (1+√5)/2</code></pre><p>Another fancier way to think of it formally is that we're working in <code>Z[x] mod x^2 - x - 1</code> and the polynomial <code>x^2 - x - 1</code> has two roots: <code>(1+√5)/2</code> and <code>(1-√5)/2</code>.</p><p>Addition and subtraction are done pointwise as in complex arithmetic.</p><p>We can work through multiplication fairly directly by exploiting the interesting fact that</p><pre><code class="haskell">φ^2 = φ+1</code></pre><p>so</p><pre><code class="haskell">(aφ+b)(cφ+d) = ac(φ+1) + (ad+bc)φ + bd = (ac+ad+bc)φ + (ac+bd) = (a(c+d)+bc)φ + (ac+bd)</code></pre><p>Turning this into a data type <code>Fib r</code> where the data constructor <code>Fib a b</code> represents <code>aφ + b</code> in the ring extension <code>r[φ]</code> we get:</p><pre><code class="haskell">data Fib a = Fib a a deriving
+  (Show, Functor, Foldable, Traversable, Eq)
+
+instance IntegralDomain a =&gt; Num (Fib a) where
+  Fib a b + Fib c d = Fib (a + c) (b + d)
+  Fib a b * Fib c d = Fib (a*(c + d) + b*c) (a*c + b*d)
+  Fib a b - Fib c d = Fib (a - c) (b - d)
+  negate (Fib a b) = Fib (negate a) (negate b)
+  abs x = x
+  signum _ = Fib 0 1 -- meh
+  fromInteger n = Fib 0 (fromInteger n)</code></pre><p>Why an <code>IntegralDomain</code>? At the least we rely on the ability to commute multiplication to get this definition. In practice, we'd probably just presume <code>Num</code> has whatever properties we need, and skip this requirement. We should otherwise be able to weaken it to a <code>CommutativeRing</code> without lying.</p><p>I'm not too happy with the <code>abs</code>/<code>signum</code> in there, but then nobody is really happy with them in Haskell, and these
+pass the only law we require in Haskell for them, that <code>abs a * signum a = a</code>, hence <code>abs = id</code>, <code>signum = 1</code> should always be admissable. Doing better requires an <code>Ord a</code>, and rules out potentially many good uses for this ring extension.</p><p>If <code>a</code> was an integral domain then so is <code>Fib a</code>:</p><pre><code class="haskell">instance IntegralDomain a =&gt; IntegralDomain (Fib a)</code></pre><p>We can represent</p><pre><code class="haskell">φ = Fib 1 0</code></pre><p>without any loss of precision in this representation without doing symbolic computation.</p><p>If we know more about <code>a</code>, we can extend this ring to a field. In our simplistic numerical tower:</p><pre><code class="haskell">class (IntegralDomain a, Fractional a) =&gt; Field a
+instance (IntegralDomain a, Fractional a) =&gt; Field a</code></pre><p>so</p><pre><code class="haskell">instance (IntegralDomain a, Fractional a) =&gt; Fractional (Fib a) where
+  recip (Fib a b) = Fib (-a/d) ((a+b)/d) where
+    d = b*b + a*b - a*a
+  fromRational r = Fib 0 (fromRational r)  </code></pre><p>is just a claim that this is a field extension.</p><p>But, it turns out we don't need any of that <code>Fractional</code> nonsense for <code>fib</code>. After all Fibonacci numbers, even the negative ones, are whole numbers! In this ring, φ has an interesting property: It is a &quot;unit&quot; of this ring, which is to say it has an inverse, even if we don't have inverses for general elements. We can generate it algebraically from the same simple claim we used to figure out multiplication</p><pre><code class="haskell">φ^2 = φ+1</code></pre><p>by multiplying on the left by <code>φ^(-1)</code></p><pre><code class="haskell">φ = φ^(-1) * φ^2 = φ^(-1) * (φ+1) = 1 + φ^(-1)</code></pre><p>so</p><pre><code class="haskell">φ^(-1) = φ - 1</code></pre><p>We can check our work by using the formula for <code>recip</code>. If we fix the argument to φ, we get:</p><pre><code class="haskell">recip φ = recip (Fib 1 0) = Fib (-1 / -1) (1/ -1) = Fib (-1 * -1) (1 * -1) = Fib 1 (-1)</code></pre><p>The only division we needed was by <code>-1</code>, which is a unit in the integers as <code>-1 * -1 = 1</code>. Being a unit means we can replace division by -1 with multiplication by its inverse (also <code>-1</code>), which we know exists in our ring.</p><p>As a further aside, we can also represent <code>√5</code> without requiring us to work over anything more than an integral domain.</p><pre><code class="haskell">√5 = 2*φ - 1</code></pre><p>Clearly, <code>phi</code>, <code>1</code>, <code>recip phi</code>, and <code>√5</code> all have a very complicated relationship status.</p><h1 id="putting-r----in-order"><a href="#putting-r----in-order">Putting R[φ] in Order</a></h1><p>You can implement <code>Ord</code> in a manner compatible with the answers given by more traditional numeric types, but it is a bit tricky.</p><p>First we check for a quick exit if both results are consistent. It is only when the sign <code>a</code> and <code>b</code> differ in <code>aφ + b</code> that we have a problem, which is bigger? <code>aφ</code> or <code>b</code>?</p><p>We can write a recursive solution that computes repeated remainders, <code>gcd</code> style, but we actually hit literally the worst case possible for the usual <code>gcd</code> algorithm for <code>Fib 1 (-1) ^ n</code>. This is <a href="http://www.cut-the-knot.org/blue/LamesTheorem.shtml">Lamé's Theorem</a> showing up in the wild, and these numbers show up below!</p><pre><code class="haskell">instance (IntegralDomain a, Ord a) =&gt; Ord (Fib a) where
+  compare (Fib a b) (Fib c d) = case compare a c of
+    LT | b &lt;= d    -&gt; LT
+       | otherwise -&gt; go compare (a-c) (b-d)
+    EQ -&gt; compare b d
+    GT | b &gt;= d    -&gt; GT
+       | otherwise -&gt; go (flip compare) (a-c) (b-d)
+   where
+     go k e f = k (sq (e+2*f)) (5*sq e)
+     sq x = x*x</code></pre><p>So instead, in the above instance I convert to <code>aφ + b</code> to <code>e√5 + f</code> and compare the squares instead. This works nicely even when <code>a</code> is <code>Double</code> and is capable of representing <code>√5</code> (more or less) on its own.</p><p>With this <code>Ord</code> instance in hand we could redefine the notion of <code>abs</code> and <code>signum</code> in <code>Num</code> above to be compatible with the real number line, but to do so, you'd have to give up instances that aren't in <code>Ord</code>, for example <code>Fib (Complex Double)</code>. This just goes to show that <code>abs</code>/<code>signum</code> being placed directly in <code>Num</code> was a bad idea.</p><p><b>Exercise:</b> Why?</p><p>Note that even this comes at a price. We have to similarly complicate the <code>Eq</code> instance, replacing the automatically derived one we start with with</p><pre><code class="haskell">instance (IntegralDomain a, Ord a) =&gt; Eq (Fib a) where
+  x == y = compare x y == EQ</code></pre><p><b>Exercise:</b> Why?</p><p>With that in mind you'd probably want to make a separate data type if you actually cared about this ordering anyways. =(</p><p>Nothing stops us from wiring this type up with instances for use with <code>linear</code> as a vector space:</p><pre><code class="haskell">instance Applicative Fib where
+  pure a = Fib a a
+  Fib a b &lt;*&gt; Fib c d = Fib (a c) (b d)
+
+instance Monad Fib where
+  return a = Fib a a
+  Fib a b &gt;&gt;= f = Fib a' b' where
+    Fib a' _ = f a
+    Fib _ b' = f b
+
+instance MonadZip Fib where
+  mzipWith f (Fib a b) (Fib c d) = Fib (f a c) (f b d)
+  munzip (Fib (a,b) (c,d)) = (Fib a c, Fib b d)
+
+instance Additive Fib where
+  zero = Fib 0 0
+  (^+^) = (+)
+  (^-^) = (-)</code></pre><p>and it may wind up in there at some point if I get bored.</p><h1 id="the-fast-fibonacci-transform"><a href="#the-fast-fibonacci-transform">The Fast Fibonacci Transform</a></h1><p>If we're extending a ring/field with φ, why did I call it <code>Fib</code>?</p><p>Well, with one more observation, we can now write the efficient notion of <code>fib</code>.</p><p>Let's take our multiplication formula</p><pre><code class="haskell">  Fib a b * Fib c d = Fib (a*(c + d) + b*c) (a*c + b*d)</code></pre><p>and consider the effect of multiplying by φ:</p><pre><code class="haskell">Fib a b * φ = Fib a b * Fib 1 0 = Fib (a*(1+0)+b*1) (a*1 + b*0) = Fib (a+b) a</code></pre><p>Multiplying by φ shifts <code>a</code> to the right, and adds the previous <code>b</code>. This is the same structure as the
+&quot;cursor&quot; we used last time when the number to the right is the previous Fibonacci number!</p><p>This gives us</p><pre><code class="haskell">Fib (fib n) (fib (n-1)) * φ = Fib (fib (n+1)) (fib n)</code></pre><p>(The above formula can be rearranged to see why the ratio between consecutive Fibonacci numbers tends to φ in the limit.)</p><p>Of course, we can compute <code>(^)</code> using peasant exponentiation, by repeated squaring rather than
+working one factor at a time. This is what Lennart's version of <code>(^)</code> which is used by GHC today
+does for us already, so we don't need to write it.</p><p>With that:</p><pre><code class="haskell">getPhi :: Fib a -&gt; a
+getPhi (Fib a _) = a 
+
+-- | Compute the nth Fibonacci number in O(log n) 
+fib :: IntegralDomain a =&gt; Integer -&gt; a
+fib n
+  | n &gt;= 0 = getPhi (Fib 1 0 ^ n)
+  | otherwise = getPhi (Fib 1 (-1) ^ negate n)</code></pre><p>This has the benefit of nicely extending to negative Fibonacci, unlike the usual boring definitions people tend to write. Moreover, if we don't <code>getPhi</code> at the end then we get both the desired Fibonacci number and the preceding Fibonacci number, which is precisely what we need in order to move around in the sequence with <code>Fib</code> as our &quot;cursor&quot;!</p><p>As mentioned earlier, this same technique can be used to jump quickly to any element of any homogeneous linear recurrence in <code>O(log n)</code> time and we can navigate from there, so we're not limited to doing this with Fibonacci numbers. You can jump around in any recurrence you like.</p><h1 id="fibonacci-search"><a href="#fibonacci-search">Fibonacci Search</a></h1><p>Remember why I got started here? Oh yeah, there was something about searching.</p><p><a href="http://en.wikipedia.org/wiki/Fibonacci_search_technique">Fibonacci search</a> was invented back in the 50s by <a href="http://en.wikipedia.org/wiki/Jack_Kiefer_(statistician)">Jack Kiefer</a>. It is traditionally defined in terms of a closed space we want to search.</p><p>To search using the Fibonacci sequence we slightly modify the binary-tree like nature of binary search to use Fibonacci numbers instead.</p><p><i>E.g.</i> given 100 elements, you find the first Fibonacci number &gt;= 100 and use that as your high end, and start below at 0.</p><p>If we have a Fibonacci number of elements, then instead of dividing in half, we can divide it into biased halves with sizes based on the two previous Fibonacci numbers. You can pick if you want the smaller on the left or the right and test the &quot;midpoint&quot; like traditional binary search. This is a fun programming exercise.</p><h1 id="open-ended-fibonacci-search"><a href="#open-ended-fibonacci-search">Open-Ended Fibonacci Search</a></h1><p>But what about unbounded search?</p><p>An &quot;upwardly closed predicate&quot; <code>p</code> on the natural numbers is a predicate <code>p :: Natural -&gt; Bool</code> for which there exists <code>n</code>, such that <code>p n</code> holds, and for all k, <code>p k</code> implies <code>p (succ k)</code>.</p><p>Given an upwardly closed predicate, open-ended binary searching proceeds by repeatedly squaring a power of 2, until it finds an upper bound which passes the predicate, then binary searching within the resulting interval.</p><p>But with the machinery above it is easy to see that we can do this same thing now with repeated squaring of φ to get results of form <code>aφ + b</code>, where <code>a = fib(2^i)</code>, <code>b = fib(2^i - 1)</code> until <code>p a</code> holds, then we have the two consecutive Fibonacci numbers <code>b</code> and <code>a</code>, where <code>b</code> is the size of one of the two branches we want to cut <code>a</code> into, and <code>a-b</code> is the other, and we know the predicate holds at <code>a</code>.</p><p>From there we're well equipped to start a traditional Fibonacci search.</p><h1 id="ripping-out-all-the-math"><a href="#ripping-out-all-the-math">Ripping Out All The Math</a></h1><p>Once we inline all the arithmetic needed for repeated squaring into <code>bound</code> and merge all the manipulations of the cursors which are effectively just multiplications by <code>φ^-1</code>, and assuming I haven't made the standard undergraduate mistake of screwing up binary search, we get a completely self-contained implementation:</p><pre><code class="haskell">search :: (Natural -&gt; Bool) -&gt; Natural
+search p
+  | p 0 = 0
+  | otherwise = bound 0 1
+  where
+    bound !a !b
+     | p b = go 0 a b
+     | bb &lt;- b*b = bound (a*a+bb) (bb+2*a*b)
+    -- the answer lies in the interval (l,l+k], i,j,k are consecutive Fibonacci numbers.
+    go !l !j !k
+      | k == 1    = l + 1
+      | p m       = go l (j-i) i
+      | otherwise = go m i j
+      where
+        m = l + i
+        i = k - j</code></pre><p>With that, things like</p><pre><code class="haskell">&gt;&gt;&gt; search (&gt;12389012380128301283012381203912380192830123801283120931203)
+12389012380128301283012381203912380192830123801283120931204</code></pre><p>are effectively instantaneous.</p><p><i>NB:</i> This version wastes a tiny bit of effort. When we finish with <code>bound</code> we'd know the predicate <code>p</code> failed for <code>fib (2^(i-1))</code>, not just <code>fib 0</code>, but the interval size between <code>fib (2^(i-1))</code> and <code>fib (2^i)</code> has no nice expression in terms of Fibonacci numbers. We could break <code>go</code> up into two functions with one for use as long as your candidate range includes this better lower bound, or we could just clutter things up with an additional test to avoid these redundant probes.</p><p>We could also just bias the result upward by <code>fib(2^(i-1))</code> and search a window starting from there relying on our bias to avoid heavily searching the known hits at the top. The best choice really depends on the cost of the predicate and how that cost grows as the argument to it increases.</p><h1 id="further-thoughts"><a href="#further-thoughts">Further Thoughts</a></h1><p>By repeatedly squaring the index of the Fibonacci number in question we're shooting through the list of Fibonacci numbers quickly, so we'll find a bound pretty fast. Approximately every 5th index adds a digit to the result but we're doubling the index every time. Is it worth using / possible to effectively use a slower growth rate to lower the initial top bound? e.g. if we could grow by 1.5x, we'd expect a huge win in reducing the cost of the descent part of the algorithm. We should have time to spend on walking up a bit more slowly. Is there some different scheme that would let us ascend some fraction of the way rather than doubling the index every time?</p><h1 id="why-care-"><a href="#why-care-">Why Care?</a></h1><p>This is a biased search algorithm, after all.</p><p>Well, if our predicate spends a lot of time rummaging around inside of arrays, we know <a href="http://www.pvk.ca/Blog/2012/07/30/binary-search-is-a-pathological-case-for-caches/">binary search is a pathological case for caches</a>. Paul Khuong showed that a traditional binary search if you had a power of 2 worth of elements was pretty awful in terms of its use of the <i>k</i>-way set associative caches we actually have in our CPUs and that at the very least you should bias your search. Here we're able to skew a little more for little effort. This argument winds up resoundingly similar to the case made by Gerth Stølting Brodal in the paper I linked last time about skewed binary trees, but for different reasons.</p><p>But even if we aren't rummaging through an array, there are some benefits to Fibonacci search. In the implementation above, I put the smaller tree on the left, so it will tend to favor checking smaller elements. If the cost of testing the predicate on a larger number is higher than testing it on a smaller number, then this biases in the correct direction.</p><p>Compared to an open-ended binary search, open-ended Fibonacci search tries to test smaller numbers with lower dispersion in a biased fashion in exchange for testing more numbers, but we're starting to see that this can be a good thing.</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>April 27, 2015</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/fibonacci/search';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

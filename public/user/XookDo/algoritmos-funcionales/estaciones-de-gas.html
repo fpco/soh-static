@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html><head><title>Estaciones de Gasolina - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/algoritmos-funcionales">Algoritmos funcionales</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/algoritmos-funcionales/estaciones-de-gas">Estaciones de Gasolina</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Estaciones de Gasolina</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 Oct 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/63dde56334d65ef0f121605d0694616d256f6732">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/algoritmos-funcionales">Go up to: Algoritmos funcionales</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#definici-n-del-problema">Definición del problema</a></li><li><a href="#representaci-n-en-haskell">Representación en Haskell</a></li><li><a href="#an-lisis-del-problema">Análisis del problema</a><ul><li><a href="#lema-1">Lema 1</a></li><li><a href="#lema-2">Lema 2</a></li><li><a href="#lema-3">Lema 3</a></li><li><a href="#uniendo-los-lemas">Uniendo los lemas</a></li></ul></li><li><a href="#soluci-n-final">Solución final</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><blockquote><p>El problema original fue tomado de <a href="http://www.programcreek.com/2014/03/leetcode-gas-station-java/">aquí</a>. La codificación de la entrada fue modificada para no usar arreglos.</p></blockquote><h2 id="definici-n-del-problema"><a href="#definici-n-del-problema">Definición del problema</a></h2><p>Se tiene un circuito de n estaciones de gasolina. Sólo se puede recorrer en una dirección, cada gasolinera tiene cierta gasolina almacenada, el tanque del auto que recorre el circuito tiene un tanque de tamaño infinito (le cabe toda la gasolina que se le quiera introducir). El problema es encontrar a partir de que gasolinera se puede iniciar el recorrida de tal forma que se pueda completar el circuito (el tanque nunca se quede vacio entre gasolineras); Si existe una solución, <code>solution</code> debe de regresar el <code>Id</code> de la gasolinera de la cual se puede iniciar el recorrida; si no existe una solución, <code>solution</code> debe de regresar <code>-1</code>.</p><p>Los circuitos son tales que tienen al menos dos estaciones de gasolina</p><p>La entrada del programa es <code>Circuit</code> el cual es una lista de gasolineras, más no un ciclo, es decir, es sólo una lista finita. (Para hacer un ciclo de una lista, se puede usar la función <a href="http://hackage.haskell.org/package/base-4.8.1.0/docs/Prelude.html#v:cycle"><code>cycle</code></a>)</p><h2 id="representaci-n-en-haskell"><a href="#representaci-n-en-haskell">Representación en Haskell</a></h2><p>El problema se puede expresar de esta manera en Haskell:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+data GasStation = GS { gas::Int, distanceToNext::Int } deriving Show
+newtype Circuit = Circuit [GasStation] deriving Show
+
+solution :: Circuit -&gt; Int
+solution = undefined            -- solution is to be done
+
+-- it creates the trip to traverse for the list l starting at the nth gas station
+trip l nth = take (length l).drop nth.cycle $ l
+
+naiveSolution :: Circuit -&gt; Int
+naiveSolution (Circuit c) =
+  maybe (-1) fst $ find snd tries
+  where traverse = scanl (\tank (GS gas cost) -&gt; tank + gas - cost) 0
+        isSolution = all (&gt;= 0) . traverse
+        tries = map (\i -&gt; (i, isSolution (trip c i))) [0..length c - 1]
+
+-------------------- Tests --------------------
+instance Arbitrary GasStation where
+  arbitrary =
+    do
+      gas' &lt;- arbitrary
+      distanceToNext' &lt;- arbitrary
+      return $ GS (abs gas') (abs distanceToNext')
+
+-- A circuit must have at least two gas stations
+instance Arbitrary Circuit where
+  arbitrary =
+    do
+      tail &lt;- arbitrary
+      gs1  &lt;- arbitrary
+      gs2  &lt;- arbitrary
+      return $ Circuit ([gs1,gs2] ++ tail)
+
+-- given a [GasStation], it returns a list of net costs of traversing from a gas station
+-- to its next gas station
+netCost = map (\(GS g d) -&gt; g - d)
+
+-- if there is a solution, then, when traversing the whole circuit from the solution,
+-- the tank never reaches a negative quantity of gas
+positive_case c@(Circuit c') =
+  let result = naiveSolution c
+  in result /= -1 ==&gt; isASuccess $ trip c' result
+  where isASuccess = all (&gt;= 0).scanl (+) 0.netCost
+
+-- If all possible traversals have a tank with negative gas at some point, then there is no solution
+negative_case c@(Circuit c') =
+  let result = naiveSolution c
+  in result == -1 ==&gt; all id failureOfEachPossibility
+  where isFailure = any (&lt; 0).scanl (+) 0.netCost
+        failureOfEachPossibility = map (isFailure . trip c') [0..length c' - 1]
+
+-- Our final solution should output the same results as the naive implementation
+solution_eqs_naiveSolution c =
+  solution c == naiveSolution c
+
+main =
+  do quickCheck positive_case
+     quickCheck negative_case
+     quickCheck solution_eqs_naiveSolution</code></pre><p>Hemos definido <code>naiveSolution</code> como parte de la especificación del problema. <code>naiveSolution</code> es una traducción obvia de la definición del problema del español a Haskell, pero su complejidad es O(n^2) en cuanto a tiempo de ejecución. También definimos dos pruebas, una para el caso en el que sí hay solución, <code>positive_case</code>, y otra para el caso en el que no hay solución, <code>negative_case</code>. Para poder correr las pruebas sobre la especificación, tuvimos que hacer a <code>GasStation</code> una instancia de <code>Arbitrary</code> (para mas información sobre pruebas en Haskell, visita <a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8/tutorial">esta liga</a>. <b>Usar QuickCheck ayudó a encontrar bugs incluso para la implementación del caso trivial</b>.</p><p>Compilar y ejecutar el código en la línea de comandos se ve de la siguinete manera:
+<img alt="c1" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2Fda3c6120-4a33-4fec-bff3-20abdb3478b6.png" /></p><p>Por ahora, la propiedad <code>solution_eqs_naiveSolution</code> falla, pues no hemos implementado la solución.</p><h2 id="an-lisis-del-problema"><a href="#an-lisis-del-problema">Análisis del problema</a></h2><p>Existen varias cosas que uno debe notar para llegar a la solución óptima, que es O(n) en tiempo de ejecución y O(1) en memoria de trabajo. La solución ingenua (<code>naiveSolution</code>) igual es O(1) en espacio de trabajo, pero O(n^2) en tiempo de ejecución; no obstante, nos servirá para verificar que nuestra solución final es correcta.</p><p>Para ayudarnos con el análisis, describiremos, más no implementaremos, las siguientes funciones:</p><ul><li><code>next g_x</code> es la gasolinera que le sigue a la gasolinera <code>g_x</code> en el circuito.</li><li><code>kthGasStation g_x k</code> es la <code>kth</code> gasolinera que le sigue a <code>x</code> en el circuito.</li><li><code>acum g_x g_y</code> es la gasolina acumulada en el tanque si iniciáramos el recorrido en <code>g_x</code> y llegáramos y cargáramos en la gasolinera <code>g_y</code>.</li><li><code>stoppedAt g_x</code> es la última estación de gasolina a la que se puede llegar partiendo desde <code>g_x</code>, es decir, <code>stoppedAt g_x</code> es la primer gasolinera partiendo de <code>g_x</code> tal que se cumple esta desigualdad: <code>distanceToNext (kthGasStation g_x (stoppedAt g_x)) &gt; acum g_x (stoppedAt g_x)</code>.</li><li><code>failedAt g_x</code> es <code>(next.stoppedAt) g_x</code>; es decir, la primer gasolinera desde <code>g_x</code> tal que <code>acum g_x (failed g_x)</code> es negativo.</li><li><code>dist g_x g_y</code> es la cantidad de gasolineras entre <code>g_x</code> y <code>g_y</code> incluyendo a <code>g_x</code> y a <code>g_y</code>.</li></ul><h3 id="lema-1"><a href="#lema-1">Lema 1</a></h3><p><b>Si <code>stoppedAt g_x == g_y</code>, entonces no tiene caso intentar iniciar el recorrido desde una gasolinera ubicada entre <code>g_x</code> y <code>g_y</code>, por lo que se debe de intentar desde <code>next g_y</code>.</b>
+Supongamos que el circuito tiene estas gasolineras: <code>g_1 -&gt; g_2 -&gt; ... -&gt; g_t-1 -&gt; g_t</code>; y que <code>stoppedAt g_1 == g_t-1</code>, eso quiere decir que <code>acum g_1 g_2</code> es un número <code>&gt;= 0</code> o no hubiésemos podido llegar a <code>g_t-1</code>, por lo que no tiene sentido intentar iniciar desde <code>g_2</code>, pues sólo nos estaríamos perdiendo de <code>acum g_1 g_2</code> y por lo tanto empeoraríamos la posibilidad de llegar más allá de <code>g_t-1</code>. El mismo razonamiento aplica para cada prefijo del tramo entre <code>g_1</code> y <code>g_t-1</code>, por lo que sólo tiene sentido tratar desde <code>g_t</code>; es decir, si <code>stoppedAt g_x</code> está definido para <code>g_x</code>, entonces la siguiente gasolinera de la cual hace sentido intentar iniciar el circuito es <code>(next.stoppedAt) g_x</code>.</p><h3 id="lema-2"><a href="#lema-2">Lema 2</a></h3><p><b>Si hay suficiente gasolina para darle la vuelta al circuito, entonces existe una solución.</b>
+Para probar esto, probaremos la contrapositiva, que dice: si no existe una solución, entonces no hay suficiente gasolina para darle la vuelta al circuito.</p><p>Dado que estamos asumiendo que no existe una solución (debido a que estamos probando la contrapositiva), <code>failed g_x</code> tiene que estar definida para toda <code>g_x</code>.</p><p>Podemos definir una función <code>acumByFailure</code> para todo circuito que no tiene solución (pues depende de <code>failedAt</code>). Esta función regresa la gasolina neta de recorrer el circuito y siempre da un numero negativo.</p><pre><code class="haskell">acumByFailure gs = go (cycle gs) (length gs) 0
+  where go _ 0 tank = tank
+        go c l tank = go drop' (l-1) (tank + acum')
+        where g_x = head c
+              g_fail = failedAt g_x
+              acum' = acum g_x g_fail
+              drop' = drop (dist g_x g_fail) c</code></pre><p>Lo que <code>acumByFailure</code> hace es darle al menos una vuelta al circuito y acumular en <code>tank</code> la gasolina neta. Dado que la acumulación es mediante <code>tank + acum'</code> y <code>acum'</code> siempre es negativa (dado que <code>acum' = acum g_x g_fail)</code>), entonces <code>acumByFailure</code> siempre regresa un número negativo.</p><p>Podemos entonces concluir que si el circuito no tiene solución, la función <code>failedAt g_x</code> está definida para cada <code>g_x</code> y por lo tanto la función <code>acumByFailure</code> está definida para dicho circuito y por lo tanto no existe suficiente gasolina para darle la vuelta al circuito, pues <code>acumByFailure</code> siempre regresa un número negativo. Y por su contrapositiva, si hay suficiente gasolina para darle la vuelta al circuito, entonces existe una solución.</p><h3 id="lema-3"><a href="#lema-3">Lema 3</a></h3><p><b>Si existe una solución, entonces, dado un circuito, basta con encontrar donde empezar en el circuito tal que se pueda llegar al final del circuito sin tener que dar la vuelta completa.</b></p><p>Dicho en otras palabras, el lema podría decir: Supongamos que tenemos un circuito: <code>g_1 -&gt; ... -&gt; g_n -&gt; g_1</code>, entonces, si existe una solución, basta con encontrar una gasolinera entre <code>g_1</code> y <code>g_n</code> (incluyéndolas) que al iniciar desde esta el recorrido, se pueda llegar a <code>g_n</code>.</p><p>Para probarlo, asumimos que hay solución y suponemos que una gasolinera <code>g_k</code> es la primera de donde se puede iniciar el recorrido y llegar a <code>g_n</code>. ¿Cómo sabemos que podremos llegar a <code>g_k</code> de regreso? Si <code>acum g_k g_n</code> no fuese suficiente para llegar de regreso a <code>g_k</code>, entonces <code>g_k</code> no podría ser la solución y por el lema 1, menos podría serlo una estación entre <code>g_k</code> y <code>g_n</code>, por lo que tendría que ser una anterior a <code>g_k</code> (pues una posterior a <code>g_n</code> sería volver a empesar (<code>g_1</code>, <code>g_2</code>, etc)), pero dado que <code>g_k</code> fue la primera en poder llegar a <code>g_n</code>, ninguna anterior a <code>g_k</code> puede serlo, por lo que o es <code>g_k</code> la solución o no hay solución y dado que estamos asumiendo que sí hay solución, <code>g_k</code> tiene que ser la solución.</p><h3 id="uniendo-los-lemas"><a href="#uniendo-los-lemas">Uniendo los lemas</a></h3><p>El lema 3 ya depende del lema 1 en la frase &quot;... y por el lema 1, menos podría serlo una estación entre <code>g_k</code> y <code>g_1</code>...&quot;. Pero el lema 3 se puede reformular usando el lema 2 de la siguiente manera:
+<b> Si hay suficiente gasolina para darle la vuelta al circuito (si existe una solución, según el lema 2), entonces, dado un circuito, basta con encontrar donde empezar en el circuito tal que se pueda llegar al final del circuito sin tener que dar la vuelta desde donde se comenzó; Si <code>stoppedAt g_x == g_y</code>, entonces no tiene caso intentar iniciar el recorrido desde una gasolinera ubicada entre <code>g_x</code> y <code>g_y</code>, por lo que se debe de intentar desde <code>next g_y</code>.</b>
+Por lo que nuestro algoritmo entonces solo tiene que encontrar a partir de cual gasolinera se puede llegar a la úlitma, calcular la gasolina neta (<code>acum g_1 g_n</code>) y si la gasolina neta es <code>&gt;= 0</code> entonces dicha gasolinera es la solución, de lo contrario, no hay solución y para hacerlo más rápido, cada vez que una gasolinera falle, podemos reiniciar la búsqueda desde <code>next.stoppedAt $ g_x</code>.</p><h2 id="soluci-n-final"><a href="#soluci-n-final">Solución final</a></h2><p>Ahora podemos expresar nuestra solución en Haskell:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+data GasStation = GS { gas::Int, distanceToNext::Int } deriving Show
+newtype Circuit = Circuit [GasStation] deriving Show
+
+-- given a [GasStation], it returns a list of net costs of traversing from a gas station
+-- to its next gas station
+netCost = map (\(GS g d) -&gt; g - d)
+
+solution :: Circuit -&gt; Int
+{-hi-}solution{-/hi-} (Circuit circuit) =
+  let c'            = netCost circuit
+      (solution,_,_,acum) = foldl next (0,0,0,0) c'
+  in {-hi-}if acum &lt; 0 then -1 else solution{-/hi-}
+  where next (tentativeSolution, currentGS, tank, totalNetGas) nextNetGas                     
+          | tank + nextNetGas &lt; 0 = ({-hi-}currentGS + 1{-/hi-},   currentGS + 1, 0,                 acum')                
+          | otherwise             = (tentativeSolution, currentGS + 1, tank + nextNetGas, acum')      
+          where acum' = totalNetGas + nextNetGas
+-- At `if acum &lt; 0 then -1 else solution`, it can be seen how if there is enough gas to go around
+-- the circuit, then there is a solution.
+-- At `currentGs + 1`, it can be seen how we skip all the stations that have been traversed each time
+-- the tank doesn't have enough gas to reach the next station (`tank + nextNetGas &lt; 0`).
+  
+
+-- it creates the trip to traverse for the list l starting at the nth gas station
+trip l nth = take (length l).drop nth.cycle $ l
+
+naiveSolution :: Circuit -&gt; Int
+naiveSolution (Circuit c) =
+  maybe (-1) fst $ find snd tries
+  where traverse = scanl (\tank (GS gas cost) -&gt; tank + gas - cost) 0
+        isSolution = all (&gt;= 0) . traverse
+        tries = map (\i -&gt; (i, isSolution (trip c i))) [0..length c - 1]
+
+-------------------- Tests --------------------
+instance Arbitrary GasStation where
+  arbitrary =
+    do
+      gas' &lt;- arbitrary
+      distanceToNext' &lt;- arbitrary
+      return $ GS (abs gas') (abs distanceToNext')
+
+-- A circuit must have at least two gas stations
+instance Arbitrary Circuit where
+  arbitrary =
+    do
+      tail &lt;- arbitrary
+      gs1  &lt;- arbitrary
+      gs2  &lt;- arbitrary
+      return $ Circuit ([gs1,gs2] ++ tail)
+
+-- if there is a solution, then, when traversing the whole circuit from the solution,
+-- the tank never reaches a negative quantity of gas
+positive_case c@(Circuit c') =
+  let result = naiveSolution c
+  in result /= -1 ==&gt; isASuccess $ trip c' result
+  where isASuccess = all (&gt;= 0).scanl (+) 0.netCost
+
+-- If all possible traversals have a tank with negative gas at some point, then there is no solution
+negative_case c@(Circuit c') =
+  let result = naiveSolution c
+  in result == -1 ==&gt; all id failureOfEachPossibility
+  where isFailure = any (&lt; 0).scanl (+) 0.netCost
+        failureOfEachPossibility = map (isFailure . trip c') [0..length c' - 1]
+
+-- If there is enough gas for completing the circuit, then there has to be a solution
+{-hi-}enoughGas_impliesSolution{-/hi-} c@(Circuit c') =
+  (foldl (+) 0.netCost) c' &gt;= 0 ==&gt; naiveSolution c /= -1
+
+-- Our final solution should output the same results as the naive implementation
+solution_eqs_naiveSolution c =
+  solution c == naiveSolution c
+
+main =
+  do quickCheck positive_case
+     quickCheck negative_case
+     quickCheck enoughGas_impliesSolution
+     quickCheck solution_eqs_naiveSolution</code></pre><p>Habiendo encontrado el segundo lema útil para verificar que nuestros algoritmos son correctos, lo uncluimos en las pruebas como <code>enoughGas_impliesSolution</code>.
+Ahora que hemos implementado <code>solution</code>, todas las pruebas pasan, incluyendo en la que decimos que nuestra solución final es extensionalmente equivalente a la solución ingenua:
+<img alt="c2.png" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F26039e06-6f23-4dd5-9f84-1a74878aaa19.png" /></p><p>Dado que nuestra solución consiste en un <code>foldl next (-1,0,0,0) c</code>, donde <code>next</code> realiza sólo un número constante de operaciones, y que después del <code>foldl</code> sólo se realiza un numero constante de operaciones, entonces la solución es O(n) en tiempo de ejecución. Dado que no usamos ningún vector o arreglo o estructura recursiva para el espacio de trabajo, la solución es O(1) en espacio de trabajo.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/algoritmos-funcionales/estaciones-de-gas';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

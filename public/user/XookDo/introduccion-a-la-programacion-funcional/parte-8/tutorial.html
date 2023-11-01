@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html><head><title>Pruebas automáticamente aleatorias con QuickCheck - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8">Parte 8</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8/tutorial">Pruebas automáticamente aleatorias con QuickCheck</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Pruebas automáticamente aleatorias con QuickCheck</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 Oct 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/1cce46c06550be838cf7fde7b03c1641455e2412">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8">Go up to: Parte 8</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#quickcheck--una-herramienta-ligera-para-probar-aleatoriamente-programas-escritos-en-haskell">QuickCheck: Una herramienta ligera para probar aleatoriamente programas escritos en Haskell</a><ul><li><a href="#abstracto">Abstracto</a></li><li><a href="#1--introducci-n">1. Introducción</a></li><li><a href="#2--definiendo-propiedades">2. Definiendo propiedades</a><ul><li><a href="#2-1-un-ejemplo-sencillo">2.1 Un ejemplo sencillo</a></li><li><a href="#2-2-funciones">2.2 Funciones</a></li><li><a href="#2-3-leyes-condicionales">2.3 Leyes condicionales</a></li><li><a href="#2-4-monitoreando-los-datos-de-prueba">2.4 Monitoreando los datos de prueba</a></li><li><a href="#2-5-estructuras-infinitas">2.5 Estructuras infinitas</a></li></ul></li><li><a href="#3--generadores">3. Generadores</a><ul><li><a href="#3-1-arbitrary">3.1 Arbitrary</a></li><li><a href="#3-2-generadores-para-tipos-definidos-por-el-usuario">3.2 Generadores para tipos definidos por el usuario</a></li><li><a href="#3-3-generando-funciones">3.3 Generando funciones</a></li></ul></li><li><a href="#4--implementando-quickcheck">4. Implementando QuickCheck</a></li><li><a href="#5--algunos-casos-de-estudio">5. Algunos casos de estudio</a><ul><li><a href="#5-1-unificaci-n">5.1 Unificación</a><ul><li><a href="#5-1-3-errores-encontrados">5.1.3 Errores encontrados</a></li></ul></li><li><a href="#5-2-propiedades-de-circuitos">5.2 Propiedades de circuitos</a><ul><li><a href="#5-2-1-lava-en-corto">5.2.1 Lava en corto</a></li></ul></li></ul></li><li><a href="#7--conclusiones">7. Conclusiones</a></li><li><a href="#agradecimientos">Agradecimientos</a></li><li><a href="#8--referencias">8. Referencias</a></li><li><a href="#ap-ndice-sobre-la-implementaci-n">Apéndice sobre la implementación</a></li></ul></li><li><a href="#ejercicios">Ejercicios</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>La calidad es importante en cualquier producto o servicio y eso incluye al software. Muy probablemente, la prueba de calidad más importante en el desarrollo de software es si el código que escribimos realmente hace lo que queríamos. El método más estricto son las comprobaciones formales; con sistemas como <a href="https://coq.inria.fr/">Coq</a> se puede autogenerar código Haskell a partir de la comprobación. Sin embargo, este método es muy avanzado, por lo que para código no crítico, se utilizan métodos más laxos como las pruebas aleatorias automáticas como se puede hacer con QuickCheck.</p><p>Para este tutorial, traduciré el documento en el que se introdujo originalmente QuickCheck (tomado de <a href="http://www.eecs.northwestern.edu/~robby/courses/395-495-2009-fall/quick.pdf">aquí</a>) con la ventaja de que, a diferencia del documento, el código de ejemplo será ejecutable en el mismo tutorial presionando el botón de <i>play</i>; sin embargo, para varios casos he notado que la respuesta no se despliega correctamente y por lo tanto recomiendo copiar y pegar el código en un archivo, compilarlo y ejecturalo si se desea comprobar el resultado por uno mismo. El artículo original fue escrito por <a href="http://www.cse.chalmers.se/~koen/">Koen Claessen</a> y <a href="http://www.cse.chalmers.se/~rjmh/">John Hughes</a>, ambos de la <a href="http://www.chalmers.se/en/Pages/default.aspx">Universidad Tecnológica de Chalmers</a>.</p><p>Existen implementaciones de QuickCheck para:</p><ul><li><a href="https://wiki.haskell.org/Introduction_to_QuickCheck1">Haskell</a></li><li><a href="https://github.com/fscheck/FsCheck">F# - FsCheck</a></li><li><a href="https://www.scalacheck.org">Scala - ScalaCheck</a></li><li><a href="https://github.com/grogers0/CppQuickCheck">C++</a></li><li><a href="https://bitbucket.org/darrint/qc.js/">JavaScript</a></li><li><a href="https://github.com/mcandre/rubycheck">Ruby</a></li><li><a href="http://www.jcheck.org">Java</a></li><li><a href="http://www.swi-prolog.org/pack/list?p=quickcheck">Prolog</a></li><li><a href="https://github.com/typelift/SwiftCheck">Swift</a></li><li><a href="https://en.wikipedia.org/wiki/QuickCheck">etc</a></li></ul><p>Para un caso de uso original, checa este análisis del problema <a href="https://www.fpcomplete.com/user/XookDo/algoritmos-funcionales/estaciones-de-gas">Estaciones de gasolina</a> en donde se prueba la solución usando QuickCheck.</p><h2 id="quickcheck--una-herramienta-ligera-para-probar-aleatoriamente-programas-escritos-en-haskell"><a href="#quickcheck--una-herramienta-ligera-para-probar-aleatoriamente-programas-escritos-en-haskell">QuickCheck: Una herramienta ligera para probar aleatoriamente programas escritos en Haskell</a></h2><h3 id="abstracto"><a href="#abstracto">Abstracto</a></h3><p>QuickCheck es una herramienta que ayuda al programador de Haskell a formular y probar propiedades de las funciones que componen un programa. Las propiedades se expresan como funciones de Haskell, y pueden ser probadas automáticamente con entradas aleatorias y también es posible definir generadores de valores a la medida. Presentamos un número de casos de estudio en los que la herramienta se utilizó con éxito y también señalamos algunas dificultades que evitar. Las pruebas aleatorias son especialmente adecuadas para programas funcionales porque las propiedades se pueden expresar con bastante granularidad. Cuando una función es construida de componentes probados por separado, entonces las pruebas aleatorias serán suficientes para obtener una buena cobertura de la definición que esté a prueba.</p><h3 id="1--introducci-n"><a href="#1--introducci-n">1. Introducción</a></h3><p>Las pruebas son por mucho el método más común usado para asegurar la calidad del software. También es un trabajo laborioso, llevándose hasta el 50% del costo del desarrollo de software. A pesar de la evidencia anecdótica de que los programas funcionales requieren de alguna manera menos pruebas (‘una vez que los tipos cuadran, usualmente funciona’), en la práctica es una gran parte del desarrollo en programación funcional.
+El costo de realizar las pruebas motiva los esfuerzos en automatizarlas, completamente o parcialmente. Las herramientas de pruebas automáticas le facilitan al programador completar la realización de pruebas en menor tiempo o probar con mayor rigurosidad con el mismo tiempo disponible y hacen fácil repetir las pruebas después de cada modificación al programa. En este escrito, describiremos una herramienta, QuickCheck, que hemos desarrollado para probar programas escritos en Haskell.</p><p>Los programas funcionales son bastante adecuados para ser probados automáticamente. Es generalmente aceptado que las funciones puras son mucho más fáciles de probar que las que tienen efectos secundarios, porque uno no tiene que preocuparse por el estado antes y después de su ejecución. En un lenguaje imperativo, aun si todo el programa son funciones puras, los procedimientos de los cuales están construidas usualmente no lo son. Entonces, grandes unidades de código deben de ser probadas a la vez. En un lenguaje funcional, las funciones puras abundan (en Haskell, solo las computaciones en el mónada de IO son difíciles de probar, pues son las únicas impuras), y por lo tanto las pruebas se pueden hacer a un nivel bastante granular.</p><p>Una herramienta debe de poder determinar si una prueba pasó o falló; el humano probador debe de proveer un un criterio probable automáticamente. Hemos diseñado un simple lenguaje “domain-specific” de especificaciones probables que el probador usaría para definir propiedades esperadas de las funciones puestas a prueba. QuickCheck checa entonces que las propiedades se mantiene para un largo número de casos. Este lenguaje de especificaciones está embebido en Haskell usando su sistema de clases de tipos. Las propiedades son escritas normalmente en el mismo módulo que las funciones que prueban, donde estas sirven también como documentación probable del comportamiento del código.</p><p>Una herramienta para realizar pruebas también debe de ser capaz de generar casos de prueba automáticamente. Hemos elegido el método más simple, pruebas aleatorias, el cual compite es la práctica de manera sorprendentemente favorable con los métodos sistemáticos. Aunque, es insignificante hablar de pruebas aleatorias sin discutir la distribución de los datos a probar. Las pruebas aleatorias son mas efectivas cuando la distribución de las pruebas siguen las los casos reales, pero cuando se prueban unidades del sistema reutilizables en vez de todo el sistema, esto es simplemente imposible, dado la distribución de los datos usados realmente se desconocen para todos los posibles casos en los que la función es reutilizada. Una distribución uniforme es usualmente usada en su lugar, pero para la información obtenida de conjuntos infinitos, esto igual es insignificante. Hemos elegido poner la distribución sobre el control del humano que realiza las pruebas al definir un *lenguaje de generación de datos de prueba” (igualmente embebido en Haskell), y una manera de observar la distribución de los casos de prueba. Al programar un generador adecuado, quien realiza la prueba puede, no solo controlar la distribución de los casos de prueba, pero también asegurarse de que estos satisfacen arbitrariamente variantes complejas.</p><p>Un importante objetivo de diseño era que QuickCheck debería de ser <i>ligero</i>. Nuestra implementación consiste de un simple módulo de al rededor de 300 líneas. QuickCheck soporta todo el lenguaje de Haskell y sus extensiones. No depende de un sistema en particular de Haskell.
+Es notoriamente difícil decir que tan efectivo es un método de pruebas en detectar errores. Aun así, hemos usado QuickCheck en una variedad de aplicaciones, yendo desde pequeños experimentos hasta sistemas reales, y hemos encontrado que funciona bien en la práctica. Hemos reportado algunas de estas experiencias en este documento, y hacemos notar que dificultades evitar.</p><h3 id="2--definiendo-propiedades"><a href="#2--definiendo-propiedades">2. Definiendo propiedades</a></h3><h4 id="2-1-un-ejemplo-sencillo"><a href="#2-1-un-ejemplo-sencillo">2.1 Un ejemplo sencillo</a></h4><p>Como un primer ejemplo, tomamos la función standard <i>reverse</i> que invierte el orden de los elementos de una lista. Esa función satisface estas leyes útiles:</p><pre><code class="haskell">         reverse [x] = [x]
+    reverse (xs++ys) = reverse (ys++reverse) xs
+reverse (reverse xs) = xs</code></pre><p>Nótese que estas leyes se mantienen solo para valores finitos y totales (no para listas infinitas). En este documento, al menos que se diga específicamente lo contrario, siempre cuantificaremos sobre valores finitos completamente definidos. Esto es para hacer mas probable que las propiedades sean computables.</p><p>Para poder usar estas leyes usando QuickCheck, las representamos como funciones de Haskell. Entonces definimos:</p><pre><code class="haskell">prop_RevUnit x =
+  reverse [x] == [x]
+
+prop_RevApp xs ys =
+  reverse (xs++ys) == reverse ys ++ reverse xs
+
+prop_RevRev xs =
+  reverse (reverse xs) == xs</code></pre><p>Ahora, si estas funciones regresasen <code>True</code> para cada posible argumento, entonces las propiedades se mantendrían. Las ponemos a prueba:</p><pre><code class="active haskell">import Test.QuickCheck
+
+prop_RevUnit x =
+  reverse [x] == [x]
+
+prop_RevApp xs ys =
+  reverse (xs++ys) == reverse ys++reverse xs
+
+prop_RevRev xs =
+  reverse (reverse xs) == xs
+  
+main =
+  do
+    quickCheck (prop_RevUnit :: Int -&gt; Bool)
+    quickCheck (prop_RevApp :: [Int] -&gt; [Int] -&gt; Bool)
+    quickCheck (prop_RevRev :: [Int] -&gt; Bool)</code></pre><blockquote><p>Se puede ver como esté metodo de expresar leyes nos podría servir cuando necesitamos crear una instancia una clase que tiene leyes, como <code>Semigroup</code>, <code>Monoid</code>, <code>Monad</code>, etc.</p></blockquote><p>Y vemos que no se reportan fallas. Si hubiésemos definido mal alguna propiedad y esta no se mantuviera, podríamos ver como se reporta un error, como a continuación:</p><pre><code class="active haskell">import Test.QuickCheck
+
+prop_RevUnit x =
+  reverse [x] == [x]
+
+prop_RevApp xs ys =
+  reverse (xs++ys) == {-hi-}reverse xs++reverse ys{-/hi-} -- wrong!
+
+prop_RevRev xs =
+  reverse (reverse xs) == xs
+  
+main =
+  do
+    quickCheck (prop_RevUnit :: Int -&gt; Bool)
+    quickCheck (prop_RevApp :: [Int] -&gt; [Int] -&gt; Bool)
+    quickCheck (prop_RevRev :: [Int] -&gt; Bool)</code></pre><blockquote><p>Se puede ver que QuickCheck detecta el error y ofrece un contraejemplo que nos demuestra que efectivamente algo está mal.</p></blockquote><p>A pesar de que las propiedades <code>prop_RevUnit</code>, <code>prop_RevApp</code> y <code>prop_RevRev</code> son polimórficas, es decir no importa el tipo contenido en la lista (<code>Int</code>, <code>Char</code>, etc.), Haskell necesita saber el tipo de la lista en compilación y no puede deducirlo sin una pista; en este caso le especificamos explícitamente cual es el tipo de la lista. Y de hecho esto es bueno, pues no todas las propiedades son polimórficas y hay veces que es distinta la semantica de una función polimórfica según el monomorfismo en particular a probar.</p><h4 id="2-2-funciones"><a href="#2-2-funciones">2.2 Funciones</a></h4><p>También somos capaces de formular propiedades que cuantifican sobre las funciones. Para probar que la composicicón de funciones es asociativa, necesitaremos definir el operador de igualdad extendida <code>(====)</code>.</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+import Test.QuickCheck
+
+(f ==== g) x = f x == g x
+prop_CompAssoc :: (Int -&gt; Int) -&gt; (Int -&gt; Int) -&gt; (Int -&gt; Int) -&gt; Int -&gt; Bool
+prop_CompAssoc f g h = (f.(g.h)) ==== ((f.g).h)
+
+instance Show (Int -&gt; Int) where
+  show f = &quot;&lt;&lt;function&gt;&gt;&quot;
+
+main = quickCheck prop_CompAssoc</code></pre><p>La única dificultad que los tipos de las funciones causan, es que si un contraejemplo es encontrado, se imprimiría como <code>&lt;&lt;function&gt;&gt;</code> en la consola. Para verlo, intentemos probar que la composición de funciones es comutativa:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+import Test.QuickCheck
+
+(f ==== g) x = f x == g x
+prop_CompComm :: (Int -&gt; Int) -&gt; (Int -&gt; Int) -&gt; Int -&gt; Bool
+prop_CompComm f g = (f.g) ==== (g.f)
+
+instance Show (Int -&gt; Int) where
+  show f = &quot;&lt;&lt;function&gt;&gt;&quot;
+
+main = quickCheck prop_CompComm</code></pre><p>En este ejemplo, podemos ver que la composición de funciones no es comutativa, pues QuickCheck reporta un error, pero no podemos ver el contraejemplo.</p><h4 id="2-3-leyes-condicionales"><a href="#2-3-leyes-condicionales">2.3 Leyes condicionales</a></h4><p>Las leyes que son simples ecuaciones son representadas convenientemente por funciones booleanas, como lo hemos visto, pero en general muchas leyes solo se cumplen bajo ciertas condiciones. QuickCheck nos proporciona un combinador de implicación para representar dichas leyes condicionales. Por ejemplo, la ley <code>x &lt;= y ==&gt; max x y == y</code> puede ser representada por por esta definición:</p><pre><code class="haskell">prop_MaxLe :: Int -&gt; Int -&gt; Property
+prop_MaxLe x y = x &lt;= y ==&gt; max x y == y</code></pre><p>De la misma manera, la función de inserción de una lista ordenada satisface la ley:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted []                     = True
+isSorted (x:[])                 = True
+isSorted (x:y:zs) | x &lt;= y      = isSorted $ y:zs
+isSorted _                      = False
+
+prop_Insert :: Int -&gt; [Int] -&gt; Property
+prop_Insert x xs =
+  isSorted xs ==&gt; isSorted (insert x xs)
+
+main = quickCheck prop_Insert</code></pre><p>Podemos ver que para esta propiedad, el tipo no es <code>Bool</code> sino <code>Property</code>. Esto es porque la semántica es distinta; si el lado izquierdo de la implicación no es <code>True</code>, se descarta ese caso y se intenta uno nuevo. ¡Pero! si muchos casos se descartan, puede que se realicen menos pruebas arrojando un mensaje similar a <code>Arguments exhausted after 64 tests.</code> Es responsabilidad del programador decidir si es suficiente o si debe de renfinar las pruebas (usando generadores especializados, por ejemplo).</p><h4 id="2-4-monitoreando-los-datos-de-prueba"><a href="#2-4-monitoreando-los-datos-de-prueba">2.4 Monitoreando los datos de prueba</a></h4><p>Quizás parezca que hemos probado la función de inserción lo suficiente para establecer su credibilidad, pero debemos de ser cuidadosos. Si modificamos la propiedad <code>prop_Insert</code> de esta manera:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted []                     = True
+isSorted (x:[])                 = True
+isSorted (x:y:zs) | x &lt;= y      = isSorted $ y:zs
+isSorted _                      = False
+
+prop_Insert :: Int -&gt; [Int] -&gt; Property
+prop_Insert x xs =
+  isSorted xs ==&gt;
+    {-hi-}classify (null xs) &quot;trivial&quot;{-/hi-} $
+      isSorted (insert x xs)
+
+main = quickCheck prop_Insert</code></pre><p>Vemos que las listas vacias (<code>null xs</code>) son clasificadas como pruebas triviales así:
+<img alt="contando casos triviales.png" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F5e104b69-db64-4cc1-b6c4-d4cdc25e99b1.png" /></p><p>Si en su lugar, lo hubiésemos modificado de esta manera:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted []                     = True
+isSorted (x:[])                 = True
+isSorted (x:y:zs) | x &lt;= y      = isSorted $ y:zs
+isSorted _                      = False
+
+prop_Insert :: Int -&gt; [Int] -&gt; Property
+prop_Insert x xs =
+  isSorted xs ==&gt;
+    {-hi-}collect (length xs){-/hi-} $
+      isSorted (insert x xs)
+
+main = quickCheck prop_Insert</code></pre><p>Podemos ver que los casos de prueba se agrupan por la longitud de las listas con las que se realizaron las pruebas y que además nos muestra el porcentaje con el que dicha longitud ocurrió así:</p><p><img alt="agrupando.png" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F87f87793-419c-4d90-9072-3b3b9e1b6644.png" /></p><p>En estos dos casos, podemos ver dos cosas. La primera es que QuickCheck se rinde (&quot;gave up&quot;) y solo realiza la prueba para un reducido número de casos, esto se debe a que la mayoría de la listas generadas automáticamente, no cumplen con la preconducición de estar ordenadas (<code>isSorted xs ==&gt; ...</code>), por lo la gran mayoría de los casos se descarta. También podemos ver que los casos que si cumplieron con la preconducición, no se encuentran distribuidos normalmente, pues es mucho más probable que una lista pequeña generada aleatoriamente esté ordenada a que una lista larga generada aleatoriamente. Para solucionar estos dos problemas, podemos usar un generador especializado que solo genera listas ordenadas, como a continuación:</p><pre><code class="active haskell">import Test.QuickCheck
+import Data.List
+
+isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted []                     = True
+isSorted (x:[])                 = True
+isSorted (x:y:zs) | x &lt;= y      = isSorted $ y:zs
+isSorted _                      = False
+
+prop_Insert :: Int -&gt; [Int] -&gt; Property
+prop_Insert x xs =
+  {-hi-}forAll orderedList{-/hi-} $ \orderedList -&gt; isSorted (insert x orderedList)
+
+main = quickCheck prop_Insert</code></pre><p>Y al ejecutar el programa podemos ver como se ejecuta mucho más rapido, pues ya no se pierde el tiempo descartando casos.
+<img alt="orderdList.png" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F99dab163-c2c9-4e75-ba8b-a6144e07434c.png" /></p><h4 id="2-5-estructuras-infinitas"><a href="#2-5-estructuras-infinitas">2.5 Estructuras infinitas</a></h4><p>La función de Haskell <code>cycle</code> toma una lista no vacía y produce una lista que repite el contenido de dicha lista infinitamente. Podemos entonces definir la siguiente ley como una propiedad de QuickCheck:</p><pre><code class="haskell">import Test.QuickCheck
+prop_DoubleCycle :: [Int] -&gt; Property
+prop_DoubleCycle xs =
+  not (null xs) ==&gt;
+    cycle xs == cycle (xs ++ xs)</code></pre><p>Aunque la ley es cierta a simple vista, no la podemos someter a prueba, pues no se puede comparar dos estructuras infinitas en tiempo finito, e.i., tomaría una infinidad de tiempo. Se puede razonar que si tomáramos prefijos aleatorios de ambos ciclos y si estos fueran siempre iguales, entonces hay razón suficiente para creer que los ciclos son iguales:</p><pre><code class="active haskell">import Test.QuickCheck
+
+prop_DoubleCycle :: [Int] -&gt; {-hi-}Int{-/hi-} -&gt; Property
+prop_DoubleCycle xs {-hi-}n{-/hi-} =
+  not (null xs) ==&gt;
+    ({-hi-}take n .{-/hi-} cycle) xs == ({-hi-}take n .{-/hi-} cycle) (xs ++ xs)
+
+main = quickCheck prop_DoubleCycle</code></pre><p>Esta versión sí se puede ejecutar, pues después de crear los ciclos, toma un prefijo de tamaño finito.</p><p>Otro asunto relacionado con estructuras infinitas es la cuantificación sobre sobre estas. Veremos más adelante como tratar con propiedades que se cumplen para todas las listas infinitas.</p><h3 id="3--generadores"><a href="#3--generadores">3. Generadores</a></h3><h4 id="3-1-arbitrary"><a href="#3-1-arbitrary">3.1 Arbitrary</a></h4><p>La manera en que se generan los casos de prueba aleatorios depende obviamente de su tipo. Por lo tanto, hemos introducido una clase de tipo <code>Arbitrary</code>; si queremos generar elementos arbitrarios de un tipo, debemos hacer entonces dicho tipo miembro de la clase <code>Arbitrary</code>.</p><pre><code class="haskell">class Arbitrary a where
+  arbitrary :: Gen a</code></pre><p><code>Gen a</code> es un tipo abstracto que representa un generador para el tipo <code>a</code>. El programador puede usar los generadores incluidos en QuickCheck o definir los suyos usando el combinador <code>forAll</code>.</p><p>Una primer definición podría ser <code>newtype Gen a = Gen (Rand -&gt; a)</code> (más adelante mostraremos la definición completa). En esta definición, <code>Rand</code> es la &quot;semilla&quot; de un número aleatorio; un generador es sólo una función que puede manufacturar un valor de tipo <code>a</code> de una manera quasi aleatoria.</p><p><code>Gen</code> también es un miembro de la clase <code>Monad</code> por lo que existen implementaciones para:</p><pre><code class="haskell">return :: a -&gt; Gen a
+(&gt;&gt;=) :: Gen a -&gt; (a -&gt; Gen b) -&gt; Gen b</code></pre><p><code>return</code> construye un <code>Gen</code> constante (realmente no es arbitrario) y <code>(&gt;&gt;=)</code> sirve para crear un <code>Gen b</code> usando un <code>Gen a</code> dado.</p><p>Algunos ejemplos de generadores:</p><pre><code class="haskell">import Test.QuickCheck
+
+-- choose (min, max) = an arbitrary Int between min and max.
+
+instance Arbitrary Int where
+  arbitrary = choose (-20, 20)
+
+instance (Arbitrary a, Arbitrary b) =&gt; Arbitrary (a, b) where
+  arbitrary = liftM2 (,) arbitrary arbitrary</code></pre><h4 id="3-2-generadores-para-tipos-definidos-por-el-usuario"><a href="#3-2-generadores-para-tipos-definidos-por-el-usuario">3.2 Generadores para tipos definidos por el usuario</a></h4><p>Al final de la ultima sección, vimos los generadores para los tipos <code>Int</code> y <code>Arbitrary a, Arbitrary b) =&gt; (a,b)</code>; en esta sección, veremos como definir generadores para tipos definidos por el usuario.
+Para facilitarnos este trabajo, QuickCheck nos proporciona diversos combinadores; el más sencillo es <code>oneof</code> que simplemente escoge un <code>Gen</code> de una lista de <code>Gen</code>s con una distribución uniforme, por ejemplo:</p><pre><code class="haskell">import Test.QuickCheck
+
+data Colour = Red | Blue | Green
+
+instance Arbitrary Colour where
+  arbitrary = oneof [return Red, return Blue, return Green]</code></pre><p>Una manera de generar listas aleatorias:</p><pre><code class="haskell">import Test.QuickCheck
+
+instance Arbitrary a =&gt; Arbitrary [a] where
+  arbitrary = oneof
+    [return [], liftM2 (:) arbitrary arbitrary]</code></pre><p>En este ejemplo, <code>liftM2</code> aplica el operador cons, <code>(:)</code>, a un <code>a</code> y una lista <code>[a]</code>. El problema con esta definición es que la longitud promedio de las listas producidas por esta definición, es de 1 sólo elemento. Para resolver esto, podemos utilizar la función <code>frequency</code>, la cual nos permite establecer con que frequencia se eligirá cada caso definido como elementos de una lista; a continuación, un ejemplo:</p><pre><code class="haskell">import Test.QuickCheck
+
+instance Arbitrary a =&gt; Arbitrary [a] where
+  arbitrary = frequency
+    [ (1, return [])
+    , (4, liftM2 (:) arbitrary arbitrary) ]</code></pre><p>En esta definición, es cuatro veces más probable que suceda el segundo caso que el primero.</p><p>Para otro tipo de datos más generales, resulta que necesitamos aun mayor control sobre la distribución de valores generados. Si quisieramos generar árboles arbitrarios siguiendo la mismá técnica que en el ejemplo pasado, nos quedaría algo así:</p><pre><code class="haskell">import Test.QuickCheck
+
+data Tree a = Leaf a | Branch (Tree a) (Tree a)
+
+instance Arbitrary a =&gt; Arbitrary (Tree a) where
+  arbitrary = frequency
+    [ (1, liftM Leaf arbitrary)
+    , (2, liftM2 Branch arbitrary arbitrary)]</code></pre><p>El problema con este código es que sólo tiene 50% de probabilidad de terminar de generar el árbol, pues de suceder el segundo caso, son ahora dos árboles (el lado izquierdo y el derecho) los que se tienen que generar, haciendo que estemos más lejos en vez de más cerca de terminar la generación. Aun si llegara a terminar, el árbol generado sería muy grande pare ser apto para pruebas; se necesitan datos no muy largos para poder realizar muchas pruebas.</p><p>La solución que ofrece QuickCheck es la de darle al programador la habilidad de escoger que generar en base a un <i>tamaño</i>. Para esto, se necesita modificar la definición de <code>Gen</code> a <code>newtype Gen a = Gen ({-hi-}Int{-/hi-} -&gt; Rand -&gt; a)</code>, donde el primer parámetro, <code>Int</code>, introduce la noción de cierto <i>límite</i> en el tamaño del valor a generar. Utilizando el combinador <code>sized :: (Int -&gt; Gen a) -&gt; Gen a</code>, podemos entonces describir <code>Gen</code>s accediendo además a un entero que el programador deberá interpretar como un valor que controla el tamaño del valor a generar. Con esto, podemos entonces crear una generador más apto para generar árboles, por ejemplo:</p><pre><code class="haskell">import Test.QuickCheck
+
+data Tree a = Leaf a | Branch (Tree a) (Tree a)
+
+instance Arbitrary a =&gt; Arbitrary (Tree a) where
+  arbitrary = sized arbTree
+
+arbTree 0 = liftM Leaf arbitrary
+arbTree n = frequency
+  [ (1, liftM Leaf arbitrary)
+  , (4, liftM2 Branch (arbTree {-hi-}(n `div` 2){-/hi-})
+                      (arbTree {-hi-}(n `div` 2){-/hi-})) ]</code></pre><p>De esta manera, a lo mucho el arbol generado puede sólo tener aproximadamente log2(n) niveles, lo cual es un límite bastante razonable.
+En cada prueba, varía el tamaño dado a <code>sized</code>, comenzando con un <code>n</code> pequeño y de ahí en adelante irlo incrementando para las pruebas posteriores. <code>sized</code> nos permitirá generar más y con mayor detalle casos de prueba, lo cual a su vez, haría mas eficiente al incrementar nuestras que satisfagan la precondición.</p><h4 id="3-3-generando-funciones"><a href="#3-3-generando-funciones">3.3 Generando funciones</a></h4><p>Si una de las propiedades que queremos probar incluye una función en su parámetro, necesitaremos poder genarar también funciones arbitrarias. Sorprendentemente, QuickCheck es capaz de esto. Para entender como, nótese que el tipo <code>Gen (a-&gt;b)</code> (generador de funciones) es igual a este <code>Int-&gt;Rand-&gt;a-&gt;b</code>, que reordenando los parámetros, es igual a <code>a -&gt; Int -&gt; Rand -&gt; b</code>, que entonces se podría representar como <code>a -&gt; Gen b</code>. Entonces, podemos definir una función <code>promote :: (a -&gt; Gen b) -&gt; Gen (a -&gt; b)</code> y usarla para producir generadores de funciones a partir de un simple <code>(a -&gt; Gen b)</code>, asumiendo que podemos construir un generador <code>Gen b</code> que de alguna manera dependa de un <code>a</code> dado. Para ayudarnos con esta dependencia que debe tener <code>Gen b</code> de <code>a</code>, definimos la siguiente clase:</p><pre><code class="haskell">class Coarbitrary a where
+  coarbitrary :: a -&gt; Gen b -&gt; Gen b</code></pre><p>cuyo método <code>coarbitrary</code> modifica un <code>Gen b</code> usando un <code>a</code>. Se debe de pensar en <code>coarbitrary</code> como un transformador de generadores. Con la clase <code>Coarbitrary</code>, podemos entonces definir la instancia de <code>Arbitrary</code> para funciones:</p><pre><code class="haskell">instance (Coarbitrary a, Arbitrary b) =&gt; Arbitrary (a-&gt;b) where
+  arbitrary = promote (\a -&gt; coarbitrary a arbitrary)</code></pre><p>Entonces, el trabajo se encuentra en definir instancias de <code>Coarbitrary</code> para un <code>a</code> de manera que pueda generar un <code>Gen b</code> del <code>a -&gt; Gen b</code> que nos interese. Para auxiliarnos en esto, utilizaremos la función <code>variant :: Int -&gt; Gen a -&gt; Gen a</code>, donde <code>variant n g</code> construye un generador que transforma la semilla generadora de un numero aleatorio de alguna manera que dependa de <code>n</code> antes de pasársela a <code>g</code>. Esta función está definida de manera muy cuidadosa, para que los generadores que construyamos usándola sean independientes. Dada una lista de enteros <code>[n1,n2,...,nk]</code>, podemos construir un transformador de generadores: <code>variant n1 . variant n2 . ... . variant nk</code>.
+Con <code>variant</code> como auxiliar, podemos definir instancias de <code>coarbitrary</code> que elige entre variantes de un generador dependiendo del primer argumento de <code>coarbitrary</code>. Por ejemplo, la instancia de <code>Coarbitrary Bool</code> es:</p><pre><code class="haskell">instance Coarbitrary Bool where
+  coarbitrary b =
+    if b then variant 0 else variant 1</code></pre><p>Se puede ver como la decisión entre <code>variant 0</code> y <code>variant 1</code> depende del <code>b</code>, haciendo que efectivamente <code>coarbitrary b</code> tenga el tipo <code>Gen x -&gt; Gen x</code>, pues tanto <code>variant 0</code> como <code>variant 1</code> tienen el tipo <code>Gen x -&gt; Gen x</code> y por lo tanto <code>coarbitrary b g</code>, donde <code>g</code> es un generador <code>Gen x</code> produce un <code>Gen x</code> que depende de <code>b</code>.</p><p>Instancias de <code>Coarbitrary</code> para tipos recursivos pueden ser definidas siguiendo un patrón estándar, por ejemplo, para las listas es:</p><pre><code class="haskell">instance Coarbitrary a =&gt; Coarbitrary [a] where
+  coarbitrary []     = variant 0
+  coarbitrary (x:xs) =
+    variant 1 . coarbitrary x . coarbitrary xs</code></pre><p>El primer caso es simple y el segundo es una serie de transformaciones, donde cada elemento de la lista es crítico en como se influenciará el generador a transformar. El patrón a seguir es: que cada miembro y su posición en la estructura recursiva forme parte del transformador final.</p><p>Finalmente, las funciones también se pueden interpretar como transformadores de generadores mediante la siguiente instancia:</p><pre><code class="haskell">instance (Arbitrary a, Coarbitrary b) =&gt;
+           Coarbitrary (a -&gt; b) where
+  coarbitrary f gen =
+    do
+      a &lt;- arbitrary
+      coarbitrary (f a) gen</code></pre><p>La idea es aplicarle a <code>f</code> un valor arbitrario y con el valor generado transformar el generador dado mediante <code>coarbitrary (f a) gen</code>.</p><h3 id="4--implementando-quickcheck"><a href="#4--implementando-quickcheck">4. Implementando QuickCheck</a></h3><p>Como hemos visto, la función quickCheck puede manjear propiedades con un numero variante de argumentos que producen diferentes resultados. Para implementar esto, introducimos el tipo <code>Property</code> y creamos la clase <code>Testable</code>:</p><pre><code class="haskell">class Testable a where
+  property :: a -&gt; Property</code></pre><p>El tipo <code>Property</code> representa predicados que se pueden verificar mediante pruebas. Esto significa que necesita producir input aleatorio y calcular un resultado. Entonces, <code>Property</code> es una computación dentro del mónada <code>Gen</code>, terminando en un tipo abstracto <code>Result</code>, el cual mantiene los datos de los resultados de las pruebas, la clasificación de los datos de prueba y los argumentos utilizados en cada caso de prueba. La definición de <code>Property</code> es <code>newtype Property = Prop (Gen Result)</code>
+Veamos algunas instancias de <code>Testable</code>:</p><pre><code class="haskell">instance Testable Bool where
+  property b = Prop (return (resultBool b))
+
+instance (Arbitrary a, Show a, Testable b) =&gt; Tetsable (a-&gt;b) where
+  property f = forAll arbitrary f
+
+instance Testable Property where
+  property p = p</code></pre><p>Usando la función <code>property</code>, ahora podemos ver el tipo de <code>quickCheck</code>, el cual es <code>quickCheck :: Testable a =&gt; a -&gt; IO()</code>.</p><h3 id="5--algunos-casos-de-estudio"><a href="#5--algunos-casos-de-estudio">5. Algunos casos de estudio</a></h3><h4 id="5-1-unificaci-n"><a href="#5-1-unificaci-n">5.1 Unificación</a></h4><p>Al intentar probar el algoritmo de unificación con QuickCheck, sucedieron varias revelaciones, tanto en las implicaciones que tiene usar QuickCheck en el diseño como algunas dificultades que se debieron de evitar. Es demasiado grande para presentar a detalle, así que sólo discutiremos las lecciones que aprendimos.
+##### 5.1.1 Impacto en las definiciones de tipos
+En vez de haber definido el tipo <code>Term</code> de esta manera:</p><pre><code class="haskell">data Term = Var Int | Constr String [Term]</code></pre><p>Se tuvo que usar esta otra definición:</p><pre><code class="haskell">data Term = Var Var | Constr Name [Term]
+newtype Var = Variable Nat
+newtype Name = Name String</code></pre><p>La razón para definir tipos nuevos mediante <code>newtype</code> es que nos permite usar <code>String</code>s en distintos contextos con semántica distinta. Lo mismo para <code>Nat</code>. De esta manera, se puede definir generadores distintos para los nombres de variables (<code>Name</code>) que para <code>String</code>s comunes y corrientes. Sucede de manera similar con <code>Var</code> y <code>Nat</code>.
+Si no se hubiese definido un tipo especial para los nombres, entonces hubiese sido muy poco probable que dos <code>String</code>s aleatorios se unificaran. Pero dado que sí definimos el tipo <code>Name</code>, se pudo definir el siguiente generador:</p><pre><code class="haskell">instance Arbitrary Name where
+  arbitrary = sized $ \n -&gt; oneof
+    [ return (Name (&quot;v&quot; ++ show i))
+    | i &lt;- [1..log n+1] ]</code></pre><p>El cual vuelve mucho más probable que se repitan los nombres generados.
+Se puede ver entonces como QuickCheck nos hace ser más específicos con los tipos que usamos, que como un extra, le permite al compilador detectar más errores.
+##### 5.1.2 Probando propiedades funcionales
+Un unificador necesita mantener la sustitución actual y también la posibilidad de errores en llamadas recursivas. Una manera conveniente de hacerlo fue usando un mónada. Definimos la unificación <code>monad M</code>, representada por una función con las siguientes operaciones:</p><pre><code class="haskell">setV :: Var -&gt; Term -&gt; M ()
+getV :: Var -&gt; M Term</code></pre><p>para leer y escribir variables, entre otras cosas. Fue posible definir el operador <code>eqM</code> de igualdad extendida sobre valores monádicos y probar las leyes de los mónadas y propiedades tales como esta:</p><pre><code class="haskell">prop_SetGet v t = (do setV v t; getV v) `eqM` (do setV v t; return t)</code></pre><h5 id="5-1-3-errores-encontrados"><a href="#5-1-3-errores-encontrados">5.1.3 Errores encontrados</a></h5><p>Un error que se detectó con QuickCheck fue en la especificación (ningun error se detectó en la implementación), donde se definió una función de sustitución que repetidamente sustituía hasta que ninguna variable sobraba y se definió la siguiente propiedad:</p><pre><code class="haskell">prop_SubstIdempotent s t =
+  subst s (subst s t) == subst s t</code></pre><p>A pesar de que a simple vista parecía una propiedad obviamente correcta, QuickCheck demostró que la propiedad sólo se mantenía para sustituciones acíclicas, por lo que se tuvo que redefinir la propiedad de esta manera:</p><pre><code class="haskell">prop_SubstIdempotent s t =
+  {-hi-}acyclic s ==&gt;{-/hi-} subst s (subst s t) == subst s t</code></pre><p>Así fue como QuickCheck nos hizo pensar con más detalle en las propiedades de nuestro código y como este quedó mejor documentado.
+Por otro lado, resultó ser mucho trabajo definir las propiedades, incluso fue más trabajo definir las propiedades que el algoritmo a probar. Esto se debe en parte porque funciones como <code>acyclic</code> no eran triviales de definir; una buena librería de teoría de conjuntos hubiera ayudado.
+##### 5.1.4 Una falsa sensación de seguridad
+El error más grande que descubrimos con este experimento fue la falsa sensación de seguridad que puede ser engendrada cuando el programa de uno pasa un gran numero de pruebas triviales. Ya nos hemos referido a este problema cuando discutimos las propiedades condicionales; en este ejemplo, nos <i>mordió duro</i>.</p><p>Muchas propiedades de unificación aplican al caso en que la unificación tiene éxito y pueden ser descritas convenientemente in la forma:</p><pre><code class="haskell">prop_Unify t1 t2
+  = unifier t1 t2 /= Nothing ==&gt; ...</code></pre><p>dado que nuestro unificador regresa <code>Nothing</code> cuando falla. Después de un poco de reflección, nos dimos cuenta que dos términos elegidos al azar eran muy probablemente unificables, dado que las variables ocurren bastante seguido y si cualquier término es una variable, entonces es muy probable que la unificación tenga éxito. Por el otro lado, si ningón término es una variable, entonces a probabilidad de que se unifiquen es muy pequeña. Por lo tanto, el caso en el que un término es una variable está muy sobrerepresentado entre los casos de prueba que satisfacen la precondición; encontramos que el 95% que satisfacían la precondición era porque alguno de los terminos era una variable.
+La solución fue usar un generador especializado:</p><pre><code class="haskell">prop_Unify =
+  forAll probablyUnifiablePair $ \(t1,t2) -&gt;
+    s /= Nothing ==&gt; ...
+    where s = unifier t1 t2</code></pre><p>Generamos &quot;parejas probablemente unificables&quot; al generar un término aleatorio y remplazando subterminos por variables de dos maneras distintas. Este método usualmente generaba términos unificables, pero podía fallar cuando las variables eran usadas inconsistentemente en dos teerminos. Con esta modificación, la proporción de casos triviales disminuyó a un rango razonable de entre 20-25%.
+Esta experiencia resaltó la importancia de investigar la distribución de los casos de prueba cuando se usen propiedades condicionales.</p><h4 id="5-2-propiedades-de-circuitos"><a href="#5-2-propiedades-de-circuitos">5.2 Propiedades de circuitos</a></h4><h5 id="5-2-1-lava-en-corto"><a href="#5-2-1-lava-en-corto">5.2.1 Lava en corto</a></h5><p><a href="http://www.cse.chalmers.se/edu/year/2012/course/TDA956/Papers/Lava98.pdf">Lava</a> es una herramienta que sirve para describir, simular y formalmente verificar software. Lava es un lenguaje embedido (en lenguaje definido en otro lenguaje), lo cual significa que la descripción de los circuitos y sus propiedades están expresados en otro lenguaje, Haskell en este caso.
+La idea es ver a un circuito de hardware cono una función de señales de entrada a señales de salida. El sistema Lava provee circuitos primitivos, como <b>and2</b>, <b>xor2</b> y <b>delay</b>. Más circuitos complicatods están definidos por combinaciones de estos. Circuitos definidos en Lava pueden ser simulados de la siguiente manera: uno provee las señales de entrada y se calculan Lava calcula las salidas:
+<img alt="aaa.png" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2Fe4e9361a-954e-47a9-885e-32f28a977857.png" /></p><p>Además, el sistema Lava define combinadores de circuitos como la composición sequencial <code>(&gt;-&gt;)</code>, composición paralela <code>(&lt;|&gt;)</code> y <code>column</code>, el cual toma un circuito y lo replica en una columna de circuitos, conectando los cables verticales.
+##### 5.2.2 Propiedades en Lava
+Las propiedades de los circuitos se pueden definir en una mnera similar. Por ejemplo, para definir la propiedad de que cierto circuito es comutativo, decimos:</p><pre><code class="haskell">prop_Commutative circ (a, b) =
+  circ (a, b) &lt;==&gt; circ (b, a)</code></pre><p>donde <code>&lt;==&gt;</code> es la equivalencia lógica <i>elevada</i> a tipos arbitrarios conteniendo señales, en este caso un par.
+Las propiedades se pueden verificar formalmente. Se hace al proveerle las entradas simbólicas al circuito o propiedad y calculando una expresión concreta en un tipo de Haskell representando el circuito.
+Después podemos escribir la expresión en un archivo y llamar a un probador de teoremas externo. Todo esto se hace mediante la función <code>verify</code>. Así es como se verifica que un <a href="https://es.wikipedia.org/wiki/Sumador">sumador</a> es comutativo:</p><pre><code class="haskell">main = verify (prop_Commutative halfAdd)</code></pre><p>El sistema Lava provee un número de funciones y combinadores que convenientemente expresan propiedades y formalmente las verifican.
+##### 5.2.3 QuickCheck y Lava
+Aunque fuimos capaces de verificar las propiedades acerca de circuitos en Lava, nos beneficiamos de extenderlo con una herramienta de pruebas como QuickCheck. Hay dos razones para esto:
+Primero, llamar un probador de teoremas externos es un proceso pesado. Verificar un multiplicador de 32 bits, las fórmulas que generamos son bastante grandes y toman mucho tiempo en comprobarse.
+Entonces, un ciclo típico de desarrollo es escribir las especificaciones del circuito primero, luego escribir una implementación, QuickCheck es para detectar bugs obvios y, por último, llamar al probador de teoremas externo para verificar. Añadir QuickCheck a Lava resulto ser bástante fácil, pues Lava ya tiene algunas nociones de propiedades.
+##### 5.2.4 Pruebas de orden superior
+La segunda razón para usar pruebas en Lava es simplemente que ¡podemos probar más propiedades de las que formalmente se pueden verificar! Los probadores de teoremas conectados a Lava apenas pueden manejar lógica de primer orden y el sistema de Lava solo es capas de generar formulas de ese tipo.
+A veces, quisieramos probar propieadeds acerca de combinadores. Por ejemplo, provar que <code>column</code> se distribuye sobre <code>(&gt;-&gt;)</code>:</p><pre><code class="haskell">prop_ComposeSeqColumn circ1 circ2 inp =
+  column (circ1 &gt;-&gt; circ2) inp &lt;==&gt; (column circ1 &gt;-&gt; column circ2) inp</code></pre><p>es muy difícil de verificar en Lava para todo <code>circ1</code> y <code>circ2</code>. De hecho, dichas propiedades son difíciles de verificar automáticamente en general (podemos hacerlo para pequeños tamaños), pero dado que podemos generar funciones aleatorias, podemos al menos probar este tipo de propiedades para circuitos arbitrarios (dado que los circuitos son funciones).
+Un inconveniente es que tenemos que fijar los tipos de estos circuitos, mientras que los combinadores de Lava, y por lo tanto sus propiedades, son polimórficas.
+##### 5.2.5 Errores encontrados
+Los errores encontrados gracias a QuickCheck fueron de dos tipos. El primer tipo de errores fueron errores que también se hubiesen podido encontrar con los probadores formales: errores lógicos. Pero el segundo caso si se trata de errores detectados únicamente por QuickCheck, dado que QuickCheck permitió probar con una variedad de entradas de tamaño aleatorio, mientras que con el método formal, siempre se probaba para tamaños preestablecidos.
+#### 5.3 Probador de teoremas proposicional
+Para fines educativos, implementamos dos diferentes y bien conocidos métodos para checar si un conjunto de cláusulas de lógica proposisional son contradictorios. Uno de estos métodos fue el método de <a href="https://en.wikipedia.org/wiki/Davis%E2%80%93Putnam_algorithm">Davis-Putnam</a>, el cual utiliza backtracking para general una lista de todos los modelos. El otro método fue el <a href="http://www.cfdvs.iitb.ac.in/download/Docs/verification/papers/sat/presentations/stalmarck-presentation.pdf">método de Stålmarck</a>.</p><pre><code class="haskell">type Clause = [Lit] -- disjunction
+type Model = [Lit] -- conjunction
+
+davisPutnam :: [Clause] -&gt; [Model]
+stalmarck    :: Int -&gt; [Clause] -&gt; Maybe Model</code></pre><p>La función <code>stålmarck</code> toma un argumento extra, un <code>Int</code> que es el llamado &quot;nivel de saturación&quot;, un parámetro que limita la profundidad de las pruebas y usualmente se encuentra entre 0 y 3. Si el resultado de <code>stålmarck</code> es <code>Nothing</code>, significa que hubo una contradicción. Si el resultado es <code>Just m</code>, significa que cada modelo dol conjunto de cláusulas debe tener <code>m</code> como un submodelo.</p><p>Dado que <code>davisPutnam</code> es mucho mas directo de implementar que <code>stalmarck</code>, quizimos checar la implementación del segundo con la del primero. Aquí es como formulamos la propiedad descrita de manera informal en este parrafo:</p><pre><code class="haskell">prop_Stalmarck_vs_DP :: Property
+prop_Stalmarck_vs_DP =
+  forAll clauses $ \cs -&gt;
+    forAll (choose (0, 3)) $ \sat -&gt;
+      case stalmarck sat cs of
+        Nothing -&gt;
+          collect &quot;contradiction&quot; $
+            davisPutnam cs == []
+
+        Just m -&gt;
+          not (null m) ==&gt;
+            collect (length m) $
+              all (subModel m) (davisPutnam cs)</code></pre><p>Nótese que se collecta algo de información estadística: <code>collect &quot;contradiction&quot;</code> cuando el resultado fue <code>Nothing</code>, y el tamaño de <code>m</code> en caso de <code>Just m</code>. También se especificó que se debe de descartar el caso en que <code>stålmarck</code> regresa <code>Just []</code>: <code>case stålmarck sat cs of ... Just m -&gt; not (null m) ==&gt; ...</code>
+¡Con esta propiedad, QuickCheck encontró 3 bugs! Estos bugs se debieron a supuestos injustificados implicitos que teníamos sobre la entrada. Las implementaciones de ambos algoritmos asumían que ninguna cláusula en la entrada pudo contener la misma literal dos veces y la función <code>stålmarck</code> asumía que ninguno de las cláusulas de entrada se encontraban vacias.
+El generador de datos de prueba, <code>clauses</code> fue definido usando las mismas técnicas que en la sección &quot;Impacto en la definicón de tipos&quot;. Probar la propiedad tomó 30 segundos y de la salida se pudo ver que la distribución de <code>Nothing</code> y <code>Just m</code> era de alrdedor de 50/50.
+#### 5.4 Pretty Printing
+Omitido.
+#### 5.5 Edison
+Omitido.
+### 6. Discusión
+#### 6.1 Pruebas aleatorias
+A primera vista, la selección aleatoria de los casos de prueba podría parecer un enfoque muy ingenuo. Métodos sistemáticos son usualmente preferidos; en general, un <i>criterio de pruebas adecuadas</i> es definido y el proceso de pruebas procede al generar casos de prueba que cumplen con el criterio de suficiencia. Por ejemplo, un criterio simple es que cada estatuto alcanzable debería de ser ejecutado al menos en una prueba; un criterio más complejo es que cada camino de un estatudo de control (excepto por los ciclos) debería de ser seguido por al menos una prueba. Se ha propuesto una gran variedad de criterios, <a href="http://www.cs.toronto.edu/~chechik/courses07/csc410/p366-zhu.pdf">he aquí un estudio</a>.
+Se eligió no basar QuickCheck en dichos criterios. En parte, esto es porque muchos criterios necesitarían ser reinterpretados antes de que pudieran ser aplicables a Haskell; es mucho menos claro, por ejemplo, que es un <i>camino de control de flujo</i> en un lenguaje con funciones de orden superior y evaluación perezosa. En parte, usar dichos criterios nos obligarían a usar métodos más pesados, incluso poder medir la covertura de todos los caminos, por ejemplo, requeriría modificaciones al compilador y por lo tanto, QuickCheck estaría atado a cierto compilador de Haskell. Generar datos de prueba para ejecutar un camino en específico requeriría analizar y resolver restricciones (para encontrar los valores adecuados que hagan ejecutarse cierto camino con ciertos valores). Aunque poder analizar y cumplir dichas restricciones sea posible para datos aritméticos, es muy difícil lograrlo para la variedad de tipos expresables en Haskell.</p><p>De todos modos, además de la dificultad de crear dicho sistema, no hay razón clara para creer que hacerlo produciría mejores resultados. En 1984, Duran y Ntafos compararon la probabilidad de detección de error para pruebas aleatorias con <i>partition testing</i> y descubrieron que las diferencias en efectividad eran pequeñas. Hamlet y Taylor repitieron su estudio de manera mas extensiva, corroborando los resultados originales. Aunque <i>partition testing</i> es ligeramente más efectivo para exponer errores, usar 20% más casos de prueba con en pruebas aleatorias eliminaba cualquier ventaja que tuviera <i>partition testing</i>.</p><p>Para pequeños programas en particular, es posible que las pruebas aleatorias van a ejecutar todos los posibles caminos. Usando QuickCheck, pudimos aplicar pruebas aleatorias a un grado bastante refinado: probamos propiedades de funciones individuales, pero las funciones que llaman son probadas independientemente. Entonces, aunque QuickCheck sea usado para probar un programa grande, siempre probamos una pequeña parte a la vez, por lo que se espera que las pruebas aleatorias funcionen particularmente bien.
+Dado todo esto, elegir hacer pruebas aleatorias con QuickCheck nos pareció una opción viable.
+#### 6.2 Criterios de exactitud
+El problema de determinar si una prueba pasó o no es conocido como el problema del oráculo. Una solución es la de comparar la salida de un programa con la de otra versión del programa, quizás una mas antigua o mas simple y lenta pero obviamente correcta. Alternativamente, una especificación ejecutable podría jugar el mismo papel. Este tipo de oráculos pueden ser expresados simplemente como una propiedad de QuickCheck, aunque nuestras propiedades son mucho más generales.
+Por otro lado, uno puede verificar que la salida de un programa es correcta de manera mucho mas rápido que uno puede computar la salida. Blum y Kannan utilizaron esto en su trabajo <a href="http://dl.acm.org/citation.cfm?id=73015&amp;dl=ACM&amp;coll=DL&amp;CFID=549961787&amp;CFTOKEN=20087942">Designing programs that check their work</a>; un verificador de programas está definido a ser otro programa que clasifica la salida del programa como correcta o erronea, con una alta probabilidad de realizar la clasificación correctamente y lo hace con estricta baja complejidad. Distinguen entre <i>probar</i> y <i>verificar</i> un programa; su propuesta es que los programas deben siempre de <i>verificar</i> su salida y de hecho Blum et al. mostraron como los programas que usualmente producen resultados correctos pueden incluso corregir resultados equivocados (en ciertos dominios). Por supuesto, verificadores de resultados igual se pueden expresar como propiedades de QuickCheck, aunque los usamos para probar un programa, mas que como una parte del programa final.
+Además, el lenguaje de propiedades de QuickCheck es más general que un verificador de resultados. Mediante las propiedades condicionales o generadores de datos específicos, podemos expresar propiedades que se mantienen solo para un pequeño subconjunto de todas las posibles entradas. Asi, podemos evitar probar funciones en casos que llevan a errores en tiempo de ejecución, o casos en que no nos importa el resultado. Por ejemplo, no tiene sentido probar la función de inserción para una lista desordenada. Por otro lado, un verificador de resultados debe verificar que un programa produce la salida correcta en todos los casos, aun para los casos que no son interesantes. También, las propiedades de QuickCheck no están limitadas a la verificación del resultado de la llamada de una función, por ejemplo, la propiedad de asociatividad de un operador no se puede probar mediante la llamada de una función, pero aun así expresa una propiedad global útil que se puede probar mediante pruebas.
+...
+Se observó que los programas funiconales y las propiedades basadas en especificaciones eran un buen match y hacerlo en Haskell nos facilita hacerlo con una mínima curva de aprendizaje.
+#### 6.3 Generación de datos de prueba
+Herramientas comerciales de pruebas aleatorias generan datos de prueba para dominios limitados, en el que el objetivo es hacer que los casos de prueba se asejemen a casos reales de ejecución, descrito por el perfil operacional. En este caso, se pueden obtener inferencias estadísticas sobre el tiempo promedio de fallas del sistema.
+Para generar datos más complejos, es necesario proveer una descripción de la estructura de los datos. Un enfoque popular para hacerlo es usando gramáticas. Pero, se entendio pronto que las gramáticas libres de contexto no pueden expresar todas las propiedades deseadas de los datos de prueba, por ejemplo, un programa generado aleatoriamente no contiene identificadores sin declarar. Por lo tanto, las gramáticas fueron mejoradas con acciones o extendidas a gramáticas atribuidas. Este enfoque ha sido el más usado para probar compiladores, aunque Maurer argumenta que tiene muchos otros usos.
+Las gramáticas se han usado para pruebas sistemáticas, donde, por ejemplo, los datos de prueba generados es requerido para expandir cada producción al menos una vez. Un criterio de adecuación como este para probar compiladores. Maurer también utilizó gramáticas para pruebas aleatorias y notó el problema de terminación para gramáticas recursivas. Su solución, sin embargo, fue simplemente la de incrementar las probabilidades de generar hojas de tal forma que se garantizara la terminación. Nuestra experienca dice que esto resulta en, por mucho, una elevada proporción de casos triviales de prueba y por lo tanto en pruebas ineficientes dado que más tests deben de ejecutarse para probar el programa apropiadamente. Creemos que nuestro método para controlar el tamaño es muy superior.
+Parece que la necesidad de aprender un lenguaje más complejo para gramáticas extendidas ha obstaculizado la adopción de estos métodos en la práctica. Al embeder un lenguaje generador de pruebas en Haskell, nosotros proveemos (por lo menos) las mismas capacidades, pero así el programador tiene sólo que aprender no mas que unos pocos operadores. Al mismo tiempo, nosotros porveemos todo el poder y flexibilidad que se necesitan para generar datos de prueba que satisfacen invariantes complejas en un lenjuage que el programador ya conoce. Al ligar generadores a tipos via el sistema de tipos de Haskell, liberamos del todo al programador de tener que especificar generadores en muchos casos y donde tienen que ser especificados, usualmente el programador solo tiene que escribir generadores para sus propios tipos.
+#### 6.4 Sobre la alateoridad
+Nos hemos encontrado algunos problemas interesantes al razonar sobre programas que utilizan generación de números aleatorios. En particular, el mónada <code>Gen</code> no es realmente un mónada. Recordando la primer ley de los mónadas:
+<code>return x &gt;&gt;= f = f x</code>
+Dado que nuestra implementación de <code>&gt;&gt;=</code> divide la semilla de su número aleatorio, entonces a <code>f</code> se le pasan <i>diferentes</i> semillas en ambos lados de la ecuación y por lo tanto puede producir diferentes resultados. Así que la ley simplemente no se cumple.
+ Moralmente, consideramos que la ley se cumple pues ambos lados de la ecuación producen resultados con la misma distribución. Por &quot;moralmente&quot; nos referimos a que si nos permitimos reinterpretar la equivalencia de dos programas cuando se incluye la presencia de un generador de números aleatorios.
+#### 6.5 Sobre la evaluación perezosa
+Hemos argumentado en el pasado que la evaluación perezosa es una invaluable herramienta de programación que radicalmente cambia la manera en que los programas pueden ser estructurados, pero QuickCheck sólo es capaz de probar propiedades computables; hay conflicto?
+De hecho, el conflicto es menor de lo que uno podría imaginar. Como ya vimos arriba, podemos usar sin problemas estructuras infinitas en las especificaciones, asumiendo que las propiedades que probamos son de hecho computables; por ejemplo, podemos probar que arbitrariamente largos prefixos en listas infinitas son iguales, en vez de comparar las listas enteras. El mónada <code>Gen</code> tiene un operador <code>&gt;&gt;=</code> perezoso (dado que dividimos la semilla generadora de números aleatorios, en vez de pasarlo por el primero y luego por el segundo), así que podemos libremente definir generadores que producen resultados infinitos. Lo que no se puede hacer es observar la no terminación, por lo que no podemos probar esta propiedad:
+<code>reverse (xs ++ undefinde) == undefined</code>
+El problema es que no hay manera de que un programa pueda detectar que otro programa produce un error al evaluar <code>undefined</code>. Existen algunas extensiones de Haskell que permiten esto y Andy Gill ha demostrado que, dadas dichas extensiones, podemos formular y checar propiedades como la de arriba.
+#### 6.6 Algunas reflexiones
+Estamos convencidos que una de las mayores ventajas de usar QuickCheck es que nos alienta a formular especificaciones formales y por lo tanto nos ayudan a entender nuestros programas. Aunque es decisión del programador hacerlo de todos modos, pocos lo hacen, quizás porque hay poca ganancia a corto plazo y quizás porque la especificación es menos valiosa si no hay verificación que corresponda al programa implementado. QuickCheck atiende estos dos problemas: nos da una recompenza a corto plazo via las pruebas automatizadas, y nos da razones para creer que las propiedades establecidas para cierto modulo se mantienen.
+Hemos observado que los errores que encontramos están divididos casi uniformemente entre los errores en los datos de prueba generados, errores en la especificación y errores en el programa. La primer categoría, errores en los datos de prueba, sólo es útil en el sentido en que corregirlos nos ayuda a entender aun más nuestro programa y las propiedades que queremos probar. La tercer categaría es obviamente útil, en el sentido de que encontrar estos errores son los motivos por los que hacemos pruebas, pero la segunda categoría igual es importante: incluso si los errores en la especificación no revelan un error en el código, revelan un mal entendido sobre lo que hace. Corregir dicho malentendido mejora nuestra habilidad de hacer uso del código del código corregido después.
+Cuando se están formulando las especificaciones, uno rapidamente descubre la necesidad de una librería de funciones que implementan abstracciones matemáticas comunes. Nosotros estamos desarrollando una implementación de de la teoría de conjuntos finitos usando QuickCheck; muchas de las abstracciones en ella son ineficientes para ser usadas en programas, pero en las especificaciones, donde el objetivo es establecer las propiedades los más claro y simple posible, encuentran su caso de uso.
+La mayor limitación de QuickCheck es que no hay manera de medir la cobertura de las pruebas, queda como responsabilidad del programador investigar la distribución  de los datos de prueba y decidir si se ejecutaron suficientes pruebas. Aunque QuickCheck ofrece maneras de colectar la información de los datos de prueba, no podemos obligar al usuario a utilizarlas; el riesgo de no hacerlo es obtener una falsa sensación de seguridad sólo por ejecutar un grande número de pruebas.</p><h3 id="7--conclusiones"><a href="#7--conclusiones">7. Conclusiones</a></h3><p>Hemos tomado dos ideas relativamente viejas: especificaciones como oráculos y pruebas aleatorias, y encontramos maneras de hacerlas asequibles para los programadores de Haskell. Primero, proveímos un lenguaje embedido para escribir propiedades, aportando expresividad sin ningún costo de aprendizaje. El lenguaje contiene características convenientes, tales como los cuantificadores, condicionales y monitores de pruebas de datos. Segundo, proveímos generadores de pruebas aleatorios estándar para los tipos estándar de Haskell, ayudando a reducir mucho el costo de implementarlos. Tercero, proveímos un lenguaje embedido para especificar generadores de pruebas aleatorios, los cuales pueden ser basados en los generadores estándar, dándole mayor control al programador sobre la distribución de los datos de prueba. También introdujimos una novedosa forma de controlar los tamaños de los datos aleatoriamente generados de tipos de datos recursivos.
+Además, demostramos que la combinación de estas viejas técnicas funcionan extremadamente bien para Haskell. La naturaleza de la programación funcional permite descibir propiedades muy específicas y de manera local al hacer explícitas todas las dependencias de una expresión. Las pruebas aleatorias son especialmente útiles para encontrar errores en este tipo de expresiones pequeñas y detalladas.
+Por último, la herramienta es ligera y fácil de usar y provee de recompensa a corto plazo para establecer explícitamente propiedades de las funciones de un programa, lo cual incrementa notoramiente el entendimiento de un programa, tanto para el programador como para fines de documentación.</p><h3 id="agradecimientos"><a href="#agradecimientos">Agradecimientos</a></h3><p>Los autores del árticulo original agradecen a Andy Gill, Chris Okasaki y a quienes anonimamente dieron sus comentarios sobre esté artículo.</p><h3 id="8--referencias"><a href="#8--referencias">8. Referencias</a></h3><p><a href="http://www.eecs.northwestern.edu/~robby/courses/395-495-2009-fall/quick.pdf">Ver la sección 8 del artículo original</a>.</p><h3 id="ap-ndice-sobre-la-implementaci-n"><a href="#ap-ndice-sobre-la-implementaci-n">Apéndice sobre la implementación</a></h3><p><a href="http://www.eecs.northwestern.edu/~robby/courses/395-495-2009-fall/quick.pdf">Ver la sección &quot;Appendix: Implementation&quot; del artículo original</a> o <a href="https://github.com/nick8325/quickcheck">el código fuente</a>.</p><h2 id="ejercicios"><a href="#ejercicios">Ejercicios</a></h2><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8/ejercicios">Ejercicios</a>
+<a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-8/soluciones">Soluciones</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/parte-8/tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html><head><title>example of why to use monads - what they can do - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/haroldcarr">Harold Carr</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/haroldcarr/example-of-why-to-use-monads-what-they-can-do">example of why to use monads - what they can do</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">example of why to use monads - what they can do</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 6 Apr 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/haroldcarr">Harold Carr</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/7756/d7cac54c9dc8f85ef0f6b4663cdb0ca5f7b2d30d">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/haroldcarr/joseph-abrahamson-s-basic-lensing-tutorial-digested-and-extended-with-action-examples-and-links">Next content: Joseph Abrahamson&#39;s Basic Lensing tutorial digested and extended with action examples and links</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/haroldcarr">See all content by Harold Carr</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a><ul><li><a href="#setup">setup</a></li></ul></li><li><a href="#non-monadic-expression-evaluator">non-monadic expression evaluator</a></li><li><a href="#conversion-to-monadic-structure">conversion to monadic structure</a></li><li><a href="#adding-error-handling">adding error handling</a><ul><li><a href="#unbound-variables">unbound variables</a></li><li><a href="#dynamic-type-errors">dynamic type errors</a></li></ul></li><li><a href="#hiding-the-environment">hiding the environment</a></li><li><a href="#adding-state">adding state</a></li><li><a href="#adding-logging">adding logging</a></li><li><a href="#io">IO</a></li><li><a href="#summary">summary</a></li><li><a href="#source-code">source code</a></li><li><a href="#feedback">feedback</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>This article is part of a <a href="http://haroldcarr.com/posts/2014-02-19-monad-series.html">series of articles on monads</a>.</p><p>Its purpose is to motivate the <i>usage</i> of monads (not to explain how
+they work, nor to explain in details the particular examples shown
+here).</p><p>This article is a condensed version of</p><ul><li><p><a href="http://www.grabmueller.de/martin/www/pub/Transformers.pdf">http://www.grabmueller.de/martin/www/pub/Transformers.pdf</a></p></li><li><p><a href="http://www.cs.virginia.edu/~wh5a/personal/Transformers.lhs">http://www.cs.virginia.edu/~wh5a/personal/Transformers.lhs</a></p></li></ul><p>This article will show</p><ul><li><p>monads as a flexible, extensible way structuring of programs</p></li><li><p>monads hide book-keeping/plumbing, removing clutter from main algorithm</p></li><li><p>using monad transformers (a way to use two or more monads at the same time)</p></li></ul><hr /><h2 id="setup"><a href="#setup">setup</a></h2><pre><code class="haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map</code></pre><hr /><h1 id="non-monadic-expression-evaluator"><a href="#non-monadic-expression-evaluator">non-monadic expression evaluator</a></h1><p>An expression evaluator will be used as a running example:</p><pre><code class="haskell">type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+eval0                 :: Env -&gt; Exp -&gt; Value
+eval0 env (Lit i)      = IntVal i
+eval0 env (Var n)      = fromJust (Map.lookup n env)
+eval0 env (Plus e1 e2) = let  IntVal i1  = eval0 env e1
+                              IntVal i2  = eval0 env e2
+                         in IntVal (i1 + i2)
+eval0 env (Abs  n  e)  = FunVal env n e
+eval0 env (App  e1 e2) = let  val1  = eval0 env e1
+                              val2  = eval0 env e2
+                         in case val1 of
+                              FunVal env' n body -&gt;
+                                  eval0 (Map.insert n val2 env') body</code></pre><p>Given the above, evaluating <code>12 + (\x -&gt; x) (4 + 2)</code> will result in <code>18</code> :</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+eval0                 :: Env -&gt; Exp -&gt; Value
+eval0 env (Lit i)      = IntVal i
+eval0 env (Var n)      = fromJust (Map.lookup n env)
+eval0 env (Plus e1 e2) = let  IntVal i1  = eval0 env e1
+                              IntVal i2  = eval0 env e2
+                         in IntVal (i1 + i2)
+eval0 env (Abs  n  e)  = FunVal env n e
+eval0 env (App  e1 e2) = let  val1  = eval0 env e1
+                              val2  = eval0 env e2
+                         in case val1 of
+                              FunVal env' n body -&gt;
+                                  eval0 (Map.insert n val2 env') body
+
+-- show
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+main = putStrLn $ show $ eval0 Map.empty exampleExp
+-- ==&gt; IntVal 18
+-- /show</code></pre><p>The above evaluator works fine for the &quot;happy path&quot;, but does not give useful
+error messages when things go wrong, such as an unbound variable:</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+eval0                 :: Env -&gt; Exp -&gt; Value
+eval0 env (Lit i)      = IntVal i
+eval0 env (Var n)      = fromJust (Map.lookup n env)
+eval0 env (Plus e1 e2) = let  IntVal i1  = eval0 env e1
+                              IntVal i2  = eval0 env e2
+                         in IntVal (i1 + i2)
+eval0 env (Abs  n  e)  = FunVal env n e
+eval0 env (App  e1 e2) = let  val1  = eval0 env e1
+                              val2  = eval0 env e2
+                         in case val1 of
+                              FunVal env' n body -&gt;
+                                  eval0 (Map.insert n val2 env') body
+
+-- show
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+main = putStrLn $ show $ eval0 Map.empty (Var &quot;x&quot;)
+-- results in an error: Maybe.fromJust: Nothing</code></pre><p>That can be &quot;fixed&quot; by using <code>Either</code>:</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+
+-- show
+eval0e                 :: Env -&gt; Exp -&gt; Either String Value
+eval0e env (Lit  i)     = Right $ IntVal i
+eval0e env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; Left $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; Right v
+eval0e env (Plus e1 e2) = let  Right (IntVal i1)  = eval0e env e1
+                               Right (IntVal i2)  = eval0e env e2
+                          in Right $ IntVal (i1 + i2)
+eval0e env (Abs  n  e)  = Right $ FunVal env n e
+eval0e env (App  e1 e2) = let  Right val1  = eval0e env e1
+                               Right val2  = eval0e env e2
+                          in case val1 of
+                              FunVal env' n body -&gt;
+                                  eval0e (Map.insert n val2 env') body
+
+main = putStrLn $ show $ eval0e Map.empty (Var &quot;x&quot;)
+-- ==&gt; Left &quot;unbound var: x&quot;
+-- /show</code></pre><p>That works, but the code gets ugly fast, adding/removing <code>Left</code> and
+<code>Right</code> all over the place — and the fix only dealt with unbound
+variables, not other problems like a non- <code>IntVal</code> given to <code>Plus</code>
+(shown later).</p><hr /><h1 id="conversion-to-monadic-structure"><a href="#conversion-to-monadic-structure">conversion to monadic structure</a></h1><p>A better solution is to write the code in a &quot;monadic&quot; style that makes
+it relatively easy to add, remove or change monads.  The monads to be
+added will handle error conditions, state, etc., (as will be seen
+later).</p><pre><code class="haskell">type Eval1 alpha  =   Identity alpha
+
+runEval1          ::  Eval1 alpha -&gt; alpha
+runEval1 ev       =   runIdentity ev
+
+eval1                 :: Env -&gt; Exp -&gt; Eval1 Value
+eval1 env (Lit  i)     = return $ IntVal i
+eval1 env (Var  n)     = return $ fromJust (Map.lookup n env)
+eval1 env (Plus e1 e2) = do  IntVal i1  &lt;- eval1 env e1
+                             IntVal i2  &lt;- eval1 env e2
+                             return $ IntVal (i1 + i2)
+eval1 env (Abs  n  e)  = return $ FunVal env n e
+eval1 env (App  e1 e2) = do  val1  &lt;- eval1 env e1
+                             val2  &lt;- eval1 env e2
+                             case val1 of
+                                 FunVal env' n body -&gt;
+                                     eval1 (Map.insert n val2 env') body</code></pre><p>Monadic <code>eval1</code> is very similar to non-monadic <code>eval0</code>.  The only
+difference is the type signature and the addition of <code>return</code>, <code>do</code>,
+and using <code>&lt;-</code> instead of <code>let</code>.</p><p>Again, it is not necessary, in this article, to understand <i>how</i> monads
+work in this example.  The point is what various monads can do, which
+will be seen below.  In other words, <i>why</i> use monads.</p><p><code>eval1</code> has the same behavior as <code>eval0</code></p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+type Eval1 alpha  =   Identity alpha
+
+runEval1          ::  Eval1 alpha -&gt; alpha
+runEval1 ev       =   runIdentity ev
+
+eval1                 :: Env -&gt; Exp -&gt; Eval1 Value
+eval1 env (Lit  i)     = return $ IntVal i
+eval1 env (Var  n)     = return $ fromJust (Map.lookup n env)
+eval1 env (Plus e1 e2) = do  IntVal i1  &lt;- eval1 env e1
+                             IntVal i2  &lt;- eval1 env e2
+                             return $ IntVal (i1 + i2)
+eval1 env (Abs  n  e)  = return $ FunVal env n e
+eval1 env (App  e1 e2) = do  val1  &lt;- eval1 env e1
+                             val2  &lt;- eval1 env e2
+                             case val1 of
+                                 FunVal env' n body -&gt;
+                                     eval1 (Map.insert n val2 env') body
+
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+
+-- show
+main = do
+    putStrLn $ show $ runEval1 (eval1 Map.empty exampleExp)
+    -- ==&gt; IntVal 18
+    putStrLn $ show $ runEval1 (eval1 Map.empty (Var &quot;x&quot;))
+    -- results in error : Maybe.fromJust: Nothing
+-- /show</code></pre><p>(Note: <code>runEval1</code> is used to get the result of <code>eval1</code> &quot;out&quot; of the monad.)</p><p>The following sections will show how to leverage the monadic structure
+of <code>eval1</code> to fix problems with the evaluator by changing the type of
+the evaluator to use more monads — all the while using the same
+top-level structure of <code>eval1</code>.</p><hr /><h1 id="adding-error-handling"><a href="#adding-error-handling">adding error handling</a></h1><h2 id="unbound-variables"><a href="#unbound-variables">unbound variables</a></h2><p>Unbound variables are handled with <code>Either</code> (as in <code>eval0e</code>) but now
+the wrapping/unwrapping of <code>Left</code> / <code>Right</code> is hidden &quot;inside&quot; the
+monad definition of <code>Either</code> (not shown) rather than cluttering the
+program.</p><p><code>eval2a</code> is <i>exactly</i> the same as <code>eval1</code> except for <code>Var</code> handling
+and the type signature.  That's the point, the evaluator has become
+more powerful without extensive rewriting.  Instead, more monads are
+used (i.e., <code>ErrorT</code>).</p><pre><code class="haskell">-- String is the type arg to ErrorT : the type of exceptions in example
+type Eval2 alpha = ErrorT String Identity alpha
+
+runEval2     :: Eval2 alpha -&gt; Either String alpha
+runEval2 ev  = runIdentity (runErrorT ev)
+
+eval2a                 :: Env -&gt; Exp -&gt; Eval2 Value
+eval2a env (Lit  i)     = return $ IntVal i
+
+-- eval1 / eval2a diff:
+eval2a env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; fail $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; return v
+
+eval2a env (Plus e1 e2) = do  IntVal i1  &lt;- eval2a env e1
+                              IntVal i2  &lt;- eval2a env e2
+                              return $ IntVal (i1 + i2)
+eval2a env (Abs  n  e)  = return $ FunVal env n e
+eval2a env (App  e1 e2) = do  val1  &lt;- eval2a env e1
+                              val2  &lt;- eval2a env e2
+                              case val1 of
+                                  FunVal env' n body -&gt; eval2a (Map.insert n val2 env') body</code></pre><p><code>eval2a</code> handles normal evaluation as before but also handles unbound
+variables in a more useful manner:</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+-- String is the type arg to ErrorT : the type of exceptions in example
+type Eval2 alpha = ErrorT String Identity alpha
+
+runEval2     :: Eval2 alpha -&gt; Either String alpha
+runEval2 ev  = runIdentity (runErrorT ev)
+
+eval2a                 :: Env -&gt; Exp -&gt; Eval2 Value
+eval2a env (Lit  i)     = return $ IntVal i
+
+-- eval1 / eval2a diff:
+eval2a env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; fail $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; return v
+
+eval2a env (Plus e1 e2) = do  IntVal i1  &lt;- eval2a env e1
+                              IntVal i2  &lt;- eval2a env e2
+                              return $ IntVal (i1 + i2)
+eval2a env (Abs  n  e)  = return $ FunVal env n e
+eval2a env (App  e1 e2) = do  val1  &lt;- eval2a env e1
+                              val2  &lt;- eval2a env e2
+                              case val1 of
+                                  FunVal env' n body -&gt; eval2a (Map.insert n val2 env') body
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+-- show
+main = do
+    putStrLn $ show $ runEval2 (eval2a Map.empty exampleExp)
+    -- ==&gt; Right (IntVal 18)
+    putStrLn $ show $ runEval2 (eval2a Map.empty (Var &quot;no-way&quot;))
+    -- ==&gt; Left &quot;unbound var: no-way&quot;
+-- /show</code></pre><h2 id="dynamic-type-errors"><a href="#dynamic-type-errors">dynamic type errors</a></h2><p>An improvement.  But all the evaluators above still give poor error
+messages for incorrect dynamic typing:</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+-- String is the type arg to ErrorT : the type of exceptions in example
+type Eval2 alpha = ErrorT String Identity alpha
+
+runEval2     :: Eval2 alpha -&gt; Either String alpha
+runEval2 ev  = runIdentity (runErrorT ev)
+
+eval2a                 :: Env -&gt; Exp -&gt; Eval2 Value
+eval2a env (Lit  i)     = return $ IntVal i
+
+-- eval1 / eval2a diff:
+eval2a env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; fail $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; return v
+
+eval2a env (Plus e1 e2) = do  IntVal i1  &lt;- eval2a env e1
+                              IntVal i2  &lt;- eval2a env e2
+                              return $ IntVal (i1 + i2)
+eval2a env (Abs  n  e)  = return $ FunVal env n e
+eval2a env (App  e1 e2) = do  val1  &lt;- eval2a env e1
+                              val2  &lt;- eval2a env e2
+                              case val1 of
+                                  FunVal env' n body -&gt; eval2a (Map.insert n val2 env') body
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+
+-- show
+                                                    -- 12 + (\x -&gt; x)
+main = putStrLn $ show $ runEval2 (eval2a Map.empty (Plus (Lit 12) (Abs &quot;x&quot; (Var &quot;x&quot;))))
+-- ==&gt; Left &quot;Pattern match failure in do expression at /home/app/isolation-runner-work/projects/24798/src.205/Main.hs:42:31-39&quot;
+-- /show</code></pre><p>That is fixed by pattern matching in <code>Plus</code> and <code>App</code> handling and
+explicitly throwing an appropriate error:</p><pre><code class="haskell">eval2b                 :: Env -&gt; Exp -&gt; Eval2 Value
+eval2b env (Lit  i)     = return $ IntVal i
+eval2b env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; fail $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; return v
+eval2b env (Plus e1 e2) = do  e1'  &lt;- eval2b env e1
+                              e2'  &lt;- eval2b env e2
+                              -- eval2a / eval2b diff:
+                              case (e1', e2') of
+                                  (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                                  _                      -&gt; throwError &quot;type error in Plus&quot;
+eval2b env (Abs  n  e)  = return $ FunVal env n e
+eval2b env (App  e1 e2) = do  val1  &lt;- eval2b env e1
+                              val2  &lt;- eval2b env e2
+                              -- eval2a / eval2b diff:
+                              case val1 of
+                                  FunVal env' n body -&gt; eval2b (Map.insert n val2 env') body
+                                  _                  -&gt; throwError &quot;type error in App&quot;</code></pre><p>The monadic structure enabled &quot;throwing&quot; the error without the need to
+thread that error return throughout the code.  Instead, it is hidden
+and handled by the <code>ErrorT</code> monad.</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+-- String is the type arg to ErrorT : the type of exceptions in example
+type Eval2 alpha = ErrorT String Identity alpha
+
+runEval2     :: Eval2 alpha -&gt; Either String alpha
+runEval2 ev  = runIdentity (runErrorT ev)
+
+eval2b                 :: Env -&gt; Exp -&gt; Eval2 Value
+eval2b env (Lit  i)     = return $ IntVal i
+eval2b env (Var  n)     = case Map.lookup n env of
+                              Nothing -&gt; fail $ &quot;unbound var: &quot; ++ n
+                              Just v  -&gt; return v
+eval2b env (Plus e1 e2) = do  e1'  &lt;- eval2b env e1
+                              e2'  &lt;- eval2b env e2
+                              -- eval2a / eval2b diff:
+                              case (e1', e2') of
+                                  (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                                  _                      -&gt; throwError &quot;type error in Plus&quot;
+eval2b env (Abs  n  e)  = return $ FunVal env n e
+eval2b env (App  e1 e2) = do  val1  &lt;- eval2b env e1
+                              val2  &lt;- eval2b env e2
+                              -- eval2a / eval2b diff:
+                              case val1 of
+                                  FunVal env' n body -&gt; eval2b (Map.insert n val2 env') body
+                                  _                  -&gt; throwError &quot;type error in App&quot;
+
+-- show
+main = do
+    putStrLn $ show $ runEval2 (eval2b Map.empty (Plus (Lit 12) (Abs &quot;x&quot; (Var &quot;x&quot;))))
+    -- ==&gt; Left &quot;type error in Plus&quot;
+    putStrLn $ show $ runEval2 (eval2b Map.empty (App (Lit 12) (Lit 0)))
+    -- ==&gt; Left &quot;type error in App&quot;
+-- /show</code></pre><hr /><h1 id="hiding-the-environment"><a href="#hiding-the-environment">hiding the environment</a></h1><p>The next change hides <code>Env</code> (via the <code>ReaderT</code> monad) since <code>Env</code> is
+only extended in <code>App</code> and used in <code>Var</code> and <code>Abs</code>.</p><p>Notice how, for each successive evaluator (i.e., <code>eval1</code>, <code>eval2</code>,
+<code>eval3</code>), an additional monad is pushed onto the front of the &quot;monad
+stack&quot; used in the type of the evaluator.  Likewise, the final value
+expression evaluation is obtained by removing each monad layer via
+<code>runIdentity</code>, <code>runErrorT</code>, <code>runReaderT</code>.</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+-- show
+type Eval3 alpha = ReaderT Env (ErrorT String Identity) alpha
+
+runEval3     :: Env -&gt; Eval3 alpha -&gt; Either String alpha
+runEval3 env ev  = runIdentity (runErrorT (runReaderT ev env))
+
+eval3             :: Exp -&gt; Eval3 Value
+eval3 (Lit  i)     = return $ IntVal i
+eval3 (Var  n)     = do env &lt;- ask                -- eval2b / eval3 diff
+                        case Map.lookup n env of
+                            Nothing  -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval3 (Plus e1 e2) = do e1'  &lt;- eval3 e1
+                        e2'  &lt;- eval3 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                            _                      -&gt; throwError &quot;type error in Plus&quot;
+eval3 (Abs  n  e)  = do env &lt;- ask
+                        return $ FunVal env n e
+eval3 (App  e1 e2) = do val1  &lt;- eval3 e1
+                        val2  &lt;- eval3 e2
+                        case val1 of
+                                                  -- eval2b / eval3 diff
+                            FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval3 body)
+                            _                  -&gt; throwError &quot;type error in App&quot;
+
+main = putStrLn $ show $ runEval3 Map.empty (eval3 exampleExp)
+       -- ==&gt; Right (IntVal 18)
+-- /show</code></pre><p>In <code>eval3</code>, the <code>ReaderT</code> <code>ask</code> function is used to obtain <code>Env</code> in
+<code>Var</code> and <code>Abs</code>, and <code>local</code> is used to extend <code>Env</code> for the recursive
+call to <code>eval3</code> in <code>App</code>.  (Note: the <code>local</code> environment, in this
+case, does not depend on the current environment, so <code>const</code> is used.)</p><p>Again, understanding the exact details mentioned here is not
+necessary.  Instead, notice how the code only changed where <code>Env</code> is
+used.  Nothing else changed (other than the type signature and not
+giving <code>Env</code> as an explicit parameter to <code>eval3</code>).</p><hr /><h1 id="adding-state"><a href="#adding-state">adding state</a></h1><p>As an example of state, the evaluator is extended with &quot;profiling&quot; :
+an integer counting calls to the evaluator.  The state added is <i>not</i>
+state like a mutable location in imperative languages.  It is
+&quot;effectful&quot; — meaning updated values are seen after updating but no
+locations are mutated.  How that happens is not covered in this
+article.</p><p>The <code>StateT</code> monad is wrapped around the innermost monad <code>Identity</code>
+(order of <code>State</code> and <code>Error</code> matters).</p><pre><code class="haskell">type Eval4 alpha = ReaderT Env (ErrorT String (StateT Integer Identity)) alpha
+
+-- returns evaluation result (error or value) and state
+-- give initial state arg for flexibility
+runEval4            ::  Env -&gt; Integer -&gt; Eval4 alpha -&gt; (Either String alpha, Integer)
+runEval4 env st ev  =   runIdentity (runStateT (runErrorT (runReaderT ev env)) st)
+
+-- tick type not same as =Eval4= so it can reused elsewhere.
+tick :: (Num s, MonadState s m) =&gt; m ()
+tick = do  st &lt;- get
+           put (st + 1)
+
+-- eval4          :: Exp -&gt; Eval4 Value
+eval4 (Lit i)      = do tick
+                        return $ IntVal i
+eval4 (Var n)      = do tick
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval4 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval4 e1
+                        e2'  &lt;- eval4 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt;
+                                return $ IntVal (i1 + i2)
+                            _ -&gt; throwError &quot;type error in addition&quot;
+eval4 (Abs n e)    = do tick
+                        env &lt;- ask
+                        return $ FunVal env n e
+eval4 (App e1 e2)  = do tick
+                        val1  &lt;- eval4 e1
+                        val2  &lt;- eval4 e2
+                        case val1 of
+                            FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval4 body)
+                            _ -&gt; throwError &quot;type error in application&quot;</code></pre><p><code>eval4</code> is identical to <code>eval3</code> (other than the change in type
+signature) except each case starts by calling <code>tick</code> (and <code>do</code> is
+added to <code>Lit</code>).</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+type Eval4 alpha = ReaderT Env (ErrorT String (StateT Integer Identity)) alpha
+
+-- returns evaluation result (error or value) and state
+-- give initial state arg for flexibility
+runEval4            ::  Env -&gt; Integer -&gt; Eval4 alpha -&gt; (Either String alpha, Integer)
+runEval4 env st ev  =   runIdentity (runStateT (runErrorT (runReaderT ev env)) st)
+
+-- tick type not same as =Eval4= so it can reused elsewhere.
+tick :: (Num s, MonadState s m) =&gt; m ()
+tick = do  st &lt;- get
+           put (st + 1)
+
+-- eval4          :: Exp -&gt; Eval4 Value
+eval4 (Lit i)      = do tick
+                        return $ IntVal i
+eval4 (Var n)      = do tick
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval4 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval4 e1
+                        e2'  &lt;- eval4 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt;
+                                return $ IntVal (i1 + i2)
+                            _ -&gt; throwError &quot;type error in addition&quot;
+eval4 (Abs n e)    = do tick
+                        env &lt;- ask
+                        return $ FunVal env n e
+eval4 (App e1 e2)  = do tick
+                        val1  &lt;- eval4 e1
+                        val2  &lt;- eval4 e2
+                        case val1 of
+                            FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval4 body)
+                            _ -&gt; throwError &quot;type error in application&quot;
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+-- show
+main = putStrLn $ show $ runEval4 Map.empty 0 (eval4 exampleExp)
+       -- (Right (IntVal 18),8) -- 8 reduction steps
+-- /show</code></pre><hr /><h1 id="adding-logging"><a href="#adding-logging">adding logging</a></h1><p>The evaluator is now extended to collect the name of each variable
+encountered during evaluation and return the collection when
+evaluation is done.</p><p>That is done via the <code>WriterT</code> monad.</p><p>(<code>WriterT</code> is a kind of a dual to <code>ReaderT</code>: <code>WriterT</code> can add (e.g.,
+&quot;write&quot;) values to result of computation, whereas <code>ReaderT</code> can only
+use (e.g., &quot;read&quot;) values passed in.)</p><pre><code class="haskell">type Eval5 alpha = ReaderT Env  (ErrorT String (WriterT [String] (StateT Integer Identity))) alpha
+
+runEval5            ::  Env -&gt; Integer -&gt; Eval5 alpha -&gt; ((Either String alpha, [String]), Integer)
+runEval5 env st ev  =   runIdentity (runStateT (runWriterT (runErrorT (runReaderT ev env))) st)
+
+eval5             :: Exp -&gt; Eval5 Value
+eval5 (Lit i)      = do tick
+                        return $ IntVal i
+eval5 (Var n)      = do tick
+                        -- eval4 / eval5 diff
+                        tell [n] -- collect name of each var encountered during evaluation
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing  -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval5 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval5 e1
+                        e2'  &lt;- eval5 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                            _                      -&gt; throwError &quot;type error in addition&quot;
+eval5 (Abs n e)     = do tick
+                         env &lt;- ask
+                         return $ FunVal env n e
+eval5 (App e1 e2)   = do tick
+                         val1  &lt;- eval5 e1
+                         val2  &lt;- eval5 e2
+                         case val1 of
+                             FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval5 body)
+                             _                  -&gt; throwError &quot;type error in application&quot;</code></pre><p>The only change from <code>eval4</code> to <code>eval5</code> (besides type signature) is
+the usage of <code>tell</code> in <code>Var</code> handling.</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+type Eval5 alpha = ReaderT Env  (ErrorT String (WriterT [String] (StateT Integer Identity))) alpha
+
+runEval5            ::  Env -&gt; Integer -&gt; Eval5 alpha -&gt; ((Either String alpha, [String]), Integer)
+runEval5 env st ev  =   runIdentity (runStateT (runWriterT (runErrorT (runReaderT ev env))) st)
+
+-- tick type not same as =Eval4= so it can reused elsewhere.
+tick :: (Num s, MonadState s m) =&gt; m ()
+tick = do  st &lt;- get
+           put (st + 1)
+
+
+eval5             :: Exp -&gt; Eval5 Value
+eval5 (Lit i)      = do tick
+                        return $ IntVal i
+eval5 (Var n)      = do tick
+                        -- eval4 / eval5 diff
+                        tell [n] -- collect name of each var encountered during evaluation
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing  -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval5 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval5 e1
+                        e2'  &lt;- eval5 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                            _                      -&gt; throwError &quot;type error in addition&quot;
+eval5 (Abs n e)     = do tick
+                         env &lt;- ask
+                         return $ FunVal env n e
+eval5 (App e1 e2)   = do tick
+                         val1  &lt;- eval5 e1
+                         val2  &lt;- eval5 e2
+                         case val1 of
+                             FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval5 body)
+                             _                  -&gt; throwError &quot;type error in application&quot;
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+-- show
+main = putStrLn $ show $ runEval5 Map.empty 0 (eval5 exampleExp)
+       -- ==&gt; ((Right (IntVal 18),[&quot;x&quot;]),8)
+-- /show</code></pre><p>At first, it may seem like magic that state, logging, etc., can
+suddenly be accessed even though they do not seem to appear as
+explicit parameters.  The magic is in eval's type signature.  It is a
+monad stack that is essentially a data structure (and more) being
+passed throughout eval.  Therefore <code>ask</code>, <code>tell</code>, etc., can access the
+appropriate part of the stack when needed.</p><p>(Aside: There is some &quot;utility&quot; magic in the monad transformers (<a href="http://hackage.haskell.org/package/mtl-2.1.2">mtl</a>).
+Even though there is a stack of monads, and a function such as <code>ask</code>
+needs to operate on a specific monad in the stack (i.e., <code>ReaderT</code>),
+the monad transformer implementation &quot;automatically&quot; applies the
+function to the appropriate monad in the stack, rather than the main
+line code needing to explicitly access the right level.)</p><hr /><h1 id="io"><a href="#io">IO</a></h1><p>The final extension is to add IO to the evaluator: <code>eval6</code> will print
+the value of each <code>Lit</code> encountered during evaluation.</p><pre><code class="haskell">type Eval6 alpha = ReaderT Env  (ErrorT String (WriterT [String] (StateT Integer IO))) alpha
+
+runEval6           ::  Env -&gt; Integer -&gt; Eval6 alpha -&gt; IO ((Either String alpha, [String]), Integer)
+runEval6 env st ev  =  runStateT (runWriterT (runErrorT (runReaderT ev env))) st
+
+eval6             :: Exp -&gt; Eval6 Value
+eval6 (Lit  i)     = do tick
+                        -- eval5 / eval 6 diff
+                        -- must use =liftIO= to lift into the currently running monad
+                        liftIO $ print i -- print each int when evaluated
+                        return $ IntVal i
+eval6 (Var  n)     = do tick
+                        tell [n]
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing  -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval6 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval6 e1
+                        e2'  &lt;- eval6 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                            _                      -&gt; throwError &quot;type error in addition&quot;
+eval6 (Abs  n  e)  = do tick
+                        env &lt;- ask
+                        return $ FunVal env n e
+eval6 (App  e1 e2) = do tick
+                        val1  &lt;- eval6 e1
+                        val2  &lt;- eval6 e2
+                        case val1 of
+                            FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval6 body)
+                            _                  -&gt; throwError &quot;type error in application&quot;</code></pre><p>The only change from <code>eval5</code> to <code>eval6</code> (besides type signature) is
+the usage of <code>liftIO ...</code> in <code>Lit</code> handling.</p><pre><code class="active haskell">{-# LANGUAGE PackageImports #-}
+
+import           &quot;mtl&quot; Control.Monad.Identity
+import           &quot;mtl&quot; Control.Monad.Error
+import           &quot;mtl&quot; Control.Monad.Reader
+import           &quot;mtl&quot; Control.Monad.State
+import           &quot;mtl&quot; Control.Monad.Writer
+
+import                 Data.Maybe
+import qualified       Data.Map as Map
+
+type Name   =  String                -- variable names
+
+data Exp    =  Lit  Integer          -- expressions
+            |  Var  Name
+            |  Plus Exp  Exp
+            |  Abs  Name Exp
+            |  App  Exp  Exp
+            deriving (Eq, Show)
+
+data Value  =  IntVal Integer        -- values
+            |  FunVal Env Name Exp
+            deriving (Eq, Show)
+
+type Env    =  Map.Map Name Value    -- from names to values
+
+type Eval6 alpha = ReaderT Env  (ErrorT String (WriterT [String] (StateT Integer IO))) alpha
+
+runEval6           ::  Env -&gt; Integer -&gt; Eval6 alpha -&gt; IO ((Either String alpha, [String]), Integer)
+runEval6 env st ev  =  runStateT (runWriterT (runErrorT (runReaderT ev env))) st
+
+-- tick type not same as =Eval4= so it can reused elsewhere.
+tick :: (Num s, MonadState s m) =&gt; m ()
+tick = do  st &lt;- get
+           put (st + 1)
+
+
+eval6             :: Exp -&gt; Eval6 Value
+eval6 (Lit  i)     = do tick
+                        -- eval5 / eval 6 diff
+                        -- must use =liftIO= to lift into the currently running monad
+                        liftIO $ print i -- print each int when evaluated
+                        return $ IntVal i
+eval6 (Var  n)     = do tick
+                        tell [n]
+                        env &lt;- ask
+                        case Map.lookup n env of
+                            Nothing  -&gt; throwError (&quot;unbound variable: &quot; ++ n)
+                            Just val -&gt; return val
+eval6 (Plus e1 e2) = do tick
+                        e1'  &lt;- eval6 e1
+                        e2'  &lt;- eval6 e2
+                        case (e1', e2') of
+                            (IntVal i1, IntVal i2) -&gt; return $ IntVal (i1 + i2)
+                            _                      -&gt; throwError &quot;type error in addition&quot;
+eval6 (Abs  n  e)  = do tick
+                        env &lt;- ask
+                        return $ FunVal env n e
+eval6 (App  e1 e2) = do tick
+                        val1  &lt;- eval6 e1
+                        val2  &lt;- eval6 e2
+                        case val1 of
+                            FunVal env' n body -&gt; local (const (Map.insert n val2 env')) (eval6 body)
+                            _                  -&gt; throwError &quot;type error in application&quot;
+
+exampleExp = Plus (Lit 12) (App (Abs &quot;x&quot; (Var &quot;x&quot;)) (Plus (Lit 4) (Lit 2)))
+
+-- show
+main = runEval6 Map.empty 0 (eval6 exampleExp) &gt;&gt;= putStrLn . show
+       -- prints 12 4 2 on separate lines and returns:
+       -- ==&gt; ((Right (IntVal 18),[&quot;x&quot;]),8)
+-- /show</code></pre><hr /><h1 id="summary"><a href="#summary">summary</a></h1><p>The important point to see is that evaluators <code>eval1</code> through <code>eval6</code>
+all have the same structure.  The only change between them is in the
+type signature and the usage of specific monad functions (e.g., <code>ask</code>,
+<code>tell</code>) to access data &quot;in&quot; the monad stack.</p><p>The mechanics of how state, logging, environment hiding, handling
+errors, etc., are weaved through that structure are hidden inside the
+monad implementations (rather than cluttering the main program).</p><p>Hopefully this article provides a glimpse into the power and
+usefulness of monads.</p><hr /><h1 id="source-code"><a href="#source-code">source code</a></h1><p>The emacs org-mode literate source code of this article is available at:</p><ul><li><p><a href="https://github.com/haroldcarr/learn-haskell-coq-ml-etc/blob/master/haskell/paper/haroldcarr/2014-02-23-concrete-monads-0-motivating-example/concrete-monads-0-motivating-example.org">https://github.com/haroldcarr/learn-haskell-coq-ml-etc/blob/master/haskell/paper/haroldcarr/2014-02-23-concrete-monads-0-motivating-example/concrete-monads-0-motivating-example.org</a></p></li></ul><h1 id="feedback"><a href="#feedback">feedback</a></h1><p>Join the discussion at <a href="http://www.reddit.com/r/haskell/comments/1yriwf/example_of_why_to_use_monads_and_what_they_can_do/">reddit</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/haroldcarr/example-of-why-to-use-monads-what-they-can-do';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

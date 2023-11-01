@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html><head><title>Pattern Synonyms for Dates and an IRC Bot - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/icelandj">icelandj</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/icelandj/Pattern%20synonyms">Pattern Synonyms for Dates and an IRC Bot</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Pattern Synonyms for Dates and an IRC Bot</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 1 May 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/icelandj">icelandj</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3231/5d6369688370b6afac5df729e8562a98667898af">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/icelandj/dynamically-link-against-library-in-ghci">Previous content: Dynamically link against library in GHCi</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/icelandj">See all content by icelandj</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction-to-pattern-synonyms">Introduction to Pattern Synonyms</a><ul><li><a href="#example-with-dates">Example with dates</a></li><li><a href="#more-complicated-dates">More complicated dates</a></li><li><a href="#accessing-values">Accessing values</a></li></ul></li><li><a href="#irc">IRC</a><ul><li><a href="#setting-the-stage">Setting the stage</a></li><li><a href="#-ping---pong--pattern">“Ping — Pong” Pattern</a></li><li><a href="#glad-you-could------m----m--us">Glad you could (μ : M² → M) us</a></li><li><a href="#responding-to-messages">Responding to messages</a></li><li><a href="#commands">Commands</a></li><li><a href="#responding-to-pms">Responding to PMs</a></li></ul></li><li><a href="#some-ideas">Some ideas</a><ul><li><a href="#infix-constructors">Infix constructors</a></li><li><a href="#variadic-patterns">Variadic patterns</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>This is intended to be an informal tutorial for pattern synonyms using dates and an IRC bot as motivating examples (we will avoid getting bogged down with details).</p><h1 id="introduction-to-pattern-synonyms"><a href="#introduction-to-pattern-synonyms">Introduction to Pattern Synonyms</a></h1><p>Pattern synonyms appeared in GHC 7.8 and allow users to abstract away from the actual implementation of a data type. Combined with the view patterns extension they allow users to move some of the logic in their guards and case expressions into patterns.</p><p>Familiarity with the <code>ViewPatterns</code> extension is assumed. Here are some references if you need to get up to speed: <a href="https://ghc.haskell.org/trac/ghc/wiki/ViewPatterns">View patterns: lightweight views for Haskell</a>, <a href="https://www.fpcomplete.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/pattern-and-guard-extensions#viewpatterns">Guide to GHC Extensions: Pattern and Guard Extensions</a>.</p><h2 id="example-with-dates"><a href="#example-with-dates">Example with dates</a></h2><p>We build on an example from the paper <a href="http://people.cs.uchicago.edu/~jhr/papers/1992/tr-sml-const.pdf">Abstract Value Constructors: Symbolic Constants for Standard ML</a> (<i>PDF</i>). Let's begin by enabling the extension and defining a simple date representation:</p><pre><code class="haskell">{-# LANGUAGE PatternSynonyms #-}
+data Date = Date { month :: Int, day :: Int } deriving Show</code></pre><p>Before 7.8 we just limited how we can match on our type right off the bat! Maybe you want to be able to match on the months, in which case this would have been a better representation</p><pre><code class="haskell">data Date = January Int | February Int | … | December Int</code></pre><p>But now we can define pattern synonyms! We start by defining synonyms for months and holidays using <code>pattern NewPattern = OldPattern</code> and match them in a function like we would a regular pattern</p><pre><code class="haskell">-- Months
+pattern January  day = Date { month = 1,  day = day }
+pattern February day = Date { month = 2,  day = day }
+pattern March    day = Date { month = 3,  day = day }
+-- elided
+pattern December day = Date { month = 12, day = day }
+
+-- Holidays
+pattern Christmas    = Date { month = 12, day = 25  } 
+
+describe :: Date -&gt; String
+describe (January 1)  = &quot;First day of year&quot;
+describe (February n) = show n ++ &quot;th of February&quot;
+describe Christmas    = &quot;Presents!&quot;
+describe _            = &quot;meh&quot;</code></pre><p>The meaning of <code>describe</code> should be clear: the first clause matches only January first, the second clause matches any day in February and the third pattern matches Christmas day.</p><p>Pattern matching on <code>Christmas</code> is the same as matching on <code>Date { month = 12, day = 25 }</code> or <code>Date 12 25</code> — only a lot clearer. Normally it is only possible to pattern match on the constructors of a data type, but now we can do it independently of how it is represented. Let's see some outputs to verify our intuition:</p><pre><code class="haskell">ghci&gt; describe Date { month = 12, day = 25 }
+&quot;Presents!&quot;
+ghci&gt; describe Date { month = 2,  day = 5  }
+&quot;5th of February&quot;</code></pre><p>But here's a trick, you can use these patterns as expressions as well:</p><pre><code class="haskell">ghci&gt; describe Christmas
+&quot;Presents!&quot;
+ghci&gt; describe (February 10)
+&quot;10th of February&quot;
+ghci&gt; March 5
+Date { month = 3, day = 5 }</code></pre><p>and not only that but we can define <code>Christmas</code> in terms of the pattern <code>December</code></p><pre><code class="haskell">pattern Christmas = December 25</code></pre><p>Quite elegant — we can now use <code>Christmas</code>, <code>December 25</code> and <code>Date 12 25</code> interchangably in our code.</p><p>All the patterns we've seen so far have been examples of simply bidirectional patterns because they can be used as both patterns <i>and</i> expressions: this is not true of all patterns though.</p><h2 id="more-complicated-dates"><a href="#more-complicated-dates">More complicated dates</a></h2><p>Let's say that we wanted to match on the days of December leading up to and following Christmas, it's not clear at all how to do this using the constructions we covered earlier since this depends on a predicate and not only pattern matching. To allow this we need to enable the <code>ViewPatterns</code> extension and use <i>uni-directional</i> patterns rather than the bidirectional ones we used previously. Uni-directional patterns are defined using <code>pattern</code> and an arrow <code>&lt;-</code> rather than <code>=</code>:</p><pre><code class="haskell">-- /show
+{-# LANGUAGE PatternSynonyms, ViewPatterns #-}
+
+data Date = Date { month :: Int, day :: Int } deriving Show
+
+pattern December day = Date { month = 12, day = day }
+-- show
+pattern BeforeChristmas {-hi-}&lt;-{-/hi-} December (compare 25 -&gt; GT)
+pattern Christmas       {-hi-}&lt;-{-/hi-} December (compare 25 -&gt; EQ)
+pattern AfterChristmas  {-hi-}&lt;-{-/hi-} December (compare 25 -&gt; LT)
+
+react :: Date -&gt; String
+react BeforeChristmas = &quot;Waiting :(&quot;
+react Christmas       = &quot;Presents!&quot;
+react AfterChristmas  = &quot;Have to wait a whole year :(&quot;
+react _               = &quot;It's not even December...&quot;</code></pre><p>There are several things to note</p><ul><li>We used a bidirectional pattern (<code>December</code>) to define the new patterns</li><li>These uni-directional patterns cannot be used as expressions (it is not obviously what the values of <code>BeforeChristmas</code> and <code>AfterChristmas</code> ought to be anyway)</li><li>We used view patterns to compare the given day to 25 in <code>(compare 25 -&gt; ...)</code></li></ul><p>This is equivalent to:</p><pre><code class="haskell">react' (Date 12 (compare 25 -&gt; GT)) = &quot;Waiting :(&quot;
+react' (Date 12 (compare 25 -&gt; EQ)) = &quot;Presents!&quot;
+react' (Date 12 (compare 25 -&gt; LT)) = &quot;Have to wait a whole year :(&quot;
+react' _                            = &quot;It's not even December...&quot;
+-- ...</code></pre><p>using view patterns but no pattern synonyms.</p><p>We could also have used different predicates such as <code>December ((&lt; 25) -&gt; True)</code>, <code>December 25</code> and <code>December ((&gt; 25) -&gt; True)</code> but this would require running a new predicate for each clause. In the current design, GHC only applies the predicate <code>compare 25</code> once (see <i>Efficiency</i> part of the <a href="http://www.haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html#view-patterns">GHC user guide</a>) producing something like this:</p><pre><code class="haskell">react date = case date of
+  Date 12 day -&gt; case compare 25 day of
+    GT -&gt; &quot;Waiting :(&quot;
+    EQ -&gt; &quot;Presents!&quot;
+    LT -&gt; &quot;Have to wait a whole year :(&quot;
+  _           -&gt; &quot;It's not even December...&quot;</code></pre><p>which would matter given a more expensive predicate.</p><h2 id="accessing-values"><a href="#accessing-values">Accessing values</a></h2><p>When matching <code>BeforeChristmas</code> and <code>AfterChristmas</code> we know that the date value is some day in December other than 25 but we don't know <i>which</i> day. We can retrieve the entire record using an as-pattern</p><pre><code class="haskell">days'tilChristmas :: Date -&gt; Int
+days'tilChristmas d@BeforeChristmas = 25 - day d
+days'tilChristmas   Christmas       = 0
+days'tilChristmas d@AfterChristmas  = 365 + 25 - day d</code></pre><p>but a nicer way might be to write</p><pre><code class="haskell">isItNow :: Int -&gt; (Ordering, Int)
+isItNow day = (compare 25 day, day)
+
+pattern BeforeChristmas day &lt;- December (isItNow -&gt; (GT, day))
+pattern Christmas           &lt;- December (isItNow -&gt; (EQ, _))
+pattern AfterChristmas  day &lt;- December (isItNow -&gt; (LT, day))
+
+days'tilChristmas :: Date -&gt; Int
+days'tilChristmas (BeforeChristmas n) = 25 - n
+days'tilChristmas Christmas           = 0
+days'tilChristmas (AfterChristmas n)  = 365 + 25 - n
+</code></pre><p><b>Exercise</b>: Create a pattern where a Unix time can be used to match our <code>Date</code> value, something like <code>Epoch 1419470000</code> should match Christmas.</p><p><b>Exercise</b>: Represent date with a single Unix timestamp and allow matching on it with <code>March 5</code> and <code>ThirdOf</code> which matches the third day of any month.</p><h1 id="irc"><a href="#irc">IRC</a></h1><p>This is not an introduction to writing a bot, go <a href="http://www.haskell.org/haskellwiki/Roll_your_own_IRC_bot">here</a> for that.</p><h2 id="setting-the-stage"><a href="#setting-the-stage">Setting the stage</a></h2><p>To build the bot we need some basic commands:</p><pre><code class="haskell">import Control.Monad
+import Network
+import System.IO
+-- show
+-- Choose a nick
+nick :: Handle -&gt; String -&gt; IO ()
+nick h name = hPutStrLn h (&quot;NICK &quot; ++ name)
+
+-- Specify username
+user :: Handle -&gt; String -&gt; IO ()
+user h name = hPutStrLn h (&quot;USER &quot; ++ name ++ &quot; 0 * :&quot; ++ name)
+
+-- Join a channel
+joinChan :: Handle -&gt; String -&gt; IO ()
+joinChan h chan = hPutStrLn h (&quot;JOIN &quot; ++ chan)</code></pre><p>Now we can connect to the server and run our action forever</p><pre><code class="haskell">main = do
+  h &lt;- connectTo &quot;irc.freenode.org&quot; (PortNumber 6667)
+  hSetBuffering   h NoBuffering
+  hSetNewlineMode h (NewlineMode CRLF CRLF)
+
+  nick h &quot;PatternBot&quot;
+  user h &quot;PatternBot&quot;
+
+  joinChan h &quot;##patternsynonyms&quot;
+
+  forever (action h)
+</code></pre><p>For <code>action = hGetLine &gt;=&gt; putStrLn</code> the bot should identify itself, join <code>##patternsynonyms</code> and output everything it receives.</p><h2 id="-ping---pong--pattern"><a href="#-ping---pong--pattern">“Ping — Pong” Pattern</a></h2><p>If the server says <code>PING</code> you must say <code>PONG</code>!</p><p>An example <code>PING</code> command may look like</p><pre><code>PING :orwell.freenode.net</code></pre><p>meaning that you need to respond with</p><pre><code>PONG :orwell.freenode.net</code></pre><p>to let it know we're still there. Here we can use our patterns!</p><pre><code class="haskell">pattern Ping serv &lt;- (words -&gt; [&quot;PING&quot;, serv])</code></pre><p>this pattern only matches two-word <code>PING</code> commands and gives us the server we need to include in our <code>PONG</code>. Now <code>action</code> turns into:</p><pre><code class="haskell">pong :: Handle -&gt; String -&gt; IO ()
+pong h serv = hPutStrLn h (&quot;PONG &quot; ++ serv)
+
+action :: Handle -&gt; IO ()
+action h = do
+  line &lt;- hGetLine h
+  case line of
+    {-hi-}PING serv -&gt; pong h serv{-/hi-}
+    _         -&gt; return ()</code></pre><p>and we can treat <code>line :: String</code> as if it were a data type of IRC messages.</p><h2 id="glad-you-could------m----m--us"><a href="#glad-you-could------m----m--us">Glad you could (μ : M² → M) us</a></h2><p>If new people come to our channel we want them to feel welcome so the bot should greet people as they join. The <code>JOIN</code> message looks something like this</p><pre><code>:&lt;nick&gt;!&lt;user&gt;@&lt;host&gt; JOIN &lt;channel&gt;
+</code></pre><p>We want to know who joined what channel so let's parse that in an ad-hoc way (there are packages on Hackage that do this properly). The nick goes from the initial colon to the exclamation mark:</p><pre><code class="haskell">-- /show
+import Data.List
+-- show
+getNick :: String -&gt; Maybe String
+getNick (':':prefix) = do
+  index &lt;- findIndex (== '!') prefix
+  return (take index prefix)
+getNick _            = Nothing</code></pre><p>Now we create the pattern for joins (and for our bot) and integrate them into the logic</p><pre><code class="haskell">pattern PBot = &quot;PatternBot&quot;
+pattern JOIN nick chan 
+   &lt;- (words -&gt; [getNick -&gt; Just nick, &quot;JOIN&quot;, chan])
+
+msg :: Handle -&gt; String -&gt; IO ()
+msg h chan msg = hPutStrLn h (&quot;PRIVMSG &quot; ++ chan ++ &quot; :&quot; ++ msg)
+
+action :: Handle -&gt; IO ()
+action h = do
+  line &lt;- hGetLine h
+  case line of
+    PING serv      -&gt; pong h serv
+    -- Greet channel when we join
+    {-hi-}JOIN PBot chan -&gt; msg h chan &quot;Halló, heimur!&quot;{-/hi-}
+    -- Greet nicks that join
+    {-hi-}JOIN nick chan -&gt; msg h chan (nick ++ &quot;: Welcome to &quot; ++ chan){-/hi-}
+    _              -&gt; return ()</code></pre><p>The <code>JOIN</code> pattern definition is not very pretty but we're not concerned with that.</p><h2 id="responding-to-messages"><a href="#responding-to-messages">Responding to messages</a></h2><p>Messages are either sent to a channel or to a single user (private message) and are either:</p><pre><code>:&lt;nick&gt;!&lt;user&gt;@&lt;host&gt; PRIVMSG &lt;channel&gt; :&lt;msg&gt;
+:&lt;nick&gt;!&lt;user&gt;@&lt;host&gt; PRIVMSG &lt;nick&gt;    :&lt;msg&gt;</code></pre><p>We would like to pick out the sender, the message and the target channel or nick:</p><pre><code class="haskell">getPriv :: String -&gt; Maybe (String, String, String)
+getPriv msg = case words msg of
+  sender : &quot;PRIVMSG&quot; : target : (':':_) : _ -&gt; do
+    nick &lt;- getNick sender
+    return (nick, target, clean msg)
+  _ -&gt; Nothing
+  where
+  clean = tail . dropWhile (/=':') . dropWhile (/= ' ') . tail</code></pre><p>Now we create two patterns that determine whether something is a nick or a channel:</p><pre><code class="haskell">pattern Nick n &lt;- ((\a -&gt; (head a /= '#', a)) -&gt; (True, n))
+pattern Chan c &lt;- ((\a -&gt; (head a == '#', a)) -&gt; (True, c))
+</code></pre><p>Yuck. Anyway, we can use these to define the desired patterns</p><pre><code class="haskell">-- Private message to our bot
+pattern PM from m &lt;- (getPriv -&gt; Just (from, Nick PBot,  m))
+
+-- Message to channel
+pattern MSG from to m &lt;- (getPriv -&gt; Just (from, Chan to, m))
+</code></pre><p>This is so nice is almost absolves me of the horrible code above <code>:)</code> but the good thing is that we can replace the underlying representation with a data type provided by some IRC parsing library without having to change the actual <code>action</code> code! Now let's put <code>MSG</code> to use: if anyone mentions “cats” we respond:</p><pre><code class="haskell">-- /show
+import Data.Char
+-- show
+-- Matches any cat
+pattern Cat &lt;- (isInfixOf &quot;cat&quot; . map toLower -&gt; True)
+
+-- …
+case line of
+  MSG _ chan Cat -&gt; msg h chan &quot;Meow!&quot;</code></pre><h2 id="commands"><a href="#commands">Commands</a></h2><p>Now we may want to allow users to run commands starting with <code>&gt; </code>:</p><pre><code class="haskell">-- /show
+{-# LANGUAGE ScopedTypeVariables #-}
+import System.Random
+-- show
+pattern Command cmd = '&gt;':' ':cmd
+
+pattern Roll &lt;- Command (map toLower -&gt; &quot;roll&quot;)
+
+-- …
+case line of
+  MSG from chan Roll -&gt; do
+    roll :: Int &lt;- randomRIO (1, 6)
+    msg h chan (from ++ &quot;: You rolled &quot; ++ show roll)</code></pre><p>It's now easy to add additional commands.</p><h2 id="responding-to-pms"><a href="#responding-to-pms">Responding to PMs</a></h2><p>Bots are snarky</p><pre><code class="haskell">case line of
+  PM from m -&gt; msg h from (&quot;You said \&quot;&quot; ++ m ++ &quot;\&quot; to me?!&quot;)</code></pre><p>and now we can have a complete session:</p><pre><code>*** PatternBot (~xxxx) has joined channel ##patternsynonyms
+&lt;PatternBot&gt; Halló, heimur!
+*** SomeNick (~yyyy) has joined channel ##patternsynonyms
+&lt;PatternBot&gt; SomeNick: Welcome to ##patternsynonyms
+*** SomeNick (~yyyy) has left channel ##patternsynonyms
+&lt;Iceland_jack&gt; PatternBot: hey
+&lt;Iceland_jack&gt; I should learn category theory
+&lt;PatternBot&gt; Meow!
+&lt;Iceland_jack&gt; &gt; roll
+&lt;PatternBot&gt; Iceland_jack: You rolled 3</code></pre><p>and the core logic looks something like this</p><pre><code class="haskell">action :: Handle -&gt; IO ()
+action h = do
+  line &lt;- hGetLine h
+  case line of
+    PING serv           -&gt; pong h serv
+    JOIN PBot chan      -&gt; msg h chan &quot;Halló, heimur!&quot;
+    JOIN nick chan      -&gt; msg h chan (nick ++ &quot;: Welcome to &quot; ++ chan)
+    PM   from m         -&gt; msg h from (&quot;You said \&quot;&quot; ++ m ++ &quot;\&quot; to me?!&quot;)
+    MSG  from chan Cat  -&gt; msg h chan &quot;Meow!&quot;
+    MSG  from chan Roll -&gt; do
+      roll :: Int &lt;- randomRIO (1, 6)
+      msg h chan (from ++ &quot;: You rolled &quot; ++ show roll)
+    _                   -&gt; return ()</code></pre><p>This example is absolutely overusing pattern synonyms it but it ends up being quite pleasant.</p><h1 id="some-ideas"><a href="#some-ideas">Some ideas</a></h1><h2 id="infix-constructors"><a href="#infix-constructors">Infix constructors</a></h2><p>There are some things that would be nice to have: currently you can't pattern match on infix non-binary operators</p><pre><code class="haskell">-- This works
+data Foo = (:⇒) Sender Recipient Message
+
+pattern (:→) a b c = (:⇒) a b c
+pattern To   a b c = (:⇒) a b c
+
+-- This works
+msg₁ :: Foo
+msg₁ = (&quot;Alice&quot; :→ &quot;Bob&quot;) &quot;ossifrage&quot;
+
+msg₂ :: Foo
+msg₂ = (&quot;Bob&quot; :→ &quot;Alice&quot;) &quot;pasta&quot;
+
+-- But {-hi-}this doesn't{-/hi-}
+foo msg = case msg of
+  (&quot;Alice&quot; :⇒ &quot;Bob&quot;  ) msg → …
+  (&quot;Bob&quot;   :→ &quot;Alice&quot;) msg → …
+  (a      `To` b     ) msg → …
+</code></pre><p>Replace Alice and Bob with nicks and channels and it makes sense for the IRC bot if you're into that sort of thing.</p><h2 id="variadic-patterns"><a href="#variadic-patterns">Variadic patterns</a></h2><p>More controversial, since patterns are always fully applied they could as well be variadic:</p><pre><code class="haskell">pattern PING             &lt;- (words -&gt; [&quot;PING&quot;])
+pattern PING serv        &lt;- (words -&gt; [&quot;PING&quot;, serv])
+pattern PING serv₁ serv₂ &lt;- (words -&gt; [&quot;PING&quot;, serv₁, serv₂])</code></pre><p>It would also allow us to define the <code>BeforeChristmas</code> and <code>AfterChristmas</code> both ways</p><pre><code class="haskell">pattern BeforeChristmas     &lt;- December (isItNow -&gt; (GT, _))
+pattern BeforeChristmas day &lt;- December (isItNow -&gt; (GT, day))
+
+pattern AfterChristmas      &lt;- December (isItNow -&gt; (LT, day))
+pattern AfterChristmas  day &lt;- December (isItNow -&gt; (LT, day))</code></pre><p>or any other pattern that may be used for pattern matching only or accessing some value as well:</p><pre><code class="haskell">parity :: Int -&gt; (Bool, Int)
+parity n = (even n, n `div` 2)
+
+pattern Even   &lt;- (parity -&gt; (True, _))
+pattern Even n &lt;- (parity -&gt; (True, n))
+
+pattern Odd    &lt;- (parity -&gt; (False, _))
+pattern Odd n  &lt;- (parity -&gt; (False, n))
+</code></pre></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/icelandj/Pattern%20synonyms';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

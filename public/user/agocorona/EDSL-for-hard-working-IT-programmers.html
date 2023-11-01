@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html><head><title>An EDSL for hard working IT programmers - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/EDSL-for-hard-working-IT-programmers">An EDSL for hard working IT programmers</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">An EDSL for hard working IT programmers</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">23 Feb 2019</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/ebcd826028df9832ac1681f3c808185989728651">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">Previous content: The hardworking programmer II: practical backtracking to undo actions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/monad-reactive-programming-2">Next content: A monad for reactive programming. Part 2</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a></li><li><a href="#the-problem--parallelization--concurrency-and-inversion-of-control">The problem: parallelization, concurrency and inversion of control</a></li><li><a href="#the-oop--half--solution">The OOP -half- solution</a><ul><li><a href="#deconstruct-the-specification-recipe-considered-harmful">Deconstruct the specification recipe considered harmful</a></li></ul></li><li><a href="#what-we-need">What we need</a></li><li><a href="#enter-the-monad">Enter the monad</a></li><li><a href="#parallelization">Parallelization</a></li><li><a href="#wait-for-events">Wait for events</a><ul><li><a href="#example">Example</a></li></ul></li><li><a href="#implicit-thread-control">Implicit thread control</a></li><li><a href="#non-blocking-io">Non blocking IO</a></li><li><a href="#applicative-and-alternative-combinators">Applicative and Alternative combinators</a></li><li><a href="#beyond-futures-and-promises">Beyond futures and promises</a></li><li><a href="#a-web-server">A Web Server</a></li><li><a href="#composition-of-programs--runnable-example-">Composition of programs (Runnable example)</a></li><li><a href="#session-data">Session data</a></li><li><a href="#de-inverting-callbacks">de-inverting callbacks</a></li><li><a href="#conclusions-and-future-work">Conclusions and future work</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>I have a problem: How I present the few applicative and monadic combinators that I just developed. I could present them as:</p><ul><li>something for  multithreaded event handling without inversion of control. Or</li><li>something for paralelization of processes: <a href="https://hackage.haskell.org/package/async">async</a> without the wait</li><li>for automatic thread control</li><li>for alternative and applicative composition of parallel IO actions</li><li>for indeterminism and asynchronicity effects</li><li>for high level programming at the specification level</li><li>for creating and  composing applications by means of a single expression</li><li>for overcoming futures and promises of Scala and JavaScript making them unnecessary</li></ul><p>Too much stuff for a single article. Maybe I should split it into pieces and taking more time to write something more extensive and less dense. But I'm lazy and moreover they are only a few primitives, four or five, six with the two state combinators: <code>async</code> <code>waitEvents</code> <code>spawn</code> and <code>react</code> <code>getSData</code> and <code>setSData</code>. No new operators. Breaking the article would hide the big picture. That would not display the beautiful unity of the common solution.</p><ul><li>If you are interested in how the idea came about read the next paragraph</li><li>If you are interested in the internals, read the section &quot;Enter the monad&quot;</li><li>If you are interested in how the monad control multiple threads see &quot;Implicit thread control&quot;</li><li>If you are interested in examples read  from &quot;Example&quot; on</li><li>If you are interested in Async, promises and futures, read &quot;Beyond futures and promises&quot;</li><li>If you are interested in running the examples read &quot;Composition of Programs&quot;</li><li>If you are interested in de-inverting the control of callbacks see &quot;deinverting callbacks&quot;</li></ul><h1 id="the-problem--parallelization--concurrency-and-inversion-of-control"><a href="#the-problem--parallelization--concurrency-and-inversion-of-control">The problem: parallelization, concurrency and inversion of control</a></h1><p>Suppose that I have a blocking computation that return data when something happens. It may be also a long running computation that blocks the thread for a time:</p><pre><code class="haskell">     receive: IO a</code></pre><p>I can use it as such, but it blocks. I can not use it in a context where other events are firing. I must create a thread for each blocking IO call. All of these threads probably modify a central state. Otherwise there will be no communication of data among threads. Alternatively someone may have created a kind of framework for this particular problem, where these blocking calls are managed. It may be a GUI toolkit, or a Web application framework, A browser environment or a library for the management of an ATM machine etc. in any case, what the programmer see is a set of blocking synchronous calls and/or a set of callbacks or handlers that he has to program and configure in the  framework.</p><p>Blocking IO creates the need to resort to manual thread management and concurrency. That means that the code is split into parallel and concurrent chunks which are hard to code and debug. In the second case I have non blocking IO, since the thread management is done implicitly by the framework, but, in the other side, I have to split the program logic into disconnected chunks. As a result, the program logic is very hard to grasp. This is know as the callback hell, a consequence of the inversion of control.</p><h1 id="the-oop--half--solution"><a href="#the-oop--half--solution">The OOP -half- solution</a></h1><p>The second scenario appears when threading is managed by a framework. Essentially it is the same case. In both cases we end up with disconnected chunks of code and a mutable state. The standard way to manage this messy central state has been to divide it into smaller states and encapsulate them together with the methods that modify and serve the state.  This is the Object Oriented Programming solution; The first OOP languages were created for managing events (SIMULA), and mouse events in a interactive GUI (Smalltalk)</p><p><i>Object-oriented programming is an exceptionally bad idea which could only have originated in California. - Dijkstra</i></p><p>Object Oriented Programming naturally fit with this inversion of control, that pervades IT problems. Whenever there are more than one asynchronous input, there is multitasking or inversion of control with state. The solution is a state machine. What OOP does is to split this state machine into smaller state machines called objects, that interact among them. But that implies the need to &quot;deconstruct&quot; the specifications.</p><h2 id="deconstruct-the-specification-recipe-considered-harmful"><a href="#deconstruct-the-specification-recipe-considered-harmful">Deconstruct the specification recipe considered harmful</a></h2><p>Usually the specification of something that must be done is naturally expressed as if this &quot;something&quot; is a process, in the third person active perspective. People connect mentally the relevant elements directly, without concern for other secondary problems.</p><p>And there may be many of these intermediate elements. In a recipe people say : &quot;you must fry the eggs&quot;. You don´t say &quot;there is fire and there are eggs, you start the fire and the eggs will be fried by the fire&quot;. You see that a complete description in terms of active and passive elements implies to give protagonism to low level elements that you are not interesting when writing an specification.</p><p>But in OOP developments, these elements must appear in the form of objects. Creating an OOP solution implies the deconstruction of the specification recipe into multiple third person passive perspectives, one for each class or object that alternatively act as passive and active elements.</p><p>In OOP, you can not create a function or method called <code>fryTheEggs</code> that stop the fire when the eggs are fried, without blocking the execution of everything else. So you need to manage explicitly at least two threads that sooner or later will have to communicate asynchronously. Alternatively, you may define <code>start-fire</code>, <code>stop-fire</code> in the <code>fire</code> class, and a callback called <code>egg-fried</code> so that you wire-up the application with these elements.</p><p>There is no way to express fry-the-eggs in a single self contained expression that you can reuse. As a consequence, OOP can not produce composable programs.
+In any case, in OOP, the programs are made of disconnected pieces, the software does not follow the natural flow as it would have been naturally extracted from the specifications and  low level details emerge at top level. The resulting code is hard to maintain.</p><p>The application/service created with this deconstruction is not composable. There is no way to insert your service within something bigger with a single invocation. Even with the objects that you fully control, since an object, by definition, is a box with many connectors, so it can not be assembled in a pipeline. This derives in the scarce reusability of the software, and the need of profuse documentation. It is inelegant, buggy, hard to maintain, and permits an huge number of arbitrary alternatives in the design space that aggravates the mentioned problems. It may be though that this is good for the IT business, because it justifies big IT department budgets, but this is not good in the medium-long term. There are better ways to do it.</p><p>In contrast a true functional solution follow closely the user specification because the very elements of the problem that the user manages should be first class in the program. There is an algebra in which each individual top level element of the user specification is a term in an equation. Therefore, reusability and composability are the natural consequence. That algebra is instantiated in an embedded domain-specific language EDSL.</p><p>But there are reasons why functional programs are not composable. The main obstacle for composability in functional languages are the asynchronous inputs. In the past there were a good effort into using continuations to deal with them, but lately they have been abandoned due to the irruption of OOP programmers in the functional arena.</p><h1 id="what-we-need"><a href="#what-we-need">What we need</a></h1><p><i>Simplicity is prerequisite for reliability. - Dijkstra</i></p><p>The application must be programmed following the natural flow defined in the specification. The code must not split the specifications into explicit parallel running tasks, neither invert the control and deconstruct the specification into objects. The design space must be limited so everyone should program the same specification the same way. So other's code can be grasped immediately without the aid of external documentation. The application must transport user-defined state, that can be inspected and updated, added and deleted, but this state must be instrumental. It should not be the center, because the center is the process described in the specification.</p><p><i>We need an EDSL for hardworking IT programmers, that use Java, JavaScript, Scala, C#, PHP, Ruby or Python and don't know Haskell. They need to experiment an immediate and huge advantage using Haskell. Not a monad stack but a simple monad, not more complex to use than IO, that may liberate them from the <s>Oppressive Object Paradigm, or OOP </s> inversion of control, without forcing them to sacrifice time and effort to the gods of Category Theory. With applicative and alternative combinators and a few primitives for implicit parallelization and thread control and for de-inversion of callbacks in the IO monad. Plus user-defined state management and early termination</i></p><p><b>What we need is a software connector that works like a hardware serial bus</b> . The hardware designers invented the serial bus for the same problem. Their chips had many more pins than the software objects have methods, so connecting between them directly was impossible. For that purpose they invented the serial bus, that receive injected signals at different points. How a connector for different elements that inject events from GUI widgets, asynchronous responses, callbacks from frameworks and hardware interruptions would look like?</p><p><i>“Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells. - Dijkstra</i></p><h1 id="enter-the-monad"><a href="#enter-the-monad">Enter the monad</a></h1><p>A monad with the asynchronicity effect can rescue the industry from the inversion of control trap for which OOP was originally designed while allowing implicit parallelization and thread control. A entire application can be coded in a single monadic expression with little or no plumbing. That allows the creation of composable applications and services of the <a href="http://www.haskellforall.com/2014/04/scalable-program-architectures.html">A -&gt; A -&gt; A</a> kind.</p><p>In <a href="https://www.fpcomplete.com/user/agocorona/monad-reactive-programming-2">A monad for reactive programming</a> I defined a monad that de-invert the control when there are different events. The <code>Transient</code> monad can listen for events at different points in the monadic expression. Current solutions have a single listen point for events. This single watching point has different names: At the OS level there are calls like <code>select</code>. GUI and Client Web frameworks have an event loop at the lower level. But at the top level they send events to different UI elements.  That kind of interface invert the control, since the programmer has to define callbacks. The reactive solutions bubble up the events to a single listen point again, and attach an event preprocessor to it together with a single expression that act like a big event handler.</p><p>The solution of the above mentioned article keep the events in the UI elements that produced the event without inverting the control. Moreover, these events listeners do not block, so every event watching point is active in the monad at the same time.</p><p>The events in the above mentioned article are injected by  a simulated event loop in the state monad. This time I will show how to listen for IO computations without the help of a framework that bring events. These events may be hardware buttons, device driver inputs, requests from users, responses from databases, requests from other systems in the cloud etc.</p><p>What we intend here is to formulate a general solution that permit coding close to the user requirement document, that is expressive enough to code an entire application as a single monadic expression even if involves multiple inputs and parallel executions. This expression will spawn communicate and kill tasks whenever necessary automatically. We will see that we can  improve the readability and reduce the complexity, so we can increase the maintainability, enabling composability of entire services or applications.</p><p>Since I have to deal with dirty things like blocking, threads and IO, don't expect what follows to be a walk in the Platonic realm. I start with a monad like the <code>Transient</code> monad, that can be stopped with <code>empty</code>  and continued with <code>runCont cont</code> where <code>cont</code> is the continuation context, set with <code>getCont</code>.  (explanation below)</p><pre><code class="haskell">    data Transient m x= Transient  {runTrans :: m (Maybe x)}
+
+    data EventF  = forall a b . EventF
+             {xcomp :: (TransientIO a)
+             ,fcomp :: [a -&gt; TransientIO b]
+             , ... other ....}
+
+    type StateIO= StateT EventF  IO
+
+    type TransientIO= Transient StateIO
+    
+    instance Monad TransientIO where
+        return x = Transient $ return $ Just x
+        x &gt;&gt;= f = Transient $ do
+            cont &lt;- setEventCont x  f
+            mk &lt;- runTrans x
+            resetEventCont cont
+            case mk of
+                Just k  -&gt; runTrans $ f k
+                Nothing -&gt; return Nothing
+
+    instance Applicative TransientIO where
+    pure a  = Transient  .  return $ Just a
+    Transient f &lt;*&gt; Transient g= Transient $ do
+        k &lt;- f
+        x &lt;- g
+        return $  k &lt;*&gt; x
+
+    instance  Alternative TransientIO where
+        empty= Transient $ return  Nothing
+        Transient f &lt;|&gt; Transient g= Transient $ do
+            k &lt;- f
+            x &lt;- g
+            return $  k &lt;|&gt; x
+
+    getCont ::(MonadState EventF  m) =&gt; m EventF
+    getCont = get
+
+    runCont :: EventF -&gt; StateIO ()
+    runCont (EventF  x fs ...)= do runIt x (unsafeCoerce fs); return ()
+      where
+      runIt x fs= runTrans $  x &gt;&gt;= compose fs
+
+      compose []= const empty
+      compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs</code></pre><p>For a view of how this monad has evolved look at the first article <a href="https://www.fpcomplete.com/user/agocorona/a-monad-for-reactive-programming-part-1">A monad for reactive programming part 1</a> where I present a simpler version of this monad that has some shortcomings. In the second part I solved these shortcomings. I think that this is the best way to understand it.</p><p>What this monad does is to store the closure <code>x</code> and the continuations <code>f</code> in the state. <code>getCont</code> captures the execution state at the point and <code>runCont</code> executes it.</p><p>As far as &quot;continuation&quot; is taken here, there may be more than one of them.</p><p>For example, in this expression:</p><pre><code> x0 &gt;&gt;=((x &gt;&gt;= f1) &gt;&gt;= f2) &gt;&gt;= f3</code></pre><p>for the closure generated at the execution point <code>x</code>, the continuations are</p><pre><code> f1 &gt;&gt;= f2 &gt;&gt;= f3</code></pre><p>And the closure is the result of the execution of <code>x0 &gt;&gt;= x</code></p><p>What <code>setEventCont</code> and <code>resetEventCont</code> does is to compose the list of continuations (one for each nested expression) in a 'flattened' representation, as a list in <code>fcomp</code>. Since the list does not &quot;know&quot; that the continuations types match, I have to erase the types using <code>unsafeCoerce</code>.</p><p>Each level is recursive. that means that if I have:</p><pre><code>do
+  (a &gt;&gt; b) &lt;|&gt; (c &gt;&gt; d)
+  e</code></pre><p>When the expression is executed, the closure is  <code>(a &gt;&gt; b) &lt;|&gt; (c &gt;&gt; d)</code>  and the continuation is e.</p><p>when a &gt;&gt; b is executed  <code>setEventcont</code> put <code>a</code> as closure and <code>b &gt;&gt; e</code> as continuation. If <code>a</code> has an statement that uses the continuation mechanism, for example <code>async</code> (see below) it will execute <code>a &gt;&gt;b &gt;&gt;e</code>.</p><p>But look at how Alternative operator is defined:</p><pre><code class="haskell">      f &lt;|&gt;  g = Transient $ do
+                  k &lt;- runTrans f
+                  x &lt;- runTrans g
+                  return $  k &lt;|&gt; x</code></pre><p>where f is <code>a &gt;&gt; b</code>  and g is <code>c &gt;&gt; d</code>  . Then both operands are executed. When c is executed,  (d &gt;&gt; e) is the continuation. So if a and c receive different events (see below) they would execute their respective continuations, that have e in common.</p><h1 id="parallelization"><a href="#parallelization">Parallelization</a></h1><p>With these three primitives <code>getCont</code> <code>runCont</code> and <code>empty</code> I will define a <code>async</code> primitive that will run a blocking IO action in a new thread and will execute the continuation in that thread when something is received:</p><pre><code class="haskell">    buffer :: Dynamic
+    
+    buffer= unsafePerformIO $ newEmptyMVar
+
+    async :: IO a -&gt; TransientIO a
+    async receive =  do
+      cont &lt;- getCont
+      r &lt;- liftIO $ tryTakeMVar buffer
+
+      case r of
+
+        Nothing -&gt;do
+           liftIO . forkIO $  do
+              r &lt;- receive
+              putMVar buffer $ toDync  r
+              runCont cont
+              return()
+           empty
+
+        Just r -&gt; return $ formDynamic r</code></pre><p>Essentially, <code>async</code> get the continuation, then inspect the buffer. If there is Nothing then spawn <code>receive</code> in a new thread. The current thread is finished (<code>empty</code>). When something arrives, it is put in the buffer, then <code>runCont</code> will continue at the beginning of receive' in the new thread. It does so because <code>getCont</code> got the <code>Transient</code> continuation there. This time, there will be something in the buffer and will return it, so the procedure will continue after the event arrives, but in a new thread.</p><p>Note that <code>receive</code> only fill the buffer. when <code>runCont</code>executes the closure it will inspect the buffer again. This time there will be something, the closure will succeed and the continuation will fire.</p><p><code>getCont</code> and <code>runCont</code> are similar to <a href="http://en.wikipedia.org/wiki/Setjmp.h">setjmp and longjmp</a> in C. Moreover, the mechanism is not very different form how the IO scheduler in GHC or in any operating system.  But this time it runs at the application level rather than at the GHC level.</p><h1 id="wait-for-events"><a href="#wait-for-events">Wait for events</a></h1><p>If we want to trigger the continuation repeatedly whenever something is received by <code>receive</code>, it is a matter of adding a loop to the <code>Nothing</code> branch. Then the continuation will be called for every received event.</p><p>let's call this variant <code>waitEvents</code>:</p><pre><code class="haskell">    waitEvents :: IO a -&gt; TransientIO a
+    waitEvents receive =  do
+      cont &lt;- getCont
+      r &lt;- tryTakeMVar buffer
+
+      case r of
+
+        Nothing -&gt;do
+           liftIO . forkIO $ loop $ do
+              r &lt;- receive
+              putMVar buffer  r
+              runCont cont
+              return()
+           empty
+
+        Just r -&gt; return r
+        
+      where
+      loop x= x &gt;&gt; loop x</code></pre><h2 id="example"><a href="#example">Example</a></h2><p>This program will say hello to every name entered.</p><pre><code class="haskell">    runTransient :: TransientIO x -&gt; IO (Maybe x, EventF)
+    runTransient t= runStateT (runTrans t) eventf0
+    
+    main= do
+        runTransient $ do
+          name &lt;- waitEvents getLine
+          liftIO $ putStrLn $ &quot;hello &quot;++ name
+        stay</code></pre><p>Note that there is no loop. waitEvent install getLine at the start of a process that execute the continuation, what is after getLine, for each entry. the loop is internal to <code>waitEvents</code></p><p>Here <code>runTransient</code> execute a transient computation down to the IO monad.</p><p><code>stay</code> is whatever that keep the console application from exiting. That is because since the transient branch that wait for events is non-blocking, it would finish immediately. <b>After async or waitEvents, the current thread dies and the rest of the monadic computation run in a different thread</b></p><h1 id="implicit-thread-control"><a href="#implicit-thread-control">Implicit thread control</a></h1><p>Since each event in any part of the monadic computation are active and trigger the continuation of the monad at that point, the monadic expression is multithreaded and non determinist.</p><p>How to control the threads?. It is natural to think that since <code>waitEvents</code> and <code>async</code> execute continuations within the monadic expression, then once something happens  in a  statement then their continuations must be invalidated.</p><p>That means that whenever <code>async</code> of <code>waitEvents</code> receive something, the threads that are running below must be killed. Then this statement, with the new buffered input will execute his closure and rebuild the continuation again.</p><p>This is the natural thread management that I implemented. I do not detail the modifications necessary for <code>waitEvents</code> to permit this behaviour. It is a matter of keeping in the state the list of spawned threads so that each <code>waitEvents</code> has the information about all the threads that are triggered after it. Additionally, this list contain also a buffer for each of these threads.</p><p>In this example:</p><pre><code class="haskell">    main= do
+        runTransient $ do
+          waitEvents watchReset &lt;|&gt; return ()
+          name &lt;- waitEvents getLine
+          liftIO $ putStrLn $ &quot;hello &quot;++ name
+        stay</code></pre><p>The <code>return()</code> composed with the alternative operator <code>&lt;|&gt;</code>would bypass immediately the wait for the reset event, but as soon as the reset is pressed, all the event handlers spawned after it will be killed. Immediately they will be spawned again.</p><p>This is a slightly different version:</p><pre><code class="haskell">    main= do
+        runTransient $ do
+          r &lt;- (waitEvents watchStop &gt;&gt; return True) &lt;|&gt; return False
+          if r then liftIO $ putStrln &quot;STOP&quot; else do
+             name &lt;- waitEvents getLine
+             liftIO $ putStrLn $ &quot;hello &quot;++ name
+        stay</code></pre><p>In this case the program will be stopped and will not be re-spawned when <code>watchStop</code> is activated. since now the branch of the monad executed is different. It prints the stop message and finalizes.</p><h1 id="non-blocking-io"><a href="#non-blocking-io">Non blocking IO</a></h1><p>Let's create one nonblocking keyboard input thing called <code>option</code>. At the same time this is a good example of inter-thread communication within the <code>Transient</code> monad:</p><pre><code class="haskell">    option :: (Typeable a, Show a, Read a, Eq a) =&gt;
+               a -&gt; [Char] -&gt; TransientIO a
+    option ret message= do
+      liftIO $ putStrLn $ message++&quot;(&quot;++show ret++&quot;)&quot;
+      waitEvents &quot;&quot; getLine'    
+      where
+      getLine'=  do
+       atomically $ do
+         mr &lt;- readTVar getLineRef
+         case mr of
+           Nothing -&gt; retry
+           Just r -&gt;
+              case readsPrec 0 r of
+              [] -&gt; retry
+              (s,_):_ -&gt; if ret== s
+                     then do
+                       writeTVar  getLineRef Nothing
+                       return ret               
+                     else retry
+               _ -&gt; retry
+
+    getLineRef= unsafePerformIO $ newTVarIO Nothing
+
+    inputLoop :: IO ()
+    inputLoop=  do
+           r&lt;- getLine         !&gt; &quot;started inputLoop&quot;
+           if r==&quot;end&quot; return True else do
+              atomically . writeTVar  getLineRef $ Just r
+              inputLoop</code></pre><h1 id="applicative-and-alternative-combinators"><a href="#applicative-and-alternative-combinators">Applicative and Alternative combinators</a></h1><p><code>option</code> read in nonblocking mode the standard input, so many options can  be combined using applicative or alternative operators. <code>option</code> shows a message and wait for <code>inputLoop</code> to enter a input line. If some <code>option</code> match, it return the value. If it does not match, it fails with <code>empty</code>, but the loop in <code>waitEvents</code> re-executes <code>getLine'</code> again for this option.  In this way, the options are continuosly watching the input. Note that more than one option can be triggered simultaneously, in a different thread.</p><p><code>inputLoop</code> is initialized by <code>async</code>. It wait for input, and expose it to all the running <code>getLine'</code> processes (one per <code>option</code>) in a <code>TVar</code>. if the user press &quot;end&quot; <code>inputLoop</code> return and <code>async</code> kill all the watching threads below.</p><pre><code class="haskell">    main= do
+       runTransient choose
+       stay
+
+    choose :: TransientIO()
+    choose= do
+       r &lt;- async inputLoop &lt;|&gt; return False
+       case r of
+         True -&gt; return ()
+         False-&gt; do
+           r &lt;-  option (1 :: Int) &quot;red&quot;  &lt;|&gt; option 2 &quot;green&quot; &lt;|&gt; option 3 &quot;blue&quot;
+           liftIO $ print r</code></pre><p>The above program will print repeatedly  the option chosen. We see that <code>option</code> is composable using the alternative operator.</p><p>Now let's create another event generator, a number is sent every second, while two options are waiting for keyboard input:</p><pre><code class="haskell">    data Option= Option String  String | Number Int deriving Show
+    
+    choose= do
+       r &lt;-  ( Option &lt;$&gt; ( option &quot;1&quot; &quot;red&quot;  &lt;*&gt; option &quot;2&quot; &quot;green&quot;))
+         &lt;|&gt; ( Number &lt;$&gt; waitEvents  waitnumber )
+       liftIO $ putStrLn $ &quot;result=&quot; ++ show r
+       
+    where
+    waitnumber= do
+      threadDelay 1000000
+      return 42</code></pre><p>Applicative and alternative combinators can be used fully. The Applicative wait for both events to be triggered to have data in their respective buffers. <code>waitnumber</code> produce an event each second.</p><p>Each Option run a different waitEvent in a different thread, but each one of them execute the same closure (<code>xcomp</code>) that is the whole applicative expression. The three have a TVar waiting for new input. they fill their respective buffers when they validate. The thread that fill the last buffer succeed and execute the continuation. The other two fail, but stay ready for the next input, since <code>option</code>uses <code>waitEvents</code> , which has a loop.</p><h1 id="beyond-futures-and-promises"><a href="#beyond-futures-and-promises">Beyond futures and promises</a></h1><p>Scala Futures and the haskell library async uses placeholders, that receive the result. These placeholders can be used instad of the result of the computation, but some waiting operation must be put somewhere either at the end of the chain of sentences that operate with the future.</p><p>Scala Futures uses them in  nice chains of multi threaded lists that can be transformed in the style of map-reduce.</p><p>In this sense they are similar to the javaScript promises, which chain code with <code>then</code>, but the latter does not perform multiple tasks like in the case of Scala futures.</p><p>For some needs, Scala and JavaScript must use callbacks since the constraints of their frameworks do not allow enough flexibility. futures and promises forces the programmer to enter in a different kind of computation model, different from the one of the native languages. In the case of Scala it is mostly monoidal. in the case of Javascript is a restricted form of bind operation.</p><p>This library put the continuation code at the end of the receiving pipeline and parallelize the execution, but the continuation is the plain code that is after the receive call in the monadic expression, so there is no restriction about what can be done.</p><p><code>async</code> can be used for any process that we want to parallelize using applicative notation.  This program sum the words in google and haskell homepages <b>in parallel</b>. Using <a href="http://hackage.haskell.org/package/HTTP-4000.2.19/docs/Network-HTTP.html">Network.HTTP</a></p><pre><code class="haskell">    sum= do
+       (r,r') &lt;- (,) &lt;$&gt; async  (worker &quot;http://www.haskell.org/&quot;)
+                     &lt;*&gt; async  (worker &quot;http://www.google.com/&quot;)
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show r + r'
+
+
+    where
+    getURL= simpleHTTP . getRequest
+
+    worker :: String -&gt; IO Int
+    worker url=do
+      r &lt;- getURL url
+      body &lt;- getResponseBody r
+      return . length . words $ body</code></pre><p>That is a complete working example.  Note that unlike in the <a href="https://hackage.haskell.org/package/async-2.0.2/docs/Control-Concurrent-Async.html">async</a> library, there is no <code>wait</code> primitive and no explicit constructon for parallelization. The applicative instance does the parallelization and <code>async</code> does also the <code>wait</code>. All the processing is done in the <code>worker</code> in his own thread. More on that below.</p><p>We also can do parallel IO processing in the style of futures of the Scala language using the <code>Monoid</code> instance of <code>TransientIO</code>. But this time since we use continuations, futures are no longer necessary since the thread of the download that finalizes the latter is the one that continues the execution. A future, instead would yield the control to a third main thread that coordinates the rest. In transient, there is no main thread. The faster thread, the one that finalizes the download the first, fails (as I explained above).</p><pre><code class="haskell">    instance Monoid a =&gt; Monoid (TransientIO a) where
+      mappend x y = mappend &lt;$&gt; x &lt;*&gt; y  
+      mempty= return mempty
+
+    sum= do
+       rs &lt;- foldl (&lt;&gt;) (return 0) $ map (async . worker)
+                  [ &quot;http://www.haskell.org/&quot;, &quot;http://www.google.com/&quot;]
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show rs</code></pre><p>Since the <code>worker</code>return an <code>Int</code>, to sum the results we need a <code>Monoid</code> instance for <code>Int</code></p><pre><code class="haskell">    instance Monoid Int where
+      mappend= (+)
+      mempty= 0</code></pre><p>Note that there is a full de-inversion of control, since the result return to the monad. The Futures and promises of Scala (or in javascript) can not return the execution flow to the calling procedure without a form of explicit asynchronous rendezvous with the main thread that executes the main flow where it continues single threaded, in imperative mode.</p><p>Since the parallel effects of the Transient monad continue in the do block, the processing of the results can continue in the monad. That permits more complex and yet clearer computations. It is not reduced to list-like processing and the main thunk of the computation should not be single threaded.</p><p>I said that in an applicative instance with <code>async</code> sentences, the one that finalize the latter computes the result and continue the rest of the computation, the other threads stop. But in an applicative expression with async, all the thread may succeed and return result to the do block, so all of them executes the next statements in parallel. This is the non-deterministic effect of transient that is explored in another article.</p><h1 id="a-web-server"><a href="#a-web-server">A Web Server</a></h1><p>Here is toy Web Server:</p><pre><code class="haskell">
+    server=  do
+       sock &lt;-  liftIO $  listenOn $ PortNumber 80
+       (h,_,_) &lt;- spawn $ accept sock
+       liftIO $ do
+           hPutStr h msg
+           hFlush h
+           hClose h
+
+    msg = &quot;HTTP/1.0 200 OK\r\nContent-Length: 5\r\n\r\nPong!\r\n&quot;</code></pre><p>In the current code, the primitives <code>async</code>, <code>waitEvents</code> and <code>spawn</code> are defined in terms of <code>parallel</code>, which is a generalization of <code>async</code> and <code>waitEvents</code> explained above :</p><pre><code class="haskell">    data Loop= Once | Loop | Multithread
+
+    waitEvents ::  IO b -&gt; TransientIO b
+    waitEvents= parallel Loop
+
+    async  :: IO b -&gt; TransientIO b
+    async = parallel Once
+
+    spawn= parallel Multithread
+
+    parallel  ::  Loop -&gt;  IO b -&gt; TransientIO b</code></pre><p>When <code>parallel</code> is called with <code>Multithread</code>,  it spawn the continuation in a thread for each event received immediately without waiting for the termination of the previous one. <code>waitEvent</code> execute the continuation within the thread so the receive method is not called again until the previous event is processed.</p><h1 id="composition-of-programs--runnable-example-"><a href="#composition-of-programs--runnable-example-">Composition of programs (Runnable example)</a></h1><p>We can compose any of these programs together since none of them block and the automatic thread control  apply gracefully to all of the elements. This program combines the above programs and some others.</p><p>The combination in this case is using the alternative operator:</p><pre><code>colors &lt;|&gt; app  &lt;|&gt; sum1 &lt;|&gt; sum2 &lt;|&gt; server &lt;|&gt; menu</code></pre><p>Since the fpcomplete environment uses ghci and it shares threads among snippets of code, I can run only one example in this article, and the composability of Transient is nice to show them all together.</p><p>To verify the multitasking press: app  and then colors.  app would start an iterative counter with an applicative expression, while colors will ask for an option among tree of them. both will run in parallel until you press &quot;main&quot; which will stop both, since main is above in the monad.</p><pre><code class="active haskell">
+
+{-# START_FILE main.hs #-}
+
+
+{-# LANGUAGE ScopedTypeVariables #-}
+
+module Main where
+
+import           Base
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Exception
+import           Control.Monad.State
+import           Data.Monoid
+import           System.IO.Unsafe
+
+import           Network.HTTP
+
+import           Network
+import           System.IO
+
+-- show
+
+data Option= Option Int  Int | Number Int deriving Show
+
+instance Monoid Int where
+      mappend= (+)
+      mempty= 0
+
+main= do
+    runTransient $ do
+       async inputLoop  &lt;|&gt; return ()
+       option &quot;main&quot; &quot;to return to the main menu&quot; &lt;|&gt; return &quot;&quot;
+       liftIO $ putStrLn &quot;MAIN MENU&quot;
+       colors &lt;|&gt; app  &lt;|&gt; sum1 &lt;|&gt; sum2 &lt;|&gt; server &lt;|&gt; menu
+
+    stay
+
+colors :: TransientIO ()
+colors= do
+       option &quot;colors&quot; &quot;choose between three colors&quot;
+       r &lt;-  color 1  &quot;red&quot;  &lt;|&gt; color 2 &quot;green&quot; &lt;|&gt; color 3 &quot;blue&quot;
+       liftIO $ print r
+       where
+       color :: Int -&gt; String -&gt; TransientIO String
+       color n str= option (show n) str &gt;&gt; return  str
+
+app :: TransientIO ()
+app= do
+       option &quot;app&quot; &quot;applicative expression that return a counter in 2-tuples every second&quot;
+       r &lt;-  (,) &lt;$&gt;  number  &lt;*&gt; number
+       liftIO $ putStrLn $ &quot;result=&quot; ++ show r
+
+       where
+       number= waitEvents $ do
+          threadDelay 1000000
+          n &lt;- takeMVar counter
+          putMVar counter (n+1)
+          return  n
+
+       counter=unsafePerformIO $ newMVar (0 :: Int)
+
+sum1 :: TransientIO ()
+sum1= do
+       option &quot;sum1&quot; &quot;access to two web pages concurrently and sum the number of words using Applicative&quot;
+       (r,r') &lt;- (,) &lt;$&gt; async  (worker &quot;http://www.haskell.org/&quot;)
+                     &lt;*&gt; async  (worker &quot;http://www.google.com/&quot;)
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show (r + r')
+
+getURL= simpleHTTP . getRequest
+
+worker :: String -&gt; IO Int
+worker url=do
+      r &lt;- getURL url
+      body &lt;- getResponseBody r
+      putStrLn $ &quot;number of words in &quot; ++ url ++&quot; is: &quot; ++ show(length (words body))
+      return . length . words $ body
+
+sum2 :: TransientIO ()
+sum2= do
+       option &quot;sum2&quot; &quot;access to N web pages concurrenty and sum the number of words using map-fold&quot;
+       rs &lt;- foldl (&lt;&gt;) (return 0) $ map (async . worker)
+                  [ &quot;http://www.haskell.org/&quot;
+                  , &quot;http://www.google.com/&quot;]
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show rs
+
+server :: TransientIO ()
+server=  do
+       option &quot;server&quot; &quot;A web server in the port 8080&quot;
+       liftIO $ print &quot;Server Stated&quot;
+       sock &lt;-  liftIO $  listenOn $ PortNumber 8080
+       (h,_,_) &lt;- spawn $ accept sock
+       liftIO $ do
+           hPutStr h msg
+           putStrLn &quot;new request&quot;
+           hFlush h
+           hClose h
+         `catch` (\(e::SomeException) -&gt; sClose sock)
+
+msg = &quot;HTTP/1.0 200 OK\r\nContent-Length: 5\r\n\r\nPong!\r\n&quot;
+
+
+menu :: TransientIO ()
+menu=  do
+     option &quot;menu&quot;  &quot;a submenu with two options&quot;
+     colors  &lt;|&gt; sum2
+
+-- / show
+
+
+
+
+
+{-# START_FILE Base.hs #-}
+
+-----------------------------------------------------------------------------
+--
+-- Module      :  Base
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE FlexibleContexts          #-}
+{-# LANGUAGE FlexibleInstances         #-}
+{-# LANGUAGE MultiParamTypeClasses     #-}
+
+-- show
+module Base (
+module Control.Applicative,
+TransientIO,
+async,waitEvents, spawn,react,
+runTransient,
+inputLoop, option, stay,
+getSData,setSData,delSData
+) where
+-- /show
+
+import           Control.Applicative
+import           Control.Monad.State
+import           Data.Dynamic
+import qualified Data.Map               as M
+import           Data.Monoid
+import           Debug.Trace
+import           System.IO.Unsafe
+import           Unsafe.Coerce
+import           Control.Concurrent
+import           Control.Concurrent.STM
+import           Data.List
+import           Data.Maybe
+import           GHC.Conc
+import           System.Mem.StableName
+
+(!&gt;) = const . id --  flip trace
+infixr 0 !&gt;
+
+data Transient m x= Transient  {runTrans :: m (Maybe x)}
+type SData= ()
+
+type EventId= Int
+
+data EventF  = forall a b . EventF{xcomp      :: (EventId,TransientIO a)
+                                  ,fcomp      :: [a -&gt; TransientIO b]
+                                  ,mfData     :: M.Map TypeRep SData
+                                  ,mfSequence :: Int
+                                  ,nodeInfo   :: Maybe (P RowElem)
+                                  ,row        :: P RowElem
+                                  ,replay     :: Bool
+                                  }
+
+type P= MVar
+
+(=:) :: P a  -&gt; a -&gt; IO()
+(=:) n v= modifyMVar_ n $ const $ return v
+
+type Buffer= Maybe ()
+type NodeTuple= (EventId, ThreadId, Buffer)
+
+type Children=  Maybe (P RowElem)
+
+data RowElem=   Node NodeTuple |  RowList Row Children
+
+instance Show RowElem where
+  show (Node (e,_,_))= show e
+  show (RowList r ch)= show ( reverse r)  ++ &quot;-&gt;&quot; ++ show ch
+
+type Row = [P RowElem]
+
+instance Eq NodeTuple where
+     (i,_,_) ==  (i',_,_)= i == i'
+
+
+instance Show x =&gt; Show (MVar x) where
+  show  x = show (unsafePerformIO $ readMVar x)
+
+eventf0= EventF  (-1,empty) [const $ empty] M.empty 0
+         Nothing rootRef False
+
+
+topNode= (-1 :: Int,unsafePerformIO $ myThreadId,False,Nothing)
+
+rootRef :: MVar RowElem
+rootRef=  unsafePerformIO $ newMVar $ RowList []  Nothing
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+
+type TransientIO= Transient StateIO
+
+type StateIO= StateT EventF  IO
+
+
+
+runTransient :: TransientIO x -&gt; IO (Maybe x, EventF)
+runTransient t= runStateT (runTrans t) eventf0
+
+
+newRow :: MonadIO m =&gt; m (P RowElem)
+newRow= liftIO $ newMVar $ RowList [] Nothing
+
+setEventCont ::   TransientIO a -&gt; (a -&gt; TransientIO b) -&gt; StateIO EventF
+setEventCont x f  = do
+   st@(EventF   _ fs d _ es ro r)  &lt;- get
+   n &lt;- if replay st then return $ mfSequence st
+     else  liftIO $ readMVar refSequence
+   ro' &lt;- newRow
+   ro `eat` ro'
+   put $ EventF   (n,x) ( f: unsafeCoerce fs) d n es ro' r !&gt; (&quot;stored &quot; ++ show n)
+   return st
+
+eat ro ro'= liftIO $
+ modifyMVar_  ro $ \(RowList es t) -&gt; return $ RowList (ro':es) t
+
+resetEventCont (EventF x fs _ _ _ _ _)=do
+   st@(EventF   _ _ d  n es ro r )  &lt;- get
+   put $ EventF  x fs d n es ro r
+
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF  (i,x) fs _ _ _ _ _)= do runIt i x (unsafeCoerce fs); return ()
+   where
+   runIt i x fs= runTrans $ do
+         st &lt;- get
+         put st{mfSequence=i}
+         r &lt;- x
+         put st
+         compose fs r
+
+compose []= const empty
+compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs
+
+
+instance   Functor TransientIO where
+  fmap f x=   Transient $ fmap (fmap f) $ runTrans x --
+
+
+instance Applicative TransientIO where
+  pure a  = Transient  .  return $ Just a
+  Transient f &lt;*&gt; Transient g= Transient $ do
+       k &lt;- f
+       x &lt;- g
+       return $  k &lt;*&gt; x
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+       k &lt;- f
+       x &lt;- g
+       return $  k &lt;|&gt; x
+
+
+-- | a sinonym of empty that can be used in a monadic expression. it stop the
+-- computation
+stop :: TransientIO a
+stop= Control.Applicative.empty
+
+instance Monoid a =&gt; Monoid (TransientIO a) where
+  mappend x y = mappend &lt;$&gt; x &lt;*&gt; y
+  mempty= return mempty
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f  = Transient $ do
+        cont &lt;- setEventCont x  f
+        mk &lt;- runTrans x
+        resetEventCont cont
+        case mk of
+           Just k  -&gt; do addRow' !&gt; &quot;ADDROW&quot; ; runTrans $ f k
+
+           Nothing -&gt; return Nothing
+
+        where
+        addRow'= do
+            r &lt;- gets row
+            n &lt;- addRow r
+            modify $ \s -&gt; s{row= n}
+addRow r=
+            liftIO $ do
+              n &lt;- newMVar $ RowList [] Nothing
+              modifyMVar_ r $ \(RowList ns ch) -&gt; do
+                case ch of
+                  Just x -&gt; error $ &quot;children not empty: &quot;++ show x
+                  Nothing -&gt;  return $ RowList  ns $ Just n
+              return n
+
+
+
+instance MonadTrans (Transient ) where
+  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO = lift . liftIO --     let x= liftIO io in x `seq` lift x
+
+
+
+-- | Get the session data of the desired type if there is any.
+getSessionData ::  (MonadState EventF m,Typeable a) =&gt;  m (Maybe a)
+getSessionData =  resp where
+ resp= gets mfData &gt;&gt;= \list  -&gt;
+    case M.lookup ( typeOf $ typeResp resp ) list of
+      Just x  -&gt; return . Just $ unsafeCoerce x
+      Nothing -&gt; return $ Nothing
+ typeResp :: m (Maybe x) -&gt; x
+ typeResp= undefined
+
+-- | getSessionData specialized for the View monad. if Nothing, the monadic computation
+-- does not continue. getSData is a widget that does not validate when there is no data
+--  of that type in the session.
+getSData :: MonadState EventF m =&gt; Typeable a =&gt;Transient m  a
+getSData= Transient getSessionData
+
+
+-- | setSessionData ::  (StateType m ~ MFlowState, Typeable a) =&gt; a -&gt; m ()
+setSessionData  x=
+  modify $ \st -&gt; st{mfData= M.insert  (typeOf x ) (unsafeCoerce x) (mfData st)}
+
+-- | a shorter name for setSessionData
+setSData ::  ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+setSData= setSessionData
+
+delSessionData x=
+  modify $ \st -&gt; st{mfData= M.delete (typeOf x ) (mfData st)}
+
+delSData :: ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+delSData= delSessionData
+
+
+----
+
+genNewId :: MonadIO m =&gt; MonadState EventF m =&gt;  m Int
+genNewId=  do
+      st &lt;- get
+      case replay st of
+        True -&gt; do
+          let n= mfSequence st
+          put $ st{mfSequence= n+1}
+          return n
+        False -&gt; liftIO $
+          modifyMVar refSequence $ \n -&gt; return (n+1,n)
+
+refSequence :: MVar Int
+refSequence= unsafePerformIO $ newMVar 0
+
+
+--- IO events
+
+--buffers :: IORef [(EventId,Dynamic)]
+--buffers= unsafePerformIO $ newIORef []
+
+data Loop= Once | Loop | Multithread deriving Eq
+
+waitEvents ::  IO b -&gt; TransientIO b
+waitEvents= parallel Loop
+spawn= parallel Multithread
+
+
+async  :: IO b -&gt; TransientIO b
+async = parallel Once
+
+parallel  ::  Loop -&gt;  IO b -&gt; TransientIO b
+parallel hasloop receive =  Transient $ do
+
+      cont &lt;- getCont
+      id &lt;- genNewId
+      let currentRow= row cont
+--          mnode=  nodeInfo cont
+      mnode  &lt;-   liftIO $ lookTree id currentRow !&gt; (&quot;idToLook=&quot;++ show id++ &quot; in: &quot;++ show currentRow)
+
+      case mnode of
+        Nothing -&gt;do
+                 return () !&gt; &quot;NOT FOUND&quot;
+                 liftIO $ do
+                   ref &lt;- newMVar $ Node (id,undefined,Nothing)
+
+                   modifyMVar_ (row cont) $ \(RowList ns t) -&gt; return $  RowList (ref : ns) t
+                   forkIO $ do
+                     th &lt;- myThreadId
+                     modifyMVar_ ref $ \(Node(id,_,n)) -&gt; return $ Node (id,th,Nothing)
+
+
+                     loop hasloop  receive $ \r -&gt; do
+
+                      th &lt;-  myThreadId
+                      modifyMVar_  ref $ \(Node(i,_,_)) -&gt; return
+                                       $ Node(i,th,Just $ unsafeCoerce r)
+                      case cont of
+                        EventF  (i,x) f _ _ _ _ _-&gt; do
+                          mr &lt;- runStateT  (runTrans x)
+                                cont{replay= True,mfSequence=i,nodeInfo=Just ref}
+                             !&gt; &quot;runx&quot; !&gt; (&quot;mfSequence=&quot;++ show i)
+                          case mr  of
+                            (Nothing,_) -&gt;return()
+
+
+                            (Just r,cont') -&gt;do
+
+                               let row1= row cont'
+                               delEvents  row1        !&gt; (&quot;delEvents, activated    &quot;++ show row1)
+                               id &lt;- readMVar refSequence
+                               n &lt;-  if hasloop== Multithread then return row1 else  addRow  row1
+                               runStateT (runTrans $ ( compose $ unsafeCoerce f) r)
+                                       cont'{row=n,replay= False,mfSequence=id } !&gt; (&quot;SEQ=&quot; ++ show(mfSequence cont'))
+                               return ()
+--                      delEvents children []
+
+
+                   modifyMVar_ (row cont) $ \(RowList ns ch) -&gt; return $  RowList (ref : ns) ch
+
+                 return Nothing
+
+
+        Just (node@(id',th', mrec)) -&gt; do
+          modify $ \cont -&gt; cont{nodeInfo=Nothing}
+          return $ if isJust mrec then Just $ unsafeCoerce $ fromJust mrec else Nothing
+
+        where
+
+
+        loop Once rec x  = rec &gt;&gt;= x
+        loop Loop rec f = do
+            r &lt;- rec
+            f r
+            loop Loop rec f
+
+        loop Multithread rec f = do
+            r &lt;- rec
+            forkIO $ f r
+            loop Multithread rec f
+
+        lookTree :: EventId -&gt; P RowElem -&gt; IO (Maybe NodeTuple)
+        lookTree id ref=  do
+            RowList ns _&lt;- readMVar ref
+            lookList id ns
+
+
+
+        lookList id mn= case mn of
+              [] -&gt; return Nothing
+              (p:nodes) -&gt; do
+                  me &lt;- readMVar p
+                  case me of
+                    Node(node@((id',_,_))) -&gt;
+                      if id== id'
+                         then return $ Just node
+                         else lookList id nodes
+                    RowList row _ -&gt; do
+                         mx &lt;- lookList id nodes
+                         case mx of
+                           Nothing -&gt; lookList id row
+                           Just x -&gt; return $ Just x
+        delEvents :: P RowElem  -&gt; IO()
+        delEvents ref = do
+            RowList mevs mch &lt;- takeMVar ref
+            maybeDel mch
+            putMVar ref $ RowList mevs Nothing
+
+        maybeDel mch=  case mch of
+              Nothing -&gt; return ()
+              Just p -&gt; do
+                  RowList es mch' &lt;- readMVar p
+                  delList es !&gt; (&quot;toDelete=&quot;++ show es)
+                  maybeDel mch'
+
+
+        delList es=  mapM_ del es where
+          del p = readMVar p &gt;&gt;= del'
+          del' (Node(node@(_,th,_)))= killThread th !&gt; (&quot;DELETING &quot; ++ show node)
+          del' (RowList l mch)= delList l &gt;&gt; maybeDel mch
+
+
+type EventSetter eventdata response= (eventdata -&gt;  IO response) -&gt; IO ()
+type ToReturn  response=  IO response
+
+-- | de-invert a event handling setter. the second parameter compute the response to return each time the event handler is called.
+-- It is useful whenever there is a framework or OS service that need to set interruption handlers, event handlers, request handlers,
+-- callbacks etc.
+--
+-- For example, if we have this OnResponse callback setter for a asynchronous query response that send data to display:
+--
+-- &gt;    data Control= SendMore | MoMore
+-- &gt;
+-- &gt;    OnResponse :: (Response -&gt; IO Control) -&gt; IO()
+--
+--  We can iterate the responses and  we can interrupt them this way:
+--
+-- &gt;    rcontrol &lt;- newMVar Control
+-- &gt;
+-- &gt;    resp &lt;- react $ OnResponse (const $ readMVar rcontrol)
+-- &gt;    display resp
+-- &gt;    r &lt;- (option &quot;more&quot; &quot;more&quot; &gt;&gt; return SendMore) &lt;|&gt; (option &quot;stop&quot; &quot;stop&quot; &gt;&gt; return NoMore)
+-- &gt;    putMVar rcontrol r
+
+react
+  :: Typeable eventdata
+  =&gt; EventSetter eventdata response
+  -&gt; ToReturn  response
+  -&gt; TransientIO eventdata
+
+react setHandler iob= Transient $ do
+        cont    &lt;- getCont
+        mEvData &lt;- getSessionData
+        case mEvData of
+          Nothing -&gt; do
+            liftIO $ setHandler $ \dat -&gt;do
+--              let cont'= cont{mfData = M.insert (typeOf dat)(unsafeCoerce dat) (mfData cont)}
+              runStateT (setSData dat &gt;&gt; runCont cont) cont
+              iob
+            return Nothing
+          Just dat -&gt; delSessionData dat &gt;&gt; return (Just  dat)
+
+
+
+getLineRef= unsafePerformIO $ newTVarIO Nothing
+
+-- for testing purposes
+option1 x  message=  inputLoop `seq` (waitEvents  $ do
+     liftIO $ putStrLn $ message++&quot;(&quot;++show x++&quot;)&quot;
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       th &lt;- unsafeIOToSTM myThreadId
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r !&gt; (&quot;received &quot; ++  show r ++  show th) of
+            (s,_):_ -&gt; if  s == x  !&gt; (&quot;waiting&quot; ++ show x)
+                     then do
+                       writeTVar  getLineRef Nothing !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry)
+     where
+     reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+option ::  String -&gt; String -&gt; TransientIO String
+option ret message= do
+    liftIO $ putStrLn $&quot;Enter &quot;++show ret++&quot;\tto: &quot; ++ message
+    waitEvents  $ getLine' (==ret)
+    liftIO $do putStrLn $ show ret ++ &quot; chosen&quot;
+    return ret
+
+getLine' :: (String-&gt;  Bool) -&gt; IO String
+getLine' cond=   inputLoop `seq` do
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       th &lt;- unsafeIOToSTM myThreadId
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            if cond r  !&gt; show (cond r)
+                     then do
+                       writeTVar  getLineRef Nothing !&gt;&quot;match&quot;
+                       return r
+
+                     else retry
+     where
+     reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+inputLoop :: IO ()
+inputLoop=  do
+    putStrLn &quot;Press end to exit&quot;
+    inputLoop'
+    where
+        inputLoop'= do
+           r&lt;- getLine                      !&gt; &quot;started inputLoop&quot;
+           if r==&quot;end&quot; then putMVar rexit () else do
+              atomically . writeTVar  getLineRef $ Just r
+              inputLoop'
+
+
+rexit= unsafePerformIO newEmptyMVar
+
+stay=  takeMVar rexit &gt;&gt; print &quot;bye&quot;
+</code></pre><h1 id="session-data"><a href="#session-data">Session data</a></h1><p>I added a type indexed map to the state so the user can store his own session data with these primitives:</p><pre><code class="haskell">    setSData :: a -&gt; TransientIO ()
+
+    getSData :: TransientIO  a</code></pre><p>Session data can be used instead of a state monad transformer for each new kind of user data.</p><p>My purpose is to create a monad for general IT purposes, for profane programmers with no knowledge of monad transformers.</p><p>Since <code>empty</code>  stop the computation but does not transport any error condition, session data can be used for this purpose:</p><pre><code class="haskell">    data Status= Error String | NoError
+
+    fail :: String -&gt; TransientIO a
+    fail msg= setSData (Error msg) &gt;&gt; empty</code></pre><p>After the execution, I can inspect the status:</p><pre><code class="haskell">    status &lt;- getSData &lt;|&gt; NoError</code></pre><p>The alternative expression is necessary since if Status has not been set, the computation would stop. <code>NoError</code> guarantee that it does not stop.</p><h1 id="de-inverting-callbacks"><a href="#de-inverting-callbacks">de-inverting callbacks</a></h1><p>So far so good. But what happens when besides dealing with raw blocking IO there is a framework that deal with some particular events, so it initiates the threads himself and expect you just to set the callbacks?</p><p>Suppose that we have this event handling setter:</p><pre><code class="haskell">     setHandlerForWatever :: (a -&gt; IO ()) -&gt; IO ()</code></pre><p>It is necessary a de-inversion call <code>whateverHappened</code> at some point of the computation may be at the beginning) so that the callback continues the monadic execution:</p><pre><code class="haskell">     do
+        somethingToDo
+        r &lt;- whatheverHappened
+        doSomethingWith r
+        ....</code></pre><p>To define the de-inverted call <code>whateverHappened</code> we use the same trick than in async, but this time there is no <code>forkIO</code> neither thread control, since the framework does it for you:</p><pre><code class="haskell">     whateverHappened= do
+        cont &lt;- getCont
+        mEvData &lt;- Just &lt;*&gt; getSData &lt;|&gt; return Nothing
+        case mEvData of
+          Nothing -&gt;  setHandlerForWhatever $\dat -&gt; do
+              runStateT ( setSData dat &gt;&gt; runTansient cont) cont
+              empty
+          Just dat -&gt; return dat</code></pre><p>Whether the framework is single threaded  or multi threaded is not important, we give it the event handlers that it need by means of continuations.</p><p>To have something more general, I defined:</p><pre><code class="haskell">   type EventSetter eventdata response= (eventdata -&gt;  IO response) -&gt; IO ()
+   type ToReturn  response=  IO response
+   
+   react
+      :: Typeable eventdata
+      =&gt; EventSetter eventdata response
+      -&gt; ToReturn  response
+      -&gt; TransientIO eventdata</code></pre><p>the second parameter is the value returned by the callback. So if you have a callback called <code>OnResponse</code></p><pre><code class="haskell">    data Control= SendMore | MoMore
+    
+    OnResponse :: (Response -&gt; IO Control) -&gt; IO()</code></pre><p>I can display all  data received  while controlling the reception this way:</p><pre><code class="haskell">    rcontrol &lt;- newMVar Control
+    
+    resp &lt;- react $ OnResponse (const $ readMVar rcontrol)
+    display resp
+    r &lt;- (option &quot;more&quot; &quot;more&quot; &gt;&gt; return SendMore) &lt;|&gt; (option &quot;stop&quot; &quot;stop&quot; &gt;&gt; return NoMore)
+    putMVar rcontrol r
+    
+    </code></pre><p>Since react set as callback all the rest of the computation and since the <code>ToReturn</code> expression is evaluated the latest, the continuation is executed and set rcontrol before  the <code>ToReturn</code> expression is evaluated.</p><p>Note that you can reassign the callback at any moment since react would set whatever continuation that is after it.</p><h1 id="conclusions-and-future-work"><a href="#conclusions-and-future-work">Conclusions and future work</a></h1><p>The code is at</p><pre><code>https://github.com/agocorona/transient</code></pre><p>My aim is to create a family of combinators for programming in industry. As I said before, that implies no monad transformers, the simplest monad that could produce the simplest error messages.</p><p>The haskell applicative, alternative, monoidal and monadic combinators when applied to a monad that  manage asynchronous IO permits multithreaded programming with little plumbing that is close to the specification level with great composability. No inversion of control means no need to deconstruct the specifications and no state machines.</p><p>This, together with the uniform and composable thread management, narrow the design space and makes the application more understandable from the requirements, and thus the technical documentation and maintenance costs are reduced to a minimum.</p><p>Note that the bulk of the programming is done in the IO monad. That is on purpose. The idea is a simple IT EDSL with the rigth effects that permit rapid and intuitive development. Additional monads can be used by running them within the IO procedures defined by the programmer if they wish. I will add some additional effects like backtracking to undo transactions and to produce execution traces. That would be the base of a new version of MFlow, my server-side framework and integration platform. The ability to perform rollbacks and respond to asynchronous events at the same time is important for cloud applications.  reader and writer  effects for any programmer need are almost trivial to implement using <code>getSData</code> and <code>setSData</code>.</p><p>Resource allocation and deallocation for file handlers etc can be done using the same strategy used for thread control, but it is more orthogonal to delegate it to the IO threads themselves. The programmer can use exceptions or monads that guarantee proper release of resources before the thread is killed.</p><p>In <code>Multithread</code> mode the single entry buffer can be overrun. It is necessary to handle this case or, else, assume that the <code>receive</code> procedure has his own buffer and his own event contention mechanism. That is the most orthogonal option.</p><p>This is huge. I plan to create interfaces for some GUI toolkit. The GUI objects will be fully composable for the first time.</p><p>Spawning threads in other machines is the next big step. <a href="http://mflowdemo.herokuapp.com/">MFlow</a> and <a href="http://tryplayg.herokuapp.com/">hplayground</a> will converge with this platform. If you want to collaborate, don´t hesitate to send me a message!</p><p>With the <code>react</code> primitive It is possible to de-invert any framework, including the callbacks of a GUI toolkit, so the widgets can be managed with Applicative and monadic combinators. hplayground does that for the Javascript callbacks and HTML forms. Since hplayground, that run in the client and MFlow that run server side share the same widget EDSL, that can be ported to a GUI, an application can run in any environment, including console applications.</p><p>Part II: <a href="https://www.schoolofhaskell.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">The hardworking programmer II: practical backtracking to undo actions</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/EDSL-for-hard-working-IT-programmers';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

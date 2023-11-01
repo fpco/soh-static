@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html><head><title>Introduction to MFlow - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/MFlow-tutoria">Introduction to MFlow</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Introduction to MFlow</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">17 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/07fa042458da083299ae0eabf9e39ec9b6a336b1">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/MFlowDSL">Previous content: MFlow as a DSL for Web applications</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction-to-the-mflow-web-framework">Introduction to the MFlow Web framework</a><ul><li><a href="#view-monad">View monad</a></li><li><a href="#flowm-monad">FlowM monad</a></li><li><a href="#example">Example</a></li><li><a href="#routes">Routes</a></li><li><a href="#session-management">Session Management</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction-to-the-mflow-web-framework"><a href="#introduction-to-the-mflow-web-framework">Introduction to the MFlow Web framework</a></h1><p>Here the basic elements of the MFlow frameworks are put in action in an example to show how easy is to create a demo app with 10+ pages.</p><p>If you don´t know Haskell and just whant to see a code example and how it works, go straight to the code example, look at it, see what happens and read what it produces. You will see that it is pretty intuitive. Once you learn the combination rules for the operators and the main primitives, you can start to play with your own applications.</p><h2 id="view-monad"><a href="#view-monad">View monad</a></h2><p>The first of the two monads is the <code>View</code> monad, that is what the widgets are made of. A widget has signature</p><pre><code class="haskell">View rendering monad returnValue</code></pre><p>Widgets are combined using monadic and applicative combinators to create  more reusable complex widgets, upto whole pages.</p><p>A page is just a complex widget. They are composed of formlet elements, that are the elementary particles that widgets are made of. A formlet is a form element or a link, that displays itself and validates the input entered. they are combined using monadic combinators, besides applicative combinators. But Widgets in MFlow also include HTML formatting. There are push widgets, Ajax-autorefreshed widgets, dynamic widgets, page flow widgets, widget containers etc. But this does not change that. These flavours of widgets are created with modifiers of ordinary widgets that are part of the EDSL in the <code>View</code> monad. This EDSL is a superset of the <a href="http://learnyouahaskell.com/functors-applicative-functors-and-monoids">applicative</a> operators used for creating <a href="http://www.haskell.org/haskellwiki/Web/Libraries/Formlets">formlets</a> in other web frameworks.</p><p>But don´t feel intimidated by these concepts. You don´t have to know the theory behind the applicative and monadic operators and formlets to create MFlow applications. Just use them. This tutorial is about how intuitive is to mix components for your needs and how nice and composable are the haskell operators for that purpose, without regard for how they work at the byte level.</p><h2 id="flowm-monad"><a href="#flowm-monad">FlowM monad</a></h2><p>The second is the <code>FlowM</code> monad, in which the navigation of the application is defined, as a sequence, with ordinary flow-control statements, much like in a console application.</p><p>The <code>FlowM</code> monad manages the synchronization of the server with the browser request. if a request comes from a previous page, the <code>flowM</code> monad will backtrack (go back) to he code of the page that handle that request. if a link point to a page down in the navigation tree, the <code>FlowM</code> monad will reach that page and will execute his view code to satisfy the  user request. That mechanism of tracking and backtracking across the navigation is part of he magic of the FlowM monad that is not explained here.</p><p>the signature of a navigation is:</p><pre><code class="haskell">FlowM rendering monad returnValue</code></pre><p>That means that a module that implement a navigation, let´s call it a 'flowlet' for example a cart check-out has this signature, is type safe and can be combined with other flowlets to create applications.</p><p>Usually flows or navigations, that is procedures in the <code>FlowM</code> monad are run with <code>runNavigation</code>. This latter expect a name for the flow, besides the monadic flow itself. <code>runNavigation</code> run the flow in a endless loop. when the flow ends, it is restarted again. About the <code>step</code> there are much to say, but at this moment let´s not enter in the details</p><p>What connect both monads is  <code>page</code> or  <code>ask</code>  (both are identical)</p><pre><code class="haskell">page :: View r m a -&gt; FlowM r m a</code></pre><p>That is, <code>page</code> get a widget, renders it in the web browser, iterates until it obtains a valid output of the kind expected and return it to the flow.</p><h2 id="example"><a href="#example">Example</a></h2><p>Here in this example you will see the basic widgets and widget combinators. You will see how pages are composed and how different pages compose a flow.</p><p>Since there is a problem with running more than one web snippet in a single tutorial, I have made this example long, but hopefully self explanatory.</p><p>There is a more advanced tutorial <a href="https://www.fpcomplete.com/user/agocorona/MFlowDSL">The MFlow DSL</a> that show  more advanced features like  persistent session data, session management, container widgets or utilities for single page development, like <code>autoRefresh</code>, <code>push</code> or <code>witerate</code>. Also I will add a tutorial for using data and databases.</p><p>But first the basics. Look at the code, run the example, see what happens and read the messages. I hope that you find it autoexplicative. Specially if you are fluent with applicative combinators, formlets and HTML. For more advanced examples look at the <a href="http://mflowdemo.herokuapp.com">MFlow demo web site</a></p><pre><code class="active haskell web">
+
+
+
+module Main where
+
+import MFlow.Wai.Blaze.Html.All
+import Data.Monoid
+
+
+main = runNavigation &quot;&quot; . step $ do
+    r &lt;- page  $  h3 &lt;&lt; &quot;Basic example with inputs and links&quot;
+              ++&gt; getString (Just &quot;text input&quot;)
+              &lt;* submitButton &quot;OK&quot;
+              
+    page $   b &lt;&lt; (&quot;you typed: &quot;++ r)
+         ++&gt; p &lt;&lt; &quot;wlink's return typed values to the flow&quot;
+         ++&gt; p &lt;&lt; &quot;in MFlow a page is a widget made of widgets&quot;
+         ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+
+    r &lt;- page $   h3 &lt;&lt; &quot;Other basic elements&quot;
+              ++&gt; p &lt;&lt; &quot; the operator (++&gt;) prepend HTML to a widget&quot;
+              ++&gt; p &lt;&lt; &quot;in this case, a field that expect an Int&quot;
+              ++&gt; getInt Nothing
+                     &lt;! [(&quot;placeholder&quot;,&quot;This is an attribute for the getInt form&quot;)]
+              &lt;* submitButton &quot;OK&quot;
+              &lt;++ p &lt;&lt; &quot;the operator (&lt;&lt;) add text to a blaze-html tag in this case&quot;
+              &lt;&gt;  p &lt;&lt; &quot;If the OverloadedStrings extension is used, this is not necessary&quot;
+              &lt;&gt;  p &lt;&lt; &quot; Note that form tags are added automatically&quot;
+
+    page $ b &lt;&lt; (&quot;you entered: &quot;++ show r) ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+
+    r &lt;- page  $   h3 &lt;&lt; &quot;Here the alternative operator (&lt;|&gt;) is used to choose between two options&quot;
+               ++&gt; wlink True  &lt;&lt; b &lt;&lt; &quot;True&quot; &lt;++ br
+               &lt;|&gt; wlink False &lt;&lt; b &lt;&lt; &quot;False&quot;
+
+    page $ b &lt;&lt; (&quot;you entered: &quot;++ show r)  ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+    -- |+|    &lt;+&gt;
+
+    r &lt;- page $ ul &lt;&lt; h3 &lt;&lt; &quot;Operators&quot;
+            ++&gt; li &lt;&lt; &quot; (&lt;&lt;&lt;) embed a widget in a tag&quot;
+            ++&gt; li &lt;&lt; &quot; (|*&gt;) intersperse a widget within a list of others&quot;
+            ++&gt; ul &lt;&lt; li &lt;&lt; &quot;in this case, a link is interspersed within a list of input fields&quot;
+            ++&gt; ((h1 &lt;&lt;&lt; wlink &quot;next&quot; &lt;&lt; b &lt;&lt; &quot;next&quot;)
+            |*&gt; [getString Nothing &lt;![(&quot;placeholder&quot;,&quot;enter field &quot;++ show i)] | i &lt;- [1..3]])
+            &lt;** submitButton &quot;OK&quot;
+
+    case r of
+      (Just _, Nothing) -&gt; return ()
+      (Nothing, Just s) -&gt; do
+                page $ p &lt;&lt; (&quot;you entered &quot; ++ s ++ &quot; in some box&quot;) 
+                   ++&gt; wlink &quot; next&quot; &lt;&lt; b &lt;&lt; &quot;next&quot;
+                return()
+
+    page $ pageFlow &quot;1&quot; $ do
+        r &lt;- h3 &lt;&lt; &quot;Page flows run a monad within a page&quot;
+             ++&gt; p &lt;&lt; &quot;note in the code that this sequence is within 'page'&quot;
+             ++&gt; p &lt;&lt; &quot;The call \&quot;pageFlow\&quot; creates a set of unique identifiers and stores&quot;
+             ++&gt; p &lt;&lt; &quot;the data entered during the steps of the pageflow&quot;
+             ++&gt; wlink True  &lt;&lt; b &lt;&lt; &quot;True&quot; &lt;++ br
+             &lt;|&gt; wlink False &lt;&lt; b &lt;&lt; &quot;False&quot;
+
+        p &lt;&lt; &quot;Until the first line is not validated, the second does not execute&quot;
+          ++&gt; p &lt;&lt; (&quot;you entered: &quot;++ show r)  ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+    page $ pageFlow &quot;2&quot; $ do
+        h2 &lt;&lt; &quot;Field validators&quot; ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+        r &lt;- p &lt;&lt; &quot;this field expect a string less than 5 characters. Otherwise it present a alert message&quot;
+             ++&gt; getString Nothing
+                `validate`
+                (\r -&gt; if length r &gt; 5 then return . Just $ script &lt;&lt; &quot;alert ('length must be lsst than five chars ')&quot;
+                                       else return Nothing)
+             &lt;* submitButton &quot;OK&quot;
+
+        p &lt;&lt; (&quot;you entered: &quot;++ show r) ++&gt; wlink () &lt;&lt; p &lt;&lt; &quot;next&quot;
+
+
+    page $ pageFlow &quot;3&quot; $ do
+        h3 &lt;&lt; &quot;A select/option box&quot; ++&gt; wlink () &lt;&lt; b &lt;&lt; &quot;click&quot; &lt;++ br
+        r &lt;- getSelect
+                        (setSelectedOption &quot;&quot; (p &lt;&lt; &quot;select a option&quot;)   &lt;|&gt;
+                         setOption &quot;red&quot;      (b &lt;&lt; &quot;red&quot;)               &lt;|&gt;
+                         setOption &quot;blue&quot;     (b &lt;&lt; &quot;blue&quot;)              &lt;|&gt;
+                         setOption &quot;Green&quot;    (b &lt;&lt; &quot;Green&quot;))
+                         &lt;! [(&quot;onchange&quot;,&quot;this.form.submit()&quot;)]
+
+        p &lt;&lt; (r ++ &quot; selected&quot;) ++&gt; wlink () &lt;&lt; p &lt;&lt;  &quot;next&quot;
+
+    let colors= getCheckBoxes(  (setCheckBox False &quot;Red&quot;   &lt;++ b &lt;&lt;  &quot;red&quot;)
+                             &lt;&gt; (setCheckBox False &quot;Green&quot; &lt;++ b &lt;&lt;  &quot;green&quot;)
+                             &lt;&gt; (setCheckBox False &quot;blue&quot;  &lt;++ b &lt;&lt;  &quot;blue&quot;))
+
+    page $ pageFlow &quot;4&quot; $ do
+        h2 &lt;&lt; &quot;checkboxes&quot; ++&gt; wlink () &lt;&lt; b &lt;&lt; &quot;click&quot; &lt;++ br
+
+        r &lt;- colors &lt;** submitButton &quot;submit&quot;
+
+        p &lt;&lt; (show r ++ &quot; selected&quot;) ++&gt; wlink () &lt;&lt; p &lt;&lt;  &quot; next&quot;
+
+   
+    page $ pageFlow &quot;5&quot; (do
+       h3 &lt;&lt; &quot;A mix of applicative and monadic operators can be used to create multiple pageflows within a page&quot; 
+        ++&gt; b &lt;&lt; &quot;here two pageflows in a form are composed with an alternative operator&quot;
+        ++&gt; wlink &quot;&quot; &lt;&lt; p &lt;&lt; &quot;click here&quot;
+       (pageFlow &quot;colors&quot; (do
+         r &lt;- colors &lt;++ br
+         p &lt;&lt; (show r ++ &quot;selected&quot;) ++&gt; noWidget &lt;++ br)
+        &lt;|&gt;
+        pageFlow &quot;input&quot; (do
+         r &lt;- getString Nothing  &lt;++ br
+         p &lt;&lt; (show r ++&quot;entered&quot;) ++&gt; noWidget &lt;++ br)
+        &lt;* submitButton &quot;OK&quot; ))
+     &lt;|&gt; br ++&gt; wlink &quot;next&quot; &lt;&lt; b &lt;&lt; &quot;back to the beginning&quot;
+
+    return ()
+
+    
+
+    </code></pre><p>You can press the back button at any time and redo each example if you wish.</p><p>After this hopefully self explanatory example, let´s talk about how some functionalities of other web frameworks are carried out in MFlow.</p><h2 id="routes"><a href="#routes">Routes</a></h2><p>A route is expressed in MFlow as a case statement depending on the return value of a menu page. There is no special syntax for it. It is just part of the navigation. Like any monadic computation in Haskell, a navigation is type safe.</p><p>This navigation define three routes and a menu page:</p><pre><code class="haskell">
+data Option= Option1 | Option2
+
+main = runNavigation &quot;verb&quot; . step $ do
+    r &lt;- page  $   h3 &lt;&lt; &quot;Here the alternative operator is used to choose between two options&quot;
+               ++&gt; wlink Option1 &lt;&lt; b &lt;&lt; &quot;Choose Option1&quot; &lt;++ br
+               &lt;|&gt; wlink Option2 &lt;&lt; b &lt;&lt; &quot;Choose Option2&quot;
+
+    case r of
+       Option1 -&gt; proc1
+       Option2 -&gt; proc2
+</code></pre><p>URLs which start with <code>http://host/verb/option1/...</code>  will go straight to <code>proc1</code>. The web browser will not display the menu. That is the magic of the tracking mechanism of MFlow. As you would expect, URLs which star with <code>http://host/verb/option2/..</code> will go strigh to <code>proc2</code>. But the URL <code>http://host/verb</code> will go to the initial menu.</p><p>The same result would be achieved using <code>waction</code> instead of the case statement.</p><pre><code class="haskell">
+wlink x &lt;&lt; rendering `waction` proc
+   </code></pre><p>Would execute the navigation proc with the parameter <code>x</code> when the link is pressed. the whole expression is a widget that can be used instead of <code>wlink x</code> alone. The advantage is that the widget defines its own navigation, and permits the creation of pages that import widgets with complex behavious whose details the programmer of the application should not be aware of.  However Page flows and <code>wcallback</code> can do it with less power.</p><p>The tree of routes can be as complex as you wish simply adding additional layers of menus. It is like the traditional procedural console oriented business after all. But you can press the back button or enter any arbitrarily REST URL to reach any of the options on the tree, as long as the navigation to the destination page is made of links.</p><p>If instead of &quot;verb&quot; runNavigation receives an empty string, the verb &quot;noscrip&quot; will be assumed. Besides the main flow defined within <code>runNavigation</code> there may be other auxiliary flows for auxiliary purposes. Push widgets install themselves as independent flows. A widget that uses AJAX may need to install a process to serve the request. that is created dynamically with the <code>requires</code> call. that´s why the main flow need an identifier: to separate the routes in the main flow from the others in auxiliary processes.</p><p>In the last version of MFlow, the default flow is ever the one specified by <code>runNavigation</code> unless the verb &quot;&quot; is used, in which case the default flow is &quot;noscript&quot; for back compatibility.</p><p>Since <code>runNavigation</code> execute the flow in a loop, to create an stateless procedure simulating a MVC framework with a single route, it is simple a matter of criating a navigation with a single page.</p><h2 id="session-management"><a href="#session-management">Session Management</a></h2><p>the session in MFlow  is the monadic procedure in the <code>FlowM</code> monad. The session data is in normal procedure variables, as in any procedure. That is a big advantage over MVC frameworks, where pages does not share variable scopes and the concept of flow is inexistent. The session state has to be stored in untyped collections accessed by a key string.</p><p>This snippet are three pages , the two first ask for a number. The third sum them.  To see it running go to <a href="https://www.fpcomplete.com/user/agocorona/MFlowDSL">The MFlow DSL</a></p><pre><code class="haskell">
+{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step $ do
+       n  &lt;- page $ getInt Nothing &lt;** submitButton &quot;first&quot;
+       n' &lt;- page $ getInt Nothing &lt;** submitButton &quot;second&quot;
+       page $ p &lt;&lt; ( n+n') ++&gt; wlink () &quot;click&quot;</code></pre><p>The two numbers are managed as in any other monadic procedure. However, since the FlowM monad backtrack, the session is managed as expected: If after showing the sum you go back and enter a new second number, the sum of the first and the new second will appear. And so on.</p><p>But sometimes is necessary to &quot;transport&quot; data among procedures, and to pass data as parameters among multiple functions can be tedious and inelegant. in Haskell, there is the state monad. The user is free to use it, but it is too technical for people that want just to use MFlow as a DSL to get their application easy and fast. For this purpose exist <code>getSessionData</code> and <code>setSessionData</code>.</p><p>This example does the same than the previous example:</p><pre><code class="haskell">
+{-# LANGUAGE OverloadedStrings #-}
+
+import MFlow.Wai.Blaze.Html.All
+
+main= runNavigation &quot;&quot; . step $ do
+       n  &lt;- page $ getInt Nothing &lt;** submitButton &quot;first&quot;
+       n' &lt;- page $ getInt Nothing &lt;** submitButton &quot;second&quot;
+       setSessionData (n,n')
+       computeSum
+
+computeSum= do
+       (n,n') &lt;- getSessionData `onNothing` return (0:: Int,0 ::Int)
+       page $ p &lt;&lt; ( n+n') ++&gt; wlink () &quot;click&quot;</code></pre><p>To see it running, go to <a href="https://www.fpcomplete.com/user/agocorona/MFlowDSL">The MFlow DSL</a></p><p><code>getSessionData</code>, in this case, look for a tuple of two Ints . if <code>setSessionData</code> did not store two integers previously, then onNothing will return (0,0) . That was not the case. computeSum can be called without parameters because the two integers are in the session state. The session state is navigation-wide.</p><p>These primitives can be used in both sides of <code>page</code>. If the user press the back button, the session state may backtrack or not depending on if you read it in one side or in the other. When going back, the only code executed is the code in the right of <code>page</code>. If <code>getSessionData</code> is there, it will retrieve the last state no matter if it is going back. This is the way to keep the user-defined state actualized to the last value when pressing the back button. Otherwise, if <code>getSessionData</code>is in the left of <code>page</code>, the session data will be the one that the page had when was presented previously. <a href="http://haskell-web.blogspot.com.es/2013/04/more-on-session-management-in-mflow.html">For more details</a>
+The session state can be made persistent. for example, if a timeout occurs or the server shut dowm, the, session state can be logged with <code>step</code>. For an explanation of this go th the next tutorial: <a href="https://www.fpcomplete.com/user/agocorona/MFlowDSL">The MFlow DSL</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/MFlow-tutoria';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

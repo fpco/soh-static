@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html><head><title>Algo sobre listas y todo sobre funciones - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3">Parte 3</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3/tutorial">Algo sobre listas y todo sobre funciones</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Algo sobre listas y todo sobre funciones</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Sep 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/37a6459db25590e5e4bc6f4d9b555eec41cd85b0">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3">Go up to: Parte 3</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#listas">Listas</a><ul><li><a href="#anexar-y-concatenar--append-and-concatenate-----and----">Anexar y concatenar (append and concatenate) (: and ++)</a></li><li><a href="#b-squeda-de-patrones-sobre-el-az-car-sint-ctico-de-las-listas">Búsqueda de patrones sobre el azúcar sintáctico de las listas</a></li></ul></li><li><a href="#el-resto-sobre-funciones">El resto sobre funciones</a><ul><li><a href="#composici-n-de-funciones">Composición de funciones</a></li><li><a href="#funciones-an-nimas">Funciones anónimas</a></li><li><a href="#funciones-de-orden-superior">Funciones de orden superior</a><ul><li><a href="#funciones-que-producen-funciones-como-su-salida">Funciones que producen funciones como su salida</a><ul><li><a href="#aplicaci-n-parcial--partial-application-">Aplicación parcial (partial application)</a></li><li><a href="#eta-reduction">Eta reduction</a></li></ul></li><li><a href="#funciones-que-al-menos-uno-de-sus-par-metros-es-una-funci-n">Funciones que al menos uno de sus parámetros es una función</a><ul><li><a href="#map">map</a></li><li><a href="#fold">fold</a></li></ul></li></ul></li><li><a href="#gu-a-para-escribir-funciones">Guía para escribir funciones</a></li></ul></li><li><a href="#ejercicios">Ejercicios</a></li><li><a href="#siguiente-parte">Siguiente parte</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>En el tutorial pasado vimos algunos puntos importantes sobre las funciones de Haskell:</p><ul><li>Sólo reciben un valor y producen un valor</li><li>Su firma tiene la forma <code>functionName :: T1 -&gt; T2 -&gt; ... -&gt; Tn -&gt; R</code> que es &quot;azúcar sintáctico&quot; (&quot;syntactic sugar&quot;) para <code>functionName :: T1 -&gt; (T2 -&gt; (... -&gt; (Tn -&gt; R)))</code>. De esto surge el fenómeno llamado &quot;aplicación parcial&quot; (&quot;partial application&quot;), que no es más que aplicar un argumento a una función para que pase de ser <code>functionName :: T1 -&gt; (T2 -&gt; (... -&gt; (Tn -&gt; R)))</code> a <code>functionName :: T2 -&gt; (... -&gt; (Tn -&gt; R))</code>.</li></ul><p>En este tutorial iremos más allá y exploraremos los conceptos restantes sobre las funciones en Haskell, los cuales no quedan muchos en realidad. Al final de este tutorial, conocerás todo lo que necesitas saber sobre las funciones de Haskell, pero primero, exploraremos el concepto de listas en Haskell.</p><h1 id="listas"><a href="#listas">Listas</a></h1><p>Ya habrás notado que las listas se expresan en Haskell utilizando <code>[</code> y <code>]</code> para denotar el inicio y el fin de la lista y <code>,</code> para separar los elementos de la lista siendo definida. Pero la verdad es que esto no es más que azúcar sintáctico, pues la lista podría definirse con la siguiente estructura:</p><pre><code class="haskell">List a = Cons a (List a) | Nil</code></pre><p>Algunos ejemplos de listas que podriamos representar de esta manera:</p><ul><li><code>[]              = Nil</code></li><li><code>[1]             = Cons 1 Nil</code></li><li><code>[1, 2, 3]       = Cons 1 (Cons 2 (Cons 3 Nil))</code></li><li><code>[[1], [2], [3]] = Cons (Cons 1 Nil) (Cons (Cons 2 Nil) (Cons (Cons 3 Nil) Nil))</code></li><li><code>[[1], [2, 3]]     = Cons (Cons 1 Nil) (Cons (Cons 2 (Cons 3 Nil)) Nil)</code></li></ul><p>Pero la verdad es que <b>no hay razón de lidiar con esto, el azúcar sintáctico de Haskell es suficente</b>. Lo único importante es no olvidar que cuando veamos <code>[]</code> o <code>[x]</code> o <code>[x, ...]</code> no es más que eso, azúcar sintáctico para una estructura de datos que se podría definir con los tipos algebraicos que ya conocemos.</p><h2 id="anexar-y-concatenar--append-and-concatenate-----and----"><a href="#anexar-y-concatenar--append-and-concatenate-----and----">Anexar y concatenar (append and concatenate) (<code>:</code> and <code>++</code>)</a></h2><p>Para añadir un elemento al inicio de una lista, existe el operador infijo <code>(:) :: a -&gt; [a] -&gt; [a]</code>. E.g. <code>1:[2,3] = [1,2,3]</code>.
+Para concatenar listas, existe el operador <code>++</code>. E.g. <code>[1]++[2,3] = [1,2,3]</code>. Dado que <code>String</code> es un sinónimo de <code>[Char]</code>, también se utiliza el operador <code>++</code> para concatenar strings. E.g. `&quot;Hello,&quot; ++ &quot; World!&quot; = &quot;Hello, World!&quot;.</p><h2 id="b-squeda-de-patrones-sobre-el-az-car-sint-ctico-de-las-listas"><a href="#b-squeda-de-patrones-sobre-el-az-car-sint-ctico-de-las-listas">Búsqueda de patrones sobre el azúcar sintáctico de las listas</a></h2><p>No se podría usar el azúcar sintáctico para las listas si no hubiera también un método para hacer búsqueda de patrones sobre este. A continuación veremos ejemplificado en una función <code>f</code> todos los casos de búsqueda de patrones sobre una lista.</p><pre><code class="haskell">f :: [a] -&gt; String
+f [] = &quot;The list is empty (n = 0)&quot;
+f [x] = &quot;The list contains exactly one element (n = 1)&quot;
+f [x1, x2] = &quot;The list contains exactly two elements (n = 2)&quot;
+-- etc.
+f (x1:xs) = &quot;The list contains at least one element. xs could be [] (n &gt;= 1)&quot;
+f (x1:x2:xs) = &quot;The list contains at least two elements. xs could be [] (n &gt;= 2)&quot;
+-- etc.</code></pre><p>Pero esta definición tiene varios problemas:</p><ul><li><code>[x]</code> no dejaría que <code>(x1:xs)</code> haga match en el caso de una lista con un elemento simplemente porque <code>[x]</code> aparece primero en la definición de <code>f</code>; se dice que los patrones se &quot;empalman&quot;.</li><li>Lo mismo sucede con <code>[x1, x2]</code> y <code>(x1:x2:xs)</code>; <code>[x1, x2]</code> no dejaría que <code>(x1:x2:xs)</code> haga match en el caso de una lista con dos elementos simplemente porque <code>[x1, x2]</code> aparece primero en la definición de <code>f</code>.</li><li>Además, todas las listas que hagan match con <code>(x1:xs)</code> hacen match con <code>(x1:x2:xs)</code>, por lo que <code>(x1:xs)</code> inutiliza a <code>(x1:x2:xs)</code>. En general, una vez que vemos <code>:xs</code>, ya estamos capturando cualquier lista, sea vacia (<code>Nil</code>) o no (<code>Cons _ _</code>).</li></ul><p>Así que para ver dichos patrones realmente en acción, lo haremos en dos funciones, <code>f1</code> y <code>f2</code>, para evitar empalmes.</p><pre><code class="active haskell">f1 :: [a] -&gt; String
+f1 [] = &quot;The list is empty (n = 0)&quot;
+f1 [x] = &quot;The list contains exactly one element (n = 1)&quot;
+f1 [x1, x2] = &quot;The list contains exactly two elements (n = 2)&quot;
+f1 (x1:x2:xs) = &quot;The list contains at least two elements (n &gt;= 2)&quot;
+
+f2 :: [a] -&gt; String
+f2 [] = &quot;The list is empty (n = 0)&quot;
+f2 [x] = &quot;The list contains exactly one element (n = 1)&quot;
+f2 (x1:x2:x3:xs) = &quot;The list contains at least three elements (n &gt;= 3)&quot;
+f2 _ = &quot;The list contains 2 elements (n = 2)&quot; -- by discard
+
+main = do
+  putStrLn (&quot;f1 [] = &quot;        ++ (f1 []))
+  putStrLn (&quot;f1 [1] = &quot;       ++ (f1 [1]))
+  putStrLn (&quot;f1 [1,2] = &quot;     ++ (f1 [1,2]))
+  putStrLn (&quot;f1 [1,2,3] = &quot;   ++ (f1 [1,2,3]))
+  putStrLn (&quot;f1 [1,2,3,4] = &quot; ++ (f1 [1,2,3,4]))
+
+  putStrLn (&quot;f2 [] = &quot;        ++ (f2 []))
+  putStrLn (&quot;f2 [1] = &quot;       ++ (f2 [1]))
+  putStrLn (&quot;f2 [1,2] = &quot;     ++ (f2 [1,2]))
+  putStrLn (&quot;f2 [1,2,3] = &quot;   ++ (f2 [1,2,3]))
+  putStrLn (&quot;f2 [1,2,3,4] = &quot; ++ (f2 [1,2,3,4]))</code></pre><h1 id="el-resto-sobre-funciones"><a href="#el-resto-sobre-funciones">El resto sobre funciones</a></h1><p>Ahora que ya conocemos más sobre las listas en Haskell, será más fácil hablar sobre los siguientes temas.</p><h2 id="composici-n-de-funciones"><a href="#composici-n-de-funciones">Composición de funciones</a></h2><p>La <b><i>composición de funciones</i></b> (<b><i>function composition</i></b>) es una manera de expresar que el resultado de una función <code>f</code> es la entrada de otra función <code>g</code>. En Haskell tiene esta sintaxis: <code>g.f</code>.
+A continuación, un ejemplo.</p><pre><code class="active haskell">f s = &quot;Hello, &quot; ++ s
+g s = s ++ &quot;!&quot;
+gf  = g.f
+
+main =
+  do
+    putStrLn (g (f &quot;World&quot;))
+    putStrLn (gf &quot;World&quot;)</code></pre><p>Para poder componer una función con otra, es importante que el tipo de salida de la primer función, sea igual al tipo de entrada de la segunda.
+Otro ejemplo.</p><pre><code class="active haskell">
+increaseOne :: Int -&gt; Int
+increaseOne n = n + 1
+
+intToStr :: Int -&gt; String
+intToStr i = show i
+
+g :: String -&gt; String
+g s = s ++ &quot;!&quot;
+
+f :: Int -&gt; String
+f = g.intToStr.increaseOne
+
+main =
+  do
+    putStrLn (f 9)
+    putStrLn (g (intToStr (increaseOne 9)))</code></pre><p>En este caso, estamos componiendo <i>tres</i> funciones; nuevamente, la composicióne es posible por que se respetó la regla de que el tipo de salida de una función debe ser igual al tipo de entrada de la siguiente:</p><pre><code class="haskell">increaseOne :: Int -&gt; Int
+intToStr    ::        Int -&gt; String
+g           ::               String -&gt; Int</code></pre><p>Para demostrar un caso en el que la composición no se logra por no respetar los tipos de las funciones, cambiaremos el orden de composición del ejemplo pasado por este (<code>g.increaseOne.intToStr</code>):</p><pre><code class="haskell">intToStr    :: Int -&gt; String
+increaseOne ::        Int    -&gt; Int            -- Type mismatch! String != Int
+g           ::                  String -&gt; Int  -- Type mismatch! Int    != String
+</code></pre><p>Demostración del error al compilar por no respetar los tipos:</p><pre><code class="active haskell">
+increaseOne :: Int -&gt; Int
+increaseOne n = n + 1
+
+intToStr :: Int -&gt; String
+intToStr i = show i
+
+g :: String -&gt; String
+g s = s ++ &quot;!&quot;
+
+f :: Int -&gt; String -- not really (type error)
+f = {-hi-}g.increaseOne.intToStr{-/hi-}
+
+main =
+  do
+    putStrLn (f 9)</code></pre><h2 id="funciones-an-nimas"><a href="#funciones-an-nimas">Funciones anónimas</a></h2><p>Ponerle nombre a los objetos es uno de los métodos de abstracción mencionados en el primer tutorial, recordaremos que su función es poder hacer referencia a dicho objeto en otras partes. Cuando una función es simple (no necesita un nombre que nos recuerdo su funcionamiento) y sólo se va a utilizar una vez, podemos evitarnos usar un nombre y podemos expreserla directamente mediante una <b><i>funcion anónima</i></b> (<b><i>anonymous function</i></b>). Su sintaxis es sencilla; una función anónima de <b>n</b> parámetros tiene la siguiente forma <code>\p1 p2 ... pn -&gt; haskellExpression</code>. En el siguiente tema, veremos ejemplos donde las funciones anónimas son de utilidad.</p><h2 id="funciones-de-orden-superior"><a href="#funciones-de-orden-superior">Funciones de orden superior</a></h2><p>Una función de orden superior es aquella que:</p><ul><li>Produce una función como su salida</li><li>Alguno de sus parámetros es una función</li></ul><h3 id="funciones-que-producen-funciones-como-su-salida"><a href="#funciones-que-producen-funciones-como-su-salida">Funciones que producen funciones como su salida</a></h3><p>En Haskell, todas las funciones que toman más de un parámetro forman parte de este grupo. Como ya habíamos dicho, una función de <b>n</b> parámetros que produce un valor de tipo <b>R</b> tiene esta signatura:
+<code>:: P1 -&gt; (P2 -&gt; (... -&gt; R))</code>; es sólo por el azúcar sintáctico que podemos escribir su firma de esta manera: <code>:: P1 -&gt; P2 -&gt; ... -&gt; R</code>. Esto nos permite 2 cosas:</p><ul><li><b><i>Aplicación parcial</i></b> (<b><i>partial application</i></b>)</li><li><b><i>Eta reduction</i></b></li></ul><h4 id="aplicaci-n-parcial--partial-application-"><a href="#aplicaci-n-parcial--partial-application-">Aplicación parcial (partial application)</a></h4><p>La aplicación parcial consiste en aplicar sólo los primeros <b>k</b> parámetros de <b>n</b> que tome una función, donde <b><i>k &lt; n</i></b>. Es decir, no aplicar todos los parámetros. Ejemplo:</p><pre><code class="active haskell">data Color = Black | White | Gray
+
+colorToStr c = case c of
+               Black -&gt; &quot;Black&quot;
+               White -&gt; &quot;White&quot;
+               Gray  -&gt; &quot;Gray&quot;
+
+introduction :: String -&gt; (Int -&gt; (Color -&gt; String))
+introduction name age color =
+    &quot;Hi, I'm &quot; ++ name ++ &quot;. &quot;
+    ++ &quot;I'm &quot; ++ (show age) ++ &quot; years old &quot;
+    ++ &quot;and my favorite color is &quot; ++ (colorToStr color)
+
+introduction1 :: Int -&gt; (Color -&gt; String)
+introduction1 = introduction &quot;Pluto&quot;
+
+introduction2 :: Color -&gt; String
+introduction2 = introduction1 3
+
+introduction3 = introduction2 Gray
+
+main = putStrLn introduction3</code></pre><p>Podemos ver como pudimos hacer <i>aplicación parcial</i> de sus parámetros uno por uno; cada vez que aplicabamos un parámetro, el tipo se reducía:</p><pre><code class="haskel">introduction  :: String -&gt; (Int -&gt; (Color -&gt; String))
+introduction1 ::            Int -&gt; (Color -&gt; String)  -- after applying a  String
+introduction2 ::                    Color -&gt; String   -- after applying an Int
+introduction3 ::                             String   -- after applying a  Color</code></pre><p>La <i>aplicación parcial</i> es especialmente útil para reutilizar alguna de las funciones intermedias:</p><pre><code class="active haskell">data Color = Black | White | Gray
+
+colorToStr c = case c of
+               Black -&gt; &quot;Black&quot;
+               White -&gt; &quot;White&quot;
+               Gray  -&gt; &quot;Gray&quot;
+               
+introduction :: String -&gt; (Int -&gt; (Color -&gt; String))
+introduction name age color =
+    &quot;Hi, I'm &quot; ++ name ++ &quot;. &quot;
+    ++ &quot;I'm &quot; ++ (show age) ++ &quot; years old &quot;
+    ++ &quot;and my favorite color is &quot; ++ (colorToStr color)
+
+introduction1 :: Int -&gt; (Color -&gt; String)
+introduction1 = introduction &quot;Pluto&quot;
+
+introduction2 :: Color -&gt; String
+introduction2 = introduction1 3
+
+-- reuse introduction2:
+introduction31 = {-hi-}introduction2{-/hi-} Gray
+introduction32 = {-hi-}introduction2{-/hi-} White
+
+main =
+  do
+    putStrLn introduction31
+    putStrLn introduction32</code></pre><h4 id="eta-reduction"><a href="#eta-reduction">Eta reduction</a></h4><p>Omitir un parámetro en la definición de una función se llama <b>eta reduction</b>; esto nos permite escribir código con menos ruido al no tener que estar escribiendo los parametros ni del lado izquierdo ni del lado derecho de una función. Por ejemplo, <code>plusOne n = (+) 1 n</code> y <code>plusOne = (+) 1</code> son equivalentes.</p><p>Ahora, otro caso más desarrollado.
+Supongamos que tenemos una función <code>lengthIs</code> que recibe una lista (<code>[a]</code>) y un entero (<code>Int</code>) y produce un booleano (<code>Bool</code>) que indique si el tamaño de la lista es igual al entero recibido:</p><pre><code class="active haskell">lengthIs :: [a] -&gt; Int -&gt; Bool
+lengthIs l n = length l == n
+
+main = putStrLn (show (lengthIs [1, 2, 3] 3))</code></pre><p>Lo cual es igual a (usando <code>==</code> como función en vez de como operador infijo):</p><pre><code class="active haskell">lengthIs :: [a] -&gt; Int -&gt; Bool
+{-hi-}lengthIs l n = (==) (length l) n{-/hi-}
+
+main = putStrLn (show (lengthIs [1, 2, 3] 3))</code></pre><p>Ahora podemos realizar <b>eta reduction</b> y eliminar el último parámetro de <code>lengthIs</code>.</p><pre><code class="active haskell">lengthIs :: [a] -&gt; Int -&gt; Bool
+{-hi-}lengthIs l = (==) (length l){-/hi-}
+
+main = putStrLn (show (lengthIs [1, 2, 3] 3))</code></pre><p>Lo cual es igual a (usando composición de funciones):</p><pre><code class="active haskell">lengthIs :: [a] -&gt; Int -&gt; Bool
+{-hi-}lengthIs = (==) . length{-/hi-}
+
+main = putStrLn (show (lengthIs [1, 2, 3] 3))</code></pre><p>Nótese como al aplicar la transformación <i>composición de funciones</i>, nuevamente desaparece un parámetro. Con esto, ya tenemos una definición muy sucinta de <code>lengthIs</code>; el nombre de <code>lengthIs</code> junto con su tipo nos da una idea bastante clara de lo que hace: <code>lengthIs :: [a] -&gt; Int -&gt; Bool</code>.</p><blockquote><p>Es muy importante recordar que <i>eta reduction</i> se aplica siempre al último parámetro de una función, el cual es el primer argumento en ser aplicado. Se debe tener esto en mente al decidir el órden de los parámetros de una función</p></blockquote><h3 id="funciones-que-al-menos-uno-de-sus-par-metros-es-una-funci-n"><a href="#funciones-que-al-menos-uno-de-sus-par-metros-es-una-funci-n">Funciones que al menos uno de sus parámetros es una función</a></h3><p>Poder explicar este tipo de funciones es la razón principal por la que introdujimos &quot;algo sobre listas&quot;, pues las funciones de orden superior de este tipo son particularmente útil para trabajar con datos recursivos, como lo son las listas.</p><p>A continuación veremos los conceptos de <b><i>map</i></b> y <b><i>fold</i></b> para listas.</p><blockquote><p>En el tutorial siguiente (Clases de tipos), veremos que <i>fold</i> y una versión más general de <code>map</code> (<code>fmap</code>) aplican no sólo para listas, sino para toda una clase de tipos.</p></blockquote><h4 id="map"><a href="#map">map</a></h4><p><code>map</code> se utiliza para aplicar una función a todos los elementos de una lista; el resultado de <code>map f [x, y, ..., z]</code> sería <code>[f x, f y, ..., f z]</code>. La definición de map es:</p><pre><code class="haskell">map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+map f [] = []
+map f (x:xs) = f x : fmap f xs</code></pre><p>Y algunas ejemplificaciones de sus usos:</p><pre><code class="active haskell">import GHC.Unicode
+main = do
+  putStrLn (show (map (+ 1) [1,-2,3]))
+  putStrLn (show (map (&gt; 0) [1,-2,3]))
+  putStrLn (map toUpper &quot;hello, world!&quot;) -- toUpper converts a char to its upper case form</code></pre><blockquote><p>Recuerda que un <code>String</code> es una lista de <code>Char</code>s (<code>[Char]</code>), por lo que podemos utilizar <code>map</code> para <code>String</code>s.</p></blockquote><h4 id="fold"><a href="#fold">fold</a></h4><p>La operación <i>fold</i> se refiere a obtener un valor resumen dado un conjunto de valores. Para listas existen dos versiones de <i>fold</i>: <code>foldl</code> y <code>foldr</code>. Para obtener el valor resumen, el usuario de <code>foldl</code> o <code>foldr</code> debe de proporcionar cual es el valor inicial y una función que los vaya acumulando. Por ejemplo:</p><pre><code class="active haskell">main = putStrLn (show (foldl (+) 0 [1,2,3]))</code></pre><p>Aquí, le indicamos a <code>foldl</code> que utilizaremos a la suma (<code>(+)</code>) para &quot;acumular&quot; los valores y que el <code>0</code> será nuestro valor inicial.</p><p>La definición de <code>foldl</code> para listas es la siguiente:</p><pre><code class="haskell">foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b
+foldl _ acum [] = acum
+foldl f acum (x:xs) = foldl f (f acum x) xs</code></pre><p>Entonces, se puede ver que <code>main = putStrLn (show (foldl (+) 0 [1,2,3]))</code> se ejecuta como <code>(((0 + 1) + 2) + 3)</code>.</p><p><code>foldr</code> es como <code>foldl</code> pero invertida tanto la asociatividad como el orden de los operandos, entonces, <code>main = putStrLn (show (foldr (+) 0 [1,2,3]))</code> se ejecutaría como <code>(0 + (1 + (2 + 3)))</code>. En este caso, el resultado es nuevamente <code>6</code>, pero no siempre el resultado es el mismo, depende de que función utilizemos para &quot;doblar&quot; los valores; por ejemplo, la división (<code>(/)</code>) no es comutativa, por lo tanto, usar <code>foldl (/)</code> es diferente a <code>foldr (/)</code>.</p><pre><code class="active haskell">main =
+  do
+    putStrLn (show (foldl (/) 1 [2,3,4])) -- ((1/2)/3)/4
+    putStrLn (show (foldr (/) 1 [2,3,4])) -- 2/(3/(4/1))
+    
+    --  ______ foldl ______  |  ______ foldr ______
+    --   1     / 2  = 0.50   |    4 / 1    = 4
+    --   0.50  / 3  = 0.16…  |    3 / 4    = .75
+    --   0.16… / 4  = 0.416… |    2 / 0.75 = 2.66…</code></pre><p>Un ejemplo más de <code>foldr</code>, esta vez aprovechando que el tipo del valor de resumen no tiene que ser el mismo que el de los valores de la lista.</p><pre><code class="active haskell">andGTZero = (&amp;&amp;).(&gt; 0)
+main =
+  do
+    putStrLn (show (foldr andGTZero True [1,2,4]))
+    putStrLn (show (foldr andGTZero True [1,2,-4]))</code></pre><p>Aunque la lista que &quot;doblamos&quot; es de enteros (<code>[Int]</code>), el tipo del resumen es <code>Bool</code>.</p><p>Aun cuando la función que utilizemos sea commutativa (y por lo tanto no importa si se utiliza asociatividad por la izquierda o por la derecha), se debe tomar en cuenta la eficiencia al decidir usar <code>foldl</code> o <code>foldr</code>. Como ejemplo, tomemos la operación de concatenación (<code>(++)</code>); No es lo mismo <code>[1]++[2,3,4,5]</code> que <code>[1,2,3,4]++[5]</code> en cuanto al tiempo que toma calcularse, pues para concatenar una lista, se requiere recorrer toda la primer lista hasta encontrar donde se conectará con la segunda.</p><pre><code class="active haskell">import Criterion.Measurement
+-- show
+import Data.Functor
+import Data.List.Split
+
+manyLists = chunksOf 1 (take 10000 [1,2 ..])
+
+f1  = length (fold{-hi-}l{-/hi-} (++) [0] manyLists)
+f2  = length (fold{-hi-}r{-/hi-} (++) [0] manyLists)
+
+-- Some trickery not shown for measuring time using Criterion.Measurement
+-- /show
+main =
+  do
+    initializeTime
+    t0  &lt;- getTime
+    putStrLn (&quot;f1 = &quot; ++ show f1)
+    f1r &lt;- return.show $ f1
+    t1  &lt;- getTime
+    putStrLn (&quot;f2 = &quot; ++ show f2)
+    t2  &lt;- getTime
+
+    putStrLn (&quot;f1 took ~&quot; ++ (secs (t1 - t0)))
+    putStrLn (&quot;f2 took ~&quot; ++ (secs (t2 - t1)))</code></pre><h2 id="gu-a-para-escribir-funciones"><a href="#gu-a-para-escribir-funciones">Guía para escribir funciones</a></h2><ul><li>Una función debe de producir una salida válida para toda entrada <a href="http://math.stackexchange.com/questions/1429972/why-dont-we-have-an-analogous-of-rangecodomain-for-domain/1429979#comment2913299_1429972">1</a>.</li><li>Encontrar el balance adecuado entre eficiencia e inteligibilidad. Es importante considerar la etapa del producto; ¿es un prototipo? ¿es crítico no cometer errores? ¿cuál es el tiempo de vida estimado de la función?</li><li>El orden de los parámetros importa. El orden de los parámetros determina como se hará la <i>aplicación parcial</i> y la composición.</li></ul><h1 id="ejercicios"><a href="#ejercicios">Ejercicios</a></h1><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3/ejercicios">Ejercicios</a></p><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3/soluciones">Soluciones</a></p><h1 id="siguiente-parte"><a href="#siguiente-parte">Siguiente parte</a></h1><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4/tutorial">Cuarta parte</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/parte-3/tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

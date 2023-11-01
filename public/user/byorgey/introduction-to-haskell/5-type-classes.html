@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html><head><title>5: Type Classes - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/byorgey">Brent Yorgey</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell">Introduction to Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/5-type-classes">5: Type Classes</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">5: Type Classes</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 8 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/byorgey">Brent Yorgey</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/32/5697fb1ebbc040b81d2087fae86fc2cea0daf9aa">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/4-higher-order-programming-and-type-inference">Previous content: 4: Higher-order programming and type inference</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell/6-laziness">Next content: 6: Laziness</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey/introduction-to-haskell">Go up to: Introduction to Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/byorgey">See all content by Brent Yorgey</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#parametricity">Parametricity</a></li><li><a href="#two-views-on-parametricity">Two views on parametricity</a></li><li><a href="#type-classes">Type classes</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Haskell's particular brand of polymorphism is known as <i>parametric</i>
+polymorphism.  Essentially, this means that polymorphic functions must
+work <i>uniformly</i> for any input type.  This turns out to have some
+interesting implications for both programmers and users of polymorphic
+functions.</p><h2 id="parametricity"><a href="#parametricity">Parametricity</a></h2><p>Consider the type</p><pre><code class="haskell">a -&gt; a -&gt; a</code></pre><p>Remember that <code>a</code> is a <i>type variable</i> which can stand for any type.
+What sorts of functions have this type?</p><p>What about this:</p><pre><code class="haskell">f :: a -&gt; a -&gt; a
+f x y = x &amp;&amp; y</code></pre><p>It turns out that this doesn't work.  The syntax is valid, at least,
+but it does not type check.  In particular we get this error message:</p><pre><code class="haskell">    Couldn't match type `a' with `Bool'
+      `a' is a rigid type variable bound by
+          the type signature for f :: a -&gt; a -&gt; a
+    In the second argument of `(&amp;&amp;)', namely `y'
+    In the expression: x &amp;&amp; y
+    In an equation for `f': f x y = x &amp;&amp; y</code></pre><p>The reason this doesn't work is that the <i>caller</i> of a polymorphic
+function gets to choose the type.  Here we, the <i>implementors</i>, have
+tried to choose a specific type (namely, <code>Bool</code>), but we may be given
+<code>String</code>, or <code>Int</code>, or even some type defined by someone using <code>f</code>,
+which we can't possibly know about in advance.  In other words, you
+can read the type</p><pre><code class="haskell">a -&gt; a -&gt; a</code></pre><p>as a <i>promise</i> that a function with this type will work no matter what
+type the caller chooses.</p><p>Another implementation we could imagine is something like</p><pre><code class="haskell">    f a1 a2 = case (typeOf a1) of
+                Int  -&gt; a1 + a2
+                Bool -&gt; a1 &amp;&amp; a2
+                _    -&gt; a1</code></pre><p>where <code>f</code> behaves in some specific ways for certain types.  After all,
+we can certainly implement this in Java:</p><pre><code class="java">    class AdHoc {
+
+        public static Object f(Object a1, Object a2) {
+            if (a1 instanceof Integer &amp;&amp; a2 instanceof Integer) {
+                return (Integer)a1 + (Integer)a2;
+            } else if (a1 instanceof Boolean &amp;&amp; a2 instanceof Boolean) {
+                return (Boolean)a1 &amp;&amp; (Boolean)a2;
+            } else {
+                return a1;
+            }
+        }
+
+        public static void main (String[] args) {
+            System.out.println(f(1,3));
+            System.out.println(f(true, false));
+            System.out.println(f(&quot;hello&quot;, &quot;there&quot;));
+        }
+
+    }</code></pre><pre><code>[byorgey@LVN513-9:~/tmp]$ javac Adhoc.java &amp;&amp; java AdHoc
+4
+false
+hello</code></pre><p>But it turns out there is no way to write this in Haskell.  Haskell
+does not have anything like Java's <code>instanceof</code> operator: it is not
+possible to ask what type something is and decide what to do based on
+the answer.  One reason for this is that Haskell types are <i>erased</i> by
+the compiler after being checked: at runtime, there is no type
+information around to query!  However, as we will see, there are other
+good reasons too.</p><p>This style of polymorphism is known as <i>parametric polymorphism</i>.  We
+say that a function like <code>f :: a -&gt; a -&gt; a</code> is <i>parametric</i> in the
+type <code>a</code>.  Here &quot;parametric&quot; is just a fancy term for &quot;works uniformly
+for any type chosen by the caller&quot;.  In Java, this style of
+polymorphism is provided by <i>generics</i> (which, you guessed it, were
+inspired by Haskell: one of the original designers of Haskell,
+<a href="http://homepages.inf.ed.ac.uk/wadler/">Philip Wadler</a>, was later one
+of the key players in the development of Java generics).</p><p>So, what functions actually <i>could</i> have this type?  Actually, there
+are only two!</p><pre><code class="haskell">f1 :: a -&gt; a -&gt; a
+f1 x y = x
+
+f2 :: a -&gt; a -&gt; a
+f2 x y = y</code></pre><p>So it turns out that the type <code>a -&gt; a -&gt; a</code> really tells us quite a
+lot.</p><p>Let's play the parametricity game!  Consider each of the following
+polymorphic types.  For each type, determine what behavior(s) a
+function of that type could possibly have.</p><ul><li><code>a -&gt; a</code></li><li><code>a -&gt; b</code></li><li><code>a -&gt; b -&gt; a</code></li><li><code>[a] -&gt; [a]</code></li><li><code>(b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)</code></li><li><code>(a -&gt; a) -&gt; a -&gt; a</code></li></ul><h2 id="two-views-on-parametricity"><a href="#two-views-on-parametricity">Two views on parametricity</a></h2><p>As an <i>implementor</i> of polymorphic functions, especially if you are
+used to a language with a construct like Java's <code>instanceof</code>, you
+might find these restrictions annoying.  &quot;What do you mean, I'm not
+allowed to do X?&quot;</p><p>However, there is a dual point of view.  As a <i>user</i> of polymorphic
+functions, parametricity corresponds not to <i>restrictions</i> but to
+<i>guarantees</i>.  In general, it is much easier to use and reason about
+tools when those tools give you strong guarantees as to how they will
+behave.  Parametricity is part of the reason that just looking at the
+type of Haskell function can tell you so much about the function.</p><p>OK, fine, but sometimes it really is useful to be able to decide what
+to do based on types!  For example, what about addition?  We've
+already seen that addition is polymorphic (it works on <code>Int</code>,
+<code>Integer</code>, and <code>Double</code>, for example) but clearly it has to know what
+type of numbers it is adding to decide what to do: adding two
+<code>Integer</code>s works in a completely different way than adding two
+<code>Double</code>s.  So how does it actually work? Is it just magical?</p><p>In fact, it isn't!  And we <i>can</i> actually use Haskell to decide what
+to do based on types---just not in the way we were imagining before.
+Let's start by taking a look at the type of <code>(+)</code>:</p><pre><code>Prelude&gt; :t (+)
+(+) :: Num a =&gt; a -&gt; a -&gt; a</code></pre><p>Hmm, what's that <code>Num a =&gt;</code> thingy doing there?  In fact, <code>(+)</code> isn't
+the only standard function with a funny double-arrow thing in its
+type.  Here are a few others:</p><pre><code class="haskell">(==) :: Eq a   =&gt; a -&gt; a -&gt; Bool
+(&lt;)  :: Ord a  =&gt; a -&gt; a -&gt; Bool
+show :: Show a =&gt; a -&gt; String</code></pre><p>So what's going on here?</p><h2 id="type-classes"><a href="#type-classes">Type classes</a></h2><p><code>Num</code>, <code>Eq</code>, <code>Ord</code>, and <code>Show</code> are <i>type classes</i>, and we say that
+<code>(==)</code>, <code>(&lt;)</code>, and <code>(+)</code> are &quot;type-class polymorphic&quot;.  Intuitively,
+type classes correspond to <i>sets of types</i> which have certain
+operations defined for them, and type class polymorphic functions work
+only for types which are instances of the type class(es) in question.
+As an example, let's look in detail at the <code>Eq</code> type class.</p><pre><code class="haskell">class Eq a where
+  (==) :: a -&gt; a -&gt; Bool
+  (/=) :: a -&gt; a -&gt; Bool</code></pre><p>We can read this as follows: <code>Eq</code> is declared to be a type class with
+a single parameter, <code>a</code>.  Any type <code>a</code> which wants to be an <i>instance</i>
+of <code>Eq</code> must define two functions, <code>(==)</code> and <code>(/=)</code>, with the
+indicated type signatures.  For example, to make <code>Int</code> an instance of
+<code>Eq</code> we would have to define <code>(==) :: Int -&gt; Int -&gt; Bool</code> and <code>(/=) ::
+Int -&gt; Int -&gt; Bool</code>.  (Of course, there's no need, since the standard
+Prelude already defines an <code>Int</code> instance of <code>Eq</code> for us.)</p><p>Let's look at the type of <code>(==)</code> again:</p><pre><code class="haskell">(==) :: Eq a =&gt; a -&gt; a -&gt; Bool</code></pre><p>The <code>Eq a</code> that comes before the <code>=&gt;</code> is a <i>type class constraint</i>.
+We can read this as saying that for any type <code>a</code>, <i>as long as <code>a</code> is
+an instance of <code>Eq</code></i>, <code>(==)</code> can take two values of type <code>a</code> and
+return a <code>Bool</code>.  It is a type error to call the function <code>(==)</code> on
+some type which is not an instance of <code>Eq</code>.  If a normal polymorphic
+type is a promise that the function will work for whatever type the
+caller chooses, a type class polymorphic function is a <i>restricted</i>
+promise that the function will work for any type the caller chooses,
+<i>as long as</i> the chosen type is an instance of the required type
+class(es).</p><p>The important thing to note is that when <code>(==)</code> (or any type class
+method) is used, the compiler uses type inference to figure out <i>which
+implementation of <code>(==)</code> should be chosen</i>, based on the inferred
+types of its arguments.  In other words, it is something like using an
+overloaded method in a language like Java.</p><p>To get a better handle on how this works in practice, let's make our
+own type and declare an instance of <code>Eq</code> for it.</p><pre><code class="haskell">data Foo = F Int | G Char
+
+instance Eq Foo where
+  (F i1) == (F i2) = i1 == i2
+
+  (G c1) == (G c2) = c1 == c2
+
+  _ == _ = False
+  foo1 /= foo2 = not (foo1 == foo2)</code></pre><p>It's a bit annoying that we have to define both <code>(==)</code> and <code>(/=)</code>.  In
+fact, type classes can give <i>default implementations</i> of methods in
+terms of other methods, which should be used whenever an instance does
+not override the default definition with its own.  So we could imagine
+declaring <code>Eq</code> like this:</p><pre><code class="haskell">class Eq a where
+  (==) :: a -&gt; a -&gt; Bool
+  (/=) :: a -&gt; a -&gt; Bool
+  x /= y = not (x == y)</code></pre><p>Now anyone declaring an instance of <code>Eq</code> only has to specify an
+implementation of <code>(==)</code>, and they will get <code>(/=)</code> for free.  But if
+for some reason they want to override the default implementation of
+<code>(/=)</code> with their own, they can do that as well.</p><p>In fact, the <code>Eq</code> class is actually declared like this:</p><pre><code class="haskell">class Eq a where
+  (==), (/=) :: a -&gt; a -&gt; Bool
+  x == y = not (x /= y)
+  x /= y = not (x == y)</code></pre><p>This means that when we make an instance of <code>Eq</code>, we can define
+<i>either</i> <code>(==)</code> or <code>(/=)</code>, whichever is more convenient; the other one
+will be automatically defined in terms of the one we specify.
+(However, we have to be careful: if we don't specify either one, we
+get infinite recursion!)</p><p>As it turns out, <code>Eq</code> (along with a few other standard type classes)
+is special: GHC is able to automatically generate instances of <code>Eq</code>
+for us.  Like so:</p><pre><code class="haskell">data Foo' = F' Int | G' Char
+  deriving (Eq, Ord, Show)</code></pre><p>This tells GHC to automatically derive instances of the <code>Eq</code>, <code>Ord</code>,
+and <code>Show</code> type classes for our data type <code>Foo</code>.</p><p><b>Type classes and Java interfaces</b></p><p>Type classes are quite similar to Java interfaces.  Both define a set
+of types/classes which implement a specified list of operations.
+However, there are a couple of important ways in which type classes
+are more general than Java interfaces:</p><ol><li><p>When a Java class is defined, any interfaces it implements must be declared.  Type class instances, on the other hand, are declared separately from the declaration of the corresponding types, and can even be put in a separate module.</p></li><li><p>The types that can be specified for type class methods are more general and flexible than the signatures that can be given for Java interface methods, especially when <i>multi-parameter type classes</i> enter the picture.</p></li></ol><p>For example, consider a hypothetical type class</p><pre><code class="haskell">class Blerg a b where
+  blerg :: a -&gt; b -&gt; Bool</code></pre><p>Using <code>blerg</code> amounts to doing <i>multiple dispatch</i>: which
+implementation of <code>blerg</code> the compiler should choose depends on
+<i>both</i> the types <code>a</code> and <code>b</code>.  There is no easy way to do this in
+Java.</p><p>Haskell type classes can also easily handle binary (or ternary, or
+...) methods, as in</p><pre><code class="haskell">class Num a where
+  (+) :: a -&gt; a -&gt; a
+  ...</code></pre><p>There is no nice way to do this in Java: for one thing, one of the
+two arguments would have to be the &quot;privileged&quot; one which is actually
+getting the <code>(+)</code> method invoked on it, and this asymmetry is awkward.
+Furthermore, because of Java's subtyping, getting two arguments of a
+certain interface type does <i>not</i> guarantee that they are actually the
+same type, which makes implementing binary operators such as <code>(+)</code>
+awkward (usually requiring some runtime type checks).</p><p><b>Standard type classes</b></p><p>Here are some other standard type classes you should know about:</p><ul><li><p><a href="http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#t%3AOrd">Ord</a>
+is for types whose elements can be <i>totally ordered</i>, that is, where
+any two elements can be compared to see which is less than the other.
+It provides comparison operations like <code>(&lt;)</code> and <code>(&lt;=)</code>, and also the
+<code>compare</code> function.</p></li><li><p><a href="http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#t%3ANum">Num</a>
+is for &quot;numeric&quot; types, which support things like addition,
+subtraction, and multipication.  One very important thing to note is
+that integer literals are actually type class polymorphic:</p><pre><code>Prelude&gt; :t 5
+5 :: Num a =&gt; a</code></pre><p>This means that literals like <code>5</code> can be used as <code>Int</code>s,
+<code>Integer</code>s, <code>Double</code>s, or any other type which is an instance of
+<code>Num</code> (<code>Rational</code>, <code>Complex Double</code>, or even a type you define...)</p></li><li><p><a href="http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#t%3AShow">Show</a>
+defines the method <code>show</code>, which is used to convert values into
+<code>String</code>s.</p></li><li><p><a href="http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#v:Eq/Read">Read</a> is the dual of <code>Show</code>.</p></li><li><p><a href="http://haskell.org/ghc/docs/latest/html/libraries/base/Prelude.html#t%3AIntegral">Integral</a> represents whole number types such as <code>Int</code> and <code>Integer</code>.</p></li></ul><p><b>A type class example</b></p><p>As an example of making our own type class, consider the following:</p><pre><code class="haskell">class Listable a where
+  toList :: a -&gt; [Int]</code></pre><p>We can think of <code>Listable</code> as the class of things which can be
+converted to a list of <code>Int</code>s.  Look at the type of <code>toList</code>:</p><pre><code class="haskell">toList :: Listable a =&gt; a -&gt; [Int]</code></pre><p>Let's make some instances for <code>Listable</code>.  First, an <code>Int</code> can be
+converted to an <code>[Int]</code> just by creating a singleton list, and <code>Bool</code>
+can be converted similarly, say, by translating <code>True</code> to <code>1</code> and
+<code>False</code> to <code>0</code>:</p><pre><code class="active haskell">class Listable a where
+  toList :: a -&gt; [Int]
+  
+-- show
+instance Listable Int where
+  -- toList :: Int -&gt; [Int]
+  toList x = [x]
+
+instance Listable Bool where
+  toList True  = [1]
+  toList False = [0]
+
+main = print (toList True, toList (7::Int))</code></pre><p>We don't need to do any work to convert a list of <code>Int</code> to a list of
+<code>Int</code>:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+
+class Listable a where
+  toList :: a -&gt; [Int]
+  
+-- show
+instance Listable [Int] where
+  toList = id
+  
+main = print (toList ([2,3,5,7] :: [Int]))</code></pre><p>Finally, here's a binary tree type which we can convert to a list by
+flattening:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+
+class Listable a where
+  toList :: a -&gt; [Int]
+  
+-- show
+data Tree a = Empty | Node a (Tree a) (Tree a)
+
+instance Listable (Tree Int) where
+  toList Empty        = []
+  toList (Node x l r) = toList l ++ [x] ++ toList r
+
+myTree :: Tree Int
+myTree = Node 1 (Node 2 Empty (Node 3 Empty Empty)) (Node 4 Empty Empty)
+
+main = print (toList myTree)</code></pre><p>If we implement other functions in terms of <code>toList</code>, they also get a
+<code>Listable</code> constraint.  For example:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+
+class Listable a where
+  toList :: a -&gt; [Int]
+  
+data Tree a = Empty | Node a (Tree a) (Tree a)
+
+instance Listable (Tree Int) where
+  toList Empty        = []
+  toList (Node x l r) = toList l ++ [x] ++ toList r
+
+myTree :: Tree Int
+myTree = Node 1 (Node 2 Empty (Node 3 Empty Empty)) (Node 4 Empty Empty)
+
+-- show
+-- to compute sumL, first convert to a list of Ints, then sum
+sumL x = sum (toList x)
+
+main = print (sumL myTree)</code></pre><p><code>ghci</code> informs us that type type of <code>sumL</code> is</p><pre><code class="haskell">sumL :: Listable a =&gt; a -&gt; Int</code></pre><p>which makes sense: <code>sumL</code> will work only for types which are instances
+of <code>Listable</code>, since it uses <code>toList</code>.  What about this one?</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+
+class Listable a where
+  toList :: a -&gt; [Int]
+  
+data Tree a = Empty | Node a (Tree a) (Tree a)
+
+instance Listable [Int] where
+  toList = id
+  
+-- show
+foo x y = sum (toList x) == sum (toList y) || x &lt; y
+
+main = print (foo ([2,3,5,7]::[Int]) ([3,6,9]::[Int]))</code></pre><p><code>ghci</code> informs us that the type of <code>foo</code> is</p><pre><code class="haskell">foo :: (Listable a, Ord a) =&gt; a -&gt; a -&gt; Bool</code></pre><p>That is, <code>foo</code> works over types which are instances of <i>both</i>
+<code>Listable</code> and <code>Ord</code>, since it uses both <code>toList</code> and comparison on
+the arguments.</p><p>As a final, and more complex, example, consider this instance:</p><pre><code class="active haskell">{-# LANGUAGE FlexibleInstances #-}
+
+class Listable a where
+  toList :: a -&gt; [Int]
+
+instance Listable Int where
+  -- toList :: Int -&gt; [Int]
+  toList x = [x]
+
+data Tree a = Empty | Node a (Tree a) (Tree a)
+
+instance Listable [Int] where
+  toList = id
+
+instance Listable (Tree Int) where
+  toList Empty        = []
+  toList (Node x l r) = toList l ++ [x] ++ toList r
+
+myTree :: Tree Int
+myTree = Node 1 (Node 2 Empty (Node 3 Empty Empty)) (Node 4 Empty Empty)
+
+-- show
+instance (Listable a, Listable b) =&gt; Listable (a,b) where
+  toList (x,y) = toList x ++ toList y
+  
+main = print (toList (3::Int), toList myTree)</code></pre><p>Notice how we can put type class constraints on an instance as well as
+on a function type.  This says that a pair type <code>(a,b)</code> is an instance
+of <code>Listable</code> as long as <code>a</code> and <code>b</code> both are.  Then we get to use
+<code>toList</code> on values of types <code>a</code> and <code>b</code> in our definition of <code>toList</code>
+for a pair.  Note that this definition is <i>not</i> recursive!  The
+version of <code>toList</code> that we are defining is calling <i>other</i> versions
+of <code>toList</code>, not itself.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/byorgey/introduction-to-haskell/5-type-classes';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

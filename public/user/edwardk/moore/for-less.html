@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html><head><title>Moore for Less - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/moore">Moore Machines</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/moore/for-less">Moore for Less</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Moore for Less</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 May 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/9ab8b288c6c5cc9d1ab36ccb8c3c74167b4dd00f">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/moore">Go up to: Moore Machines</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#soul-of-a-nu-machine">Soul of a Nu Machine</a></li><li><a href="#distributive-functors--represent-">Distributive Functors, Represent!</a></li><li><a href="#cofree-anyone-">Cofree Anyone?</a></li><li><a href="#representable-machines">Representable Machines</a></li><li><a href="#doing-two-things-at-once">Doing Two Things at Once</a></li><li><a href="#stepping-lightly">Stepping Lightly</a></li><li><a href="#running-a-tab">Running a Tab</a></li><li><a href="#compressive-parsing">Compressive Parsing</a></li><li><a href="#the-story-so-far">The Story So Far</a></li><li><a href="#representability-and-adjunctions">Representability and Adjunctions</a></li><li><a href="#i-m-my-own-grandpa">I&#39;m My Own Grandpa</a></li><li><a href="#less-like-moore">Less Like Moore</a></li><li><a href="#representing-transducers">Representing Transducers</a></li><li><a href="#open-thoughts">Open Thoughts</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>I was playing around while stuck on a plane this morning, and realized a few things that had previously escaped me about <a href="http://en.wikipedia.org/wiki/Moore_machine">Moore machines</a>.</p><p>In previous posts, I've talked about the notion of an (infinite) Moore machine.</p><p>Here we have a machine where each state <code>Moore a b</code> has a label <code>b</code>, and given an input <code>a</code> we transition along an edge to a new state. Unlike a traditional Moore machine, we may well have an infinite number of states, which removes all those pesky limitations on what you can recognize with such a machine.</p><pre><code class="haskell">data Moore a b = Moore b (a -&gt; Moore a b)</code></pre><p>In this form it can be seen to be an <code>Cofree</code> comonad.</p><pre><code class="haskell">data Cofree f a = Cofree a (f (Cofree f a))</code></pre><p>We can see that <code>Moore a b</code> is isomorphic to <code>Cofree ((-&gt;) a) b</code>.</p><h2 id="soul-of-a-nu-machine"><a href="#soul-of-a-nu-machine">Soul of a Nu Machine</a></h2><p>An equivalent definition of a Moore machine that <a href="https://www.fpcomplete.com/user/edwardk/cellular-automata/part-2">I've covered before</a> is to switch to an explicit 'state' type.</p><p>We can derive that definition from the more direct definition above by one of several different means.</p><p>Probably the most straightforward way to do so is to exploit the fact that <code>Cofree f a = Fix (Compose ((,) a) f)</code>, where <code>Fix f</code> is the greatest fixed point of <code>f</code>, and look at the two different ways to encode the greatest fixed point in Haskell.</p><p>The usual definition of <code>Fix</code> is given by:</p><pre><code class="haskell">data Fix f = In { out :: f (Fix f) }</code></pre><p>This definition exploits the fact that the least and greatest fixed points are the same, but we can also just use the direct definition as the greatest fixed point, which we get when we write down the definition of an anamorphism, which we can use to build a member of the greatest fixed point of <code>f</code>:</p><pre><code class="haskell">ana :: Functor f =&gt; (s -&gt; f s) -&gt; s -&gt; Nu f</code></pre><p>and just take its type signature as the definition of <code>Nu</code>.</p><pre><code class="haskell">data Nu f where
+  Nu :: (s -&gt; f s) -&gt; s -&gt; Nu f
+
+ana = Nu </code></pre><p><code>Nu</code> represents the greatest fixed point in a much more portable way than <code>Fix</code>. <code>Fix</code> only really works as a greatest fixed point due to laziness in Haskell. In a strict language these two defintions are not equivalent.</p><p>Substituting <code>Nu</code> into <code>Cofree</code> instead of <code>Fix</code> we get:</p><pre><code>Cofree f b =
+Nu (Compose ((,) b) f) =
+∃s. (s -&gt; Compose ((,) b) f s, s) =
+∃s. (s -&gt; (b, f s), s) =
+∃s. (s -&gt; b, s -&gt; f s, s)</code></pre><p>In the particular case of a Moore machine:</p><pre><code>Moore a b = 
+Cofree ((-&gt;) a) b =
+∃s. (s -&gt; b, s -&gt; a -&gt; s, s)</code></pre><p>This corresponds to the data type:</p><pre><code class="haskell">data Moore a b where
+  Moore :: (s -&gt; b) -&gt; (s -&gt; a -&gt; s) -&gt; s -&gt; Moore a b</code></pre><p>I've talked about this data type before, as has <a href="http://www.haskellforall.com/2013/08/composable-streaming-folds.html">Gabriel Gonzalez</a>. I have it packaged up in <a href="http://hackage.haskell.org/package/folds">my <code>folds</code> package</a>, and he has a version of it in <a href="http://hackage.haskell.org/package/foldl">his <code>foldl</code> package</a>.</p><h2 id="distributive-functors--represent-"><a href="#distributive-functors--represent-">Distributive Functors, Represent!</a></h2><p>Now for something new: In category theory a representable functor <code>f</code> is a functor for which there exists an object <code>x</code> such that we can equip our functor with a natural isomorphism between <code>f a</code> and <code>(x -&gt; a)</code>. It describes all of the arrows out of some object <code>x</code>.</p><p>I have long had this definition split across two packages.</p><p>We first have the &quot;haskell 98&quot; <code>distributive</code> package, which provides</p><pre><code class="haskell">class Functor g =&gt; Distributive g where
+  distribute :: Functor f =&gt; f (g a) -&gt; g (f a)
+  collect :: Functor f =&gt; (a -&gt; g b) -&gt; f a -&gt; g (f b)</code></pre><p><code>Distributive</code> is effectively a co-<code>Traversable</code>. Given that the package is Haskell 98 / 2010, it can't supply us <code>x</code>. For every <code>Distributive</code> functor such an <code>x</code> should exist though. In the <code>adjunctions</code> package, you can get your hands on it with:</p><pre><code class="haskell">class Distributive f =&gt; Representable f where
+  type Rep f
+  tabulate :: (Rep f -&gt; a) -&gt; f a
+  index :: f a -&gt; Rep f -&gt; a</code></pre><p>Here, <code>x = Rep f</code>, and <code>tabulate</code> and <code>index</code> are inverses.</p><h2 id="cofree-anyone-"><a href="#cofree-anyone-">Cofree Anyone?</a></h2><p>There is an obvious representation for <code>((-&gt;) x)</code>, as <code>(x -&gt; a)</code> is clearly isomorphic to <code>(x -&gt; a)</code>!</p><pre><code class="haskell">instance Representable ((-&gt;) x) where
+  type Rep ((-&gt;) x) = x
+  tabulate = id
+  index = id</code></pre><p>With this we can just randomly embellish the definition of a cofree comonad by explicitly choosing <code>s</code> to be the representation of <i>some</i> representable functor, and just not telling me what it is.</p><pre><code class="haskell">data Cofree f a where
+  Cofree :: Representable k =&gt; k a -&gt; k (f (Rep k)) -&gt; Rep k -&gt; Cofree f a
+
+instance Functor (Cofree f) where
+  fmap f (Cofree k u s) = Cofree (fmap f k) u s
+
+instance Comonad (Cofree f) where
+  extract (Cofree k _ s) = index k s
+  duplicate (Cofree k u s) = Cofree (tabulate (Cofree k u)) u s</code></pre><h2 id="representable-machines"><a href="#representable-machines">Representable Machines</a></h2><p>Now we're equipped to play with a similarly modified definition of a Moore machine.</p><pre><code class="haskell">data Moore a b where
+  Moore :: Representable k =&gt; k b -&gt; k (a -&gt; Rep k) -&gt; Rep k -&gt; Moore a b</code></pre><p>Above and beyond what we can say about <code>Cofree</code> in general, we know something else in the <code>Moore</code> case, namely that both our unknown representable functor <code>k</code> and <code>(-&gt;) a</code> are <code>Distributive</code>, so we can freely interchange them in the definition above. This yields the following definition, in terms of which all subsequent instances are defined:</p><pre><code class="haskell">data Moore a b where
+  Moore :: Representable k =&gt; k b -&gt; (a -&gt; k (Rep k)) -&gt; Rep k -&gt; Moore a b</code></pre><p>Since the <code>u</code> argument isn't used at all in the definition of the <code>Comonad</code> for <code>Cofree f</code> and is just silently passed along, these instances for <code>Moore a</code> work either way.</p><pre><code class="haskell">instance Functor (Moore a) where
+  fmap f (Moore k u b) = Moore (fmap f k) u b
+
+instance Comonad (Moore a) where
+  extract (Moore k _ s)   = index k s
+  duplicate (Moore k u s) = Moore (tabulate (Moore k u)) u s
+  extend f (Moore k u s)  = Moore (tabulate (f . Moore k u)) u s</code></pre><p>Due to the <code>Representable ((-&gt;) x)</code> instance no power is lost, but now some choices of <code>k</code> might be suitable for memoization, acting as a trie to hold onto the results rather than recomputing them each time they are asked.</p><h2 id="doing-two-things-at-once"><a href="#doing-two-things-at-once">Doing Two Things at Once</a></h2><p>While I've put the <code>Comonad</code> for <code>Moore</code> to good use in previous posts, much of the original motivation for using <code>Moore</code> was to give us the ability to describe how to fuse together multiple passes over the data.</p><p>To derive the <code>Applicative</code> for our new machine we'll need suitable functors to use to memoize all of our states. Rather than using functions, let's look for some things that are better behaved.</p><p>The next simpler instance after the naïve function instance above is:</p><pre><code class="haskell">instance Representable Identity where
+  type Rep Identity = ()
+  tabulate f = Identity (f ())
+  index (Identity a) () = a</code></pre><p>Next, given two representable functors, their composition is also representable:</p><pre><code class="haskell">instance (Representable f, Representable g) =&gt; Representable (Compose f g) where
+  type Rep (Compose f g) = (Rep f, Rep g)
+  index (Compose fg) (i,j) = index (index fg i) j
+  tabulate = Compose . tabulate . fmap tabulate . curry</code></pre><p>So let's put these instances to work:</p><pre><code class="haskell">instance Applicative (Moore a) where
+  pure a = Moore (Identity a) (\_ -&gt; Identity ()) ()
+  Moore kf uf sf &lt;*&gt; Moore ka ua sa =
+    Moore (Compose ((&lt;$&gt; ka) &lt;$&gt; kf))
+          (\x -&gt; Compose $ (\y -&gt; (,) y &lt;$&gt; ua x) &lt;$&gt; uf x)
+          (sf, sa)
+
+instance ComonadApply (Moore a) where
+  (&lt;@&gt;) = (&lt;*&gt;)</code></pre><p>This is just the definition we used to use for the <code>foldl</code>-style <code>Moore</code> machine, but now instead of using functions from our state, we just use representable functors that have our states as their representations.</p><p>Finally, as a small but useful aside, a <code>Moore</code> machine is a <code>Profunctor</code>, so we can map contravariantly over the inputs as well as covariantly over the results.</p><pre><code class="haskell">instance Profunctor Moore where
+  dimap f g (Moore k u s) = Moore (g &lt;$&gt; k) (u . f) s</code></pre><h2 id="stepping-lightly"><a href="#stepping-lightly">Stepping Lightly</a></h2><p>So how do we run the machine?</p><p>We can feed our machine in one of two ways. We can define</p><pre><code class="haskell">step1 :: a -&gt; Moore a b -&gt; b
+step1 a (Moore k u s) = index k (index (u a) s)</code></pre><p>and rely on the ability to <code>extend (step a)</code> to change out all of the labels on our machine. This unfortunately builds up and tears down a whole representable functor worth of data.</p><p>On the other hand, we can simply move the start state and get a whole new machine:</p><pre><code class="haskell">step :: a -&gt; Moore a b -&gt; Moore a b
+step a (Moore k u s) = Moore k u (index (u a) s)</code></pre><p>The choice between <code>step a</code> and <code>extend (step1 a)</code> is indistinguishable to the outside observer except in terms of performance. While <code>step</code> isn't a Cokleisli arrow, it is much faster.</p><h2 id="running-a-tab"><a href="#running-a-tab">Running a Tab</a></h2><p>That said, we don't have to run the machine one step at a time!</p><p>Dan Piponi once wrote an article on recognizing a regular language with a monoid. What he did was build a data type to represent the tabulation of transitions in his DFA.</p><p>The <code>a -&gt; f (Rep f)</code> in the body of our Moore machine suggests what such a tabulation might look like, generically. It takes <code>a</code> to a structure that contains references to all the new states.</p><pre><code class="haskell">newtype Tab f = Tab { getTab :: f (Rep f) }
+
+instance Representable f =&gt; Monoid (Tab f) where
+  mempty = Tab $ tabulate id
+  mappend (Tab fs) (Tab gs) = Tab (index gs &lt;$&gt; fs)</code></pre><p>You can view this as a form of <code>Endo (Rep f)</code> that happens to be able to memoize the results of each argument to the function if <code>f</code> is sufficiently &quot;nice&quot;.</p><p>We can now feed our machine a whole <code>Foldable</code> container at a time.</p><pre><code class="haskell">feed :: Foldable f =&gt; f a -&gt; Moore a b -&gt; Moore a b
+feed as (Moore k u s) = Moore k u (index (getTab $ foldMap (Tab . u) as) s)</code></pre><h2 id="compressive-parsing"><a href="#compressive-parsing">Compressive Parsing</a></h2><p>The next trick is finding the right container type to fold over to make use of the memoized internal states.</p><p>For this, I'll turn to an old package of mine, <code>compressed</code>, which supplies a rather peculiar <code>LZ78</code> container type. LZ78 is a compression scheme by Lempel and Ziv that has a number of nice properties for my purposes.</p><pre><code class="haskell">data Token a = Token {-# UNPACK #-} !Int a deriving (Eq, Ord)
+data LZ78 a
+  = Cons {-# UNPACK #-} !(Token a) (LZ78 a)
+  | Nil</code></pre><p>The idea is this:</p><p>1.) You start with a dictionary that maps integers to a list of values and which contains a single entry that maps 0 to the empty string.</p><p>2.) Now you receive (or generate) a series of <code>(Int, value)</code> pairs, where each <code>Int</code> represents an existing slot in the dictionary, and the value represents something you want to <code>snoc</code> onto the end of it to make a fresh dictionary entry.</p><p>More advanced versions of this scheme collect old entries, but we can define a particularly naive LZ78 encoder / decoder very easily.</p><p>We can encode using a variety of different constraint types and times depending on how we represent the dictionary during construction.</p><p>In <i>O(n<sup>2</sup>)</i> we can construct an LZ78 stream using a list internally, but no more than an <code>Eq</code> constraint on <code>a</code>.</p><pre><code class="haskell">encodeEq :: Eq a =&gt; [a] -&gt; LZ78 a
+encodeEq = go [] 1 0 where
+  go _ _ _ [] = Nil
+  go _ _ p [c] = Cons (Token p c) Nil
+  go d f p (c:cs) = let t = Token p c in case List.lookup t d of
+    Just p' -&gt; go d f p' cs
+    Nothing -&gt; Cons t (go ((t, f):d) (succ f) 0 cs)</code></pre><p>With a <code>Map</code> our time upgrades to <i>O(n log n)</i> with an <code>Ord</code> constraint.</p><pre><code class="haskell">encodeOrd :: Ord a =&gt; [a] -&gt; LZ78 a
+encodeOrd = go Map.empty 1 0 where
+  go _ _ _ [] = Nil
+  go _ _ p [c] = Cons (Token p c) Nil
+  go d f p (c:cs) = let t = Token p c in case Map.lookup t d of
+    Just p' -&gt; go d f p' cs
+    Nothing -&gt; Cons t (go (Map.insert t f d) (succ f) 0 cs)</code></pre><p>We can also turn to a <code>HashMap</code> if we have <code>Hashable</code> inputs.</p><pre><code class="haskell">encode :: (Hashable a, Eq a) =&gt; [a] -&gt; LZ78 a
+encode = go HashMap.empty 1 0 where
+  go _ _ _ [] = Nil
+  go _ _ p [c] = Cons (Token p c) Nil
+  go d f p (c:cs) = let t = Token p c in case HashMap.lookup t d of
+    Just p' -&gt; go d f p' cs
+    Nothing -&gt; Cons t (go (HashMap.insert t f d) (succ f) 0 cs)</code></pre><p>But regardless of how it was constructed, we can <code>decode</code> with <code>Foldable</code>.</p><pre><code class="haskell">instance Foldable LZ78 where
+  foldMap f = go (Seq.singleton mempty) mempty where
+    go _ m Nil = m
+    go s m (Cons (Token w c) ws) = m `mappend` go (s |&gt; v) v ws where
+      v = Seq.index s w `mappend` f c</code></pre><p>The key here is that the decompression scheme never actually <i>looks</i> at the values it decodes, so it is possible to decompress directly in any target <code>Monoid</code> you want.</p><p>When you do so you'll gain some sharing of intermediate values.</p><p>Other compression schemes may also be useful depending on your application.</p><h2 id="the-story-so-far"><a href="#the-story-so-far">The Story So Far</a></h2><p>We can open up such a machine and borrow its internal type of tabulations to generate anything that can be generated by such a machine in parallel or incrementally.</p><p>It is possible to run a <code>Representable</code> <code>Moore</code> machine directly on compressed inputs and pay proportionally to the size of the compressed data, not the decompressed data.</p><h2 id="representability-and-adjunctions"><a href="#representability-and-adjunctions">Representability and Adjunctions</a></h2><p>In category theory we have the notion of an adjunction.</p><p>Given two functors <code>F : D -&gt; C</code>, and <code>G : C -&gt; D</code>, when <code>F a -&gt; b</code> is naturally isomorphic to <code>a -&gt; G b</code> we describe this situation in one of several equivalent ways, we say that <code>F -| G</code>, <code>G</code> is right adjoint to <code>F</code>, or <code>F is left adjoint to G</code>, and if the categories matter, sometimes we'll write <code>F -| G :: C -&gt; D</code>.</p><p>Different authors have slightly different conventions on the latter and may give the signature for F instead of G.</p><ul><li><p>The left (or right) adjoint of a functor is unique up to isomorphism if it exists at all.</p></li><li><p>All adjunctions <code>F -| G :: C -&gt; Hask</code> have the property that <code>G</code> is representable and <a href="http://en.wikipedia.org/wiki/Representable_functor#Left_adjoint"><code>F ()</code> represents <code>G</code></a></p></li><li><p>Since adjoints are unique the fact that the right adjoint is isomorphic to <code>(F () -&gt; a)</code> lets us go back across the <code>(,) (F ()) -| (-&gt;) (F ())</code> adjunction and use the uniqueness of adjoints to see <code>F a</code> is isomorphic to <code>(,) (F ()) a</code>. In other words, <code>F</code> contains exactly one <code>a</code>. On top of that, every left adjoint <code>F :: Hask -&gt; Hask</code> looks like <code>F = (,) x</code> for some <code>x</code>.</p></li><li><p><a href="http://en.wikipedia.org/wiki/Representable_functor#Uniqueness">Representations of representable functors are unique up to isomorphism.</a></p></li></ul><p>With all of these constraints, if we write down a class describing adjunctions from <code>Hask -&gt; Hask</code> it is rather poorly inhabited! All instances of this class are isomorphic (for some <code>s</code>) to the canonical <code>(,) s -| (-&gt;) s</code> adjunction that gives rise to the <code>State</code> monad and <code>Store</code> comonad!</p><pre><code class="haskell">class (Functor f, Representable g) =&gt; f -| g where
+  leftAdjunct :: (f a -&gt; b) -&gt; a -&gt; g b
+  rightAdjunct :: (a -&gt; g b) -&gt; f a -&gt; b</code></pre><p>First consider that if <code>f</code> and <code>g</code> are <code>Representable</code> then <code>Product f g</code> is isomorphic to <code>(-&gt;) (Either (Rep f) (Rep g))</code> and we can also look at a couple of our recently explored instances:</p><ul><li><p><code>Identity</code> is isomorphic to <code>(-&gt;) ()</code></p></li><li><p>If <code>f</code> and <code>g</code> are <code>Representable</code> then <code>Compose f g</code> is isomorphic to <code>(-&gt;) (Rep f, Rep g)</code></p></li></ul><p>If you squint at these a bit the representation looks a lot like the &quot;logarithm&quot; of the data type in question. Exponents become products, products become sums, etc. Conor McBride is fond of calling representable functors &quot;Napierian&quot; and using <code>Log</code> instead of <code>Rep</code>.</p><p>Since every adjunction gives us a representable functor (the right adjoint), and every representable functor is the right adjoint in some adjunction, and all of this stuff is the same up to isomorphism, we could rephrase everything we just wrote in terms of an adjunction from <code>Hask -&gt; Hask</code>.</p><p>We get a couple of options (all of equivalent expressive power) for how to arrange things:</p><pre><code class="haskell">Moore :: (f -| g) =&gt; g b -&gt; f (a -&gt; g (f ())) -&gt; Moore a b
+Moore :: (f -| g) =&gt; g b -&gt; f (g (a -&gt; f ())) -&gt; Moore a b
+Moore :: (f -| g) =&gt; f (g b) -&gt; (a -&gt; g (f ())) -&gt; Moore a b</code></pre><p>I think the last one of those is the most interesting. When <code>f -| g</code>, then <code>f·g</code> is a comonad and <code>g·f</code> is a monad. Here our Moore machine is pairing up some comonad with a function that gives a monadic action that is intimately related to that comonad.</p><p>Since all adjunctions from <code>Hask -&gt; Hask</code> look like the representable cases we've already explored we haven't yet gained anything from this, but we could work with adjunctions that visit other categories than <code>Hask</code>.</p><h2 id="i-m-my-own-grandpa"><a href="#i-m-my-own-grandpa">I'm My Own Grandpa</a></h2><p>There is a nice adjunction from <code>Hask -&gt; Hask</code><sup>op</sup> that we use in Haskell a great deal.</p><p>Using backwards arrows to denote arrows in <code>Hask</code><sup>op</sup>, any such adjunction would look like a statement that <code>f a &lt;- b</code> is isomorphic to <code>a -&gt; g b</code>. <code>f</code> and <code>g</code> here are contravariant functors, and if we turn this around we get that <code>b -&gt; f a</code> is isomorphic to <code>a -&gt; g b</code>.</p><p>There is such an adjunction:</p><pre><code class="haskell">(-&gt; r) -| (-&gt; r)</code></pre><p>When composed in one direction we get a monad in <code>Hask</code>, when composed the other way around we get a comonad in <code>Hask</code><sup>op</sup>. This is why <code>Cont r</code> has no comonadic equivalent. It is its own inverse.</p><p><code>(b -&gt; a -&gt; r)</code> be isomorphic to <code>(a -&gt; b -&gt; r)</code>, and this is witnessed by <code>flip</code> in both directions.</p><h2 id="less-like-moore"><a href="#less-like-moore">Less Like Moore</a></h2><p>Now, we can mechanically massage that last definition of a Moore machine to go round trip through <code>Hask</code><sup>op</sup>.</p><pre><code class="haskell">Wat :: (b -&gt; r -&gt; r) -&gt; a -&gt; (() -&gt; r) -&gt; r</code></pre><p>The <code>() -&gt;</code> in there adds no value, so we can apply it to <code>()</code> to get more or less Rich Hickey's notion of a <a href="http://clojure.org/transducers">transducer</a>.</p><pre><code class="haskell">type Transducer a b = forall r. (b -&gt; r -&gt; r) -&gt; (a -&gt; r -&gt; r)</code></pre><p>Hickeys's transducers derive from the type signature of <code>foldl</code>:</p><pre><code class="haskell">&gt;&gt;&gt; :t foldl
+foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b
+&gt;&gt;&gt; :t foldl.foldl
+foldl.foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [[a]] -&gt; b
+...</code></pre><p>and you can convert from that form to this form with a couple of judiciously placed <code>flip</code>s.</p><p>So in this sense a <code>Transducer</code> is a &quot;generalized Moore machine&quot;. The generalization here is powerful enough to allow the transducer to emit multiple <code>b</code>s per <code>a</code>.</p><h2 id="representing-transducers"><a href="#representing-transducers">Representing Transducers</a></h2><p>But now we have functions to and from some arbitrary <code>r</code> in our <code>Transducer</code> definition and we can replay this same motivating trick we used to exploit representations on that definition as well.</p><pre><code class="haskell">type Transducer a b = forall f. Representable f =&gt; (b -&gt; f (Rep f)) -&gt; a -&gt; f (Rep f)</code></pre><p>which is equivalent to</p><pre><code class="haskell">type Transducer a b = forall f. Representable f =&gt; (b -&gt; Tab f) -&gt; a -&gt; Tab f</code></pre><p>In fact we can apply such a transducer to a Moore machine to get one that turns each <code>a</code> into potentially several <code>b</code>s, and makes that whole chain of transitions in the state diagram at once.</p><pre><code class="haskell">transduce :: Moore b c -&gt; Transducer a b -&gt; Moore a c
+transduce (Moore k u s) t = Moore k (getD #. t (D #. u)) s</code></pre><p>Finally, if you work for all tabulations of a function, nothing stops you from working for a monoid through <code>Endo m</code>, so you might as well just go to:</p><pre><code class="haskell">type Transducer a b = forall f. Monoid m =&gt; (b -&gt; m) -&gt; a -&gt; m</code></pre><p>but this is just what <code>lens</code> calls a <code>Fold</code></p><pre><code class="haskell">type Fold a b = forall f. (Contravariant f, Applicative f) =&gt; (b -&gt; f b) -&gt; a -&gt; f a</code></pre><p>If you are (legally) both <code>Contravariant</code> and <code>Functor</code> then your argument must be phantom, and using <code>contramap</code> and <code>fmap</code> you can freely change it to anything you want, so this is isomorphic to the last definition.</p><h2 id="open-thoughts"><a href="#open-thoughts">Open Thoughts</a></h2><p>Similar changes can be applied to a <a href="http://hackage.haskell.org/package/free-4.12.1/docs/Control-Comonad-Trans-Coiter.html">coiterative comonad generated by a comonad</a>, which looks very similar to the <code>Mealy</code> machine even if it has wildly different semantics. But given that coincidence, what does such a <code>Comonad</code> mean for a <code>Mealy</code> machine that has a <code>Monoid</code> on its input type? How would such a machine have to work? What does it do?</p><p>Just like we ultimately massaged the transducer into a form where it was obvious we could make the same machinery work for any <code>Monoid</code> once it supported tabulated endomorphisms, can do find a series of direct generalizations that take us from a <code>Moore</code> machine to one that uses an intermediate <code>Monoid</code>? Either like the <code>M</code> machine in <code>folds</code> or using a Monoid action to update the state instead of accepting just any new state.</p><p>We built a tabulation of a deterministic not-necessarily-finite automaton. What about a non-deterministic automaton? For that we can make a set of representations using the trie we get for a representable functor <code>f</code>.</p><pre><code class="haskell">newtype Set f = Set { getSet :: f Bool }
+
+instance Representable f =&gt; Monoid (Set f) where
+  mempty = Set $ tabulate (const False)
+  mappend (Set as) (Set bs) = Set $ tabulate $ \i -&gt; index as i || index bs i
+  
+singleton :: (Representable f, Eq (Rep f)) =&gt; Rep f -&gt; Set f
+singleton i = Set $ tabulate (i==)
+
+insert :: (Representable f, Eq (Rep f)) =&gt; Rep f -&gt; Set f -&gt; Set f
+insert i (Set is) = Set $ tabulate $ \j -&gt; index is j || (i==j)
+
+contains :: Set f -&gt; Rep f -&gt; Bool
+contains (Set is) i = index is i </code></pre><p>but it'd probably be better to use a real &quot;Set&quot; in practice for most applications. You need something like <code>Foldable f</code> as well as <code>Representable</code> in order to make the <code>Monoid</code> for</p><pre><code class="haskell">newtype N f = N { getN :: f (Set f) }</code></pre><p>This would start to limit the domain to at-most-countably-infinite automata.</p><p>Given that can we define a nice compiler that takes a regular expression builds an NFA state replete with the appropriate functor as it goes, and then converts it to a DFA?</p><p>The compressive parsing technique provided by <code>LZ78</code> above works for lots of monoids, not just this one.</p><p>For instance, we can modify the code in <a href="http://www.cse.chalmers.se/~bernardy/PP.pdf">Efficient Parallel and Incremental Parsing of Practical Context-Free Languages</a> to work with a <code>Monoid</code> rather than the notion of a sequence algebra they use there. (A sequence-algebra can be converted to <code>Monoid</code> by using a finger-tree to peel off one symbol of work on one side.)</p><p>This would let us parse context-free languages using this same machinery.</p><p>The main body of code here is available in this <a href="https://gist.github.com/ekmett/0b9d00c621d34a352e57">gist</a></p><p>(Also, the code above probably needs a couple of tweaks. Notably, it should use a strict pair for the internal state.)</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a>
+May 28, 2015</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/moore/for-less';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

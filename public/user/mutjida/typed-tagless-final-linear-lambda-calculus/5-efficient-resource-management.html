@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html><head><title>5 Efficient Resource Management - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/mutjida">mutjida</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida/typed-tagless-final-linear-lambda-calculus">Typed Tagless-Final Linear Lambda Calculus</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida/typed-tagless-final-linear-lambda-calculus/5-efficient-resource-management">5 Efficient Resource Management</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">5 Efficient Resource Management</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">25 Apr 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/mutjida">mutjida</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3838/0c4c7d51f021d4455f56b8371e0d79ff47b11855">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida/typed-tagless-final-linear-lambda-calculus/4-full-linear-lambda-calculus">Previous content: 4 Full Linear Lambda Calculus</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida/typed-tagless-final-linear-lambda-calculus/6-recursive-types">Next content: 6 Recursive Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida/typed-tagless-final-linear-lambda-calculus">Go up to: Typed Tagless-Final Linear Lambda Calculus</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mutjida">See all content by mutjida</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#efficient-resource-management">Efficient Resource Management</a><ul><li><a href="#representation-in-haskell">Representation in Haskell</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="efficient-resource-management"><a href="#efficient-resource-management">Efficient Resource Management</a></h2><p>As can be seen in the preceding section's <code>TI</code> and <code>0E</code> rules, additive units complicate the (relatively) efficient typing rules by allowing an arbitrary subset of the linear context to be consumed. Simply trying all possible subsets is not a feasible strategy. However, it is possible to reformulate these rules so that the choice of which resouces the additive units consume is lazily determined.</p><p>The main idea is to sometimes treat the linear context as affine, where not all variables need to be consumed (i.e. an affine context permits ignoring hypotheses but not copying hypotheses). The switch from linear to affine is triggered by the presence of an additive unit; however, the need to coordinate resource usage between the branches of the <code>&amp;I</code> and <code>+E</code> rules can trigger a switch back from affine to linear. This allows the additive unit typing rules to simply pass the entire input context through, making no choices about what to consume, and just switching from linear to affine. The determination of what an additive unit consumes is pushed into the <code>&amp;I</code> and <code>+E</code> typing rules.
+This idea comes from work on <a href="http://www.cs.cmu.edu/~fp/papers/erm97.pdf">resource management</a> for linear logic programming; Frank Pfenning also has some <a href="http://www.cs.cmu.edu/~fp/courses/15816-f01/handouts/linfp.pdf">notes</a> giving a more thorough presentation of the following typing rules.</p><p>I will attach a flag, <code>v</code>, to the previous typing judgement to indicate whether the linear context has changed to being affine.</p><pre><code>G ; Di \ Do  |-v  m :: A</code></pre><p><code>v</code> will be either true, <code>t</code>, or false, <code>f</code>. The actual linear context used in a derivation will be <code>Di - Do'</code> where <code>Do' == Do</code> when <code>v == f</code> and <code>Do' subset Do</code> otherwise. I will write <code>v1 || v2</code> and <code>v1 &amp;&amp; v2</code> for the boolean disjunction and conjunction of <code>v1</code> and <code>v2</code>. The modified typing rules follow.</p><p>The linear variable rule requires the context be linear.</p><pre><code>-------------------------------------- (lvar) 
+G ; D, x::A, D' \ D, _, D' |-f  x :: A</code></pre><p>The <code>-&lt;&gt;I</code> rule does not affect whether the context has become affine.</p><pre><code>G ; x::A, Di \ xVar, Do  |-v  m :: B      where  v == t  or  xVar == _    
+---------------------------------------------------------------------- (-&lt;&gt;I) 
+G ; Di \ Do  |-v  \x -&lt;&gt; m :: A -&lt;&gt; B</code></pre><p>However, if the context has become affine, then it doesn't matter if variable <code>x</code> was consumed.</p><p>The <code>-&lt;&gt;E</code> rule reflects the fact that the linear variables are shared between the two subderivations:</p><pre><code>G ; Di \ D  |-v1  m :: A -&lt;&gt; B     G ; D \ Do  |-v2  n :: A 
+----------------------------------------------------------- (-&lt;&gt;E)
+G ; Di \ Do  |-(v1 || v2)  m ^ n :: B</code></pre><p>If linear context becomes affine in either subderivation of <code>-&lt;&gt;E</code> (or any multiplicative rule) then it becomes affine in the whole derivation-- I am free to split the context however I want; in particular in a way that causes all unused resources in <code>Do</code> to flow through the subderivation with the additive unit.</p><p>The rules for regular variables and functions are almost unchanged from the previous algorithmic typing rules.</p><pre><code>   x::A in G                 
+--------------------- (var)
+G ; D \ D |-f  x :: A      
+
+
+x::A, G ; Di \ Do  |-v  m :: B
+----------------------------------- (-&gt;I)
+G ; Di \ Do  |-v  \x -&gt; m :: A -&gt; B
+
+
+G ; Di \ Do  |-v  m :: A -&gt; B     G ;  \  |-v'  n :: A
+------------------------------------------------------ (-&gt;E)
+G ; Di \ Do  |-v  m ^ n :: B</code></pre><p>In the <code>-&gt;E</code> rule, whether the context is linear depends only on what happened in the derivation of the function; the argument can't depend on any linear variables.</p><p>The <code>TI</code> rule simply switches the context to being affine:</p><pre><code>----------------------- (TI)
+G ; D \ D  |-t  () :: T</code></pre><p>The <code>&amp;I</code> rule requires that both conjuncts consume the same linear variables, therefore the context can only be affine if both subderivations have an affine context.</p><pre><code>G ; Di \ D1  |-v1  m :: A     G ; Di \ D2  |-v2  n :: B 
+-------------------------------------------------------- (&amp;I)
+G ; Di \ (D1 intersect D2)  |-(v1 &amp;&amp; v2)  (m,n) :: A &amp; B</code></pre><p>The <code>&amp;I</code> rule must additionally satisfy the following conditions:</p><ul><li><code>v1 == f</code> and <code>v2 == f</code> implies <code>D1 == D2</code></li><li><code>v1 == t</code> and <code>v2 == f</code> implies <code>D2 subset D1</code></li><li><code>v1 == f</code> and <code>v2 == t</code> implies <code>D1 subset D2</code></li></ul><p>These conditions ensure that a variable consumed by either conjunct will necessarily be consumed by the whole term.</p><p>The rest of the rules require no new concepts and their Haskell encodings can be seen in the code of the following section.</p><h3 id="representation-in-haskell"><a href="#representation-in-haskell">Representation in Haskell</a></h3><p>The typing rules in the previous section can be directly written in Haskell. The representation type will be a direct transcription of the judgement, which is just the previous representation type extended with a boolean flag:</p><pre><code class="haskell">repr (vid::Nat) (tf::Bool) (hi::[Maybe Nat]) (ho::[Maybe Nat]) (a::*)</code></pre><p>I can encode the <code>lvar</code> and <code>var</code> rules as</p><pre><code class="haskell">type LinVar repr (vid::Nat) a = 
+     forall (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) . (Consume vid i o) =&gt; repr v False i o a
+
+type RegVar repr a = 
+     forall (v::Nat) (i::[Maybe Nat]) . repr v False i i a</code></pre><p>Note that, as this is HOAS, there is no explicit representation of a variable (there is no <code>var</code> or <code>lvar</code> member of the <code>Lin</code> class); however, there is an explicit representation of the type of a variable. The types I use for linear and regular variables specify that neither turns the context affine, and only the linear variables consume something from the context.</p><p>Before I can write down any more typing rules, I need some type level supporting machinery to carry out all the ancillary operations used by the typing rules. In addition to <code>Nat</code>, <code>EQ</code>, <code>AnyNat</code>, and <code>Consume</code> from before, I'll need boolean disjunction</p><pre><code class="haskell">type family Or (x::Bool) (y::Bool) :: Bool
+type instance Or False False = False
+type instance Or True False = True
+type instance Or False True = True
+type instance Or True True = True</code></pre><p>as well as a class to check that a variable was consumed properly:</p><pre><code class="haskell">class VarOk (tf :: Bool) (v :: Maybe Nat)
+instance VarOk True (Just v)    -- affine context
+instance VarOk True Nothing     -- affine context
+instance VarOk False Nothing    -- linear context</code></pre><p>in other words, the variable only has to be explicitly consumed if the context is linear.
+This is a class, rather than a type family, since it will be used as a constraint on (the representation of) a typing rule; it does not compute a new type.</p><p>I can now write the <code>-&lt;&gt;I</code> and <code>-&lt;&gt;E</code> rules:</p><pre><code class="haskell">class Lin (repr :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+
+    llam :: (VarOk tf var) =&gt; 
+            (LinVar repr vid a -&gt; repr (S vid) tf (Just vid ': hi) (var ': ho) b) -&gt; 
+            repr vid tf hi ho (a :-&lt;&gt;: b)
+
+    (&lt;^&gt;) :: repr vid tf0 hi h (a :-&lt;&gt;: b) -&gt; repr vid tf1 h ho a -&gt; 
+             repr vid (Or tf0 tf1) hi ho b</code></pre><p>Note that, the same as before, <code>llam</code> takes a Haskell function and thus adds a variable of type <code>LinVar repr vid a</code> to the Haskell context; it is the definition of <code>LinVar</code> and the <code>VarOk</code> constraint which enforce linearity for us.</p><p>All of the other multiplicative rules follow the same basic pattern.</p><p>In order to write the additive rules (<code>&amp;I</code> and <code>+E</code>), I will need a subset relation on linear contexts:</p><pre><code class="haskell">type family (:&lt;:) (x::[Maybe Nat]) (y::[Maybe Nat]) :: Bool 
+type instance '[] :&lt;: '[] = True
+type instance (Nothing ': xs) :&lt;: (Nothing ': ys) = xs :&lt;: ys
+type instance (Nothing ': xs) :&lt;: (Just y ': ys) = xs :&lt;: ys
+type instance (Just x ': xs) :&lt;: (Nothing ': ys) =  False
+type instance (Just x ': xs) :&lt;: (Just x ': ys) =  xs :&lt;: ys</code></pre><p>and an intersection function on linear contexts:</p><pre><code class="haskell">type family Intersect (xs::[Maybe Nat]) (ys::[Maybe Nat]) :: [Maybe Nat]
+type instance Intersect '[] '[] = '[]
+type instance Intersect (Nothing ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Nothing ': xs) (Just y ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Just x ': ys) = (Just x ': Intersect xs ys)</code></pre><p>Additionally, I need a way to express the conditions on the <code>&amp;I</code> (and <code>+E</code>) rule. The astute reader will also notice that I neglected to provide a boolean conjunction type family. I have opted to fold the conditions into the definition of boolean conjunction:</p><pre><code class="haskell">type family AdditiveAnd (tf0::Bool) (tf1::Bool) (h0::[Maybe Nat]) (h1::[Maybe Nat]) :: Bool
+type instance AdditiveAnd False False h h = False 
+type instance AdditiveAnd False True h0 h1 = When (h0 :&lt;: h1) False
+type instance AdditiveAnd True False h0 h1 = When (h1 :&lt;: h0) False 
+type instance AdditiveAnd True True h0 h1 = True 
+
+type family When (x::Bool) (y::Bool) :: Bool
+type instance When True y = y</code></pre><p><code>AdditiveAnd</code> is computing the boolean conjunction of the two <code>Bool</code> arguments, except that the appropriate subtyping relation must hold in order for <code>AdditiveAnd</code> to compute; i.e. there is no instance for <code>When False</code>.</p><p>I can now write the additive rules; here are <code>TI</code> and <code>&amp;I</code>:</p><pre><code class="haskell">type a :&amp;: b = (a, b)
+type Top = ()
+
+class Lin (repr :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+
+    top :: repr vid True h h Top
+
+    (&lt;&amp;&gt;) :: repr vid tf0 hi h0 a -&gt; repr vid tf1 hi h1 b -&gt; 
+             repr vid (AdditiveAnd tf0 tf1 h0 h1) hi (Intersect h0 h1) (a :&amp;: b)</code></pre><p>Note that <code>top</code> makes the context affine, while <code>&lt;&amp;&gt;</code> relies on the <code>AdditiveAnd</code> calculation to determine whether the context should be affine.</p><p>Here are the complete typing rules for LLC.</p><pre><code class="haskell">--
+-- Linear types
+--
+newtype a :-&lt;&gt;: b = Lolli {unLolli :: a -&gt; b}
+data a :*: b = Tensor a b
+data One = One
+type a :&amp;: b = (a, b)
+type Top = ()
+data a :+: b = Inl a | Inr b
+data Zero 
+newtype Bang a = Bang {unBang :: a}
+
+
+type LinVar repr (vid::Nat) a = 
+     forall (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) . (Consume vid i o) =&gt; repr v False i o a
+
+type RegVar repr a = 
+     forall (v::Nat) (i::[Maybe Nat]) . repr v False i i a
+
+class Lin (repr :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+    llam :: (VarOk tf var) =&gt; 
+            (LinVar repr vid a -&gt; repr (S vid) tf (Just vid ': hi) (var ': ho) b) -&gt; 
+            repr vid tf hi ho (a :-&lt;&gt;: b)
+    (&lt;^&gt;) :: repr vid tf0 hi h (a :-&lt;&gt;: b) -&gt; repr vid tf1 h ho a -&gt; 
+             repr vid (Or tf0 tf1) hi ho b
+
+    (!) :: repr vid tf h h a -&gt; repr vid False h h (Bang a)
+    letBang :: repr vid tf0 hi h (Bang a) -&gt; 
+               (RegVar repr a -&gt; repr vid tf1 h ho b) -&gt; 
+               repr vid (Or tf0 tf1) hi ho b
+
+    lam :: (RegVar repr a -&gt; repr vid tf hi ho b) -&gt; repr vid tf hi ho (a -&gt; b)
+    (&lt;$&gt;) :: repr vid tf0 hi ho (a -&gt; b) -&gt; repr vid tf1 ho ho a -&gt; repr vid tf0 hi ho b
+
+    one :: repr vid False h h One
+    letOne :: repr vid tf0 hi h One -&gt; repr vid tf1 h ho a -&gt; 
+              repr vid (Or tf0 tf1) hi ho a
+
+    (&lt;*&gt;) :: repr vid tf0 hi h a -&gt; repr vid tf1 h ho b -&gt; 
+             repr vid (Or tf0 tf1) hi ho (a :*: b)
+    letStar :: (VarOk tf1 var0, VarOk tf1 var1) =&gt; 
+               repr vid tf0 hi h (a :*: b) -&gt; 
+               (LinVar repr vid a -&gt; 
+                  LinVar repr (S vid) b -&gt; 
+                    repr (S (S vid)) 
+                         tf1 
+                         (Just vid ': Just (S vid) ': h) 
+                         (var0 ': var1 ': ho) 
+                         c
+               ) -&gt; 
+               repr vid (Or tf0 tf1) hi ho c
+                    
+    top :: repr vid True h h Top
+
+    (&lt;&amp;&gt;) :: repr vid tf0 hi h0 a -&gt; repr vid tf1 hi h1 b -&gt; 
+             repr vid (AdditiveAnd tf0 tf1 h0 h1) hi (Intersect h0 h1) (a :&amp;: b)
+    pi1 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho a 
+    pi2 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho b 
+
+    inl :: repr vid tf hi ho a -&gt; repr vid tf hi ho (a :+: b)
+    inr :: repr vid tf hi ho b -&gt; repr vid tf hi ho (a :+: b)
+    letPlus :: (VarOk tf1 var1, VarOk tf2 var2) =&gt; 
+               repr vid tf0 hi h (a :+: b) -&gt;
+               (LinVar repr vid a -&gt; repr (S vid) tf1 (Just vid ': h) (var1 ': ho1) c) -&gt;
+               (LinVar repr vid b -&gt; repr (S vid) tf2 (Just vid ': h) (var2 ': ho2) c) -&gt;
+               repr vid (Or tf0 (AdditiveAnd tf1 tf2 ho1 ho2)) hi (Intersect ho1 ho2) c
+
+    abort :: repr vid tf hi ho Zero -&gt; repr vid True hi ho a</code></pre><p>As before, I can add a type synonym to give Haskell a little help with inferring types. This time I will also need to include the fact that the intersection of a context with itself is itself, and that a context is a subset of itself.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE 
+  DataKinds,
+  FlexibleContexts,
+  FlexibleInstances,
+  FunctionalDependencies,
+  KindSignatures,
+  MultiParamTypeClasses,
+  NoMonomorphismRestriction,
+  OverlappingInstances,
+  RankNTypes, 
+  TypeFamilies,
+  TypeOperators,
+  UndecidableInstances
+ #-}
+
+-- module Linear where
+
+{---------------------------------------------------------------------
+
+Type level machinery
+
+---------------------------------------------------------------------}
+
+--
+-- Type level Or
+--
+type family Or (x::Bool) (y::Bool) :: Bool
+type instance Or False False = False
+type instance Or True False = True
+type instance Or False True = True
+type instance Or True True = True
+
+--
+-- Type level Nats
+--
+data Nat = Z | S Nat
+
+--
+-- Type level Nat equality
+--
+class EQ (x::Nat) (y::Nat) (b::Bool) | x y -&gt; b
+instance EQ x x True
+instance (b ~ False) =&gt; EQ x y b
+
+--
+-- Type level machinery for consuming a variable in a list of variables.
+--
+class Consume (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) | v i -&gt; o
+class Consume1 (b::Bool) (v::Nat) (x::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) | b v x i -&gt; o
+instance (Consume v i o) =&gt; Consume v (Nothing ': i) (Nothing ': o)
+instance (EQ v x b, Consume1 b v x i o) =&gt; Consume v (Just x ': i) o
+instance Consume1 True v x i (Nothing ': i)
+instance (Consume v i o) =&gt; Consume1 False v x i (Just x ': o)
+
+--
+-- Machinery needed to check/enforce conditions for additive conjunction/disjunction to correctly deal with Top.
+--
+class VarOk (tf :: Bool) (v :: Maybe Nat)
+instance VarOk True (Just v)
+instance VarOk True Nothing 
+instance VarOk False Nothing
+
+type family (:&lt;:) (x::[Maybe Nat]) (y::[Maybe Nat]) :: Bool 
+type instance '[] :&lt;: '[] = True
+type instance (Nothing ': xs) :&lt;: (Nothing ': ys) = xs :&lt;: ys
+type instance (Nothing ': xs) :&lt;: (Just y ': ys) = xs :&lt;: ys
+type instance (Just x ': xs) :&lt;: (Nothing ': ys) =  False
+type instance (Just x ': xs) :&lt;: (Just x ': ys) =  xs :&lt;: ys
+
+type family Intersect (xs::[Maybe Nat]) (ys::[Maybe Nat]) :: [Maybe Nat]
+type instance Intersect '[] '[] = '[]
+type instance Intersect (Nothing ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Nothing ': xs) (Just y ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Just x ': ys) = (Just x ': Intersect xs ys)
+
+type family When (x::Bool) (y::Bool) :: Bool
+type instance When True y = y
+
+type family AdditiveAnd (tf0::Bool) (tf1::Bool) (h0::[Maybe Nat]) (h1::[Maybe Nat]) :: Bool
+type instance AdditiveAnd False False h h = False 
+type instance AdditiveAnd False True h0 h1 = When (h0 :&lt;: h1) False
+type instance AdditiveAnd True False h0 h1 = When (h1 :&lt;: h0) False 
+type instance AdditiveAnd True True h0 h1 = True 
+
+
+{---------------------------------------------------------------------
+
+Final tagless HOAS linear lambda calculus.
+
+---------------------------------------------------------------------}
+
+--
+-- Linear types
+--
+newtype a :-&lt;&gt;: b = Lolli {unLolli :: a -&gt; b}
+data a :*: b = Tensor a b
+data One = One
+type a :&amp;: b = (a, b)
+type Top = ()
+data a :+: b = Inl a | Inr b
+data Zero 
+newtype Bang a = Bang {unBang :: a}
+
+
+type LinVar repr (vid::Nat) a = 
+     forall (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) . (Consume vid i o) =&gt; 
+     repr v False i o a
+
+type RegVar repr a = 
+     forall (v::Nat) (i::[Maybe Nat]) . repr v False i i a
+
+class Lin (repr :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+    llam :: (VarOk tf var) =&gt; 
+            (LinVar repr vid a -&gt; repr (S vid) tf (Just vid ': hi) (var ': ho) b) -&gt; 
+            repr vid tf hi ho (a :-&lt;&gt;: b)
+    (&lt;^&gt;) :: repr vid tf0 hi h (a :-&lt;&gt;: b) -&gt; repr vid tf1 h ho a -&gt; 
+             repr vid (Or tf0 tf1) hi ho b
+
+    (!) :: repr vid tf h h a -&gt; repr vid False h h (Bang a)
+    letBang :: repr vid tf0 hi h (Bang a) -&gt; 
+               (RegVar repr a -&gt; repr vid tf1 h ho b) -&gt; 
+               repr vid (Or tf0 tf1) hi ho b
+
+    lam :: (RegVar repr a -&gt; repr vid tf hi ho b) -&gt; repr vid tf hi ho (a -&gt; b)
+    (&lt;$&gt;) :: repr vid tf0 hi ho (a -&gt; b) -&gt; repr vid tf1 ho ho a -&gt; repr vid tf0 hi ho b
+
+    one :: repr vid False h h One
+    letOne :: repr vid tf0 hi h One -&gt; repr vid tf1 h ho a -&gt; 
+              repr vid (Or tf0 tf1) hi ho a
+
+    (&lt;*&gt;) :: repr vid tf0 hi h a -&gt; repr vid tf1 h ho b -&gt; 
+             repr vid (Or tf0 tf1) hi ho (a :*: b)
+    letStar :: (VarOk tf1 var0, VarOk tf1 var1) =&gt; 
+               repr vid tf0 hi h (a :*: b) -&gt; 
+               (LinVar repr vid a -&gt; 
+                  LinVar repr (S vid) b -&gt; 
+                    repr (S (S vid)) 
+                         tf1 
+                         (Just vid ': Just (S vid) ': h) 
+                         (var0 ': var1 ': ho) c
+               ) -&gt; 
+               repr vid (Or tf0 tf1) hi ho c
+                    
+    top :: repr vid True h h Top
+
+    (&lt;&amp;&gt;) :: repr vid tf0 hi h0 a -&gt; repr vid tf1 hi h1 b -&gt; 
+             repr vid (AdditiveAnd tf0 tf1 h0 h1) hi (Intersect h0 h1) (a :&amp;: b)
+    pi1 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho a 
+    pi2 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho b 
+
+    inl :: repr vid tf hi ho a -&gt; repr vid tf hi ho (a :+: b)
+    inr :: repr vid tf hi ho b -&gt; repr vid tf hi ho (a :+: b)
+    letPlus :: (VarOk tf1 var1, VarOk tf2 var2) =&gt; 
+               repr vid tf0 hi h (a :+: b) -&gt;
+               (LinVar repr vid a -&gt; repr (S vid) tf1 (Just vid ': h) (var1 ': ho1) c) -&gt;
+               (LinVar repr vid b -&gt; repr (S vid) tf2 (Just vid ': h) (var2 ': ho2) c) -&gt;
+               repr vid (Or tf0 (AdditiveAnd tf1 tf2 ho1 ho2)) hi (Intersect ho1 ho2) c
+
+    abort :: repr vid tf hi ho Zero -&gt; repr vid True hi ho a
+-- show Full LLC Examples
+type Defn tf a = forall repr vid h . 
+                 (Lin repr, Intersect h h ~ h, (h :&lt;: h) ~ True) =&gt; 
+                 repr vid tf h h a
+defn :: Defn tf a -&gt; Defn tf a
+defn x = x
+
+type MyBool = One :+: One
+
+cond :: Defn False (MyBool :-&lt;&gt;: ((a :&amp;: a) :-&lt;&gt;: a))
+cond = llam $ \b -&gt; llam $ \tf -&gt; letPlus b (\x -&gt; letOne x (pi1 tf)) (\x -&gt; letOne x (pi2 tf))
+
+cond1 = defn $ llam $ \b -&gt; llam $ \tf -&gt; letPlus b (\x -&gt; letOne x (pi1 tf)) (\x -&gt; letOne x (pi2 tf))
+-- *Main&gt; :t cond1
+-- cond1
+--   :: (Lin repr, AnyNat vid, Intersect h h ~ h) =&gt;
+--      repr vid 'False h h ((One :&lt;+&gt;: One) :-&lt;&gt;: ((a :&lt;&amp;&gt;: a) :-&lt;&gt;: a))
+
+--bad :: Defn False ((a :-&lt;&gt;: (a :-&lt;&gt;: b)) :-&lt;&gt;: (a :-&lt;&gt;: b))
+-- bad = defn $ llam $ \f -&gt; llam $ \x -&gt; f &lt;^&gt; x &lt;^&gt; x
+
+--good :: Defn False ((a :-&lt;&gt;: (a :-&lt;&gt;: b)) :-&lt;&gt;: (a -&gt; b))
+good = defn $ llam $ \f -&gt; lam $ \x -&gt; f &lt;^&gt; x &lt;^&gt; x
+
+--goodBang :: Defn False (a :-&lt;&gt;: (a :-&lt;&gt;: b)) :-&lt;&gt;: (Bang a :-&lt;&gt;: b))
+goodBang = defn $ llam $ \f -&gt; llam $ \y -&gt; (llam $ \x -&gt; letBang x (\x -&gt; f &lt;^&gt; x &lt;^&gt; x)) &lt;^&gt; y
+
+w1 = defn $ llam $ \x -&gt; llam $ \y -&gt; llam $ \z -&gt; 
+            top &lt;*&gt; ((x &lt;*&gt; y) &lt;&amp;&gt; (y &lt;*&gt; x))
+
+w2 = defn $ llam $ \x -&gt; llam $ \y -&gt; llam $ \z -&gt; 
+            top &lt;*&gt; ((x &lt;*&gt; y) &lt;&amp;&gt; (top &lt;*&gt; x))
+
+-- fails since z is not used in first conjunct.
+--w3 = defn $ llam $ \x -&gt; llam $ \y -&gt; llam $ \z -&gt; 
+--            (x &lt;*&gt; y) &lt;&amp;&gt; (top &lt;*&gt; x)
+
+main = putStrLn &quot;ok&quot;</code></pre><p>I did not need to add a class and instances to let the type checker solve <code>Intersection</code> and <code>:&lt;:</code> for each possible instance of <code>h</code> since an uninstantiated context <code>h</code> will only be intersected and subset-ed with itself.</p><p>Note, once again, that the Haskell type checker is enforcing linearity (including coordination of resources among additive subderivations) as there is no instance of <code>Lin</code> yet defined.</p><p>Also as before, it is trivial to add a concrete instance to allow evaluation.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE 
+  DataKinds,
+  FlexibleContexts,
+  FlexibleInstances,
+  FunctionalDependencies,
+  KindSignatures,
+  MultiParamTypeClasses,
+  NoMonomorphismRestriction,
+  OverlappingInstances,
+  RankNTypes, 
+  TypeFamilies,
+  TypeOperators,
+  UndecidableInstances
+ #-}
+
+-- module Linear where
+
+{---------------------------------------------------------------------
+
+Type level machinery
+
+---------------------------------------------------------------------}
+
+--
+-- Type level Or
+--
+type family Or (x::Bool) (y::Bool) :: Bool
+type instance Or False False = False
+type instance Or True False = True
+type instance Or False True = True
+type instance Or True True = True
+
+--
+-- Type level Nats
+--
+data Nat = Z | S Nat
+
+--
+-- Type level Nat equality
+--
+class EQ (x::Nat) (y::Nat) (b::Bool) | x y -&gt; b
+instance EQ x x True
+instance (b ~ False) =&gt; EQ x y b
+
+--
+-- Type level machinery for consuming a variable in a list of variables.
+--
+class Consume (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) | v i -&gt; o
+class Consume1 (b::Bool) (v::Nat) (x::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) | b v x i -&gt; o
+instance (Consume v i o) =&gt; Consume v (Nothing ': i) (Nothing ': o)
+instance (EQ v x b, Consume1 b v x i o) =&gt; Consume v (Just x ': i) o
+instance Consume1 True v x i (Nothing ': i)
+instance (Consume v i o) =&gt; Consume1 False v x i (Just x ': o)
+
+--
+-- Machinery needed to check/enforce conditions for additive conjunction/disjunction to correctly deal with Top.
+--
+class VarOk (tf :: Bool) (v :: Maybe Nat)
+instance VarOk True (Just v)
+instance VarOk True Nothing 
+instance VarOk False Nothing
+
+type family (:&lt;:) (x::[Maybe Nat]) (y::[Maybe Nat]) :: Bool 
+type instance '[] :&lt;: '[] = True
+type instance (Nothing ': xs) :&lt;: (Nothing ': ys) = xs :&lt;: ys
+type instance (Nothing ': xs) :&lt;: (Just y ': ys) = xs :&lt;: ys
+type instance (Just x ': xs) :&lt;: (Nothing ': ys) =  False
+type instance (Just x ': xs) :&lt;: (Just x ': ys) =  xs :&lt;: ys
+
+type family Intersect (xs::[Maybe Nat]) (ys::[Maybe Nat]) :: [Maybe Nat]
+type instance Intersect '[] '[] = '[]
+type instance Intersect (Nothing ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Nothing ': xs) (Just y ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Nothing ': ys) = (Nothing ': Intersect xs ys)
+type instance Intersect (Just x ': xs) (Just x ': ys) = (Just x ': Intersect xs ys)
+
+type family When (x::Bool) (y::Bool) :: Bool
+type instance When True y = y
+
+type family AdditiveAnd (tf0::Bool) (tf1::Bool) (h0::[Maybe Nat]) (h1::[Maybe Nat]) :: Bool
+type instance AdditiveAnd False False h h = False 
+type instance AdditiveAnd False True h0 h1 = When (h0 :&lt;: h1) False
+type instance AdditiveAnd True False h0 h1 = When (h1 :&lt;: h0) False 
+type instance AdditiveAnd True True h0 h1 = True 
+
+
+{---------------------------------------------------------------------
+
+Final tagless HOAS linear lambda calculus.
+
+---------------------------------------------------------------------}
+
+--
+-- Linear types
+--
+newtype a :-&lt;&gt;: b = Lolli {unLolli :: a -&gt; b}
+data a :*: b = Tensor a b
+data One = One
+type a :&amp;: b = (a, b)
+type Top = ()
+data a :+: b = Inl a | Inr b
+data Zero 
+newtype Bang a = Bang {unBang :: a}
+
+
+type LinVar repr (vid::Nat) a = 
+     forall (v::Nat) (i::[Maybe Nat]) (o::[Maybe Nat]) . (Consume vid i o) =&gt; 
+     repr v False i o a
+
+type RegVar repr a = 
+     forall (v::Nat) (i::[Maybe Nat]) . repr v False i i a
+
+class Lin (repr :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+    llam :: (VarOk tf var) =&gt; 
+            (LinVar repr vid a -&gt; repr (S vid) tf (Just vid ': hi) (var ': ho) b) -&gt; 
+            repr vid tf hi ho (a :-&lt;&gt;: b)
+    (&lt;^&gt;) :: repr vid tf0 hi h (a :-&lt;&gt;: b) -&gt; repr vid tf1 h ho a -&gt; 
+             repr vid (Or tf0 tf1) hi ho b
+
+    (!) :: repr vid tf h h a -&gt; repr vid False h h (Bang a)
+    letBang :: repr vid tf0 hi h (Bang a) -&gt; 
+               (RegVar repr a -&gt; repr vid tf1 h ho b) -&gt; 
+               repr vid (Or tf0 tf1) hi ho b
+
+    lam :: (RegVar repr a -&gt; repr vid tf hi ho b) -&gt; repr vid tf hi ho (a -&gt; b)
+    (&lt;$&gt;) :: repr vid tf0 hi ho (a -&gt; b) -&gt; repr vid tf1 ho ho a -&gt; repr vid tf0 hi ho b
+
+    one :: repr vid False h h One
+    letOne :: repr vid tf0 hi h One -&gt; repr vid tf1 h ho a -&gt; 
+              repr vid (Or tf0 tf1) hi ho a
+
+    (&lt;*&gt;) :: repr vid tf0 hi h a -&gt; repr vid tf1 h ho b -&gt; 
+             repr vid (Or tf0 tf1) hi ho (a :*: b)
+    letStar :: (VarOk tf1 var0, VarOk tf1 var1) =&gt; 
+               repr vid tf0 hi h (a :*: b) -&gt; 
+               (LinVar repr vid a -&gt; 
+                  LinVar repr (S vid) b -&gt; 
+                    repr (S (S vid)) 
+                         tf1 
+                         (Just vid ': Just (S vid) ': h) 
+                         (var0 ': var1 ': ho) c
+               ) -&gt; 
+               repr vid (Or tf0 tf1) hi ho c
+                    
+    top :: repr vid True h h Top
+
+    (&lt;&amp;&gt;) :: repr vid tf0 hi h0 a -&gt; repr vid tf1 hi h1 b -&gt; 
+             repr vid (AdditiveAnd tf0 tf1 h0 h1) hi (Intersect h0 h1) (a :&amp;: b)
+    pi1 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho a 
+    pi2 :: repr vid tf hi ho (a :&amp;: b) -&gt; repr vid tf hi ho b 
+
+    inl :: repr vid tf hi ho a -&gt; repr vid tf hi ho (a :+: b)
+    inr :: repr vid tf hi ho b -&gt; repr vid tf hi ho (a :+: b)
+    letPlus :: (VarOk tf1 var1, VarOk tf2 var2) =&gt; 
+               repr vid tf0 hi h (a :+: b) -&gt;
+               (LinVar repr vid a -&gt; repr (S vid) tf1 (Just vid ': h) (var1 ': ho1) c) -&gt;
+               (LinVar repr vid b -&gt; repr (S vid) tf2 (Just vid ': h) (var2 ': ho2) c) -&gt;
+               repr vid (Or tf0 (AdditiveAnd tf1 tf2 ho1 ho2)) hi (Intersect ho1 ho2) c
+
+    abort :: repr vid tf hi ho Zero -&gt; repr vid True hi ho a
+
+
+type Defn tf a = forall repr vid h . 
+                 (Lin repr, Intersect h h ~ h, (h :&lt;: h) ~ True) =&gt; 
+                 repr vid tf h h a
+defn :: Defn tf a -&gt; Defn tf a
+defn x = x
+
+-- show Evaluator for full LLC.
+newtype R (vid::Nat) (tf::Bool) (hi::[Maybe Nat]) (ho::[Maybe Nat]) a = R {unR :: a}
+
+instance Lin (R :: Nat -&gt; Bool -&gt; [Maybe Nat] -&gt; [Maybe Nat] -&gt; * -&gt; *) where
+    llam f = R $ Lolli $ \x -&gt; unR (f (R x))
+    f &lt;^&gt; x = R $ unLolli (unR f) (unR x)
+
+    (!) = R . Bang . unR
+    letBang x f = R $ unR $ f' (unR x)
+      where f' (Bang x) = f (R x)
+
+    lam f = R $ \x -&gt; unR (f (R x))
+    f &lt;$&gt; x = R $ unR f (unR x)
+
+    x &lt;*&gt; y = R $ Tensor (unR x) (unR y)
+    letStar xy f = R $ unR $ f' (unR xy)
+      where f' (Tensor x y) = f (R x) (R y)
+
+    one = R One
+    letOne x y = R $ unR $ (\One -&gt; y) $ unR x
+
+    top = R ()
+
+    x &lt;&amp;&gt; y = R $ (unR x, unR y)
+    pi1 = R . fst . unR
+    pi2 = R . snd . unR
+
+    inl = R . Inl . unR
+    inr = R . Inr . unR
+    letPlus xy fInl fInr = case unR xy of
+                             Inl x -&gt; R $ unR $ fInl (R x)
+                             Inr y -&gt; R $ unR $ fInr (R y)
+
+    abort x = R $ error &quot;abort&quot;
+
+
+eval :: R Z tf '[] '[] a -&gt; a
+eval = unR
+
+type MyBool = One :+: One
+
+tt = inl one :: Defn False MyBool
+ff = inr one :: Defn False MyBool
+
+cond :: Defn False (MyBool :-&lt;&gt;: ((a :&amp;: a) :-&lt;&gt;: a))
+cond = llam $ \b -&gt; llam $ \tf -&gt; letPlus b (\x -&gt; letOne x (pi1 tf)) (\x -&gt; letOne x (pi2 tf))
+cond1 = defn $ llam $ \b -&gt; llam $ \tf -&gt; letPlus b (\x -&gt; letOne x (pi1 tf)) (\x -&gt; letOne x (pi2 tf))
+
+
+--bad :: Defn False ((a :-&lt;&gt;: (a :-&lt;&gt;: b)) :-&lt;&gt;: (a :-&lt;&gt;: b))
+-- bad = defn $ llam $ \f -&gt; llam $ \x -&gt; f &lt;^&gt; x &lt;^&gt; x
+
+--good :: Defn False ((a :-&lt;&gt;: (a :-&lt;&gt;: b)) :-&lt;&gt;: (a -&gt; b))
+good = defn $ llam $ \f -&gt; lam $ \x -&gt; f &lt;^&gt; x &lt;^&gt; x
+
+main = do
+  putStrLn $ (eval $ cond &lt;^&gt; tt &lt;^&gt; (lam (\x -&gt; x) &lt;&amp;&gt; 
+                                      abort (undefined :: Defn True Zero))
+             ) &quot;I was applied to a function.&quot;
+  putStrLn &quot;ok&quot;</code></pre></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/mutjida/typed-tagless-final-linear-lambda-calculus/5-efficient-resource-management';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

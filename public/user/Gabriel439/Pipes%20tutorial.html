@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html><head><title>Pipes tutorial - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/Gabriel439">Gabriel Gonzalez</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Gabriel439/Pipes%20tutorial">Pipes tutorial</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Pipes tutorial</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">12 Apr 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/Gabriel439">Gabriel Gonzalez</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/15/2a5d17cdbc94b6e4f6d96f260b7711cd7777c648">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Gabriel439/sum-types">Next content: Sum Types</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/Gabriel439">See all content by Gabriel Gonzalez</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#overview">Overview</a></li><li><a href="#introduction">Introduction</a></li><li><a href="#producers">Producers</a></li><li><a href="#producers">Producers</a></li><li><a href="#consumers">Consumers</a></li><li><a href="#pipes">Pipes</a></li><li><a href="#listt">ListT</a></li><li><a href="#tricks">Tricks</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="overview"><a href="#overview">Overview</a></h1><p>Conventional Haskell stream programming forces you to choose only two of the
+following three features:</p><ul><li><p>Effects</p></li><li><p>Streaming</p></li><li><p>Composability</p></li></ul><p>If you sacrifice <i>Effects</i> you get Haskell's pure and lazy lists, which you
+can transform using composable functions in constant space, but without
+interleaving effects.</p><p>If you sacrifice <i>Streaming</i> you get <code>mapM</code>, <code>forM</code> and
+&quot;ListT done wrong&quot;, which are composable and effectful, but do not return
+a single result until the whole list has first been processed and loaded
+into memory.</p><p>If you sacrifice <i>Composability</i> you write a tightly coupled read,
+transform, and write loop in <code>IO</code>, which is streaming and effectful, but is
+not modular or separable.</p><p><code>pipes</code> gives you all three features: effectful, streaming, and composable
+programming.  <code>pipes</code> also provides a wide variety of stream programming
+abstractions which are all subsets of a single unified machinery:</p><ul><li><p>effectful <code>Producer</code>s (like generators),</p></li><li><p>effectful <code>Consumer</code>s (like iteratees),</p></li><li><p>effectful <code>Pipe</code>s (like Unix pipes), and:</p></li><li><p><code>ListT</code> done right.</p></li></ul><p>All of these are connectable and you can combine them together in clever and
+unexpected ways because they all share the same underlying type.</p><p><code>pipes</code> requires a basic understanding of monad transformers, which you can
+learn about by reading either:</p><ul><li><p>the paper &quot;Monad Transformers - Step by Step&quot;,</p></li><li><p>chapter 18 of &quot;Real World Haskell&quot; on monad transformers, or:</p></li><li><p>the documentation of the <code>transformers</code> library.</p></li></ul><p>If you want a Quick Start guide to <code>pipes</code>, read
+<a href="http://hackage.haskell.org/package/pipes-4.1.0/docs/Pipes-Prelude.html">the documentation in <code>Pipes.Prelude</code></a>
+from top to bottom.</p><p>This tutorial is more extensive and explains the <code>pipes</code> API in greater
+detail and illustrates several idioms.</p><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>The <code>pipes</code> library decouples stream processing stages from each other so
+that you can mix and match diverse stages to produce useful streaming
+programs.  If you are a library writer, <code>pipes</code> lets you package up
+streaming components into a reusable interface.  If you are an application
+writer, <code>pipes</code> lets you connect pre-made streaming components with minimal
+effort to produce a highly-efficient program that streams data in constant
+memory.</p><p>To enforce loose coupling, components can only communicate using two
+commands:</p><ul><li><p><code>yield</code>: Send output data</p></li><li><p><code>await</code>: Receive input data</p></li></ul><p><code>pipes</code> has four types of components built around these two commands:</p><ul><li><p><code>Producer</code>s can only <code>yield</code> values and they model streaming sources</p></li><li><p><code>Consumer</code>s can only <code>await</code> values and they model streaming sinks</p></li><li><p><code>Pipe</code>s can both <code>yield</code> and <code>await</code> values and they model stream
+transformations</p></li><li><p><code>Effect</code>s can neither <code>yield</code> nor <code>await</code> and they model non-streaming
+components</p></li></ul><p>You can connect these components together in four separate ways which
+parallel the four above types:</p><ul><li><p><code>for</code> handles <code>yield</code>s</p></li><li><p><code>(&gt;~)</code> handles <code>await</code>s</p></li><li><p><code>(&gt;-&gt;)</code> handles both <code>yield</code>s and <code>await</code>s</p></li><li><p><code>(&gt;&gt;=)</code> handles return values</p></li></ul><p>As you connect components their types will change to reflect inputs and
+outputs that you've fused away.  You know that you're done connecting things
+when you get an <code>Effect</code>, meaning that you have handled all inputs and
+outputs.  You run this final <code>Effect</code> to begin streaming.</p><h1 id="producers"><a href="#producers">Producers</a></h1><p><code>Producer</code>s are effectful streams of input.  Specifically, a <code>Producer</code> is a
+monad transformer that extends any base monad with a new <code>yield</code> command.
+This <code>yield</code> command lets you send output downstream to an anonymous
+handler, decoupling how you generate values from how you consume them.</p><p>The following <code>stdinLn</code> <code>Producer</code> shows how to incrementally read in
+<code>String</code>s from standard input and <code>yield</code> them downstream, terminating
+gracefully when reaching the end of the input:</p><pre><code class="haskell">import Control.Monad (unless)
+import Pipes
+import System.IO (isEOF)
+
+--         +--------+-- A 'Producer' that yields 'String's
+--         |        |
+--         |        |      +-- Every monad transformer has a base monad.
+--         |        |      |   This time the base monad is 'IO'.
+--         |        |      |  
+--         |        |      |  +-- Every monadic action has a return value.
+--         |        |      |  |   This action returns '()' when finished
+--         v        v      v  v
+stdinLn :: Producer String IO ()
+stdinLn = do
+    eof &lt;- lift isEOF        -- 'lift' an 'IO' action from the base monad
+    unless eof $ do
+        str &lt;- lift getLine
+        yield str            -- 'yield' the 'String'
+        stdinLn              -- Loop</code></pre><p><code>yield</code> emits a value, suspending the current <code>Producer</code> until the value is
+consumed.  If nobody consumes the value (which is possible) then <code>yield</code>
+never returns.  You can think of <code>yield</code> as having the following type:</p><pre><code class="haskell">yield :: Monad m =&gt; a -&gt; Producer a m ()</code></pre><p>The true type of <code>yield</code> is actually more general and powerful.  Throughout
+the tutorial I will present type signatures like this that are simplified at
+first and then later reveal more general versions.  So read the above type
+signature as simply saying: &quot;You can use <code>yield</code> within a <code>Producer</code>, but
+you may be able to use <code>yield</code> in other contexts, too.&quot;</p><p>If you navigate to the
+<a href="http://hackage.haskell.org/package/pipes-4.1.0/docs/Pipes.html#v:yield">documentation for <code>yield</code></a>
+you will
+see that <code>yield</code> actually uses the <code>Producer'</code> (with an apostrophe) type
+synonym which hides a lot of polymorphism behind a simple veneer.  The
+documentation for <code>yield</code> says that you can also use <code>yield</code> within a
+<code>Pipe</code>, too, because of this polymorphism:</p><pre><code class="haskell">yield :: Monad m =&gt; a -&gt; Pipe x a m ()</code></pre><p>Use simpler types like these to guide you until you understand the fully
+general type.</p><p><code>for</code> loops are the simplest way to consume a <code>Producer</code> like <code>stdinLn</code>.
+<code>for</code> has the following type:</p><pre><code class="haskell">--                +-- Producer      +-- The body of the   +-- Result
+--                |   to loop       |   loop              |
+--                v   over          v                     v
+--                --------------    ------------------    ----------
+for :: Monad m =&gt; Producer a m r -&gt; (a -&gt; Effect m ()) -&gt; Effect m r</code></pre><p><code>for producer body</code> loops over <code>producer</code>, substituting each <code>yield</code> in
+<code>producer</code> with <code>body</code>.</p><p>You can also deduce that behavior purely from the type signature:</p><ul><li><p>The body of the loop takes exactly one argument of type <code>a</code>, which is
+the same as the output type of the <code>Producer</code>.  Therefore, the body of the
+loop must get its input from that <code>Producer</code> and nowhere else.</p></li><li><p>The return value of the input <code>Producer</code> matches the return value of the
+result, therefore <code>for</code> must loop over the entire <code>Producer</code> and not skip
+anything.</p></li></ul><p>The above type signature is not the true type of <code>for</code>, which is actually
+more general.  Think of the above type signature as saying: &quot;If the first
+argument of <code>for</code> is a <code>Producer</code> and the second argument returns an
+<code>Effect</code>, then the final result must be an <code>Effect</code>.&quot;</p><p>If you navigate to the
+<a href="http://hackage.haskell.org/package/pipes-4.1.0/docs/Pipes.html#v:for">documentation for <code>for</code></a>
+you will
+see the fully general type and underneath you will see equivalent simpler
+types.  One of these says that if the body of the loop is a <code>Producer</code>, then
+the result is a <code>Producer</code>, too:</p><pre><code class="haskell">for :: Monad m =&gt; Producer a m r -&gt; (a -&gt; Producer b m ()) -&gt; Producer b m r</code></pre><p>The first type signature I showed for <code>for</code> was a special case of this
+slightly more general signature because a <code>Producer</code> that never <code>yield</code>s is
+also an <code>Effect</code>:</p><pre><code class="haskell">data X  -- The uninhabited type
+
+type Effect m r = Producer X m r</code></pre><p>This is why <code>for</code> permits two different type signatures.  The first type
+signature is just a special case of the second one:</p><pre><code class="haskell">for :: Monad m =&gt; Producer a m r -&gt; (a -&gt; Producer b m ()) -&gt; Producer b m r
+
+-- Specialize 'b' to 'X'
+for :: Monad m =&gt; Producer a m r -&gt; (a -&gt; Producer X m ()) -&gt; Producer X m r
+
+-- Producer X = Effect
+for :: Monad m =&gt; Producer a m r -&gt; (a -&gt; Effect     m ()) -&gt; Effect     m r</code></pre><p>This is the same trick that all <code>pipes</code> functions use to work with various
+combinations of <code>Producer</code>s, <code>Consumer</code>s, <code>Pipe</code>s, and <code>Effect</code>s.  Each
+function really has just one general type, which you can then simplify down
+to multiple useful alternative types.</p><p>Here's an example use of a <code>for</code> loop, where the second argument (the
+loop body) is an <code>Effect</code>:</p><pre><code class="haskell">loop :: Effect IO ()
+loop = for stdinLn $ \str -&gt; do  -- Read this like: &quot;for str in stdinLn&quot;
+    lift $ putStrLn str          -- The body of the 'for' loop
+
+-- more concise: loop = for stdinLn (lift . putStrLn)</code></pre><p>In this example, <code>for</code> loops over <code>stdinLn</code> and replaces every <code>yield</code> in
+<code>stdinLn</code> with the body of the loop, printing each line.  This is exactly
+equivalent to the following code, which I've placed side-by-side with the
+original definition of <code>stdinLn</code> for comparison:</p><pre><code class="haskell">loop = do
+    eof &lt;- lift isEOF
+    unless eof $ do
+        str &lt;- lift getLine
+        {-hi-}(lift . putStrLn){-/hi-} str
+        loop
+
+stdinLn = do
+    eof &lt;- lift isEOF
+    unless eof $ do
+        str &lt;- lift getLine
+        {-hi-}yield{-/hi-} str
+        stdinLn</code></pre><p>You can think of <code>yield</code> as creating a hole and a <code>for</code> loop is one way to
+fill that hole.</p><p>Notice how the final <code>loop</code> only <code>lift</code>s actions from the base monad and
+does nothing else.  This property is true for all <code>Effect</code>s, which are just
+glorified wrappers around actions in the base monad.  This means we can run
+these <code>Effect</code>s to remove their <code>lift</code>s and lower them back to the
+equivalent computation in the base monad:</p><pre><code class="haskell">runEffect :: Monad m =&gt; Effect m r -&gt; m r</code></pre><p>This is the real type signature of <code>runEffect</code>, which refuses to accept
+anything other than an <code>Effect</code>.  This ensures that we handle all inputs and
+outputs before streaming data:</p><pre><code class="haskell">main :: IO ()
+main = runEffect loop</code></pre><p>... or you could inline the entire <code>loop</code> into the following one-liner:</p><pre><code class="active haskell">import Control.Monad (unless)
+import Pipes
+import System.IO (isEOF)
+
+stdinLn :: Producer String IO ()
+stdinLn = do
+    eof &lt;- lift isEOF
+    unless eof $ do
+        str &lt;- lift getLine
+        yield str
+        stdinLn
+-- show
+-- Try me!
+main = runEffect $ for stdinLn (lift . putStrLn)</code></pre><p>Run the above program and it will loop over standard input and echo every line to
+standard output.  If you run the program from the command line instead of School of
+Haskell you can also test how the program handles end of input:</p><pre><code>$ ./echo
+Test&lt;Enter&gt;
+Test
+ABC&lt;Enter&gt;
+ABC
+&lt;Ctrl-D&gt;
+$</code></pre><p>The final behavior is indistinguishable from just removing all the <code>lift</code>s
+from <code>loop</code>:</p><pre><code class="haskell">main = do
+    eof &lt;- isEOF
+    unless eof $ do
+        str &lt;- getLine
+        putStrLn str
+        main
+
+loop = do
+    eof &lt;- {-hi-}lift{-/hi-} isEOF
+    unless eof $ do
+        str &lt;- {-hi-}lift{-/hi-} getLine
+        {-hi-}lift{-/hi-} $ putStrLn str
+        main</code></pre><p>This <code>main</code> is what we might have written by hand if we were not using
+<code>pipes</code>, but with <code>pipes</code> we can decouple the input and output logic from
+each other.  When we connect them back together, we still produce streaming
+code equivalent to what a sufficiently careful Haskell programmer would
+have written.</p><p>You can also use <code>for</code> to loop over lists, too.  To do so, convert the list
+to a <code>Producer</code> using <code>each</code>, which is exported by default from the <code>Pipes</code>
+module:</p><pre><code class="haskell">each :: Monad m =&gt; [a] -&gt; Producer a m ()
+each as = mapM_ yield as</code></pre><p>Combine <code>for</code> and <code>each</code> to iterate over lists using a &quot;foreach&quot; loop:</p><pre><code class="active haskell">import Pipes
+
+main = runEffect $ for (each [1..4]) (lift . print)</code></pre><p><code>each</code> is actually more general and works for any <code>Foldable</code>:</p><pre><code class="haskell">each :: (Monad m, Foldable f) =&gt; f a -&gt; Producer a m ()</code></pre><p>So you can loop over any <code>Foldable</code> container or even a <code>Maybe</code>:</p><pre><code class="active haskell">import Pipes
+
+main = runEffect $ for (each (Just 1)) (lift . print)</code></pre><h1 id="producers"><a href="#producers">Producers</a></h1><p>You might wonder why the body of a <code>for</code> loop can be a <code>Producer</code>.  Let's
+test out this feature by defining a new loop body that <code>duplicate</code>s every
+value:</p><pre><code class="haskell">import Pipes
+import qualified Pipes.Prelude as Pipes  -- Pipes.Prelude already has 'stdinLn'
+ 
+duplicate :: Monad m =&gt; a -&gt; Producer a m ()
+duplicate x = do
+    yield x
+    yield x
+
+loop :: Producer String IO ()
+loop = for Pipes.stdinLn duplicate
+
+-- This is the exact same as:
+--
+-- loop = for P.stdinLn $ \x -&gt; do
+--     yield x
+--     yield x</code></pre><p>This time our <code>loop</code> is a <code>Producer</code> that outputs <code>String</code>s, specifically
+two copies of each line that we read from standard input.  Since <code>loop</code> is a
+<code>Producer</code> we cannot run it because there is still unhandled output.
+However, we can use yet another <code>for</code> to handle this new duplicated stream:</p><pre><code class="active haskell">import Pipes
+import qualified Pipes.Prelude as Pipes  -- Pipes.Prelude already has 'stdinLn'
+ 
+duplicate :: Monad m =&gt; a -&gt; Producer a m ()
+duplicate x = do
+    yield x
+    yield x
+
+loop :: Producer String IO ()
+loop = for Pipes.stdinLn duplicate
+-- show
+main = runEffect $ for loop (lift . putStrLn)</code></pre><p>Run the above program, which will echo every line from standard input to
+standard output twice.</p><p>However, are is this really necessary?  Couldn't we have instead written this using a
+nested for loop?</p><pre><code class="haskell">main = runEffect $
+    for Pipes.stdinLn $ \str1 -&gt;
+        for (duplicate str1) $ \str2 -&gt;
+            lift $ putStrLn str2</code></pre><p>Yes, we could have!  In fact, this is a special case of the following
+equality, which always holds no matter what:</p><pre><code class="haskell">s :: Monad m =&gt;      Producer a m ()  -- i.e. Pipes.stdinLn
+f :: Monad m =&gt; a -&gt; Producer b m ()  -- i.e. duplicate
+g :: Monad m =&gt; b -&gt; Producer c m ()  -- i.e. lift . putStrLn
+
+for (for s f) g = for s (\x -&gt; for (f x) g)</code></pre><p>We can understand the rationale behind this equality if we first define the
+following operator that is the point-free counterpart to <code>for</code>:</p><pre><code class="haskell"> (~&gt;) :: Monad m
+      =&gt; (a -&gt; Producer b m r)
+      -&gt; (b -&gt; Producer c m r)
+      -&gt; (a -&gt; Producer c m r)
+ (f ~&gt; g) x = for (f x) g</code></pre><p>Using <code>(~&gt;)</code> (pronounced &quot;into&quot;), we can transform our original equality
+into the following more symmetric equation:</p><pre><code class="haskell">f :: Monad m =&gt; a -&gt; Producer b m r
+g :: Monad m =&gt; b -&gt; Producer c m r
+h :: Monad m =&gt; c -&gt; Producer d m r
+
+-- Associativity
+(f ~&gt; g) ~&gt; h = f ~&gt; (g ~&gt; h)</code></pre><p>This looks just like an associativity law.  In fact, <code>(~&gt;)</code> has another nice
+property, which is that <code>yield</code> is its left and right identity:</p><pre><code class="haskell">-- Left Identity
+yield ~&gt; f = f
+
+-- Right Identity
+f ~&gt; yield = f</code></pre><p>In other words, <code>yield</code> and <code>(~&gt;)</code> form a <code>Category</code>, specifically the
+generator category, where <code>(~&gt;)</code> plays the role of the composition operator
+and <code>yield</code> is the identity.  If you don't know what a <code>Category</code> is, that's
+okay, and category theory is not a prerequisite for using <code>pipes</code>.  All you
+really need to know is that <code>pipes</code> uses some simple category theory to keep
+the API intuitive and easy to use.</p><p>Notice that if we translate the left identity law to use <code>for</code> instead of
+<code>(~&gt;)</code> we get:</p><pre><code class="haskell">for (yield x) f = f x</code></pre><p>This just says that if you iterate over a pure single-element <code>Producer</code>,
+then you could instead cut out the middle man and directly apply the body of
+the loop to that single element.</p><p>If we translate the right identity law to use <code>for</code> instead of (<code>~&gt;</code>) we
+get:</p><pre><code class="haskell">for s yield = s</code></pre><p>This just says that if the only thing you do is re-<code>yield</code> every element of
+a stream, you get back your original stream.</p><p>These three &quot;for loop&quot; laws summarize our intuition for how <code>for</code> loops
+should behave and because these are <code>Category</code> laws in disguise that means
+that <code>Producer</code>s are composable in a rigorous sense of the word.</p><p>In fact, we get more out of this than just a bunch of equations.  We also
+get a useful operator: <code>(~&gt;)</code>.  We can use this operator to condense
+our original code into the following more succinct form that composes two
+transformations:</p><pre><code class="haskell">main = runEffect $ for Pipes.stdinLn (duplicate ~&gt; lift . putStrLn)</code></pre><p>This means that we can also choose to program in a more functional style and
+think of stream processing in terms of composing transformations using
+<code>(~&gt;)</code> instead of nesting a bunch of <code>for</code> loops.</p><p>The above example is a microcosm of the design philosophy behind the <code>pipes</code>
+library:</p><ul><li><p>Define the API in terms of categories</p></li><li><p>Specify expected behavior in terms of category laws</p></li><li><p>Think compositionally instead of sequentially</p></li></ul><h1 id="consumers"><a href="#consumers">Consumers</a></h1><p>Sometimes you don't want to use a <code>for</code> loop because you don't want to consume
+every element of a <code>Producer</code> or because you don't want to process every
+value of a <code>Producer</code> the exact same way.</p><p>The most general solution is to externally iterate over the <code>Producer</code> using
+the <code>next</code> command:</p><pre><code class="haskell">next :: Monad m =&gt; Producer a m r -&gt; m (Either r (a, Producer a m r))</code></pre><p>Think of <code>next</code> as pattern matching on the head of the <code>Producer</code>.  This
+<code>Either</code> returns a <code>Left</code> if the <code>Producer</code> is done or it returns a <code>Right</code>
+containing the next value, <code>a</code>, along with the remainder of the <code>Producer</code>.</p><p>However, sometimes we can get away with something a little more simple and
+elegant, like a <code>Consumer</code>, which represents an effectful sink of values.  A
+<code>Consumer</code> is a monad transformer that extends the base monad with a new
+<code>await</code> command. This <code>await</code> command lets you receive input from an
+anonymous upstream source.</p><p>The following <code>stdoutLn</code> <code>Consumer</code> shows how to incrementally <code>await</code>
+<code>String</code>s and print them to standard output, terminating gracefully when
+receiving a broken pipe error:</p><pre><code class="haskell">import Control.Monad (unless)
+import Control.Exception (try, throwIO)
+import qualified GHC.IO.Exception as G
+import Pipes
+
+--          +--------+-- A 'Consumer' that awaits 'String's
+--          |        |
+--          v        v
+stdoutLn :: Consumer String IO ()
+stdoutLn = do
+    str &lt;- await  -- 'await' a 'String'
+    x   &lt;- lift $ try $ putStrLn str
+    case x of
+        -- Gracefully terminate if we got a broken pipe error
+        Left e@(G.IOError { G.ioe_type = t}) -&gt;
+            lift $ unless (t == G.ResourceVanished) $ throwIO e
+        -- Otherwise loop
+        Right () -&gt; stdoutLn</code></pre><p><code>await</code> is the dual of <code>yield</code>: we suspend our <code>Consumer</code> until we receive a
+new value.  If nobody provides a value (which is possible) then <code>await</code>
+never returns.  You can think of <code>await</code> as having the following type:</p><pre><code class="haskell">await :: Monad m =&gt; Consumer a m a</code></pre><p>One way to feed a <code>Consumer</code> is to repeatedly feed the same input using
+using <code>(&gt;~)</code> (pronounced &quot;feed&quot;):</p><pre><code class="haskell">--                 +- Feed       +- Consumer to    +- Returns new
+--                 |  action     |  feed           |  Effect
+--                 v             v                 v  
+--                 ----------    --------------    ----------
+(&gt;~) :: Monad m =&gt; Effect m b -&gt; Consumer b m c -&gt; Effect m c</code></pre><p><code>draw &gt;~ consumer</code> loops over <code>consumer</code>, substituting each <code>await</code> in
+<code>consumer</code> with <code>draw</code>.</p><p>So the following code replaces every <code>await</code> in <code>stdoutLn</code> with
+<code>lift getLine</code> and then removes all the <code>lift</code>s:</p><pre><code class="active haskell">import Control.Monad (unless)
+import Control.Exception (try, throwIO)
+import qualified GHC.IO.Exception as G
+import Pipes
+
+stdoutLn :: Consumer String IO ()
+stdoutLn = do
+    str &lt;- await
+    x   &lt;- lift $ try $ putStrLn str
+    case x of
+        Left e@(G.IOError { G.ioe_type = t}) -&gt;
+            lift $ unless (t == G.ResourceVanished) $ throwIO e
+        Right () -&gt; stdoutLn
+-- show
+main = runEffect $ lift getLine &gt;~ stdoutLn</code></pre><p>Run the above program and it will echo standard input to standard input.  The
+difference is that this time it checks for a broken output pipe instead of end
+of input.</p><p>You might wonder why (<code>&gt;~</code>) uses an <code>Effect</code> instead of a raw action in the
+base monad.  The reason why is that <code>(&gt;~)</code> actually permits the following
+more general type:</p><pre><code class="haskell">(&gt;~) :: Monad m =&gt; Consumer a m b -&gt; Consumer b m c -&gt; Consumer a m c</code></pre><p><code>(&gt;~)</code> is the dual of <code>(~&gt;)</code>, composing <code>Consumer</code>s instead of <code>Producer</code>s.</p><p>This means that you can feed a <code>Consumer</code> with yet another <code>Consumer</code> so
+that you can <code>await</code> while you <code>await</code>.  For example, we could define the
+following intermediate <code>Consumer</code> that requests two <code>String</code>s and returns
+them concatenated:</p><pre><code class="haskell">doubleUp :: Monad m =&gt; Consumer String m String
+doubleUp = do
+    str1 &lt;- await
+    str2 &lt;- await
+    return (str1 ++ str2)
+
+-- more concise: doubleUp = (++) &lt;$&gt; await &lt;*&gt; await</code></pre><p>We can now insert this in between <code>lift getLine</code> and <code>stdoutLn</code> and see
+what happens:</p><pre><code class="active haskell">import Control.Monad (unless)
+import Control.Exception (try, throwIO)
+import qualified GHC.IO.Exception as G
+import Pipes
+
+stdoutLn :: Consumer String IO ()
+stdoutLn = do
+    str &lt;- await
+    x   &lt;- lift $ try $ putStrLn str
+    case x of
+        Left e@(G.IOError { G.ioe_type = t}) -&gt;
+            lift $ unless (t == G.ResourceVanished) $ throwIO e
+        Right () -&gt; stdoutLn
+
+doubleUp :: Monad m =&gt; Consumer String m String
+doubleUp = do
+    str1 &lt;- await
+    str2 &lt;- await
+    return (str1 ++ str2)
+-- show
+main = runEffect $ lift getLine &gt;~ doubleUp &gt;~ stdoutLn</code></pre><p>If you run the above example it will repeatedly request two lines of input and
+output them concatenated.</p><p><code>doubleUp</code> splits every request from <code>stdoutLn</code> into two separate requests
+and returns back the concatenated result.</p><p>We didn't need to parenthesize the above chain of <code>(&gt;~)</code> operators, because
+<code>(&gt;~)</code> is associative:</p><pre><code class="haskell">-- Associativity
+(f &gt;~ g) &gt;~ h = f &gt;~ (g &gt;~ h)</code></pre><p>... so we can always omit the parentheses since the meaning is unambiguous:</p><pre><code class="haskell">f &gt;~ g &gt;~ h</code></pre><p>Also, <code>(&gt;~)</code> has an identity, which is <code>await</code>!</p><pre><code class="haskell">-- Left identity
+await &gt;~ f = f
+
+-- Right Identity
+f &gt;~ await = f</code></pre><p>In other words, <code>(&gt;~)</code> and <code>await</code> form a <code>Category</code>, too, specifically the
+iteratee category, and <code>Consumer</code>s are also composable.</p><h1 id="pipes"><a href="#pipes">Pipes</a></h1><p>Our previous programs were unsatisfactory because they were biased either
+towards the <code>Producer</code> end or the <code>Consumer</code> end.  As a result, we had to
+choose between gracefully handling end of input (using <code>stdinLn</code>) or
+gracefully handling end of output (using <code>stdoutLn</code>), but not both at the
+same time.</p><p>However, we don't need to restrict ourselves to using <code>Producer</code>s
+exclusively or <code>Consumer</code>s exclusively.  We can connect <code>Producer</code>s and
+<code>Consumer</code>s directly together using (<code>&gt;-&gt;</code>) (pronounced &quot;pipe&quot;):</p><pre><code class="haskell">(&gt;-&gt;) :: Monad m =&gt; Producer a m r -&gt; Consumer a m r -&gt; Effect m r</code></pre><p>This returns an <code>Effect</code> which we can run:</p><pre><code class="active haskell">import Pipes
+import qualified Pipes.Prelude as Pipes  -- Pipes.Prelude also provides 'stdoutLn'
+
+main = runEffect $ Pipes.stdinLn &gt;-&gt; Pipes.stdoutLn</code></pre><p>This program is more declarative of our intent: we want to stream values
+from <code>stdinLn</code> to <code>stdoutLn</code>.  The above &quot;pipeline&quot; not only echoes
+standard input to standard output, but also handles both end of input and
+broken pipe errors.</p><p><code>(&gt;-&gt;)</code> is &quot;pull-based&quot; meaning that control flow begins at the most
+downstream component (i.e. <code>stdoutLn</code> in the above example).  Any time a
+component <code>await</code>s a value it blocks and transfers control upstream and
+every time a component <code>yield</code>s a value it blocks and restores control back
+downstream, satisfying the <code>await</code>.  So in the above example, <code>(&gt;-&gt;)</code>
+matches every <code>await</code> from <code>P.stdoutLn</code> with a <code>yield</code> from <code>stdinLn</code>.</p><p>Streaming stops when either <code>stdinLn</code> terminates (i.e. end of input) or
+<code>stdoutLn</code> terminates (i.e. broken pipe).  This is why <code>(&gt;-&gt;)</code> requires
+that both the <code>Producer</code> and <code>Consumer</code> share the same type of return value:
+whichever one terminates first provides the return value for the entire
+<code>Effect</code>.</p><p>Let's test this by modifying our <code>Producer</code> and <code>Consumer</code> to each return a
+diagnostic <code>String</code>:</p><pre><code class="active haskell">import Control.Applicative ((&lt;$))  -- (&lt;$) modifies return values
+import Pipes
+import qualified Pipes.Prelude as P
+import System.IO
+
+main = do
+    hSetBuffering stdout NoBuffering
+    str &lt;- runEffect $
+        (&quot;End of input!&quot; &lt;$ P.stdinLn) &gt;-&gt; (&quot;Broken pipe!&quot; &lt;$ P.stdoutLn)
+    hPutStrLn stderr str</code></pre><p>If you run this program on the command line you can trigger both termination
+scenarios:</p><pre><code>$ ./echo2
+Test&lt;Enter&gt;
+Test
+&lt;Ctrl-D&gt;
+End of input!
+$ ./echo2 | perl -e 'close STDIN'
+Test&lt;Enter&gt;
+Broken pipe!
+$</code></pre><p>You might wonder why <code>(&gt;-&gt;)</code> returns an <code>Effect</code> that we have to run instead
+of directly returning an action in the base monad.  This is because you can
+connect things other than <code>Producer</code>s and <code>Consumer</code>s, like <code>Pipe</code>s, which
+are effectful stream transformations.</p><p>A <code>Pipe</code> is a monad transformer that is a mix between a <code>Producer</code> and
+<code>Consumer</code>, because a <code>Pipe</code> can both <code>await</code> and <code>yield</code>.  The following
+example <code>Pipe</code> is analogous to the Prelude's <code>take</code>, only allowing a fixed
+number of values to flow through:</p><pre><code class="haskell">import Control.Monad (replicateM_)
+import Pipes
+import Prelude hiding (take)
+
+--              +--------- A 'Pipe' that
+--              |    +---- 'await's 'a's and
+--              |    | +-- 'yield's 'a's
+--              |    | |
+--              v    v v
+take ::  Int -&gt; Pipe a a IO ()
+take n = do
+    replicateM_ n $ do                     -- Repeat this block 'n' times
+        x &lt;- await                         -- 'await' a value of type 'a'
+        yield x                            -- 'yield' a value of type 'a'
+    lift $ putStrLn &quot;You shall not pass!&quot;  -- Fly, you fools!</code></pre><p>You can use <code>Pipe</code>s to transform <code>Producer</code>s, <code>Consumer</code>s, or even other
+<code>Pipe</code>s using the same <code>(&gt;-&gt;)</code> operator:</p><pre><code class="haskell">(&gt;-&gt;) :: Monad m =&gt; Producer a m r -&gt; Pipe   a b m r -&gt; Producer b m r
+(&gt;-&gt;) :: Monad m =&gt; Pipe   a b m r -&gt; Consumer b m r -&gt; Consumer a m r
+(&gt;-&gt;) :: Monad m =&gt; Pipe   a b m r -&gt; Pipe   b c m r -&gt; Pipe'   a c m r</code></pre><p>For example, you can compose <code>take</code> after <code>stdinLn</code> to limit the number
+of lines drawn from standard input:</p><pre><code class="active haskell">import Control.Monad (replicateM_)
+import Pipes
+import qualified Pipes.Prelude as Pipes
+import Prelude hiding (take)
+
+take ::  Int -&gt; Pipe a a IO ()
+take n = do
+    replicateM_ n $ do
+        x &lt;- await
+        yield x
+    lift $ putStrLn &quot;You shall not pass!&quot;
+-- show
+maxInput :: Int -&gt; Producer String IO ()
+maxInput n = Pipes.stdinLn &gt;-&gt; take n
+
+main = runEffect $ maxInput 3 &gt;-&gt; Pipes.stdoutLn</code></pre><p>... or you can pre-compose <code>take</code> before <code>stdoutLn</code> to limit the number
+of lines written to standard output:</p><pre><code class="active haskell">import Control.Monad (replicateM_)
+import Pipes
+import qualified Pipes.Prelude as Pipes
+import Prelude hiding (take)
+
+take ::  Int -&gt; Pipe a a IO ()
+take n = do
+    replicateM_ n $ do
+        x &lt;- await
+        yield x
+    lift $ putStrLn &quot;You shall not pass!&quot;
+-- show
+maxOutput :: Int -&gt; Consumer String IO ()
+maxOutput n = take n &gt;-&gt; Pipes.stdoutLn
+
+-- Exact same behavior
+main = runEffect $ Pipes.stdinLn &gt;-&gt; maxOutput 3</code></pre><p>Those both gave the same behavior because <code>(&gt;-&gt;)</code> is associative:</p><pre><code class="haskell">(p1 &gt;-&gt; p2) &gt;-&gt; p3 = p1 &gt;-&gt; (p2 &gt;-&gt; p3)</code></pre><p>Therefore we can just leave out the parentheses:</p><pre><code class="active haskell">import Control.Monad (replicateM_)
+import Pipes
+import qualified Pipes.Prelude as Pipes
+import Prelude hiding (take)
+
+take ::  Int -&gt; Pipe a a IO ()
+take n = do
+    replicateM_ n $ do
+        x &lt;- await
+        yield x
+    lift $ putStrLn &quot;You shall not pass!&quot;
+-- show
+-- Exact same behavior
+main = runEffect $ Pipes.stdinLn &gt;-&gt; take 3 &gt;-&gt; Pipes.stdoutLn</code></pre><p><code>(&gt;-&gt;)</code> is designed to behave like the Unix pipe operator, except with less
+quirks.  In fact, we can continue the analogy to Unix by defining <code>cat</code>
+(named after the Unix <code>cat</code> utility), which reforwards elements endlessly:</p><pre><code class="haskell">cat :: Monad m =&gt; Pipe a a m r
+cat = forever $ do
+    x &lt;- await
+    yield x</code></pre><p><code>cat</code> is the identity of <code>(&gt;-&gt;)</code>, meaning that <code>cat</code> satisfies the
+following two laws:</p><pre><code class="haskell">-- Useless use of 'cat
+cat &gt;-&gt; p = p
+
+-- Forwarding output to 'cat' does nothing
+p &gt;-&gt; cat = p</code></pre><p>Therefore, <code>(&gt;-&gt;)</code> and <code>cat</code> form a <code>Category</code>, specifically the category of
+Unix pipes, and <code>Pipe</code>s are also composable.</p><p>A lot of Unix tools have very simple definitions when written using <code>pipes</code>:</p><pre><code class="active haskell">import Control.Monad (forever)
+import Pipes
+import qualified Pipes.Prelude as Pipes  -- Pipes.Prelude provides 'take', too
+import Prelude hiding (head)
+
+head :: Monad m =&gt; Int -&gt; Pipe a a m ()
+head = Pipes.take
+
+yes :: Monad m =&gt; Producer String m r
+yes = forever $ yield &quot;y&quot;
+
+main = runEffect $ yes &gt;-&gt; head 3 &gt;-&gt; Pipes.stdoutLn</code></pre><p>This prints out 3 <code>y</code>s, just like the equivalent Unix pipeline:</p><pre><code>$ yes | head -3
+y
+y
+y
+$</code></pre><p>This lets us write &quot;Haskell pipes&quot; instead of Unix pipes.  These are much
+easier to build than Unix pipes and we can connect them directly within
+Haskell for interoperability with the Haskell language and ecosystem.</p><h1 id="listt"><a href="#listt">ListT</a></h1><p><code>pipes</code> also provides a
+<a href="http://www.haskell.org/haskellwiki/ListT_done_right">&quot;ListT done right&quot; implementation</a>.
+This differs from the implementation in <code>transformers</code> because this <code>ListT</code>:</p><ul><li><p>obeys the monad laws, and</p></li><li><p>streams data immediately instead of collecting all results into memory.</p></li></ul><p>The latter property is actually an elegant consequence of obeying the monad
+laws.</p><p>To bind a list within a <code>ListT</code> computation, combine <code>Select</code> and <code>each</code>:</p><pre><code class="haskell">import Pipes
+
+pair :: ListT IO (Int, Int)
+pair = do
+    x &lt;- Select $ each [1, 2]
+    lift $ putStrLn $ &quot;x = &quot; ++ show x
+    y &lt;- Select $ each [3, 4]
+    lift $ putStrLn $ &quot;y = &quot; ++ show y
+    return (x, y)</code></pre><p>You can then loop over a <code>ListT</code> by using <code>every</code>:</p><pre><code class="haskell">every :: Monad m =&gt; ListT m a -&gt; Producer a m ()</code></pre><p>So you can use your <code>ListT</code> within a <code>for</code> loop:</p><pre><code class="active haskell">import Pipes
+
+pair :: ListT IO (Int, Int)
+pair = do
+    x &lt;- Select $ each [1, 2]
+    lift $ putStrLn $ &quot;x = &quot; ++ show x
+    y &lt;- Select $ each [3, 4]
+    lift $ putStrLn $ &quot;y = &quot; ++ show y
+    return (x, y)
+-- show
+-- Try me!
+main = runEffect $ for (every pair) (lift . print)</code></pre><pre><code>... or a pipeline:</code></pre><pre><code class="active haskell">import Pipes
+import qualified Pipes.Prelude as Pipes
+
+pair :: ListT IO (Int, Int)
+pair = do
+    x &lt;- Select $ each [1, 2]
+    lift $ putStrLn $ &quot;x = &quot; ++ show x
+    y &lt;- Select $ each [3, 4]
+    lift $ putStrLn $ &quot;y = &quot; ++ show y
+    return (x, y)
+-- show
+main = runEffect $ every pair &gt;-&gt; Pipes.print</code></pre><p>Note that <code>ListT</code> is lazy and only produces as many elements as we request:</p><pre><code class="active haskell">import Pipes
+import qualified Pipes.Prelude as Pipes
+
+pair :: ListT IO (Int, Int)
+pair = do
+    x &lt;- Select $ each [1, 2]
+    lift $ putStrLn $ &quot;x = &quot; ++ show x
+    y &lt;- Select $ each [3, 4]
+    lift $ putStrLn $ &quot;y = &quot; ++ show y
+    return (x, y)
+-- show
+-- Try me!
+main = runEffect $ for (every pair &gt;-&gt; Pipes.take 2) (lift . print)</code></pre><p>You can also go the other way, binding <code>Producer</code>s directly within a
+<code>ListT</code>.  In fact, this is actually what <code>Select</code> was already doing:</p><pre><code class="haskell">Select :: Producer a m () -&gt; ListT m a</code></pre><p>This lets you write crazy code like:</p><pre><code class="haskell">import Pipes
+import qualified Pipes.Prelude as Pipes
+
+input :: Producer String IO ()
+input = Pipes.stdinLn &gt;-&gt; Pipes.takeWhile (/= &quot;quit&quot;)
+
+name :: ListT IO String
+name = do
+    firstName &lt;- Select input
+    lastName  &lt;- Select input
+    return (firstName ++ &quot; &quot; ++ lastName)</code></pre><p>Here we're binding standard input non-deterministically (twice) as if it
+were an effectful list:</p><pre><code class="active haskell">import Pipes
+import qualified Pipes.Prelude as Pipes
+
+input :: Producer String IO ()
+input = Pipes.stdinLn &gt;-&gt; Pipes.takeWhile (/= &quot;quit&quot;)
+
+name :: ListT IO String
+name = do
+    firstName &lt;- Select input
+    lastName  &lt;- Select input
+    return (firstName ++ &quot; &quot; ++ lastName)
+-- show
+main = runEffect $ every name &gt;-&gt; Pipes.stdoutLn</code></pre><p>Here is an example session using the above program:</p><pre><code>&gt; Daniel&lt;Enter&gt;
+&gt; Fischer&lt;Enter&gt;
+Daniel Fischer
+&gt; Wagner&lt;Enter&gt;
+Daniel Wagner
+&gt; quit&lt;Enter&gt;
+&gt; Donald&lt;Enter&gt;
+&gt; Stewart&lt;Enter&gt;
+Donald Stewart
+&gt; Duck&lt;Enter&gt;
+Donald Duck
+&gt; quit&lt;Enter&gt;
+&gt; quit&lt;Enter&gt;</code></pre><p>Notice how this streams out values immediately as they are generated, rather
+than building up a large intermediate result and then printing all the
+values in one batch at the end.</p><h1 id="tricks"><a href="#tricks">Tricks</a></h1><p><code>pipes</code> is more powerful than meets the eye so this section presents some
+non-obvious tricks you may find useful.</p><p>Many pipe combinators will work on unusual pipe types and the next few
+examples will use the <code>cat</code> pipe to demonstrate this.</p><p>For example, you can loop over the output of a <code>Pipe</code> using <code>for</code>, which is
+how <code>map</code> is defined:</p><pre><code class="haskell">map :: Monad m =&gt; (a -&gt; b) -&gt; Pipe a b m r
+map f = for cat $ \x -&gt; yield (f x)
+
+-- Read this as: For all values flowing downstream, apply 'f'</code></pre><p>This is equivalent to:</p><pre><code class="haskell">map f = forever $ do
+    x &lt;- await
+    yield (f x)</code></pre><p>You can also feed a <code>Pipe</code> input using <code>(&gt;~)</code>.  This means we could have
+instead defined the <code>yes</code> pipe like this:</p><pre><code class="haskell">yes :: Monad m =&gt; Producer String m r
+yes = return &quot;y&quot; &gt;~ cat
+
+-- Read this as: Keep feeding &quot;y&quot; downstream</code></pre><p>This is equivalent to:</p><pre><code class="haskell">yes = forever $ yield &quot;y&quot;</code></pre><p>You can also sequence two <code>Pipe</code>s together.  This is how <code>drop</code> is
+defined:</p><pre><code class="haskell">drop :: Monad m =&gt; Int -&gt; Pipe a a m r
+drop n = do
+    replicateM_ n await
+    cat</code></pre><p>This is equivalent to:</p><pre><code class="haskell">drop n = do
+    replicateM_ n await
+    forever $ do
+        x &lt;- await
+        yield x</code></pre><p>You can even compose pipes inside of another pipe:</p><pre><code class="haskell">customerService :: Producer String IO ()
+customerService = do
+    each [ &quot;Hello, how can I help you?&quot;                -- Begin with a script
+         , &quot;Hold for one second.&quot;
+         ]
+    Pipes.stdinLn &gt;-&gt; Pipes.takeWhile (/= &quot;Goodbye!&quot;)  -- Now continue with a human</code></pre><p>Also, you can often use <code>each</code> in conjunction with (<code>~&gt;</code>) to traverse nested
+data structures.  For example, you can print all non-<code>Nothing</code> elements
+from a doubly-nested list:</p><pre><code class="active haskell">import Pipes
+
+main = runEffect $ (each ~&gt; each ~&gt; each ~&gt; lift . print) [[Just 1, Nothing], [Just 2, Just 3]]</code></pre><p>Another neat thing to know is that 'every' has a more general type:</p><pre><code class="haskell">every :: (Monad m, Enumerable t) =&gt; t m a -&gt; Producer a m ()</code></pre><p><code>Enumerable</code> generalizes <code>Foldable</code> and if you have an effectful container
+of your own that you want others to traverse using <code>pipes</code>, just have your
+container implement the <code>toListT</code> method of the <code>Enumerable</code> class:</p><pre><code class="haskell">class Enumerable t where
+    toListT :: Monad m =&gt; t m a -&gt; ListT m a</code></pre><p>You can even use <code>Enumerable</code> to traverse effectful types that are not even
+proper containers, like <code>MaybeT</code>:</p><pre><code class="active haskell">import Control.Monad (guard)
+import Control.Monad.Trans.Maybe
+import Pipes
+import qualified Pipes.Prelude as Pipes
+
+input :: MaybeT IO String
+input = do
+    str &lt;- lift getLine
+    guard (str /= &quot;Fail&quot;)
+    return str
+
+main = runEffect $ every input &gt;-&gt; Pipes.stdoutLn</code></pre><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>This tutorial covers the concepts of connecting, building, and reading
+<code>pipes</code> code.  However, this library is only the core component in an
+ecosystem of streaming components.  Derived libraries that build immediately
+upon <code>pipes</code> include:</p><ul><li><p><code>pipes-concurrency</code>: Concurrent reactive programming and message passing</p></li><li><p><code>pipes-parse</code>: Minimal utilities for stream parsing</p></li><li><p><code>pipes-safe</code>: Resource management and exception safety for @pipes@</p></li></ul><p>These libraries provide functionality specialized to common streaming
+domains.  Additionally, there are several libraries on Hackage that provide
+even higher-level functionality, which you can find by searching under the
+&quot;Pipes&quot; category or by looking for packages with a <code>pipes-</code> prefix in
+their name.  Current examples include:</p><ul><li><p><code>pipes-network</code>/<code>pipes-network-tls</code>: Networking</p></li><li><p><code>pipes-zlib</code>: Compression and decompression</p></li><li><p><code>pipes-binary</code>: Binary serialization</p></li><li><p><code>pipes-attoparsec</code>: High-performance parsing</p></li><li><p><code>pipes-aeson</code>: JSON serialization and deserialization</p></li></ul><p>Even these derived packages still do not explore the full potential of
+<code>pipes</code> functionality, which actually permits bidirectional communication.
+Advanced <code>pipes</code> users can explore this library in greater detail by
+studying the documentation in
+<a href="http://hackage.haskell.org/package/pipes-4.1.0/docs/Pipes-Core.html">the <code>Pipes.Core</code> module</a>
+to learn about the symmetry of the underlying <code>Proxy</code> type and operators.</p><p>To learn more about <code>pipes</code>, ask questions, or follow <code>pipes</code> development,
+you can subscribe to
+<a href="https://groups.google.com/forum/#!forum/haskell-pipes">the <code>haskell-pipes</code> mailing list</a>
+or you can
+<a href="mailto:haskell-pipes@googlegroups.com">mail the list directly</a>.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/Gabriel439/Pipes%20tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

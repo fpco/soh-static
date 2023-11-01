@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html><head><title>Pattern and Guard Extensions - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions">Guide to GHC Extensions</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/pattern-and-guard-extensions">Pattern and Guard Extensions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Pattern and Guard Extensions</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">22 Jan 2016</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/PthariensFlame">Alexander Altman</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5324/7122668ddc8737c60875d582f98c3cb129ad9d19">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/basic-syntax-extensions">Previous content: Basic Syntax Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/explicit-forall">Next content: Explicit `forall`</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions">Go up to: Guide to GHC Extensions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/PthariensFlame">See all content by Alexander Altman</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#npluskpatterns">NPlusKPatterns</a></li><li><a href="#bangpatterns">BangPatterns</a></li><li><a href="#viewpatterns">ViewPatterns</a><ul><li><a href="#viewpatterns-as-a-replacement-for-npluskpatterns">ViewPatterns as a Replacement for NPlusKPatterns</a></li></ul></li><li><a href="#patternguards">PatternGuards</a></li><li><a href="#patternsignatures">PatternSignatures</a></li><li><a href="#patternsynonyms">PatternSynonyms</a><ul><li><a href="#pattern-synonym-type-signatures">Pattern Synonym Type Signatures</a></li><li><a href="#pattern-synonyms-in-export-lists">Pattern Synonyms in Export Lists</a></li><li><a href="#use-case--simple-api--complex-implementation">Use Case: Simple API, Complex Implementation</a></li><li><a href="#use-case--regex-by-pattern">Use Case: Regex-By-Pattern</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>These extensions enhance Haskell’s patterns and guards.</p><h1 id="npluskpatterns"><a href="#npluskpatterns"><code>NPlusKPatterns</code></a></h1><p><b>Available in:  GHC 6.12 and later</b></p><p>The deprecated extension <code>NPlusKPatterns</code> was originally part of Haskell 98, but has since been removed in Haskell 2010.  It allows a very specific extension of pattern syntax, such that you can write, e.g.:</p><pre><code class="haskell">myFunc (x+3) = f x</code></pre><p>and have it mean exactly:</p><pre><code class="haskell">myFunc x' | x' &gt;= 3 = let x = x'-3 in f x</code></pre><p>In place of <code>3</code>, you can have any fixed positive integer literal (the “k” in the term “n-plus-k pattern”).</p><p>Because of the extremely limited utility of this feature, and its nature as an explicit special case, n-plus-k patterns were eventually deemed unworthy of inclusion in the language and were dropped in the Haskell 2010 Report.</p><p><b>WARNING:</b> <i>Do not use <code>NPlusKPatterns</code> in new code!</i>  I only include it here because it may be important when trying to understand legacy Haskell codebases.  If <code>NPlusKPatterns</code> seems like it would have been a perfect fit for your use case, try using <a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/pattern-and-guard-extensions#viewpatterns-as-a-replacement-for-npluskpatterns"><code>ViewPatterns</code></a> instead.</p><h1 id="bangpatterns"><a href="#bangpatterns"><code>BangPatterns</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>BangPatterns</code> extension allows a small extension to pattern syntax.  You can now write patterns of the form <code>!p</code>, where p is any other pattern, and have it mean “match as though by <code>p</code>, but first evaluate the value being matched to weak head normal form.”  In essence, just as standard Haskell allows you to force a pattern match to be lazy (or “irrefutable”) by using <code>~</code>, the <code>BangPatterns</code> extension allows you to force a pattern match to be strict (or “immediate”) by using <code>!</code>.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE BangPatterns #-}
+
+lazyFunc, strictFunc :: () -&gt; ()
+
+-- lazy, even though it would normally be strict
+lazyFunc ~() = ()
+
+-- strict, even though it would normally be lazy
+strictFunc !v = ()
+
+-- replace 'lazyFunc' with 'strictFunc' and see what happens
+main = print $ lazyFunc undefined</code></pre><h1 id="viewpatterns"><a href="#viewpatterns"><code>ViewPatterns</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>ViewPatterns</code> extension adds a new form of pattern that can be used anywhere any other pattern can, and that applies an arbitrary expression (of appropriate function type), called a <i>view</i>, to the argument before matching.  A view pattern <code>e -&gt; p</code> applies the view <code>e</code> to the argument that would be matched by the whole view pattern, and then matches the pattern <code>p</code> against <code>e</code>’s result.  The whole view pattern matches against the original value exactly when <code>p</code> matches against the derived value.  A consequence of these semantics is that <code>e -&gt; p</code> is irrefutable exactly when <code>p</code> is irrefutable, as long as <code>e</code> is sufficiently lazy.</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE ViewPatterns #-}
+
+eitherEndIsZero :: [Int] -&gt; Bool
+eitherEndIsZero (head -&gt; 0) = True
+eitherEndIsZero (last -&gt; 0) = True
+eitherEndIsZero          _  = False
+
+main = print $ eitherEndIsZero [0,1,8,9]</code></pre><h2 id="viewpatterns-as-a-replacement-for-npluskpatterns"><a href="#viewpatterns-as-a-replacement-for-npluskpatterns"><a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/pattern-and-guard-extensions#viewpatterns"><code>ViewPatterns</code></a> as a Replacement for <a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/pattern-and-guard-extensions#npluskpatterns"><code>NPlusKPatterns</code></a></a></h2><p>You can use <code>ViewPatterns</code> to replace the deprecated <code>NPlusKPatterns</code> by simply using <code>subtract </code><i><code>k</code></i> as the view.  Although it is somewhat longer to type, it affords greater future-proofing and less fragility than <code>NPlusKPatterns</code> does:</p><pre><code class="haskell">myFunc x'@(subtract 3 -&gt; x) | x' &gt;= 3 = f x</code></pre><h1 id="patternguards"><a href="#patternguards"><code>PatternGuards</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The <code>PatternGuards</code> extension, now officially incorporated into the Haskell 2010 language, expands guards to allow arbitrary pattern matching and condition chaining.  The existing syntax for guards then becomes a special case of the new, much more general form.</p><p>You start a guard in the same way as always, with a <code>|</code>.  You then continue with either a <i>boolean guardlet</i> or a <i>pattern guardlet</i>.  A <i>boolean guardlet</i> is any expression whose type is <code>Bool</code>, and they function as before.  A <i>pattern guardlet</i> is of the form <code>p &lt;- e</code>, where <code>p</code> is an arbitrary pattern and <code>e</code> is an arbitrary expression, and which is fullfilled exactly when <code>e</code> matches against <code>p</code>.  You may then add additional boolean or pattern guardlets, seperated from each other by commas.  Finally, you finish off the complete guard with <code>=</code>, as usual.</p><p><code>PatternGuards</code> syntax is deliberately designed to be reminicent of list comprehension syntax, but be aware that, in a pattern guardlet, <i><code>p</code> matches against the same type as <code>e</code> has</i>, unlike in a list comprehension generator.  All the provided guardlets are tried in order, and only if all of them succeed is that guard’s clause chosen.  Otherwise, evaluation moves to the next clause down, as usual (or unceremoniously falls off the bottom if there is no next clause, also as usual).</p><p>Try it out!</p><pre><code class="active haskell">{-# LANGUAGE PatternGuards #-}
+import Data.List (nub)
+
+strangeOperation :: [Int] -&gt; Ordering
+strangeOperation xs | 7  &lt;- sum xs
+                    , n  &lt;- length xs
+                    , n  &gt;= 5
+                    , n  &lt;= 20
+                      = EQ
+                    | 1  &lt;- sum xs
+                    , 18 &lt;- length xs
+                    , r  &lt;- nub xs `compare` [1,2,3]
+                    , r /= EQ
+                      = r
+                    | otherwise
+                      = [3,1,2] `compare` xs
+
+main = print $ strangeOperation ([5,7..21] ++ [20,19..4])</code></pre><h1 id="patternsignatures"><a href="#patternsignatures"><code>PatternSignatures</code></a></h1><p><b>Available in:  All recent GHC versions</b></p><p>The deprecated extension <code>PatternSignatures</code> allowed type signatures to be put on patterns; it has been wholly subsumed by the much cleaner and more powerful <a href="https://www.schoolofhaskell.com/user/PthariensFlame/guide-to-ghc-extensions/explicit-forall#scopedtypevariables"><code>ScopedTypeVariables</code></a> extension, and should not be used in new code.</p><h1 id="patternsynonyms"><a href="#patternsynonyms"><code>PatternSynonyms</code></a></h1><p><b>Available in:  GHC 7.8 and later</b></p><p>In standard Haskell, you can abstract over values and functions, as well as over types and type constructors, but you <i>can’t</i> abstract over patterns.  The <code>PatternSynonyms</code> extension fixes this, and gives you a very powerful mechanism for implementation hiding while still providing your module’s users with the streamlined interface that they would get from a fully open implementation.  In short, <code>PatternSynonyms</code> lets you present even the most complicated multiply-nested and hyperoptimized data representation with whatever simple constructors-and-pattern-matching-based interface you feel is appropriate.</p><p>In order to acheive this, <code>PatternSynonyms</code> enables a new form for top-level declarations in a Haskell module:  <i>pattern synonym declarations</i>, which always begin with the new keyword <code>pattern</code>.  Pattern synonym declarations produce new patterns that are valid anywhere you can do pattern matching.</p><p>There are three styles of pattern synonym declaration; which one you should use depends on exactly how you want the resulting pattern synonym to behave.  A <i>monodirectional</i> pattern synonym declaration produces a pattern synonym that is only valid in patterns.  For example:</p><pre><code class="haskell">-- This pattern synonym will match the first and third elements of a 3-tuple
+-- and bind them to 'x' and 'y' respectively.
+pattern OneAndThree x y &lt;- (x, _, y)
+
+-- Here is how the above pattern synonym might be used:
+OneAndThree one three = (4, 5, 6)
+-- Now 'one' is bound to '4' and 'three' is bound to '6'.</code></pre><p>Although the <code>OneAndThree</code> pattern is <a href="https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#dx8-60022">irrefutable</a>, pattern synonyms in general don’t have to be; for example:</p><pre><code class="haskell">-- This pattern will fail if the list it matches against
+-- isn't exactly of the form it's expecting.
+pattern VerySpecificList a b c &lt;- [(0, a), (b, &quot;hello&quot;), (1, [_]), c]
+
+-- Here is how the above pattern synonym might be used:
+extractMyData :: [(Int, String)] -&gt; Maybe (String, Int, Int, String)
+extractMyData (VerySpecificList str0 n0 (n1, str1)) = Just (str0, n0, n1, str1)
+extractMyData _ = Nothing</code></pre><p>The syntax of a monodirectional pattern synonym declaration is pretty straightforward.  You start with the keyword <code>pattern</code>, then give the name of the pattern synonym you’re declaring.  Pattern synonyms share a namespace and naming rules with data constructors; that is, you cannot have a pattern synonym and a data constructor with the same name in the same module, and pattern synonyms must either begin with an uppercase letter and continue alphanumerically or begin with a colon and continue symbolically, just like data constructors do.</p><p>After the pattern synonym’s name, you give a series of variable names (which might be empty, as in <code>pattern SingleOne &lt;- [1]</code>).  You cannot duplicate any of the names in this list; these are your <i>pattern variables</i>.</p><p>You follow the pattern variables with the symbol <code>&lt;-</code>, and then finish the declaration with the <i>underlying pattern</i>.  This is what your pattern synonym is actually a synonym <i>for</i>; in other words, the underlying pattern is what your pattern synonym will “expand into,” just like type synonyms “expand into” their definitions.  In order to guarantee that this makes sense at all, though, there are some restrictions on the form of the underlying pattern:  you must use all of your pattern variables <i>exactly</i> once, and any additional variables present must be used <i>at most</i> once.  (That last part means we could rewrite our <code>OneAndThree</code> example as <code>pattern OneAndThree x y &lt;- (x, z, y)</code> and still have it behave the same way.)  Otherwise, anything that’s a valid pattern elsewhere in the language is a valid underlying pattern for a pattern synonym; this includes pattern extensions like <code>ViewPatterns</code>, <code>BangPatterns</code>, and <code>NPlusKPatterns</code>, as well as previously defined pattern synonyms.</p><p>As previously mentioned, monodirectional pattern synonyms can <i>only</i> be used in pattern matching; if you try to use one as part of an expression, GHC will produce an error (at compile time).  This is in contrast to <i>bidirectional</i> pattern synonyms, which can be used in both contexts.  For example:</p><pre><code class="haskell">pattern NestedTriple x y z = (x, (y, z))
+
+-- Using the above pattern synonym in a pattern context:
+NestedTriple x y z = (1, (2, 3))
+
+-- Using the same pattern synonym in an expression context:
+t = [NestedTriple 'a' 'b' 'c', ('d', ('e', 'f'))]</code></pre><p>Bidirectional pattern synonym declarations take advantage of the fact that Haskell’s pattern and expression syntaxes are (deliberately) very similar to each other.  Notionally, a bidirectional pattern synonym “expands into the same thing,” regardless of whether that “thing” is required to be a pattern or an expression; the resulting abstract syntax is then automatically interpreted appropriately for the context it’s found in.  This behaviour is a lot like that of data constructors, which can themselves be viewed as bidirectional pattern synonyms that the language just so happens to provide “primitively.”</p><p>The only difference in appearance between monodirectional and bidirectional pattern synonym declarations is that the latter uses the symbol <code>=</code> where the former uses <code>&lt;-</code>; the only additional restrictions on bidirectional pattern synonyms compared to monodirectional pattern synonyms are that the underlying pattern must also be valid as an expression, and that you cannot use any “extra“ variables besides the pattern variables.</p><p>However, sometimes those additional restrictions are unacceptable; you might have an underlying pattern that is conceptually usable in a bidirectional fashion, but that you cannot express in a way that is syntactically uniform between pattern and expression contexts.  In such cases, as well as when you simply what more fine-grained control over the exact behavior of a bidirectional pattern synonym, you can use an <i>explicitly bidirectional</i> pattern synonym declaration.  For example:</p><pre><code class="haskell">pattern DoubleHead x &lt;- (x:_):_ where
+    DoubleHead x = [[x]]</code></pre><p>This pattern will successfully match any non-empty list of lists whose first element is also non-empty, binding its first element; it’s also usable in an expression context, where it will produce a singleton list of a singeton list of its sole parameter.</p><p>To declare a bidirectional pattern synonym explicitly, you declare the behavior of the pattern synonym in a pattern context as though you were declaring a monodirectional pattern synonym (<i>i.e.</i>, using <code>&lt;-</code> rather than <code>=</code>), but continue after the underlying pattern with the keyword <code>where</code> and an appropriately indented value or function declaration, except that the “value” or “function” that you’re declaring is the pattern synonym as it behaves in an expression context.</p><p>It should be noted that the sensibility of explicitly bidirectional pattern synonym declarations is very much in the hands of the programmer; all GHC cares about is that the syntax and types all check successfully.  If you want to produce a pattern synonym whose behaviour in an expression context doesn’t “match” its behaviour in a pattern context, you are free to do so!  Just make sure your users know what they’re getting into, or else you’ll severely break their expectations about how patterns are “supposed to work.”</p><h2 id="pattern-synonym-type-signatures"><a href="#pattern-synonym-type-signatures">Pattern Synonym Type Signatures</a></h2><p>In GHC 7.10 and later, pattern synonyms can be given type signatures.</p><p><b>TODO</b></p><h2 id="pattern-synonyms-in-export-lists"><a href="#pattern-synonyms-in-export-lists">Pattern Synonyms in Export Lists</a></h2><p><b>TODO</b></p><h2 id="use-case--simple-api--complex-implementation"><a href="#use-case--simple-api--complex-implementation">Use Case: Simple API, Complex Implementation</a></h2><p><b>TODO</b></p><h2 id="use-case--regex-by-pattern"><a href="#use-case--regex-by-pattern">Use Case: Regex-By-Pattern</a></h2><p><b>TODO</b></p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/pattern-and-guard-extensions';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

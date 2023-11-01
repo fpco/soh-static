@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html><head><title>Functional programming elevator pitch - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/imalsogreg">Greg Hale</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/imalsogreg/functional-programming-elevator-pitch">Functional programming elevator pitch</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Functional programming elevator pitch</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">31 May 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/imalsogreg">Greg Hale</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4584/e9f5f9218eec5b79be22a58cbb03e0cf095e42e2">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/imalsogreg">See all content by Greg Hale</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-functional-programming-elevator-pitch">The Functional Programming Elevator Pitch</a><ul><li><a href="#first-class-functions--build-components-with-interlocking-precision">First-class functions: Build components with interlocking precision</a></li><li><a href="#strong-static-typing---if-it-compiles--it-works--">Strong static typing: &quot;If it compiles, it works.&quot;</a><ul><li><a href="#algebraic-data-types">Algebraic Data Types</a></li><li><a href="#pattern-matching">Pattern Matching</a></li><li><a href="#pattern-matching-guides-you-through-code-refactorings">Pattern Matching guides you through code refactorings</a></li><li><a href="#generic-programming-from-the-ground-up">Generic programming from the ground up</a></li></ul></li><li><a href="#functional-purity-and-immutable-data--a-different-way-of-thinking-about-programming">Functional Purity and Immutable Data: A different way of thinking about programming</a><ul><li><a href="#surprise--1--variables-never-change-their-value">Surprise #1: Variables never change their value</a></li><li><a href="#surprise--2--no-for-loops">Surprise #2: No for loops</a></li><li><a href="#surprise--3--functions-other-than-main-can-t-do-any-i-o">Surprise #3: Functions other than main can&#39;t do any I/O</a></li></ul></li><li><a href="#a-monad-safely-mediates-communication-between-the-real-world-and-pure-functions">A Monad safely mediates communication between the real world and pure functions</a></li><li><a href="#haskell-can-be-pragmatic">Haskell can be Pragmatic</a><ul><li><a href="#haskell-code-runs-really-fast">Haskell code runs really fast</a></li><li><a href="#haskell-has-pretty-strong-library-offerings">Haskell has pretty strong library offerings</a></li><li><a href="#haskell-has-incredible-unit-testing">Haskell has incredible Unit Testing</a></li></ul></li><li><a href="#haskell-has-personality">Haskell has personality</a></li><li><a href="#you-can-do-it--where-to-go-next-">You can do it!  Where to go next.</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="the-functional-programming-elevator-pitch"><a href="#the-functional-programming-elevator-pitch">The Functional Programming Elevator Pitch</a></h1><p>What is functional programming about?  This tutorial will try to tell you why it's worth your time to learn the functional style.  We're focusing on Haskell, the most popular <i>pure</i> functional language, to see where these ideas take us in the extreme.</p><p>You will see that code you write in Haskell is highly modular and reusable - because the language makes it easy to write higher-order functions that have very particular jobs and are able to move through a program to the right spots the same way that data does.  Haskell allows you to create data-types that capture some of the <i>meaning</i> of your algorithms, so that the compiler can check your reasoning, not just your use of punctuation.  This eliminates a huge class of frustrating bugs.  And Haskell's pure functional discipline allows the Haskell compiler to understand much more about your program than is the case in other languages - the result is aggressive compiler optimization, a much better concurrency model, great code-testing tools, and the eradication of SegFaults, NullPtrExceptions, and the like.</p><p>Our goal in this post isn't to teach you Haskell (although you will pick up some basics).  We just want to demo Haskell to you, in the hope that you will be convinced to give Haskell a good try.  Please don't be frightened by the unusual syntax - it will all become clear.</p><h2 id="first-class-functions--build-components-with-interlocking-precision"><a href="#first-class-functions--build-components-with-interlocking-precision">First-class functions: Build components with interlocking precision</a></h2><p>FP is about treating functions like 'first-class citizens' in the language.  In most languages, functions take values as arguments and return a value as a result.  Functional languages allow you to treat functions themselves as values.  A function can take other functions as arguments, and return a function as a result.  The syntax for calling a function is also different.  <code>e = max(a,b)</code> would be written as <code>e = max a b</code> in Haskell.</p><pre><code class="active haskell">import Data.Char
+import Data.List
+
+-- Helper functions split a sentence into words and punctuation
+isWordPart l  = notElem l &quot; .,?!-\&quot;' &quot;
+toParts s = groupBy (\x y -&gt; isWordPart x &amp;&amp; isWordPart y) s
+
+modSentence :: (String -&gt; Bool) -&gt; (String -&gt; String) -&gt; String -&gt; String
+modSentence pred mod s = concat . 
+                         map (\w -&gt; if pred w then mod w else w) .
+                         toParts $ s
+
+-- show
+-- Two different tests for whether a word 'w' is in the list
+isName  w =  elem w [&quot;Erika&quot;,&quot;Mark&quot;,&quot;Katharine&quot;]
+isPlace w =  elem w [&quot;lab&quot;, &quot;zoo&quot;]
+
+-- Two functions that return either the capitalized
+-- or abbreviated form of the input word
+uppercaseWord   w = map toUpper w
+abbreviatedWord w = [ toUpper (head w), '.' ]
+
+mySentence = &quot;Are Erika and Mark in the lab? Katharine is at the zoo.&quot;
+
+main = print $ modSentence isName uppercaseWord mySentence 
+-- /show</code></pre><p>Two of the arguments to the function <code>modSentence</code> are themselves functions.  You can swap them out for other functions that fit in that context (<code>isPlace</code> and <code>abbreviatedWord</code>).</p><p>This example focuses on functions that work on strings.  But the method applies to functions over all data types, and you will see later that data types in in Haskell play a bigger role than they do in most other languages.</p><p>Detail: how is this different from function pointers in c, for example?  Click &quot;Show more&quot; to find out.</p><div class="hidden"><p>The first uses you will find for higher-order functions (functions that take other functions as arguments or return other functions) are the same ones you would think of for function pointers in languages that support them: for example a sorting algorithm that can be called with different ordering functions.</p><p>Function pointers are an very powerful feature.  Functional languages take this feature and make it pervasive in the language.  You can see this already in the syntax for Haskell function calls.</p><p>For example, <code>foldl</code> is a very general higher-order function that takes three arguments: (A) a function that combines two elements to make a third (B) An initial element and (C) list of elements [e1, ..., eN]</p><p><code>foldl f i ls</code> returns the function <code>f</code> 'folded' over the initial element and every element in the list like so: 
+<code>f( ... f( f( a e1) e2 ) ... en)</code></p><pre><code class="active haskell">-- show
+a = foldl (+) 0 [5 .. 10]
+b = foldl (++) &quot;These &quot; [&quot;are &quot;, &quot;some &quot;, &quot;words!&quot;]
+-- /show
+main = do
+    putStrLn $ &quot;a: &quot; ++ show a
+    putStrLn $ &quot;b: &quot; ++ show b</code></pre><p>What would happen if we left off the last argument?  It's reasonable to think that this is an error, just as it would be an to try to compute <code>y = min(a,);</code>  But in fact, it is very common to leave out arguments in Haskell.  The return value of <code>foldl (+) 0</code> (the above function call, minus its last argument) is a function that stores (+) and 0, and runs when finally given its third argument, a list of elements.</p><pre><code class="active haskell">-- 'Partial application' of foldl to two of its three arguments
+myFa = foldl (+) 0
+
+-- myFa is now a function on one argument
+main = print (myFa [5 .. 10])</code></pre><p>It turns out that <code>myFa</code> is a pretty useful function!  Try changing the function's name to listSum.</p><p>Then change the name again to <code>listProduct</code> and see if you can change its definition so that it returns the product of the elements in a list, instead of their sum.</p></div><p>Haskell syntax makes it as easy as possible to build up new functions out of old ones and to pass them around in your code.  This allows you to <a href="http://worrydream.com/LadderOfAbstraction/">move up and down the ladder of abstraction</a> very efficiently.</p><h2 id="strong-static-typing---if-it-compiles--it-works--"><a href="#strong-static-typing---if-it-compiles--it-works--">Strong static typing: &quot;If it compiles, it works.&quot;</a></h2><p>You will be very happy with how <i>often</i> your programs work as expected the first time they pass compilation.  The reason for this is that <i>Algebraic Data Types</i> make it easy to design types that can only take values that make sense in your program, and <i>Pattern Matching</i> helps you pass these well-formed values between functions.</p><h3 id="algebraic-data-types"><a href="#algebraic-data-types">Algebraic Data Types</a></h3><p>An ADT enumerates the values that a data type may take, with some of these values coming with extra data tacked on.  Double colon lines are optional 'type annotations' that convey a value's type to the reader of the program and to the compiler.</p><pre><code class="active haskell">-- show
+-- The definition of a Palatability Type
+data Palatability = Delicious      -- Palatability values may be Delicious
+                  | NotDelicious   -- OR NotDelicious
+
+-- The definition of type Taste
+data Taste = Sweet                 -- Values of type Taste may be Sweet 
+           | Salty                 -- OR Salty
+           | Umami                 -- OR ... ...
+           | Bitter Palatability   -- Bitter and Sour values must specify
+           | Sour Palatability     -- whether they are good or bad
+
+
+-- Example value of type Taste
+cookieTaste :: Taste               -- Here is a type annotation
+cookieTaste = Sweet
+
+brusselsSproutsTaste = Bitter NotDelicious
+
+harpoonIpaTaste =   Bitter Delicious
+
+someTestTaste = Sweet Delicious -- An accident that the compiler will catch
+                                -- Sweet values don't come with Palatability
+                                -- data
+anotherTestTaste  = Bitter
+
+-- /show
+main = print &quot;OK&quot;</code></pre><p>Try to make the above code compile by finding and fixing the malformed values.  Programming Haskell in the real world is like this - a back-and-forth between you and the compiler until your use of types lines up with the definition you created for them.</p><h3 id="pattern-matching"><a href="#pattern-matching">Pattern Matching</a></h3><p>Where Algebraic Data Types give structure to values, Pattern Matching allows functions to take advantage of that structure.  A function with an ADT parameter may 'match' each possible value in turn, and bind any accompanying data for use within the function.</p><p>In this example, a sensor reading can only be extracted from a SensorReading value tagged as 'ValidReading'.  If a function tried to extract a value from an invalid sample, that would be a type error, and the program would simply fail to compile.  If a programmer forgot to check for the possibility of error by handling the HardwareError case, the compiler would issue a warning.  We are using types to enforce invariants in the code.  The ability to move a program's <i>semantics</i> up into the type system, where they can be checked by the compiler, provides a powerful bug-deterrent.</p><pre><code class="active haskell">--show
+data SensorReading = ValidReading Float  
+            | HardwareError
+
+updateHeading :: SensorReading -&gt; Float -&gt; Float
+updateHeading (ValidReading r) oldHeading = oldHeading + r
+updateHeading HardwareError oldHeading = oldHeading
+-- /show
+main = print &quot;OK&quot;</code></pre><p>Try as you might - it is impossible to accidentally read a value from a SensorReading carrying the <code>HardwareError</code> tag.  The compiler won't let you.</p><p>Using C structs, or objects Python, the programmer would have <i>remember</i> to check validity flags by hand in every function using SensorReadings; or values would need to be accessed through special helper functions.  Forgetting to exercise such discipline in other languages can result in errors that are silent all the way up until the project is deployed / the analysis is done and the paper is published / the flight-control system is up in the air.  Using ADT's and pattern matching, more errors are caught during compilation and fixed before they can wreak havoc.</p><p>Pattern matching also provides a very expressive way to manipulate data structures.  Here we define a binary tree type, which may either be <code>Empty</code>, or a <code>Branch</code> with two sub-trees and a node value.  The function <code>insert</code> breaks down <code>Branch</code> values into named parts that get used in the function.  See the full code for more pattern matching examples.</p><pre><code class="active haskell">
+-- show
+data CharTree = Empty 
+              | Branch CharTree Char CharTree
+  deriving (Show)
+
+-- depth takes a tree and returns its depth
+depth :: CharTree -&gt; Integer
+depth Empty           = 0                            -- Handle the empty case
+depth (Branch l el r) = 1 + max (depth l) (depth r)  -- Handle the branch case
+
+-- insert takes a tree and a character c, returning a new tree with c inserted
+insert :: CharTree -&gt; Char -&gt; CharTree
+insert Empty el = Branch Empty el Empty   -- Handle the empty case
+insert (Branch l c r) el                  -- Recursively handle Branch case...
+ | el &lt;= c   = Branch (insert l el) c r   --   when element &lt;= center node
+ | el &gt;  c   = Branch l c (insert r el)   --   when element &gt;  center node
+-- /show 
+ 
+isElement :: CharTree -&gt; Char -&gt; Bool
+isElement Empty el = False
+isElement (Branch l c r) el 
+ | el == c   = True
+ | el &lt; c    = isElement l el
+ | el &gt; c    = isElement r el
+
+
+-- See the note about function pointers above to learn about foldl
+-- show
+-- Insert all the characters from this string into the tree in turn
+myTree = foldl insert Empty &quot;Hello World!&quot; 
+myTestChar = 'o'
+-- /show
+
+reportTest :: Char -&gt; String
+reportTest testChar
+ | isElement myTree testChar = &quot;We found your element - &quot; ++ [testChar]
+ | otherwise                 = &quot;Could not find &quot; ++ [testChar] 
+ 
+main = do 
+    putStrLn $ &quot;Depth: &quot; ++ show (depth myTree)
+    putStrLn $ reportTest myTestChar
+    putStrLn $ &quot;The tree: &quot; ++ show myTree
+</code></pre><p>Note: Pattern matching is a big help during code refactoring, as the compiler tells you the location of every function that needs to be changed to reflect a change that you make in a data type.  This feature isn't turned on yet on the School of Haskell website, but it works just fine in your project.</p><div class="hidden"><h3 id="pattern-matching-guides-you-through-code-refactorings"><a href="#pattern-matching-guides-you-through-code-refactorings">Pattern Matching guides you through code refactorings</a></h3><p>Data structures often change as a program grows.  Haskell makes the process of synchronizing the rest of the program far less painful than it is in languages with weaker type systems.  Add <code>Tornado</code> as a flight condition and recompile.  The compiler makes sure that every function handles all possible input values, and will tell you which functions need to be modified to accommodate your refactoring.  (In the case of a tornado, set the wingDirection to Up and thrust to Afterburners)</p><pre><code class="active haskell">
+data Direction = WLeft | WRight | WUp | WDown
+  deriving (Show)
+
+data ThrustStrength = EnginesOff | Thrust Integer | Afterburners
+  deriving (Show)
+
+data FlightCondition = Calm
+                     | LightWind Direction
+
+-- Given weather conditions and our current wing direction,
+-- what should our new wing direction be?
+wingResponse :: FlightCondition -&gt; Direction -&gt; Direction
+wingResponse Calm d               = d      -- In calm conditions stay the course
+wingResponse (LightWind WLeft) _  = WRight -- Bank against light wind
+wingResponse (LightWind WRight) _ = WLeft  -- Bank against light wind
+wingResponse (LightWind _) d      = d      -- In up/down wind, stay the course 
+
+thrustResponse Calm t = t                           
+thrustResponse (LightWind _) (Thrust t) = Thrust (t+10)  -- Increase power against wind
+-- /show
+
+main = print $ wingResponse (LightWind WUp) WLeft
+</code></pre></div><h3 id="generic-programming-from-the-ground-up"><a href="#generic-programming-from-the-ground-up">Generic programming from the ground up</a></h3><p>In functional programming you call it 'polymorphism', and its use predates the templates and generics that you see in c++, Java, etc.  Haskell's support for polymorphic data types and polymorphic functions is excellent in terms of syntactic simplicity, expressiveness, and speed.  Here is an example of a polymorphic tree.  You can see that the syntax is so natural that there was never a need to make trees non-generic in the first place.</p><pre><code class="active haskell">import Data.Map hiding (insert, foldl)
+-- show
+-- A tree with nodes that can take any type
+data MyTree a = MyEmptyTree | Branch (MyTree a) a (MyTree a)
+  deriving (Show)
+
+-- insert works for MyTrees of any type that can be ordered
+insert :: Ord a =&gt; MyTree a -&gt; a -&gt; MyTree a
+insert MyEmptyTree el = Branch MyEmptyTree el MyEmptyTree
+insert (Branch l c r) el
+ | el &lt;= c    = Branch (insert l el) c r 
+ | el &gt;  c    = Branch l c (insert r el) 
+  
+-- A MyTree of Strings   
+myTree :: MyTree String
+myTree = foldl insert MyEmptyTree [&quot;Ada&quot;,&quot;Brent&quot;,&quot;Conel&quot;,&quot;Doaitse&quot;,&quot;Ertugrul&quot;]
+
+-- A MyTree of (Map from String to Integer),
+-- just to demonstrate that we can make trees of ANY orderable type
+myTree2 :: MyTree (Map String Integer)
+myTree2 = foldl insert MyEmptyTree 
+    [fromList [(&quot;c++&quot;, 6),(&quot;ocaml&quot;, 9),(&quot;haskell&quot;,10),(&quot;python&quot;,7)]
+    ,fromList [(&quot;LeBron&quot;, 250),(&quot;Rajon&quot;, 186),(&quot;Kyrie&quot;,191)]
+    ,fromList [(&quot;Big Mac&quot;,550),(&quot;Whopper&quot;,670),(&quot;Baconator&quot;,970)] ]
+-- /show
+main = do {print myTree; print myTree2}
+</code></pre><h2 id="functional-purity-and-immutable-data--a-different-way-of-thinking-about-programming"><a href="#functional-purity-and-immutable-data--a-different-way-of-thinking-about-programming">Functional Purity and Immutable Data: A different way of thinking about programming</a></h2><p>Functions in FP are modeled after mathematical functions: instead of performing a sequence of operations, they express strict mathematical relationships between arguments and a return value.  Imperative programs are <i>sequences</i> of commands that each have an effect on memory or on the computer's output.  <i>Functional programs are collections of statements that are true at all times.</i></p><p>Purity and immutability are what makes functional programming seem so alien.  They are also what gives functional programming its power.  When using imperative languages (c, c++, Java, Python, C#, etc etc), the programmer has to keep a mental timeline of their program's execution.  Immutability in FP frees functional programmers from having to think about sequences of changes - they focus instead on the validity of the mathematical relationships between types they design.</p><p>Here are a few surprising examples of this.</p><h3 id="surprise--1--variables-never-change-their-value"><a href="#surprise--1--variables-never-change-their-value">Surprise #1: Variables never change their value</a></h3><pre><code class="active haskell">-- show
+a = 5      -- ERROR! To quote Miran Lipovača, &quot;If you say that a is 5, 
+a = a + 1  -- you can't say it's something else later because you just 
+           -- said it was 5. What are you, some kind of liar?&quot;
+-- /show
+main = print &quot;OK&quot;</code></pre><p>What we do instead depends on our reason for wanting to increment the value <code>a</code> in the first place.</p><pre><code class="active haskell">a = 5
+-- Simply refer to the incremented value
+b = (a + 1)
+
+-- Define a function that refers to a incremented
+incr a = a + 1
+b = incr a</code></pre><h3 id="surprise--2--no-for-loops"><a href="#surprise--2--no-for-loops">Surprise #2: No for loops</a></h3><pre><code class="haskell">-- There is no such thing in Haskell, 
+-- because the values of i, a, and b are changing
+a = [1, 2, 3, 4, 5]
+b = 1.5
+for (i = 0; i &lt; 5; i++)
+  a(i) = 2 * a(i)
+end
+
+for (i = 0; i &lt; 100, i++)
+  b = b^2 - 1
+end</code></pre><p>Wherever a for loop is used in imperative code, functional languages offer combinators that more precisely capture the nature of that particular loop.  Two short examples:</p><pre><code class="active haskell">-- show
+a = [1,2,3,4,5]
+
+-- map maps a function (here, the number-doubling function)
+-- over all elements in a list
+r1 = map (* 2) a
+
+-- iterate recursively applies a function to its argument
+-- to any depth.  Take and last pull out the value you're
+-- interested in from that list
+r2 = last . take 100 $ iterate (\x -&gt; x^2 - 1) 1.5
+-- /show
+
+main = do
+  putStrLn $ &quot;r1: &quot; ++ show r1
+  putStrLn $ &quot;r2: &quot; ++ show r2
+  </code></pre><p>It's natural to wonder, Without being able to change variables, how can you possibly get any work done?  The general answer is, You quickly get used to working with recursion, and you get used to the combinators that abstract over recursion.  Believe it or not, coding in this style is a lot of fun, and if you learn Haskell, you will probably find yourself re-writing these combinators for your own use in the other languages you work with.</p><h3 id="surprise--3--functions-other-than-main-can-t-do-any-i-o"><a href="#surprise--3--functions-other-than-main-can-t-do-any-i-o">Surprise #3: Functions other than main can't do any I/O</a></h3><p>Functions that do I/O aren't functions in the mathematical sense, because they <i>do things</i> instead of expressing relationships.  A function that does input could return different values each time it was run, and a function that does output can't be treated as an algebraic entity that can be combined with others and safely moved around, as terms often are in actual algebra.</p><pre><code class="haskell">printAndDouble :: Integer -&gt; Integer  
+printAndDouble n = print n;   -- Not allowed!  We give up this sort of
+                   (n * 2)    -- thing to pay for Haskell's other features</code></pre><p>If functions can't do I/O, how does a functional program interact with the world, read data, communicate over the internet?  They use &quot;monads&quot;.</p><h2 id="a-monad-safely-mediates-communication-between-the-real-world-and-pure-functions"><a href="#a-monad-safely-mediates-communication-between-the-real-world-and-pure-functions">A Monad safely mediates communication between the real world and pure functions</a></h2><p>Data in the world (on a disk, on the internet, from the keyboard) may only enter and leave a purely functional program through a dedicated channel called the <code>IO</code> monad.  In general, monads offer specific patterns that simulate sequential code execution, in much the same way that <code>map</code> and <code>iterate</code> simulate particular patterns found in <code>for</code> loops, without actually mutating data.</p><p>Haskell's type system enforces the rule that only values that are 'in the IO monad' may interact with the real world.  A functional program is structured so that the majority of its functions are pure, communicating with the real world using only a few functions in the IO monad.</p><pre><code class="active haskell">import System.IO
+import Control.Monad
+
+shiftLetter :: Integer -&gt; Char -&gt; Char
+shiftLetter n c
+ | n == 0      = c
+ | n &gt; 0       = shiftLetter (n - 1) (succ c)
+ | n &lt; 0       = shiftLetter (n + 1) (pred c)
+
+-- simulating sequential code in the IO monad
+main :: IO ()
+main = do
+    hSetBuffering stdout NoBuffering
+    hSetBuffering stdin  NoBuffering
+    putStr &quot;How many lines do you want to encode: &quot;
+    nLines &lt;- readLn
+    putStr &quot;How deep do you want each line to be encoded: &quot;
+    depth  &lt;- readLn
+    sequence_ . replicate nLines $ do
+      putStr &quot;Enter a string: &quot;
+      entry &lt;- getLine
+      putStrLn $ &quot;Encoded: &quot; ++ (map (shiftLetter depth) entry) ++ &quot;\n&quot;</code></pre><p>That is not to say that occurrences of <code>putStrLn</code> and <code>getLine</code> can only exist directly within the <code>main</code> function.  On the contrary, <code>putStrLn</code> is a function that can be passed to and from other higher-order functions, integrated into lists and data structures, and glued to other IO-performing functions using monad combinators.  As you learn Haskell, you will discover how monads can help you raise the expressiveness and abstraction level of sequential code. A common metaphor for monads is 'a programmable semicolon', because they allow you to flexibly define what it means to do actions in a sequence.</p><p>You may ask, &quot;What exactly <i>is</i> a Monad?&quot;  A very rough answer is: any data type for which you can explain how to program the semicolon.  Too abstract?  It will all become clear as you see them more and use them in your own code.</p><h2 id="haskell-can-be-pragmatic"><a href="#haskell-can-be-pragmatic">Haskell can be Pragmatic</a></h2><h3 id="haskell-code-runs-really-fast"><a href="#haskell-code-runs-really-fast">Haskell code runs really fast</a></h3><p>Although Haskell is a very high-level language, it's now a top contender in code speed shootouts.  Haskell compiles to LLVM and to native code on Linux, OS X, and Windows.  Unoptimized code compiled with GHC (the most commonly used of Haskell's several compilers) generally runs within 1/5 the speed of unoptimized c programs, and quite a bit faster than Python.  Heavily optimized Haskell code is generally within half the speed of heavily optimized c; in some cases faster.</p><h3 id="haskell-has-pretty-strong-library-offerings"><a href="#haskell-has-pretty-strong-library-offerings">Haskell has pretty strong library offerings</a></h3><p><a href="http://hackage.haskell.org">Hackage</a> is an online database with many high-quality, community-written libraries covering lots of areas (linear algebra, crypto, web frameworks, etc. etc. etc.).  The School of Haskell website is powered by Yesod, a powerful Haskell web framework.  There are Haskell bindings to OpenGL, GUI libraries, databases, CUDA, and on.  Libraries for concurrency and parallelism are particularly strong.</p><h3 id="haskell-has-incredible-unit-testing"><a href="#haskell-has-incredible-unit-testing">Haskell has incredible Unit Testing</a></h3><p>Haskell's QuickCheck library is an absolutely wonderful unit-testing framework.  You use QuickCheck to test algorithms by defining a collection of properties of that algorithm that should always be true.  QuickCheck uses the function types to intelligently generate randomized data sets (as many as you like - the default is 100) that get into far more corner-cases than any unit-test writer would ever care to write by hand.</p><pre><code class="active haskell">import Data.Map hiding (insert, foldl)
+import Test.QuickCheck
+
+-- A tree with nodes that can take any type
+-- show
+data MyTree a = MyEmptyTree | Branch (MyTree a) a (MyTree a)
+  deriving (Show)
+-- /show
+
+-- depth recursively descends the tree to find its maximum depth
+depth :: MyTree a -&gt; Integer
+depth MyEmptyTree = 0
+depth (Branch l _ r) = 1 + max (depth l) (depth r)
+
+-- nElem recursively counts elements
+nElem :: MyTree a -&gt; Integer
+nElem MyEmptyTree = 0
+nElem (Branch l _ r ) = 1 + (nElem l) + (nElem r)
+
+-- show
+-- insert works for MyTrees of any type that can be ordered
+insert :: Ord a =&gt; MyTree a -&gt; a -&gt; MyTree a
+insert MyEmptyTree el = Branch MyEmptyTree el MyEmptyTree
+insert (Branch l c r) el
+ | el &lt;= c    = Branch (insert l el) c r 
+ | el &gt;  c    = Branch l c (insert r el) 
+-- /show
+ 
+isElem :: Ord a =&gt; a -&gt; MyTree a -&gt; Bool
+isElem _ MyEmptyTree = False
+isElem el (Branch l c r)
+ | el == c  = True
+ | el &lt;  c  = isElem el l
+ | el &gt;  c  = isElem el r
+ 
+-- show
+-- QuickCheck will generate random inputs to test these properties
+prop_insIsElem :: (MyTree Double) -&gt; Double -&gt; Bool
+prop_insIsElem tree el =  isElem el (insert tree el)
+
+prop_prevIsElem :: (MyTree Double) -&gt; Double -&gt; Double -&gt; Bool
+prop_prevIsElem tree el el' = isElem el (insert (insert tree el) el')
+
+prop_insChangeDepth :: (MyTree Double) -&gt; Double -&gt; Bool
+prop_insChangeDepth tree el = (depth (insert tree el)) - depth(tree) &lt;= 1
+
+prop_depthLowerBound :: (MyTree Double) -&gt; Bool
+prop_depthLowerBound tree = (depth tree) &gt;= 
+                            floor (logBase 2 $ fromIntegral(nElem tree))
+-- /show
+instance (Arbitrary a, Ord a) =&gt; Arbitrary (MyTree a) where
+  arbitrary = do
+    elems &lt;- listOf arbitrary
+    return (foldl insert MyEmptyTree elems)
+    
+main = do
+  let args = stdArgs { maxSuccess = 10, maxSize = 10, chatty = True }
+  putStrLn &quot;Checking insertion properties.&quot;
+  quickCheckWith args prop_insIsElem
+  quickCheckWith args prop_prevIsElem
+  putStrLn &quot;Checking depth properties.&quot;
+  quickCheckWith args prop_insChangeDepth
+  quickCheckWith args prop_depthLowerBound
+</code></pre><h2 id="haskell-has-personality"><a href="#haskell-has-personality">Haskell has personality</a></h2><p>Haskell is backed by a lot of amazing people - both great engineers and great teachers.  It has a cool <a href="http://www.youtube.com/watch?v=7NPBrWDzO2A">history</a> and a <a href="http://www.youtube.com/watch?v=2PJ_DbKGFUA">formal background</a> that might inspire you to learn some abstract math.  The #haskell IRC channel and haskell-cafe mailing list are famously friendly and educational places to hang out.</p><p>Seasoned Haskellers flock to new language features and take a peculiar interest in teaching about them.  <a href="http://contemplatecode.blogspot.com/">Haskell Weekly News</a> is consistently filled with links to blog posts explaining interesting corners of the language and reddit stories about new experiments and abstractions.</p><p>You can challenge yourself for a very long time before you can reach to all corners of the Haskell world; and as a research language, it is always growing.</p><h2 id="you-can-do-it--where-to-go-next-"><a href="#you-can-do-it--where-to-go-next-">You can do it!  Where to go next.</a></h2><p>It's rumored that Haskell is hard.  It's probably more accurate to say that Haskell makes easy things a little tricky; while bring things that would otherwise be extremely difficult within reach.</p><p>It's important to remember that no one was born knowing Haskell.  We all came to it out of curiosity and a sense of adventure.  You <i>will</i> have to study in order to get Haskell, but that's half of the fun.</p><p>If you are ready to start learning the language, take a look at <a href="http://learnyouahaskell.com">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org">Real World Haskell</a>.  Check out the many tutorials here at <a href="https://www.fpcomplete.com/">School of Haskell</a>.  Find other resources at <a href="http://haskell.org">haskell.org</a>.  And download the <a href="http://haskell.org/platform">Haskell Platform</a>.  Have fun!</p><p>**</p><p>Feel free to help out or suggest improvements for this post on <a href="https://github.com/ImAlsoGreg/FPEP/">github</a>.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/imalsogreg/functional-programming-elevator-pitch';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

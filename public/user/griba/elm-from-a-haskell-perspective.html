@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html><head><title>Elm from a Haskell perspective - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/griba">Gabriel Riba Faura</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/elm-from-a-haskell-perspective">Elm from a Haskell perspective</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Elm from a Haskell perspective</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">25 Nov 2018</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/griba">Gabriel Riba Faura</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4225/8c1a91386d23ced7dc2d11d9e7950242cbe0cc00">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/purescript-client-side-mvc-frameworks-1">Previous content: PureScript client-side MVC frameworks</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba/error-parameterized-monad-and-transformer-a-replacement-for-synchronous-exceptions">Next content: Error parameterized monad and transformer, a replacement for synchronous exceptions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/griba">See all content by Gabriel Riba Faura</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#syntax">Syntax</a></li><li><a href="#predefined-stuff">Predefined stuff</a></li><li><a href="#typevarcategories">TypeVarCategories</a></li><li><a href="#type-differences">Type differences</a></li><li><a href="#some-structure-equivalences">Some structure equivalences</a></li><li><a href="#functions">Functions</a></li><li><a href="#usual-adt-functions">usual ADT functions</a><ul><li><a href="#reductions--traversals-and-tail-call-optimization">Reductions, Traversals and Tail call optimization</a></li></ul></li><li><a href="#desugaring-haskell-do-blocks">Desugaring Haskell Do blocks</a></li><li><a href="#deferring-computations---lazy-parameters">Deferring computations - Lazy parameters</a></li><li><a href="#a-static--hello-world--page">A static &quot;Hello world&quot; page</a></li><li><a href="#pages-without-effects">Pages without effects</a></li><li><a href="#pages-with-effects">Pages with effects</a></li><li><a href="#effects--effects-managers-and-message-routing">Effects, Effects managers and Message routing</a></li><li><a href="#running-a-task">Running a Task</a><ul><li><a href="#adding-tipical-control-functions-for-the-type--task-">Adding tipical control functions for the type &quot;Task&quot;</a></li></ul></li><li><a href="#elm-timing-example--comparing-elapsed-times-of-expressions-with-partial-application-vs-complete-number-of-arguments-">Elm timing example: Comparing elapsed times of expressions with partial application vs complete number of arguments.</a></li><li><a href="#more-info">More info</a></li><li><a href="#other-client-side-model-view-controller-frameworks">Other client side Model-View-Controller frameworks</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p><a href="http://elm-lang.org/">Elm</a> has no genericity mechanisms for structures by now, like Haskell typeclasses, nor instance arguments.</p><p>Elm gives a parser error if you try to use type variables for structures like <i>(m a)</i> in a function.</p><p>Instead you have a few predefined, compiler bound, type variable categories.</p><p>(Examples tested with Elm version 0.18)</p><h3 id="syntax"><a href="#syntax">Syntax</a></h3><p>Check it <a href="http://elm-lang.org/docs/syntax">here</a>.</p><h3 id="predefined-stuff"><a href="#predefined-stuff">Predefined stuff</a></h3><p>Elm's predefined functions are at <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics">Basics</a>, but there are additional <a href="https://github.com/elm/core#default-imports">default imports</a>.</p><h3 id="typevarcategories"><a href="#typevarcategories">TypeVarCategories</a></h3><p>Elm has predefined type variable categories that have implicit functionality. You specify a type var. category by means of a prefix. Check the compiler function <a href="https://github.com/elm/compiler/blob/master/builder/src/Deps/Diff.hs#LC288"><i>categorizeVar</i></a></p><ul><li>type variables with <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#+"><i>&quot;number&quot;</i></a> as prefix form a category that corresponds to Haskell's <i>Num</i> typeclass (a <a href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a> structure), defines (+), (-), (*), <i>abs</i>, <i>negate</i>, adding (^) and <i>clamp</i> to the pack. Check the link documentation for available instances.</li><li><a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#compare"><i>&quot;comparable&quot;</i></a> type var category corresponds to Haskell's <i>Ord</i> functionality</li><li><a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#++"><i>&quot;appendable&quot;</i></a> type var category corresponds to Haskell's <i>Semigroup</i> with (++) as right associative infix operator for <i>append</i></li></ul><p>To extend the functionality with new functions based on the predefined ones for the category, you only have to categorize the type variable of the parameter using the category prefix.</p><h3 id="type-differences"><a href="#type-differences">Type differences</a></h3><ul><li><p>Elm's <i>Int</i> has the integer division as double slash <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#//">(//)</a> and <i>mod</i> as (%), and <i>rem</i> as <i>rem</i>. (/) is <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#/">only for Floats</a></p></li></ul><p>But there is a catch with (//). It does not return the integer part when dividing negatives. It behaves like haskell's <i>quot</i> truncating towards zero !! So it does not correspond to the <a href="https://en.wikipedia.org/wiki/Euclidean_division">euclidean division</a> definition because it doesn't comply the rule stating that the remainder should be non‑negative.</p><pre><code class="haskell">import Html as H
+import List as L
+
+-- (//) behaves like `quot`, not like `div`
+intDblSlashIsQuot : Int -&gt; Int -&gt; Bool
+intDblSlashIsQuot denom num = abs (num // denom) == abs (-num // denom)
+
+checkProperty = intDblSlashIsQuot 3
+
+main = H.text &lt;| toString &lt;| L.map checkProperty [7, -2, 4, -8]</code></pre><ul><li>Elm's <i>Float</i> (JavaScript's IEEE754 Number) corresponds to Haskell's <i>Double</i></li><li>Parameters with the type category <i>number</i> allow Int and Float as actual parameter types.</li><li>Elm's data types use the clause keyword <i>type</i>. Type aliases are defined with &quot;type alias&quot;.</li><li>Elm has a special uninhabited type <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#Never"><i>Never</i></a> to be used as a Task error type parameter for tasks that cannot fail.</li></ul><h3 id="some-structure-equivalences"><a href="#some-structure-equivalences">Some structure equivalences</a></h3><ul><li>Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#Maybe"><i>Maybe</i></a> corresponds to Haskell's <i>Maybe</i></li><li>Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Result"><i>Result</i></a> has an homomorphic corresponding in Haskell's <i>Either</i></li><li>Squared bracket literals [1,3,5] denote Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/List">Lists</a>, not Arrays.</li></ul><pre><code class="haskell">-- zips are missing but easy done
+zip : List a -&gt; List b -&gt; List (a,b)
+zip = List.map2 (,)
+
+zip3 = List.map3 (,,)
+zip4 = List.map4 (,,,)
+</code></pre><ul><li><p>Elm's random access sequence <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Array">Array</a> is <b>immutable</b>, not like JS ones. A Haskell corresponding is Vector from <a href="https://hackage.haskell.org/package/vector/docs/Data-Vector-Unboxed.html">Data.Vector.Unboxed</a></p></li><li><p>Elm's linear access sequence <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/List">List</a></p></li><li><p>Elm's mapping <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Dict"><i>Dict</i></a> structure (dictionary) requires <i>comparable</i> key types (ordered domains). This includes Int, Float, Time, Char, String, and tuples or lists of comparable types. Its corresponding in Haskell is <a href="http://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html">Data.Map.Strict</a> where stored values are forcedly evaluated.</p></li><li><p>Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Set"><i>Set</i></a> structure as a special case of Dict where the elements are the keys, has the same restriction.</p></li><li><p>Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Task"><i>Task</i></a> structure is for effect actions that may fail. It implements Haskell's <a href="http://hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html#t:MonadError">MonadError</a> throwing errors with <i>fail</i> that skips the subsequent actions until the <i>onError</i> monadic catcher is evaluated, and its type <i>(Task err a)</i> would correspond to <i>IO</i> lifted to a <i>MonadError</i> compliant transformer, like <i>(<a href="http://hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html#t:ExceptT">ExceptT</a> err IO a)</i>.</p></li><li><p>Haskell range syntax is not supported in Elm. Specific functions are used: <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/List#range">List.range</a>. But you can define a <i>dot-dot</i> operator (..)</p></li></ul><pre><code class="haskell">import Html as H
+import List
+
+(..) = List.range
+infix 9 ..
+
+main = H.text &lt;| toString (1..7)</code></pre><p>A Haskell style stepped range for Ints defining <a href="http://hackage.haskell.org/package/base/docs/Prelude.html#v:enumFromThenTo">enumFromThenTo</a>.</p><pre><code class="haskell">import Html as H
+import List as L
+import Debug as D
+import Char as Ch
+
+-- tailrec
+intEnumFromThenToTR : List Int -&gt; Int -&gt; Int -&gt; Int -&gt; List Int
+intEnumFromThenToTR acc ini nxt top = 
+   if ini == nxt 
+   then D.log &quot;next must be different than initial&quot; []
+   else if {- ini beyond top -} ini /= top &amp;&amp; 
+           compare ini top /= compare ini nxt 
+        then L.reverse acc
+        else intEnumFromThenToTR (ini :: acc) nxt (nxt + nxt - ini) top
+
+intEnumFromThenTo = intEnumFromThenToTR []  -- using this seems to slow result yield
+
+v0 = intEnumFromThenTo 9 7 1     -- [9,7,5,3,1]
+
+v1 = intEnumFromThenToTR [] 9 7 1  -- not as elegant but maybe faster
+
+-- refactored
+intEnumFromThenTo2 : Int -&gt; Int -&gt; Int -&gt; List Int
+intEnumFromThenTo2 ini0 nxt0 top =
+    if ini0 == nxt0 
+    then D.log &quot;next must be different than initial&quot; []
+    else let 
+             step = nxt0 - ini0
+             go acc ini nxt = 
+               if {- ini beyond top -} ini /= top &amp;&amp; 
+                  compare ini top /= compare ini nxt 
+               then L.reverse acc
+               else go (ini :: acc) nxt (nxt + step)
+          in go [] ini0 nxt0      
+
+v2 = intEnumFromThenTo2 9 7 1
+
+charEnumFromThenTo: Char -&gt; Char -&gt; Char -&gt; List Char
+charEnumFromThenTo ini0 nxt0 top = 
+    if ini0 == nxt0 
+    then D.log &quot;next must be different than initial&quot; []
+    else L.map Ch.fromCode &lt;| 
+               intEnumFromThenTo2 (Ch.toCode ini0) (Ch.toCode nxt0) (Ch.toCode top)
+
+v3 = charEnumFromThenTo 'Y' 'W' 'A'
+main = H.text &lt;| toString (v2, v3)</code></pre><p>Using partial application seems to yield result later in Elm's <i>try-online</i> vs. specifying all function arguments at once. Check it also with the program at the page bottom.</p><h3 id="functions"><a href="#functions">Functions</a></h3><p><a href="https://groups.google.com/d/msg/elm-discuss/9XxV9L0zoA0/ZUU9RGKAthoJ">Strict evaluation</a>.</p><p>Single pattern definitions.</p><p>No <i>where</i> clauses.</p><p>Elm's Prelude is described <a href="https://github.com/elm/core#default-imports">here</a>.</p><p>Elm's API search is <a href="http://package.elm-lang.org/">here</a>.</p><ul><li><p>Haskell's <i>id</i> is called <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#identity"><i>identity</i></a> in Elm.</p></li><li><p>Haskell's <i>const</i> is called <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#always"><i>always</i></a> in Elm.</p></li><li><p>Haskell's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#flip"><i>flip</i></a>, <i>curry</i> and <i>uncurry</i> are named equally in Elm.</p></li><li><p>Haskell's function application Data.Function.($) corresponds to Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#%3C|">(&lt;|)</a></p></li><li><p>Haskell's reverse application Data.Function.(&amp;) corresponds to Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#|%3C">(|&gt;)</a></p></li><li><p>Haskell's right to left composition Control.Category.(&lt;&lt;&lt;) corresponds to Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#%3C%3C">(&lt;&lt;)</a></p></li><li><p>Haskell's left to right composition Control.Category.(&gt;&gt;&gt;) corresponds to Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics#%3E%3E">(&gt;&gt;)</a></p></li><li><p>Haskell's <i>show</i> corresponds to Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#toString"><i>toString</i></a></p></li><li><p>Haskell's Data.Tuple <i>fst</i>, <i>snd</i> are defined in Elm's Basics, but they are named <i>first</i>, <i>second</i> in Elm's <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Tuple">Tuple</a></p></li><li><p>Tuple constructors are defined for arity (&lt;= 9), but the <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Tuple">Tuple</a> module advises against it use, proposing records instead.</p></li></ul><pre><code class="haskell">import Html as H
+
+v = (,,,,,,,,) 1 2 3 4 5 6 7 8 9 -- `_Tuple9` Ok, `_Tuple10` undefined
+
+main = H.text (toString v)</code></pre><ul><li><p><a href="https://github.com/elm/compiler/blob/master/builder/src/Generate/Functions.hs">Functions arity</a> has a top of 9 arguments</p></li></ul><h3 id="usual-adt-functions"><a href="#usual-adt-functions">usual ADT functions</a></h3><ul><li><p>Functor: Haskell Data.Functor.fmap corresponds to Elm structures' <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#map">map</a> function</p></li><li><p>Monad: Haskell's bind (&gt;&gt;=) corresponds to Elm structures' <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#andThen"><i>andThen</i></a> flipped.</p></li><li><p>Applicative: With Elm structures' (<a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#map2">map2</a>, .., map5) you have the functionality that corresponds to Haskell's Control.Applicative (liftA2, ...) to combine the results of a string of actions as subsequent parameters.</p></li></ul><p>For Task's <i>map{N}</i>, action side effects are serialized with <i>andThen</i> (Haskell's bind) so they rather correspond to Control.Monad.liftM{N} instead of Control.Applicative.liftA{N}.</p><h4 id="reductions--traversals-and-tail-call-optimization"><a href="#reductions--traversals-and-tail-call-optimization">Reductions, Traversals and Tail call optimization</a></h4><p>&gt;&gt; The Elm compiler is able to do tail-call elimination on a function when any of the branches are a direct self-recursive call. See <a href="https://github.com/evancz/functional-programming-in-elm/blob/master/recursion/tail-call-elimination.md">Tail-call elimination</a>.</p><ul><li><p>Lists</p></li></ul><pre><code class="haskell">-- from Elm's core library List
+foldl : (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
+foldl func acc list =
+  case list of
+    []      -&gt; acc
+    x :: xs -&gt; foldl func (func x acc) xs   -- tail recursive
+    
+foldr : (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
+foldr = Native.List.foldr     -- via JS list conversion toArray(xs)
+
+-- map is based on foldr, so elements are traversed right to left
+map : (a -&gt; b) -&gt; List a -&gt; List b
+map f xs = foldr (\x acc -&gt; f x :: acc) [] xs
+
+-- Task.sequence traverses left-to-right a list of Tasks giving a Task that returns the List of results. It uses map2 (like Applicative.liftA2 but serializing the side effects: Control.Monad.liftM2) to concatenate its results.</code></pre><h3 id="desugaring-haskell-do-blocks"><a href="#desugaring-haskell-do-blocks">Desugaring Haskell Do blocks</a></h3><p>Simulation of a Haskell <i>do</i> block, nesting subsequent monadic functions to have all lambda argument variables in scope. Try it in Elm's <a href="http://elm-lang.org/try">try online</a>:</p><pre><code>import Html as H exposing (Html)
+import Maybe as M
+
+-- Maybe.andThen : (a -&gt; Maybe b) -&gt; Maybe a -&gt; Maybe b
+
+-- simulation of a Haskell &quot;do&quot; block
+monadic : Maybe Int
+monadic = Just 1 
+              |&gt; M.andThen (\x -&gt; Just 2
+              |&gt; M.andThen (\y -&gt; let y2 = y * y     -- a `do block` let
+                                  in Just (x + y2)
+              |&gt; M.andThen (\z -&gt; Just (x + y2 + z)  -- y2 still in scope
+                            )))
+-- rewriting it with (&gt;&gt;=)
+(&gt;&gt;=) m f = M.andThen f m
+infixl 1 &gt;&gt;=
+
+monadic2 : Maybe Int
+monadic2 = Just 1 
+              &gt;&gt;= (\x -&gt; Just 2
+              &gt;&gt;= (\y -&gt; let y2 = y * y     -- a `do block` let
+                                  in Just (x + y2)
+              &gt;&gt;= (\z -&gt; Just (x + y2 + z)  -- y2 still in scope
+                   )))
+
+main : Html String
+main = H.text &lt;| toString (monadic, monadic2)</code></pre><h3 id="deferring-computations---lazy-parameters"><a href="#deferring-computations---lazy-parameters">Deferring computations - Lazy parameters</a></h3><p>See also <a href="https://github.com/elm-lang/lazy">elm-lang/lazy</a>. Lazyness memoisation is advised against. Have a look at the link's <i>&quot;Pitfalls&quot;</i> section regarding memory usage for memoization of lazy expressions and parameters.</p><pre><code class="haskell">import Html as H
+
+-- lazyness without memoization
+type Lazy a = Lazy (() -&gt; a)
+
+force : Lazy a -&gt; a
+force (Lazy f) = f ()
+--------------
+-- use:
+maybeOrElse : Maybe a -&gt; Lazy a -&gt; a
+maybeOrElse mbX lzY = case mbX of
+      Just x -&gt; x
+      Nothing -&gt; force lzY
+
+v = maybeOrElse Nothing &lt;| Lazy (\_ -&gt; sqrt 2)
+
+main = H.text &lt;| toString v</code></pre><ul><li><a href="http://package.elm-lang.org/packages/elm-lang/lazy/latest">Lazyness with memoization</a></li><li>A <a href="http://package.elm-lang.org/packages/naddeoa/stream/latest">Stream library</a></li></ul><h3 id="a-static--hello-world--page"><a href="#a-static--hello-world--page">A static &quot;Hello world&quot; page</a></h3><pre><code class="haskell">import Html as H exposing (Html)
+
+-- appendables (Semigroup) have (++) as infixr for append (See Basics)
+
+main : Html msg
+main = H.text &lt;| &quot;Hello &quot; ++ &quot;cruel world!&quot;</code></pre><h3 id="pages-without-effects"><a href="#pages-without-effects">Pages without effects</a></h3><p>Web programs without effects follow the so called <i>beginnerProgram</i> structure as <a href="https://guide.elm-lang.org/architecture/user_input/buttons.html">explained here</a>.</p><pre><code class="haskell">Html.beginnerProgram : { model : model, 
+                    view : model -&gt; Html msg, 
+                    update : msg -&gt; model -&gt; model } 
+                    -&gt; Program Never model msg</code></pre><pre><code class="haskell">main = Html.beginnerProgram { model = initialModel, view = view, update = update }</code></pre><h3 id="pages-with-effects"><a href="#pages-with-effects">Pages with effects</a></h3><pre><code class="haskell">Html.program : { init : (model, Cmd msg), 
+            update : msg -&gt; model -&gt; (model, Cmd msg), 
+            subscriptions : model -&gt; Sub msg, 
+            view : model -&gt; Html msg } 
+            -&gt; Program Never model msg</code></pre><p>Effect actions (tasks) are not evaluated directly but by sending a command to an <i>Effect manager</i> that will be handled differently based on their protocol processing state.</p><h3 id="effects--effects-managers-and-message-routing"><a href="#effects--effects-managers-and-message-routing">Effects, Effects managers and Message routing</a></h3><p>Effect managers support protocol processing by handling its own message queue (<i>selfMsg</i> queue), and may send messages to the app main loop through the <i>appMsg</i> queue parameter of a <i>Router</i> object assigned to them.</p><p>You can interact with them sending <i>commands</i> and <i>subscriptions</i>  specific to the <i>effect manager</i> which finally will send messages routed to your app main loop, and handled by the <i>update</i> function.</p><p>See the guide on <a href="https://guide.elm-lang.org/architecture/effects/">Effects</a> and the <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Platform#ProcessId">Platform Router</a></p><pre><code class="haskell">-- from the Platform module:
+{-| Task: Represents asynchronous effects that may fail. It is useful for stuff like HTTP.
+-}
+type Task err ok = Task
+
+{-| Router: An effect manager has access to a “router” that routes messages between the main app and your individual effect manager.
+-}
+type Router appMsg selfMsg = Router
+
+
+{-| sendToApp: The effects manager module will be able to send the router a message for the main loop of your app. This message will be handled by the overall `update` function, just like events from `Html`.
+-}
+sendToApp : Router appMsg a -&gt; appMsg -&gt; Task err ()
+
+{-| sendToSelf: The effects manager module will be able to send the router a message for its own message queue. This message will
+be routed to the `onSelfMsg` function, where you can update the state of your effect manager as necessary.
+-}
+sendToSelf : Router a selfMsg -&gt; selfMsg -&gt; Task err ()
+</code></pre><p>The <i>(Cmd msg)</i> and <i>(Sub msg)</i> types are the types of requests for commands or subscriptions sent to the effect managers (see below) that may send app messages to be processed by the <i>update</i> function.</p><p>Each effect manager exposes user entry points to build such requests.</p><pre><code>-- from Platform.Cmd
+{-| Cmd msg: the type of commands to Elm's effects
+
+Every Cmd specifies (1) which effects you need access to and (2) the type of messages that will come back into your application.
+-}
+type Cmd msg
+
+-- from Platform.Sub
+
+{-| Sub msg: the type of commands to Elm's effects
+Every Sub specifies (1) which effects you need access to and (2) the type of messages that will come back into your application.
+-}
+</code></pre><p>Elm has modules qualified by the <i>effect</i> keyword as effect managers. They handle Msgs from/to the run time system.</p><p>As example, the <a href="https://github.com/elm-lang/websocket/blob/master/src/WebSocket.elm">Websocket Effect Manager</a> skeleton, expliciting which queue the message types are related:</p><pre><code class="haskell">effect module WebSocket where { command = MyCmd, subscription = MySub } exposing
+  ( send
+  , listen
+  , keepAlive
+)
+...
+
+-- MyCmd and MySub are parameterized by an appMsg type to encode app. message constructors.
+
+type MyCmd appMsg = Send String String
+
+type MySub appMsg = Listen String (String -&gt; appMsg) 
+                 | KeepAlive String
+
+-- | user entry calls to build command or subscription requests
+
+send : String -&gt; String -&gt; Cmd appMsg
+send url txt = command (Send url txt)
+
+listen : String -&gt; (String -&gt; appMsg) -&gt; Sub appMsg
+listen url tagger = subscription (Listen url tagger)
+-- ^ tagger: appMsg constructor to wrap the received String with
+
+keepAlive : String -&gt; Sub appMsg
+keepAlive url = subscription (KeepAlive url)
+
+-- | request processing automaton (input -&gt; state -&gt; state) callback
+
+onEffects
+  : Platform.Router appMsg SelfMsg
+  -&gt; List (MyCmd appMsg)     -- cmd requests
+  -&gt; List (MySub appMsg)     -- subscription requests
+  -&gt; State appMsg
+  -&gt; Task Never (State appMsg)
+onEffects router cmds subs state = ...
+
+-- | State: The msg param in the State type is the appMsg of the type of the current subscriptions
+
+type alias State msg =
+  { sockets : SocketsDict
+  , queues : QueuesDict
+  , subs : SubsDict msg
+}
+
+-- | selfMsgs (type changed from Msg to SelfMsg to avoid confusion)
+
+type SelfMsg  
+  = GoodOpen String WS.WebSocket
+  | BadOpen String
+  | Receive String String
+  | Die String
+
+-- | selfMsgs processing automaton callback
+
+onSelfMsg 
+  : Platform.Router appMsg SelfMsg 
+  -&gt; SelfMsg 
+  -&gt; State appMsg 
+  -&gt; Task Never (State appMsg)
+onSelfMsg router selfMsg state = ...
+
+-- | cmdMap called by Platform.Cmd.map
+
+cmdMap : (a -&gt; b) -&gt; MyCmd a -&gt; MyCmd b
+
+-- | subMap called by Platform.Sub.map
+
+subMap : (a -&gt; b) -&gt; MySub a -&gt; MySub b</code></pre><p>See <a href="https://guide.elm-lang.org/architecture/effects/web_sockets.html">WebSockets client program</a> from the Elm's guide.</p><p>Other effect managers: Time (subscription only), Random (command only), other at <a href="http://package.elm-lang.org/">core library or Effects pkg list</a></p><h2 id="running-a-task"><a href="#running-a-task">Running a Task</a></h2><p>The type <i>(Task err a)</i> represents an action that may fail.</p><p>You may run a Task with the commands <i>perform</i> or <i>attempt</i>, that send a message to the appMsg queue upon finalisation, through the Task effect manager (See the <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Task">module</a>'s source).</p><p>Within <i>Effect managers</i>, automaton callbacks are Tasks. You can also run tasks asynchronously through <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/Process#spawn">Process.spawn</a> and abort them with <i>Process.kill</i>.</p><p>The structure Task implements Haskell's Monad and <a href="http://hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html#t:MonadError">MonadError</a> functionality as well, for computations that can throw errors whose type is determined by the type of the monad, here <i>(Task err)</i>, where <i>throwError</i> bypasses subsequent actions until <i>catchError</i> is found.</p><ul><li><i>succeed</i> -&gt; Haskell Monad's <i>return</i> implementation</li><li><i>andThen</i> -&gt; Haskell Monad's flipped <i>bind</i> impl.</li><li><i>fail</i> -&gt; Haskell MonadError's <i>throwError</i></li><li><i>onError</i> -&gt; Haskell MonadError's <i>catchError</i></li><li><i>map</i> -&gt; Haskell Functor's <i>fmap</i></li><li><i>map2</i> -&gt; Haskell Control.Monad's <i>liftM2</i></li><li><i>map3</i> -&gt; Haskell Control.Monad's <i>liftM3</i></li><li><i>sequence</i> -&gt; Haskell Control.Monad <i>sequence</i> for a List container</li></ul><pre><code class="haskell">effect module Task where { command = MyCmd } exposing
+  ( Task                      -- the type
+  , perform, attempt          -- cmds to run tasks
+  , succeed, andThen          -- return, bind
+  , map, map2, map3, map4, map5  -- functor, liftM{N}
+  , sequence                     -- sequence a list of tasks
+  , fail, onError, mapError   -- throwError, catchError
+)
+
+{-| Command to perform asynchronously a Task that cannot fail (err ~ Never) and send a msg to the appMsg queue
+-}
+perform : (a -&gt; msg) -&gt; Task Never a -&gt; Cmd msg
+perform toMessage task =
+  command (Perform (map toMessage task))
+
+
+{-| Command to attempt asynchronously a task that might fail and send a msg chosen by the resultToMessage function
+-}
+attempt : (Result err a -&gt; msg) -&gt; Task err a -&gt; Cmd msg
+attempt resultToMessage task =
+  command (Perform (
+    task
+      |&gt; andThen (succeed &lt;&lt; resultToMessage &lt;&lt; Ok)   -- Ok is a constructor of type Result
+      |&gt; onError (succeed &lt;&lt; resultToMessage &lt;&lt; Err)  -- Err is a constructor of type Result
+))
+
+
+{-| Simple task generator that succeeds immediately when run.
+    A Haskell's Monad `return` implementation.
+-}
+succeed : a -&gt; Task err a
+
+{-| Tasks chaining.
+    A flipped version of Haskell's Monad `bind`
+-}
+andThen : (a -&gt; Task x b) -&gt; Task x a -&gt; Task x b
+
+{-| fail gives a task that fails immediately when run.
+    fail &quot;file not found&quot; : Task String a
+    
+    fail: Monadic exception thrower, MonadError's throwError
+-}
+fail : err -&gt; Task err a
+
+{- onError: Monadic exceptions catcher, MonadError's catchError
+-}
+onError : (x -&gt; Task y a) -&gt; Task x a -&gt; Task y a
+
+{- mapError: to wrap the error type into a wider union one with a constructor
+-}
+mapError : (x -&gt; y) -&gt; Task x a -&gt; Task y a
+
+{- Functor map
+-}
+map : (a -&gt; b) -&gt; Task x a -&gt; Task x b
+map f taskA = 
+        taskA |&gt; andThen (\a -&gt; succeed (f a))
+
+{- Results combination of serialized tasks: Haskell's liftM2
+-}
+
+map2 : (a -&gt; b -&gt; c) -&gt; Task x a -&gt; Task x b -&gt; Task x c
+map2 f2 taskA taskB = 
+          taskA |&gt; andThen (\a -&gt; taskB
+                |&gt; andThen (\b -&gt; succeed (f2 a b)
+                          ))
+...
+
+{-| form a Task from a list of tasks returning the list of results.
+-}
+sequence : List (Task x a) -&gt; Task x (List a)
+sequence tasks =
+  case tasks of
+    [] -&gt; succeed []
+    task :: remainingTasks -&gt; 
+              map2 (::) task (sequence remainingTasks)</code></pre><h3 id="adding-tipical-control-functions-for-the-type--task-"><a href="#adding-tipical-control-functions-for-the-type--task-">Adding tipical control functions for the type &quot;Task&quot;</a></h3><pre><code class="haskell">module Task_Extra exposing (..)
+
+import Task exposing (Task, succeed, andThen, map2)
+
+-- lazyness without memoization
+type Lazy a = Lazy (() -&gt; a)
+
+force : Lazy a -&gt; a
+force (Lazy f) = f ()
+
+-- let's call traverse what in Haskell would be mapM or traverseM
+traverse : (a -&gt; Task err b) -&gt; List a -&gt; Task err (List b)
+traverse f li = case li of
+              [] -&gt; succeed []
+              x :: xs -&gt; map2 (::) (f x) (traverse f xs)
+
+-- side effects only
+traverse_ : (a -&gt; Task err ()) -&gt; List a -&gt; Task err ()
+traverse_ f li = case li of
+               [] -&gt; succeed ()
+               x :: xs -&gt; f x |&gt; andThen (\_ -&gt; traverse_ f xs)
+
+-- Haskell's monadic forM
+for = flip traverse
+for_ = flip traverse_
+
+when : Bool -&gt; Lazy (Task err ()) -&gt; Task err ()
+when cond lzTask = 
+    if cond then force lzTask 
+            else succeed ()
+
+whenM : Lazy (Task err Bool) -&gt; Lazy (Task err ()) -&gt; Task err ()
+whenM lzBoolTask lzTask = 
+    force lzBoolTask |&gt; andThen (\cond -&gt; when cond lzTask)
+
+-- replicate with Index
+replicate : Int -&gt; (Int -&gt; Task err a) -&gt; Task err (List a)
+replicate n f = 
+   if n &lt;= 0 then succeed []
+   else let go i =                 -- i: 0..n
+                   if (i &lt; n) then map2 (::) (f i) &lt;| go (i+1)
+                   else succeed []    
+        in go 0   
+
+-- side effects only
+replicate_ : Int -&gt; (Int -&gt; Task err ()) -&gt; Task err ()
+replicate_ n f =                 
+   if n &lt;= 0 then succeed ()
+   else let go i action =          -- i: 0..n
+                   if (i &lt; n) then go (i+1) (f i)   -- tail recursive
+                   else succeed ()    
+        in go 0 (succeed ())  
+</code></pre><h2 id="elm-timing-example--comparing-elapsed-times-of-expressions-with-partial-application-vs-complete-number-of-arguments-"><a href="#elm-timing-example--comparing-elapsed-times-of-expressions-with-partial-application-vs-complete-number-of-arguments-">Elm timing example: Comparing elapsed times of expressions with partial application vs complete number of arguments.</a></h2><p>Check the <a href="https://github.com/elm/compiler/blob/master/builder/src/Generate/Functions.hs">function application templates</a> and run this program in Elm's <a href="http://elm-lang.org/try">try-online</a>.</p><pre><code class="haskell">import Html as H exposing (Html)
+import Time as TM exposing (Time)
+import Platform.Cmd
+import Platform.Sub
+import Task as TS exposing (Task)
+import List as L
+import Debug as D
+
+-- (&gt;&gt;=) for Tasks
+(&gt;&gt;=) m f = TS.andThen f m
+infixl 1 &gt;&gt;=
+
+type Lazy a = Lazy (() -&gt; a)
+
+force : Lazy a -&gt; a
+force (Lazy f) = f ()
+
+type MyErr = MyErr String
+
+type Msg = Start | Elapsed (Time, Time) | MsgErr String
+
+type alias Model = {elapsed: Result String (Time, Time)}
+
+intEnumFromThenToTR : List Int -&gt; Int -&gt; Int -&gt; Int -&gt; List Int
+intEnumFromThenToTR acc ini nxt top = 
+   if ini == nxt then D.log &quot;next must be different than initial&quot; []
+   else if {- ini beyond top -} ini /= top &amp;&amp; 
+           compare ini top /= compare ini nxt 
+   then L.reverse acc
+   else intEnumFromThenToTR (ini :: acc) nxt (nxt + nxt - ini) top
+
+intEnumFromThenTo = intEnumFromThenToTR []  -- using partial application seems to slow execution
+
+v0 = intEnumFromThenTo 1003 1001 1   
+
+v1 = intEnumFromThenToTR [] 1003 1001 1  -- maybe faster
+
+-- evaluate the deferred lzA parameter N times
+iterateM_ : Int -&gt; Lazy a -&gt; Task MyErr ()
+iterateM_ n lzA = 
+  case compare n 0 of 
+    LT -&gt; TS.fail &lt;| MyErr &quot;iterateM_: n must be positive&quot; 
+    EQ -&gt; TS.succeed ()
+    GT -&gt; let -- tail recursive, evaluating the action as parameter
+              go m action = 
+                if m == 0 then TS.succeed ()
+                else go (m-1) (TS.succeed (force lzA) 
+                                   &gt;&gt;= (\_ -&gt; TS.succeed ()))
+          in go n (TS.succeed ())
+
+-- time N evaluations of lzA
+timeItN : Int -&gt; Lazy a -&gt; Task MyErr Time
+timeItN n lzA = TM.now 
+      &gt;&gt;= (\ tmIni -&gt; iterateM_ n lzA
+      &gt;&gt;= (\ _ -&gt; TM.now
+      &gt;&gt;= (\ tmFinal -&gt; TS.succeed (tmFinal - tmIni)
+      )))
+
+timeV : List Int -&gt; Task MyErr Time
+timeV v = timeItN 1000 &lt;| Lazy (\_ -&gt; L.sum v)
+
+targetsTimes : Task MyErr (Time, Time)
+targetsTimes = timeV v0
+           &gt;&gt;= (\ t1 -&gt; timeV v1
+           &gt;&gt;= (\ t2 -&gt; TS.succeed (t1, t2)
+           ))
+
+timesResultToMsg : Result MyErr (Time, Time) -&gt; Msg
+timesResultToMsg res = 
+     case res of
+       Ok v -&gt; Elapsed v
+       Err (MyErr str) -&gt; MsgErr str
+
+view : Model -&gt; Html msg
+view model =
+    case model.elapsed of
+      Err str -&gt; H.div [] [H.text &lt;| &quot;Error: &quot; ++ str]
+      Ok (t1, t2) -&gt; -- arrange (t1, t2) in a List to map units once
+                     let res = L.map TM.inMilliseconds [t1, t2]
+                     in H.div [] [H.text &lt;| toString res]
+
+update : Msg -&gt; Model -&gt; (Model, Cmd Msg)
+update msg mdl = case msg of
+      Start -&gt; (mdl, TS.attempt timesResultToMsg targetsTimes)
+      Elapsed tm -&gt; ({ mdl | elapsed = Ok tm}, Cmd.none)
+      MsgErr str -&gt; ({ mdl | elapsed = Err str}, Cmd.none)
+
+init : (Model, Cmd Msg)
+init = ({elapsed = Ok (0, 0)}, 
+        TS.perform (\_ -&gt; Start) (TS.succeed ())) -- send Start msg
+
+main = H.program { init = init, update = update, 
+                   view = view, subscriptions = (\_ -&gt; Sub.none)}</code></pre><h2 id="more-info"><a href="#more-info">More info</a></h2><ul><li><a href="https://guide.elm-lang.org/reuse/modules.html#building-projects-with-multiple-modules">Cabal-like project file, JSON styled (elm-package.json)</a></li><li><a href="https://github.com/elm-lang/websocket/blob/master/elm.json">A library project file</a></li><li><a href="https://github.com/elm-lang/elm-package/blob/master/README.md">Installing packages</a></li><li><a href="https://guide.elm-lang.org/">The Elm Book - An Introduction to Elm</a></li><li><a href="https://medium.com/@l.mugnaini/forms-in-elm-validation-tutorial-and-examples-2339830055da">Forms in Elm</a></li></ul><h2 id="other-client-side-model-view-controller-frameworks"><a href="#other-client-side-model-view-controller-frameworks">Other client side Model-View-Controller frameworks</a></h2><p><a href="http://taylor.fausak.me/static/pages/2015-10-22-better-know-a-language-purescript.html#1">PureScript</a> offers alternatives for designing Web User Interfaces much nearer to the language power of Haskell and much lighter weight than GHCJS (no GHC RTS emulation).</p><p>See <a href="https://www.schoolofhaskell.com/user/griba/purescript-client-side-mvc-frameworks">Purescript client-side MVC frameworks</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/griba/elm-from-a-haskell-perspective';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

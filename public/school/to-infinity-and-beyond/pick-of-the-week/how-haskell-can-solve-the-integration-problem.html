@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html><head><title>How Haskell can solve the integration problem - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/how-haskell-can-solve-the-integration-problem">How Haskell can solve the integration problem</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">How Haskell can solve the integration problem</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 7 Mar 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/60e02ae92d6bb8ade89c4918e508c0411da296a4">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/example-of-why-to-use-monads-what-they-can-do">Previous content: example of why to use monads - what they can do</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/MFlowDSL">Next content: MFlow as a DSL for Web applications</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Go up to: Pick of the Week</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a></li><li><a href="#the-integration-problem--inversion-of-control">The integration problem: Inversion of control</a></li><li><a href="#the-standard-solution">The standard solution</a><ul><li><a href="#the-problems-of-the-standard-solution">The problems of the standard solution</a><ul><li><a href="#declarative-configurations-make-the-problem-grow">Declarative configurations make the problem grow</a></li><li><a href="#standards-divide-the-integration-problem">Standards divide the integration problem</a></li><li><a href="#guis-hide-the-problem">GUIs hide the problem</a></li></ul></li></ul></li><li><a href="#a-better-solution">A better solution</a><ul><li><a href="#workflow">Workflow</a></li><li><a href="#tcache">TCache</a></li><li><a href="#mflow">MFlow</a></li></ul></li><li><a href="#the-example-application">The example application</a><ul><li><a href="#how-workflow-works">How Workflow works</a></li><li><a href="#how-tcache-works">How TCache works</a></li><li><a href="#queues">Queues</a></li></ul></li><li><a href="#enter-mflow">Enter MFlow</a></li><li><a href="#long-running-transactions">Long running transactions</a><ul><li><a href="#compensation-for-a-long-running-transaction">Compensation for a long running transaction</a></li><li><a href="#same-workflow-with-compensation">Same workflow with compensation</a></li><li><a href="#travel-back-in-time">Travel back in time</a></li></ul></li><li><a href="#solving-rollback-in-the-web-code">Solving rollback in the Web code</a></li><li><a href="#defining-persistence">Defining persistence</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="introduction"><a href="#introduction">Introduction</a></h1><p>This tutorial:</p><ul><li><p>Will show how the development of web applications, workflows, asynchronous tasks, Enterprise Application Integration(EAI), Service Integration and Business Process Management (BPM) face the same underlying problem, that may be called the integration problem. That is, in essence, a problem of inversion of control.</p></li><li><p>Will show how the traditional architecture that solves that problem, the state-transition system, end up in the creation of complex frameworks with excessive configurations, standards, APIs and development environments specialized for each particular problem that hides the commonalities and make the integration prohibitively expensive and difficult to program and maintain, while the language Haskell permits the implementation of a common underlying solution for all these problems that is vastly simpler and intuitive.</p></li><li><p>For a practical problem, you will learn how to program and test a long running task (a workflow) in a monadic sequence that will automatically checkpoint its own state so that it can be restarted, after intended or unintended shutdowns.</p></li><li><p>Will learn how to program long timeouts while waiting for the completion of some task, using STM transactions.</p></li><li><p>Will learn to create a web application that will start, monitor, restart and make use of the results of the previous task</p></li><li><p>Will learn how to use transactional persistent queues to communicate asynchronously between different tasks</p></li><li><p>Will learn how to  rollback a long running transaction</p></li><li><p>Will learn how to rollback transactions in a online Web application using the same primitives</p></li><li><p>All of this done with the same framework, making a practical demonstration of how  different problems such is the Web application and a running asynchronous workflow have the same underlying problems and the same underlying solution.</p></li></ul><h1 id="the-integration-problem--inversion-of-control"><a href="#the-integration-problem--inversion-of-control">The integration problem: Inversion of control</a></h1><p>Creating a single application in the imperative style is easy and intuitive, because the programmer is in control of the sequence of things to do. But when it comes the time to integrate two or more autonomous entities that send events at any time in its own sequence then is when the programmer is not in control, so a different programming model is necessary. Such problem happens when trying to integrate the users with  backoffice applications via web applications,  but also when it is necessary to integrate two or more backoffice applications, company departments, web sites, web services etc.  In some of the cases is the inherent nature of the entities to integrate, that are really in control: For example, the user in a web application. In other is due to the loose coupling  of the integration as is the case of web services that may produce timeouts or other error conditions. A single element that produce an error or exception  can force the undo of many operations.</p><h1 id="the-standard-solution"><a href="#the-standard-solution">The standard solution</a></h1><p>The standard model that solves this inversion of control problem has various names but essentially is the same architecture with different names: finite state machine, state-transition system, a state machine system or a event handling model. That is the architecture of the main web frameworks, Enterprise Application Integration (EAI) frameworks, Orchestration frameworks, Workflow frameworks, Service Oriented Architecture (SOA) frameworks and Business Process Management (BPM) frameworks, that solve respectively, the individual above mentioned integration problems.</p><h2 id="the-problems-of-the-standard-solution"><a href="#the-problems-of-the-standard-solution">The problems of the standard solution</a></h2><p>But state machines are difficult to program and debug. Almost every consideration about the goto statement applies to the event handling mechanism that manage state transitions. The event handlers do not share variable scopes, so, like in the case of the goto, the code rely in global variables, or in global session variables, when they are created dynamically. There is no top level structure in the code that may represent the main sequence. For the maintainer, it is very difficult to know what the code is trying to achieve. Just like it would happen when using the goto statement.</p><h3 id="declarative-configurations-make-the-problem-grow"><a href="#declarative-configurations-make-the-problem-grow">Declarative configurations make the problem grow</a></h3><p>This lack of clarity and maintainability drives a tendency to standardization and to the use of declarative languages and configurations. A typical solution is the use of declarative languages such are XML to express the top level of the state changes, with different  degrees of sophistication: such is the case of routing in  web applications, or the page flow in the case of flow oriented web frameworks (such is the case of the <i>Seam</i> or the <i>Spring Web Flow</i>  frameworks). This solution is also typical in orchestration of integration scenarios such is the case of EAI, SOA or BPM for the same reasons.</p><h3 id="standards-divide-the-integration-problem"><a href="#standards-divide-the-integration-problem">Standards divide the integration problem</a></h3><p>It is supposed that this declarative top level configuration, separated from the imperative code of the event/integration handlers makes things a little more readable and maintainable. But when the ambition of the declarative strategy grows it becomes almost equally or more complicated than the equivalent imperative code. Moreover, the code that implement the event handlers must be broken into small imperative pieces invoked by the declarative top level, since both are different languages. The change of something in the program involves the edition of many files, with magic identifiers that link this or that feature across the ensemble of files.</p><h3 id="guis-hide-the-problem"><a href="#guis-hide-the-problem">GUIs hide the problem</a></h3><p>A further step, typical in machine state programming is to use a Graphical User Interface that will be in charge of handling the ensemble of configurations and imperative files by coordinating the multiple editions of variables, methods etc in different files when the user edit graphically an action in the flow. Many EAI, SOA, BPM, and Workflow frameworks have a graphical flow editing tool. And also in the case of some Web frameworks. At the same time the framework authors hope that the graphical interface will make evident the sequence that is not present in the code.</p><p>However that graphical solution carries out only the edition of the top level. there are a number of things to be done by hand in the configurations and in the code here and there. So the lower level can not be taken as a black box but must be documented for architecture programmers, administrators and so on. At this moment, the framework is a monster with hundred of documentation pages, wizards that help for many particulars cases -but not for your case- and arcane primitives, keywords, and configurations.</p><h1 id="a-better-solution"><a href="#a-better-solution">A better solution</a></h1><p>All that complication is a consequence of the low level of the machine state and his event model. Instead of a mix of an imperative language that define sequences and some declarative languages that define transitions between sequences, we need a single language that can define declarative sequences. Such declarative sequences describe explicitly the normal flow of execution in a intuitive imperative-like style, and the exception conditions appear in the code as exceptions to the main flow.</p><p>But unlike imperative code, the declarative sequence may be read as a recipe by the program scheduler: Like in that case, the flow can be stopped and restarted again, it can be backtracked to rollback actions,  and it must  be capable of making transitions at any depth from a branch to another to respond to unexpected events or errors. That scheduler  of declarative sequences can be programmed in Haskell using Monad transformers with effects for application state logging and recovery, tracking and backtracking. With these effects, it is possible to run long running applications that integrate, orchestrate and dispatch out of order events, stop and restart and rollback actions in case of errors  in integration scenarios while at the same time are as simple and inexpensive to develop, understand and maintain as ordinary imperative applications.</p><h2 id="workflow"><a href="#workflow">Workflow</a></h2><p>The library <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Workflow" title="Hoogle search for: Workflow"><code>Workflow</code></a>  executes processes that are restartable. A process in the workflow monad can be stopped and restarted without losing the execution state, so it can run for days, months or years. The stored state is not the one of a state machine but the execution log  in a sequential program. a workflow is normally an application that run for a lot of time, so checkpointing the state and to recover its state of execution after a  shutdown is one of the main characteristic of a workflow. This library uses STM to execute transactions and to implement timeouts.</p><h2 id="tcache"><a href="#tcache">TCache</a></h2><p>The library <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=tcache" title="Hoogle search for: tcache"><code>tcache</code></a> implement transactional <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=STM" title="Hoogle search for: STM"><code>STM</code></a> variables with persistence in a backend defined by the user. STM can be used not only for concurrency but to manage complex combinations of events in a composable way. <code>tcache</code> also implement persistent queues that can be used for asynchronous communications with other workflows or processes. It provides file persistence by default for your data, so prototyping is very fast. workflow uses tcache to manage and persist its state in a coherent state with the rest of the data.</p><h2 id="mflow"><a href="#mflow">MFlow</a></h2><p>The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mflow" title="Hoogle search for: mflow"><code>mflow</code></a> library is a web framework that uses the Workflow library. It takes web applications as workflow sequences. It add tracking and backtracking effects to respond to out of order user requests. The same backtracking mechanism can be used with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Workflow" title="Hoogle search for: Workflow"><code>Workflow</code></a> to roll-back long running transactions, something that happens in many integration scenarios. We will see how to do it later in this tutorial.</p><h1 id="the-example-application"><a href="#the-example-application">The example application</a></h1><p>In this example we will show how a web application with some pages and an asynchronous workflow can be coded in an intuitive way in a few lines of Haskell code.</p><p>A small bookseller sell special books by request to selected clients. The seller need to offer special services. For example if a book is not in stock, he will have the option to reserve it for a time as soon as it appears, let say  for five days. If the client do not buy it, the book will be unreserved.</p><h2 id="how-workflow-works"><a href="#how-workflow-works">How Workflow works</a></h2><p>A simple example of a workflow using the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Workflow" title="Hoogle search for: Workflow"><code>Workflow</code></a> package is as such:</p><pre><code class="Haskell">exec1 &quot;workflowname&quot; $ do
+   result &lt;- step $ process1
+   step $ process2 result
+   ...</code></pre><p>Where <code>process1</code>, <code>process2</code> etc are IO actions and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.step" title="Hoogle search for: Control.Workflow.step"><code>step</code></a> is the lifting of the monad transformer that log the results of the execution and is involved in the recovery of the application state from the log created. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.exec1" title="Hoogle search for: Control.Workflow.exec1"><code>exec1`</code></a> is the scheduler that start or restart the workflow. It is guaranteed that once the result of each IO process is logged by <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.step" title="Hoogle search for: Control.Workflow.step"><code>step</code></a>, the process is not executed again when it is restarted. It also can be restarted in another machine using the log, so it has a natural fallback mechanism in case of hardware failure.</p><p>Since a workflow, like any integration activity is the coordination or orchestration of autonomous entities such are persons and processes, most of the processes in a workflow, like in any integration problem, involves sending a request and wait for a response, or send a response and wait for the next request. In both cases what is received may not be the one expected and it may arrive late. Sometimes it is necessary to execute a different branch depending on different events. In the worst case, one of the autonomous elements integrated can force an undo of the task as a consequence of an error until some handler up in the flow manages the situation and restore the flow forward. Perhaps in another branch of the declarative sequence. At this moment you can see certain similarities with in a web application when the user forces going back in the navigation sequence and goes through another branch.</p><h2 id="how-tcache-works"><a href="#how-tcache-works">How TCache works</a></h2><p>The Workflow library uses STM transactions as the main way to wait for external events. The package <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.TCache" title="Hoogle search for: Data.TCache"><code>tcache</code></a> is a transactional cache using STM, with persistence in different backends. The user define the persistence of his data by means of a class instance.</p><p>First, a definition for the book metadata:</p><pre><code class="haskell">data Book= Book{btitle :: String, stock, reserved :: Int} 
+           deriving (Read,Show, Eq,Typeable)</code></pre><p>The library TCache defines STM variables called <code>DBRefs</code> that are persistent in a programmer-defined backend. Such persistence is defined by class instances. Apart from that, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.TCache" title="Hoogle search for: Data.TCache"><code>tcache</code></a> references are like <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=TVar" title="Hoogle search for: TVar"><code>TVar</code></a> references.</p><pre><code class="haskell">import Data.TCache.DefaultPersistence
+
+instance Indexable Book where key= btitle
+
+instance Serializable Book where
+  serialize= pack. show
+  deserialize= read . unpack</code></pre><p>Here we defined a key for the <code>Book</code> register and a simple serialization instance defined in terms of <code>Read</code> and <code>Show</code>. By default this instance uses files for persistence, unless the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.TCache.Defs.setPersist" title="Hoogle search for: Data.TCache.Defs.setPersist"><code>setPersist</code></a> method is overridden in the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Serializable" title="Hoogle search for: Serializable"><code>Serializable</code></a> instance. Later we will substitute it by a database persistence. But now for the first steps, lets use this simple persistence in files.</p><pre><code class="haskell">keyBook= &quot;booktitle&quot; 
+
+rbook= getDBRef $  keyBook</code></pre><p>Here <code>rbook</code> is a TCache reference to the book of this title. That reference will point to a register in the cache and in the storage (or <code>Nothing</code>). The content can be read with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=readDBRef" title="Hoogle search for: readDBRef"><code>readDBRef</code></a> written with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=writeDBRef" title="Hoogle search for: writeDBRef"><code>writeDBRef</code></a> or deleted with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=delDBRef" title="Hoogle search for: delDBRef"><code>delDBRef</code></a> in the STM monad.</p><p>The key of the object can also be obtained from the reference by using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=keyObjDBRef" title="Hoogle search for: keyObjDBRef"><code>keyObjDBRef</code></a>.</p><p>Here below are the first lines of the workflow. That code wait for stock in the book for a time <code>timereserve</code>:</p><pre><code class="Haskell">buyReserve timereserve  keyBook= do
+    let rbook = getDBRef keyBook
+    logWF $  &quot;Reserve workflow start for: &quot;++ keyBook
+    t &lt;- getTimeoutFlag timereserve  
+
+    r &lt;- WF.step . atomically $ (reserveIt rbook &gt;&gt; return True)
+                      `orElse`  (waitUntilSTM t &gt;&gt; return False)</code></pre><p>Here the timeout is defined in <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getTimeoutFlag" title="Hoogle search for: getTimeoutFlag"><code>getTimeoutFlag</code></a>. The parameter is the timeout in seconds but it can be unlimited, for days,  months or years since it is an Integer. this timeout can wait beyond process stop and restart. If the timeout is in execution and the process is interrupted, when restarted the timeout takes into account the time during which the process was stopped. What it returns is a STM variable with <code>False</code> as its content. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=waitUntilSTM" title="Hoogle search for: waitUntilSTM"><code>waitUntilSTM</code></a> simply wait until the STM variable becomes <code>True</code> as result of the timeout. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=orElse" title="Hoogle search for: orElse"><code>orElse</code></a> and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=atomically" title="Hoogle search for: atomically"><code>atomically</code></a> are part of the standard STM semantics.  What the second statement does is to wait either for the reservation of the book, in which case will return <code>True</code> or timeout in which case it return <code>False</code>.  More on the <code>reserveIt</code> definition later.</p><p>The rest of the workflow get the result of the previous step and either log about the timeout condition or wait <code>timereserve</code> time until the reservation period finish or the product is bought using a similar STM transaction arrangement:</p><pre><code class="haskell">    if not r
+     then do
+       logWF &quot;reservation period ended, no stock available&quot;
+       return ()
+
+     else do
+       logWF &quot;The book entered in stock, reserved &quot;
+       t &lt;- getTimeoutFlag timereserve 
+       r &lt;- WF.step . atomically $ (waitUntilSTM t &gt;&gt; return False)
+                          `orElse` (testBought rbook &gt;&gt; return True)
+
+       if r
+        then do
+          logWF &quot;Book was bought at this time&quot;
+        else do
+          logWF &quot;Reserved for a time, but reserve period ended&quot;
+          WF.step . atomically $ unreserveIt rbook
+          return ()</code></pre><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=logWF" title="Hoogle search for: logWF"><code>logWF</code></a> add a message to the log, so the history of the execution of the process can be known by the log content. This trace will be presented to the user or the administrator.  `testBought` return when the user buy the book. If not bought, after the timeout, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=waitUntilSTM" title="Hoogle search for: waitUntilSTM"><code>waitUntilSTM</code></a> return `False` and the reserve is dropped.<p>Actually this kind of wait for a condition with timeout is defined in the package workflow as <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=withTimeout" title="Hoogle search for: withTimeout"><code>withTimeout</code></a>:</p><pre><code class="haskell">withTimeout ∷ (MonadIO m, Typeable a, Serialize a)
+            ⇒ Integer → STM a → Workflow m (Maybe a)
+withTimeout time  f = do
+  flag ←  getTimeoutFlag time
+  step . liftIO . atomically $ (f &gt;&gt;= return  .  Just )
+                      `orElse`
+                      (waitUntilSTM flag  &gt;&gt; return  Nothing)
+</code></pre><p>But the explicit STM expression is more general and it show how STM can be used for handling the scheduling of complex event combinations.</p><p>What is the definition of <code>reserve</code>,  <code>unreserve</code> ?</p><pre><code class="haskell">reserveIt rbook = do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; retry
+     Just (Book t s r) -&gt; writeDBRef rbook $ Book t (s-1)  (r+1)
+
+
+unreserveIt rbook= do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;unreserveIt: where is the book register?&quot;
+     Just (Book t s r) -&gt; writeDBRef rbook $ Book t (s+1)  (r-1)</code></pre><p>Here <code>reserveIt</code> wait for the appearance of the book in stock. Otherwise it retries. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=retry" title="Hoogle search for: retry"><code>retry</code></a> is defined in the standard STM package. <code>unreserveIt</code> does the opposite. To make the code simpler, border cases are not considered. stocks and reservations in the register are supposed to be positive etc.</p><h2 id="queues"><a href="#queues">Queues</a></h2><p>What if we want to reserve it and send a mail to the user? That is a typical problem in workflows and EAI applications. To keep it in the STM monad and have the nice automatic benefits of transactionality we can use the transactional persistent queues of the package TCache: <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q= Data.Persistent.Collection" title="Hoogle search for:  Data.Persistent.Collection"><code> Data.Persistent.Collection</code></a></p><pre><code class="haskell">userMail= &quot;user@mail.com&quot;
+mailQueue= &quot;mailqueue&quot;
+
+reserveAndMailIt rbook=  do
+   let qref = getQRef mailQueue
+   pushSTM qref ( userMail :: String
+                , &quot;your book &quot;++ keyObjDBRef rbook ++ &quot; received&quot; :: String
+                , &quot;Hello, your book....&quot; :: String)
+   reserveIt rbook</code></pre><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getQRef" title="Hoogle search for: getQRef"><code>getQRef</code></a> return the reference to a queue identifier string and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=pushSTM" title="Hoogle search for: pushSTM"><code>pushSTM</code></a> push a tuple with the recipient mail, the subject and the content. A different process can read it  (using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=popSTM" title="Hoogle search for: popSTM"><code>popSTM</code></a>) and send it through  mail using any of the haskell mail libraries. The write to the queue is transactional so any retry will not add duplicate registers to the queue.<p>Alternatively, for the execution of IO computations, for example, to send the mail instead of queuing it,  <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=safeIOToSTM" title="Hoogle search for: safeIOToSTM"><code>safeIOToSTM</code></a> can be used. unlike <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=unsafeIOToSTM" title="Hoogle search for: unsafeIOToSTM"><code>unsafeIOToSTM</code></a>, the former execute  the IO action completely even if the STM transaction is aborted and retried. However, the IO process invoked must be idempotent. That may involve the detection of duplicated executions since the STM transaction can be retried and the process invoked by <code>safeIOToSTM</code> can be re-executed.</p><p>Sometimes it necessary the execution of various tasks that may take certain time, for example the invocation of  other workflow or even to ask some user. depending on the response, something done time ago may need to be undone. These <a href="http://en.wikipedia.org/wiki/Long-running_transaction">long running transactions</a> usually are rolled back using complensations, and require more declarative configurations and imperative code in traditional solutions. Workflow can use the backtracking mechanism of the package <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=MFlow" title="Hoogle search for: MFlow"><code>MFlow</code></a> to roll back such transactions almost transparently, without cluttering the expression of the main flow. That will be explained later.</p><p>To simulate the entry of stock, a process called by main wait for a certain amount of time and update the register:</p><pre><code class="haskell">enterStock delay rbook= forkIO $ do
+   liftIO $ threadDelay $ delay * 1000000
+   putStrLn &quot;ENTER STOCK&quot;
+   atomically $ writeDBRef rbook $ Book &quot;booktitle&quot; 5  0
+</code></pre><p>Finally <code>buy</code> is simulated also with a process that wait for some time. if the book is reserved it decrement the reservation. If not, it decrement the stock:</p><pre><code class="haskell">(!&gt;)= flip trace
+
+buy delay rbook=  forkIO $ do
+  threadDelay $ delay * 1000000
+  atomically $ do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;Not in stock&quot;
+     Just (Book t n n') -&gt;
+        if n' &gt; 0  !&gt; show mr then writeDBRef rbook $ Book t n (n'-1)
+                       !&gt; &quot;There is in Stock and reserved, BOUGHT&quot;
+        else if n &gt; 0 then
+                      writeDBRef rbook $ Book t (n-1) 0
+                       !&gt; &quot;No reserved, but stock available, BOUGHT&quot;
+        else error &quot;buy: neither stock nor reserve&quot;</code></pre><p>In the workflow, the detection of the book being bought in the buy process is done checking if the reservation becomes 0. This only works for a single client, but I try to keep it as simple as possible.</p><pre><code class="haskell">testBought rbook= do
+    mr &lt;- readDBRef rbook
+    case mr of
+       Nothing -&gt; retry !&gt; (&quot;testbought: the register does not exist: &quot; ++ show rbook)
+       Just (Book t stock reserve) -&gt;
+           case reserve  of
+              0 -&gt; return()
+              n -&gt; retry</code></pre><p>Now <code>test</code> is a method that integrate all the elements  and can invoke the workflow with different timings:</p><pre><code class="haskell">test stockdelay buydelay timereserve stopdelay = do
+
+  let keyBook= &quot;booktitle&quot;
+      rbook= getDBRef  keyBook
+
+  enterStock stockdelay rbook
+  buy buydelay rbook
+  th &lt;- forkIO $ exec &quot;buyreserve&quot; (buyReserve  timereserve) keyBook
+      
+  stopRestart stopdelay timereserve th
+
+  threadDelay $ (buydelay- stopdelay+1)  * 1000000
+  putStrLn  &quot;FINISHED&quot;
+  atomically $ delDBRef rbook
+  putStrLn &quot;----------------WORKFLOW HISTORY:--------------&quot;
+  h &lt;- getHistory &quot;buyreserve&quot; keyBook
+  putStrLn $ unlines h
+  putStrLn &quot;---------------END WORKFLOW HISTORY------------&quot;
+  delWF &quot;buyreserve&quot; keyBook
+  </code></pre><p><code>stopRestart</code> kill the workflow and restart it to simulate a shutdown and a restart. As expected, nothing change with the shutdown and the restart. <code>getTimeoutFlag</code> take into account the time during which the process has been stopped.</p><pre><code class="haskell">stopRestart delay timereserve th=  do
+    threadDelay $ delay * 1000000
+    killThread th                              !&gt; &quot;workflow KILLED&quot;
+    syncCache  
+    atomically flushAll                                      
+    restartWorkflows ( fromList [(&quot;buyreserve&quot;, buyReserve timereserve)] ) 
+                !&gt; &quot;workflow RESTARTED&quot;</code></pre><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.restartWorkflows" title="Hoogle search for: Control.Workflow.restartWorkflows"><code>restartWorkflows</code></a> restart all the &quot;buyreserve&quot; workflows for all the book keys. these keys are all the book keys for which a WF has been started  exec. In this case there is only one key, `&quot;booktitle&quot;`, but if there were many workflows initiated for the reservation of different books, they would have been restarted. if the workflow has been already restarted, `restartWorkflow` does nothing. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=syncCache" title="Hoogle search for: syncCache"><code>syncCache</code></a> synchronize the cache with the storage and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=flushAll" title="Hoogle search for: flushAll"><code>flushAll</code></a> delete the cache.<p>Becase there is just a single workflow, instead of <code>restartWorkflows</code>   exec<a class="hoogle" href="https://www.stackage.org/lts/hoogle?q= could have been used to restar it again:" title="Hoogle search for:  could have been used to restar it again:"><code> could have been used to restar it again:</code></a></p><pre><code class="haskell">forkIO $ exec &quot;buyreserve&quot; (buyReserve  timereserve) keyBook</code></pre><p>since <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.exec" title="Hoogle search for: Control.Workflow.exec"><code>exec</code></a> recover the state and restart the workflow if it was already initiated.</p><p>The <code>getHistory</code> procedure read the workflow log and filter all the strings logged by the workflow.</p><pre><code class="haskell">getHistory name x= liftIO $ do
+   let wfname= keyWF name x
+   let key= keyResource stat0{wfName=wfname}
+   atomically $ flushKey key
+   mh &lt;- atomically . readDBRef . getDBRef $ key
+   case mh of
+      Nothing -&gt; return [&quot;No Log&quot;]
+      Just h  -&gt; return  . catMaybes
+                         . map eitherToMaybe
+                         . map safeFromIDyn
+                         $ versions h   ::  IO [String]
+   where
+   eitherToMaybe (Right r)= Just r
+   eitherToMaybe (Left _) = Nothing</code></pre><p>The elements of the log are stored as a list of <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=IDynamic" title="Hoogle search for: IDynamic"><code>IDynamic</code></a> values. <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=safeFromIDyn" title="Hoogle search for: safeFromIDyn"><code>safeFromIDyn</code></a> is used to filter all the values of type String. The log is retrieved as a DBRef register.</p><p>This console program test the whole code by injecting some interesting cases. We may have generated aleatory tests using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=quickcheck" title="Hoogle search for: quickcheck"><code>quickcheck</code></a>, but probably these interesting cases would have not been produced randomly:</p><p><b> Warning </b> Do not execute this snippet after a web snippet has been executed. Wait until it time out. Some background tasks of the Web example can interfere with this one.</p><pre><code class="haskell active">{-# LANGUAGE DeriveDataTypeable #-}
+
+import Control.Workflow as WF
+import Data.TCache
+import Data.TCache.DefaultPersistence
+import Control.Concurrent.STM
+import Data.ByteString.Lazy.Char8(pack,unpack)
+import Data.Typeable
+import Control.Concurrent(forkIO,threadDelay, killThread)
+import Control.Monad.IO.Class(liftIO)
+import Control.Workflow.Stat
+import Data.Maybe
+import Data.Map (fromList)
+
+import Debug.Trace
+(!&gt;)= flip trace
+
+data Book= Book{btitle :: String, stock,reserved :: Int}
+           deriving (Read,Show, Eq,Typeable)
+
+instance Indexable Book where key= btitle
+
+instance Serializable Book where
+  serialize= pack. show
+  deserialize= read . unpack
+
+-- show
+main= do
+
+  putStrLn &quot;\nFIRST CASE: the stock appears at 20 seconds.\n\
+           \The WF is killed and restarted at 30 simulating \
+           \a shutdown and restart.\n\
+           \It is bought at 40.\n\
+           \The reserve timeouts (at 50) is not reached.\n&quot;
+  test 20  40 50 30
+
+  putStrLn &quot;press any key to start the second case&quot;
+  getChar
+
+  putStrLn &quot;\nSECOND CASE: the stock appears at 20. \n\
+           \It is killed at 10 simulating a shutdown \
+           \and restart.\n\
+           \It is bought at 60, after the end of the \
+           \reserve (20+25)\n&quot;
+  test 20 60 25 10
+
+  putStrLn &quot;press a letter to start the third case&quot;
+  getChar
+
+  putStrLn &quot;\nTHIRD CASE: the product enter in stock at 25,\
+           \n when the reservation period was finished.\n\
+           \At 30 but the buyer appears shortly after and \
+           \buy the product.\n\
+           \At 15 the WF is killed to simulate a shutdown\n&quot;
+  test 25 30 20 15
+
+  putStrLn &quot;END&quot;
+
+-- /show
+
+test stockdelay buydelay timereserve stopdelay = do
+  let keyBook= &quot;booktitle&quot;
+      rbook= getDBRef  keyBook
+
+  enterStock stockdelay rbook
+
+  buy buydelay rbook
+
+
+  th &lt;- forkIO $ exec &quot;buyreserve&quot; (buyReserve  timereserve) keyBook
+
+  stopRestart stopdelay timereserve th
+
+  threadDelay $ (buydelay- stopdelay+1) * 1000000
+  putStrLn  &quot;FINISHED&quot;
+  atomically $ delDBRef rbook
+  putStrLn &quot;----------------WORKFLOW HISTORY:--------------&quot;
+  h &lt;- getHistory &quot;buyreserve&quot; keyBook
+  putStrLn $ unlines h
+  putStrLn &quot;---------------END WORKFLOW HISTORY------------&quot;
+  delWF &quot;buyreserve&quot; keyBook
+
+
+
+
+buyReserve timereserve  keyBook= do
+    let rbook = getDBRef keyBook
+    logWF $  &quot;Reserve workflow start for: &quot;++ keyBook
+    t &lt;- getTimeoutFlag timereserve  -- $ 5 * 24 * 60 * 60
+
+    r &lt;- WF.step . atomically $ (reserveIt rbook &gt;&gt; return True)
+                      `orElse` (waitUntilSTM t &gt;&gt; return False)
+    if not r
+     then do
+       logWF &quot;reservation period ended, no stock available&quot;
+       return ()
+
+     else do
+       logWF &quot;The book entered in stock, reserved &quot;
+       t &lt;- getTimeoutFlag timereserve -- $ 5 * 24 *60 * 60
+       r &lt;- WF.step . atomically $ (waitUntilSTM t &gt;&gt; return False)
+                          `orElse` (testBought rbook &gt;&gt; return True)
+
+       if r
+        then do
+          logWF &quot;Book was bought at this time&quot;
+        else do
+          logWF &quot;Reserved for a time, but reserve period ended&quot;
+          WF.step . atomically $ unreserveIt rbook
+          return ()
+
+
+
+reserveIt rbook = do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; retry
+     Just (Book t s r) -&gt; writeDBRef rbook $ Book t (s-1) (r+1)
+
+
+unreserveIt rbook= do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;where is the book?&quot;
+     Just (Book t s r) -&gt; writeDBRef rbook $ Book t (s+1) (r-1)
+
+enterStock delay rbook= forkIO $ do
+   liftIO $ threadDelay $ delay * 1000000
+   putStrLn &quot;ENTER STOCK&quot;
+   atomically $ writeDBRef rbook $ Book &quot;booktitle&quot; 5  0
+
+buy delay rbook= forkIO $ do
+  threadDelay $ delay * 1000000
+  atomically $ do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;Not in stock&quot;
+     Just (Book t n n') -&gt;
+        if n' &gt; 0 then writeDBRef rbook $ Book t n (n'-1)
+                       !&gt; &quot;There is in Stock and reserved, BOUGHT&quot;
+        else if n &gt; 0 then
+                      writeDBRef rbook $ Book t (n-1) 0
+                       !&gt; &quot;No reserved, but stock available, BOUGHT&quot;
+        else error &quot;buy: neither stock nor reserve&quot;
+
+testBought rbook= do
+    mr &lt;- readDBRef rbook
+    case mr of
+       Nothing -&gt; retry !&gt;  (&quot;testbought: the register does not exist: &quot; 
+                              ++ show rbook)
+       Just (Book t stock reserve) -&gt;
+           case reserve  of
+              0 -&gt; return()
+              n -&gt; retry
+
+stopRestart delay timereserve th=  do
+    threadDelay $ delay * 1000000
+    killThread th  !&gt; &quot;workflow KILLED&quot;
+    syncCache
+    atomically flushAll
+    restartWorkflows ( fromList [(&quot;buyreserve&quot;, buyReserve timereserve)] ) 
+                   !&gt; &quot;workflow RESTARTED&quot;
+
+getHistory name x= liftIO $ do
+   let wfname= keyWF name x
+   let key= keyResource stat0{wfName=wfname}
+   atomically $ flushKey key
+   mh &lt;- atomically . readDBRef . getDBRef $ key
+   case mh of
+      Nothing -&gt; return [&quot;No Log&quot;]
+      Just h  -&gt; return  . catMaybes
+                         . map eitherToMaybe
+                         . map safeFromIDyn
+                         $ versions h   :: IO [String]
+   where
+   eitherToMaybe (Right r)= Just r
+   eitherToMaybe (Left _) = Nothing
+
+
+</code></pre><p>Depending on the delays, any kind of combination is possible. This program is just in order to test the workflow and the subprocesses used in the final application. You can change the delays to add more cases and see what happens.</p><h1 id="enter-mflow"><a href="#enter-mflow">Enter MFlow</a></h1><p>The Web application will use the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=MFlow" title="Hoogle search for: MFlow"><code>MFlow</code></a> library. It permits the creation of applications with a structure very similar to a console applications, where the text inputs and outputs are substituted by web pages with type safe responses from links, forms and Ajax requests.</p><p>The navigation monad add effects of tracking, backtracking to the login and recovery of the workflow package. Then, the monadic code is read by the monad as  a &quot;declarative sequence&quot; in the sense explained above. The routing is expressed as conditionals statements depending on the REST path in the URL or as a result of a link clicked. Even if the application does not have to manage much state along the pages, to arrange the logic as sequences of pages  makes the development more intuitive and thus more maintainable in the same way than the workflow expressed as a sequence is more intuitive than when expressed under a state machine paradigm.</p><pre><code class="haskell active web">
+    {-# LANGUAGE   OverloadedStrings, DeriveDataTypeable , NoMonomorphismRestriction #-}
+import MFlow.Wai.Blaze.Html.All hiding (footer, step, push)
+import Control.Monad.State
+import Data.Monoid
+import Control.Applicative
+import Control.Concurrent
+import Control.Workflow as WF
+import Control.Workflow.Stat
+import Control.Concurrent.STM
+import Data.Typeable
+import Data.TCache.DefaultPersistence
+import Data.Persistent.Collection
+import Data.ByteString.Lazy.Char8(pack,unpack)
+import Data.Map  as M (fromList)
+import Data.List(isPrefixOf)
+import Data.Maybe
+import Debug.Trace
+import System.IO.Unsafe
+(!&gt;) = flip trace
+
+
+
+data Book= Book{btitle :: String, stock,reserved :: Int} deriving (Read,Show,Eq,Typeable)
+
+instance Indexable Book where key= btitle
+
+-- implicitly defined:
+-- instance Serializable Book where
+--   serialize= pack. show
+--   deserialize= read . unpack
+
+keyBook= &quot;booktitle&quot; :: String
+
+rbook= getDBRef $  keyBook
+
+stm= liftIO . atomically
+
+-- show
+reservetime= 5* 24 * 60 * 60  -- five days waiting for reserve and  five days reserved
+
+data RouteOptions= Buy | Other | Reserve | NoReserve deriving (Typeable,Show)
+
+main= do
+ enterStock 30 rbook
+ restartWorkflows $ M.fromList [(&quot;buyreserve&quot;,  buyReserve reservetime)]
+
+ runNavigation &quot;&quot; . transientNav $ do
+  op &lt;-  page $ wlink Buy &quot;buy or reserve the book&quot; &lt;++ br 
+            &lt;|&gt; wlink Other &quot;Do other things&quot;
+  case op of
+   Other -&gt; page $ &quot;doing other things&quot; ++&gt; wlink () &quot;home&quot;
+   Buy -&gt; do
+     reserved  &lt;- stm $ do
+             mr &lt;- readDBRef rbook
+             case mr of
+               Nothing -&gt; return False
+               Just r  -&gt; 
+                 if reserved r &gt; 0 then return True
+                 else if stock r &gt; 0 then reserveIt rbook &gt;&gt; return True
+                 else return False
+                 
+     if reserved then page $ buyIt keyBook
+
+     else  reserveOffline keyBook
+         
+-- /show
+
+buyIt keyBook= do
+      mh &lt;- getHistory &quot;buyreserve&quot; keyBook
+
+      p  &quot;there is one book for you in stock &quot; 
+         ++&gt; case mh of
+              Nothing -&gt; p &quot;The book was in stock and reserved online right now&quot;
+              Just hist -&gt;
+                let histmarkup= mconcat[p &lt;&lt; l | l &lt;- hist]
+                in  h2 &quot;History of your reserve:&quot;
+                    &lt;&gt; histmarkup
+         ++&gt; wlink keyBook &quot;buy?&quot;
+                 `waction` (\keyBook -&gt; do
+                     stm $ buy rbook
+                     page $  &quot;bought! &quot; ++&gt; wlink () &quot;home&quot;
+                     delWF &quot;buyreserve&quot; keyBook)
+
+reserveOffline keyBook = do
+     v &lt;- getState &quot;buyreserve&quot; (buyReserve reservetime) keyBook
+     case v of
+         Left AlreadyRunning -&gt; lookReserve keyBook
+         Left err -&gt; error $ show err
+         Right (name, f, stat) -&gt; do
+           r &lt;- page $ wlink Reserve 
+                        &quot;not in stock. Press to reserve it when available in \
+                        \the next five days. It will be reserved for five days &quot;
+                   &lt;|&gt; br
+                   ++&gt; wlink NoReserve &quot;no thanks, go to home&quot;
+           case r of
+             Reserve -&gt; do
+
+           
+            
+                  liftIO $ forkIO $ runWF1 name (buyReserve reservetime keyBook) stat True
+                  return ()
+
+             NoReserve -&gt; return()
+
+
+lookReserve keyBook= do
+    hist &lt;- getHistory &quot;buyreserve&quot; keyBook `onNothing ` return [&quot;No workflow log&quot;] 
+    let histmarkup= mconcat[p &lt;&lt; l | l &lt;- hist]
+    page $ do
+        mr &lt;-   stm   $ readDBRef rbook
+        if mr== Nothing
+              || fmap stock mr == Just 0
+              &amp;&amp; fmap reserved mr  == Just 0
+           then 
+             &quot;Sorry, not available but you already demanded a reservation when the book\
+                           \ enter in stock&quot;
+                   ++&gt; wlink () &lt;&lt; p &quot;press here to go home if the book has not arrived&quot;
+                   &lt;++ p &quot;you can refresh or enter this url to verify availability&quot;
+                   &lt;&gt; h2 &quot;status of your request for reservation upto now:&quot;
+                   &lt;&gt; histmarkup
+           else 
+           h2 &quot;Good! things changed: the book arrived and was reserved&quot; 
+            ++&gt; buyIt keyBook 
+
+
+buyReserve timereserve  keyBook= do
+    let rbook = getDBRef keyBook
+    logWF $  &quot;You requested the reserve for: &quot;++ keyBook
+    t &lt;- getTimeoutFlag timereserve  -- $ 5 * 24 * 60 * 60
+
+    r &lt;- WF.step . atomically $ (reserveAndMailIt rbook &gt;&gt; return True)
+                      `orElse` (waitUntilSTM t &gt;&gt; return False)
+    if not r
+     then do
+       logWF &quot;reservation period ended, no stock available&quot;
+       return ()
+
+     else do
+       logWF &quot;The book entered in stock, reserved &quot;
+       t &lt;- getTimeoutFlag timereserve -- $ 5 * 24 *60 * 60
+       r &lt;- WF.step . atomically $ (waitUntilSTM t &gt;&gt; return False)
+                          `orElse` (testBought rbook &gt;&gt; return True)
+
+       if r
+        then do
+          logWF &quot;Book was bought at this time&quot;
+        else do
+          logWF &quot;Reserved for a time, but reserve period ended&quot;
+          WF.step . atomically $ unreserveIt rbook
+          return ()
+
+userMail= &quot;user@mail.com&quot;
+
+mailQueue= &quot;mailqueue&quot;
+ 
+reserveAndMailIt rbook=  do
+   let qref = getQRef mailQueue
+   pushSTM qref ( userMail :: String
+                , &quot;your book &quot;++ keyObjDBRef rbook ++ &quot; received&quot; :: String
+                , &quot;Hello, your book....&quot; :: String)
+   reserveIt rbook
+
+reserveIt rbook = do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; retry
+     Just (Book t s  r) -&gt;
+       if s &gt;0 then writeDBRef rbook $ Book t (s-1) (r+1)
+               else retry
+
+
+unreserveIt rbook= do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;unreserveIt: where is the book?&quot;
+     Just (Book t s r) -&gt;
+       if r &gt;0 then writeDBRef rbook $ Book t (s+1) (r-1)
+               else return()
+
+enterStock delay rbook= forkIO $ loop enter
+  where
+  loop f= f &gt;&gt; loop f
+  enter= do
+   threadDelay $ delay * 1000000
+   atomically $ do
+     Book _ n  r &lt;- readDBRef rbook `onNothing` return (Book keyBook 0 0)
+     writeDBRef rbook $ Book &quot;booktitle&quot; (n +1) r
+              !&gt; &quot;Added 1 more book to the stock&quot;
+
+
+buy rbook=  do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;Not in stock&quot;
+     Just (Book t n n') -&gt;
+        if n' &gt; 0  !&gt; show mr then writeDBRef rbook $ Book t n (n'-1)
+                       !&gt; &quot;There is in Stock and reserved, BOUGHT&quot;
+        else if n &gt; 0 then
+                      writeDBRef rbook $ Book t (n-1) 0
+                       !&gt; &quot;No reserved, but stock available, BOUGHT&quot;
+        else error &quot;buy: neither stock nor reserve&quot;
+
+   
+testBought rbook= do
+    mr &lt;- readDBRef rbook
+    case mr of
+       Nothing -&gt; retry
+                  !&gt;  (&quot;testbought: the register does not exist: &quot; 
+                       ++ show rbook)
+       Just (Book t stock reserve) -&gt;
+           case reserve  of
+              0 -&gt; return()
+              n -&gt; retry
+
+stopRestart delay timereserve th=  do
+    threadDelay $ delay * 1000000
+    killThread th  !&gt; &quot;workflow KILLED&quot;
+    syncCache
+    atomically flushAll
+    restartWorkflows ( fromList [(&quot;buyreserve&quot;, buyReserve timereserve)] ) 
+                        !&gt; &quot;workflow RESTARTED&quot;
+
+getHistory name x= liftIO $ do
+   let wfname= keyWF name x
+   let key= keyResource stat0{wfName=wfname}
+   atomically $ flushKey key
+   mh &lt;- atomically . readDBRef . getDBRef $ key
+   case mh of
+      Nothing -&gt; return Nothing
+      Just h  -&gt; return  . Just
+                         . catMaybes
+                         . map eitherToMaybe
+                         . map safeFromIDyn
+                         $ versions h   ::  IO (Maybe [String])
+   where
+   eitherToMaybe (Right r)= Just r
+   eitherToMaybe (Left _) = Nothing
+</code></pre><p>The methods of the same name are the ones explained previously, but <code>enterStock</code> this time enter a new copy of the book in stock every 30 seconds. So if you buy the books faster than the stock is added, the offline reservation WF will be started and you will see the status of your reserve. if not, the Web App. will do it online.</p><p>After each start <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=restartWorkflows" title="Hoogle search for: restartWorkflows"><code>restartWorkflows</code></a> restart all the active workflows. That happens if the application is stopped and restarted. In this case there is only one book and one user for the sake of simplicity.</p><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=runNavigation " title="Hoogle search for: runNavigation "><code>runNavigation </code></a> execute a web navigation. <p>See the <a href="https://www.fpcomplete.com/user/agocorona/MFlow-tutoria">MFlow Introduction</a> for more information about how to use formatting, and how to use the applicative and monadic operatos used in the page and in the flow. For how state is managed and about the different kinds of possible web applications, see <a href="https://www.fpcomplete.com/user/agocorona/MFlowDSL">MFlow, a DSL for web applications</a>.</p><p>A navigation is a sequence of pages with conditionals. When the sequence end, it is restarted from the beginning.</p><p>The first page has a menu with two alternative links, with values defined in <code>RouteOptions</code>. The routes defined are<code>http://host/</code>  <code>http://host/noscript/buy</code> and <code>http://host/noscript/other</code>. they can be entered in the browser and the response will be the expected. That is because the navigation monad and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=page" title="Hoogle search for: page"><code>page</code></a> have a  mechanism that tracks the REST path and route the execution to the appropriate page.</p><p>If the user press the <code>Buy</code> option (or if it invokes the <code>http://host/noscript/buy</code> URL in the browser), the application check for the availability of the book. If there is stock available, it reserve it (in order to prevent race conditions with other users) and goes to the page where the user is informed about the availability, so he can buy it (explained later). If the book is not available, <code>reserveOffline</code> will notify the user of this condition and will present the option to reserve it when available:</p><pre><code class="haskell">reserveOffline keyBook = do
+   v &lt;- getState &quot;buyreserve&quot; (buyReserve reservetime) keyBook
+   case v of
+      Left AlreadyRunning -&gt; lookReserve keyBook
+      Left err -&gt; error $ show err
+      Right (name, f, stat) -&gt; do
+           r &lt;- page $ wlink Reserve &quot;not in stock. Press to reserve\
+                \ it when available in the next five days. It will \
+                \ be reserved for five days &quot;
+                   &lt;|&gt; br
+                   ++&gt; wlink NoReserve &quot;no thanks, go to home&quot;
+           case r of
+             Reserve -&gt; do
+
+                  liftIO $ forkIO $ runWF1 name 
+                                    (buyReserve reservetime keyBook) 
+                                    stat True
+                  return ()
+
+             NoReserve -&gt; return()</code></pre><p>Since <code>reserveOffline</code> will execute the reservation workflow, and may be called recurrently, every time the /buy verb is invoked and there is no stock, it is necessary to check if the WF has been executed already. This is done with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getState" title="Hoogle search for: getState"><code>getState</code></a>. If it is not running, the user can choose to init the reservation WF or not. This time the WF is initiated with a more low level primitive, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=runWF1" title="Hoogle search for: runWF1"><code>runWF1</code></a> that uses the state returned by <code>getState</code>. Essentially <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Workflow.exec" title="Hoogle search for: Control.Workflow.exec"><code>exec</code></a>, used in the previous example, perform a <code>getState</code> followed by a <code>runWF1</code>.</p><p>When the WF is already running, the user is informed about the state of things in the workflow with <code>lookReserve</code>.</p><pre><code class="haskell">lookReserve keyBook= do
+    hist &lt;- getHistory &quot;buyreserve&quot; keyBook 
+              `onNothing ` return [&quot;No reserve log&quot;] 
+    let histmarkup= mconcat[p &lt;&lt; l | l &lt;- hist]
+    page $ do
+        mr &lt;-   stm   $ readDBRef rbook
+        if mr== Nothing
+              || fmap stock mr == Just 0
+              &amp;&amp; fmap reserved mr  == Just 0
+           then 
+            &quot;Sorry, not available but you already demanded a reservation\ 
+            \when the book would enter in stock&quot;
+              ++&gt; p &quot;you can refresh or enter this url to verify availability&quot;
+              ++&gt; h2 &quot;status of your request for reservation upto now:&quot;
+              ++&gt; histmarkup
+              ++&gt; wlink () &lt;&lt; p &quot;press here to go home if the book do not arrive&quot;
+
+           else 
+            h2 &quot;Good! things changed: the book arrived and was reserved&quot; 
+              ++&gt; buyIt keyBook </code></pre><p><code>lookReserve</code> is one page where the Workflow history and the book register are checked. If there is no stock, the history of the WF up to the moment is presented. If there is stock, the <code>buyIt</code> content is presented.</p><p>The first alternative has a link to the home page. But since the page code is executed again when the link is pressed, if in the meantime the book arrives and is reserved by the workflow, then the page will present the second alternative instead of returning with the value of the link pressed.  <code>runNavigation</code>would restart the navigation again and present the home page otherwise.</p><p>Since the inspection of the reserve status is done within the page, the lookReserve page can be refreshed in the browser to detect the changes.</p><pre><code class="haskell">buyIt keyBook= do
+      mh &lt;- getHistory &quot;buyreserve&quot; keyBook
+      p &quot;there is one book for you in stock &quot; 
+         ++&gt; case mh of
+              Nothing -&gt; p &quot;The book was in stock and reserved online right now&quot;
+              Just hist -&gt;
+                let histmarkup= mconcat[p &lt;&lt; l | l &lt;- hist]
+                in  h2 &quot;History of your reserve:&quot;
+                    &lt;&gt; histmarkup
+         ++&gt; wlink (&quot;buyit&quot;:: String) &quot;buy?&quot;
+              `waction` const (do
+                  stm $ buy rbook
+                  page $  &quot;bought! &quot; ++&gt; wlink () &quot;home&quot;
+                  delWF &quot;buyreserve&quot; keyBook)</code></pre><p><code>buyIt</code> is not a page, but the content of a page. It is part of both the <code>lookReserve</code> and also is invoked in the <code>Buy</code> option as a separate page. It informs either if the reservation was made online by the web app or offline by the workflow, while the user was away. The user is informed about when it was reserved and implicitly, for how long the reserve will be kept if the user does not buy immediately. For the sake of simplicity, only the essential options are programmed.</p><p>The page show the reserve information and a single link with the &quot;buy&quot; option. If the link is pressed <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=MFlow.Forms.waction" title="Hoogle search for: MFlow.Forms.waction"><code>waction</code></a> executes a navigation that buy the book (using the same <code>buy</code> procedure above mentioned) and present a page with the &quot;bought!&quot; message and a link, after which the flow of execution return to the <code>buyIt</code> code, and BuyIt return the flow control to whatever may have called it. In this case, in both call locations to <code>buyIt</code> the flow finalizes, so the home menu will be presented again by <code>runNavigation</code>. <code>buyIt</code> is an example of reusable piece that can be inserted in whatever page of the flow.</p><p>With the exception of these useful peculiarities, the flow and structure of the application is pretty similar to a console application. Another peculiarity is that the  back button works because the backtracking mechanism implemented in the navigation monad goes back to the page that handle each request.</p><h1 id="long-running-transactions"><a href="#long-running-transactions">Long running transactions</a></h1><p>the  navigation monad of MFlow is essentially a IO monad lifted with effects for backtracking that includes primitives for user interaction through a web interface. In fact the navigation monad can lift not only IO, but also the Workflow monad. Then, the navigation monad itself can implement a workflow and the backtracking mechanism can be used to undo things in case of failure in a workflow. It also gives to a workflow the capability to interact with the user. Or seen from the other side, in permits a web application to persist his session state thanks to the Workflow monad.</p><p>The backtracking is performed by <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=MFlow.Forms.Internals.Sup" title="Hoogle search for: MFlow.Forms.Internals.Sup"><code>Sup</code></a> , an embedded monad. <code>Sup</code> comes from &quot;Supervisor&quot;.</p><p>In the navigation monad it is possible to determine if a sentence has been called in backtracking mode or not with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=goingBack" title="Hoogle search for: goingBack"><code>goingBack</code></a>. A sentence is called back when backtracking if it uses breturn as the last executed sentence instead of <code>return</code> to yield something. The initiation of the backtracking is performed with the method <code>fail</code>. When a <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=page" title="Hoogle search for: page"><code>page</code></a> find a request that can not handle it call <code>fail</code> and backtrack in the computation to find the appropriate page that handle it.</p><h2 id="compensation-for-a-long-running-transaction"><a href="#compensation-for-a-long-running-transaction">Compensation for a long running transaction</a></h2><p>A compensable action in the navigation monad can be coded as:</p><pre><code class="haskell">compensate :: Monad m =&gt; FlowM v m a -&gt; FlowM v m a -&gt; FlowM v m a
+compensate doit undoit= do
+     back &lt;- goingBack
+     case  back of
+        False -&gt; doit &gt;&gt;= breturn
+        True  -&gt; undoit</code></pre><p>When going forward, <code>compensate</code> (that can be used in infix mode) execute <code>doit</code> and mark itself to be called again when backtracking, because it <code>breturn</code> the result of <code>doit</code>.</p><p>When backtraking, <code>undoit</code> is executed. But that is not all.  Again, depending on if <code>undoit</code> uses <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=breturn" title="Hoogle search for: breturn"><code>breturn</code></a>  or <code>fail</code> as the last sentence, the flow will continue forward or backward. Depending on that <code>undoit</code> can be a fix in order to continue the sequence forward, or a true compensation that, after done, leave the flow going back to undo further actions or to find a fix. In the first case, if the flow reach the top, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=runFlowOnce" title="Hoogle search for: runFlowOnce"><code>runFlowOnce</code></a> will restart the workflow again.</p><p><code>undoit</code> can check the session information to decide either to compensate and fail back or fix the problem and continue. If the flow is online such is in the case of a web application during a complex operation, for example, a payment, it can even ask the user  what to do. Seen this way, a workflow with exception handling for long running transactions can be equivalent to a navigation.</p><p>Lets codify the workflow that we tested before in the flow monad. Now the <code>unreserveIt</code> will be carried out as a compensation of the <code>reserveAndMaiIt</code>. There is a first compensate element at the beginning that abort the computation if the backtracking reach this statement, to avoid runFlowOnce to re-schedule of the flow. Also since the Flow monad is a lifting of the Workflow monad, it has to <code>lift</code> the workflow statements. Otherwise the flow is the same:</p><h2 id="same-workflow-with-compensation"><a href="#same-workflow-with-compensation">Same workflow with compensation</a></h2><pre><code class="haskell">withTimeoutIO flag f  = liftIO $ atomically $ (f  &gt;&gt; return True)
+                    `orElse` (waitUntilSTM flag &gt;&gt; return False)
+
+buyReserve timereserve  keyBook= do runFlowOnce f (error &quot;token not found&quot;) where
+ f :: FlowM Html (Workflow IO) ()
+ f= do
+    compensate (return()) $ do
+        lift $ logWF $ &quot;aborting&quot;
+        error &quot;aborted&quot;
+        
+    let rbook = getDBRef keyBook
+    lift . logWF $  &quot;You requested the reserve for: &quot;++ keyBook
+    
+    t &lt;- lift $ getTimeoutFlag timereserve  -- $ 5 * 24 * 60 * 60
+
+    r &lt;- compensate (step . withTimeoutIO t $ reserveIt rbook)
+                     (do
+                       lift $ logWF &quot;Unreserving the book&quot;
+                       step $  (liftIO . atomically $ unreserveIt rbook) &gt;&gt; fail &quot;&quot;)
+
+--     liftIO $ atomically $ (reserveIt rbook &gt;&gt; return True)
+--                    `orElse` (waitUntilSTM t &gt;&gt; return False)
+    if not r
+     then do
+       lift $ logWF &quot;reservation period ended, no stock available&quot;
+       return ()
+
+     else do
+       lift $ logWF &quot;The book entered in stock, reserved &quot;
+       t &lt;- lift $ getTimeoutFlag timereserve -- $ 5 * 24 *60 * 60
+       r &lt;- step . liftIO $ atomically $ (waitUntilSTM t &gt;&gt; return False)
+                          `orElse` (testBought rbook &gt;&gt; return True)
+
+       if r
+        then do
+          lift $ logWF &quot;Book was bought at this time&quot;
+        else do
+          lift $ logWF &quot;Reserved for a time, but reserve period ended&quot;
+          fail &quot;&quot;
+
+--        now it is compensated above
+--        step . liftIO $ atomically $ unreserveIt rbook
+
+</code></pre><p>Now, when the reserve time is finished and the book is not bought, the <code>fail</code> method fires a backtracking that call back the compensate statements in reverse order. in the second compensate statement, the event is logged, <code>unreserveIt</code> is executed and the flow continue back,  to the first compensate that log something and abort the computation.</p><p>Remember that this process can run for days waiting for stock.</p><p>We have packaged the reserve and unreserve in a single line, so we can forget in the rest of the workflow about how to undo the reservation. We simply call <code>fail</code> and all the compensable transactions will be undone. At the same time, we see the normal flow of execution clearly expressed in the code. Additionally, the rollback is also restartable because its state is also logged since the rollback actions use <code>step</code>. The rollback is itself a long running process.</p><p>Note that backtracking yield the control to previous statements within the sequence (the ones marked with breturn), while a thrown exception would yield control up to the caller of the sequence.</p><p>This is a test program that executes this last workflow, add a book to the stock, and wait for the second timeout. The compensation actions are executed and finally it present the execution log of the flow.</p><p><b> Warning </b> Do not execute an snippet after the web snippet has been executed. Wait until the web app time out. Some background tasks of the Web example can interfere with this one.</p><pre><code class="haskell active">
+{-# LANGUAGE DeriveDataTypeable #-}
+
+import MFlow.Wai.Blaze.Html.All hiding (footer, push)
+import Control.Monad.State
+import Data.Monoid
+import Control.Applicative
+import Control.Concurrent
+import Control.Workflow as WF hiding(step)
+import Control.Workflow.Stat
+import Control.Concurrent.STM
+import Data.Typeable
+import Data.TCache.DefaultPersistence
+import Data.Persistent.Collection
+import Data.ByteString.Lazy.Char8(pack,unpack)
+import Data.Map  as M (fromList)
+import Data.Maybe
+import Debug.Trace
+import System.IO.Unsafe
+(!&gt;) = flip trace
+
+data Book= Book{btitle :: String, stock,reserved :: Int}
+           deriving (Read,Show, Eq,Typeable)
+
+instance Indexable Book where key= btitle
+
+-- instance Serializable Book where
+--   serialize= pack. show
+--   deserialize= read . unpack
+
+keyBook= &quot;booktitle&quot; :: String
+
+rbook= getDBRef $  keyBook :: DBRef Book
+
+-- show
+main= do
+  enterStock 10 rbook
+  forkIO $ exec &quot;buyreserve&quot; (buyReserve  30) keyBook
+
+  threadDelay 45000000
+  
+  putStrLn  &quot;FINISHED&quot;
+  putStrLn &quot;----------------WORKFLOW HISTORY:--------------&quot;
+  h &lt;- getHistory &quot;buyreserve&quot; keyBook
+  putStrLn $ unlines h
+  putStrLn &quot;---------------END WORKFLOW HISTORY------------&quot;
+  delWF &quot;buyreserve&quot; keyBook
+  atomically $ delDBRef rbook
+
+
+compensate :: Monad m =&gt; FlowM v m a -&gt; FlowM v m a -&gt; FlowM v m a
+compensate doit undoit= do
+     back &lt;- goingBack
+     case  back of
+        False -&gt; doit &gt;&gt;= breturn
+        True  -&gt; undoit
+
+withTimeoutIO flag f  = liftIO $ atomically $ (f  &gt;&gt; return True)
+                    `orElse` (waitUntilSTM flag &gt;&gt; return False)
+
+buyReserve timereserve  keyBook= do runFlowOnce f (error &quot;token not found&quot;) where
+ f :: FlowM Html (Workflow IO) ()
+ f= do
+ 
+    compensate (return()) $ do   
+        lift . logWF $ &quot;Aborting&quot;
+        error &quot;Aborted&quot;
+
+    let rbook = getDBRef keyBook
+    lift . logWF $  &quot;You requested the reserve for: &quot;++ keyBook
+    
+    t &lt;- lift $ getTimeoutFlag timereserve  -- $ 5 * 24 * 60 * 60
+
+    r &lt;- compensate (step . withTimeoutIO t $ reserveIt rbook)
+                     (do
+                       lift $ logWF &quot;Unreserving the book&quot;
+                       step $  (liftIO . atomically $ unreserveIt rbook) &gt;&gt; fail &quot;&quot;)
+
+    if not r
+     then do
+       lift $ logWF &quot;reservation period ended, no stock available&quot;
+       return ()
+
+     else do
+       lift $ logWF &quot;The book entered in stock, reserved &quot;
+       t &lt;- lift $ getTimeoutFlag timereserve -- $ 5 * 24 *60 * 60
+       r &lt;- step . liftIO $ atomically $ (waitUntilSTM t &gt;&gt; return False)
+                          `orElse` (testBought rbook &gt;&gt; return True)
+
+       if r
+        then do
+          lift $ logWF &quot;Book was bought at this time&quot;
+        else do
+          lift $ logWF &quot;Reserved for a time, but reserve period ended&quot;
+          fail &quot;&quot;
+
+
+-- /show
+
+reserveIt rbook = do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; retry
+     Just (Book t s  r) -&gt;
+       if s &gt;0 then writeDBRef rbook $ Book t (s-1) (r+1)
+               else retry
+
+
+unreserveIt rbook= do
+   mr &lt;- readDBRef rbook  !&gt; &quot;UNRESERVE&quot;
+   case mr of
+     Nothing -&gt; error &quot;unreserveIt: where is the book?&quot;
+     Just (Book t s r) -&gt;
+       if r &gt;0 then writeDBRef rbook $ Book t (s+1) (r-1) 
+               else return() 
+
+enterStock delay rbook= forkIO $ do
+   liftIO $ threadDelay $ delay * 1000000
+   putStrLn &quot;ENTER STOCK&quot;
+   atomically $ writeDBRef rbook $ Book &quot;booktitle&quot; 5  0
+
+buy delay rbook= forkIO $ do
+  threadDelay $ delay * 1000000 
+  atomically $ do
+   mr &lt;- readDBRef rbook
+   case mr of
+     Nothing -&gt; error &quot;Not in stock&quot;
+     Just (Book t n n') -&gt;
+        if n' &gt; 0 then writeDBRef rbook $ Book t n (n'-1)
+                       !&gt; &quot;There is in Stock and reserved, BOUGHT&quot;
+        else if n &gt; 0 then
+                      writeDBRef rbook $ Book t (n-1) 0
+                       !&gt; &quot;No reserved, but stock available, BOUGHT&quot;
+        else error &quot;buy: neither stock nor reserve&quot;
+
+testBought rbook= do
+    mr &lt;- readDBRef rbook
+    case mr of
+       Nothing -&gt; retry    !&gt;  (&quot;testbought: the register does not exist: &quot; ++ show rbook)
+       Just (Book t stock reserve) -&gt;
+           case reserve  of
+              0 -&gt; return()
+              n -&gt; retry
+
+stopRestart delay timereserve th=  do
+    threadDelay $ delay * 1000000
+    killThread th  !&gt; &quot;workflow KILLED&quot;
+    syncCache
+    atomically flushAll
+    restartWorkflows ( fromList [(&quot;buyreserve&quot;, buyReserve timereserve)] ) !&gt; &quot;workflow RESTARTED&quot;
+
+getHistory name x= liftIO $ do
+   let wfname= keyWF name x
+   let key= keyResource stat0{wfName=wfname}
+   atomically $ flushKey key
+   mh &lt;- atomically . readDBRef . getDBRef $ key
+   case mh of
+      Nothing -&gt; return [&quot;No Log&quot;]
+      Just h  -&gt; return  . catMaybes
+                         . map eitherToMaybe
+                         . map safeFromIDyn
+                         $ versions h   :: IO [String]
+   where
+   eitherToMaybe (Right r)= Just r
+   eitherToMaybe (Left _) = Nothing
+</code></pre><h2 id="travel-back-in-time"><a href="#travel-back-in-time">Travel back in time</a></h2><p>I said that the <code>compensate</code> mechanism besides undoing, it can also  fix the problem and continue the flow forward. To realize the fix,  the code may need more specific information about the cause of the <code>fail</code>. Suppose that the fail may be the result of a timeout or the consequence of a fail on the approval of a document. the the compensate undo may need to know the cause:</p><pre><code class="haskell">data conditions = Timeout |  Reject Causes | Approbal
+
+...
+document &lt;-  edit `compensate`  handleConditions
+
+r &lt;- withTimeout  t approbal 
+case r of
+   Nothing -&gt; setSessionData Timeout
+   Just (reject@Reject _) -&gt; setSessionData $ reject
+   Just other -&gt; forward other
+...
+   
+handleConditions= do
+     r &lt;- getSessionData
+     case r of
+       Timeout -&gt;….
+       Reject cause -&gt; do
+                newDoc &lt;- edit
+                breturn newDoc</code></pre><p>In the code above, <code>handleConditions</code> will receive rejections and timeouts. In the first case , the user edit a new document and send it back for approval. The info about the rejection travel  back using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=setSessionData" title="Hoogle search for: setSessionData"><code>setSessionData</code></a> and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=getSessionData" title="Hoogle search for: getSessionData"><code>getSessionData</code></a>.</p><p>Note that in a traditional workflow framework, that iteration would need a separate loop, because a plain compensation can not do that, while here the iteration  is part of the main sequence. So the code is more concise. You see how the workflow becomes more close to a navigation back and forth within the main sequence.</p><h1 id="solving-rollback-in-the-web-code"><a href="#solving-rollback-in-the-web-code">Solving rollback in the Web code</a></h1><p>But wait! the web application can show to the user the buy link, but if he does not click it, but instead, it press the back button, the register stay reserved!. It is necessary to detect that condition and unreserve tje book.</p><p>That can be done with a single line using <code>compensate</code>:</p><pre><code class="haskell">
+main= do
+ enterStock 30 rbook
+ restartWorkflows $ M.fromList [(&quot;buyreserve&quot;,  buyReserve reservetime)]
+
+ runNavigation &quot;&quot; . transientNav $ do
+  op &lt;-  page $ wlink Buy &quot;buy or reserve the book&quot; &lt;++ br &lt;|&gt; wlink Other &quot;Do other things&quot;
+  case op of
+   Other -&gt; page $ &quot;doing other things&quot; ++&gt; wlink () &quot;home&quot;
+   Buy -&gt; do
+     reserved  &lt;- stm (do
+         mr &lt;- readDBRef rbook !&gt; &quot;RESERVING&quot;
+         case mr of
+           Nothing -&gt; return False
+           Just r  -&gt;
+             if reserved r &gt; 0 then return True
+             else if stock r &gt; 0 then reserveIt rbook &gt;&gt; return True
+             else return False)
+              
+  {-hi-}`compensate` stm (unreserveIt rbook) &gt;&gt; fail &quot;&quot; {-/hi-} 
+       
+     if reserved then do
+                     page $ buyIt keyBook 
+                     return() !&gt; &quot;buyit forward&quot;
+                  
+
+     else  reserveOffline keyBook
+     </code></pre><p>When the back button is pressed and the user see the home page, when he press some link of this page, then <code>page</code> detect the desynchronization, the navigation backtrack, and the undo part of compensate is executed, which unreserve the book and continue backtracking to the previous page, the home page, that handles the request. if the reservation has been done asynchronously, <code>testBought</code> will detect the unreserve and will finish the workflow as if the user would have bought the book.</p><p>We have solved the same problem in the Web app with the same code used in the long running task. The web app is not a long running transaction since <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=step" title="Hoogle search for: step"><code>step</code></a> is not used, so the effect of logging and recovery is not available in the web application. However it can be used, if the web app need it. (I will show it in future articles)</p><h1 id="defining-persistence"><a href="#defining-persistence">Defining persistence</a></h1><p>TCache registers persist in files by default. The folder <code>.tcachedata</code> will contain the files and folders of the book register and the workflow log.</p><p>Of course it is possible to access a database directly but this does not permit the convenience of composable STM transactions. To permit tcache to read and write to a database for a certain data type, it is a matter of defining a <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.TCache.Def.setPersist" title="Hoogle search for: Data.TCache.Def.setPersist"><code>setPersist</code></a> in the in the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Serializable" title="Hoogle search for: Serializable"><code>Serializable</code></a> instance. That is for key-value databases.  The package <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q= tcache-AWS" title="Hoogle search for:  tcache-AWS"><code> tcache-AWS</code></a> uses this method.</p><p>A more general mechanism for TCache persistence is to define an instance of the<a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.TCache.IResource" title="Hoogle search for: Data.TCache.IResource"><code>IResource</code></a> class. It defines the key of the register and how to read, write and delete a register. the package <a href="https://github.com/agocorona/tcache-persistent">tcache-persist</a> shows an instance of IResource over datatypes defined with the package <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=persistent" title="Hoogle search for: persistent"><code>persistent</code></a>.</p><p>mflow and workflow work synchronously by default, that means that <code>step</code> forces a synchronization of the cache with the persistent storages (there may be many of them) by writing only the modified registers. To change this behaviour, use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=syncWrite" title="Hoogle search for: syncWrite"><code>syncWrite</code></a>. When writing to a database, with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=setConditions" title="Hoogle search for: setConditions"><code>setConditions</code></a> the programmer configure two procedures to be called before and after the synchronization, for example a commit, if the programmer does not want to use autocommit.</p><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>We have seen how to create an  asynchronous task, with long running transactions and a web application using the same framework, by exploiting the commonalities that the two kinds of applications have. The code is more clean, maintainable and concise than traditional solutions.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/how-haskell-can-solve-the-integration-problem';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html><head><title>Имитационное моделирование с Aivika. Часть 1 - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/NCrashed">Anton Gushcha</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/NCrashed/aivika-1-1">Имитационное моделирование с Aivika. Часть 1</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Имитационное моделирование с Aivika. Часть 1</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 6 Apr 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/NCrashed">Anton Gushcha</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/15014/f754b04f4e2fb58b84c4b0df04d8418b45462aab">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/NCrashed/radio-problem-descr">Previous content: Radio-problem-descr</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/NCrashed">See all content by Anton Gushcha</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#-----------------">Постановка задачи</a></li><li><a href="#-----------aivika">Введение в Aivika</a></li><li><a href="#----------------------------------">Построение обслуживающих автоматов</a><ul><li><a href="#----------------------">Обрабатывающий автомат</a></li><li><a href="#----------------">Генератор заявок</a></li></ul></li><li><a href="#----------------">Собираем систему</a></li><li><a href="#---------------">Сбор статистики</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h1 id="-----------------"><a href="#-----------------">Постановка задачи</a></h1><p>Моделируется простая система массового обслуживания, состоящая из генератора, буфера и обслуживающего автомата. Если буфер переполняется, заявки откидываются. Время генерации и обработки заявок распределено по экспоненциальному закону.</p><div style="text-align:center"><img src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fraw.githubusercontent.com%2FNCrashed%2Fbmstu-aivika-tutorial-01%2Fmaster%2Ftutorial%2Fsystem.png" /></div><p>Условные обозначения:</p><ul><li><p>Г - генератор заявок</p></li><li><p>Б - буфер заявок</p></li><li><p>ОА - обслуживающий автомат</p></li></ul><p>Входные данные модели:</p><ul><li><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fimages.astronet.ru%2Fpubd%2Ftex%2Fformula31061.gif" /> - среднее время между заявками</p></li><li><p>m - емкость буфера</p></li><li><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fimages.astronet.ru%2Fpubd%2Ftex%2Fformula31062.gif" />- среднее время обработки заявки</p></li></ul><p>Объявим структуру, которая будет содержать входные данные:</p><pre><code class="haskell">data Input = Input {
+    generationTime :: Double,
+    processingTime :: Double,
+    bufferCapacity :: Int
+}</code></pre><p>Выходные данные модели:</p><ul><li><p>Вероятность отказа системы</p></li><li><p>Средний размер очереди в буфере</p></li><li><p>Среднее количество заявок в системе</p></li><li><p>Среднее время ожидания в буфере</p></li></ul><p>Объявим структуру, которая будет содержать выходные данные:</p><pre><code class="haskell">data Output = Output {
+    failChance :: Double,
+    queueSize :: Double,
+    requestsCount :: Double,
+    awaitingTime :: Double
+}</code></pre><p>Необходимо написать функцию, которая вычислит <code>Output</code> на основе данного <code>Input</code>:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation Output</code></pre><p>Возвращаемый тип обернут в монаду <code>Simulation</code>, которая отвечает за вычисления внутри симуляции. В рамках описанной задачи понимание концепции монады не требуется, читатель может рассматривать ее как контейнер, содержащий значение и правила его вычисления. Желающим ознакомиться предлагаем прочитать <a href="http://habrahabr.ru/post/183150/">статью</a>.</p><h1 id="-----------aivika"><a href="#-----------aivika">Введение в Aivika</a></h1><p><a href="https://hackage.haskell.org/package/aivika-3.0">Aivika</a> - библиотека для имитационного моделирования, поддерживающая несколько парадигм. Однако мы рассмотрим только одну из них - моделирование на основе процессов.</p><p>Библиотека использует сложную иерархию монад для представления различных типов вычислений. Перечислим основные монады, которые потребуются нам для решения задачи:</p><ul><li><p><code>Simulation</code> - вычисления внутри симуляции. Является основной монадой в Aivika, так как <code>Simulation a</code> обозначает имитационную модель, которая вычисляет значение типа <code>a</code> и описывает все аспекты модели.</p></li><li><p><code>Event</code> - значение внутри этой монады является функцией от времени со строгой синхронизацией с очередью событий. Вычисления в монаде <code>Event</code> не могут быть приостановлены. Пример использования: отправка сообщения в буфер.</p></li><li><p><code>Process</code> - вычисление, которое может быть приостановлено в любой момент и возобновлено позже. В нашей задаче данная монада будет использована для представления процессов генератора и обслуживающего автомата.</p></li><li><p><code>Parameter</code> - значение внутри этой монады является внешним параметром для имитационной модели. Пример использования: получение максимального времени, до которого проводится симуляция; вычисление случайных величин.</p></li></ul><p>Данные монады выстраивают иерархию, которая показана на рисунке ниже. Значение из менее общей монады можно преобразовать в значение более общей монады. Обратное преобразование запрещено, так как происходит потеря контекста. По схожей логике, целые числа можно преобразовать в дробные без потери информации, а дробные в целые - просходит потеря информации о дробной части числа.</p><p>Стрелка от монады <code>A</code> к монаде <code>B</code> означает, что вычисление <code>A t</code> может быть приобразовано в вычисление <code>B t</code> с помощью специальных функций, имена которых начинаются с <code>lift</code> (например, <code>liftSimulation</code> может перевести вычисление <code>Simulation t</code> в <code>Event t</code> и <code>Process t</code>):</p><div style="text-align:center"><img src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fraw.githubusercontent.com%2FNCrashed%2Fbmstu-aivika-tutorial-01%2Fmaster%2Ftutorial%2Fmonads_hierarchy.png" /></div><h1 id="----------------------------------"><a href="#----------------------------------">Построение обслуживающих автоматов</a></h1><p>В данной модели буфер можно представить как FIFO (first in, first out), иначе называемую FCFS (first come, first served), очередь. В aivika есть подходящий тип очереди: <code>FCFSQueue</code>:</p><pre><code class="haskell">type Buffer a = FCFSQueue a</code></pre><p>Здесь <code>a</code> отвечает за тип элементов, которые хранятся в очереди. Также для краткости определим синоним функции для создания нового буфера:</p><pre><code class="haskell">newBuffer :: Int -&gt; Event (Buffer a)
+newBuffer = newFCFSQueue </code></pre><p>Функция принимает максимальную емкость буфера, после которой элементы будет отбрасываться. Также нужно обратить внимание: так как новый буфер обернут в монаду <code>Event</code>, создание очереди происходит мгновенно в модельном времени.</p><p>Теперь определим обслуживающий автомат. Его будем моделировать с помощью зацикленного вычисления в монаде <code>Process</code>. Так как обслуживающий автомат использует входной буфер, то нам понадобится функция-обертка, которая предварительно создаст буфер и передаст его в обработчик обслуживающего автомата (далее ОА):</p><pre><code class="haskell">withBuffer :: Int -&gt; (Buffer a -&gt; Process b) -&gt; Event (Process b, Buffer a)
+withBuffer capacity f = do
+   buffer &lt;- newBuffer capacity
+   return (f buffer, buffer)</code></pre><p>Функция принимает размер буфера ОА, функцию-обработчик и возвращает кортеж из двух элементов: новый обработчик ОА, готовый к запуску симуляции; и созданный буфер, который будет использоваться в других ОА.</p><p>В качестве заявок, проходящих через систему будем использовать следующий тип:</p><pre><code class="haskell">data Request = Request</code></pre><p>Он не несет никакой дополнительной информации в себе, значение этого типа просто обозначает наличие заявки.</p><h2 id="----------------------"><a href="#----------------------">Обрабатывающий автомат</a></h2><p>Теперь мы можем определить обработчик ОА с буфером:</p><pre><code class="haskell">processor :: Event (Process (), Buffer Request)
+processor = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+   _ &lt;- dequeue buffer
+   holdExponential processingTime</code></pre><p>Для создания ОА мы использовали только что определенную функцию <code>withBuffer</code>. ОА бесконечно (благодаря функции <code>forever</code>) забирает заявки из буфера с помощью <code>dequeue</code>, уничтожает их (так как заявка покидает систему после этого ОА и больше не нужна), и имитирует обработку путем остановки на случайное количество секунд, распределенных экспоненциально с парамером λ равным <code>processingTime</code> секунд. Для приостановки процесса используется вспомогательная функция <code>holdExponential</code>, которую мы определим как:</p><pre><code class="haskell">holdExponential :: Double -&gt; Process ()
+holdExponential t = do
+    htime &lt;- liftParameter $ randomExponential t
+    holdProcess htime</code></pre><p>Нужно заметить, что функция из aivika <code>randomExponential</code> имеет тип:</p><pre><code class="haskell">randomExponential :: Double-&gt; Parameter Double</code></pre><p>Поэтому мы поднимаем вычисление из монады <code>Parameter</code> в монаду <code>Process</code> с помощью <code>liftProcess</code>.</p><p>Функция <code>holdProcess</code> из aivika приостанавливает выполнение процесса на переданное ей количество времени.</p><h2 id="----------------"><a href="#----------------">Генератор заявок</a></h2><p>Определим генератор заявок, он будет бесконечно создавать новые <code>Request</code> и класть их во входной буфер ОА:</p><pre><code class="haskell">generator :: Buffer Request -&gt; Process ()
+generator buffer = forever $ do
+       holdExponential generationTime
+       liftEvent $ enqueueOrLost_ buffer Request</code></pre><p>Функция <code>enqueueOrLost_</code> в aivika пытается поставить заявку в очередь, и если буфер переполнен, то отбрасывает ее. Функция выполняется в монаде <code>Event</code>, поэтому нам необходимо использовать <code>liftEvent</code>, чтобы поднять вычисление в монаду <code>Process</code>.</p><h1 id="----------------"><a href="#----------------">Собираем систему</a></h1><p>Определим функцию, которая создаст описание модели, готовой для запуска симуляции:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation ()
+simulate Input{..} = runEventInStartTime $ do
+    (processorProc, buffer) &lt;- processor
+    generatorProc &lt;- generator buffer
+    liftSimulation $ do
+        runProcessInStartTime processorProc
+        runProcessInStartTime generatorProc
+    where
+    
+    generator :: Buffer Request -&gt; Process ()
+    generator buffer = forever $ do
+       holdExponential generationTime
+       liftEvent $ enqueueOrLost_ buffer Request
+
+    processor :: Event (Process (), Buffer Request)
+    processor = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+       _ &lt;- dequeue buffer
+       holdExponential processingTime</code></pre><p>Входной параметр с настройками модели записан с помощью расширения языка <a href="https://ocharles.org.uk/blog/posts/2014-12-04-record-wildcards.html">RecordWildcards</a>, поэтому поля структуры <code>Input</code> видны в функциях <code>generator</code> и <code>porcessor</code>.</p><p><code>runEventInStartTime</code> позволяет запустить вычисление в монаде <code>Event</code> в момент старта симуляции, в этот момент мы создаем генератор и ОА и связываем их вместе, а функция <code>runProcessInStartTime</code> запускает обработчики генератора и ОА в момент старта симуляции.</p><h1 id="---------------"><a href="#---------------">Сбор статистики</a></h1><p>Модель готова, но ничего полезного из нее сейчас нельзя получить, поэтому добавим сбор статистики из генератора и ОА.</p><p>Для отслеживания количества заявок в системе добавим переменную-счетчик <code>Var Int</code>, которая будет увеличиваться, когда заявка выходит из генератора и уменьшаться, когда ОА заканчивает обработку заявки. Особенность <code>Var</code> в том, что этот тип переменной сохраняет историю изменений, что позволит посчитать среднее количество заявок в системе:</p><pre><code class="haskell">generator :: Buffer Request -&gt; Event (Process (), Var Int)
+generator buffer = do
+    stats &lt;- liftSimulation $ newVar 0
+    return $ (, stats) $ forever $ do
+       holdExponential generationTime
+       liftEvent $ do
+           modifyVar stats (+1)
+           enqueueOrLost_ buffer Request
+
+processor :: Var Int -&gt; Event (Process (), Buffer Request)
+processor stats = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+   _ &lt;- dequeue buffer
+   holdExponential processingTime
+   liftEvent $ modifyVar stats (subtract 1)</code></pre><p>В функции создания генератора создается новая переменная с помощью <code>stats &lt;- liftSimulation $ newVar 0</code>, и увеличивается на 1 каждый раз, когда новая заявка появляется в системе.</p><p>Для ОА переменная является входным аргументом, каждый раз, когда заявка покидает систему, переменная уменьшается на единицу.</p><p>Однако при создании генератора и ОА в функции <code>simulate</code> мы столкнемся с рекурсивной зависимостью:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation ()
+simulate Input{..} = runEventInStartTime $ do
+    (processorProc, buffer) &lt;- processor stats
+    (generatorProc, stats) &lt;- generator buffer -- рекурсивная зависимость
+    liftSimulation $ do
+        runProcessInStartTime processorProc
+        runProcessInStartTime generatorProc
+    where
+    
+    generator :: Buffer Request -&gt; Process ()
+    generator buffer = forever $ do
+       holdExponential generationTime
+       liftEvent $ enqueueOrLost_ buffer Request
+
+    processor :: Event (Process (), Buffer Request)
+    processor = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+       _ &lt;- dequeue buffer
+       holdExponential processingTime</code></pre><p>Переменная <code>stats</code> используется в <code>processor</code> до того, как она создается в <code>generator</code>, но поменять порядок выполнения мы не можем, так как <code>processor</code> создает буфер <code>buffer</code>, который используется в <code>generator</code>.</p><p>Для разрешения этой проблемы воспользуемся расширением <a href="https://www.haskell.org/haskellwiki/MonadFix"><code>RecursiveDo</code></a>,оно позволит &quot;отложить&quot; использование рекурсивной перменной <code>stats</code>, чтобы передать ее в <code>processor</code>:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation ()
+simulate Input{..} = runEventInStartTime $ do
+    -- ключевое слово rec обозначает блок с рекурсивными зависимостями
+    rec (processorProc, buffer) &lt;- processor stats
+        (generatorProc, stats) &lt;- generator buffer
+    liftSimulation $ do
+        runProcessInStartTime processorProc
+        runProcessInStartTime generatorProc
+    where
+    
+    generator :: Buffer Request -&gt; Process ()
+    generator buffer = forever $ do
+       holdExponential generationTime
+       liftEvent $ enqueueOrLost_ buffer Request
+
+    processor :: Event (Process (), Buffer Request)
+    processor = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+       _ &lt;- dequeue buffer
+       holdExponential processingTime</code></pre><p>Теперь настало время заполнить структуру <code>Output</code> с помощью средств для сбора статистических данных в aivika. Функция <code>simulate</code> теперь будет возвращать тип <code>Output</code>:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation Output</code></pre><p>А в конец функции мы добавим код с вычислением выходных данных модели:</p><pre><code class="haskell">runEventInStopTime $ do
+   -- Вытаскиваем из буфера статистику по размеру
+   sizeStats &lt;- queueCountStats buffer
+   -- Достаем из буфера количестов откинутых заявок и конвертируем в Double
+   lostCount &lt;- fromIntegral &lt;$&gt; enqueueLostCount buffer
+   -- Достаем из буфера общее количество заявок за все вермя
+   totalCount &lt;- fromIntegral &lt;$&gt; enqueueCount buffer
+   -- Статистика со временем ожидания заявки в буфере
+   awaiting &lt;- queueWaitTime buffer 
+   -- Вытаскиваем статистику из нашей переменной
+   requestsCountStats &lt;- statsFromVar stats 
+   return Output {
+       -- Считаем вероятность отказа через определение вероятности
+       failChance = lostCount / (lostCount + totalCount),
+       -- Вычисляем среднее значение размера буфера
+       queueSize = timingStatsMean sizeStats,
+       -- Вычисляем среднее количество заявок в системе
+       requestsCount = samplingStatsMean requestsCountStats,
+       -- Вычисляем среднее время ожидания заявки в буфере
+       awaitingTime = samplingStatsMean awaiting 
+   }</code></pre><p>Итого функция, описывающая модель поставленной задачи:</p><pre><code class="haskell">simulate :: Input -&gt; Simulation Output
+simulate Input{..} = runEventInStartTime $ do
+    rec (processorProc, buffer) &lt;- processor stats
+        (generatorProc, stats) &lt;- generator buffer
+    liftSimulation $ do
+        runProcessInStartTime processorProc
+        runProcessInStartTime generatorProc
+        runEventInStopTime $ do
+           sizeStats &lt;- queueCountStats buffer
+           lostCount &lt;- fromIntegral &lt;$&gt; enqueueLostCount buffer
+           totalCount &lt;- fromIntegral &lt;$&gt; enqueueCount buffer
+           awaiting &lt;- queueWaitTime buffer 
+           requestsCountStats &lt;- statsFromVar stats 
+           return Output {
+               failChance = lostCount / (lostCount + totalCount),
+               queueSize = timingStatsMean sizeStats,
+               requestsCount = samplingStatsMean requestsCountStats,
+               awaitingTime = samplingStatsMean awaiting 
+           }
+    where
+    generator :: Buffer Request -&gt; Event (Process (), Var Int)
+    generator buffer = do
+        stats &lt;- liftSimulation $ newVar 0
+        return $ (, stats) $ forever $ do
+           holdExponential generationTime
+           liftEvent $ do
+               modifyVar stats (+1)
+               enqueueOrLost_ buffer Request
+
+    processor :: Var Int -&gt; Event (Process (), Buffer Request)
+    processor stats = withBuffer bufferCapacity $ \buffer-&gt; forever $ do
+       _ &lt;- dequeue buffer
+       holdExponential processingTime
+       liftEvent $ modifyVar stats (subtract 1)</code></pre><p>Весь описанный выше код размещен в <a href="https://www.fpcomplete.com/user/NCrashed/adopted/aivika-example">отдельном проекте</a>, где его можно изменять и запускать:</p><pre><code>Вероятность отказа: 0.80
+Средний размер буфера: 1.83
+Среднее число заявок в системе: 4.29
+Среднее время ожидания в буфере: 99.99</code></pre><p>В предоставленном проекте входные параметры изменены так, чтобы была возможность задавать закон распределения генерации заявок:</p><pre><code class="haskell">-- | Входные параметры модели
+testInput :: Input
+testInput = Input {
+    -- | Закон распределения потока заявок
+    -- Указывается один из: exponential, erlang, normal, uniform
+    -- каждому закону нужно указать список параметров
+    -- для exponential нужен 1 параметр (среднее время между заявками)
+    -- для других (erlang и т.д.) нужно по 2 параметра
+    generationDistribution = generationDistr &quot;hyperexponential&quot; [10, 0.5, 120, 0.5],
+    -- | Закон распределения обработки заявок в обслуживающем автомате
+    -- параметры аналогичны.
+    processingDistribution = generationDistr &quot;exponential&quot; [50],
+    -- | Емкость буффера
+    bufferCapacity = 2,
+    -- | Время иммитационного моделирования
+    simulationTime = 500000.0,
+    -- | Количество знаков после запятой в выводе результатов
+    outputPrecision = 5
+}</code></pre><p>Поддерживаемые законы:</p><ul><li><p><code>exponential</code> - экспоненциальное распределение, принимает один параметр (среднее время между событиями). Пример: <code>generationDistr &quot;exponential&quot; [50]</code></p></li><li><p><code>hyperexponential</code> - гиперэкспоненциальное распределение, принимает пары параметров: вероятность i-ого экспоненциального распределения и его параметр (среднее время между событиями). Пример: <code>generationDistr &quot;hyperexponential&quot; [10, 0.5, 120, 0.5]</code></p></li><li><p><code>erlang</code> - эрланговское распределение, принимает два параметра: среднее время (плавающая запятая) и порядок (положительное целое). Пример: <code>generationDistr &quot;erlang&quot; [50, 2]</code></p></li><li><p><code>normal</code> - нормальное распределение, принимает два параметра: среднее значение (плавающая запятая) и среднеквадратичное отклонение (плавающая запятая). Пример: <code>generatonDist &quot;normal&quot; [25.5, 2.5]</code></p></li><li><p><code>uniform</code> - равномерное распределение, принимает два параметра: минимальное время и максимальное (плавающая запятая). Пример: <code>generationDist &quot;uniform&quot; [10, 20]</code></p></li></ul></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/NCrashed/aivika-1-1';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html><head><title>Database access - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks">Libraries and Frameworks</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/persistent-db">Database access</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Database access</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 Nov 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/school">School of Haskell</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/30/38137c986ca8c9042e4500dcb77538b6eecea0b5">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/libraries-and-frameworks/randoms">Previous content: Random numbers in Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks">Go up to: Libraries and Frameworks</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#creating-a-database">Creating a database</a></li><li><a href="#dumping-a-table">Dumping a table</a></li><li><a href="#some-simple-queries">Some simple queries</a></li><li><a href="#a-second-table">A second table</a></li><li><a href="#getting-the-server-to-do-the-work">Getting the server to do the work</a></li><li><a href="#modifying-the-database">Modifying the database</a></li><li><a href="#there-s-more">There&#39;s more</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>The most popular architecture for web applications is three layers - one running on the clients, talking to the layer running on one or more servers, which talks to the database layer. This tutorial is going to cover database access, using the sqlite database, which makes a perfect tool for development, though it might not be up to production in such an environment. A production database using PostgrSQL or MySQL would use most of the same code.</p><p>We're going to use the <code>persistent</code> and <code>esqueleto</code> database access packages for these reasons:</p><ol><li>They provide type-safe integration with Haskell, leveraging Haskell's type system.</li><li>They are largely database neutral, allowing easy porting from sqlite for development to a production database.</li><li>They are well-integrated with Yesod, the web platform recommended by FP Complete.</li></ol><h1 id="creating-a-database"><a href="#creating-a-database">Creating a database</a></h1><p>We're going to create our database in Haskell. In this particular case, we're going to use the file <code>:memory:</code>, which causes sqlite to create an in-memory database. To keep the database on the file system, you'd replace that with a file name. Sqlite locks the file, so this is even safe for multi-process applications. We create the database by simply declaring the type we want in a table, and then migrate them into SQL. The following will print the SQL, which will be fixed in the next example.</p><pre><code class="active haskell">{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigration)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+
+main = runSqlite &quot;:memory:&quot; $ runMigration migrateTables</code></pre><p>Don't let all the language options scare you. <code>TemplateHaskell</code> and <code>QuasiQuotes</code> are required by <code>persistent</code>, as it uses those features. These allow including <code>[</code> enclosed text which will be passed to the <code>share</code> function, and generate a lot of code that uses other extensions. Except for <code>OverloadedStrings</code>, you generally don't need to use them yourself. <code>OverloadedStrings</code> lets you use constant string for types that you would otherwise have to cast the string to the correct type.</p><p>The important part is the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.TH.share" title="Hoogle search for: Database.Persist.TH.share"><code>share</code></a> statement, which is a Template Haskell function invocation. The first argument is a list of actions to apply to the second part. In this case, the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.TH.mkPersist" title="Hoogle search for: Database.Persist.TH.mkPersist"><code>mkPersist</code></a> action creates the appropriate data statements and type classes for the table described in the second argument for an sql database. The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.TH.mkMigrate" title="Hoogle search for: Database.Persist.TH.mkMigrate"><code>mkMigrate</code></a> action creates the function <code>migrateTables</code> that will create the tables described.</p><p>The bulk of the statement is the table declaration in the second argument:</p><pre><code>Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show</code></pre><p>Which defines the table to be created, as well as a Haskell type <code>Tutorial</code> with the three fields <code>title</code>, <code>url</code> and <code>school</code>. The last one is a <code>Bool</code> indicating that this is an official School tutorial of some kind. Using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.TH.persistLowerCase" title="Hoogle search for: Database.Persist.TH.persistLowerCase"><code>persistLowerCase</code></a> causes it to case the variable names properly.</p><p>Finally, the <code>main</code> function uses the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.Sqlite.runSqlite" title="Hoogle search for: Database.Persist.Sqlite.runSqlite"><code>runSqlite</code></a> function to run SQL code, which just uses <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.Sql.runMigration" title="Hoogle search for: Database.Persist.Sql.runMigration"><code>runMigration</code></a> to run the migration action the <code>share</code> statement created.</p><h1 id="dumping-a-table"><a href="#dumping-a-table">Dumping a table</a></h1><p>Of course, we want to do more than just create tables. Let's dump the raw contents of the table. We add the <code>dumpTable</code> function to just dump the <code>Tutorial</code> table via the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.Sql.rawQuery" title="Hoogle search for: Database.Persist.Sql.rawQuery"><code>rawQuery</code></a> function. There's a collection of imports for it. We'll also change the <code>runMigration</code> to <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.Sql.runMigrationSilent" title="Hoogle search for: Database.Persist.Sql.runMigrationSilent"><code>runMigrationSilent</code></a> so we don't get the table creation SQL in our output. Finally, we update <code>main</code> to call <code>dumpTable</code> after doing the migration.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+-- show
+import Database.Persist.Sqlite (runSqlite, {-hi-}runMigrationSilent{-/hi-})
+-- /show
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+-- show
+-- imports for dumpTable
+import Database.Persist.Sql (rawQuery)
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+-- /show
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    runMigrationSilent migrateTables{-hi-}
+    dumpTable{-/hi-}
+{-hi-}
+dumpTable = rawQuery &quot;select * from Tutorial&quot; [] $$ CL.mapM_ (liftIO . print){-/hi-}
+    </code></pre><p>That was uninspiring. Let's try putting some data into the table. We can use the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.Sql.insert" title="Hoogle search for: Database.Persist.Sql.insert"><code>insert</code></a> function to add a <code>Tutorial</code> instance to the database. This also shows the creation of such a thing, which looks like any other similar thing in Haskell.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+-- show
+import Database.Persist.Sql (rawQuery, {-hi-}insert{-/hi-})
+-- /show
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    runMigrationSilent migrateTables{-hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True{-/hi-}
+    dumpTable
+-- /show
+
+dumpTable = rawQuery &quot;select * from Tutorial&quot; [] $$ CL.mapM_ (liftIO . print)</code></pre><p>That's a little better. We now have a list with one entry. That includes an integer, which is the item id provided by the persistent database interaface, the title and the url of the <code>Tutorial</code> we inserted. You don't often have to resort to <code>rawSql</code>, and generally shouldn't as it ties you to both SQL and possibly a specific database, but I wanted to show that, should you need to, you can access the facilities of SQL directly.</p><p>Now let's try putting a bit more data into the table, and doing a query. We'll move the table creation into a new <code>buildDb</code> function so it doesn't clutter up our work in <code>main</code>.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+
+-- rawSql imports.
+import Database.Persist.Sql (rawQuery, insert)
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb
+    dumpTable
+
+buildDb = do
+    runMigrationSilent migrateTables
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False
+
+-- /show
+
+dumpTable = rawQuery &quot;select * from Tutorial&quot; [] $$ CL.mapM_ (liftIO . print)</code></pre><h1 id="some-simple-queries"><a href="#some-simple-queries">Some simple queries</a></h1><p>Now that we've got a table with some data in it, let's do some simple queries. We'll also just print the results of the queries, instead of using <code>rawSql</code> to get them.</p><p>The first query is for the <i>Basic Haskell</i> tutorial. To do this, we're going to use the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.selectList" title="Hoogle search for: Database.Persist.selectList"><code>selectList</code></a> function from <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist" title="Hoogle search for: Database.Persist"><code>Database.Persist</code></a>. The first argument to <code>selectList</code> is a list of expressions to select a row from a table. Each expression uses a constructor derived from the table declarations, being the name of a table and the name of a column in the table concatenated together, both with an uppercased firstter. In this case, we want the <code>title</code> row from the <code>Tutorial</code> table, so it's <code>TutorialTitle</code>. The operators are drawn from <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist" title="Hoogle search for: Database.Persist"><code>Database.Persist</code></a>, and are documented there. They are generally the standard haskell comparison operators with a <code>.</code> appended. The exception is <code>!=.</code> instead of <code>/=.</code>, because <code>/=.</code> is used for updates. Here, we use <code>==.</code> The second argument is a list of options controlling the output list. Again, they are documented in <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist" title="Hoogle search for: Database.Persist"><code>Database.Persist</code></a>. In this case, we have no entries for that list.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+-- /show
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    basic &lt;- selectList [TutorialTitle ==. &quot;Basic Haskell&quot;] []
+    liftIO $ print basic{-/hi-}
+    
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False</code></pre><p>That query found two articles with the given title. Let's add a second condition to the <code>selectList</code>, and search for one that is deemed official in the school by having it's <code>school</code> value be <code>True</code>. Since the conditions are anded together, we just need to add that condition to the list:</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+-- /show
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb
+    basic &lt;- selectList [TutorialTitle ==. &quot;Basic Haskell&quot;{-hi-}, TutorialSchool ==. True{-/hi-}] []
+    liftIO $ print basic
+    
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False</code></pre><h1 id="a-second-table"><a href="#a-second-table">A second table</a></h1><p>Tutorials are usually written by people, and we might well want to keep track of them as well as the tutorials. So let's add a table of authors. A persistent <code>Author</code> table declaration is simple. Adding a link from the <code>Tutorial</code> table to the <code>Author</code> table is more interesting. The <code>author</code> entry uses the type <code>AuthorId</code>, which is automatically created by the template processor.</p><p>Now let's use <code>selectList</code> to find the author <i>Ann Author</i>. Here we use the second argument to <code>selectList</code> with the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist.LimitTo" title="Hoogle search for: Database.Persist.LimitTo"><code>LimitTo</code></a> constructor to get just the first such author. The other constructors that can be used here - controlling order, starting point for pagination, etc. - are documented in  <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist" title="Hoogle search for: Database.Persist"><code>Database.Persist</code></a>.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (rawQuery, insert)
+
+-- dumpTable imports
+import Data.Conduit (($$))
+import Data.Conduit.List as CL
+import Control.Monad.IO.Class (liftIO)
+-- show
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+
+main = runSqlite &quot;:memory:&quot; $ do{-hi-}
+    buildDb{-hi-}
+    school &lt;- selectList [AuthorName ==. &quot;Ann Author&quot;] [LimitTo 1]
+    liftIO $ print school{-/hi-}
+
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;ann@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne
+-- /show</code></pre><p>Now that we've got an author, let's get a list of their tutorials. First, we're going to make the author's email address a uniqueness constaint on the table. We do that by adding a line to the declaration, here <code>EmailKey email</code>. That creates a new Haskell constructor <code>EmailKey</code>, which by Haskell's rules has to start with an upper case letter. We can then use that with a <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist" title="Hoogle search for: Database.Persist"><code>getBy</code></a> function to fetch a single row.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+-- show
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    anne &lt;- getBy $ EmailKey &quot;anne@example.com&quot;
+    liftIO $ print anne
+{-/hi-}
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><p>If you run this code, you'll see that the result is wrapped in a <code>Maybe</code>. We can pull it out of that, and then pull the rows <code>Key</code> out of that, and use the result to select all the tutorials by this author.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Persist
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    anne &lt;- getBy $ EmailKey &quot;anne@example.com&quot;
+    case anne of
+        Nothing -&gt; liftIO $ print &quot;No such user in database.&quot;
+        Just row -&gt; do
+            tuts &lt;- selectList [TutorialAuthor ==. entityKey row] []
+            liftIO $ print tuts{-/hi-}
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><h1 id="getting-the-server-to-do-the-work"><a href="#getting-the-server-to-do-the-work">Getting the server to do the work</a></h1><p>Those of you familiar with SQL will have noticed that we are extracting data from one table in order to query for it in another table. While there are some cases where this is acceptable, and possibly even desirable, the normal SQL idiom is to do the work in the database. The <code>persistent</code> package doesn't do that very well, so we're going to use the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto" title="Hoogle search for: Database.Esqueleto"><code>esqueleto</code></a> package for that. While <code>esqueleto</code> gives you access to more of the power of SQL than <code>persistent</code>, <code>esqueleto</code> is SQL-only, while <code>persistent</code> can be used with NoSQL databases like MongoDB.</p><p>The only changes in the code are to replace <code>import Database.Persist</code> with <code>import Database.Esqueleto</code>, and to write the query out in  <code>esqueleto</code> expressions instead of <code>selectList</code>.  The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.select" title="Hoogle search for: Database.Esqueleto.select"><code>select</code></a> function is used to return values, just like it is in SQL. The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.from" title="Hoogle search for: Database.Esqueleto.from"><code>from</code></a> function is used to run a function over each row in an implicit join. For selects using just one table, the function's argument is a single variable. Here, we want to use two tables, so we use a tuple of two elements to name them. The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.where_" title="Hoogle search for: Database.Esqueleto.where_"><code>where_</code></a> function then takes an argument that is similar to the expressions in the first argument to <code>selectList</code>. Since it's not a list, <code>&amp;&amp;</code>. is used to <i>and</i> the expressions together. We also have to provide the table names, well, the arguments to the function passed to <code>from</code> in the values, using <code>^.</code> to connect the column name constructors to the tables. This allows us to use <code>AuthorId</code> on the table instead of <code>entityKey</code> on the value from the table. Finally, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.val" title="Hoogle search for: Database.Esqueleto.val"><code>val</code></a> is needed to lift a string value into the SQL expression. And of course, we use <code>return</code> to send the resulting argument back to the monad.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+-- show
+{-hi-}
+import Database.Esqueleto{-/hi-}
+-- /show
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    tuts &lt;- select $ from $ \(a, t) -&gt; do
+            where_ (a ^. AuthorEmail ==. val &quot;anne@example.com&quot; &amp;&amp;. t ^. TutorialAuthor ==. a ^. AuthorId)
+            return t{-/hi-}
+    liftIO $ print tuts
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><p>While I've talked about this in terms of the Haskell syntax used, <code>esqueleto</code> actually builds an SQL statement and runs it to get the results back. The various functions - except for select, which does the execution - build an SQL statement. Using the <code>esqueleto</code> equivalents of grouping and cumulative functions makes that a bit clearer.</p><p>For example, we can use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.orderBy" title="Hoogle search for: Database.Esqueleto.orderBy"><code>orderBy</code></a> to control the order of the resulting list. The argument to <code>orderBy</code> is a list of ordering expressions. We use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.asc" title="Hoogle search for: Database.Esqueleto.asc"><code>asc</code></a> to get an ascending sort on both the <code>AuthorEmail</code> and <code>TutorialTitle</code>. This example also shows how to <code>return</code> just specific elements from the result instead of the entire row, in this case the <code>AuthorEmail</code> and <code>TutorialTitle</code>.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+
+module Main where
+
+import Data.Text (Text)
+import Database.Esqueleto
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb
+    tuts &lt;- select $ from $ \(t, a) -&gt; do
+            where_ (t ^. TutorialAuthor ==. a ^. AuthorId){-hi-}
+            orderBy [asc (a ^. AuthorEmail), asc (t ^. TutorialTitle)]
+            return (a ^. AuthorEmail, t ^. TutorialTitle){-/hi-}
+    liftIO $ print tuts
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><p>While the list above is interesting, a list of authors and how many tutorials each has written is probably more informative. Lets generate that report. Two new functions here are <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.groupBy" title="Hoogle search for: Database.Esqueleto.groupBy"><code>groupBy</code></a> which creates groups, in this case by <code>authorId</code>, and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.countRows" title="Hoogle search for: Database.Esqueleto.countRows"><code>countRows</code></a> to count the rows in each group. We use a <code>let</code> to save the group count, represented by the variable <code>cnt</code> in the Haskell source, so we can both order the result on it, and return it without calculating it twice. The <code>orderBy</code> introduces <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.desc" title="Hoogle search for: Database.Esqueleto.desc"><code>desc</code></a>, which creates a <i>descending</i> order by <code>cnt</code>. Finally, note the type signature on <code>cnt</code>: this is required, as otherwise the compiler won't be able to derive the required type.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+
+module Main where
+
+import Data.Text (Text)
+import Database.Esqueleto
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb
+    tuts &lt;- select $ from $ \(a, t) -&gt; do
+            where_ (t ^. TutorialAuthor ==. a ^. AuthorId){-hi-}
+            groupBy (a ^. AuthorId)
+            let cnt = countRows :: SqlExpr (Value Int)
+            orderBy [desc cnt]
+            return (a ^. AuthorEmail, cnt){-/hi-}
+    liftIO $ print tuts
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><h1 id="modifying-the-database"><a href="#modifying-the-database">Modifying the database</a></h1><p>Of course, you don't often just load data into a database and then query it. You want to delete data if it goes stale, or possibly modify it.</p><p>So let's delete all the tutorials whose title is <i>Basic Haskell</i> that aren't official school tutorials. The first new function here is <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.delete" title="Hoogle search for: Database.Esqueleto.delete"><code>delete</code></a>.  It's essentially identical to select, except that it's value is <code>()</code> instead of a <code>selectList</code>. We modify the <code>select</code> to exract all unofficial tutorials, and only return the <code>Title</code> of each tutorial.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Esqueleto
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    delete $ from $ \t -&gt;
+             where_ (t ^. TutorialTitle ==. val &quot;Basic Haskell&quot; &amp;&amp;. t ^. TutorialSchool ==. val False){-/hi-}
+    tuts &lt;- select $ from $ \t -&gt; do
+            where_ {-hi-}(t ^. TutorialSchool !=. val True)
+            return (t ^. TutorialTitle){-/hi-}
+    liftIO $ print tuts
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><p>Now let's delete all the tutorials by <code>anne@example.com</code>. Since <code>delete</code> can only specify a single table in it's <code>from</code>, we need to use an SQL <code>select</code> expression. This is done with the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.sub_select" title="Hoogle search for: Database.Esqueleto.sub_select"><code>sub_select</code></a> function. It's arguments are identical to <code>select</code>, but it returns an SQL value instead of a value in the monad. Note <code>sub_select</code> returns a single value, so the result needs to be a single value. If you want to check for multiple values, you can use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.subList_select" title="Hoogle search for: Database.Esqueleto.subList_select"><code>subList_select</code></a> with the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.in_" title="Hoogle search for: Database.Esqueleto.in_"><code>in_</code></a> function instead.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Esqueleto
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    delete $ from $ \t -&gt; do
+             where_ $ (t ^. TutorialAuthor) ==. 
+                      (sub_select $ from $ \a -&gt; do
+                                    where_ (a ^. AuthorEmail ==. val &quot;anne@example.com&quot;)
+                                    return (a ^. AuthorId)){-/hi-}
+    tuts &lt;- select $ from $ \t -&gt; do
+            where_ (t ^. TutorialSchool !=. val True)
+            return (t ^. TutorialTitle)
+    liftIO $ print tuts
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><p>Ok, let's end with something simple. Let's just update the database by giving an author a new email address. We're going to correct Anne Author's address from <i>ann<b>e</b>@example.com</i> to <i>ann<b>a</b>@example.com</i>. We're also going to use this example to show how to extract a value from a returned object. Instead returning the value we want, we'll use <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto.entityVal" title="Hoogle search for: Database.Esqueleto.entityVal"><code>entityVal</code></a> to extract the value, then <code>authorEmail</code> to get the value for that field.</p><pre><code class="active haskell">-- /show
+{-# LANGUAGE QuasiQuotes, TemplateHaskell, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings, GADTs, FlexibleContexts #-}
+module Main where
+
+import Data.Text (Text)
+import Database.Esqueleto
+import Database.Persist.Sqlite (runSqlite, runMigrationSilent)
+import Database.Persist.TH (mkPersist, mkMigrate, persistLowerCase,
+       share, sqlSettings)
+import Database.Persist.Sql (insert)
+import Control.Monad.IO.Class (liftIO)
+
+share [mkPersist sqlSettings, mkMigrate &quot;migrateTables&quot;] [persistLowerCase|
+Author
+   name     Text
+   email    Text
+   EmailKey email
+   deriving Show
+Tutorial
+   title    Text
+   url      Text
+   school   Bool
+   author   AuthorId
+   deriving Show
+|]
+-- show
+main = runSqlite &quot;:memory:&quot; $ do
+    buildDb{-hi-}
+    update $ \a -&gt; do
+             set a [AuthorEmail =. val &quot;anna@example.com&quot;]
+             where_ (a ^. AuthorEmail ==. val &quot;anne@example.com&quot;)
+    auths &lt;- select $ from $ \a -&gt; return a
+    liftIO $ mapM_ (print . authorEmail . entityVal) auths{-/hi-}
+-- /show
+buildDb = do
+    runMigrationSilent migrateTables{-hi-}
+    school &lt;- insert $ Author &quot;School of Haskell&quot; &quot;school@example.com&quot;
+    anne &lt;- insert $ Author &quot;Ann Author&quot; &quot;anne@example.com&quot;{-/hi-}
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete.com/school/basic-haskell-1&quot; True school
+    insert $ Tutorial &quot;A monad tutorial&quot; &quot;https://fpcomplete.com/user/anne/monads&quot; False anne
+    insert $ Tutorial &quot;Yesod usage&quot; &quot;https://fpcomplete.com/school/basic-yesod&quot; True school
+    insert $ Tutorial &quot;Putting the FUN in functors&quot; &quot;https://fpcomplete.com/user/anne/functors&quot; False anne
+    insert $ Tutorial &quot;Basic Haskell&quot; &quot;https://fpcomplete/user/anne/basics&quot; False anne</code></pre><h1 id="there-s-more"><a href="#there-s-more">There's more</a></h1><p>This has just been an introduction to using <code>persistent</code> and <code>esqueleto</code> for accessing a database from Haskell. <code>persistent</code> has it's own update and delete functions, as well as the ability to use NoSQL back end. <code>esqueleto</code> has the SQL operators for computing values, including other cumulative functions. More information about them can be found in the documentation at <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Persist&amp;results=1" title="Hoogle search for: Database.Persist"><code>Database.Persist</code></a> and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Database.Esqueleto&amp;results=1" title="Hoogle search for: Database.Esqueleto"><code>Database.Esqueleto</code></a>.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/libraries-and-frameworks/persistent-db';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

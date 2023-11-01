@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html><head><title>A monad for reactive programming. Part 2 - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/monad-reactive-programming-2">A monad for reactive programming. Part 2</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">A monad for reactive programming. Part 2</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 3 Aug 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/f77499a60c84349b955f47134dda0a29893d7399">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/EDSL-for-hard-working-IT-programmers">Previous content: An EDSL for hard working IT programmers</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/a-monad-for-reactive-programming-part-1">Next content: A monad for reactive programming. Part 1</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a></li><li><a href="#motivation">Motivation</a></li><li><a href="#shortcomings-of-part-1">Shortcomings of part 1</a></li><li><a href="#creating-events">Creating events</a></li><li><a href="#run-it">Run it</a></li><li><a href="#running-the-applicative-case">Running the applicative case</a></li><li><a href="#the-code">The code</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#other-similar-projects">Other similar projects</a></li><li><a href="#conclusions">Conclusions</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h2 id="introduction"><a href="#introduction">Introduction</a></h2><p>Some time has passed since I published the <a href="https://www.fpcomplete.com/user/agocorona/a-monad-for-reactive-programming-part-1">first part of this tutorial</a>. The time has been spent in achieving a deeper understanding of events and event processing.  In this second part I solve the problems of the simple approach depicted at the end of the part 1.</p><p>The motivating example to solve is the same, a console application with a basic event scheduler, a monadic computation that  has some statements which wait for different kinds of events. You can run the two examples here in the tutorial.</p><p>This tutorial  also can be considered as the description of an event sourcing mechanism without inversion of control. A event sourcing application is basically a set of event handlers for each type of event with a central state. A functional reactive mechanism is a single event handler with event preprocessing on top. while a monadic reactive mechanism like this is a monadic computation that automatically generates a cascade of event handlers.</p><p>Besides monadic reactive, I will demonstrate more classical functional reactive behaviours using applicative combinators, and how to mix monadic, reactive and alternative to mimic the creation of new signals, with thresholds.</p><h2 id="motivation"><a href="#motivation">Motivation</a></h2><p>Why am I jumping into the crowded reactive business? Because the current functional reactive solutions do not address the problem created by side effects, like computation costs, input output and whatever. Monadic reactive programming has been discarded by functional purists because it looks &quot;imperative&quot;. As a result monadic reactive is rarely considered. But it is the natural solution for many reactive scenarios.</p><p>Functional reactive programming has no notion of event scope. A functional, reactive computation is declarative. It is affected as a whole by every signal, so it must re-compute from the beginning in some way.</p><p>In the other side, a monad can contain the scope of the signal, so part of the computation already done, upstream, is not re-executed when a signal is injected at some level of the computation by an active component.</p><p>A monad can decompose the computation in a chain of event handlers virtually set up by the monadic computation when it is called by the top signal, that is, when it is run for the first time. Each event handler executes the continuation of the computation with the execution state of the closure coming from what was executed previously. The monadic sequence, althoug it has a imperative look, actually it is a declarative expression that configure event handlers. It is not a imperative description of what the computer will do.</p><p>This cascading of computations for different events has many applications. Imagine this computation:</p><pre><code>profits= do
+  quantity ←  waitEvent &quot;quantity&quot;
+  liftIO $ do
+        putStr &quot;quantity=&quot;
+        print quantity
+        getChar
+  price ←  waitEvent &quot;price&quot;
+  liftIO $ do
+        putStr &quot;price=&quot;
+        print price
+        getChar
+  liftIO $ do
+     putStr $ &quot;total=&quot;
+     print $ quantity * price
+     getChar
+  return $ quantity * price</code></pre><p>Suppose that quantity and price changes along the day, so there are two events, one when the stock sold (&quot;quantity&quot;) changes and one when price changes. Suppose that instead of printing in the console, the process update a display in an executive dashboard. Suppose that the computation is much more complicated and costly with access to databases, OLAP queries, with a lot of different events. Maybe some message has been sent to the president and he launched some missiles. We need only that when the price changes, the monad execute just the code below the price event, to change the price and the calculated total, without touching the other costly branches of the monad, that may call the president to launch more missiles when it is not necessary. Maybe  not only the part of the computation that is above, upstream of the event insertion must remain untouched, but also some branches that may be after the event.</p><p>Alternatively, consider that the computation is cheap, but events happens very fast, for example there is a mouse movement event, but the scene must be redraw only when another second event happens and this redraw is the expensive part of the process. The cheap re-calculation can be done before and only from time to time the expensive part will be executed.</p><p>In these  scenarios monadic reactive is the natural solution.</p><h2 id="shortcomings-of-part-1"><a href="#shortcomings-of-part-1">Shortcomings of part 1</a></h2><p>In the part 1 we see that the solution proposed does not handle more than one bind level. This program,  uses the <code>profits</code> expression defined above:</p><pre><code>threshold= 120
+do
+ pr &lt;- profits
+ liftIO $ if pr &gt; threshold
+     then  putStr &quot;Passed threshold!.. mail sent to boss: &quot; &gt;&gt; print pr
+     else  print pr</code></pre><p>would never show the message &quot;Passed Threshold...&quot; since the event handler set by the monad &quot;forget&quot; the continuation that is outside of the bind chain where the event occurs, in <code>profits</code>.</p><p>To see that this new code print the message when the condition is met, run <a href="#run-it">the code</a></p><p>Additionally, the part 1 can not handle applicative combinations of events. The code below is the same <code>profits</code> calculation, but this time it is using an applicative expression:</p><pre><code>profits' :: TransientIO Int
+profits'=  do
+  total&lt;- (*) &lt;$&gt; currentEventValue &quot;quantity&quot; &lt;*&gt; currentEventValue &quot;price&quot;
+  liftIO $ do
+     putStr $ &quot;total=&quot;
+     print $ total
+     getChar</code></pre><p>See how the new code run this applicative combination <a href="#running-the-appicative-case">running here</a></p><h2 id="creating-events"><a href="#creating-events">Creating events</a></h2><p>In the part I there is a tentative monad that do not fully configure the event handlers when it is executed. This time there are some enhancements :</p><pre><code>data Transient m x= Transient  (m (Maybe x)
+
+type StateIO= StateT EventF  IO
+
+type TransientIO= Transient StateIO
+
+instance Monad TransientIO where
+  return x = Transient $ return $ Just x
+  x &gt;&gt;= f = Transient $ do
+    cont &lt;- setEventCont x  f
+    mk &lt;- runTrans x
+    resetEventCont cont
+    case mk of
+       Just k  -&gt; runTrans $ f k
+       Nothing -&gt; return Nothing</code></pre><p>Don´t worry, all this would be explained in the following paragraphs. the name <code>Transient</code> comes from my old idea of closures in a monadic expression as transient pure states that are only reevaluated when some change appears upstream.</p><p>To tell the rest of the monadic computation to stop:</p><pre><code>stop= empty</code></pre><p>This <code>empty</code> will be the empty of the applicative instance for Transient. Now we define these instances that were absent in part 1:</p><pre><code>instance   Functor TransientIO where
+  fmap f x= Transient $ fmap (fmap f) $ runTrans x
+
+
+instance Applicative TransientIO where
+  pure a  = Transient  .  return $ Just a
+  Transient f &lt;*&gt; Transient g= Transient $ 
+      f &gt;&gt;= \ k -&gt;
+      g &gt;&gt;= \ x -&gt;
+      return $  k &lt;*&gt; x
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+      x &lt;- f
+      y &lt;- g
+      return $ x &lt;|&gt; y</code></pre><p>These instances would permit nice combinations of signals, for the creation of new ones.</p><p>It uses the state monad since we need to 'transport' <code>EventF</code> data. This kind of data are continuations (f) for each computation (x).</p><pre><code>data EventF  = forall a b . EventF{eventHandlers:: (M.Map String EventF )
+                                  ,currentEvent :: Maybe Event
+                                  ,eventValues :: M.Map String Dynamic
+                                  ,xcomp :: (TransientIO a)
+                                  ,fcomp :: [a -&gt; TransientIO b]}</code></pre><p>This time the state is more complicated because now the event handlers and the last arrived event are carried out in the state. They are not stored in MVars like in the part 1. Moreover, to simulate discrete signals whose values change when the corresponding event arrives, I stored all the current event values for each type.  <code>eventHandlers</code> contains the state at which the computation is for each event waiting. from this state is possible to construct the event handler.</p><p>Note that now the computation state has two components. <code>xcomp</code> is the code of the active component that initiate the event handler, and carries out the state of all the computation upto now. <code>fcomp</code> is the rest of the computation. There is a list because the rest of the computation may be a subcomputation of a calling computation, therefore it has his own continuation and so on. in the example the additional continuation is threshold comparison. More on that later.</p><p><code>Transient</code> uses Maybe because I want to stop the computation when further computations are not necessary. The monad does not install event handlers properly, it simply store the next continuation with <code>setEventCont</code>:</p><pre><code>setEventCont ::   (TransientIO a) -&gt; (a -&gt; TransientIO b) -&gt; StateIO EventF
+setEventCont x f  = do
+   st@(EventF es c vs x' fs)  &lt;- get
+   put $ EventF es c vs  x ( f: unsafeCoerce fs) 
+   return st</code></pre><p><code>setEventConf</code> stores the current x in the monad, that may contain active combinators that set event handlers. it also <code>flattens</code> the hierarchy of nested computations that compose the remaining to be done. both will compose the event handler code. togeter with <code>resetEventConf</code> (not shown) they push and pop subcomputations in the state in the monad instance, so that <code>waitEvent</code> can set the right event handler.</p><p>The <i>real</i> computation that set the event handlers is <code>waitEvent</code> , it is the active element that set up an event handler. It need to get his own continuation (set by <code>setEventCont</code> in the monad) and set it as the event handler for the event that is waiting.</p><p>The event handler is set in the state itself, in the <code>eventHandlers</code> field. Since <code>waitEvent</code> is called two times, one when the monad find it to set up the event and once or more times when his event arrives, he distinguish both cases. if the event has not been set, it insert itself and stop the computation returning Nothing. If it has been set previosly, it updates the event handler and return the value of the current event if it is of the type expected. Nothing if it is not. <code>eventValue</code> just verifies if the current event match the  event type that was waiting for or not.</p><pre><code>waitEvent :: Typeable a =&gt; EvType -&gt; TransientIO a
+waitEvent name = Transient $ do
+  st &lt;- get                                              !&gt; &quot;waitEvent&quot;
+  let evs = eventHandlers  st 
+
+  case  M.lookup name evs of
+    Nothing -&gt;  do
+       put st{ eventHandlers=  M.insert name st  evs}    !&gt; (&quot;created event handler for: &quot;++ name)
+       return Nothing 
+    Just _ -&gt;  do
+       put st{ eventHandlers=  M.insert name st evs}     !&gt; (&quot;upadated event handler for: &quot;++ name)
+       eventValue name
+
+eventValue name =  do
+   st &lt;- get
+   let me= currentEvent st 
+   case me of
+     Nothing -&gt; return Nothing                           !&gt; &quot;NO current EVENT&quot;
+     Just (Event name' r) -&gt; do
+      if name /= name' then return Nothing  else do
+        case fromDynamic r of
+          Nothing -&gt; return Nothing 
+          Just x -&gt; do 
+            liftIO $ putStrLn $ &quot;read event: &quot; ++ name
+            put st{eventValues= M.insert name (toDyn x) $ eventValues st}
+            return $ Just x</code></pre><p>the operator <code>!&gt;</code> is used for debugging. set it to  <code>(!&gt;)= flip trace</code> to have execution traces.</p><p>Now the event is defined using <code>Dynamic</code>. An <code>Event</code> contains a type -that is used to lookup for its event handler- and his value.</p><pre><code>type EvType = String
+data Event = Event EvType Dynamic</code></pre><p>Then, after the monadic expression is executed, this structure has at least the first event handler set.</p><p><code>eventLoop</code> is the event scheduler that wait for events and execute the corresponding event handlers:</p><pre><code>eventLoop :: [Event] -&gt;  StateIO ()
+eventLoop []= return()
+eventLoop (ev@(Event name _):evs)= do
+   modify (\st -&gt; st{currentEvent= Just ev ,eventValues= M.delete name $ eventValues st})  
+                                    !&gt; (&quot;inject event:&quot; ++ name)
+   ths &lt;- gets eventHandlers
+   case M.lookup name ths of
+      Just st -&gt; runCont st         !&gt; (&quot;execute event handler for: &quot;++ name) 
+      Nothing -&gt; return ()          !&gt; &quot;no handler for the event&quot;
+   eventLoop evs</code></pre><p>Instead of consuming a list, <code>eventLoop</code> could have been defined as a process that read a queue.</p><p>The continuation called by eventLoop  may contain further <code>waitEvent</code> sentences that will add further event handlers to the loop by the same mechanism.</p><p>Let´s give a set of events to the monster:</p><pre><code>eventList=[ Event &quot;quantity&quot; 10, Event &quot;price&quot; 2, Event &quot;price&quot; 3
+           ,Event &quot;quantity&quot; 30, Event &quot;price&quot; 4]</code></pre><p>And run it</p><h2 id="run-it"><a href="#run-it">Run it</a></h2><p>(<b>Press return to make advance the computation</b>, since <code>profits</code> has <code>getChar</code>)</p><pre><code class="active haskell">
+{-# START_FILE main.hs #-}
+
+module Main where
+
+import Base
+import Control.Monad.State.Strict
+import Unsafe.Coerce
+import System.IO.Unsafe
+import Control.Applicative
+import qualified Data.Map as M
+import Data.Dynamic
+
+-- show
+
+threshold = 100
+
+main= (flip runStateT) eventf0 $ do
+  runTrans  $ do
+     pr &lt;- profits
+     liftIO $ if pr &gt; threshold
+         then  putStr &quot;Passed threshold!.. mail sent to boss: &quot; &gt;&gt; print pr
+         else  print pr
+   
+  eventLoop eventList
+  
+  liftIO $ putStrLn &quot;END&quot;
+  
+
+eventList=[Event &quot;quantity&quot; $ int2Dyn 10
+                ,Event &quot;price&quot; $ int2Dyn 2
+                ,Event &quot;price&quot; $ int2Dyn 3
+          ,Event &quot;quantity&quot; $ int2Dyn 30
+                ,Event &quot;price&quot; $ int2Dyn 4]
+
+  where
+  int2Dyn :: Int -&gt; Dynamic
+  int2Dyn= toDyn
+  
+
+
+profits :: TransientIO Int
+profits= do
+      quantity &lt;-   waitEvent &quot;quantity&quot;
+      liftIO $ do
+            putStr &quot;quantity=&quot;
+            print (quantity :: Int)
+            getChar
+      price &lt;-   waitEvent &quot;price&quot;
+      liftIO $ do
+            putStr &quot;price=&quot;
+            print price
+            getChar
+      let total= quantity * price
+      liftIO $ do
+         putStr $ &quot;total=&quot;
+         print total
+         getChar
+      return total
+
+-- /show
+
+
+
+{-# START_FILE Base.hs #-}
+{-# LANGUAGE ExistentialQuantification,FlexibleContexts,
+             FlexibleInstances, UndecidableInstances, MultiParamTypeClasses #-}
+
+-- show
+
+module Base where
+
+--/show
+
+import Control.Monad.State.Strict
+import Unsafe.Coerce
+import System.IO.Unsafe
+import Control.Applicative
+import qualified Data.Map as M
+import Data.Dynamic
+import Debug.Trace
+
+(!&gt;) = const . id -- flip trace
+
+
+data Transient m x= Transient  (m (Maybe x))
+
+
+data EventF  = forall a b . EventF{eventHandlers:: (M.Map String EventF )
+                                  ,currentEvent :: Maybe Event
+                                  ,eventValues :: M.Map String Dynamic
+                                  ,xcomp :: (TransientIO a)
+                                  ,fcomp :: [a -&gt; TransientIO b]}
+
+
+eventf0= EventF M.empty Nothing M.empty (empty) [const $ empty]
+
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+type StateIO= StateT EventF  IO
+
+type TransientIO= Transient StateIO
+
+runTrans ::  TransientIO x -&gt; StateT EventF  IO (Maybe x)
+runTrans (Transient mx) = mx
+
+setEventCont ::   (TransientIO a) -&gt; (a -&gt; TransientIO b) -&gt; StateIO EventF
+setEventCont x f  = do
+   st@(EventF es c vs x' fs)  &lt;- get
+   put $ EventF es c vs  x ( f: unsafeCoerce fs) -- st{xcomp=  x, fcomp=  f: unsafeCoerce fs}
+   return st
+
+resetEventCont cont=do
+      st &lt;- get
+      put cont {eventHandlers=eventHandlers st, eventValues=eventValues st, currentEvent= currentEvent st}
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF _ _ _ x fs)= do runIt x (unsafeCoerce fs); return ()
+   where
+      runIt x fs= runTrans $  x &gt;&gt;= compose fs
+
+
+
+      compose []= const empty
+      compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs
+
+
+eventLoop :: [Event] -&gt;  StateIO ()
+eventLoop []= return()
+eventLoop (ev@(Event name _):evs)= do
+   (modify $ \st -&gt; st{currentEvent= Just ev ,eventValues= M.delete name $ eventValues st})  !&gt; (&quot;inject event:&quot; ++ name)
+   ths &lt;- gets eventHandlers
+   case M.lookup name ths of
+      Just st -&gt; runCont st  !&gt; (&quot;execute event handler for: &quot;++ name) 
+      Nothing -&gt; return ()   !&gt; &quot;no handler for the event&quot;
+   eventLoop evs
+
+instance   Functor TransientIO where
+  fmap f x= Transient $ fmap (fmap f) $ runTrans x
+
+
+instance Applicative TransientIO where
+  pure a  = Transient  .  return $ Just a
+  Transient f &lt;*&gt; Transient g= Transient $ 
+       f &gt;&gt;= \ k -&gt;
+       g &gt;&gt;= \ x -&gt;
+       return $  k &lt;*&gt; x
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+       x &lt;- f
+       y &lt;- g
+       return $ x &lt;|&gt; y
+
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f = Transient $ do
+        cont &lt;- setEventCont x  f
+        mk &lt;- runTrans x
+        resetEventCont cont
+        case mk of
+           Just k  -&gt; runTrans $ f k
+           Nothing -&gt; return Nothing
+
+instance MonadTrans (Transient ) where
+  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO = lift . liftIO --     let x= liftIO io in x `seq` lift x
+
+
+
+type EvType = String
+data Event = Event EvType Dynamic
+
+
+
+currentEventValue :: Typeable a =&gt; String -&gt; TransientIO a
+currentEventValue name =  do
+  st &lt;- get !&gt; &quot;currValue&quot;
+  let vals= eventValues st
+  case M.lookup name vals of
+      Nothing -&gt; waitEvent name
+      Just v  -&gt; return $ fromDyn v (error &quot;currentEventValue: type error&quot;) 
+      
+  
+waitEvent :: Typeable a =&gt; String -&gt; TransientIO a
+waitEvent name = Transient $ do
+  st &lt;- get !&gt; &quot;waitEvent&quot;
+  let evs = eventHandlers  st 
+
+  case  M.lookup name evs of
+    Nothing -&gt;  do
+       put st{ eventHandlers=  M.insert name st  evs} !&gt; (&quot;created event handler for: &quot;++ name)
+       return Nothing 
+    Just _ -&gt;  do
+       put st{ eventHandlers=  M.insert name st evs} !&gt; (&quot;upadated event handler for: &quot;++ name)
+       eventValue name
+
+eventValue name =  do
+   st &lt;- get
+   let me= currentEvent st 
+   case me of
+     Nothing -&gt; return Nothing   !&gt; &quot;NO current EVENT&quot;
+     Just (Event name' r) -&gt; do
+      if name /= name' then return Nothing  else do
+        case fromDynamic r of
+          Nothing -&gt; return Nothing 
+          Just x -&gt; do 
+            liftIO $ putStrLn $ &quot;read event: &quot; ++ name
+            put st{eventValues= M.insert name (toDyn x) $ eventValues st}
+            return $ Just x</code></pre><h2 id="running-the-applicative-case"><a href="#running-the-applicative-case">Running the applicative case</a></h2><p>(<b>Press return to make advance the computation</b>)</p><p>And now an applicative combination of events values. This case is more similar to a  traditional , non monadic, functional reactive framework. Note that each event produce a <code>total</code> result, instead of executing partially the computation. Here <code>getCurrentEvent</code> get the current event of the signal associated with the event, that is nothing less, nothing more thant the value of the last event of this type.</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+module Main where
+
+import Base
+import Control.Monad.State.Strict
+import Unsafe.Coerce
+import System.IO.Unsafe
+import Control.Applicative
+import qualified Data.Map as M
+import Data.Dynamic
+
+-- show
+
+threshold = 100
+
+main= (flip runStateT) eventf0 $ do
+  runTrans  $ do
+     pr &lt;- profits'
+     liftIO $ if pr &gt; threshold
+         then  putStr &quot;Passed threshold!.. mail sent to boss: &quot; &gt;&gt; print pr
+         else  print pr
+   
+  eventLoop eventList
+  
+  liftIO $ putStrLn &quot;END&quot;
+  
+
+eventList=[Event &quot;quantity&quot; $ int2Dyn 10
+                ,Event &quot;price&quot; $ int2Dyn 2
+                ,Event &quot;price&quot; $ int2Dyn 3
+          ,Event &quot;quantity&quot; $ int2Dyn 30
+                ,Event &quot;price&quot; $ int2Dyn 4]
+
+  where
+  int2Dyn :: Int -&gt; Dynamic
+  int2Dyn= toDyn
+  
+
+getSignal= currentEventValue
+
+profits' :: TransientIO Int
+profits'=  do
+    total &lt;- (*) &lt;$&gt; getSignal &quot;quantity&quot; &lt;*&gt; getSignal &quot;price&quot;
+    liftIO $ do
+         putStr $ &quot;total=&quot;
+         print $ total
+         getChar
+         
+    return total
+
+--/show
+
+{-# START_FILE Base.hs #-}
+
+{-# LANGUAGE ExistentialQuantification,FlexibleContexts,
+             FlexibleInstances, UndecidableInstances, MultiParamTypeClasses #-}
+
+-- show
+
+module Base where
+
+--/show
+
+import Control.Monad.State.Strict
+import Unsafe.Coerce
+import System.IO.Unsafe
+import Control.Applicative
+import qualified Data.Map as M
+import Data.Dynamic
+import Debug.Trace
+
+(!&gt;) = const . id -- flip trace
+
+
+data Transient m x= Transient  (m (Maybe x))
+
+
+data EventF  = forall a b . EventF{eventHandlers:: (M.Map String EventF )
+                                  ,currentEvent :: Maybe Event
+                                  ,eventValues :: M.Map String Dynamic
+                                  ,xcomp :: (TransientIO a)
+                                  ,fcomp :: [a -&gt; TransientIO b]}
+
+
+eventf0= EventF M.empty Nothing M.empty (empty) [const $ empty]
+
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+type StateIO= StateT EventF  IO
+
+type TransientIO= Transient StateIO
+
+runTrans ::  TransientIO x -&gt; StateT EventF  IO (Maybe x)
+runTrans (Transient mx) = mx
+
+setEventCont ::   (TransientIO a) -&gt; (a -&gt; TransientIO b) -&gt; StateIO EventF
+setEventCont x f  = do
+   st@(EventF es c vs x' fs)  &lt;- get
+   put $ EventF es c vs  x ( f: unsafeCoerce fs) -- st{xcomp=  x, fcomp=  f: unsafeCoerce fs}
+   return st
+
+resetEventCont cont=do
+      st &lt;- get
+      put cont {eventHandlers=eventHandlers st, eventValues=eventValues st, currentEvent= currentEvent st}
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF _ _ _ x fs)= do runIt x (unsafeCoerce fs); return ()
+   where
+      runIt x fs= runTrans $  x &gt;&gt;= compose fs
+
+
+
+      compose []= const empty
+      compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs
+
+
+eventLoop :: [Event] -&gt;  StateIO ()
+eventLoop []= return()
+eventLoop (ev@(Event name _):evs)= do
+   (modify $ \st -&gt; st{currentEvent= Just ev ,eventValues= M.delete name $ eventValues st})  !&gt; (&quot;inject event:&quot; ++ name)
+   ths &lt;- gets eventHandlers
+   case M.lookup name ths of
+      Just st -&gt; runCont st  !&gt; (&quot;execute event handler for: &quot;++ name) 
+      Nothing -&gt; return ()   !&gt; &quot;no handler for the event&quot;
+   eventLoop evs
+
+instance   Functor TransientIO where
+  fmap f x= Transient $ fmap (fmap f) $ runTrans x
+
+
+instance Applicative TransientIO where
+  pure a  = Transient  .  return $ Just a
+  Transient f &lt;*&gt; Transient g= Transient $ 
+       f &gt;&gt;= \ k -&gt;
+       g &gt;&gt;= \ x -&gt;
+       return $  k &lt;*&gt; x
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+       x &lt;- f
+       y &lt;- g
+       return $ x &lt;|&gt; y
+
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f = Transient $ do
+        cont &lt;- setEventCont x  f
+        mk &lt;- runTrans x
+        resetEventCont cont
+        case mk of
+           Just k  -&gt; runTrans $ f k
+           Nothing -&gt; return Nothing
+
+instance MonadTrans (Transient ) where
+  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO = lift . liftIO --     let x= liftIO io in x `seq` lift x
+
+
+
+type EvType = String
+data Event = Event EvType Dynamic
+
+
+
+currentEventValue :: Typeable a =&gt; String -&gt; TransientIO a
+currentEventValue name =  do
+  st &lt;- get !&gt; &quot;currValue&quot;
+  let vals= eventValues st
+  case M.lookup name vals of
+      Nothing -&gt; waitEvent name
+      Just v  -&gt; return $ fromDyn v (error &quot;currentEventValue: type error&quot;) 
+      
+  
+waitEvent :: Typeable a =&gt; String -&gt; TransientIO a
+waitEvent name = Transient $ do
+  st &lt;- get !&gt; &quot;waitEvent&quot;
+  let evs = eventHandlers  st 
+
+  case  M.lookup name evs of
+    Nothing -&gt;  do
+       put st{ eventHandlers=  M.insert name st  evs} !&gt; (&quot;created event handler for: &quot;++ name)
+       return Nothing 
+    Just _ -&gt;  do
+       put st{ eventHandlers=  M.insert name st evs} !&gt; (&quot;upadated event handler for: &quot;++ name)
+       eventValue name
+
+eventValue name =  do
+   st &lt;- get
+   let me= currentEvent st 
+   case me of
+     Nothing -&gt; return Nothing   !&gt; &quot;NO current EVENT&quot;
+     Just (Event name' r) -&gt; do
+      if name /= name' then return Nothing  else do
+        case fromDynamic r of
+          Nothing -&gt; return Nothing 
+          Just x -&gt; do 
+            liftIO $ putStrLn $ &quot;read event: &quot; ++ name
+            put st{eventValues= M.insert name (toDyn x) $ eventValues st}
+            return $ Just x
+
+</code></pre><p>If there is something for this event in the <code>eventValues</code> state, then <code>getCurrentEvent</code> will return it. If not, it will call <code>waitEvent</code> to get one:</p><pre><code>currentEventValue :: Typeable a =&gt; EvType -&gt; TransientIO a
+currentEventValue name =  do
+  st &lt;- get !&gt; &quot;currValue&quot;
+  let vals= eventValues st
+  case M.lookup name vals of
+      Nothing -&gt; waitEvent name
+      Just v  -&gt; return $ fromDyn v (error &quot;currentEventValue: type error&quot;) </code></pre><p>It can be said that the applicative combination of quantity and price creates a new signal: the <code>total</code> signal. When this signal pass the threshold, the computation continues, so it &quot;send&quot; the message to the boss.</p><p>It is easy to create computations with a combination of applicative and monadic computations as we please. The last snippet is an example of it</p><p>In the other side observe that there are no loops. That is because the monadic reactive expression is a declaration. It is not what the computer really does. Is the event scheduler, that inject the event the one that execute event handlers and run the code, not the monadic expression. The latter only configure event handlers.</p><p>That is beatiful IMHO, and show the endless power of monads for industrial applications adaptable to any execution model and, more important, the hability to encapsulate the plumbing behind the monad instance. In this case, the nighmare of the callback hell.</p><h2 id="the-code"><a href="#the-code">The code</a></h2><p>is <a href="https://github.com/agocorona/transient">here</a></p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><ul><li><p>You can redefine the operator <code>(!&gt;)</code> in Base.hs to have execution traces in both examples.</p></li><li><p>The use of the Alternative instance has not been demonstrated in this example, but can you imagine an scenario where the <code>&lt;|&gt;</code> operator can be used to create more complex signals?</p></li></ul><h2 id="other-similar-projects"><a href="#other-similar-projects">Other similar projects</a></h2><p>Atze van der Ploeg - <a href="http://homepages.cwi.nl/~ploeg/papers/monfrp.pdf">Monadic Functional Reactive Programming</a> and the hackage library drClickOn.</p><p>I possibly looked previously at a different version of the paper which did not mention the hackage library. I don´t remember the box examples. Anyway I looked for literature after creating hplayground, which implement basically the same monadic mechanism of this tutorial and I did not looked at the paper in detail until now. But the problems that solves and the advantages of the approach are the ones that I appreciated the most from the paper.</p><p>As far as I can understand the execution model described in that paper uses blocking, since the process is running and it advances when it receives the events expected. Therefor is not as flexible as the one proposed here, that uses a non-blocking semantics.</p><p>What I see is that the library of the paper seems to use blocking semantics. Since it uses SDL https://www.libsdl.org/ for the example. So there is a single listening point active at each computation that is looking for events. The computation continues when it receives the right event. Please correct me if someone know the example more, but it seems that the computation is in a blocking state waiting, like a console application.</p><p>My approach is different: the monad simply configure an event handler for the first <code>waitEvent</code> of the computation and then finishes. The rest is done by event handlers. when an event arrives, the event scheduler call the event handler just configured. That event handler execution may configure more event handlers if there are more waitEvent sentences downstream. Once configured, there are many listening points (callbacks), one for each waitEvent. Since there is no central IO state, the event actions can be executed fully in parallel (but, wait, this latter is not as easy....)
+Once configured, there is no valid and invalid sequences of events to consider but any combination of them are valid. That means that it may execute the event handler corresponding to a previous event, upstream from the one that has received previously, while the one of the paper can not. Like in the case of the inputs of a console application, they have a strict order since the computation has a single execution point. That is his weak point. It can not manage the example of my tutorial without enclosing it in a loop and adding conditionals since the sequence has to contemplate explicitly all possible combinations of events.</p><p>But I may be very wrong. Tell me by mail or <a href="https://www.reddit.com/r/haskell/comments/2mrjg8/a_monad_for_reactive_programming_part_2_school_of/">in this reddit discussion</a></p><p>In the other side it mentioned in the paper that there are primitives to emit signals. I understand that as if the computations can send new events sort to speak. I don´t know very well the mechanism. I don not understand very well all the concepts used by functonal reactive frameworks. Neither I´m an expert in signal processing....The paper describes a more complete signal processing API, but in essence it uses also Applicative operators for composition of signals (it call it &lt;^&gt;). And all the primitives are in essence combinations of the basic monadic-applicative combinators that I also have defined.</p><h2 id="conclusions"><a href="#conclusions">Conclusions</a></h2><p>Monadic functional reactive frameworks have many advantages. They permit to avoid to repeat costly computations, so they may perform effects in a more controlled way. With the help of applicative combinators they can express the complex signal processing associated with specialized declarative reactive frameworks, but using standard haskell combinators.</p><p>It has been used in the web browser with the <a href="https://github.com/agocorona/hplayground">hplayground</a> client-side framework. Although it uses combinators that produce rendering as well as output values (formlets) and the event scheduler is the one of the web browser, in essence the event mechanism is the same.</p><p>Additionally it is easy to create an scheduler that may work independently from window or web programming. It can be used in event sourcing applications. Is much more convenient  and pleasant since the entire application can be programmed in a single flow, instead of splitting it in event handlers with a common state.</p><p>AMDG</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/monad-reactive-programming-2';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

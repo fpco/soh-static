@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html><head><title>The Happstack Crashcourse - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/stepcut">Jeremy Shaw</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/stepcut/the-happstack-crashcourse">The Happstack Crashcourse</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">The Happstack Crashcourse</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">22 Apr 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/stepcut">Jeremy Shaw</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/5350/8b7fab961b488c34dfa7131272f2163cf5bfc8b5">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/stepcut/hsp-0-8">Previous content: HSP 0.8</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/stepcut">See all content by Jeremy Shaw</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#hello-world">Hello World</a><ul><li><a href="#your-first-app-">Your first app!</a></li><li><a href="#the-parts-of-hello-world">The parts of Hello World</a><ul><li><a href="#listening-for-http-requests">Listening for HTTP requests</a></li><li><a href="#configuring-the-http-listener">Configuring the HTTP listener</a></li><li><a href="#processing-a-request">Processing a Request</a></li><li><a href="#setting-the-http-response-code">Setting the HTTP response code</a></li><li><a href="#creating-a-response">Creating a Response</a></li></ul></li><li><a href="#choosing-between-multiple-serverpartts">Choosing between multiple ServerPartTs</a></li></ul></li><li><a href="#route-filters">Route Filters</a><ul><li><a href="#using-dir-to-match-on-static-path-components">Using dir to match on static path components</a></li><li><a href="#using-dir-to-match-on-multiple-components">Using dir to match on multiple components</a></li><li><a href="#using-dirs-as-shorthand-to-match-on-multiple-components">Using dirs as shorthand to match on multiple components</a></li><li><a href="#matching-on-variable-path-segments">Matching on variable path segments</a></li><li><a href="#fromrequri--extending-path">FromReqURI: extending path</a></li><li><a href="#matching-on-request-method--get--post--etc-">Matching on request method (GET, POST, etc)</a></li><li><a href="#advanced-method-matching-with-matchmethod">Advanced method matching with MatchMethod</a></li><li><a href="#other-routing-filters">Other Routing Filters</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>This is a work in progress. In the meantime you can read the complete version of <i>The Happstack Crashcourse</i> <a href="http://happstack.com/docs/crashcourse/index.html">here</a>.</p><h1 id="hello-world"><a href="#hello-world">Hello World</a></h1><h2 id="your-first-app-"><a href="#your-first-app-">Your first app!</a></h2><p>Our first Happstack application is a simple server that responds to all
+requests with the string, <code>Hello, World!</code>.</p><pre><code class="haskell web active">module Main where
+
+import Happstack.Server.Env (nullConf, simpleHTTP, toResponse, ok)
+
+main :: IO ()
+main = simpleHTTP nullConf $ ok &quot;Hello, World!&quot;</code></pre><p>If you are reading this on <a href="https://www.fpcomplete.com/">School of
+Haskell</a>, the examples import the module
+<code>Happstack.Server.Env</code> instead of <code>Happstack.Server</code>. This is a
+(hopefully) temporary hack so that the interactive code examples work on
+School of Haskell. To run code from School of Haskell locally simply
+replace <code>Happstack.Server.Env</code> with <code>Happstack.Server</code>.</p><p>If you are reading this on School of Haskell, you can run the examples
+interactively with out installing anything.</p><p>If you want to run the code locally, and you have not already installed
+Happstack -- you will need to do that first. You can find instructions
+on how to install Happstack at
+<a href="http://happstack.com/page/view-page-slug/2/download">http://happstack.com/page/view-page-slug/2/download</a>.</p><p>To build the application run:</p><pre><code>$ ghc -threaded HelloWorld.hs -o helloworld</code></pre><p>The executable will be named <code>helloworld</code>.</p><p>Alternatively, you can use <code>runhaskell</code> and avoid the compilation step.</p><pre><code>$ runhaskell HelloWorld.hs</code></pre><p>Run this app and point your browser at
+<a href="http://localhost:8000/"><code>http://localhost:8000/</code></a>. (assuming you are
+building the program on your local machine.) The page should load and
+say <code>&quot;Hello, World!&quot;</code>.</p><p>Alternatively, we can use <code>curl</code>:</p><pre><code> $ curl http://localhost:8000/
+Hello, World!</code></pre><p><code>curl</code> is a command-line utility which can be used to create many types
+of HTTP requests. Unlike a browser, it does not attempt to render the
+results, it just prints the body of the response to the console.</p><p>If you run <code>curl</code> with the <code>-v</code> option it will provide verbose output
+which includes the headers sent back and forth between curl and the
+server:</p><pre><code> $ curl -v http://localhost:8000/
+ * About to connect() to localhost port 8000 (#0)
+ *   Trying 127.0.0.1... connected
+ &gt; GET / HTTP/1.1
+ &gt; User-Agent: curl/7.22.0 (x86_64-pc-linux-gnu)
+ &gt; Host: localhost:8000
+ &gt; Accept: */*
+ &gt;
+ &lt; HTTP/1.1 200 OK
+ &lt; Transfer-Encoding: chunked
+ &lt; Connection: Keep-Alive
+ &lt; Content-Type: text/plain; charset=UTF-8
+ &lt; Date: Thu, 13 Dec 2012 00:19:01 GMT
+ &lt; Server: Happstack/7.0.7
+ &lt;
+ * Connection #0 to host localhost left intact
+ * Closing connection #0
+ Hello, World!</code></pre><p>This can sometimes be useful for debugging why your site is not working
+as you expect.</p><p><code>curl</code> is not required by Happstack or this book, but it is a useful
+tool for web development. <code>curl</code> is not part of Happstack. The official
+curl website is <a href="http://curl.haxx.se">http://curl.haxx.se</a>.</p><h2 id="the-parts-of-hello-world"><a href="#the-parts-of-hello-world">The parts of <code>Hello World</code></a></h2><h3 id="listening-for-http-requests"><a href="#listening-for-http-requests">Listening for HTTP requests</a></h3><p>The <code>simpleHTTP</code> function is what actually starts the program listening
+for incoming HTTP requests:</p><pre><code class="haskell">simpleHTTP :: (ToMessage a) =&gt; Conf -&gt; ServerPartT IO a -&gt; IO ()</code></pre><p>We'll examine the various parts of this type signature in the following
+sections.</p><h3 id="configuring-the-http-listener"><a href="#configuring-the-http-listener">Configuring the HTTP listener</a></h3><p>The first argument is some simple server configuration information. It
+is defined as:</p><pre><code class="haskell">data Conf = Conf
+    { port       :: Int
+    , validator  :: Maybe (Response -&gt; IO Response)
+    , logAccess  :: forall t. FormatTime t =&gt; Maybe (LogAccess t)
+    , timeout    :: Int
+    }</code></pre><p>The fields can be described as:</p><p><code>port</code><br />the TCP port to listen on for incoming connection</p><p><code>validator</code><br />on-the-fly validation of output during development</p><p><code>logAccess</code><br />logging function for HTTP requests</p><p><code>timeout</code><br />number of seconds to wait before killing an inactive connection</p><p>The default config is <code>nullConf</code> which is simply defined as:</p><pre><code class="haskell">-- | Default configuration contains no validator and the port is set to 8000
+nullConf :: Conf
+nullConf = Conf
+    { port      = 8000
+    , validator = Nothing
+    , logAccess = Just logMAccess
+    , timeout   = 30
+    }</code></pre><h3 id="processing-a-request"><a href="#processing-a-request">Processing a <code>Request</code></a></h3><p>The second argument is a bit more interesting. It is the handler which
+processes an incoming HTTP <code>Request</code> and generates a <code>Response</code>.
+<code>ServerPartT IO a</code> is essentially a fancy way of writing a function with
+the type:</p><pre><code class="haskell">Request -&gt; IO a</code></pre><p><code>simpleHTTP</code> processes each incoming request in its own thread. It will
+parse the <code>Request</code>, call your <code>ServerPartT</code> handler, and then return
+the <code>Response</code> to the client. When developing your handler, it is
+natural to think about things as if you are writing a program which
+processes a single <code>Request</code>, generates a <code>Response</code>, and exits. However
+it is important when doing I/O, such as writing files to disk, or
+talking to a database to remember that there may be other threads
+running simultaneously.</p><h3 id="setting-the-http-response-code"><a href="#setting-the-http-response-code">Setting the HTTP response code</a></h3><p>In this example, our handler is simply:</p><pre><code class="haskell">ok &quot;Hello, World!&quot; :: ServerPartT IO String</code></pre><p><code>ok</code> is one of several combinators which can be used to set the HTTP
+response code. In this case, it will set the response code to <code>200 OK</code>.
+The type signature for <code>ok</code> can be simplified to:</p><pre><code class="haskell">ok :: a -&gt; ServerPartT IO a</code></pre><p><code>ok</code> acts much like <code>return</code> except it also sets the HTTP response code
+for a <code>Response</code>.</p><p><code>Happstack.Server.SimpleHTTP</code> contains similar functions for the common
+HTTP response codes including, <code>notFound</code>, <code>seeOther</code>, <code>badRequest</code> and
+more.</p><h3 id="creating-a-response"><a href="#creating-a-response">Creating a <code>Response</code></a></h3><p>The <code>ToMessage</code> class is used to turn values of different types into
+HTTP responses. It contains three methods:</p><pre><code class="haskell">class ToMessage a where
+  toContentType :: a -&gt; ByteString
+  toMessage     :: a -&gt; Lazy.ByteString
+  toResponse    :: a -&gt; Response</code></pre><p>A vast majority of the time we only call the <code>toResponse</code> method.</p><p><code>simpleHTTP</code> automatically calls <code>toResponse</code> to convert the value
+returned by the handler into a <code>Response</code> -- so we did not have to call
+<code>toResponse</code> explicitly. It converted the <code>String</code> <code>&quot;Hello, World!&quot;</code>
+into a <code>Response</code> with the content-type <code>&quot;text/plain&quot;</code> and the message
+body <code>&quot;Hello, World!&quot;</code></p><p>Often times we will opt to explicitly call <code>toResponse</code>. For example:</p><pre><code class="haskell active web">-- / show
+module Main where
+
+import Happstack.Server.Env (nullConf, simpleHTTP, toResponse, ok)
+-- show
+main :: IO ()
+main = simpleHTTP nullConf $ ok (toResponse &quot;Hello, World!&quot;)</code></pre><p>Happstack comes with pre-defined <code>ToMessage</code> instances for many types
+such as <code>Text.Html.Html</code>, <code>Text.XHtml.Html</code>, <code>String</code>, the types from
+HSP, and more.</p><h2 id="choosing-between-multiple-serverpartts"><a href="#choosing-between-multiple-serverpartts">Choosing between multiple <code>ServerPartTs</code></a></h2><p>In the first example, we had only one <code>ServerPartT</code>. All <code>Request</code>s were
+handled by the same part and returned the same <code>Response</code>.</p><p>In general, our applications will have many <code>ServerPartT</code>s. We combine
+them into a single <code>ServerPartT</code> by using <code>MonadPlus</code>. Typically via the
+<code>msum</code> function:</p><pre><code class="haskell">msum :: (MonadPlus m) =&gt; [m a] -&gt; m a</code></pre><p>In the following example we combine three <code>ServerPartT</code>s together.</p><pre><code class="haskell web active">module Main where</code></pre><pre><code class="haskell web active">import Control.Monad
+import Happstack.Server.Env (nullConf, simpleHTTP, ok, dir)</code></pre><pre><code class="haskell web active">main :: IO ()
+main = simpleHTTP nullConf $ msum [ mzero
+                                  , ok &quot;Hello, World!&quot;
+                                  , ok &quot;Unreachable ServerPartT&quot;
+                                  ]</code></pre><p>The behaviour of <code>MonadPlus</code> is to try each <code>ServerPartT</code> in succession,
+until one succeeds.</p><p>In the example above, the first part is <code>mzero</code>, so it will always fail.
+The second part will always succeed. That means the third part will
+never be reachable.</p><p>Alas, that means this application will appear to behave exactly like the
+first application. What we need are some ways to have parts match or
+fail depending on the contents of the HTTP <code>Request</code>.</p><h1 id="route-filters"><a href="#route-filters">Route Filters</a></h1><p><i>a.k.a Responding to different url paths</i></p><p>Happstack provides a variety of ways to match on parts of the <code>Request</code>
+(such as the path or request method) and respond appropriately.</p><p>Happstack provides two different systems for mapping the request path to
+a handler. In this section we will cover a simple, untyped routing
+system. Later we will look at fancier, type-safe routing sytem known as
+<code>web-routes</code>.</p><h2 id="using-dir-to-match-on-static-path-components"><a href="#using-dir-to-match-on-static-path-components">Using <code>dir</code> to match on static path components</a></h2><p>We can use <code>dir</code> to handle components of the URI path which are static.
+For example, we might have a site with the two URLs: <code>hello</code> and
+<code>goodbye</code>.</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad
+import Happstack.Server.Env (nullConf, simpleHTTP, ok, dir, seeOther)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum
+    [ dir &quot;hello&quot;    $ ok &quot;Hello, World!&quot;
+    , dir &quot;goodbye&quot;  $ ok &quot;Goodbye, World!&quot;
+    , seeOther &quot;/hello&quot; &quot;/hello&quot;
+    ]</code></pre><p>If we start the app and point our browser at
+<a href="http://localhost:8000/hello">http://localhost:8000/hello</a> we get the <code>hello</code> message, and if we
+point it at <a href="http://localhost:8000/goodbye">http://localhost:8000/goodbye</a>, we get the <code>goodbye</code>
+message.</p><h2 id="using-dir-to-match-on-multiple-components"><a href="#using-dir-to-match-on-multiple-components">Using <code>dir</code> to match on multiple components</a></h2><p>We can match on multiple components by chaining calls to <code>dir</code> together:</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad (msum)
+import Happstack.Server.Env (nullConf, simpleHTTP, ok, dir)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum [ dir &quot;hello&quot;    $ dir &quot;world&quot; $ ok &quot;Hello, World!&quot;
+                                  , dir &quot;goodbye&quot;  $ dir &quot;moon&quot;  $ ok &quot;Goodbye, Moon!&quot;
+                                  ]</code></pre><p>If we start the app and point our browser at
+<a href="http://localhost:8000/hello/world">http://localhost:8000/hello/world</a> we get the hello message, and if we
+point it at <a href="http://localhost:8000/goodbye/moon">http://localhost:8000/goodbye/moon</a>, we get the goodbye
+message.</p><h2 id="using-dirs-as-shorthand-to-match-on-multiple-components"><a href="#using-dirs-as-shorthand-to-match-on-multiple-components">Using <code>dirs</code> as shorthand to match on multiple components</a></h2><p>As a shorthand, we can also use <code>dirs</code> to handle multiple static patch
+components.</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad (msum)
+import Happstack.Server.Env (nullConf, simpleHTTP, ok, dirs)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum [ dirs &quot;hello/world&quot;  $ ok &quot;Hello, World!&quot;
+                                  , dirs &quot;goodbye/moon&quot; $ ok &quot;Goodbye, Moon!&quot;
+                                  ]</code></pre><p>If we start the app and point our browser at
+<a href="http://localhost:8000/hello/world">http://localhost:8000/hello/world</a> we get the hello message, and if we
+point it at <a href="http://localhost:8000/goodbye/moon">http://localhost:8000/goodbye/moon</a>, we get the goodbye
+message.</p><h2 id="matching-on-variable-path-segments"><a href="#matching-on-variable-path-segments">Matching on variable path segments</a></h2><p>Often times a path segment will contain a variable value we want to
+extract and use, such as a number or a string. We can use the <code>path</code>
+combinator to do that.</p><pre><code class="haskell">path :: (FromReqURI a, MonadPlus m, ServerMonad m) =&gt; (a -&gt; m b) -&gt; m b</code></pre><p>You may find that type to be a little hard to follow because it is
+pretty abstract looking. Fortunately, we can look at it in an easier
+way. A <code>ServerPart</code> is a valid instance of, <code>ServerMonad m</code>, so we can
+just replace the <code>m</code> with <code>ServerPart</code>. You can do this anywhere you see
+type signatures with <code>(ServerMonad m) =&gt;</code> in them. In this case, the
+final result would look like:</p><pre><code class="haskell">path :: (FromReqURI a) =&gt; (a -&gt; ServerPart b) -&gt; ServerPart b</code></pre><p><code>path</code> will attempt to extract and decode a path segment, and if it
+succeeds, it will pass the decode value to the nested server part.</p><p>Let's start with the most basic example, extracting a <code>String</code> value. We
+will extend the Hello World server so that we can say hello to anyone.</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad (msum)
+import Happstack.Server.Env (nullConf, simpleHTTP, ok, dir, path)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum [ dir &quot;hello&quot; $ path $ \s -&gt; ok $ &quot;Hello, &quot; ++ s
+                                  ]</code></pre><p>Now, if we start the app and point our browser at:
+<a href="http://localhost:8000/hello/World">http://localhost:8000/hello/World</a> we get the response
+<code>&quot;Hello, World&quot;</code>. if we point it at
+<a href="http://localhost:8000/hello/Haskell">http://localhost:8000/hello/Haskell</a>, we get <code>&quot;Hello, Haskell&quot;</code>.</p><h2 id="fromrequri--extending-path"><a href="#fromrequri--extending-path"><code>FromReqURI:</code> extending <code>path</code></a></h2><p>We can extend path so that we can extract our own types from the path
+components as well. We simply add an instance to the FromReqURI class:</p><pre><code class="haskell">class FromReqURI a where
+    fromReqURI :: String -&gt; Maybe a</code></pre><p>For example, let's say that we want to create a type to represent
+subjects we can greet.</p><pre><code class="haskell web active"> -- show
+ module Main where
+
+ import Control.Monad (msum)
+ import Data.Char (toLower)
+ import Happstack.Server.Env (FromReqURI(..), nullConf, simpleHTTP, ok, dir, path)
+
+-- show Subject data-type
+
+ data Subject = World | Haskell
+
+ sayHello :: Subject -&gt; String
+ sayHello World   = &quot;Hello, World!&quot;
+ sayHello Haskell = &quot;Greetings, Haskell!&quot;
+
+ -- show We simply add an instance such as:
+
+ instance FromReqURI Subject where
+     fromReqURI sub =
+         case map toLower sub of
+           &quot;haskell&quot; -&gt; Just Haskell
+           &quot;world&quot;   -&gt; Just World
+           _         -&gt; Nothing
+
+ -- show Now when we use `path` it will extract a value of type `Subject`.
+
+ main :: IO ()
+ main = simpleHTTP nullConf $ dir &quot;hello&quot; $ path $ \subject -&gt; ok $ (sayHello subject)</code></pre><p>Now, if we start the app and point our browser at:
+<a href="http://localhost:8000/hello/World">http://localhost:8000/hello/World</a> we get the response
+<code>&quot;Hello, World&quot;</code>. if we point it at
+<a href="http://localhost:8000/hello/Haskell">http://localhost:8000/hello/Haskell</a>, we get <code>&quot;Greetings, Haskell!&quot;</code>.</p><h2 id="matching-on-request-method--get--post--etc-"><a href="#matching-on-request-method--get--post--etc-">Matching on request method <code>(GET, POST, etc)</code></a></h2><p>We can specify that a route is only valid for specific HTTP request
+methods by using the <code>method</code> guard:</p><pre><code class="haskell">method :: (ServerMonad m, MonadPlus m, MatchMethod method) =&gt; method -&gt; m ()</code></pre><p>Here is a simple demo app:</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad (msum)
+import Happstack.Server.Env (Method(GET, POST), dir, method, nullConf, ok, simpleHTTP)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum
+       [ do method GET
+            ok $ &quot;You did a GET request.\n&quot;
+       , do method POST
+            ok $ &quot;You did a POST request.\n&quot;
+       , dir &quot;foo&quot; $ do method GET
+                        ok $ &quot;You did a GET request on /foo\n&quot;
+       ]</code></pre><p>Using <code>curl</code> we can see the expected results for normal <code>GET</code> and <code>POST</code>
+requests to <code>/</code>:</p><pre><code> $ curl http://localhost:8000/
+You did a GET request.
+ $ curl -d '' http://localhost:8000/
+You did a POST request.</code></pre><p>Note that <code>method</code> does not require that all the segments of request
+path have been consumed. We can see in here that <code>/foo</code> is accepted, and
+so is <code>/foo/bar</code>.</p><pre>
+ $ curl http://localhost:8000/foo
+You did a GET request on /foo
+ $ curl http://localhost:8000/foo/bar
+You did a GET request on /foo
+</pre><p>You can use <code>nullDir</code> to assert that all the path segments have been
+consumed:</p><pre><code class="haskell">nullDir :: (ServerMonad m, MonadPlus m) =&gt; m ()</code></pre><h2 id="advanced-method-matching-with-matchmethod"><a href="#advanced-method-matching-with-matchmethod">Advanced method matching with <code>MatchMethod</code></a></h2><p>The method routing functions use a class <code>(MatchMethod method)</code> instead
+of the concrete type <code>Method</code>. The <code>MatchMethod</code> class looks like this:</p><pre><code class="haskell">class MatchMethod m where
+    matchMethod :: m -&gt; Method -&gt; Bool
+
+instance MatchMethod Method           where ...
+instance MatchMethod [Method]         where ...
+instance MatchMethod (Method -&gt; Bool) where ...
+instance MatchMethod ()               where ...</code></pre><p>This allows us to easily match on more than one method by either
+providing a list of acceptable matches, or by providing a function which
+returns a boolean value. We can use this feature to support the <code>HEAD</code>
+method. When the client does a <code>HEAD</code> request, the server is supposed to
+return the same headers it would for a GET request, but with an empty
+response body. Happstack includes special support for handling this
+automatically in most cases.</p><pre><code class="haskell web active">module Main where
+
+import Control.Monad (msum)
+import Happstack.Server.Env (Method(GET, HEAD), dir, methodM, nullConf, ok, simpleHTTP)
+
+main :: IO ()
+main = simpleHTTP nullConf $ msum
+       [ do methodM [GET, HEAD]
+            ok $ &quot;Hello, World\n&quot;
+       ]</code></pre><p>We can now use curl to do a normal <code>GET</code> request, or we can use the <code>-I</code>
+flag which does a <code>HEAD</code> request:</p><pre><code> $ curl http://localhost:8000/
+Hello, World
+ $ curl -I http://localhost:8000/
+HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 13
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 15 Jun 2010 19:56:07 GMT
+Server: Happstack/0.5.0</code></pre><p>Happstack automatically notices that it is a <code>HEAD</code> request, and does
+not send the body.</p><h2 id="other-routing-filters"><a href="#other-routing-filters">Other Routing Filters</a></h2><p>SimpleHTTP includes a number of other useful routing filters, such as:</p><p><code>nullDir :: (ServerMonad m, MonadPlus m) =&gt; m ()</code><br />check that there are no path segments remaining</p><p><code>host :: (ServerMonad m, MonadPlus m) =&gt; String -&gt; m a -&gt; m a</code><br />match on a specific host name in the Request</p><p><code>withHost :: (ServerMonad m, MonadPlus m) =&gt; (String -&gt; m a) -&gt; m a</code><br />Lookup the host header and pass it to the handler.</p><p><code>uriRest :: (ServerMonad m) =&gt; (String -&gt; m a) -&gt; m a</code><br />Grab the rest of the URL (dirs + query) and passes it to your handler</p><p><code>anyPath :: (ServerMonad m, MonadPlus m) =&gt; m r -&gt; m r</code><br />Pop any path element and ignore when choosing a 'ServerPartT' to handle
+the request.</p><p><code>trailingSlash :: (ServerMonad m, MonadPlus m) =&gt; m ()</code><br />Guard which checks that the Request URI ends in <code>/</code>. Useful for
+distinguishing between <code>foo</code> and <code>foo/</code></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/stepcut/the-happstack-crashcourse';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html><head><title>Beautiful parallel non-determinism (Transient effects III) - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/beautiful-parallel-non-determinism-transient-effects-iii">Beautiful parallel non-determinism (Transient effects III)</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Beautiful parallel non-determinism (Transient effects III)</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">19 Aug 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/agocorona">Alberto Gómez Corona</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3374/b2e0621da88bf3d0db3961cc4ad7ffb4832148c8">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/moving-haskell-processes-between-nodes-transient-effects-iv">Previous content: Moving Haskell processes between nodes (Transient effects IV)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">Next content: The hardworking programmer II: practical backtracking to undo actions</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/agocorona">See all content by Alberto Gómez Corona</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#what-">What?</a></li><li><a href="#about-transient">About Transient</a></li><li><a href="#about-the-transient-monad">About the Transient Monad</a></li><li><a href="#about-backtracking-and-indeterminism">About Backtracking and Indeterminism</a></li><li><a href="#non-determinism-in-the-list-monad">Non-determinism in the List monad</a></li><li><a href="#monadplus-and-guard">MonadPlus and guard</a></li><li><a href="#monadplus-and-guard-in-transient">MonadPlus and guard in Transient</a></li><li><a href="#input-a-list-of-values-and-process-them-in-parallel">Input a list of values and process them in parallel</a></li><li><a href="#control-of-parallelization">Control of parallelization</a></li><li><a href="#list-like-processing-using-the-transient-monad">List-like processing using the Transient monad</a></li><li><a href="#using-the-parallel-non-determinist-effects-in-transient-to-perform-parallel-search">Using the parallel non-determinist effects in Transient to perform parallel search</a></li><li><a href="#running-examples">Running examples</a></li><li><a href="#constraint-logic-programming">Constraint Logic programming</a></li><li><a href="#conclusions-and-future-work">Conclusions and future work</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h1 id="what-"><a href="#what-">What?</a></h1><p>I will demonstrate how the Transient monad can process many elements and filter them at the same time using <code>guard</code>, like the list monad, but in this case, running parallel threads. The programmer can decide how many threads will execute.</p><p>I will also use the same primitives for a parallel search in a filesystem, followin an <a href="http://tldrify.com/9hg">example</a> on the book &quot;parallel and concurrent Haskell&quot; in the chapter <a href="http://chimera.labs.oreilly.com/books/1230000000929/ch13.html">Parallel programming using threads</a> from Simon Marlow. We will see that the high level approach used for non-determinism solve the problem of parallel search with more generality and with less modifications of the straighforward single threaded code.</p><p>Finally I will show the relation between logic programming in a language like Prolog or curry with the nondeterminist examples.</p><p>The naive parallelization of non deterministic computations may produce potentially a big amount of threads and the granularity may be smaller than the optimal if each element has a light processing that does not justify spawning a thread for it. To control this situation, the Transient monad now incorporates primitives for such purpose. These primitives can be used in any other scenario where granularity of paralelization is a problem.</p><h1 id="about-transient"><a href="#about-transient">About Transient</a></h1><p>In the hardworking programmer series, I develop a &quot;supercharged&quot; EDSL, based on the Transient monad with many high level effects out of the box. Some are classical effect with a new twist, like early termination or state. Some others are high level, including some ones that languages and operating systems do not bring or bring them at a low level, like implicit threading, event handling or backtracking.</p><p>The purpose is to enpower the programmer. I just want to ease the introduction of people to haskell and let them be productive from the beginning. Transient has some uncommon effects that makes it to look like a very high level language. In the first article I argued that these effects will permit to program composable software even in the presence of multithreading and events.</p><p>Unlike other EDSLs, the transient effects are not created by aggregating monad transformers, neither using an effect system. It is done manipulating continuations in a new way, a kind of meta-programming.</p><p>The repository with the last version of Transient and the examples is at</p><p><a href="https://github.com/agocorona/transient">https://github.com/agocorona/transient</a></p><h1 id="about-the-transient-monad"><a href="#about-the-transient-monad">About the Transient Monad</a></h1><p>In the transient monad each statement can have access to his own continuation. The monad also carries programmer-defined state. Therefore, it is possible to edit the continuation at run time. It is also possible to notify other statements about some condition by adding information to the state. The best example of this manipulation is the <a href="https://www.fpcomplete.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">backtracking effect</a>.</p><p><i>Effect primitives in Transient are like the nodes of a  living flowchart that could rewire it at run time</i>, to do more than what the original flowchart supposed to do. That kind of metaprogramming is the way the transient statements can create new effects. In category theoretical terms, the effects edit the arrows of the continuations.</p><p>This is an unexplored territory. <b>I´m currently researching new possibilities. It is impossible for me to explain the details every step, but I hope that you may catch the power of the concept and forgive me for my bad writing habits. I´m rewriting this from time to time since this is an unfinished work</b>.</p><p>from the previous version, I added better and simpler internals, and primitives for thread control <code>threads</code>, <code>oneThread</code> and <code>freeThreads</code>, added for solving parallel indeterminst problems, as well as some primitives for the same purpose: <code>choose</code> and  <code>collect</code>.</p><p>I will describe them here.</p><p>But first, a long disquisition that you may obviate if you are not interested in the details. step over it if you want to go to the &quot;meat&quot;</p><h1 id="about-backtracking-and-indeterminism"><a href="#about-backtracking-and-indeterminism">About Backtracking and Indeterminism</a></h1><p>There is a legitimate confusion between backtracking and indeterminism. Backtracking in <code>Transient</code> means to resume execution at a previous statement, but not only that. The execution can go further back until a cut of backtracking is found. Alternatively it can continue forward depending on some primitives used for flow control.</p><p>In the other side, Indeterminism, exemplified in the List monad, is the effect that process and return more than one value. However some people understand that the List monad perform a kind of backtracking. Details about this follows:</p><p>After publishing the <a href="https://www.fpcomplete.com/user/agocorona/the-hardworking-programmer-ii-practical-backtracking-to-undo-actions">Backtracking example</a>  Jello_Raptor  asked me:</p><p>*Err, Why not just use List as a monad to get the same effect? I mean that's just what using List for recursive descent parsers does, no? If you need state and things, there's always ListT (or one of many implementations thereof).</p><p>And I answered this:</p><p>I do not know how to use the list monad for backtracking. I know how to use it for indeterminism</p><p>This problem (undoing IO actions) is not similar to the one of the example here that I think is what you have in your mind:</p><p>refering to <a href="http://www.randomhacks.net/2007/03/12/monads-in-15-minutes">this article</a></p><p>In the above article each combination is filtered against the guard condition. Really in that example there is no backtracking, but indeterminism. It is a list monad that compute all the responses &quot;at the same time&quot;. Only the ones that pass the guard condition are shown. As always to remove the magic and understand what is going on, the best thing is to desugar everything. In this case, if you change the bind operation by <code>concatMap</code>. You will see that it is ordinary list processing going on there.</p><p>Lazy evaluation in fact makes the backtracking simulated by the list monad a bit more real, since the list is created on demand, and the guard forces the evaluation of each element of the list by executing the code within 'choose', but this is no different from how any other monad des it executing lazy statements. That is not privative of the List monad. Laziness assures that every pure computation implement &quot;backtracking in some way&quot;, since it forces the execution of unevaluated expressions coming from statements above them.  But is the hability to carry many values (indeterminism) of the List monad the effect that permits to simulate the execution of different alternatives.</p><p>To summarize, non-determinism can simulate backtracking in some problems like this, where a tree of combinations are explored. A deterministic program would need either execute explicit loops or do true backtracking to solve the problem of the above link, but in the case of my article about backtracking, there is no tree of alternatives to explore. The problem is to undo actions which have undo &quot;annotations&quot; attached. and the list monad can do nothing with it.</p><p>The backtracking effect demonstrated in my article is different; While in the case of the list it explores alternatives simulating being restarted from the same point again and again choosing of another alternative each time (it is not that, but it simulates this behavior), in my case the backtracking does his job while it is going back (by undoing or compensating actions) This is beyond what any indeterministic monad can do. However my monad can reverse the execution flow and go forward (with retry) then backward (with undo), then forward etc and can simulate an indeterministic effect if <code>onUndo</code> feed the flow with different values each time. In this case it would be backtracking simulating indeterminism, while the list monad execute indeterminism simulating backtracking. That is closely related, but not the same than exploring a tree deep first versus doing it breath first. Laziness complicates the analogy in the case of the list monad</p><p>--- end of response ----</p><p>I will not simulate indeterminism doing backtracking, because it is easier to perform indeterminism as such, by mimicking the behaviour of the List monad. But the list monad does not perform parallelization. In addition Transient permits paralelization.</p><h1 id="non-determinism-in-the-list-monad"><a href="#non-determinism-in-the-list-monad">Non-determinism in the List monad</a></h1><p>This is the code of the indeterminist example  above (that the author call backtracking) using the list monad:</p><pre><code class="active haskell">
+import Control.Monad
+
+solveConstraint :: [(Int,Int)]
+solveConstraint = do
+  x &lt;- choose [1,2,3]
+  y &lt;- choose [4,5,6]
+  guard (x*y == 8)
+  return (x,y)
+  where
+  choose = id
+
+main= print solveConstraint
+</code></pre><p>If we execute and print the result of <code>solveConstraint</code> we get</p><p>&gt;[(2,4)]</p><p>the magic is operated by the List monad and the <code>guard</code> operation. I will not enter in the details. The best way to understand it, as i said above, is to desugar everything until the monad is expressed in terms of pure function application and see that <code>solveConstraint</code> is normal list processing.</p><h1 id="monadplus-and-guard"><a href="#monadplus-and-guard">MonadPlus and guard</a></h1><p><code>guard</code> need the <a href="http://en.wikibooks.org/wiki/Haskell/MonadPlus">MonadPlus</a> class. It is the indeterminism class. It is in charge of adding results to a computation.  the methods of <code>MonadPlus</code> are <code>mzero</code>, when no result is added, and <code>mplus</code>  when a result is added to the previous ones.</p><p>In the list monad, <code>MonadPlus</code>is defined as:</p><pre><code class="haskell">instance MonadPlus [] where
+  mzero = []
+  mplus = (++)</code></pre><p><code>guard</code> is defined polimorphically for all the monads that have the <code>MonadPlus</code> instance as:</p><pre><code class="haskell">guard :: MonadPlus m =&gt; Bool -&gt; m ()
+guard True  = return ()
+guard _ = mzero</code></pre><p>look at the desugaring of <a href="http://tldrify.com/7w8">guard in the MonadPlus</a> document to understand how it filter result in the list monad.</p><h1 id="monadplus-and-guard-in-transient"><a href="#monadplus-and-guard-in-transient">MonadPlus and guard in Transient</a></h1><p>Let's do it for the Transient monad. The MonadPlus instance would be:</p><pre><code class="haskell">instance MonadPlus TransientIO where
+    mzero= stop
+    mplus (Transient x) (Transient y)=  Transient $ do
+         mx &lt;- x
+         case mx of
+             Nothing -&gt; y
+             justx -&gt; return justx</code></pre><p><code>stop</code>  is the call that interrupt the execution of the monad. It is defined as a Transient statement that return Nothing:</p><pre><code class="haskell">stop= Transient $ return Nothing</code></pre><p><code>mplus</code> executes the first expression, if the first gives Nothing, then it executes the second.</p><h1 id="input-a-list-of-values-and-process-them-in-parallel"><a href="#input-a-list-of-values-and-process-them-in-parallel">Input a list of values and process them in parallel</a></h1><p>We need to introduce a list of values in the monad.</p><pre><code class="haskell">-- | slurp a list of values and process them in parallel . To limit the number of processing
+-- threads, use `threads`
+choose  ::  [a] -&gt; TransientIO a
+choose   xs = do
+    evs &lt;- liftIO  $ newMVar xs  
+    parallel  $ do
+           es &lt;- takeMVar evs
+           putMVar evs $ tail es  
+
+           case es of
+            [x] -&gt; return $ Left x
+                else
+            (x:_)  return $ Right x </code></pre><p><code>choose</code> stores the set of values in a IORef, then <code>parallel</code> extract each value from thar IORef. If there is no more, it stop the computation returning a Left value</p><p>choose uses <code>parallel</code>, the basic primitive of transient, that executes his continuation every time that the IO computation return a value. it has changed. Now the signature is simpler:</p><pre><code class="haskell">parallel  ::   IO (Either a a) -&gt; TransientIO a</code></pre><p>When the IO computation return a <code>Left</code> value, parallel executes and finish. When it retun a <code>Rigth</code> value, it does the same, but reexecutes the IO computation until a <code>Left</code> value arrives</p><p>Well, there is a much more elegant way to do <code>choose</code>:</p><pre><code class="haskell">choose' :: [a] -&gt; TransientIO a
+choose'  xs = foldl (&lt;|&gt;) empty $ map (parallel . return . Left) xs
+</code></pre><p>But it is a bit slower, since it uses a number of <code>parallel</code> statements equal to the number of elements, instead of one.</p><h1 id="control-of-parallelization"><a href="#control-of-parallelization">Control of parallelization</a></h1><p><code>parallel</code> launch a new thread. This thread wait for outputs of the IO procedure passed as the parameter. Then it executes the continuation. Everithing that happens after parallel is in this new thread.</p><p>Another new thing is <code>freeThreads</code>. It avoids thread control. All the threads created after it control their lifecycle themselves. A non free thread can be killed by the parent process with <code>killchilds</code></p><p>It is possible however to restrict the number of threads. The example above would produce nine threads. One for each element of the first <code>choose</code>. Each one of them launches one thread for each element of the second choose. if there are more elements (N) and more choose's (NC), the number of threads would grow exponentially  N^NC.  That is not optimal, taking into account also that the processing done by each thread may be very light. In this case, only the processing is just the guard operation. To be effective, one thread must process more than one guard.</p><p>To avoid it,  <code>threads</code> set the maximum number of threads that may run simultaneously. If the maximum is reached, each new <code>parallel</code> statement does not spawn a thread, but execute his loop within the current thread, until some other thread dies. Then the next <code>parallel</code> will use this free slot.</p><p>finally <code>oneThread</code> assures that all the threads generated after this combinator are killed before continuing the execution. In the previous versions, this was done automatically by <code>parallel</code>. This decoupling allows for more flexibility.</p><pre><code class="`haskell">oneThread :: TransientIO a -&gt; TransientIO a</code></pre><h1 id="list-like-processing-using-the-transient-monad"><a href="#list-like-processing-using-the-transient-monad">List-like processing using the Transient monad</a></h1><p>Finally, with the definitions of <code>choose</code> and <code>guard</code> the code in the Transient monad is almost the same than for the list monad. Remember that <code>choose</code> is essentially the primitive <code>parallel</code> feeded with different values:</p><pre><code class="haskell">import Base
+import Indeterminism
+
+solveConstraint=  do
+      x &lt;- choose  [1,2,3]
+      y &lt;- choose  [4,5,6]
+      guard $ x * y == 8
+      return (x,y)
+
+main= keep $ do
+      s &lt;- threads 4 solveConstraint
+      liftIO $ print s
+</code></pre><p><code>keep</code> is a new call that run the transient monad and keep the application running. It also wait for text input.</p><h1 id="using-the-parallel-non-determinist-effects-in-transient-to-perform-parallel-search"><a href="#using-the-parallel-non-determinist-effects-in-transient-to-perform-parallel-search">Using the parallel non-determinist effects in Transient to perform parallel search</a></h1><p>The true power of parallel non-determinism can only be extracted when working with large datasets and  combined with other effects. Then, non-determinism can magically convert a single-threaded program into a multithreaded program almost without changes.</p><p>Let's see the Simon Marlow <a href="http://tldrify.com/9hg">example</a> in the Book <i>&quot;parallel and Concurrent programming in Haskell&quot;</i>. 
+The program, using a single thread, crawl the filesystem from a given directory to all the subdirectories looking for a file. The program return when a file is found.</p><pre><code class="haskell">find :: String -&gt; FilePath -&gt; IO (Maybe FilePath)
+find s d = do
+  fs &lt;- getDirectoryContents d                         -- 1
+  let fs' = sort $ filter (`notElem` [&quot;.&quot;,&quot;..&quot;]) fs    -- 2
+  if any (== s) fs'                                    -- 3
+     then return (Just (d &lt;/&gt; s))
+     else loop fs'                                     -- 4
+ where
+  loop [] = return Nothing                             -- 5
+  loop (f:fs)  = do
+    let d' = d &lt;/&gt; f                                   -- 6
+    isdir &lt;- doesDirectoryExist d'                     -- 7
+    if isdir
+       then do r &lt;- find s d'                          -- 8
+               case r of
+                 Just _  -&gt; return r                   -- 9
+                 Nothing -&gt; loop fs                    -- 10
+       else loop fs                                    -- 11</code></pre><p><i>Parallelizing this program is not entirely straightforward because doing it naively could waste a lot of work; if we search multiple subdirectories concurrently and we find the file in one subdirectory, then we would like to stop searching the others as soon as possible. Moreover, if an error is encountered at any point, then we need to propagate the exception correctly. We must be careful to keep the deterministic behavior of the sequential version, too. If we encounter an error while searching a subtree, then the error should not prevent the return of a correct result if the sequential program would have done so.</i></p><p>To use the async library, it is necessary to transform the single threaded program in some contorted ways. Instead, the non-determinist effect with paralelization using the Transient monad as explained above, essentially allows you to parallelize the single-threaded program with few changes.</p><p>The transformed program is:</p><pre><code class="haskell">find' :: String -&gt; FilePath -&gt; TransientIO FilePath
+find' s d = do
+  fs &lt;- liftIO $ getDirectoryContents d                -- 1
+  let fs' = sort $ filter (`notElem` [&quot;.&quot;,&quot;..&quot;]) fs    -- 2
+  if any (== s) fs'                                    -- 3
+     then  return $ d&lt;/&gt; s
+
+     else do
+       f &lt;- choose fs'                                 -- 4
+       let d' = d &lt;/&gt; f                                -- 6
+       isdir &lt;- liftIO $ doesDirectoryExist d'         -- 7
+       if isdir then find' s d'                        -- 8
+                else stop        -- not a dir, not the file 
+                                 -- looked for, end</code></pre><p>Instead of the loop, I use  <code>choose</code>, defined above, to carry out the recursive search in the tree of directories.</p><p>That's all. This is the whole of it. Well, find' is executed in parallel many times and calls itself. It can return many matches and can execute up to one thread for each <code>choose</code> if not limited. If we run <code>find'</code> &quot;as is&quot;, it will return files and it will not stop until all the directory tree is explored. In a big filesystem probably will allocate too much RAM since the number of simultaneous threads is unlimited.</p><p>To control  the execution, we use <code>collect</code>:</p><pre><code class="haskell">main= keep $  do
+    r&lt;- threads 10 . collect 1 $ find' &quot;Main.hs&quot;  &quot;..&quot;
+    liftIO $ putStrLn $ &quot;Found= &quot;++ show  r</code></pre><p><code>collect</code> monitors the threads spawned by <code>find'</code> and the number of responses. When the number of responses are the number requested, it stop all the running <code>find'</code>processes. If there is no thread active because the process has finished and there a not enough responses, it return the ones found. In this example the search uses ten threads and we look for one file.</p><p>Yo can see that there are separated combinators for each functionality: thread control, monitoring and thread spawning. That allows for more use cases and more flexible programs with a few of these combinators.</p><h1 id="running-examples"><a href="#running-examples">Running examples</a></h1><p>All the examples above and some more can be run below. You must choose the option &quot;nondet&quot;. Then you see a submenu with all the examples.</p><p>To see the effect of restricting the number of threads, one of the samples, the thread sample, display the result together with the identifier of the thread that generated it. You can input the max number of simultaneous threads and see how the order of the responses and the thread identifiers change.</p><p>I also included all the examples of the previous articles, that demonstrates backtracking for undoing IO actions, parallelism, composability, event handling, async-like/futures like/map-reduce-like processing:</p><pre><code class="active haskell">
+{-# START_FILE Main.hs #-}
+
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+
+module Main where
+
+import           Data.Typeable
+import           Base
+import           Backtrack
+import           Indeterminism
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Exception
+import           Control.Monad.State
+import           Data.Monoid
+import           System.IO.Unsafe
+import           System.Directory
+import           System.FilePath
+import           Network.HTTP
+import           qualified Data.Map as M
+import           Network
+import           System.IO
+import           Data.IORef
+import Data.List hiding (find,map, group)
+
+-- show
+
+solveConstraint=  do
+      x &lt;- choose  [1,2,3]
+      y &lt;- choose  [4,5,6]
+
+      guard $ x * y == 8
+
+      return (x,y)
+
+pythags = do
+  x &lt;- choose [1..50]
+  y &lt;- choose ([1..x] :: [Int])
+  z &lt;- choose [1..round $ sqrt(fromIntegral $ 2*x*x)]
+
+  guard (x*x+y*y==z*z)
+
+  return (x, y,z)
+
+example1= do
+    option &quot;ex1&quot; &quot;example 1&quot;
+    r &lt;- threads 4 solveConstraint
+    liftIO $ print r
+
+example2= do
+    option &quot;pyt&quot; &quot;pythagoras&quot;
+    r&lt;- threads 1 pythags
+    liftIO $ print r
+
+groupSample= threads 4 $ do
+    option &quot;coll&quot; &quot;group sample: return results in a list&quot;
+    r &lt;- group 9 $ do
+      x &lt;- choose  [1,2,3]
+      y &lt;- choose  [4,5,6]
+      return (x,y)
+
+    liftIO $ print r
+
+threadSample= freeThreads $ do
+     option &quot;th&quot; &quot;threads sample&quot;
+     liftIO $ print &quot;number of threads? (&lt; 10)&quot;
+
+     n &lt;- input  ( &lt; 10)
+
+     threads n $ do
+        x &lt;- choose  [1,2,3]
+        y &lt;- choose  [4,5,6]
+
+        -- added some delay to show tread interleaving better in Linux
+        th &lt;- liftIO $ threadDelay 100000 &gt;&gt; myThreadId
+
+        liftIO $ print (x,y,th)
+
+nonDeterminsm= do
+      option &quot;nondet&quot; &quot;Non determinism examples&quot;
+      example1 &lt;|&gt; example2
+               &lt;|&gt; groupSample
+               &lt;|&gt; threadSample
+               &lt;|&gt; fileSearch
+
+
+
+find' :: String -&gt; FilePath -&gt; TransientIO FilePath
+find' s d = do
+  fs &lt;- liftIO $ getDirectoryContents d
+       `catch` \(e:: SomeException) -&gt; return []       -- 1
+  let fs' = sort $ filter (`notElem` [&quot;.&quot;,&quot;..&quot;]) fs    -- 2
+  if any (== s) fs'                                    -- 3
+     then return $ d&lt;/&gt; s
+     else do
+       f &lt;- choose fs'                                 -- 4
+       let d' = d &lt;/&gt; f                                -- 6
+       isdir &lt;- liftIO $ doesDirectoryExist d'         -- 7
+       if isdir then find' s d'                        -- 8
+                else stop
+
+
+------------------
+
+fileSearch=   do
+    option &quot;file&quot; &quot;example of file search&quot;
+    r&lt;- threads 3 $ collect 1 $ find' &quot;Main.hs&quot;  &quot;..&quot;
+    liftIO $ putStrLn $ &quot;Found= &quot;++ show  r
+
+
+
+main= keep $ do
+      oneThread $ option &quot;main&quot; &quot;to return to the main menu&quot;   &lt;|&gt; return &quot;&quot;
+      liftIO $ putStrLn &quot;MAIN MENU&quot;
+
+      nonDeterminsm &lt;|&gt; trans &lt;|&gt;
+             colors &lt;|&gt; app   &lt;|&gt;
+            futures &lt;|&gt; server
+
+-- / show
+
+trans= do
+       option &quot;trans&quot; &quot;transaction examples with backtracking for undoing actions&quot;
+       transaction &lt;|&gt; transaction2
+
+transaction=   do
+       option &quot;back&quot; &quot;backtracking test&quot;
+       productNavigation
+       reserve
+       payment
+
+transaction2= do
+       option &quot;back2&quot; &quot;backtracking test 2&quot;
+       productNavigation
+       reserveAndSendMsg
+       payment
+
+
+       liftIO $ print &quot;done!&quot;
+
+
+productNavigation = liftIO $ putStrLn &quot;product navigation&quot;
+
+reserve= liftIO (putStrLn &quot;product reserved,added to cart&quot;)
+                 `onUndo` liftIO (putStrLn &quot;product un-reserved&quot;)
+
+payment = do
+           liftIO $ putStrLn &quot;Payment failed&quot;
+           undo
+
+reserveAndSendMsg= do
+            reserve
+            liftIO  (putStrLn &quot;update other database necesary for the reservation&quot;)
+                 `onUndo` liftIO (putStrLn &quot;database update undone&quot;)
+
+
+
+colors :: TransientIO ()
+colors= do
+       option &quot;colors&quot; &quot;choose between three colors&quot;
+       r &lt;-  color 1  &quot;red&quot;  &lt;|&gt; color 2 &quot;green&quot; &lt;|&gt; color 3 &quot;blue&quot;
+       liftIO $ print r
+       where
+       color :: Int -&gt; String -&gt; TransientIO String
+       color n str= do
+         option (show n) str
+         liftIO . print $ str ++ &quot; color&quot;
+         return  str
+
+app :: TransientIO ()
+app= do
+       option &quot;app&quot; &quot;applicative expression that return a counter in 2-tuples every second&quot;
+       liftIO $ putStrLn &quot;to stop the sequence, write main(enter)&quot;
+       counter &lt;- liftIO $ newMVar 0
+
+       r &lt;-  (,) &lt;$&gt;  number  counter 1 &lt;*&gt; number counter 1
+
+
+       liftIO $ putStrLn $ &quot;result=&quot; ++ show r
+       where
+       number counter n= waitEvents $ do
+          threadDelay $ n * 1000000
+          n &lt;- takeMVar counter
+          putMVar counter (n+1)
+          return n
+
+futures= do
+       option &quot;async&quot; &quot;for parallelization of IO actions with applicative and monioidal combinators&quot;
+       sum1 &lt;|&gt; sum2
+
+sum1 :: TransientIO ()
+sum1= do
+       option &quot;sum1&quot; &quot;access to two web pages concurrently and sum the number of words using Applicative&quot;
+       liftIO $ print &quot; downloading data...&quot;
+       (r,r') &lt;- (,) &lt;$&gt; async  (worker &quot;http://www.haskell.org/&quot;)
+                     &lt;*&gt; async  (worker &quot;http://www.google.com/&quot;)
+
+       liftIO $ putStrLn $ &quot;result=&quot;  ++ show  (r + r')
+
+getURL= simpleHTTP . getRequest
+
+worker :: String -&gt; IO Int
+worker url=do
+      r &lt;- getURL url
+      body &lt;- getResponseBody r
+      putStrLn $ &quot;number of words in &quot; ++ url ++&quot; is: &quot; ++ show(length (words body))
+      return . length . words $ body
+
+sum2 :: TransientIO ()
+sum2= do
+      option &quot;sum2&quot; &quot;access to N web pages concurrenty and sum the number of words using map-fold&quot;
+      liftIO $ print &quot; downloading data...&quot;
+      rs &lt;- foldl (&lt;&gt;) (return 0) $ map (async . worker)
+                  [ &quot;http://www.haskell.org/&quot;
+                  , &quot;http://www.google.com/&quot;]
+
+      liftIO $ putStrLn $ &quot;result=&quot;  ++ show rs
+
+instance Monoid Int where
+      mappend= (+)
+      mempty= 0
+
+server :: TransientIO ()
+server=  do
+       option &quot;server&quot; &quot;A web server in the port 8080&quot;
+       liftIO $ print &quot;Server Stated&quot;
+       sock &lt;-  liftIO $  listenOn $ PortNumber 8080
+       (h,_,_) &lt;- spawn $ accept sock
+       liftIO $ do
+           hPutStr h msg
+           putStrLn &quot;new request&quot;
+           hFlush h
+           hClose h
+         `catch` (\(e::SomeException) -&gt; sClose sock)
+
+msg = &quot;HTTP/1.0 200 OK\r\nContent-Length: 5\r\n\r\nPong!\r\n&quot;
+
+
+
+{-# START_FILE Backtrack.hs #-}
+-- show
+-- /show
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE ExistentialQuantification #-}
+
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE ExistentialQuantification #-}
+module Backtrack (registerUndo, onUndo, undo, retry, undoCut) where
+
+import Base
+import Data.Typeable
+import Control.Applicative
+import Control.Monad.State
+import Unsafe.Coerce
+import System.Mem.StableName
+
+data Backtrack= forall a b.Backtrack{backtracking :: Bool
+                                    ,backStack :: [EventF]}
+                                    deriving Typeable
+
+-- | assures that backtracking will not go further
+undoCut :: TransientIO ()
+undoCut= Transient $ do
+     delSessionData $ Backtrack False []
+     return $ Just ()
+
+-- | the secod parameter will be executed when backtracking 
+{-# NOINLINE onUndo #-}
+onUndo :: TransientIO a -&gt; TransientIO a -&gt; TransientIO a
+onUndo ac bac= do
+   r&lt;-registerUndo $ Transient $ do 
+     Backtrack back _ &lt;- getSessionData `onNothing` return (Backtrack False [])
+     runTrans $ if back then bac  else ac 
+   return r
+   
+-- | register an actions that will be executed when backtracking
+{-# NOINLINE registerUndo #-}
+registerUndo :: TransientIO a -&gt; TransientIO a
+registerUndo f  = Transient $ do
+   cont@(EventF x _ _ _ _ _ _ _ _)  &lt;- get   !&gt; &quot;backregister&quot;
+   md  &lt;- getSessionData 
+   ss &lt;- case md of
+        Just (bss@(Backtrack b (bs@((EventF x'  _ _ _ _ _ _ _ _):_)))) -&gt; do
+            addrx  &lt;- addr x
+            addrx' &lt;- addr x'         -- to avoid duplicate backtracking points
+            return $ if addrx == addrx' then bss else  Backtrack b $ cont:bs
+        Nothing -&gt;  return $ Backtrack False [cont]
+   setSessionData ss
+   runTrans f
+   where
+   addr x = liftIO $ return . hashStableName =&lt;&lt; (makeStableName $! x)
+
+-- | restart the flow forward from this point on
+retry :: TransientIO ()
+retry= do
+    Backtrack _ stack &lt;- getSessionData `onNothing` return (Backtrack False [])
+    setSData $ Backtrack False stack
+
+-- | execute backtracking. It execute the registered actions in reverse order. 
+--
+-- If the backtracking flag is changed the flow proceed  forward from that point on. 
+--
+--If the backtrack stack is finished or undoCut executed, `undo` will stop.
+undo :: TransientIO a
+undo= Transient $ do
+  bs &lt;- getSessionData  `onNothing` return nullBack            !&gt;&quot;GOBACK&quot;
+  goBackt  bs
+
+  where
+  nullBack= Backtrack False []
+  goBackt (Backtrack _ [])= return Nothing                     !&gt; &quot;END&quot;
+  goBackt (Backtrack b (stack@(first@(EventF x fs _ _  _ _ _ _ _): bs)))= do
+--        put first{replay=True} 
+        setSData $ Backtrack True stack
+        mr &lt;-  runClosure first                                !&gt; &quot;RUNCLOSURE&quot;
+        Backtrack back _ &lt;- getSessionData `onNothing` return nullBack 
+                                                               !&gt;&quot;END RUNCLOSURE&quot;
+        case back of
+           True -&gt;  goBackt $ Backtrack True bs                !&gt; &quot;BACK AGAIN&quot;
+           False -&gt; case mr of
+                   Nothing -&gt; return empty                     !&gt; &quot;FORWARD END&quot;
+                   Just x -&gt;  runContinuation first x          !&gt; &quot;FORWARD EXEC&quot;
+
+
+
+{-# START_FILE Indeterminism.hs #-}
+-- show
+-- /show
+-----------------------------------------------------------------------------
+--
+-- Module      :  Transient.Indeterminism
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE BangPatterns, DeriveDataTypeable #-}
+module Indeterminism (
+choose, choose', collect, group --, found
+) where
+
+import Base
+import Control.Monad.IO.Class
+import Data.IORef
+import Control.Applicative
+import Data.Monoid
+import Control.Concurrent
+import Data.Typeable
+import Control.Monad.State
+import Control.Concurrent.STM as STM
+import GHC.Conc
+
+
+-- | slurp a list of values and process them in parallel . To limit the number of processing
+-- threads, use `threads`
+choose  ::  [a] -&gt; TransientIO a
+choose []= empty
+choose   xs = do
+    evs &lt;- liftIO  $ newIORef xs
+    parallel   $ do
+           es &lt;- atomicModifyIORef' evs $ \es -&gt; let !tes= tail es in (tes,es)
+           case es of
+            [x]  -&gt; return $ Left $ head es
+            x:_  -&gt; return $ Right x
+
+-- | group the output of a possible mmultithreaded process in groups of n elements.
+group :: Int -&gt; TransientIO a -&gt; TransientIO [a]
+group num proc =  do
+    v &lt;- liftIO $ newIORef (0,[])
+    x &lt;- proc
+    n &lt;- liftIO $ atomicModifyIORef' v $ \(n,xs) -&gt; let !n'=n +1 in ((n', x:xs),n')
+    if n &lt; num
+      then stop
+      else do
+       liftIO $ atomicModifyIORef v $ \(n,xs) -&gt;  ((0,[]),xs)
+
+choose' :: [a] -&gt; TransientIO a
+choose'  xs = foldl (&lt;|&gt;) empty $ map (parallel . return . Left) xs
+
+
+--newtype Collect a= Collect (MVar (Int, [a])) deriving Typeable
+
+-- collect the results of a search done in parallel, usually initiated by
+-- `choose` . The results are added to the collection with `found`
+--
+--
+
+(**&gt;) x y=   Transient $do
+       runTrans x
+       runTrans y
+
+(&lt;**) x y= Transient $ do
+       r &lt;- runTrans x
+       runTrans y
+       return r
+
+-- execute a process and get the first n solutions.
+-- if the process end without finding the number of solutions requested, it return the fond ones
+-- if he find the number of solutions requested, it kill the threads of the process and return
+-- It works monitoring the solutions found and the number of active threads.
+collect :: Typeable a =&gt; Int -&gt; TransientIO a -&gt; TransientIO [a]
+collect n search=  do
+  rv &lt;- liftIO $ atomically $ newTVar (0,[]) !&gt; &quot;NEWMVAR&quot;
+  endflag &lt;- liftIO $ newTVarIO False
+  st &lt;- get
+  let any1 = do
+        r &lt;- search   !&gt; &quot;ANY&quot;
+        liftIO $ atomically $ do
+            (n1,rs) &lt;- readTVar rv
+            writeTVar  rv (n1+1,r:rs) !&gt; &quot;MODIFY&quot;
+        stop
+
+      detect= do
+        stnow &lt;- get
+        freeThreads $ async $ do
+             threadDelay 1000 -- to allow the spawning of worker threads
+             xs &lt;- atomically $ do
+                (n',xs) &lt;- (readTVar rv ) !&gt; &quot;read&quot;
+                ns &lt;- readTVar $ children st
+--                unsafeIOToSTM $ putStrLn $ &quot;LEN=&quot;++show (length ns)++ &quot; &quot;++ show n'++ &quot; &quot;++ show n
+
+                if (n' &gt;= n) || (length ns == 1)
+                  then return xs
+                  else retry
+
+             th &lt;- myThreadId !&gt; &quot;KILL&quot;
+             free th stnow
+             killChildren st
+             addThread st stnow
+             return  xs
+
+  any1  **&gt; detect
+
+
+
+
+{-# START_FILE Base.hs #-}
+-- show
+-- /show
+{-# LANGUAGE ScopedTypeVariables #-}
+-----------------------------------------------------------------------------
+--
+-- Module      :  Base
+-- Copyright   :
+-- License     :  GPL (Just (Version {versionBranch = [3], versionTags = []}))
+--
+-- Maintainer  :  agocorona@gmail.com
+-- Stability   :
+-- Portability :
+--
+-- |
+--
+-----------------------------------------------------------------------------
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE FlexibleContexts          #-}
+{-# LANGUAGE FlexibleInstances         #-}
+{-# LANGUAGE MultiParamTypeClasses     #-}
+{-# LANGUAGE DeriveDataTypeable        #-}
+-- show
+module Base  where
+-- /show
+
+import           Control.Applicative
+import           Control.Monad.State
+import           Data.Dynamic
+import qualified Data.Map               as M
+import           Data.Monoid
+import           Debug.Trace
+import           System.IO.Unsafe
+import           Unsafe.Coerce
+import           Control.Exception
+import           Control.Concurrent
+import           Control.Concurrent.STM
+import           System.Mem.StableName
+import           Data.Maybe
+import           GHC.Conc
+import           Data.List
+import           Data.IORef
+
+(!&gt;) =const . id -- flip trace
+infixr 0 !&gt;
+
+data Transient m x= Transient  {runTrans :: m (Maybe x)}
+type SData= ()
+
+type EventId= Int
+
+
+
+data EventF  = forall a b . EventF{xcomp       :: TransientIO a
+                                  ,fcomp       :: [b -&gt; TransientIO b]
+                                  ,mfData      :: M.Map TypeRep SData
+                                  ,mfSequence  :: Int
+                                  ,threadId    :: ThreadId
+                                  ,freeTh      :: Bool
+                                  ,parent      :: Maybe EventF
+                                  ,children    :: TVar[EventF]
+                                  ,maxThread     :: Maybe (P Int)
+                                  }
+                                  deriving Typeable
+
+type P= IORef
+newp= newIORef
+
+
+--(=:) :: P a  -&gt; (a -&gt; a) -&gt; IO()
+(=:) n f= liftIO $ atomicModifyIORef' n $  \v -&gt;  ((f v),())
+
+addr x= show $ unsafePerformIO $ do
+       st &lt;- makeStableName $! x
+       return $ hashStableName st
+
+waitQSemB sem= atomicModifyIORef' sem $ \n -&gt; if n &gt; 0 then(n-1,True) else (n,False)
+signalQSemB sem= atomicModifyIORef' sem  $ \n -&gt;  (n + 1,())
+
+-- | set the maximun number of threads for a procedure. It is useful for the
+threads :: Int -&gt; TransientIO a -&gt; TransientIO a
+threads n proc= Transient $do
+   msem &lt;- gets maxThread
+   sem &lt;- liftIO $ newIORef n
+   modify $ \s -&gt; s{maxThread= Just sem}
+   r &lt;- runTrans proc
+   modify $ \s -&gt; s{maxThread = msem} -- restore it
+   return r
+
+
+instance MonadState EventF  TransientIO where
+  get=  Transient $ get &gt;&gt;= return . Just
+  put x= Transient $ put x &gt;&gt; return (Just ())
+
+type StateIO= StateT EventF  IO
+
+type TransientIO= Transient StateIO
+
+--runTrans ::  TransientIO x -&gt; StateT EventF  IO (Maybe x)
+--runTrans (Transient mx) = mx
+
+
+runTransient :: TransientIO x -&gt; IO (Maybe x, EventF)
+runTransient t= do
+
+  th &lt;- myThreadId
+  let eventf0=  EventF  empty [] M.empty 0
+          th False  Nothing  (unsafePerformIO $ newTVarIO []) Nothing
+   
+
+  runStateT (runTrans t) eventf0{threadId=th} !&gt; &quot;MAIN=&quot;++show th
+
+
+setEventCont ::   TransientIO a -&gt; (a -&gt; TransientIO b) -&gt; StateIO ()
+setEventCont x f  = do
+   st@(EventF   _ fs d n  r applic  ch rc bs)  &lt;- get
+--   if applic
+--    then return () else
+   put $ EventF x ( unsafeCoerce f : fs) d n  r applic  ch rc bs
+
+
+
+resetEventCont :: Maybe a -&gt; StateIO ()
+resetEventCont mx =do
+   st@(EventF _ fs d n  r nr  ch rc bs)  &lt;- get
+--   if nr
+--    then return ()
+--    else do
+   let f= \mx -&gt;  case mx of
+                       Nothing -&gt; empty
+                       Just x  -&gt; (unsafeCoerce $ head fs)  x
+   put $ EventF  (f mx) ( tailsafe fs)d n  r nr  ch rc bs
+   where
+   tailsafe []=[]
+   tailsafe (x:xs)= xs
+
+
+
+getCont ::(MonadState EventF  m) =&gt; m EventF
+getCont = get
+
+
+runCont :: EventF -&gt; StateIO ()
+runCont (EventF  x fs _ _  _ _  _ _ _)= runTrans ((unsafeCoerce x') &gt;&gt;= compose ( fs)) &gt;&gt; return ()
+    where
+    x'=  do
+--           modify $ \s -&gt; s{replay=True}
+           r&lt;- x
+--           modify $ \s -&gt; s{replay=False}
+           return r
+
+{-
+runCont cont= do
+     mr &lt;- runClosure cont
+     case mr of
+         Nothing -&gt; return Nothing
+         Just r -&gt; runContinuation cont r
+-}
+
+compose []= const empty
+compose (f: fs)= \x -&gt; f x &gt;&gt;= compose fs
+
+
+
+runClosure :: EventF -&gt; StateIO (Maybe a)
+runClosure (EventF x _ _ _ _ _ _ _ _) =  unsafeCoerce $ runTrans x
+
+runContinuation ::  EventF -&gt; a -&gt; StateIO (Maybe b)
+runContinuation (EventF _ fs _ _ _ _  _ _ _) x= runTrans $  (unsafeCoerce $ compose $  fs) x
+
+instance   Functor TransientIO where
+  fmap f mx=   -- Transient $ fmap (fmap f) $ runTrans mx
+    do
+     x &lt;- mx
+     return $ f x
+
+instance Applicative TransientIO where
+  pure a  = Transient . return $ Just a
+
+
+  f &lt;*&gt; g = Transient $ do
+
+         rf &lt;- liftIO $ newIORef Nothing
+         rg &lt;- liftIO $ newIORef Nothing   -- !&gt; &quot;NEWIOREF&quot;
+
+         cont@(EventF _ fs a b c d peers children g1) &lt;- get   -- !&gt; &quot;APLICATIVE DOIT&quot;
+
+         let
+             appg x = Transient $  do
+                   liftIO $ writeIORef rg $ Just x :: StateIO ()
+                   k &lt;- liftIO $ readIORef rf
+
+                   return $ k &lt;*&gt; Just x  -- !&gt; &quot;RETURNED: &quot; ++ show(isJust k)++ show(isJust x)
+
+
+             appf k = Transient $  do
+                   liftIO $ writeIORef rf  $ Just k :: StateIO ()
+                   x&lt;- liftIO $ readIORef rg
+
+                   return $ Just k &lt;*&gt; x  --  !&gt; &quot;RETURNED: &quot; ++ show(isJust k)++ show(isJust x)
+
+
+
+         put $ EventF f (unsafeCoerce appf:  fs)
+                                          a b c d peers children g1
+         k &lt;- runTrans f
+         liftIO $ writeIORef rf  k -- :: StateIO ()
+
+         put $ EventF g (unsafeCoerce appg :  fs)
+                                          a b c d peers  children g1
+         x &lt;- runTrans g
+         liftIO $ writeIORef rg  x
+
+         return $ k &lt;*&gt; x
+
+
+instance  Alternative TransientIO where
+  empty= Transient $ return  Nothing
+  Transient f &lt;|&gt; Transient g= Transient $ do
+         k &lt;-   f
+         x &lt;-   g
+         return $ k &lt;|&gt; x
+
+-- | delete all the previous childs generated by the expressions and continue execution
+-- of the current thread.
+oneThread :: TransientIO a -&gt; TransientIO a
+oneThread comp=  do
+   chs &lt;- liftIO $ newTVarIO []
+   r &lt;- comp
+   modify $ \ s -&gt; s{children= chs}
+   killchilds
+   return r
+
+-- | internal. use `oneThread`
+killchilds :: TransientIO()
+killchilds= Transient $  do
+   cont &lt;- get
+   liftIO $  killChildren cont
+   return $ Just ()
+
+-- | The threads generated in the process passed as parameter will not be killed.
+freeThreads :: TransientIO a -&gt; TransientIO a
+freeThreads proc= Transient $ do
+     st &lt;- get
+     put st{freeTh= True}
+     r &lt;- runTrans proc
+     modify $ \st -&gt; st{freeTh= freeTh st}
+     return r
+
+-- | The threads will be killed when the parent thread dies
+hookedThreads proc= Transient $ do
+     st &lt;- get
+     put st{freeTh= False}
+     r &lt;- runTrans proc
+     modify $ \st -&gt; st{freeTh= freeTh st}
+     return r
+
+instance MonadPlus TransientIO where
+    mzero= stop
+    mplus (Transient x) (Transient y)=  Transient $ do
+         mx &lt;- x
+         case mx of
+             Nothing -&gt; y
+             justx -&gt; return justx
+
+-- | a sinonym of empty that can be used in a monadic expression. it stop the
+-- computation
+stop :: TransientIO a
+stop= Control.Applicative.empty
+
+instance Monoid a =&gt; Monoid (TransientIO a) where
+  mappend x y = mappend &lt;$&gt; x &lt;*&gt; y
+  mempty= return mempty
+
+instance Monad TransientIO where
+      return x = Transient $ return $ Just x
+      x &gt;&gt;= f  = Transient $ do
+        cont &lt;- setEventCont x  f
+
+        mk &lt;- runTrans x
+        resetEventCont mk
+        case mk of
+           Just k  -&gt; do
+               runTrans $ f k
+
+           Nothing -&gt; return Nothing
+
+
+
+instance MonadTrans (Transient ) where
+  lift mx = Transient $ mx &gt;&gt;= return . Just
+
+instance MonadIO TransientIO where
+  liftIO = lift . liftIO --     let x= liftIO io in x `seq` lift x
+
+
+
+-- | Get the session data of the desired type if there is any.
+getSessionData ::  (MonadState EventF m,Typeable a) =&gt;  m (Maybe a)
+getSessionData =  resp where
+ resp= gets mfData &gt;&gt;= \list  -&gt;
+    case M.lookup ( typeOf $ typeResp resp ) list of
+      Just x  -&gt; return . Just $ unsafeCoerce x
+      Nothing -&gt; return $ Nothing
+ typeResp :: m (Maybe x) -&gt; x
+ typeResp= undefined
+
+-- | getSessionData specialized for the View monad. if Nothing, the
+-- monadic computation does not continue. getSData is a widget that does
+-- not validate when there is no data of that type in the session.
+getSData :: MonadState EventF m =&gt; Typeable a =&gt;Transient m  a
+getSData= Transient getSessionData
+
+
+-- | setSessionData ::  (StateType m ~ MFlowState, Typeable a) =&gt; a -&gt; m ()
+setSessionData  x=
+  modify $ \st -&gt; st{mfData= M.insert  (typeOf x ) (unsafeCoerce x) (mfData st)}
+
+-- | a shorter name for setSessionData
+setSData ::  ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+setSData= setSessionData
+
+delSessionData x=
+  modify $ \st -&gt; st{mfData= M.delete (typeOf x ) (mfData st)}
+
+delSData :: ( MonadState EventF m,Typeable a) =&gt; a -&gt; m ()
+delSData= delSessionData
+
+withSData ::  ( MonadState EventF m,Typeable a) =&gt; (Maybe a -&gt; a) -&gt; m ()
+withSData f= modify $ \st -&gt; st{mfData=
+    let dat = mfData st
+        mx= M.lookup typeofx dat
+        mx'= case mx of Nothing -&gt; Nothing; Just x -&gt; unsafeCoerce x
+        fx=  f mx'
+        typeofx= typeOf $ typeoff f
+    in  M.insert typeofx  (unsafeCoerce fx) dat}
+    where
+    typeoff :: (Maybe a -&gt; a) -&gt; a
+    typeoff = undefined
+----
+
+genNewId :: MonadIO m =&gt; MonadState EventF m =&gt;  m Int
+genNewId=  do
+          st &lt;- get
+
+          let n= mfSequence st
+          put $ st{mfSequence= n+1}
+          return n
+
+refSequence :: IORef Int
+refSequence= unsafePerformIO $ newp 0
+
+
+
+data Loop= Once | Loop | Multithread deriving Eq
+
+waitEvents ::   IO b -&gt; TransientIO b
+waitEvents io= do
+   r &lt;- parallel (Right &lt;$&gt; io)
+   killchilds
+   return r
+
+
+async  ::  IO b -&gt; TransientIO b
+async io= do
+   r &lt;- parallel  (Left &lt;$&gt;io)
+   killchilds
+   return r
+
+spawn ::  IO b -&gt; TransientIO b
+spawn io= freeThreads $ do
+   r &lt;- parallel (Right &lt;$&gt;io)
+   return r
+
+data EventValue= EventValue SData deriving Typeable
+
+parallel  ::    IO (Either b b) -&gt; TransientIO b
+parallel  ioaction= Transient$   do
+        cont &lt;- getCont                    -- !&gt; &quot;PARALLEL&quot;
+        mv &lt;- getSessionData
+        case mv  of
+         Just (EventValue v)  -&gt; do
+            delSessionData $ EventValue () -- !&gt; &quot;ISJUST &quot;
+            return  $ Just $ unsafeCoerce v
+         Nothing -&gt; do
+            liftIO  $ loop cont    ioaction
+            return Nothing
+
+
+
+
+loop (cont'@(EventF x fs a b c d peers childs g))  rec  =  do
+  chs &lt;- liftIO $ newTVarIO []
+  let cont = EventF x fs a b c d (Just cont') chs g
+      iocont dat=
+          runStateT ( do
+             setSessionData . EventValue $ unsafeCoerce dat
+             runCont cont
+             ) cont
+             &gt;&gt; return ()
+      loop'= do
+        mdat &lt;- rec
+        case mdat of
+         Left dat -&gt; iocont dat
+
+         Right dat -&gt; do
+              forkMaybe  $ iocont dat
+              loop'
+
+      forkMaybe  proc = do
+         dofork &lt;- case maxThread cont of
+                  Nothing -&gt; return True
+                  Just sem -&gt; do
+                    dofork &lt;- waitQSemB sem
+                    if dofork then  return True else return False
+
+         if dofork
+            then  do
+                 th &lt;- forkFinally proc $ \me -&gt; do
+                         case me of -- !&gt; &quot;THREAD ENDED&quot; of
+                          Left  e -&gt; do
+                           when (fromException e /= Just ThreadKilled)$ liftIO $ print e
+                           killChildren  cont  !&gt; &quot;KILL RECEIVED&quot; ++ (show $ unsafePerformIO myThreadId)
+
+                          Right _ -&gt; do
+                             --  if parent is alive
+                             --  then remove himself from the list (with free)
+                             --  and pass his active children to his parent
+                             return ()
+                             th &lt;- myThreadId
+                             mparent &lt;- free th cont
+                             case mparent of
+                              Nothing  -&gt;  return()
+                              Just parent -&gt; atomically $ do
+                                     chs' &lt;- readTVar $ children cont
+                                     chs  &lt;- (readTVar $ children parent) 
+                                     writeTVar (children parent)$ chs ++ chs'
+                                     return ()
+
+                         case maxThread cont of
+                           Just sem -&gt; signalQSemB sem
+                           Nothing -&gt; return ()
+
+
+                 addThread cont' cont{threadId=th}  -- !&gt;  &quot;thread created: &quot;++ show th
+
+            else proc  -- !&gt; &quot;NO THREAD&quot;
+
+  forkMaybe  loop'
+
+
+free th env= do
+  if isNothing $ parent env
+   then  return Nothing  !&gt;  show th ++ &quot; orphan&quot;
+   else do
+    let msibling= fmap children $ parent env
+    
+    case msibling of
+     Nothing -&gt; return Nothing
+     Just sibling  -&gt; do
+       found &lt;- atomically $ do
+                sbs &lt;- readTVar sibling  
+                let (sbs', found) = drop [] th  sbs !&gt; &quot;search &quot;++show th ++ &quot; in &quot; ++ show (map threadId sbs)
+                when found $ writeTVar sibling sbs'
+                return found
+       if (not found &amp;&amp; isJust (parent env)) 
+         then free th $ fromJust $ parent env !&gt; &quot;toparent&quot;
+         else return $ Just env
+
+   where
+   drop processed th []= (processed,False)
+   drop processed th (ev:evts)| th == threadId ev= (processed ++ evts, True)
+                    | otherwise= drop (ev:processed) th evts
+
+
+addThread parent child = when(not $ freeTh parent) $ do
+   let headpths= children parent
+   atomically $ do
+       ths &lt;- readTVar headpths
+       writeTVar headpths $  child:ths
+
+killChildren  cont = do
+     forkIO $ do
+        let childs= children cont --  !&gt; &quot;killChildren list= &quot;++ addr (children cont)
+        ths &lt;- atomically $ do
+           ths &lt;- readTVar childs
+           writeTVar childs []
+           return ths
+        mapM_ (killThread . threadId) ths  !&gt; &quot;KILLEVENT &quot; ++ show (map threadId ths)
+     return ()
+
+
+type EventSetter eventdata response= (eventdata -&gt;  IO response) -&gt; IO ()
+type ToReturn  response=  IO response
+react
+  :: Typeable eventdata
+  =&gt; EventSetter eventdata response
+  -&gt; ToReturn  response
+  -&gt; TransientIO eventdata
+
+react setHandler iob= Transient $ do
+        cont    &lt;- getCont
+        mEvData &lt;- getSessionData
+        case mEvData of
+          Nothing -&gt; do
+            liftIO $ setHandler $ \dat -&gt;do
+--              let cont'= cont{mfData = M.insert (typeOf dat)(unsafeCoerce dat) (mfData cont)}
+              runStateT (setSData dat &gt;&gt; runCont cont) cont
+              iob
+            return Nothing
+          Just dat -&gt; delSessionData dat &gt;&gt; return (Just  dat)
+
+
+
+getLineRef= unsafePerformIO $ newTVarIO Nothing
+
+
+option1 x  message= do
+
+ waitEvents  $ do
+     liftIO $ putStrLn $ message++&quot;(&quot;++show x++&quot;)&quot;
+     th &lt;-  myThreadId
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r of  -- !&gt; (&quot;received &quot; ++  show r ++  show th) of
+            (s,_):_ -&gt; if  s == x  -- !&gt; (&quot;waiting&quot; ++ show x)
+                     then do
+                       writeTVar  getLineRef Nothing -- !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry
+     where
+     reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+
+roption= unsafePerformIO $ newMVar []
+
+-- | install a event receiver that wait for a string and trigger the continuation when this string arrives.
+option :: (Typeable b, Show b, Read b, Eq b) =&gt;
+     b -&gt; [Char] -&gt; TransientIO b
+option ret message= do
+    let sret= show ret
+
+    liftIO $ putStrLn $ &quot;Enter &quot;++sret++&quot;\tto: &quot; ++ message
+    liftIO $ modifyMVar_ roption $ \msgs-&gt; return $ sret:msgs
+    waitEvents  $ getLine' (==ret)
+    liftIO $ putStrLn $ show ret ++ &quot; chosen&quot;
+    return ret
+
+
+-- | validates an input entered in the keyboard in non blocking mode. non blocking means that
+-- the user can enter also anything else to activate other option
+-- unlike `option`, input only wait for one valid response
+input :: (Typeable a, Read a) =&gt; (a -&gt; Bool) -&gt; TransientIO a
+input cond= Transient . liftIO . atomically $ do
+       mr &lt;- readTVar getLineRef
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r  of
+            (s,_):_ -&gt; if cond s  --  !&gt; show (cond s)
+                     then do
+                       writeTVar  getLineRef Nothing -- !&gt;&quot;match&quot;
+                       return $ Just s
+
+                     else return Nothing
+            _ -&gt; return Nothing
+
+
+getLine' cond=    do
+     atomically $ do
+       mr &lt;- readTVar getLineRef
+       case mr of
+         Nothing -&gt; retry
+         Just r -&gt;
+            case reads1 r of --  !&gt; (&quot;received &quot; ++  show r ++ show (unsafePerformIO myThreadId)) of
+            (s,_):_ -&gt; if cond s -- !&gt; show (cond s)
+                     then do
+                       writeTVar  getLineRef Nothing -- !&gt;&quot;match&quot;
+                       return s
+
+                     else retry
+            _ -&gt; retry
+
+reads1 s=x where
+      x= if typeOf(typeOfr x) == typeOf &quot;&quot; then unsafeCoerce[(s,&quot;&quot;)] else readsPrec 0 s
+      typeOfr :: [(a,String)] -&gt;  a
+      typeOfr  = undefined
+
+inputLoop=  do
+    putStrLn &quot;Press end to exit&quot;
+    inputLoop'  -- !&gt; &quot;started inputLoop&quot;
+    where
+        inputLoop'= do
+           r&lt;- getLine
+           if r==&quot;end&quot; then putMVar rexit () else do
+              atomically . writeTVar  getLineRef $ Just r
+              inputLoop'
+
+
+rexit= unsafePerformIO newEmptyMVar
+
+stay=  takeMVar rexit
+
+keep mx = do
+   forkIO $ inputLoop
+   forkIO $ runTransient mx  &gt;&gt; return ()
+   stay
+
+exit :: TransientIO a
+exit= do
+  liftIO $ putStrLn &quot;Tempus fugit: exit&quot;
+  liftIO $ putMVar rexit   True
+  return undefined
+
+onNothing iox iox'= do
+       mx &lt;- iox
+       case mx of
+           Just x -&gt; return x
+           Nothing -&gt; iox'
+
+
+</code></pre><p><code>collect</code> can also be used in context of map-reduce.</p><p>To see how the transient EDSL compose programs and how the internals of the EDSL work, see the <a href="https://www.fpcomplete.com/user/agocorona/EDSL-for-hard-working-IT-programmers">first article</a></p><h1 id="constraint-logic-programming"><a href="#constraint-logic-programming">Constraint Logic programming</a></h1><p>In the paper <a href="http://www.researchgate.net/profile/Sebastian_Fischer9/publication/221557789_Transforming_Functional_Logic_Programs_into_Monadic_Functional_Programs/links/02e7e537488887d824000000.pdf?origin=publication_detail">&quot;transforming functional logic programs into monadic functional programs&quot;</a> the authors propose a generic solution that translate the logic expression to any monad with the MonadPlus instance if the logic variables (free variables whose value is unknown) are substituted by generators. Each value generated in each iteration must be shared in the expression being evaluated.</p><p>So once we define a generator class, Transient can perform logic programming for all the instances of this class. It is better to show it with an example:</p><p>To create a generator it is enough to use <code>choose</code> defined above, applied to a list of possible values of the data type.</p><p>Using <code>choose</code> we can create the class <code>Free</code>:</p><pre><code class="haskell">class  Free m a where
+    free :: m [a]
+
+
+instance Free TransientIO Bool where
+    free= choose[True,False]
+
+instance Free TransientIO Int where
+    free= choose[0..]  -- exclude negatives
+...</code></pre><p>So this  Transient routine</p><pre><code class="haskell">
+pairs :: TransientIO Int
+pairs= do
+   x &lt;- free
+   y &lt;- free
+   guard (x/y == 4)
+   return (x,y)</code></pre><p>or expressed with monad comprehension:</p><pre><code class="haskell">pairs=[(x,y)| x/y == 4, x &lt;- free, y &lt;- free]</code></pre><p>Is  a constraint logic program quite similar in syntax to the syntax in a functional logic program such is curry with constraints:</p><pre><code class="haskell">pairs= (x,y) where x /y == 4, x free, y free</code></pre><p>But also all the rest of the above programs are  constraint logic programs too, since <code>choose</code> is a way to express constraints on the possible values of the logic variables.</p><p>I guess that there is a way to program  classical examples of logic programming with logic clauses besides constraints. <a href="https://wiki.haskell.org/Logic_programming_example">This example designe for the list monad</a> I suppose that is straighforward to translate to Transient.</p><h1 id="conclusions-and-future-work"><a href="#conclusions-and-future-work">Conclusions and future work</a></h1><p>I used Transient here for some typical toy problems of non-determinism, but also I have show how <b>for some realistic IT problems the non-determinism built-in in the Transient monad can generate elegant multithreaded solutions with the same list monad syntax, while doing the same without this monad requires complex code transformations</b>.</p><p>The advantage of using Transient for problems with multiple solutions is that <b>the evaluation model of Transient is multithreaded so it can make use of all the machine cores for the exploration of the possible answers.</b></p><p>And, perhaps more important, <b>the Transient monad is unique for all the effects: It is not necessary to switch from a monad to other with complicated monadic stacks to use multithreading, events, non-determinism, transactions or distributed computing (soon) among others. All the effects can be mixed freely. The code is as simple and clean as it could be</b>.</p><p><code>parallel</code>, the basic primitive of Transient is inherently non-deterministic, since it implicitly uses multithreading and execute the continuation for each event in a new thread. But non-determinism is typically represented by the List monad. Here I demonstrated how Transient can process in parallel and filter many results using the semantics of the List monad with simple but effective and high level threading control.</p><p>I have used the parallel non-determinism of Transient to easily paralelize a search program with very little changes and at a higher level programming, more close to the programmer intuitions. In fact it does not need more but less code!. This shows how non-determinism can be in Transient to solve practical problems while maintaining a high-level and soundness of the solution and thus increase the maintainability of the software.</p><p>Since all of this machinery can be mixed freely with other effects, there is nothing that I may know with the generality and seamlessness of Transient for parallel processing.</p><p><code>guard</code> and <code>collect</code> can also be used in map-reduce scenarios.</p><p>For greater flexibility, thread control has been decoupled from <code>parallel</code>. Now paralell does not perform thread control. there are explicit primitives for it.</p><p>Continuations are stored in the state with type erasure. This makes the edition of them difficult since the type system does not help. Using Dynamic would restrict the intermediate result to the Typeable ones and it would slow down execution. Moreover that would only produce errors at runtime, not at compile time. Perhaps some trick can aleviate these problems. Definitively something better than the hacky edition of state is necessary.</p><p>Transient will include more effects: thread state persistence in files and source emit are necessary for the integration of <a href="http://mflowdemo.herokuapp.com/">MFlow</a> and <a href="http://tryplayg.herokuapp.com/">hplayground</a> as a single &quot;isomorphic&quot; web framework.</p><p>Thread state persistence is the effect now provided by the Workflow package. Source emit is the solution for the serialization of code and the execution in another node, including a web browser. It is not clear that it can be feasible.</p><p>A cloud effect for the distribution of computing resources, where the transient monad does the distribution automatically depending on the load of each node and his capabilities, including browsers, may be possible in the medium term.</p><p>AMDG</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/agocorona/beautiful-parallel-non-determinism-transient-effects-iii';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

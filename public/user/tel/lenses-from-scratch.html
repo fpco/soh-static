@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html><head><title>Lenses from Scratch - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/tel">Joseph Abrahamson</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/tel/lenses-from-scratch">Lenses from Scratch</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Lenses from Scratch</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">31 Aug 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/tel">Joseph Abrahamson</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/1503/d1250d99493008da9e29271c1d144738e842f62d">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/tel/a-little-lens-starter-tutorial">Previous content: A Little Lens Starter Tutorial</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/tel/lens-aeson-traversals-prisms">Next content: Lens/Aeson Traversals/Prisms</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/tel">See all content by Joseph Abrahamson</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#getting-and-setting">Getting and Setting</a></li><li><a href="#early-lenses">Early lenses</a><ul><li><a href="#composition">Composition</a></li></ul></li><li><a href="#generalizing-to-store">Generalizing to Store</a><ul><li><a href="#functors">Functors</a></li><li><a href="#comonads">Comonads</a></li><li><a href="#coalgebras">Coalgebras</a></li></ul></li><li><a href="#what-did-we-gain-">What did we gain?</a><ul><li><a href="#laws">Laws</a></li></ul></li><li><a href="#can-we-go-further-">Can we go further?</a></li><li><a href="#composing-pretexts">Composing Pretexts</a></li><li><a href="#but-wait--what-about-s-t-a-b-">But wait, what about s-t-a-b?</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p><code>Lens</code> gets a lot of flack for having crazy type signatures. This is a whirlwind derivation of the craziest of signatures from the ground up. It might be useful as a starting point for exploring more of the <code>lens</code> code and seeing &quot;through&quot; the sophisticated types.</p><h2 id="getting-and-setting"><a href="#getting-and-setting">Getting and Setting</a></h2><p>At the simplest, a <code>Lens</code> is a getter and a setter much like the getters and setters in an OO language. If you've not seen them before you might wonder what &quot;getting&quot; and &quot;setting&quot; even means in a pure language.</p><p>In Haskell, getting and setting refers to the relationship between a &quot;large&quot; structure and some &quot;smaller&quot; part of it. For instance, given a tuple you might want to get and set the left side of it.</p><pre><code class="haskell">get :: (a, b) -&gt; a
+get (part, _) = part
+
+set :: a' -&gt; (a, b) -&gt; (a', b)
+set part (_, b) = (part, b)</code></pre><p>so <code>get</code> is an extraction function and <code>set x</code> is a transformation on the &quot;larger&quot; structure parameterized by the &quot;smaller&quot; structure.</p><h2 id="early-lenses"><a href="#early-lenses">Early lenses</a></h2><p>A <code>Lens</code> is always just a &quot;getter&quot; and a &quot;setter&quot; together. The most obvious implementation would be to tuple them.</p><pre><code class="haskell">data Lens a b 
+  = Lens { get :: a -&gt; b
+         , set :: b -&gt; a -&gt; a
+         }</code></pre><p>and indeed this is a perfectly valid <code>Lens</code> that has most of the common properties of the more clever derivations to come. We'll build our lens <code>l</code> that focus on the &quot;smaller&quot; part of some &quot;larger&quot; thing and then use the field selectors <code>get l</code> and <code>set l</code> just like before.</p><pre><code class="haskell">-- | A *Lens* that focuses on the first element in a tuple.
+_1 :: Lens (a, b) a
+_1 = Lens (\(part, _) -&gt; part) (\part (_, b) -&gt; (part, b))
+
+&gt; :t get _1 
+get _1 :: (a, b) -&gt; a
+
+&gt; :t set _1
+set _1 :: a -&gt; (a, b) -&gt; (a, b)</code></pre><p>If you're really paying attention you'll notice that the &quot;setter&quot; on this lens is actually slightly less powerful than the one we wrote in the first section. We'll revisit that later and rectify it.</p><h3 id="composition"><a href="#composition">Composition</a></h3><p>If this were all that Lenses offered there might not be much of a point, but they can also be chained letting us build lenses which focus deep inside of the &quot;larger&quot; object from many simpler lenses together.</p><pre><code class="haskell">-- | Lens composition
+(&gt;-) :: Lens a b -&gt; Lens b c -&gt; Lens a c
+la &gt;- lb = Lens (get lb . get la) $ \part whole -&gt;
+  set la (set lb part (get la whole)) whole</code></pre><p>the setter is a little messy, but if you think of there being big (<code>a</code>), middle (<code>b</code>), and little (<code>c</code>) pieces then it's this process, given an original big part and a new little part</p><ol><li>Get the original middle part from the original big part</li><li>Update the middle part with the new little part</li><li>Update the bit part with the new middle part</li></ol><p>which isn't too challenging, though it is tedious. Part of the magic of lens composition is that it completely dispatches with all of this tedious boilerplate.</p><pre><code class="haskell">&gt; :t _1 &gt;- _1 &gt;- _1 &gt;- _1 &gt;- _1    -- useless, but if you didn't have pattern matching
+                                   -- this would be very challenging to code
+                                   -- ... we don't always have pattern matching,
+                                   -- but can always have lenses
+_1 &gt;- _1 &gt;- _1 &gt;- _1 &gt;- _1 :: Lens (((((c, b4), b3), b2), b1), b) c</code></pre><h2 id="generalizing-to-store"><a href="#generalizing-to-store">Generalizing to Store</a></h2><p>The lenses up to this point are fully functional, but there's a lot more structure to them that we haven't expoloited. For instance, both the &quot;getter&quot; and the &quot;setter&quot; take the larger piece as an argument. We can thus combine those applications and &quot;extract an argument from our tuple&quot;.</p><pre><code class="haskell">type Lens a b = (a -&gt;  b, b -&gt; a -&gt; a)   -- same as before
+type Lens a b = (a -&gt;  b, a -&gt; b -&gt; a)   -- flip the setter
+type Lens a b =  a -&gt; (b,      b -&gt; a)   -- pull the parameter out</code></pre><p>The intuition to guide this change is that now a <code>Lens</code> is a function that takes a large structure and returns to us two things, (1) a small piece from inside that large structure, and (2) a &quot;holey&quot; version of our original structure---it demands a small piece like the one it gave us in order to restore the original large structure. In fact, if we just put these pieces back together we'll get back our original object.</p><pre><code class="haskell">lensToId :: Lens a b -&gt; (a -&gt; a)
+lensToId f = \a -&gt; let (piece, hole) = f a in hole piece</code></pre><p>This intuition is already important---<a href="http://r6.ca/blog/20121209T182914Z.html">the idea of separating structures into parts and the holes that those parts fit into shows up repeatedly</a>---but the process of doing that separation <code>a -&gt; (b, b -&gt; a)</code>, and the result <code>(b, b -&gt; a)</code> itself, both have surprisingly rich structure.</p><p>Without going into any details about what that structure &quot;means&quot;, I'll describe it. To begin, that pair is often called <code>Store</code>...</p><pre><code class="haskell">data Store b a = Store b (b -&gt; a)</code></pre><h3 id="functors"><a href="#functors">Functors</a></h3><p>Almost too obvious to mention, but <code>(b, b -&gt; a)</code> forms a <code>Functor</code> in exactly the same way that <code>(-&gt;) e</code>, the <code>Reader</code> <code>Monad</code>, does.</p><pre><code class="haskell">instance Functor (Store b) where
+  fmap f (Store piece hole) = Store piece (f . hole)</code></pre><h3 id="comonads"><a href="#comonads">Comonads</a></h3><p>Without any elaboration, you can think of a <code>Comonad</code> as the inversion of a <code>Monad</code>. <code>Monad</code>s <code>m</code> are defined by their operations <code>join :: m (m a) -&gt; m a</code> and <code>return :: a -&gt; m a</code>. <code>Comonads</code> (often denoted <code>w</code> as a visual pun) are defined by their operations <code>extract :: w a -&gt; a</code> and <code>duplicate :: w a -&gt; w (w a)</code>. Or, to drive home the correspondance even more</p><pre><code>|   Monad        a  -&gt; m a                  m (m a) -&gt; m a
+| Comonad              w a -&gt; a      w a -&gt; w (w a)
+</code></pre><p>It turns out that <code>Store b</code> forms a <code>Comonad</code>.</p><pre><code class="haskell">instance Comonad (Store b) where
+  extract (Store piece hole) = hole piece    -- this is the second part of lensToId!
+  duplicate (Store piece hole) = 
+    Store piece (\newPiece -&gt; Store newPiece hole)</code></pre><h3 id="coalgebras"><a href="#coalgebras">Coalgebras</a></h3><p>The final interesting structure is the <code>Coalgebra</code>. This is a generalization of <code>unfoldr</code> for turning a &quot;seed&quot; into something with more structure. For instance, you can use <code>unfoldr</code> to create a list counting down from an integer.</p><pre><code class="haskell">&gt; unfoldr (\n -&gt; if (n == 0) then Nothing else Just (n, n-1)) 10
+[10,9,8,7,6,5,4,3,2,1]</code></pre><p>If we just look at <code>unfoldr go</code> we see it has a type like <code>a -&gt; [a]</code>, an &quot;injection&quot; function. Things like <code>unfoldr go</code> transform seed values into lists of values and are exactly what <code>Coalgebra</code>s are. These are tightly related to recursion because so long as the larger result structure is a <code>Functor</code> (and this is actually a requirement to calling <code>a -&gt; f a</code> a <code>Coalgebra</code>) then we can repeatedly apply our coalgebra.</p><pre><code class="haskell">&gt;                                  unfoldr go                :: a -&gt;   [a]
+&gt;       fmap (unfoldr go)  .       unfoldr go                :: a -&gt;  [[a]]  -- this is like &quot;duplicate&quot;
+&gt; fmap (fmap (unfoldr go)) . fmap (unfoldr go) . unfoldr go  :: a -&gt; [[[a]]] -- and duplicate again!</code></pre><p>So, at this point since we're calling our <code>Lens a b = a -&gt; Store b a</code> and <code>Store b</code> is a <code>Functor</code> we're allowed to call our <code>Lens</code> a <code>Coalgebra</code>.</p><pre><code class="haskell">type Coalg f a = a -&gt; f a
+type Lens a b = Coalg (Store b) a          -- (thanks to Austin Seipp for pointing this out)</code></pre><p>Which, all together, leads to the <a href="http://r6research.livejournal.com/23705.html">fascinating</a> or <a href="https://twitter.com/PLT_Borat/status/228009057670291456">oblique</a> notion that &quot;Lenses are Costate Comonad Coalgebras&quot;. [1]</p><h2 id="what-did-we-gain-"><a href="#what-did-we-gain-">What did we gain?</a></h2><p>Alright, so now that we've seen that this rather tiny trick, pulling just one argument out of our trivial &quot;pair of a getter and a setter&quot; structure, has exposed a great deal of hidden structure in lenses does it make our lenses any more powerful? Our intuition any more clear?</p><p>Well, hopefully thinking about the <code>Store</code> <code>Comonad</code> as holding a &quot;piece&quot; and its &quot;hole&quot; as two parts of the &quot;whole&quot; as given new insight, but is it really worth all that jargon?</p><p>One way we get a lot of improvement is in writing the composition operator <code>(&gt;-)</code>. Previously it wasn't exactly difficult to write, but demanded a small amount of mental gymnastics to write the combined &quot;setter&quot;. What does it look like using the <code>Store</code> <code>Comonad</code>?</p><pre><code class="haskell">(&gt;-) :: Lens a b -&gt; Lens b c -&gt; Lens a c
+(la &gt;- lb) a = let Store partB holeBA = la a
+                   Store partC holeCB = lb partB
+
+                   holeCA             = holeBA . holeCB
+               in  Store partC holeCA</code></pre><p>Really, given the types available, this function almost writes itself. It also more clearly demonstrates the idea of splitting our <code>a</code> type into the two underlying pieces and their holes---the two layers of <code>Store</code>s---and then sewing them back together to form the resulting, composed <code>Store</code>.</p><p>Furthermore, if you read the <a href="http://r6research.livejournal.com/23705.html">blog post by Russell O'Connor</a> I linked earlier, you'll might have noticed there's something genuinely beautiful going on here.</p><h3 id="laws"><a href="#laws">Laws</a></h3><p>Our inutitions so far are built upon our beliefs about how Lenses &quot;should&quot; behave, but we can be more specific. The notion of a lens has been studied for a long time by computer scientists and a set of formal laws which outline everyone's intution have been established. These are <a href="http://dl.acm.org/citation.cfm?doid=1232420.1232424">Pierce's Laws of a &quot;Very Well Behaved Lens&quot;</a>:</p><ol><li><p>Setting something back that you just got out is a no-op</p><p> set s (get s) == s</p></li><li><p>Getting something that you just set is exactly that thing</p><p> get (set s v) == v</p></li><li><p>If you put something repeatedly, the last put wins</p><p> get (set (set s v1) v2) == v2</p></li></ol><p>Hopefully you'll find that your inutition about what &quot;getting&quot; and &quot;setting&quot; might mean is completely aligned with these laws. They're carefully designed to capture the entire behavior of getting and setting and nothing more.</p><p>What O'Connor discovered was that these laws, things thought to be the essence of a particularly practical notion of computer science, can be derived as a specific instance of much more general laws known to hold for <i>any</i> &quot;Comonad Coalgebra&quot;. In particular, given some <code>l :: Lens b a = a -&gt; Store b a</code> they are completely equivalent to</p><pre><code class="haskell">extract . l == id            -- injecting with the coalgebra then extracting the comonad is `id`
+                             --    (this is just breaking our whole into the &quot;piece&quot; and &quot;hole&quot;
+                             --     then jamming them back together)
+fmap l . l  == duplicate l   -- duplicate is the same as &quot;repeated coalgebra injection&quot;
+                             --    (see the comments in the Coalgebra section)</code></pre><p>Clearly these laws are less inuitive than the &quot;Well Behaved Lens Laws&quot;, but they also are not much more than a very formal was of saying that Comonad Coalgebras are as boring as possible---they behave exactly the way you would expect them to.</p><p>And &quot;Costate&quot; Comonad Coalgebras [1] behave as boringly as possible, exactly as getters and setters.</p><h2 id="can-we-go-further-"><a href="#can-we-go-further-">Can we go further?</a></h2><p>This is already a lot of generality, but we haven't yet reached the representation that <a href="http://hackage.haskell.org/package/lens"><code>lens</code></a> uses today. There's one last step.</p><p>Right now, if someone were to use our &quot;Comonad Coalgebra&quot; lenses they would need an instance of the <code>Store</code> datatype. That means dragging around all of our lens library as a dependency to every library which offers a lenslike interface. Not the worst result, but it'd be nice if we could offer a &quot;minimal&quot; interface for this dependency. Something that eliminates the datatype <code>Store</code> while keeping all of its power around.</p><p>If you read <a href="https://www.fpcomplete.com/user/edwardk/cellular-automata">Edward Kmett's discussion of Store Comonadic Cellular Automata</a> or <a href="https://www.fpcomplete.com/user/tel/pretext-by-experiments-and-guesses">my followup exploration</a> you will have seen a very particular and interesting operation on <code>Store</code>s called <code>experiment</code></p><pre><code class="haskell">experiment :: Functor f =&gt; Store b a -&gt; (b -&gt; f b) -&gt; f a
+experiment (Store part hole) inj = hole &lt;$&gt; inj part</code></pre><p>As Edward hinted and I tried to explore in much greater depth, <code>experiment</code> converts a <code>Store</code> into its &quot;functional&quot; form. Furthermore, this conversion is an isomorphism.</p><pre><code>Store piece hole          ~=         experiment (Store piece hole)
+Store b     a             ~=         (b -&gt; f b) -&gt; f a</code></pre><p>Just for completeness, I'll write the other isomorphism which I previously called <code>guess</code></p><pre><code class="haskell">guess :: ( forall f . Functor f =&gt; (b -&gt; f b) -&gt; f a )   -&gt;   Store b a
+guess m = m $ \piece -&gt; Store piece id</code></pre><p>which uses the fact that <code>Store</code> is a <code>Functor</code>.</p><p>Since it's an isomorphism, we gain nothing of value by choosing to use <code>Store b a</code> or <code>(forall f. Functor f =&gt; (b -&gt; f b) -&gt; f a)</code>. With <code>Store</code> we have much simpler looking types, but with the second type (also called a <a href="http://hackage.haskell.org/packages/archive/lens/3.9.0.2/doc/html/Control-Lens-Internal-Context.html#t:Pretext"><code>Pretext</code></a>) we don't need to carry around our <code>Store</code> datatype.</p><p>If we expand out what <code>Lens b a</code> is when using <code>Pretexts</code> it looks like this</p><pre><code class="haskell">type Lens a b = Functor f =&gt; a -&gt; (b -&gt; f b) -&gt; f a</code></pre><p>which, while much more confusing, can be written for any type using only <code>fmap</code>.</p><pre><code class="haskell">_1 :: Lens (a, b) a
+_1 (a, b) inj = (,b) &lt;$&gt; inj a</code></pre><h2 id="composing-pretexts"><a href="#composing-pretexts">Composing Pretexts</a></h2><p>Lets revisit the classic example for the power of a Lens, how does it look to compose it? It's somewhat difficult in this format to think about how two lenses compose, but we can do it.</p><pre><code class="haskell">(&gt;-) :: Lens a b -&gt; Lens b c -&gt; Lens a c
+(la &gt;- lb) a = ...</code></pre><p>—wait! Actually, there's a trick. If we rearrange our definition of a <code>Pretext</code> lens.</p><pre><code class="haskell">type Lens a b = Functor f =&gt; (b -&gt; f b) -&gt; (a -&gt; f a)</code></pre><p>and maybe make another type alias</p><pre><code class="haskell">type Coalg f x = x -&gt; f x</code></pre><p>then we can see this as a much simpler type</p><pre><code class="haskell">type Lens a b = Functor f =&gt; Coalg f b -&gt; Coalg f a</code></pre><p>and in fact we immediately have composition using basic function composition!</p><pre><code class="haskell">(&gt;-) :: Lens a b -&gt; Lens b c -&gt; Lens a c
+la &gt;- lb = la . lb</code></pre><p>This finally is exactly the type of a <code>Lens'</code> you might see in the <a href="hackage.haskell.org/package/lens"><code>lens</code></a> library. In this extended form you can compose lenses using only normal function composition <code>(.)</code> and you don't need any external dependencies to write a lens for a type in your code---you need only <code>fmap</code>.</p><p>It's worth noting that this formulation was perhaps first discovered by <a href="http://twanvl.nl/blog/haskell/cps-functional-references">Twan van Laarhoven under the name &quot;CPS Functional Reference&quot;</a> though it arose from a somewhat different direction.</p><h2 id="but-wait--what-about-s-t-a-b-"><a href="#but-wait--what-about-s-t-a-b-">But wait, what about s-t-a-b?</a></h2><p>If you've used <a href="hackage.haskell.org/package/lens"><code>lens</code></a> a lot you probably caught a slight trick I played a moment ago—I only bothered to define what <code>Lens'</code>, a.k.a. <code>Simple Lens</code>, is. This whole article has focused entirely on two-parameter lenses while the ones in the library are <i>four</i> parameter lenses! Where does this extra complexity come from?</p><p>Well, let's try writing one of these lenses. I'll pick the same example I've carried throughout.</p><pre><code class="haskell">_1 :: Lens (a,b) a
+_1 inj (a, b) = (,b) &lt;$&gt; inj a</code></pre><p>That's a pretty tight definition that seems to make sense with just two parameters. Watch what happens if we forget the type line and let GHCi infer things, though.</p><pre><code class="haskell">&gt; :t \inj (a, b) -&gt; (,b) &lt;$&gt; inj a
+\inj (a, b) -&gt; (,b) &lt;$&gt; inj a
+  :: Functor f =&gt; (a -&gt; f b) -&gt; (a, t) -&gt; f (b, t)</code></pre><p>We can &quot;sort of&quot; interpret that type as a Pretext lens, except that we need <code>a ~ b</code> and <code>(a, t) ~ (b, t)</code>, each implying the other. This extra freedom indicates something very powerful about getters and setters---setting has the ability to change the type of the whole! <a href="http://comonad.com/reader/2012/mirrored-lenses/">Not completely, and not always</a>, but the type of <code>Lens</code> we defined earlier completely wipes that possibility off the table.</p><p>This possibility is, in fact, the exact thing we enountered way back at the beginning of this article, write before the first &quot;Composition&quot; section.</p><p>We can fix it, though, by generalizing the type of our <code>Lens</code> to its final form that we know and love.</p><pre><code class="haskell">type Lens s t a b = Functor f =&gt; (a -&gt; f b) -&gt; (s -&gt; f t)</code></pre><p>Quite obvious now isn't it? ;)</p><hr /><p>If this was an interesting read, I highly recommend Russell O'Connor's <a href="http://arxiv.org/abs/1103.2841v1"><i>Functor is to Lens as Applicative is to Biplate</i></a> which carries out this argument with much more elegance and generality while also making many more connections to related topics. He also proves the important steps which I'm simply omitting.</p><hr /><p>(Thanks to aseipp, drb226, alen_ribic, heisenbug, Jameshfisher, mutjida, and tailbalance for comments and corrections.)</p><p><a href="http://www.reddit.com/r/haskell/comments/1l8ld7/lenses_from_scratch/">Comments on Reddit</a></p><p>[1] It's a common gag, as evidenced by PL Borat there, to call <code>Store</code> lenses &quot;Costate Comonad Coalgebras&quot;. Above I walked through where &quot;Coalgebra&quot; and &quot;Comonad&quot; come from, but left &quot;Costate&quot; alone. It turns out there is a relationship between <code>Store</code> and <code>State</code> though it's not truly &quot;Co-&quot; relationship.</p><p>The &quot;Co-&quot; terminology comes from category theory where &quot;Co-X&quot; means &quot;X with all of the arrows turned around&quot;. Category theory tends to encode all interesting properties of all things in the arrows, so this is a very important notion. Thus all the more reason to be precise in how <code>State</code> and <code>Store</code> are actually related.</p><p>Again in whirlwind fashion, one can think of all <code>Monad</code>s as arising from the composition of two <code>Functors</code> which share a special relationship known as &quot;adjunction&quot;. For the <code>Store</code> monad, they are as follows</p><pre><code>( b , b -&gt; a )   ==  ( b ,  _ )   .   ( b -&gt; _ )   $   a</code></pre><p>If we reverse the order of these functions, we end up with <code>State</code> directly.</p><pre><code>( b , b -&gt; a )   ==  ( b ,  _ )   .   ( b -&gt; _ )   $   a
+                     ( b -&gt; _ )   .   ( b ,  _ )   $   a    ==   ( b -&gt; ( b ,  a ) )</code></pre><p>and obviously visa versa. I don't know of a good name for &quot;adjunction flipped cousins&quot;, which perhaps explains the longevity of the pithy, suggestive, but ultimately incorrect term &quot;Costate Comonad&quot;.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/tel/lenses-from-scratch';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

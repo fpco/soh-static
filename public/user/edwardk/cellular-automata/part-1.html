@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html><head><title>Part I: From Theory to Pretty Pictures - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata">Cellular Automata</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata/part-1">Part I: From Theory to Pretty Pictures</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Part I: From Theory to Pretty Pictures</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">29 Nov 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/2a6140398ce46eceac790037f4afbd66c3b9c7c5">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata/part-2">Next content: Part II: PNGs and Moore</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/cellular-automata">Go up to: Cellular Automata</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#minding-the-store">Minding The Store</a></li><li><a href="#a-glimpse-down-the-rabbit-hole">A Glimpse Down the Rabbit Hole</a></li><li><a href="#following-the-rules">Following the Rules</a></li><li><a href="#got-the-memo-">Got the Memo?</a></li><li><a href="#let-s-do-the-time-warp-again">Let&#39;s Do the Time Warp Again</a></li><li><a href="#pretty-as-a-picture">Pretty as a Picture</a></li><li><a href="#but-is-it-web-scale-">But is it Web Scale?</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Cellular automata are one of the &quot;go to&quot; examples for comonads in Haskell.</p><p>Dan Piponi wrote his article on <a href="http://blog.sigfpe.com/2006/12/evaluating-cellular-automata-is.html">using comonads to evaluate cellular automata</a> back in 2006, and that was pretty much my introduction to comonads in general. He used a <a href="http://en.wikipedia.org/wiki/Zipper_%28data_structure%29">list zipper</a>.</p><p>Today, I want to use something a little bit more general and maybe draw some pictures.</p><h1 id="minding-the-store"><a href="#minding-the-store">Minding The Store</a></h1><p>To that end, let's define the <code>Store</code> <code>Comonad</code>.</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor #-}
+import Control.Comonad
+
+-- show
+data Store s a = Store (s -&gt; a) s deriving Functor
+
+instance Comonad (Store s) where
+  extract (Store f s) = f s
+  duplicate (Store f s) = Store (Store f) s
+-- /show
+  
+experiment :: Functor f =&gt; (s -&gt; f s) -&gt; Store s a -&gt; f a
+experiment k (Store f s) = f &lt;$&gt; k s 
+
+main = putStrLn &quot;It typechecks, so it must be correct!&quot;</code></pre><p>A <code>Store s a</code> describes some &quot;test&quot; that takes a configuration <code>s</code> and will produce a value of type <code>a</code>, where we also have some ambient initial configuration of type <code>s</code> that is known with which we could start the experiment.</p><p>The <code>experiment</code> combinator characterizes a <code>Store</code> completely. It lets you explore variations on the initial conditions of our test.</p><pre><code class="haskell">experiment :: Functor f =&gt; (s -&gt; f s) -&gt; Store s a -&gt; f a
+experiment k (Store f s) = f &lt;$&gt; k s </code></pre><p><code>Store</code> gives you a little bit more power than we want in a cellular automaton, as you can do both relative <i>and</i> global addressing, but it happens to be a very general construction, so we'll start there. It has the benefit that if we decide we want to play with automata in more than 1 dimension all we have to do is change out the state type.</p><p>The <code>Store</code> comonad has a lot of different uses that aren't immediately obvious. It is used heavily inside of the <code>lens</code> library.</p><h1 id="a-glimpse-down-the-rabbit-hole"><a href="#a-glimpse-down-the-rabbit-hole">A Glimpse Down the Rabbit Hole</a></h1><p><i>(This section is completely skippable and is included as a highly technical aside)</i></p><p>An interesting exercise for the advanced Haskeller is to flip the definition of <code>experiment</code> and take that as the definition for <code>Store</code>.</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE RankNTypes #-}
+import Control.Comonad
+-- show
+newtype Pretext s a = Pretext { 
+    runPretext :: forall f. Functor f =&gt; (s -&gt; f s) -&gt; f a 
+  } deriving Functor
+
+experiment :: Functor f =&gt; (s -&gt; f s) -&gt; Pretext s a -&gt; f a
+experiment f (Pretext k) = k f
+-- /show
+main = putStrLn &quot;It typechecks, so it must be correct!&quot;</code></pre><p>Defining the <code>Comonad</code> instance for that type is a particularly enlightening challenge.</p><p>If you replace the <code>Functor</code> constraint in the definition above with <code>Applicative</code> you get a <code>Comonad</code> I call the <code>Bazaar</code>. This <code>Comonad</code> is used to derive many of the most brain-bending <code>Traversal</code> and <code>uniplate</code>-derived combinators in <code>lens</code>.</p><p>The code for its <code>Comonad</code> instance is identical to the instance for <code>Pretext</code> above, but it can also be made <code>Applicative</code>.</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE RankNTypes #-}
+import Control.Comonad
+import Control.Applicative
+-- show
+newtype Bazaar s a = Bazaar { 
+    runBazaar :: forall f. Applicative f =&gt; (s -&gt; f s) -&gt; f a 
+  } deriving Functor
+-- /show
+main = putStrLn &quot;It typechecks, so it must be correct!&quot;</code></pre><p>If you try to search for the <code>Store</code>-like analogue to the <code>Bazaar</code>, you wind you looking at what Twan van Laarhoven called a <code>FunList</code> in <a href="http://twanvl.nl/blog/haskell/non-regular1">&quot;A non-regular data type challenge&quot;</a>.</p><pre><code class="active haskell">{-# LANGUAGE DeriveFunctor #-}
+import Control.Comonad
+import Control.Applicative
+-- show
+data FunList s a
+    = Done a
+    | More s (FunList s (s -&gt; a))
+    deriving Functor
+-- /show
+main = putStrLn &quot;It typechecks, so it must be correct!&quot;</code></pre><p>An interesting exercise is to derive the <code>Applicative</code> and <code>Comonad</code> instances for <code>FunList</code>. This exercise is much easier than the <code>Pretext</code> and <code>Bazaar</code> derivations, but still quite challenging.</p><p>Surprisingly <code>FunList</code> is actually a less powerful type than <code>Bazaar</code> in the presence of infinite traversals as many tools you can build will not terminate when you manipulate an infinite traversal with them built using a <code>FunList</code>, but <i>will</i> terminate when they are constructed using the <code>Bazaar</code>!</p><h1 id="following-the-rules"><a href="#following-the-rules">Following the Rules</a></h1><p>Stephen Wolfram described a rather concise encoding of 2-color automata that can only look at their neighbors in <a href="http://www.wolframscience.com/">&quot;A New Kind of Science&quot;</a>.</p><p>We can encode his family of 2-color rules as a comonadic action:</p><pre><code class="haskell">rule :: Num s =&gt; Word8 -&gt; Store s Bool -&gt; Bool
+rule w (Store f s) = testBit w $ 
+  0 &amp; partsOf (taking 3 bits) .~ [f (s+1), f s, f (s-1)]</code></pre><p>That is rather dense, so let's unpack it.</p><p>Wolfram numbers his rules from 0 to 255 because if you look at the current cell and the neighbor to the left and right of it, we have 3 inputs to consider. Each is a <code>Bool</code> so we have 2^3 different results to give. If we bundle all those possible results together as the bits of a <code>Word8</code>, the <code>Word8</code> perfectly describes all of the possible 2-color cellular automata that can look at the current and neighboring cells.</p><p>So now the trick is doing that indexing. To do so, first we need to figure out which bit in our <code>Word8</code> we are interested in. To do that we need to use the 3 booleans we obtain by tweaking our position and asking to perform our &quot;experiment&quot; there at the slightly modified positions instead.</p><p>Now we want to compose 3 bits together into an <code>Int</code>. We could do this with a bunch of conditional logic, etc. but there is a slightly cute encoding we can get when we use <code>lens</code>.</p><p><code>bits</code> provides a <code>Traversal</code> of the individual bits of any instance of <code>Bits</code>. (In the case of <code>Integer</code>, though, because it is infinite sadly the <code>Traversal</code> can never finish reassembling the <code>Integer</code>, and so it devolves to merely a <code>Fold</code>.</p><p><code>taking n t</code> takes a <code>Traversal t</code> and yields a <code>Traversal</code> that only touches the first <code>n</code> targets of the original <code>Traversal</code>.</p><p>Therefore <code>taking 3 bits</code> is the <code>Traversal</code> of the first 3 bits of a number.</p><p><code>partsOf</code> takes a <code>Traversal</code> and gives you a (slightly hinky) <code>Lens</code> to a list of all of the targets of the traversal. You can freely replace that list with a new list (of the same length!). It is only a law abiding <code>Lens</code> if you do not change the length of the list of targets, but even if you violate these assumptions it is well behaved operationally. In fact you can safely remove <code>taking n</code> from the definition of rule above, and its semantics do not change.</p><p>And finally, we can use the fact that every <code>Lens</code> is a valid <code>Setter</code> to make the assignment.</p><pre><code class="haskell">0 &amp; partsOf (taking 3 bits) .~ [f (s+1), f s, f (s-1)]</code></pre><p>then builds an <code>Int</code> <i>n</i> between 0 and 7 by starting with a 0 and setting its first 3 bits accordingly.</p><p>With that in hand we can now test the <i>n</i>th bit of the rule number and obtain our result.</p><p>Since <code>Store s</code> forms a <code>Comonad</code> though, we can <code>extend</code> our <code>rule n</code> to obtain a new <code>Store s Bool</code> from out existing <code>Store s Bool</code>.</p><p>Now if we, say, <code>extend (rule 110)</code> we get a function from one world to a new world, where that
+rule has been applied uniformly across the entire world at the same time.</p><pre><code class="haskell">extend (rule 110) :: Num s =&gt; Store s Bool -&gt; Store s Bool</code></pre><p>By choosing an appropriate number type for <code>s</code> we can choose the topology for our automaton to live on!</p><p>We could repeatedly run our rules with</p><pre><code class="haskell">slowLoop :: (Store s a -&gt; a) -&gt; Store s a -&gt; [Store s a]
+slowLoop f = iterate (extend f)</code></pre><h1 id="got-the-memo-"><a href="#got-the-memo-">Got the Memo?</a></h1><p>...but we'd get explosive slowdown. Why?</p><p>After a each loop iteration we depend on 3x as many evaluations as we did for the iteration before, because each evaluation is asking for all of the other old versions of the old neighbors, etc.</p><p>So the trick is to memoize our function. The easiest way to do that without reasoning about <code>IO</code> is to use a memo combinator package like <code>data-memocombinators</code> or my own <code>representable-tries</code>. I'll buck my trend and use Luke's package instead of mine.</p><p>But which function?</p><p>We don't want to memoize the comonad algebra itself. The argument to that is of type <code>Store s a</code>, and memoizing function spaces of function spaces gets truly messy. Let's make a function that turns a value in our <code>Store</code> comonad into one that memoizes its answers by memoizing the experiment it contains.</p><pre><code class="haskell">tab :: Memo s -&gt; Store s a -&gt; Store s a
+tab opt (Store f s) = Store (opt f) s</code></pre><p><code>tab</code> takes a way to memoize a function from the context of our <code>Store</code> and a <code>Store</code> and yields a new <code>Store</code> that memoizes its results.</p><p><code>Memo</code> comes from <code>data-memocombinators</code>.</p><pre><code class="haskell">type Memo a = forall r. (a -&gt; r) -&gt; a -&gt; r</code></pre><p>A value of type <code>Memo a</code> describes a memoization strategy for functions from values of type <code>a</code>. It takes a function and turns it into a function that memoizes its results. It does so in a completely pure way that is worth exploring in its own right, but...</p><p>If we just use the fact that <code>integral</code> provides us with such a memoization strategy that works for any <code>Integral</code> type, we can derive a smarter <code>loop</code>!</p><pre><code class="haskell">loop :: Integral s =&gt; (Store s a -&gt; a) -&gt; Store s a -&gt; [Store s a]
+loop f = iterate (extend f . tab integral)</code></pre><p>Here when we are given a new <code>Store</code> before each iteration we simply upgrade it to memoize its results for each position as it is asked before handing it to our rule for further evaluation.</p><h1 id="let-s-do-the-time-warp-again"><a href="#let-s-do-the-time-warp-again">Let's Do the Time Warp Again</a></h1><p>Now let's timewarp back to the stone age and print out endless reams of paper filled with automaton states.</p><p>To do that we need a way to see what some slice of our world looks like:</p><pre><code class="active haskell">-- TODO: copy the whole program below here
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE QuasiQuotes #-} 
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE DeriveFunctor #-}
+
+import Control.Comonad
+import Control.Lens as L
+import Data.Bits
+import Data.Bits.Lens as L
+import qualified Data.ByteString as Strict
+import qualified Data.ByteString.Lazy as Lazy
+import Data.MemoCombinators
+import Data.Word
+import Diagrams.Backend.SVG
+import Diagrams.Prelude as D
+import Text.Blaze.Svg.Renderer.Utf8
+import Yesod
+
+data Store s a = Store (s -&gt; a) s deriving Functor
+
+instance Comonad (Store s) where
+  extract (Store f s) = f s
+  duplicate (Store f s) = Store (Store f) s
+  
+experiment :: Functor f =&gt; (s -&gt; f s) -&gt; Store s a -&gt; f a
+experiment k (Store f s) = f &lt;$&gt; k s 
+
+rule :: Num s =&gt; Word8 -&gt; Store s Bool -&gt; Bool
+rule w (Store f s) = testBit w $ 
+  0 L.&amp; partsOf (taking 3 L.bits) .~ [f (s+1), f s, f (s-1)]
+
+tab :: Memo s -&gt; Store s a -&gt; Store s a
+tab opt (Store f s) = Store (opt f) s
+
+loop :: Integral s =&gt; (Store s a -&gt; a) -&gt; Store s a -&gt; [Store s a]
+loop f = iterate (extend f . tab integral)
+
+-- show
+window :: (Enum s, Num s) =&gt; s -&gt; s -&gt; Store s a -&gt; [a]
+window l h = experiment $ \ s -&gt; [s-l..s+h]
+
+xo :: Bool -&gt; Char
+xo True  = 'X'
+xo False = ' '
+
+main = mapM_ (putStrLn . map xo . window 50 0) $ 
+       take 50 $ loop (rule 110) $ Store (==0) 0
+-- /show</code></pre><p>I probably should have told that thing stop printing a little sooner. Sorry. ;)</p><p><code>window</code> varies our position on the number line up or down a bit so we can see several data points.</p><p><code>xo</code> converts each result into a form we might want to see.</p><p>Then we put it all together and run Wolfram's <a href="http://en.wikipedia.org/wiki/Rule_110">rule 110</a> starting with a single point at position 0 as our initial condition.</p><h1 id="pretty-as-a-picture"><a href="#pretty-as-a-picture">Pretty as a Picture</a></h1><p>It isn't the stone age any more.</p><p>Matt Sottile did a pretty looking <a href="http://syntacticsalt.com/2010/08/30/forest-fire-cellular-automaton-haskell-and-matlab/">forest fire</a> cellular automata example a couple of years back. But he had to render everything by hand using OpenGL.</p><p>Nowadays we can draw pretty pictures using Brent Yorgey's awesome <code>diagrams</code> package rather than carve ASCII <code>X</code>'s into the walls of our cave.</p><p>Now that we have the windows of data we want, all we need to do is turn each <code>window</code> into a a bunch of squares and stitch those rows together into a <code>Diagram</code>.</p><pre><code class="haskell">grid :: [[Bool]] -&gt; Diagram SVG R2
+grid = vcat . map (hcat . cell) where
+  cell b = unitSquare D.# fc (if b then black else white)</code></pre><p>This post was spawned from a discussion with Rein Henrichs on #haskell. He supplied the initial version of the <code>diagrams</code> code. His version was much prettier.</p><p><code>diagrams</code> supports rendering to a ton of formats including SVG, so we can transform our diagram into a document using <code>diagrams-svg</code> and <code>blaze-svg</code>. We could also render it directly to <code>cairo</code> and get out a PNG, get out an HTML canvas, a postscript document, etc.</p><p>We could use the <code>renderSVG</code> function to generate a file on disk, but it also isn't the 80s. Command line tools that spit out files are passé. So lets just get our hands on the file here in memory as a <code>ByteString</code> and make sure it's strict to deal with the impedence mismatch between the tools I'm using.</p><pre><code class="haskell">svg :: Diagram SVG R2 -&gt; Strict.ByteString
+svg = Strict.concat . Lazy.toChunks . 
+      renderSvg . renderDia SVG (SVGOptions (Width 400) Nothing)</code></pre><h1 id="but-is-it-web-scale-"><a href="#but-is-it-web-scale-">But is it Web Scale?</a></h1><p>The School of Haskell supports <a href="https://www.fpcomplete.com/blog/2013/08/snap-happstack-anything-else">running</a> full-fledged web-based applications from an &quot;active&quot; Haskell snippet, so lets give it a try.</p><p>If we put them these pieces of code together you should be able to click run below and get out pretty pictures out of a custom web server that all but fits on your screen.</p><p>Click Run!</p><pre><code class="active haskell web">{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE QuasiQuotes #-} 
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE DeriveFunctor #-}
+
+import Control.Comonad
+import Control.Lens as L
+import Data.Bits
+import Data.Bits.Lens as L
+import qualified Data.ByteString as Strict
+import qualified Data.ByteString.Lazy as Lazy
+import Data.MemoCombinators
+import Data.Word
+import Diagrams.Backend.SVG
+import Diagrams.Prelude as D
+import Text.Blaze.Svg.Renderer.Utf8
+import Yesod
+
+data Store s a = Store (s -&gt; a) s deriving Functor
+
+instance Comonad (Store s) where
+  extract (Store f s) = f s
+  duplicate (Store f s) = Store (Store f) s
+  
+experiment :: Functor f =&gt; (s -&gt; f s) -&gt; Store s a -&gt; f a
+experiment k (Store f s) = f &lt;$&gt; k s 
+
+rule :: Num s =&gt; Word8 -&gt; Store s Bool -&gt; Bool
+rule w (Store f s) = testBit w $ 0 L.&amp; partsOf (taking 3 L.bits) .~ [f (s+1), f s, f (s-1)]
+
+tab :: Memo s -&gt; Store s a -&gt; Store s a
+tab opt (Store f s) = Store (opt f) s
+
+loop :: Integral s =&gt; (Store s a -&gt; a) -&gt; Store s a -&gt; [Store s a]
+loop f = iterate (extend f . tab integral)
+
+window :: (Enum s, Num s) =&gt; s -&gt; s -&gt; Store s a -&gt; [a]
+window l h = experiment $ \ s -&gt; [s-l..s+h]
+
+grid :: [[Bool]] -&gt; Diagram SVG R2
+grid = cat unitY . reverse . map (hcat . map cell) where
+  cell b = unitSquare D.# fc (if b then black else white)
+
+svg :: Diagram SVG R2 -&gt; Strict.ByteString
+svg = Strict.concat . Lazy.toChunks . renderSvg . renderDia SVG (SVGOptions (Width 400) Nothing)
+ 
+data App = App
+
+instance Yesod App
+
+mkYesod &quot;App&quot; [parseRoutes| / ImageR GET |]
+
+getImageR :: MonadHandler m =&gt; m TypedContent
+getImageR = sendResponse $ toTypedContent (typeSvg, toContent img) 
+
+img = svg . grid . map (window 49 0) . take 50 . loop (rule 110) $ Store (==0) (0 :: Int)
+
+main = warpEnv App</code></pre><p>That clocks in at 60 lines of code. In that much space we defined the <code>Store</code> comonad, defined a generic evaluator that can handle any of Wolfram's 2-color automata, built a system of memoization to avoid asymptotic slowdown, took a cross section of our universe, and then rendered it to a diagram and built a custom web server to display that content here on the internet.</p><p>Almost all of the components we built are generic. We can define new types of automata, try out new initial conditions, jump around in time, with some work we can support multiple colors, new topologies, render the same diagram to different file formats conditionally based on browser preferences. The code above can be edited live here in your browser or downloaded and run locally on your own machine.</p><p>In the interest of full disclosure, the SVG that is rendered is far from optimal. The <code>diagrams</code> crew is aware of the issue and they are hard at work improving the way <code>diagrams</code> streams primitives to its backends, allowing it to take advantage of all the glorious structure that they have inside the <code>Diagram</code> type described in Brent's <a href="http://www.cis.upenn.edu/~byorgey/pub/monoid-pearl.pdf">excellent functional pearl</a>. Currently the communication process between <code>diagrams</code> and the backend is duplicating the transformation matrix and styling on a per element basis, and this is resulting in a much inflated document. When those changes go into <code>diagrams</code> and <code>diagrams-svg</code>, then this example will become <i>much</i> faster with no changes to this code.</p><p>I hope this shows how you can use a little bit of theory and some of the more practical components of the Haskell ecosystem to accomplish a lot with very little code.</p><p>-- <a href="mailto:ekmett@gmail.com">Edward Kmett</a>
+August 15, 2013</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/cellular-automata/part-1';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

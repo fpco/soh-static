@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html><head><title>PHOAS For Free - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/phoas">PHOAS For Free</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">PHOAS For Free</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 9 Dec 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/07986d7545873d46a1bcc28b8fbe367f2f9fa5ab">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/heap-of-successes">Previous content: How to Replace Failure by a Heap of Successes</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/bound">Next content: Bound</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#folding-invariants">Folding Invariants</a></li><li><a href="#weak-hoas">Weak HOAS</a></li><li><a href="#parametric-hoas">Parametric HOAS</a></li><li><a href="#p-is-for-profunctor">P is for Profunctor</a></li><li><a href="#phoas-is-free">PHOAS Is Free</a></li><li><a href="#take-the-end">Take The End</a></li><li><a href="#boxes-go-bananas-for-less">Boxes Go Bananas For Less</a></li><li><a href="#conclusion">Conclusion</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Back in 2008 I wrote an article entitled <a href="http://comonad.com/reader/2008/rotten-bananas/">&quot;Rotten Bananas&quot;</a> about how to convert between the different forms of catamorphisms over &quot;exponential&quot; data types that arise when we go to work with Higher Order Abstract Syntax (HOAS).</p><p>Today I want to go back and revisit that post in light of my current understanding of profunctors from working on <a href="http://hackage.haskell.org/package/lens"><code>lens</code></a>.</p><p>My goal today is to go through and reformulate Parametric HOAS slightly differently by using profunctors to tease apart the positive and negative occurences of the type variable.</p><p>By doing so, we can show the connection between Fegaras and Sheard's catamorphism and the free monad that laid so close to the surface in the original formulation, and we can derive a variant on Weirich and Washburn's efficient catamorphism by using an alternate encoding of the free monad that I've already <a href="http://comonad.com/reader/2011/free-monads-for-less-2/">blogged about before</a> in my series on <a href="http://comonad.com/reader/2011/free-monads-for-less/">&quot;Free Monads for Less&quot;</a>.</p><h1 id="folding-invariants"><a href="#folding-invariants">Folding Invariants</a></h1><p>If we take the base functor for an expression type that has both positive and negative occurences of a variable, there isn't much we can do with our standard tools. It isn't even a <code>Functor</code>, so it can't be <code>Foldable</code> or <code>Traversable</code>, <code>Applicative</code> or a <code>Monad</code>.</p><pre><code class="haskell">data ExpF a
+  = App a a
+  | Lam (a -&gt; a)</code></pre><p>To work with it, you can define a rather unsatisfying</p><pre><code class="haskell">class Invariant f where
+  invmap :: (a -&gt; b) -&gt; (b -&gt; a) -&gt; f a -&gt; f b
+  
+instance Invariant ExpF where
+  invmap ab ba (App x y) = App (ab x) (ab y)
+  invmap ab ba (Lam aa)  = Lam (ab.aa.ba)</code></pre><p>I described this in my 2008 post as <code>ExpFunctor</code>, based on a similar operation in Weirich and Washburn. It is packaged up in the <code>invariant</code> package on Hackage as <code>Invariant</code>, with a method named <code>invmap</code>, if you find you  really want to use it.</p><p>One of my goals today is to show that we can get away without it!</p><p>Erik Meijer and Graham Hutton showed in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.64.4921&amp;rep=rep1&amp;type=pdf">&quot;Bananas in Space&quot;</a> that you can define a catamorphism over that data type if you can <i>also</i> define a corresponding anamorphism that serves as its inverse. E.g. to define a pretty printer for this type with Meijer/Hutton's catamorphism you also need a parser. ಠ__ಠ</p><pre><code class="haskell">newtype Mu f = In { out :: f (Mu f) } 
+
+cata :: Invariant f =&gt; (f a -&gt; a) -&gt; (a -&gt; f a) -&gt; Mu f -&gt; a
+cata f g (In x) = f (invmap (cata f g) (ana f g) x)
+
+ana :: Invariant f =&gt; (f a -&gt; a) -&gt; (a -&gt; f a) -&gt; a -&gt; Mu f
+ana f g x = In (invmap (ana f g) (cata f g) (g x))</code></pre><p><a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.36.2763">Fegaras and Sheard</a> showed that if you change the domain of the problem a bit, you can get away with a 'fake' anamorphism, by adding a constructor that you agree never to use, because the anamorphism is only ever used as a right inverse to our catamorphism. They then proceeded to provide a type system for checking this. Adopting the notation from Weirich and Washburn's take on Fegaras and Sheard's catamorphism, this would be:</p><pre><code class="haskell">data Rec f a = Place a | Roll (f (Rec f a))
+
+cata :: Invariant f =&gt; (f a -&gt; a) -&gt; Rec f a -&gt; a
+cata f (Roll x) = f (invmap (cata f) Place x)
+cata f (Place x) = x</code></pre><p>You can clearly see that <code>Place</code> forms a right inverse of <code>cata f</code>:</p><pre><code class="haskell">cata f . Place = id</code></pre><p>Now you can define smart constructors for the running <code>Exp</code> example, using <code>Roll</code>.</p><pre><code class="haskell">type Exp = Rec ExpF
+
+lam :: (Exp a -&gt; Exp a) -&gt; Exp a
+lam f = Roll (Lam f)
+
+app :: Exp a -&gt; Exp a -&gt; Exp a
+app x y = Roll (App x y)</code></pre><p>Weirich and Washburn noted that you can prevent the accidental use of the type parameter <code>a</code> by quantifying over it.</p><p>Finally, Weirich and Washburn reimplemented <code>Rec</code>.</p><pre><code class="haskell">type Rec f a = (f a -&gt; a) -&gt; a</code></pre><p>This made <code>cata</code> ridiculously simple:</p><pre><code class="haskell">cata :: (f a -&gt; a) -&gt; Rec f a -&gt; a
+cata f x = x f</code></pre><p>But we don't have <code>Roll</code> any more, so we need to move the complexity into an explicit <code>roll</code> combinator:</p><pre><code class="haskell">roll :: Invariant f =&gt; f (Rec f a) -&gt; Rec f a
+roll x f = f (invmap (cata f) place x)</code></pre><p>We no longer have <code>Place</code> either, but nothing says <code>(f a -&gt; a) -&gt; a</code> has to use the supplied function, when we know <code>a</code>!</p><pre><code class="haskell">place :: a -&gt; Rec f a
+place = const</code></pre><p>Then we can see:</p><pre><code class="haskell">type Exp a = Rec ExpF a
+
+lam :: (Exp a -&gt; Exp a) -&gt; Exp a
+lam f = roll (Lam f)
+
+app :: Exp a -&gt; Exp a -&gt; Exp a
+app x y = roll (App x y)
+
+var :: a -&gt; Exp a
+var = place</code></pre><p>Again, in particular in both the Fegaras-Sheard and Weirich-Washburn forms, you can denote a closed term safely using</p><pre><code class="haskell">type ClosedExp = forall x. Exp x</code></pre><p>The safety of this is really the subject of the &quot;Boxes Go Bananas&quot; paper.</p><p>Based on the observations about the price of substitution into free monads by <a href="http://www.iai.uni-bonn.de/~jv/mpc08.pdf">Janis Voigtländer</a>, one should probably favor Weirich and Washburn's construction if you're going to be doing substitution on your HOAS representation -- and if you're not doing substitution, then why are you using HOAS in the first place?!</p><h1 id="weak-hoas"><a href="#weak-hoas">Weak HOAS</a></h1><p>Everything I've mentioned above is a &quot;strong&quot; HOAS variants. You can perform substitution just by passing in the expression you want.</p><p>In weak HOAS (and PHOAS) the decision is made to deal with negative occurences differently than in what we've done so far.</p><p>Instead of taking a full <code>Exp a</code> in negative position, we're just going to take an <code>a</code>.</p><p>Written monolithically, it would look something like:</p><pre><code class="haskell">data Exp a
+  = Var a
+  | Lam (a -&gt; Exp a)
+  | App (Exp a) (Exp a)</code></pre><p>Then our smart constructors change a bit:</p><pre><code class="haskell">lam :: (Exp a -&gt; Exp a) -&gt; Exp a</code></pre><p>weakens to</p><pre><code class="haskell">lam :: (a -&gt; Exp a) -&gt; Exp a</code></pre><p>We still have both positive and negative occurences of <code>a</code>, but we no longer have <code>Exp</code> occurring in both positive and negative position.</p><p>This is particularly popular in the Coq and Agda communities because it can pass the positivity checker, but unlike strong HOAS can be a bit more painful to work with.</p><h1 id="parametric-hoas"><a href="#parametric-hoas">Parametric HOAS</a></h1><p><a href="http://adam.chlipala.net/">Adam Chlipala</a> does a lot of work with Parametric HOAS, which is based on a weak HOAS variant of Weirich and Washburn's <a href="http://www.seas.upenn.edu/~sweirich/papers/itabox/icfp-published-version.pdf">Boxes Go Bananas: Encoding Higher-Order Abstract Syntax with
+Parametric Polymorphism</a>, which I talked about in that post. His <a href="http://ltamer.sourceforge.net/">Lambda Tamer</a> is based on this model.</p><p>One issue is that neither of these really gives us a free <code>Monad</code>, due to the fact that the <code>a</code> occurs in both positive and negative position and so we can't even derive a <code>Functor</code> instance.</p><p>Adam's work doesn't really feel this pinch, because in <a href="http://coq.inria.fr/">Coq</a> he can <a href="http://adam.chlipala.net/papers/PhoasICFP08/PhoasICFP08Talk.pdf">define custom tactics</a> for <a href="http://coq.inria.fr/files/adt-30jun09-bruno-ltac.pdf"><code>ltac</code></a> to use and you generally don't try to factor out this pattern into a library, but when you switch to <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a> and have to do everything by hand, the lack of common abstractions comes to bite you.</p><h1 id="p-is-for-profunctor"><a href="#p-is-for-profunctor">P is for Profunctor</a></h1><p>Dan Piponi wrote a nice article on <a href="http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html">Profunctors in Haskell</a> introducing profunctors to the Haskell community, and they now form the basis of much of <code>lens</code>. Liyang HU also has a more <a href="https://www.fpcomplete.com/school/pick-of-the-week/profunctors">tongue in cheek introduction</a> here on the School of Haskell that he originally presented back in April at a <a href="http://comonad.com/reader/2013/japanese-workshop-1/">benkyoukai</a> about various libraries of mine in Japan.</p><p>To say something is a <code>Profunctor</code> in Haskell is just to say it is contravariant in the first argument and covariant in the second.</p><pre><code class="haskell">class Profunctor p where
+  dimap :: (a -&gt; b) -&gt; (c -&gt; d) -&gt; p b c -&gt; p a d</code></pre><p>This argument order is a bit reversed from how it is usually tackled in category theory, but by lining things up this way we match up with the variances for <code>Arrow</code> and <code>(-&gt;)</code>.</p><p>For convenience we also provide class methods for:</p><pre><code class="haskell">lmap :: Profunctor p =&gt; (a -&gt; b) -&gt; p b c -&gt; p a c
+rmap :: Profunctor p =&gt; (b -&gt; c) -&gt; p a b -&gt; p a c</code></pre><p>Notice when I wrote the Weak HOAS definition, I had to keep it monolithic? To factor out <code>Var</code> / <code>Place</code>, it winds up needing two type parameters, since now both <code>a</code> and <code>Exp a</code> occur inside the expression.</p><p>So, if we go back to the start and separate positive and negative occurences of these, we're left with something like</p><pre><code class="haskell">data ExpF a b 
+  = App b b 
+  | Lam (a -&gt; b)</code></pre><p>This forms a valid <code>Profunctor</code>.</p><pre><code class="haskell">instance Profunctor ExpF where
+  dimap f g (App x y) = App (g x) (g y)
+  dimap f g (Lam h)   = Lam (g.h.f)</code></pre><h1 id="phoas-is-free"><a href="#phoas-is-free">PHOAS Is Free</a></h1><p>Now we can revisit the <code>Exp</code> we were talking about in the section on Weak HOAS and we can rip apart the old:</p><pre><code class="haskell">data Exp a
+  = Var a
+  | Lam (a -&gt; Exp a)
+  | Abs (Exp a) (Exp a)</code></pre><p>into the application of a Fegaras and Sheard free-monad-like construction</p><pre><code class="haskell">data Rec p a b
+  = Place b
+  | Roll (p a (Rec p a b))</code></pre><p>to our base profunctor <code>ExpF</code>, so now</p><pre><code class="haskell">type Exp = Rec ExpF</code></pre><p>But now, we're no longer free-monad like, we're actually a free monad!</p><p>We can even define this <code>Monad</code>, by cribbing the definition from <a href="http://hackage.haskell.org/package/free"><code>free</code></a>.</p><pre><code class="haskell">instance Profunctor p =&gt; Monad (Rec p a) where
+  return = Place
+  Place b  &gt;&gt;= f = f b
+  Roll bs &gt;&gt;= f = Roll $ rmap (&gt;&gt;= f) bs</code></pre><p>This <code>Monad</code> even performs capture avoiding substitution.</p><p>The Fegaras-Sheard catamorphism doesn't change much</p><pre><code class="haskell">cata :: Profunctor p =&gt; (p a b -&gt; b) -&gt; Rec p a b -&gt; b
+cata phi (Place b)  = b
+cata phi (Roll bs) = phi (rmap (cata phi) bs)</code></pre><p>However, it now just turns a <code>p a</code>-algebra into a <code>Rec p a</code>-algebra, and doesn't need to use <code>Place</code> at all!</p><p>And we get weak HOAS style smart constructors:</p><pre><code class="haskell">lam :: (a -&gt; Exp a b) -&gt; Exp a b
+lam f = Roll (Lam f)
+
+app :: Exp a b -&gt; Exp a b -&gt; Exp a b
+app x y = Roll (App x y)</code></pre><p>Now, <code>var</code> is the only thing that <a href="http://www.youtube.com/watch?v=jyaLZHiJJnE">crosses the streams</a> and causes the two type arguments to unify</p><pre><code class="haskell">var :: b -&gt; Exp a b
+var = return</code></pre><p>Notice the difference between the type of the argument of <code>lam</code> and the signature of <code>var</code>. This causes actual expressions that use any variable they bind to wind up with the types agreeing:</p><pre><code class="haskell">foo :: Exp a a
+foo = lam $ \x -&gt; lam $ \y -&gt; app (var x) (var y)</code></pre><h1 id="take-the-end"><a href="#take-the-end">Take The End</a></h1><p>Now instead of talking about a closed term in terms of quantifying over a single parameter that can only vary with an isomorphism, we take an end over our <code>Profunctor</code> instead:</p><pre><code class="haskell">type End p = forall x. p x x
+
+iter0 :: Profunctor p =&gt; (p a a -&gt; a) -&gt; End (Rec p) -&gt; a
+iter0 phi x = cata phi x</code></pre><p>I intend to write up a post on how to &quot;read&quot; universal properties as types, to help folks see where this definition for <code>End</code> comes from.</p><p>This was the Free monad I just said you probably don't want to use for substitution, so let's go try the other one.</p><h1 id="boxes-go-bananas-for-less"><a href="#boxes-go-bananas-for-less">Boxes Go Bananas For Less</a></h1><p>Recall Weirich and Washburn's <code>Rec</code>:</p><pre><code class="haskell">type Rec f a = (f a -&gt; a) -&gt; a</code></pre><p>When we go to turn that into a <code>Profunctor</code> directly we get stuck.</p><p>We could make</p><pre><code class="haskell">newtype Rec p a b = Rec { runRec :: (p a b -&gt; a) -&gt; b }</code></pre><p>and get the variances right for a <code>Profunctor</code>.</p><pre><code class="haskell">instance Profunctor p =&gt; Profunctor (Rec p) where
+  dimap f g (Rec h) = Rec $ \pab2a -&gt; g $ h $ f . pab2a . dimap f g</code></pre><p>But this doesn't look much like the instance I derived from Fegaras and Sheard's construction, and doesn't give us a Monad!</p><p>They could pull this off because <code>a</code> and <code>b</code> were interchangeable in either direction. We're a bit more constrained.</p><p>We could turn to <code>Codensity</code> of my weak variant of the Fegaras-Sheard construction, but as I've blogged about before, <code>Codensity (Free f)</code> is bigger than it needs to be.</p><p>Fortunately, that same series ended showing how you can get there with just Yoneda. Armed with that, we can borrow the Church-Free monad and get a Weirich and Wasburn-style <code>Profunctor</code> for <code>Rec</code>.</p><pre><code class="haskell">data Rec p a b = Rec 
+  { runRec :: forall r. 
+    (b -&gt; r) -&gt; (p a r -&gt; r) -&gt; r 
+  }
+
+instance Profunctor p =&gt; Profunctor (Rec p) where
+  dimap f g m = Rec $ \kp kf -&gt; runRec m (kp.g) (kf.lmap f)</code></pre><p>We retain the <code>Monad</code> we won by splitting our type parameters in the weak Fegaras-Sheard variant above:</p><pre><code class="haskell">instance Profunctor p =&gt; Monad (Rec p a) where
+  return b = Rec $ \ br _ -&gt; br b
+  m &gt;&gt;= f  = Rec $ \kp kf -&gt; 
+    runRec m (\a -&gt; runRec (f a) kp kf) kf</code></pre><p>and we can define the rest of the catamorphism machinery:</p><pre><code class="haskell">type End p = forall x. p x x
+
+cata :: Profunctor p =&gt; (p a b -&gt; b) -&gt; Rec p a b -&gt; b
+cata phi m = runRec m id phi
+
+roll :: Profunctor p =&gt; p a (Rec p a b) -&gt; Rec p a b
+roll w = Rec $ \kp kf -&gt; kf (rmap (\r -&gt; runRec r kp kf) w)
+
+iter0 :: Profunctor p =&gt; (p a a -&gt; a) -&gt; End (Rec p) -&gt; a
+iter0 phi x = cata phi x</code></pre><p>Now we can put together our smart constructors</p><pre><code class="haskell">lam :: (a -&gt; Exp a b) -&gt; Exp a b
+lam f = roll (Lam f)
+
+app :: Exp a b -&gt; Exp a b -&gt; Exp a b
+app x y = roll (App x y)
+
+var :: b -&gt; Exp a b
+var = return</code></pre><p>and we can build expressions</p><pre><code class="haskell">foo :: Exp a a
+foo = lam $ \x -&gt; lam $ \y -&gt; app (var x) (var y)</code></pre><h1 id="conclusion"><a href="#conclusion">Conclusion</a></h1><p>There is a lot more we can play with here.</p><p>Many expression types will admit a <code>Strong</code> instance. Now that we've split the input and output parameters can we perhaps use that or something like it to more easily <a href="http://www.haskell.org/pipermail/haskell-cafe/2008-November/049473.html">manipulate environments</a>?</p><p>Just like with <a href="https://www.fpcomplete.com/user/edwardk/bound"><code>bound</code></a> we can build an <a href="http://github.com/ekmett/indexed"><code>indexed</code></a> version of this construction that permits us to write strongly typed EDSLs. That is how PHOAS is usually presented in Coq after all.</p><p>There is also probably a lot more to be said about dinaturality here.</p><p>I still generally prefer working with <a href="http://hackage.haskell.org/package/bound"><code>bound</code></a> to working in HOAS these days, because it is much easier to work under lambdas, and it is easier to grab all your free variables using <code>Foldable</code> and <code>Traversable</code> and harder to make mistakes with.</p><p>That said it is good to finally be able to merge together the notion of Fegaras and Sheard's construction and the standard free monad.</p><p>This also strikes me as a good first step towards being able to turn PHOAS into something that can be encoded usefully in Haskell as a library rather than a design pattern.</p><p><a href="https://plus.google.com/u/0/113063331545548237308?rel=author">-</a>[-](<a href="https://plus.google.com/u/0/113063331545548237308" rel="publisher">-</a>)<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>September 18th, 2013</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/phoas';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

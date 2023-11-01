@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html><head><title>Monoids Tour - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/mgsloan">mgsloan</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mgsloan/monoids-tour">Monoids Tour</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Monoids Tour</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 9 Sep 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/mgsloan">mgsloan</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/12/fa4d22077d297cc8bdb2de20b209a7f55880a911">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mgsloan/yesod-calculator">Previous content: Calculator</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/mgsloan">See all content by mgsloan</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#what-s-in-a-monoid-">What&#39;s in a Monoid?</a></li><li><a href="#lists">Lists</a></li><li><a href="#dual-wrapper">Dual Wrapper</a></li><li><a href="#maybe">Maybe</a></li><li><a href="#first-and-last">First and Last</a></li><li><a href="#other-wrappers">Other Wrappers</a></li><li><a href="#applications">Applications</a><ul><li><a href="#foldable">Foldable</a></li><li><a href="#measured-monoids">Measured Monoids</a></li><li><a href="#diagrams">Diagrams</a></li><li><a href="#writer">Writer</a></li><li><a href="#parallelism">Parallelism</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Like the term &quot;monad&quot;, &quot;monoid&quot; can be a bit intimidating:  Why would I want to think about math while I'm doing real world programming?!?</p><p>One answer is that thinking in terms of monoids can be very beneficial to parallelism and efficient data structures.  Using the <code>Monoid</code> interface in Haskell allows you to leverage the many convenient functions that work with them.</p><h2 id="what-s-in-a-monoid-"><a href="#what-s-in-a-monoid-">What's in a Monoid?</a></h2><p>A monoid has two things: a 'unit' value, which we call <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mempty" title="Hoogle search for: mempty"><code>mempty</code></a>, and an append operation that combines values, called <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=mappend" title="Hoogle search for: mappend"><code>mappend</code></a>.  The typeclass for <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Monoid" title="Hoogle search for: Monoid"><code>Monoid</code></a> looks like:</p><pre><code class="haskell">-- Defined in Data.Monoid
+
+class Monoid a where
+    mempty  :: a
+    mappend :: a -&gt; a -&gt; a
+
+    -- This is here because some types might have a more efficient definition for it.
+    mconcat :: [a] -&gt; a
+    mconcat = foldr mappend mempty</code></pre><p>The <code>(&lt;&gt;)</code> operator has become the conventional way to refer to <code>mappend</code>:</p><pre><code class="haskell">infixr 6 (&lt;&gt;)
+
+(&lt;&gt;) :: Monoid a =&gt; a -&gt; a -&gt; a
+(&lt;&gt;) = mappend</code></pre><p>So what's so special about this <code>(&lt;&gt;)</code> thing?  Mainly, that it's <i>associative</i> -- this means using <code>(&lt;&gt;)</code> to merge together a sequence of items results in the same value regardless of the evaluation order. The following laws must hold:</p><pre><code class="haskell">a &lt;&gt; (b &lt;&gt; c) = (a &lt;&gt; b) &lt;&gt; c
+mempty &lt;&gt; a = a
+a &lt;&gt; mempty = a</code></pre><p>These last two laws say that <code>mempty</code> is the identity for <code>(&lt;&gt;)</code>, and it doesn't matter which side it's used on.  Without <code>mempty</code> and those laws, associativity is still an interesting property.  Types that have this property can be an instance of the &quot;<a href="http://hackage.haskell.org/packages/archive/semigroups/latest/doc/html/Data-Semigroup.html">Semigroup</a>&quot; typeclass.  However, since <code>Monoid</code> is in the base libraries, it's much more commonly used.</p><p>The main thing to understand about a series of values merged by <code>(&lt;&gt;)</code> is that the order that they are evaluated doesn't matter.  However, often the order of the arguments does matter -- <code>a &lt;&gt; b</code> is not necessarily the same thing as <code>b &lt;&gt; a</code>.</p><h2 id="lists"><a href="#lists">Lists</a></h2><p>List concatenation is an associative operation, and adding an empty list to either side just results in the same list.  It's a monoid!</p><pre><code class="haskell">instance Monoid [a] where
+    mempty  = []
+    mappend = (++)</code></pre><p>Let's test that this makes sense as a monoid:</p><pre><code class="active haskell">main = do
+    let a = [1,1,2]
+        b = [3,5]
+        c = [8,13]
+
+    putStrLn &quot;These are equal:&quot;
+    print $  a ++ (b  ++ c)
+    print $ (a ++  b) ++ c
+    putStrLn &quot;\nThese leave 'a' alone:&quot;
+    print $ a ++ []
+    print $ [] ++ a</code></pre><p>Yup!  It satisfies the laws we want.  Let's try using the monoid instance on <code>String</code> (which uses the list monoid):</p><pre><code class="active haskell">import Data.Monoid
+
+main = do 
+    putStrLn &quot;These are equal:&quot;
+    print $ &quot;Hello there!&quot; &lt;&gt;  mempty &lt;&gt; &quot; Monoids are&quot;  &lt;&gt; &quot; neat!&quot; &lt;&gt; mempty
+    print $ &quot;Hello there!&quot; &lt;&gt; (mempty &lt;&gt; &quot; Monoids are&quot;) &lt;&gt; &quot; neat!&quot; &lt;&gt; mempty</code></pre><p>Many other collection-like structures have <code>Monoid</code> instances corresponding to concatenation or union.  These include many of the datatypes in the <a href="http://hackage.haskell.org/package/containers">containers package</a> - <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Sequence" title="Hoogle search for: Sequence"><code>Sequence</code></a>, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Map" title="Hoogle search for: Map"><code>Map</code></a>, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Set" title="Hoogle search for: Set"><code>Set</code></a>, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=IntMap" title="Hoogle search for: IntMap"><code>IntMap</code></a>, and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=IntSet" title="Hoogle search for: IntSet"><code>IntSet</code></a>.</p><h2 id="dual-wrapper"><a href="#dual-wrapper">Dual Wrapper</a></h2><p>If an operation satisfies these laws no matter the input values, then it is by definition a monoid - there may be multiple valid monoids for a given datatype.  For example, this is another monoid for lists:</p><pre><code class="haskell">instance Monoid [a] where
+    mempty = []
+    mappend = flip (++)</code></pre><p><i>Note: <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=flip" title="Hoogle search for: flip"><code>flip</code></a> just takes a function of two arguments, and switches them.</i></p><p>It's not a very useful instance!  It still concatenate the two lists, but with the second one before the first.  In general, if you're going to define an instance of monoid for your datatype, then the most straightforward and useful definition should be chosen.</p><p>This particular variation of the list monoid can be generalized - there is a <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Dual" title="Hoogle search for: Dual"><code>Dual</code></a> newtype in &quot;Data.Monoid&quot;, which flips the <code>(&lt;&gt;)</code> of whatever monoid it wraps.</p><pre><code class="active haskell">import Data.Monoid
+
+main = print $ Dual &quot;world&quot; &lt;&gt; Dual &quot;hello &quot; </code></pre><p><code>Dual</code> is not used very frequently - but its a useful way of showing that there are often several valid instances of <code>Monoid</code> for a given datatype.</p><h2 id="maybe"><a href="#maybe">Maybe</a></h2><p>The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Maybe" title="Hoogle search for: Maybe"><code>Maybe</code></a> monoid follows a common pattern found when writing typeclass instances for containers: the type of the element is also constrained to being an instance of the class.</p><pre><code class="haskell">instance Monoid a =&gt; Monoid (Maybe a) where
+  mempty = Nothing
+
+  Nothing `mappend` x = x
+  x `mappend` Nothing = x
+  Just x `mappend` Just y = Just (x `mappend` y)</code></pre><p>The last line of this definition is saying that <code>Just x &lt;&gt; Just y</code> is merged by using the <code>Monoid a</code> to merge the two.  Let's look at an example:</p><pre><code class="active haskell">import Data.Monoid
+import Safe (readMay)
+
+main = print numbers
+
+numbers :: Maybe [Int]
+numbers = readMay &quot;[1,2,3]&quot; &lt;&gt; readMay &quot;[90&quot; &lt;&gt; readMay &quot;[4,5,6]&quot;</code></pre><p>What's happening here is that <code>readMay &quot;[90&quot;</code> returns <code>Nothing</code>, because the parse fails.  In the <code>Maybe</code> monoid, <code>Nothing</code> is <code>mempty</code>, so due to the monoid laws, we know we can just leave it out.  So it becomes just the other two parses merged with <code>&lt;&gt;</code>.</p><pre><code class="haskell">numbers = readMay &quot;[1,2,3]&quot; &lt;&gt; readMay &quot;[4,5,6]&quot;
+
+--      = Just [1,2,3] &lt;&gt; Just [4,5,6]
+
+--      = Just [1,2,3,4,5,6]</code></pre><p>This isn't the only monoid for <code>Maybe</code> that's useful!  After all, <code>Maybe</code> is often used to represent failure.  What if we just wanted the first thing that worked?</p><h2 id="first-and-last"><a href="#first-and-last">First and Last</a></h2><p>The <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=First" title="Hoogle search for: First"><code>First</code></a> / <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Last" title="Hoogle search for: Last"><code>Last</code></a> wrappers in <code>Data.Monoid</code> wrap <code>Maybe</code> values to provide a different monoid instance.  These instances don't require the type of the inner value to also be a <code>Monoid</code>, because they don't need to do any operations on them.  Here are there definitions:</p><pre><code class="haskell">-- | Maybe monoid returning the leftmost non-Nothing value.
+newtype First a = First { getFirst :: Maybe a }
+        deriving (Eq, Ord, Read, Show)
+
+instance Monoid (First a) where
+        mempty = First Nothing
+        r@(First (Just _)) `mappend` _ = r
+        First Nothing `mappend` r = r
+
+-- | Maybe monoid returning the rightmost non-Nothing value.
+newtype Last a = Last { getLast :: Maybe a }
+        deriving (Eq, Ord, Read, Show)
+
+instance Monoid (Last a) where
+        mempty = Last Nothing
+        _ `mappend` r@(Last (Just _)) = r
+        r `mappend` Last Nothing = r</code></pre><p>Let's see an example!  This is a convenient time to use <code>mconcat :: Monoid a =&gt; [a] -&gt; a</code>, because then we can just use <code>map</code> to wrap all of our values:</p><pre><code class="active haskell">import Data.Monoid
+import Safe (readMay)
+
+vals :: [Maybe Int]
+vals = [readMay &quot;ignored&quot;, readMay &quot;1&quot;, readMay &quot;5&quot;, readMay &quot;10&quot;]
+
+main = do
+    print . mconcat $ map First vals
+    print . mconcat $ map Last vals</code></pre><h2 id="other-wrappers"><a href="#other-wrappers">Other Wrappers</a></h2><p>Along with <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Dual" title="Hoogle search for: Dual"><code>Dual</code></a>, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=First" title="Hoogle search for: First"><code>First</code></a>, and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Last" title="Hoogle search for: Last"><code>Last</code></a>, <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Monoid" title="Hoogle search for: Data.Monoid"><code>Data.Monoid</code></a> defines a few more newtype wrappers.  All of them encode the observation that existing, commonly used operations and values are monoids.  For example, the <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Sum" title="Hoogle search for: Sum"><code>Sum</code></a> monoid encodes that <code>(+)</code> and <code>0</code> form a monoid:</p><pre><code class="haskell">-- | Monoid under addition.
+newtype Sum a = Sum { getSum :: a }
+        deriving (Eq, Ord, Read, Show, Bounded)
+
+instance Num a =&gt; Monoid (Sum a) where
+        mempty = Sum 0
+        Sum x `mappend` Sum y = Sum (x + y)</code></pre><p>Here's an example:</p><pre><code class="active haskell">import Data.Monoid
+
+vals :: [Int]
+vals = [1,2,3,4,5]
+
+main = print . mconcat $ map Sum vals</code></pre><p>The rest of the newtype wrappers follow this pattern -- the <code>mappend</code> operation just unwraps the value, and re-wraps them after combining with some operation.</p><ul><li>Sum is `(+)` and `0` (it wraps any <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Num" title="Hoogle search for: Num"><code>Num</code></a> instance)</li><li><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Product" title="Hoogle search for: Product"><code>Product</code></a> is `(*)` and `1` (it wraps any <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Num" title="Hoogle search for: Num"><code>Num</code></a> instance).</li><li><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=All" title="Hoogle search for: All"><code>All</code></a> is `(&amp;&amp;)` and `True` (it wraps <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Bool" title="Hoogle search for: Bool"><code>Bool</code></a>).</li><li><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Any" title="Hoogle search for: Any"><code>Any</code></a> is `(||)` and `False`</li><li><a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Endo" title="Hoogle search for: Endo"><code>Endo</code></a> is `(.)` and `id`</li></ul><p>This last one, <code>Endo</code>, is pretty interesting.  Its name comes from category theory -- &quot;Endomorphism&quot; -- but its meaning here isn't so complicated.  It just means that functions with the type <code>a -&gt; a</code> can be combined by composition, and the order of the application of composition doesn't matter much:</p><pre><code class="active haskell">main = do
+    let f =  (+1) . ((*2)  . negate)
+        g = ((+1) .  (*2)) . negate
+    
+    putStrLn &quot;These are equal:&quot;
+    print $ f 5
+    print $ g 5</code></pre><p>Using <code>Endo</code>, this looks like:</p><pre><code class="active haskell">import Data.Monoid
+
+f :: Endo Int
+f = mconcat $ map Endo [(+1), (*2), negate]
+
+main = print $ f `appEndo` 5</code></pre><p>Here, <code>appEndo</code> extracts the <code>Int -&gt; Int</code> function from the <code>Endo Int</code>.  Even though it's a field accessor, it can be used infix, because when supplied with an <code>Endo a</code>, it returns a function <code>a -&gt; a</code>.</p><p>This property is one of the main things that makes using function composition attractive.  If you see &quot;f . g . h&quot; used to define a function, then you know that you could refactor out &quot;f . g&quot; or &quot;g . h&quot; as separate definitions.</p><pre><code class="active haskell">v1 :: String -&gt; Int
+v1 = length . filter (not . null) . lines
+
+v2 :: String -&gt; Int
+v2 = fg . lines
+  where
+    fg = length . filter (not . null)
+
+v3 :: String -&gt; Int
+v3 = length . gh
+  where
+    gh = filter (not . null) . lines
+
+main = do
+    print $ v1 &quot;a\n\nb\nc&quot;
+    print $ v2 &quot;a\n\nb\nc&quot;
+    print $ v3 &quot;a\n\nb\nc&quot;</code></pre><h1 id="applications"><a href="#applications">Applications</a></h1><p>Naturally, practical applications of monoids take advantage of the fact that the operation is associative.  This can allow for efficient data structures and parallel computation.</p><h2 id="foldable"><a href="#foldable">Foldable</a></h2><p>The <code>Foldable</code> typeclass contains quite a few functions, but the important one is <code>foldMap</code>:</p><pre><code class="haskell">class Foldable t where
+    -- | Combine the elements of a structure using a monoid.
+    fold :: Monoid m =&gt; t m -&gt; m
+    fold = foldMap id
+
+    -- | Map each element of the structure to a monoid, and combine the results.
+    foldMap :: Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m
+    foldMap f = foldr (mappend . f) mempty
+    
+    -- | Right-associative fold of a structure.
+    foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b
+    foldr f z t = appEndo (foldMap (Endo . f) t) z
+    
+    -- etc.. foldr', foldl, foldl', foldr1, foldl1</code></pre><p><code>foldMap</code> allows you to execute a query on some datatype, by providing a function from the &quot;elements&quot; of the datatype to some monoidal value.  Let's take <code>LeafyTree</code>, below, as an example datatype for the <code>t</code> in <code>Foldable t</code> :</p><pre><code class="haskell">data LeafyTree a
+    = Branch [LeafyTree a]
+    | Leaf a</code></pre><p>Let's say we decide that our <code>Foldable</code> instance should provide a left-to-right traversal of the leaves.  Then, the fact that it takes a <code>Monoid</code> means that the actual structure of the <code>Branch</code> parts of the structure don't matter!  This means that tree-like data structures can be used to represent efficient sequences, while supporting efficient query  (more on this in the next section).</p><pre><code class="active haskell">import Data.Foldable
+import Data.Monoid
+
+data LeafyTree a
+    = Branch [LeafyTree a]
+    | Leaf a
+-- show
+instance Foldable LeafyTree where
+    foldMap f (Branch xs) = mconcat $ map (foldMap f) xs
+    foldMap f (Leaf a) = f a
+
+tree1 = Branch [Leaf &quot;abr&quot;, Branch [Branch [Leaf &quot;a&quot;, Leaf &quot;ca&quot;], Leaf &quot;dabra&quot;]]
+
+tree2 = Branch [Leaf &quot;abr&quot;, Leaf &quot;a&quot;, Branch [Leaf &quot;ca&quot;, Leaf &quot;dabra&quot;]]
+
+main = do
+    putStrLn &quot;These are equal:&quot;
+    print $ foldMap (Sum . length) tree1
+    print $ foldMap (Sum . length) tree2
+    
+    -- Since the leaves are Monoids, we can just directly merge them:
+    putStrLn &quot;Also equal:&quot;
+    print $ foldMap id tree1
+    print $ foldMap id tree2</code></pre><p>If the implementation of this datatype is hidden, and only functions similar to <code>foldMap</code> are exported, then the user can't inspect the structure of the tree if they fold it with valid monoids.  This allows the tree's structure to be an implementation detail.</p><h2 id="measured-monoids"><a href="#measured-monoids">Measured Monoids</a></h2><p>In <a href="http://apfelmus.nfshost.com/articles/monoid-fingertree.html">quite an excellent article</a>, Heinrich Apfelmus describes the monoidal annotations supported by fingertrees.  Such annotations really can be supported by any tree data structure.</p><p>Here's the typeclass used for &quot;measured monoids&quot; in the <a href="http://hackage.haskell.org/packages/archive/fingertree/0.0.1.1/doc/html/Data-FingerTree.html">fingertree package</a>:</p><pre><code class="haskell">data FingerTree v a   -- = ...
+
+class Monoid v =&gt; Measured a v | a -&gt; v where
+    measure :: a -&gt; v</code></pre><p>What this means is that for a given type <code>a</code> we have a way of creating a monoidal summary of its value.  In other words, this <code>measure</code> function is quite similar to the first parameter of <code>foldMap</code>.  The difference is that since it's in a typeclass, the types themselves specify the function rather than requiring a function to be passed in.</p><p>This means that when we create a <code>FingerTree v a</code>, where the leaves have type <code>a</code> and the inner nodes always cache the monoidal summary (<code>v</code>) of that subtree.  As Apfelmus describes, this lets us efficiently search and seek in the tree, by navigating by the cached monoid.</p><p>I'll leave my summary of the material at that -- no reason to re-do his excellent article!  However, I would like to throw in a few comments:</p><ol><li><p>While the <code>FingerTree</code> only supports one monoidal summary, you can easily use the datatype with multiple monoids by relying on the tuple instances of <code>Monoid</code>.  For example:</p></li></ol><pre><code class="haskell">-- TODO</code></pre><ol><li><p>For many reasonable uses of these monoidal annotations, the <code>measure</code> above is a <a href="http://en.wikibooks.org/wiki/Haskell/Monoids#Homomorphisms">&quot;monoid homomorphism&quot;</a>.  This is a very fancy way of saying that if the leaf value <code>a</code> is also a monoid, then if you <code>mconcat</code>-ed the whole sequence together, and applied <code>measure</code> to get <code>v</code>, you'd get the same result as if you just looked at the <code>v</code> annotation at the root.</p></li></ol><h2 id="diagrams"><a href="#diagrams">Diagrams</a></h2><p>In his <a href="http://www.cis.upenn.edu/~byorgey/pub/monoid-pearl.pdf">Monoid Pearl</a>, Brent Yorgey describes the usage of monoids in the <a href="http://projects.haskell.org/diagrams/">diagrams</a> libraries.  A lot of the primitives in the system are monoids:</p><ul><li>Diagrams.  The core representation of diagrams is a monoid where <code>above &lt;&gt; below</code> means that <code>above</code> is drawn on top of <code>below</code>.</li><li>Envelopes - bounding area of a diagram</li><li>Traces - line intersections with a diagram</li><li>Styles - color / line width / stroke style / etc</li><li>Transformations - stuff like scaling / rotation / shift</li><li>Bounding boxes</li></ul><p>One of the core <code>Diagram</code> type is really a <a href="http://hackage.haskell.org/package/dual-tree">DUAL tree</a>, a tree that supports both upwards and downwards monoidal annotations.  This means that attributes like styles and transformations can be accumulated downwards, while</p><p>Beyond discussing a very practical yet theory-motivated usage of Monoids, this article is also worth a read for going into the details of &quot;Monoid Actions&quot;, &quot;Deep Embeddings&quot;, and &quot;Difference Lists&quot;.</p><p>Here's an example of using the <code>Monoid</code> instance for <code>Diagram</code>:</p><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.mgsloan.com%2Fdiagrams_example.png" /></p><pre><code class="haskell">example = mconcat [ circle 0.1 # fc green
+                  , eqTriangle 1 # scale 0.4 # fc yellow
+                  , square 1 # fc blue
+                  , circle 1 # fc red
+                  ]</code></pre><h2 id="writer"><a href="#writer">Writer</a></h2><p>The 'Writer' type, from the <a href="http://hackage.haskell.org/package/mtl">&quot;mtl&quot;</a> or the preferred <a href="http://hackage.haskell.org/package/transformers">&quot;transformers&quot;</a> package, allows you to write monadic computations that write down data without reading it.  The usage of &quot;transformers&quot; is the same, but the definition in &quot;mtl&quot; is simpler, so I'll use that for explanation:</p><pre><code class="haskell">class (Monoid w, Monad m) =&gt; MonadWriter w m | m -&gt; w where
+    tell   :: w -&gt; m ()
+    listen :: m a -&gt; m (a, w)
+    pass   :: m (a, w -&gt; w) -&gt; m a</code></pre><p>The main reason to use a <code>Writer</code> is that you can't arbitrarily set or modify the value of <code>w</code>, the accumulator.  You can only use <code>(&lt;&gt;)</code> to merge in more information, by using <code>tell</code>.  You can still inspect the information (using <code>listen</code>), and even apply transformations to it (using <code>pass</code>), but these operations must happen as transformations <i>outside</i> the actual monad.  In other words, even with these methods, you can't get an action <code>foo :: MonadWriter w m =&gt; m a</code> that uses something other than <code>(&lt;&gt;)</code> to mutate <code>w</code>.</p><p><a href="http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html">This</a> excellent monoids tutorial (which covers some similar content) has a good section about using the Writer monad.</p><h2 id="parallelism"><a href="#parallelism">Parallelism</a></h2><p>Monoids are a very useful abstraction for parallel programming.  If you are dealing with a monoidal reduction (many &quot;reduces&quot; in map-reduce fit this pattern), then you are allowed to make many different decisions about the division of labor.</p><pre><code class="haskell">--TODO</code></pre><p>http://byorgey.wordpress.com/2011/04/18/monoids-for-maybe/</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/mgsloan/monoids-tour';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

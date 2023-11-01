@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html><head><title>Haskell Fast &amp; Hard (Part 4) - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard">Haskell Fast &amp; Hard</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-4">Haskell Fast &amp; Hard (Part 4)</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Haskell Fast &amp; Hard (Part 4)</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">14 Apr 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/70/0782affdfb12603d1d34055731ab0fc60632d774">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-3">Previous content: Haskell Fast &amp; Hard  (Part 3)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-5">Next content: Haskell Fast &amp; Hard (Part 5)</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/haskell-fast-hard">Go up to: Haskell Fast &amp; Hard</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh">See all content by Yann Esposito</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#types">Types</a><ul><li><a href="#type-inference">Type inference</a></li><li><a href="#type-construction">Type construction</a><ul><li><a href="#exercises-">Exercises:</a></li></ul></li><li><a href="#recursive-type">Recursive type</a></li><li><a href="#trees">Trees</a></li></ul></li><li><a href="#infinite-structures">Infinite Structures</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h3 id="types"><a href="#types">Types</a></h3><p><img alt="Dali, the madonna of port Lligat" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fsalvador-dali-the-madonna-of-port-lligat.jpg" /></p><hr /><p>Too long; didn't read:</p><ul><li><code>type Name = AnotherType</code> is just an alias and the compiler doesn't do any difference between <code>Name</code> and <code>AnotherType</code>.</li><li><code>data Name = NameConstructor AnotherType</code> make a difference.</li><li><code>data</code> can construct structures which can be recursives.</li><li><code>deriving</code> is magic and create functions for you.</li></ul><hr /><p>In Haskell, types are strong and static.</p><p>Why is this important? It will help you <i>greatly</i> to avoid mistakes.
+In Haskell, most bugs are caught during the compilation of your program.
+And the main reason is because of the type inference during compilation.
+It will be easy to detect where you used the wrong parameter at the wrong place for example.</p><h4 id="type-inference"><a href="#type-inference">Type inference</a></h4><p>Static typing is generally essential to reach fast execution time.
+But most statically typed languages are bad at generalizing concepts.
+Haskell's saving grace is that it can <i>infer</i> types.</p><p>Here is a simple example.
+The <code>square</code> function in Haskell:</p><pre><code class="haskell">square x = x * x</code></pre><p>This function can <code>square</code> any Numeral type.
+You can provide <code>square</code> with an <code>Int</code>, an <code>Integer</code>, a <code>Float</code> a <code>Fractional</code> and even <code>Complex</code>. Proof by example:</p><pre><code class="active haskell">import Data.Complex
+
+square x = x*x
+
+main = do
+  print $ square 2
+  print $ square 2.1
+  print $ square (2 :+ 1)</code></pre><p><code>x :+ y</code> is the notation for the complex (<i>x + ib</i>).</p><p>Now compare with the amount of code necessary in C:</p><pre><code class="c">int     int_square(int x) { return x*x; }
+
+float   float_square(float x) {return x*x; }
+
+complex complex_square (complex z) {
+    complex tmp;
+    tmp.real = z.real * z.real - z.img * z.img;
+    tmp.img = 2 * z.img * z.real;
+}
+
+complex x,y;
+y = complex_square(x);</code></pre><p>For each type, you need to write a new function.
+The only way to work around this problem is to use some meta-programming trick.
+For example using the pre-processor.
+In C++ there is a better way, the C++ templates:</p><pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;complex&gt;
+using namespace std;
+
+template&lt;typename T&gt;
+T square(T x)
+{
+    return x*x;
+}
+
+int main() {
+    // int
+    int sqr_of_five = square(5);
+    cout &lt;&lt; sqr_of_five &lt;&lt; endl;
+    // double
+    cout &lt;&lt; (double)square(5.3) &lt;&lt; endl;
+    // complex
+    cout &lt;&lt; square( complex&lt;double&gt;(5,3) )
+         &lt;&lt; endl;
+    return 0;
+}</code></pre><p>C++ does a far better job than C.
+For more complex function the syntax can be hard to follow:
+look at
+<a href="http://bartoszmilewski.com/2009/10/21/what-does-haskell-have-to-do-with-c/">this article</a>
+for example.</p><p>In C++ you must declare that a function can work with different types.
+In Haskell this is the opposite.
+The function will be as general as possible by default.</p><p>Type inference gives Haskell the feeling of freedom that dynamically
+typed languages provide.
+But unlike dynamically typed languages, most errors are caught before the execution.
+Generally, in Haskell:</p><blockquote><p>&quot;if it compiles it certainly does what you intended&quot;</p></blockquote><h4 id="type-construction"><a href="#type-construction">Type construction</a></h4><p>You can construct your own types.
+First you can use aliases or type synonyms.</p><pre><code class="active haskell">type Name   = String
+type Color  = String
+
+showInfos :: Name -&gt;  Color -&gt; String
+showInfos name color =  &quot;Name: &quot; ++ name
+                        ++ &quot;, Color: &quot; ++ color
+name :: Name
+name = &quot;Robin&quot;
+color :: Color
+color = &quot;Blue&quot;
+main = putStrLn $ showInfos name color</code></pre><p>But it doesn't protect you much.
+Try to swap the two parameter of <code>showInfos</code> and run the program:</p><pre><code class="active haskell">type Name   = String
+type Color  = String
+
+showInfos :: Name -&gt;  Color -&gt; String
+showInfos name color =  &quot;Name: &quot; ++ name
+                        ++ &quot;, Color: &quot; ++ color
+name :: Name
+name = &quot;Robin&quot;
+color :: Color
+color = &quot;Blue&quot;
+-- show
+main = putStrLn $ showInfos color name
+-- /show</code></pre><p>It will compile and execute.
+In fact you can replace Name, Color and String everywhere.
+The compiler will treat them as completely identical.</p><p>Another method is to create your own types using the keyword <code>data</code>.</p><pre><code class="active haskell">data Name   = NameConstr String
+data Color  = ColorConstr String
+
+showInfos :: Name -&gt;  Color -&gt; String
+showInfos (NameConstr name) (ColorConstr color) =
+      &quot;Name: &quot; ++ name ++ &quot;, Color: &quot; ++ color
+
+name  = NameConstr &quot;Robin&quot;
+color = ColorConstr &quot;Blue&quot;
+main = putStrLn $ showInfos name color</code></pre><p>Now if you switch parameters of <code>showInfos</code>, the compiler complains!
+A possible mistake you could never do again.
+The only price is to be more verbose.</p><p>Also remark constructor are functions:</p><pre><code class="haskell">NameConstr  :: String -&gt; Name
+ColorConstr :: String -&gt; Color</code></pre><p>The syntax of <code>data</code> is mainly:</p><pre><code class="haskell">data TypeName =   ConstructorName  [types]
+                | ConstructorName2 [types]
+                | ...</code></pre><p>Generally the usage is to use the same name for the
+DataTypeName and DataTypeConstructor.</p><p>Example:</p><pre><code class="haskell">data Complex a = Num a =&gt; Complex a a</code></pre><p>Also you can use the record syntax:</p><pre><code class="haskell">data DataTypeName = DataConstructor {
+                      field1 :: [type of field1]
+                    , field2 :: [type of field2]
+                    ...
+                    , fieldn :: [type of fieldn] }</code></pre><p>And many accessors are made for you.
+Furthermore you can use another order when setting values.</p><p>Example:</p><pre><code class="haskell">data Complex a = Num a =&gt; Complex { real :: a, img :: a}
+c = Complex 1.0 2.0
+z = Complex { real = 3, img = 4 }
+real c ⇒ 1.0
+img z ⇒ 4</code></pre><h5 id="exercises-"><a href="#exercises-">Exercises:</a></h5><ol><li><p>Declare the data type <code>Knight</code>  in the following program:</p></li></ol><pre><code class="active haskell">data Knight = undefined
+
+galaad = Knight { name = &quot;Galaad, the pure&quot;
+                , quest = &quot;To seek the Holy Grail&quot;
+                , favoriteColor = &quot;The blue... No the red! AAAAAAHHHHHHH!!!!&quot; }
+
+showCharacter :: Knight -&gt; String
+showCharacter knight = &quot;What is your name?\n&quot;
+    ++ &quot;My name is &quot; ++ name knight
+    ++ &quot;\nWhat is your quest?\n&quot;
+    ++ quest knight
+    ++ &quot;\nWhat is your favorite color?\n&quot;
+    ++ favoriteColor knight
+
+main = do
+  putStrLn $ showCharacter galaad
+</code></pre><div class="hidden" title="Solution"><pre><code class="active haskell">data Knight = {-hi-}Knight { name :: String
+                     , quest :: String
+                     , favoriteColor :: String }{-/hi-}
+
+galaad = Knight { name = &quot;Galaad, the pure&quot;
+                , quest = &quot;To seek the Holy Grail&quot;
+                , favoriteColor = &quot;The blue... No the red! AAAAAAHHHHHHH!!!!&quot; }
+
+showCharacter :: Knight -&gt; String
+showCharacter knight = &quot;What is your name?\n&quot;
+    ++ &quot;My name is &quot; ++ name knight
+    ++ &quot;\nWhat is your quest?\n&quot;
+    ++ quest knight
+    ++ &quot;\nWhat is your favorite color?\n&quot;
+    ++ favoriteColor knight
+
+main = do
+  putStrLn $ showCharacter galaad
+</code></pre></div><ol><li><p>Somebody changed the showCharacter to make it more readable.
+Unfortunately he mades some mistake.
+Change the type declaration such that the compiler complains, and then correct the showCharacter function.</p></li></ol><pre><code class="active haskell">data Knight = Knight { name :: String
+                     , quest :: String
+                     , favoriteColor :: String }
+
+showNameQuestion :: String -&gt; String
+showNameQuestion someName = &quot;What is your name? My name is &quot; ++ someName
+
+showQuestQuestion :: String -&gt; String
+showQuestQuestion someQuest = &quot;What is your quest? &quot; ++ someQuest
+
+showColorQuestion :: String -&gt; String
+showColorQuestion someColor = &quot;What is your favorite color? &quot; ++ someColor
+    
+showCharacter :: Knight -&gt; String
+showCharacter knight = showNameQuestion (favoriteColor knight) ++ &quot;\n&quot;
+                       ++ showQuestQuestion (name knight ) ++ &quot;\n&quot;
+                       ++ showColorQuestion (quest knight)
+
+galaad = Knight { name = &quot;Galaad, the pure&quot;
+                , quest = &quot;To seek the Holy Grail&quot;
+                , favoriteColor = &quot;The blue... No the red! AAAAAAHHHHHHH!!!!&quot; }
+
+main = do
+  putStrLn $ showCharacter galaad
+</code></pre><div class="hidden" title="Solution"><pre><code class="active haskell">{-hi-}data Name = Name String
+data Quest = Quest String
+data Color = Color String{-/hi-}
+
+data Knight = Knight { name :: Name
+                     , quest :: Quest
+                     , favoriteColor :: Color }
+
+showNameQuestion :: {-hi-}Name{-/hi-} -&gt; String
+showNameQuestion {-hi-}(Name someName){-/hi-} = &quot;What is your name? My name is &quot; ++ someName
+
+showQuestQuestion :: {-hi-}Quest{-/hi-} -&gt; String
+showQuestQuestion {-hi-}(Quest someQuest){-/hi-} = &quot;What is your quest? &quot; ++ someQuest
+
+showColorQuestion :: {-hi-}Color{-/hi-} -&gt; String
+showColorQuestion {-hi-}(Color someColor){-/hi-} = &quot;What is your favorite color? &quot; ++ someColor
+    
+showCharacter :: Knight -&gt; String
+{-
+-- This version doesn't compile, try to uncomment to verify
+showCharacter knight = showNameQuestion (favoriteColor knight) ++ &quot;\n&quot;
+                       ++ showQuestQuestion (name knight ) ++ &quot;\n&quot;
+                       ++ showColorQuestion (quest knight)
+-}
+
+showCharacter knight = showNameQuestion (name knight) ++ &quot;\n&quot;
+                       ++ showQuestQuestion (quest knight ) ++ &quot;\n&quot;
+                       ++ showColorQuestion (favoriteColor knight)
+
+galaad = Knight { name = {-hi-}Name{-/hi-} &quot;Galaad, the pure&quot;
+                , quest = {-hi-}Quest{-/hi-} &quot;To seek the Holy Grail&quot;
+                , favoriteColor = {-hi-}Color{-/hi-} &quot;The blue... No the red! AAAAAAHHHHHHH!!!!&quot; }
+
+main = do
+  putStrLn $ showCharacter galaad
+</code></pre></div><h4 id="recursive-type"><a href="#recursive-type">Recursive type</a></h4><p>You already encountered a recursive type: lists.
+You can re-create lists, but with a more verbose syntax:</p><pre><code class="haskell">data List a = Empty | Cons a (List a)</code></pre><p>If you really want to use an easier syntax you can use an infix name for constructors.</p><pre><code class="haskell">infixr 5 :::
+data List a = Nil | a ::: (List a)</code></pre><p>The number after <code>infixr</code> is the priority.</p><p>If you want to be able to print (<code>Show</code>), read (<code>Read</code>), test equality (<code>Eq</code>) and compare (<code>Ord</code>) your new data structure you can tell Haskell to derive the appropriate functions for you.</p><pre><code class="haskell">infixr 5 :::
+data List a = Nil | a ::: (List a)
+              deriving (Show,Read,Eq,Ord)</code></pre><p>When you add <code>deriving (Show)</code> to your data declaration, Haskell create a <code>show</code> function for you.
+We'll see soon how you can use your own <code>show</code> function.</p><pre><code class="haskell">convertList [] = Nil
+convertList (x:xs) = x ::: convertList xs</code></pre><pre><code class="active haskell">infixr 5 :::
+data List a = Nil | a ::: (List a)
+              deriving (Show,Read,Eq,Ord)
+convertList [] = Nil
+convertList (x:xs) = x ::: convertList xs
+-- show
+main = do
+      print (0 ::: 1 ::: Nil)
+      print (convertList [0,1])
+-- /show</code></pre><h4 id="trees"><a href="#trees">Trees</a></h4><p><img alt="Magritte, l'Arbre" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fmagritte-l-arbre.jpg" /></p><p>We'll just give another standard example: binary trees.</p><pre><code class="haskell">import Data.List
+
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                              deriving (Show)</code></pre><p>We will also create a function which turns a list into an ordered binary tree.</p><pre><code class="haskell">treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))</code></pre><p>Look at how elegant this function is.
+In plain English:</p><ul><li>an empty list will be converted to an empty tree.</li><li><p>a list <code>(x:xs)</code> will be converted to a tree where:</p><ul><li>The root is <code>x</code></li><li>Its left subtree is the tree created from members of the list <code>xs</code> which are strictly inferior to <code>x</code> and</li><li>the right subtree is the tree created from members of the list <code>xs</code> which are strictly superior to <code>x</code>.</li></ul></li></ul><pre><code class="active haskell">import Data.List
+
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                              deriving (Show)
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+-- show
+main = print $ treeFromList [7,2,4,8]
+-- /show</code></pre><p>This is an informative but quite unpleasant representation of our tree.</p><p>Just for fun, let's code a better display for our trees.
+I simply had fun making a nice function to display trees in a general way.
+You can safely skip this part if you find it too difficult to follow.</p><p>We have a few changes to make.
+We remove the <code>deriving (Show)</code> from the declaration of our <code>BinTree</code> type.
+And it might also be useful to make our BinTree an instance of (<code>Eq</code> and <code>Ord</code>).
+We will be able to test equality and compare trees.</p><pre><code class="haskell">data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)</code></pre><p>Without the <code>deriving (Show)</code>, Haskell doesn't create a <code>show</code> method for us.
+We will create our own version of <code>show</code>.
+To achieve this, we must declare that our newly created type <code>BinTree a</code>
+is an instance of the type class <code>Show</code>.
+The general syntax is:</p><pre><code class="haskell">instance Show (BinTree a) where
+   show t = ... -- You declare your function here</code></pre><p>Here is my version of how to show a binary tree.
+Don't worry about the apparent complexity.
+I made a lot of improvements in order to display even stranger objects.</p><pre><code class="haskell">-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    -- treeshow pref Tree
+    --   shows a tree and starts each line with pref
+    -- We don't display the Empty tree
+    treeshow pref Empty = &quot;&quot;
+    -- Leaf
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    -- Right branch is empty
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    -- Left branch is empty
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- Tree with left and right children non empty
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replaces &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replaces one char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;</code></pre><p>The <code>treeFromList</code> method remains identical.</p><pre><code class="haskell">treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))</code></pre><p>And now, we can play:</p><pre><code class="active haskell">data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    -- treeshow pref Tree
+    --   shows a tree and starts each line with pref
+    -- We don't display the Empty tree
+    treeshow pref Empty = &quot;&quot;
+    -- Leaf
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    -- Right branch is empty
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    -- Left branch is empty
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- Tree with left and right children non empty
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replaces &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replaces one char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+-- show
+main = do
+  putStrLn &quot;Int binary tree:&quot;
+  print $ treeFromList [7,2,4,8,1,3,6,21,12,23]
+-- /show</code></pre><p>Now it is far better!
+The root is shown by starting the line with the <code>&lt;</code> character.
+And each following line starts with a <code>:</code>.
+But we could also use another type.</p><pre><code class="active haskell">data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    -- treeshow pref Tree
+    --   shows a tree and starts each line with pref
+    -- We don't display the Empty tree
+    treeshow pref Empty = &quot;&quot;
+    -- Leaf
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    -- Right branch is empty
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    -- Left branch is empty
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- Tree with left and right children non empty
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replaces &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replaces one char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+-- show
+main = do
+  putStrLn &quot;\nString binary tree:&quot;
+  print $ treeFromList [&quot;foo&quot;,&quot;bar&quot;,&quot;baz&quot;,&quot;gor&quot;,&quot;yog&quot;]
+-- /show</code></pre><p>As we can test equality and order trees, we can
+make tree of trees!</p><pre><code class="active haskell">data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    -- treeshow pref Tree
+    --   shows a tree and starts each line with pref
+    -- We don't display the Empty tree
+    treeshow pref Empty = &quot;&quot;
+    -- Leaf
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    -- Right branch is empty
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    -- Left branch is empty
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- Tree with left and right children non empty
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replaces &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replaces one char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+-- show
+main = do
+  putStrLn &quot;\nBinary tree of Char binary trees:&quot;
+  print ( treeFromList
+           (map treeFromList [&quot;baz&quot;,&quot;zara&quot;,&quot;bar&quot;]))
+-- /show</code></pre><p>This is why I chose to prefix each line of tree display by <code>:</code> (except for the root).</p><p><img alt="Yo Dawg Tree" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fyo_dawg_tree.jpg" /></p><pre><code class="active haskell">data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    -- treeshow pref Tree
+    --   shows a tree and starts each line with pref
+    -- We don't display the Empty tree
+    treeshow pref Empty = &quot;&quot;
+    -- Leaf
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    -- Right branch is empty
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    -- Left branch is empty
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- Tree with left and right children non empty
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- this shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replaces &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (show x)
+
+    -- replaces one char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+
+treeFromList :: (Ord a) =&gt; [a] -&gt; BinTree a
+treeFromList [] = Empty
+treeFromList (x:xs) = Node x (treeFromList (filter (&lt;x) xs))
+                             (treeFromList (filter (&gt;x) xs))
+-- show
+main = do
+  putStrLn &quot;\nTree of Binary trees of Char binary trees:&quot;
+  print $ (treeFromList . map (treeFromList . map treeFromList))
+             [ [&quot;YO&quot;,&quot;DAWG&quot;]
+             , [&quot;I&quot;,&quot;HEARD&quot;]
+             , [&quot;I&quot;,&quot;HEARD&quot;]
+             , [&quot;YOU&quot;,&quot;LIKE&quot;,&quot;TREES&quot;] ]
+-- /show</code></pre><p>Which is equivalent to</p><pre><code class="haskell">print ( treeFromList (
+          map treeFromList
+             [ map treeFromList [&quot;YO&quot;,&quot;DAWG&quot;]
+             , map treeFromList [&quot;I&quot;,&quot;HEARD&quot;]
+             , map treeFromList [&quot;I&quot;,&quot;HEARD&quot;]
+             , map treeFromList [&quot;YOU&quot;,&quot;LIKE&quot;,&quot;TREES&quot;] ]))</code></pre><p>Notice how duplicate trees aren't inserted;
+there is only one tree corresponding to <code>&quot;I&quot;,&quot;HEARD&quot;</code>.
+We have this for (almost) free, because we have declared Tree to be an instance of <code>Eq</code>.</p><p>See how awesome this structure is.
+We can make trees containing not only integers, strings and chars, but also other trees.
+And we can even make a tree containing a tree of trees!</p><h3 id="infinite-structures"><a href="#infinite-structures">Infinite Structures</a></h3><p><img alt="Escher" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FHaskell-the-Hard-Way%2Fescher_infinite_lizards.jpg" /></p><p>It is often stated that Haskell is <i>lazy</i>.</p><p>In fact, if you are a bit pedantic, you should state that <a href="http://www.haskell.org/haskellwiki/Lazy_vs._non-strict">Haskell is <i>non-strict</i></a>.
+Laziness is just a common implementation for non-strict languages.</p><p>Then what does not-strict means? From the Haskell wiki:</p><blockquote><p>Reduction (the mathematical term for evaluation) proceeds from the outside in.</p><p>so if you have <code>(a+(b*c))</code> then you first reduce <code>+</code> first, then you reduce the inner <code>(b*c)</code></p></blockquote><p>For example in Haskell you can do:</p><pre><code class="active haskell">-- numbers = [0,1,2,..]
+numbers :: [Integer]
+numbers = 0:map (1+) numbers
+
+take' n [] = []
+take' 0 l = []
+take' n (x:xs) = x:take' (n-1) xs
+
+main = print $ take' 10 numbers</code></pre><p>And it stops.</p><p>How?</p><p>Instead of trying to evaluate <code>numbers</code> entirely,
+it evaluates elements only when needed.</p><p>Also, note in Haskell there is a notation for infinite lists</p><pre><code>[1..]   ⇔ [1,2,3,4...]
+[1,3..] ⇔ [1,3,5,7,9,11...]</code></pre><p>And most functions will work with them.
+Also, there is a built-in function <code>take</code> which is equivalent to our <code>take'</code>.</p><p>Suppose we don't mind having an ordered binary tree.
+Here is an infinite binary tree:</p><pre><code class="haskell">nullTree = Node 0 nullTree nullTree</code></pre><p>A complete binary tree where each node is equal to 0.
+Now I will prove you can manipulate this object using the following function:</p><pre><code class="haskell">-- take all element of a BinTree
+-- up to some depth
+treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr</code></pre><p>See what occurs for this program:</p><pre><code class="active haskell">import Data.List
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    treeshow pref Empty = &quot;&quot;
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    -- This shows a tree using some prefixes to make it nice
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replace &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (&quot; &quot; ++ show x)
+
+    -- replace on char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+nullTree = Node 0 nullTree nullTree
+-- take all element of a BinTree
+-- up to some depth
+treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr
+-- show
+main = print $ treeTakeDepth 4 nullTree
+-- /show</code></pre><p>This code compiles, runs and stops.</p><p>Just to heat up your neurones a bit more,
+let's make a slightly more interesting tree:</p><pre><code class="haskell">iTree = Node 0 (dec iTree) (inc iTree)
+        where
+           dec (Node x l r) = Node (x-1) (dec l) (dec r)
+           inc (Node x l r) = Node (x+1) (inc l) (inc r)</code></pre><p>Another way to create this tree is to use a higher order function.
+This function should be similar to <code>map</code>, but should work on <code>BinTree</code> instead of list.
+Here is such a function:</p><pre><code class="haskell">-- apply a function to each node of Tree
+treeMap :: (a -&gt; b) -&gt; BinTree a -&gt; BinTree b
+treeMap f Empty = Empty
+treeMap f (Node x left right) = Node (f x)
+                                     (treeMap f left)
+                                     (treeMap f right)</code></pre><p><i>Hint</i>: I won't talk more about this here.
+If you are interested by the generalization of <code>map</code> to other data structures,
+search for functor and <code>fmap</code>.</p><p>Our definition is now:</p><pre><code class="haskell">infTreeTwo :: BinTree Int
+infTreeTwo = Node 0 (treeMap (\x -&gt; x-1) infTreeTwo)
+                    (treeMap (\x -&gt; x+1) infTreeTwo)</code></pre><p>Look at the result for</p><pre><code class="active haskell">import Data.List
+data BinTree a = Empty
+                 | Node a (BinTree a) (BinTree a)
+                  deriving (Eq,Ord)
+-- declare BinTree a to be an instance of Show
+instance (Show a) =&gt; Show (BinTree a) where
+  -- will start by a '&lt;' before the root
+  -- and put a : a begining of line
+  show t = &quot;&lt; &quot; ++ replace '\n' &quot;\n: &quot; (treeshow &quot;&quot; t)
+    where
+    treeshow pref Empty = &quot;&quot;
+    treeshow pref (Node x Empty Empty) =
+                  (pshow pref x)
+
+    treeshow pref (Node x left Empty) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; left)
+
+    treeshow pref (Node x Empty right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    treeshow pref (Node x left right) =
+                  (pshow pref x) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;|--&quot; &quot;|  &quot; left) ++ &quot;\n&quot; ++
+                  (showSon pref &quot;`--&quot; &quot;   &quot; right)
+
+    showSon pref before next t =
+                  pref ++ before ++ treeshow (pref ++ next) t
+
+    -- pshow replace &quot;\n&quot; by &quot;\n&quot;++pref
+    pshow pref x = replace '\n' (&quot;\n&quot;++pref) (&quot; &quot; ++ show x)
+
+    -- replace on char by another string
+    replace c new string =
+      concatMap (change c new) string
+      where
+          change c new x
+              | x == c = new
+              | otherwise = x:[] -- &quot;x&quot;
+iTree = Node 0 (dec iTree) (inc iTree)
+        where
+           dec (Node x l r) = Node (x-1) (dec l) (dec r)
+           inc (Node x l r) = Node (x+1) (inc l) (inc r)
+-- apply a function to each node of Tree
+treeMap :: (a -&gt; b) -&gt; BinTree a -&gt; BinTree b
+treeMap f Empty = Empty
+treeMap f (Node x left right) = Node (f x)
+                                     (treeMap f left)
+                                     (treeMap f right)
+infTreeTwo :: BinTree Int
+infTreeTwo = Node 0 (treeMap (\x -&gt; x-1) infTreeTwo)
+                    (treeMap (\x -&gt; x+1) infTreeTwo)
+
+treeTakeDepth _ Empty = Empty
+treeTakeDepth 0 _     = Empty
+treeTakeDepth n (Node x left right) = let
+          nl = treeTakeDepth (n-1) left
+          nr = treeTakeDepth (n-1) right
+          in
+              Node x nl nr
+-- show
+main = print $ treeTakeDepth 4 infTreeTwo
+-- /show</code></pre><p><a href="https://www.fpcomplete.com/school/haskell-fast-hard/haskell-fast-hard-part-5">continue to next part</a></p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/yogsototh/haskell-fast-hard/haskell-fast-hard-part-4';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

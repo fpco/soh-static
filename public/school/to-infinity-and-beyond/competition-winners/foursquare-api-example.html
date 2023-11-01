@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html><head><title>Using the Foursquare API to get a list of trending venues - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/competition-winners">FP Complete competition  winners</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/competition-winners/foursquare-api-example">Using the Foursquare API to get a list of trending venues</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Using the Foursquare API to get a list of trending venues</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 2 Aug 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/wcauchois">Bill Cauchois</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/1282/7d3605cb82e7dfd6779810080ba1dcfed49fecee">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/competition-winners/interfacing-with-restful-json-apis">Previous content: Interfacing with RESTful JSON APIs</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/competition-winners">Go up to: FP Complete competition  winners</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/wcauchois">See all content by Bill Cauchois</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#basics--making-an-http-request">Basics: Making an HTTP Request</a></li><li><a href="#extracting-structured-data--parsing-with-aeson">Extracting Structured Data: Parsing with Aeson</a></li><li><a href="#building-out-a-framework-for-endpoints">Building Out a Framework For Endpoints</a></li><li><a href="#detour--aeson-parsers">Detour: Aeson Parsers</a></li><li><a href="#modeling-the-geocoder-result">Modeling the Geocoder Result</a></li><li><a href="#putting-it-all-together--part-1-">Putting It All Together (Part 1)</a></li><li><a href="#hooking-up-foursquare">Hooking Up Foursquare</a></li><li><a href="#foursquare-authorization">Foursquare Authorization</a></li><li><a href="#putting-it-all-together--part-2-">Putting It All Together (Part 2)</a></li><li><a href="#appendix--obtaining-foursquare-api-credentials">Appendix: Obtaining Foursquare API Credentials</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>In this tutorial we will explore how to consume JSON web APIs using Haskell. In particular, we will use the <a href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API</a> to convert an address into a lat long, and then plug that information into the <a href="https://developer.foursquare.com/docs/">Foursquare API</a> to get a list of trending venues. Topics covered include:</p><ul><li>Making HTTP[S] requests.</li><li>Parsing JSON using Data.Aeson.</li><li>Using type classes to make it easy to add support for new endpoints.</li><li>Propagating errors using the IO monad.</li></ul><p>This tutorial is aimed at intermediate Haskell programmers.</p><div style="border:1px solid #ccc;background-color:#e7ffc7;margin-bottom:10px;padding:5px">
+<strong><em>For those of you unfamiliar with Foursquare:</em></strong> <a href="https://foursquare.com">Foursquare</a> is a local discovery app. They expose a comprehensive API including a rich point-of-interest (POI) database. Powered by millions of checkins, Foursquare can use algorithms to detect &quot;trending&quot; (e.g. unusually popular) venues. This is the endpoint we will be using in this tutorial. (Disclaimer: I work for Foursquare. That'll be the last bit of marketing in here :).
+</div><div style="border:1px solid #ccc;background-color:#ffff99;margin-bottom:10px;padding:5px">
+<strong><em>Source code</em></strong>: The entire (runnable) source code for this tutorial is available <a href="https://github.com/wcauchois/haskell-foursquare-api-example">on GitHub</a>. Feel free to refer to the source as you follow along.
+</div><h2 id="basics--making-an-http-request"><a href="#basics--making-an-http-request">Basics: Making an HTTP Request</a></h2><p>At its core, consuming a web API is a matter of making HTTP requests to some server with the desired parameters (see: <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>). We'll be using the <a href="http://hackage.haskell.org/packages/archive/http-conduit/1.2.1/doc/html/Network-HTTP-Conduit.html">Network.HTTP.Conduit</a> library for making these requests.</p><p>The interface is simple:</p><pre><code class="haskell">simpleHttp :: MonadIO m =&gt; String -&gt; m ByteString</code></pre><p><code>MonadIO</code> is just a type class for monads that can embed IO operations -- including <code>IO</code> itself. The first parameter to this function is a URI, and it returns a <a href="http://hackage.haskell.org/packages/archive/bytestring/0.9.0.4/doc/html/Data-ByteString-Lazy.html">ByteString</a> -- which is a just a buffer.</p><p>Here's an example:</p><pre><code class="active haskell">import Network.HTTP.Conduit
+main = do -- The GitHub API is convenient as it doesn't require authentication
+          response &lt;- simpleHttp &quot;https://api.github.com/repos/yesodweb/yesod&quot; 
+          print response</code></pre><p>You can expect to see output along the lines of:</p><pre><code>Chunk &quot;{\&quot;id\&quot;:237904,\&quot;name\&quot;:\&quot;yesod\&quot;,\&quot;full_name\&quot;:\&quot;yesodweb/yesod\&quot;,
+\&quot;owner\&quot;:{\&quot;login\&quot;:\&quot;yesodweb\&quot;,\&quot;id\&quot;:930379,\&quot;avatar_url\&quot;:\&quot;https://sec
+ure.gravatar.com/avatar/c224026a2005e5ce9a0e1a6defb9f893?d=https://a248.e
+.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png\&quot;,
+\&quot;gravatar_id\&quot;:\&quot;c224026a2005e5ce9a0e1a6defb9f893\&quot;,\...</code></pre><p>It's not very pretty, but this JSON response contains a lot of juicy information about the Yesod repository, including its URL, description, and owner. <a href="https://api.github.com/repos/yesodweb/yesod">Take a look for yourself</a>.</p><h2 id="extracting-structured-data--parsing-with-aeson"><a href="#extracting-structured-data--parsing-with-aeson">Extracting Structured Data: Parsing with Aeson</a></h2><p><a href="http://hackage.haskell.org/packages/archive/aeson/0.6.1.0/doc/html/Data-Aeson.html">Data.Aeson</a> provides tons of handy utilities for dealing with JSON. For our purposes, we mostly care about <code>decode</code> -- which takes a ByteString and returns a kind of JSON AST.</p><pre><code class="active haskell">import Data.Aeson
+import Data.ByteString.Lazy.Char8(pack)
+main = print $ (decode (pack &quot;{\&quot;key\&quot;: \&quot;val\&quot;}&quot;) :: Maybe Value)</code></pre><div style="border:1px solid #ccc;background-color:#e7ffc7;margin-bottom:10px;padding:5px">
+<strong><em>Aside:</em></strong> Why do we have to annotate the return type of <tt>decode</tt>? If you look at the type signature for decode, <tt>FromJSON a =&gt; ByteString -&gt; Maybe a</tt>, you can see that it is generic. The <tt>FromJSON</tt> type class (detailed later) represents any value that can be converted from JSON into a Haskell type. <tt>instance Value FromJSON</tt> is provided by Aeson, but you can also implement FromJSON for your own types (as we will soon do).
+</div><p>So, what's a <code>Value</code>?</p><pre><code class="haskell">data Value = Object !Object -- The exclamation mark (!) is a strictness annotation.
+           | Array !Array
+           | String !Text
+           | Number !Number
+           | Bool !Bool
+           | Null</code></pre><p>As you can see, it corresponds very nicely to the structure of a JSON document. Using <code>simpleHTTP</code> and <code>decode</code> together, you should be able to send a request to an endpoint and parse it into a JSON AST. However, in the next section we'll take a step back and start building some utilities to help us build out different endpoints in a generic manner.</p><h2 id="building-out-a-framework-for-endpoints"><a href="#building-out-a-framework-for-endpoints">Building Out a Framework For Endpoints</a></h2><p>What is an endpoint (besides a <a href="https://gist.github.com/wcauchois/63b8c0b12b598102af69">miserable pile of secrets</a>)? Since we're dealing with GET requests only, for our purposes it's basically a URI with some query parameters. We would like to encapsulate those parameters in a typed data structure, and provide a way to build a URI using those parameters. This notion is captured by the following type class:</p><pre><code class="haskell">class Endpoint a where
+  buildURI :: a -&gt; String</code></pre><p>For an example, let's build out the geocoding endpoint. As a quick reminder, geocoding is the process of converting an address like &quot;New York City&quot; into a latitude and longitude. We'll need a lat/long for our subsequent call to the Foursquare API.</p><p>From the <a href="https://developers.google.com/maps/documentation/geocoding/">Google Geocoding API Documentation</a>, we can see that the form of the geocoding request is fairly simple: <code>http://maps.googleapis.com/maps/api/geocode/output?parameters</code>, where the two required parameters (that we care about) are:</p><ul><li><code>address</code>: The address that you want to geocode.</li><li><code>sensor</code>: Boolean indicating whether the request came from a device with a location sensor. For our program this will always be false.</li></ul><p>We encapsulate these parameters with the following ADT:</p><pre><code class="haskell">data GeocoderEndpoint =
+  GeocodeEndpoint { address :: String, sensor :: Bool }</code></pre><p>To convert this data structure into a URI, we need to prepend the API endpoint path to a string consisting of the query parameterized fields.</p><pre><code class="haskell">instance Endpoint GeocoderEndpoint where
+  buildURI GeocodeEndpoint { address = address, sensor = sensor } =
+    let params = [(&quot;address&quot;, Just address), (&quot;sensor&quot;, Just $ map toLower $ show sensor)]
+    in &quot;http://maps.googleapis.com/maps/api/geocode/json&quot; ++ renderQuery True params</code></pre><p>As you can see, its fairly simple. I've glossed over the implementation of <code>renderQuery :: Bool -&gt; [(String, Maybe String)] -&gt; String</code> -- it converts a set of parameters into a string like &quot;?key1=value1&amp;key2=value2&quot; (making sure to URL-encode the values). To see the full definition, <a href="https://github.com/wcauchois/haskell-foursquare-api-example/blob/master/src/Core.hs">check out the source on GitHub</a>.</p><h2 id="detour--aeson-parsers"><a href="#detour--aeson-parsers">Detour: Aeson Parsers</a></h2><p>Before we get to decoding the response from the geocoder endpoint, let's take a detour and explore a powerful feature of Aeson: Parsers.</p><p>Parsers are closely tied to the <code>FromJSON</code> type class we saw earlier. From the <a href="http://hackage.haskell.org/packages/archive/aeson/0.6.1.0/doc/html/Data-Aeson.html#t:FromJSON">Aeson documentation</a>, a <code>FromJSON</code> is &quot;A type that can be converted from JSON, with the possibility of failure.&quot; Its only method is <code>parseJSON :: Value -&gt; Parser a</code>.</p><p>A <code>Parser</code> is a monad that encapsulates that possibility of failure, as well as a sequence of operations which convert a <code>Value</code> (JSON AST) into some type <i>a</i>. A naive implementation of <code>parseJSON</code> could simply inspect the Value and <code>return</code> an <i>a</i> based on that information, but Aeson also provides a few handy combinators operating within the <code>Parser</code> Monad. We'll be using <code>.:</code>, which allows you to easily access Object fields. For example:</p><pre><code class="haskell active">{-# LANGUAGE OverloadedStrings #-}
+import Data.Aeson
+import Data.Aeson.Types
+import Data.Text(Text)
+import Data.ByteString.Lazy.Char8
+
+data Venue = Venue { venueId :: Text, name :: Text } deriving Show
+
+instance FromJSON Venue where
+  parseJSON val = do let Object obj = val -- Use pattern matching to extract an Object
+                     venueId &lt;- obj .: &quot;id&quot;
+                     name &lt;- obj .: &quot;name&quot;
+                     return $ Venue venueId name
+
+main = print venue
+  where json = &quot;{\&quot;id\&quot;: \&quot;some venue id\&quot;, \&quot;name\&quot;: \&quot;bob's venue\&quot;}&quot;
+        venue = decode json &gt;&gt;= parseMaybe parseJSON :: Maybe Venue</code></pre><div style="border:1px solid #ccc;background-color:#e7ffc7;margin-bottom:10px;padding:5px">
+<strong><em>Aside:</em></strong> Different string types in Haskell. If you look at <a href="http://hackage.haskell.org/packages/archive/aeson/0.6.1.0/doc/html/Data-Aeson.html#v:.:">signature of <tt>.:</tt></a> (essentially <tt>Object -&gt; Text -&gt; Parser a</tt>), you can see that for its second argument it takes a &quot;Text&quot;. A Text (from <a href="http://hackage.haskell.org/packages/archive/text/0.11.1.5/doc/html/Data-Text.html">Data.Text</a>) is an efficient representation of a unicode string. However, a string literal will always yield an object of type <tt>String</tt>. The <a href="http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/type-class-extensions.html#overloaded-strings">OverloadedStrings</a> GHC extension allows us to have string literals take alternative types. Concretely, it lets us pass an ordinary string literal as the second argument to <tt>.:</tt> rather than using Data.Text.pack.
+</div><div style="border:1px solid #ccc;background-color:#e7ffc7;margin-bottom:10px;padding:5px">
+<strong><em>Recall:</em></strong> Pattern match failures inside a Monad will invoke that Monad's <tt>fail</tt> method. So when we use pattern matching to extract an Object from the input Value, its not as dangerous as it might seem.
+</div><p>Now that we have parser basics down, we should be able to model the geocoder result as an ADT, and parse it from a decoded <code>Value</code>.</p><h2 id="modeling-the-geocoder-result"><a href="#modeling-the-geocoder-result">Modeling the Geocoder Result</a></h2><p>Now that we can construct a URI for calling the geocoder, we need to make sense of the response. I'd suggest <a href="http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;sensor=false">hitting the endpoint in a web browser</a> to get a rough idea of what the geocoder returns.</p><p>The response is fairly generic, with support for multiple results and lots of extra metadata. The only thing <i>we</i> care about is the lat/long of the first result. In JavaScript notation: <code>response.results[0].geometry.location</code>.</p><p>Since this structure is fairly nested, I built a helper method called <code>navigateJson :: Value -&gt; [Text] -&gt; Parser Value</code>. This takes a <code>Value</code> and a list of field names and walks down the tree -- for example, if you provided {a: {b: 2}} and ['a', 'b'] as parameters, it would return 2. I'll elide the definition here; check out the full source <a href="https://github.com/wcauchois/haskell-foursquare-api-example/blob/master/src/Core.hs">on GitHub</a>.</p><p>With <code>navigateJSON</code>, building the <code>Parser</code> should be trivial. Access the 'results' field of the response; get the first entry; navigate thru ['geometry', 'location']; return the 'lat' and 'lng' parts of that object.</p><p>Before we continue, let's define an ADT to encapsulate this type of result.</p><pre><code class="haskell">type LatLng = (Double, Double)
+data GeocodeResponse = GeocodeResponse LatLng
+  deriving Show -- Handy for debugging</code></pre><p>Now we can write our parser by declaring an instance of the <code>FromJSON</code> type class.</p><pre><code class="haskell">instance FromJSON GeocodeResponse where
+  parseJSON (Object obj) =
+    do (Array results) &lt;- obj .: &quot;results&quot;
+       (Object location) &lt;- navigateJson (results V.! 0) [&quot;geometry&quot;, &quot;location&quot;]
+       (Number lat) &lt;- location .: &quot;lat&quot;
+       (Number lng) &lt;- location .: &quot;lng&quot;
+       -- Use realToFrac to convert from Aeson Numbers into simple Doubles.
+       return $ GeocodeResponse (realToFrac lat, realToFrac lng)</code></pre><h2 id="putting-it-all-together--part-1-"><a href="#putting-it-all-together--part-1-">Putting It All Together (Part 1)</a></h2><p>So far we have a method to build URIs for endpoints and a way to parse the JSON response from those endpoints into a structure we can use. Since these steps are encapsulated by the generic type classes <code>FromJSON</code> and <code>Endpoint</code>, its easy to build a general function to call any endpoint. Let's start with a type signature: <code>callJsonEndpoint :: (FromJSON j, Endpoint e) =&gt; e -&gt; IO j</code>. &quot;Take an endpoint (with data about the call), make some HTTP request, and parse the response into some JSON object.&quot; This process must take place in the IO monad, since we're making a network request.</p><p>We'll use <code>simpleHTTP</code> like earlier. To run our parser, we'll use a variant of <code>decode</code> called <code>eitherDecode</code> -- using the error message from <code>Either</code>, we can provide more helpful errors (via IO's <code>fail</code>).</p><pre><code class="haskell">callJsonEndpoint :: (FromJSON j, Endpoint e) =&gt; e -&gt; IO j
+callJsonEndpoint e =
+  do responseBody &lt;- simpleHttp (buildURI e)
+     case eitherDecode responseBody of
+       Left err -&gt; fail err
+       Right res -&gt; return res</code></pre><p>With <code>callJsonEndpoint</code>, we could call the geocoder endpoint like so:</p><pre><code>(GeocodeResponse latLng) &lt;- callJsonEndpoint $ GeocodeEndpoint &quot;568 Broadway, New York, NY&quot; False</code></pre><h2 id="hooking-up-foursquare"><a href="#hooking-up-foursquare">Hooking Up Foursquare</a></h2><p>Now that we have a nifty little framework, we can come back to the motivation for this tutorial: retreiving a list of trending venues around an address. Foursquare makes this easy with an endpoint called <a href="https://developer.foursquare.com/docs/venues/trending">&quot;/venues/trending&quot;</a>. The parameter we care about is the lat/long (&quot;ll&quot;), but you can optionally provide a limit on the results and a radius for your search area.</p><pre><code class="haskell">data FoursquareEndpoint =
+    VenuesTrendingEndpoint { ll :: LatLng, limit :: Maybe Int, radius :: Maybe Double }
+
+instance Endpoint FoursquareEndpoint where
+  buildURI VenuesTrendingEndpoint {ll = ll, limit = limit, radius = radius} =
+    let params = [(&quot;ll&quot;, Just $ renderLatLng ll), (&quot;limit&quot;, fmap show limit), (&quot;radius&quot;, fmap show radius)]
+    in &quot;https://api.foursquare.com/v2/venues/trending&quot; ++ renderQuery True params</code></pre><p>The docs tell us that this returns a list of &quot;venues&quot;, which is another JSON object. For our simple example, we choose to care about two fields: the venue ID, and its name.</p><pre><code class="haskell">data Venue = Venue { venueId :: String, name :: String } deriving Show</code></pre><p>The whole response from this endpoint (list of venues) is encompassed by the following structure:</p><pre><code class="haskell">data VenuesTrendingResponse = VenuesTrendingResponse { venues :: [Venue] } deriving Show</code></pre><p>Implementing <code>FromJSON</code> instances for these structures is left as an exercise for the reader (with the <a href="https://github.com/wcauchois/haskell-foursquare-api-example/blob/master/src/FoursquareModel.hs">source on GitHub</a> available for the lazy ;).</p><h2 id="foursquare-authorization"><a href="#foursquare-authorization">Foursquare Authorization</a></h2><p>Even though we've implemented data structures, parsing logic, and a URI builder for the venues/trending endpoint, there remains one restriction upon using the Foursquare API: you must have access credentials.</p><p>The venues/trending endpoint is <a href="https://developer.foursquare.com/overview/auth#userless">&quot;userless&quot;</a>, so we don't need to go through OAuth, but we still need an API key/secret. I've covered the process of obtaining these credentials in an appendix below, so let's assume we have those for the remainder of this tutorial.</p><p>To start, let's define a structure to represent the needed credentials:</p><pre><code class="haskell">data FoursquareCredentials = FoursquareCredentials { clientId :: String, clientSecret :: String }</code></pre><p>We can actually build upon the <code>Endpoint</code> framework to build a type of &quot;authorized Foursquare endpoint&quot; that wraps another endpoint and appends the necessary access credentials. Let's call this an <code>AuthorizedFoursquareEndpoint</code>:</p><pre><code class="haskell">data AuthorizedFoursquareEndpoint = AuthorizedFoursquareEndpoint FoursquareCredentials FoursquareEndpoint</code></pre><p>In order to build an instance of <code>Endpoint</code> for <code>AuthorizedFoursquareEndpoint</code>, all we have to do is build the URI of the inner endpoint, and then append &quot;client_id&quot; and &quot;client_secret&quot; parameters.</p><pre><code class="haskell">instance Endpoint AuthorizedFoursquareEndpoint where
+  buildURI (AuthorizedFoursquareEndpoint creds e) = appendParams originalUri authorizationParams
+    where originalUri = buildURI e
+          authorizationParams = [(&quot;client_id&quot;, Just $ clientId creds),
+                                 (&quot;client_secret&quot;, Just $ clientSecret creds),
+                                 (&quot;v&quot;, Just foursquareApiVersion)]</code></pre><div style="border:1px solid #ccc;background-color:#e7ffc7;margin-bottom:10px;padding:5px">
+<strong><em>Aside:</em></strong> What's that &quot;v&quot; parameter? From the <a href="https://developer.foursquare.com/overview/versioning">Foursquare documentation</a>: &quot;All requests now accept a v=YYYYMMDD param, which indicates that the client is up to date as of the specified date.&quot; In <a href="https://github.com/wcauchois/haskell-foursquare-api-example/blob/master/src/FoursquareEndpoint.hs">my code</a>, I defined the constant <tt>foursquareApiVersion = &quot;20130721&quot;</tt>.
+</div><p>Finally, let's define a handy helper that lets us authorize an endpoint using an infix syntax (e.g. <tt>endpoint `authorizeWith` creds</tt>):</p><pre><code>authorizeWith = flip AuthorizedFoursquareEndpoint</code></pre><h2 id="putting-it-all-together--part-2-"><a href="#putting-it-all-together--part-2-">Putting It All Together (Part 2)</a></h2><p>To recap: we've built a system for describing web API endpoints; we learned how to use Aeson's <code>FromJSON</code> to parse the results of those endpoints; and we implemented a function to call those endpoints using that functionality.</p><p>At the beginning of this tutorial, we wanted to retrieve a list of trending venues about an address. At this point, we can achieve that goal.</p><ol><li>Call Google's geocoder endpoint. Store the lat/long.</li><li>Plug that lat/long into Foursquare's trending venues endpoint.</li><li>Display those trending venues to the user.</li></ol><p>For our Main.hs, we'll also use <code>getLine</code> to retrieve access credentials. Here goes:</p><pre><code class="haskell">targetAddress = &quot;568 Broadway, New York, NY&quot;
+main :: IO ()
+main =
+  do putStrLn &quot;API key?&quot;
+     apiKey &lt;- getLine
+     putStrLn &quot;API secret?&quot;
+     apiSecret &lt;- getLine
+     let creds = FoursquareCredentials apiKey apiSecret
+
+     (GeocodeResponse latLng) &lt;- callJsonEndpoint $ GeocodeEndpoint targetAddress False
+     let venuesTrendingEndpoint = VenuesTrendingEndpoint latLng Nothing Nothing `authorizeWith` creds
+     (VenuesTrendingResponse venues) &lt;- callJsonEndpoint venuesTrendingEndpoint
+     let printVenue v = putStrLn $ &quot;- &quot; ++ name v
+     mapM_ printVenue venues</code></pre><p>And that's it! Once again, see <a href="https://github.com/wcauchois/haskell-foursquare-api-example">the full source on GitHub</a> for a complete implementation of the techniques described in this tutorial.</p><h2 id="appendix--obtaining-foursquare-api-credentials"><a href="#appendix--obtaining-foursquare-api-credentials">Appendix: Obtaining Foursquare API Credentials</a></h2><ol><li><a href="https://foursquare.com/signup">Sign up for Foursquare</a> if you don't already have an account.</li><li>Log in.</li><li>Go to <a href="https://foursquare.com/developers/apps">My Apps</a> (this is linked to from the developer website).</li><li>Click &quot;Create A New App&quot;.</li><li>Enter some details. The only 3 required fields here are the app name, the download URL, and the redirect URI. Since we're not using OAuth, the redirect URI doesn't matter. I would recommend adding any path on a domain you own for these two URIs.</li><li>Once you click &quot;Save Changes&quot;, you'll be directed to the details of your app. This includes your client key and secret, which you can use to run this example!</li></ol></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/competition-winners/foursquare-api-example';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

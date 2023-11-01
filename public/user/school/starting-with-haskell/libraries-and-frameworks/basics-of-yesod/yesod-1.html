@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html><head><title>1. My First Website - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell">Starting with Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks">Libraries and Frameworks</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/basics-of-yesod">Basics of Yesod</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/basics-of-yesod/yesod-1">1. My First Website</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">1. My First Website</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">28 Nov 2016</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/283cb856e6ddc58453835e7cee23cb46c22c7c0e">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/starting-with-haskell/libraries-and-frameworks/basics-of-yesod/yesod-2">Next content: 2. Playing with Routes and Links</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/basics-of-yesod">Go up to: Basics of Yesod</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#yesod-and-web-development">Yesod and Web Development</a></li><li><a href="#hello-piggies-">Hello Piggies!</a></li><li><a href="#running-the-program">Running the Program</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#a-bit-of-haskell">A Bit of Haskell</a><ul><li><a href="#function-call-syntax">Function Call Syntax</a></li><li><a href="#function-definition-syntax">Function Definition Syntax</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>This is the first in the series of tutorials introducing a new approach to web development using Haskell and Yesod. Haskell is a functional language and Yesod is a web development framework written in Haskell by Michael Snoyman who also wrote a book about it. Michael is a member of the FP Complete team and he provided a lot of valuable feedback for this tutorial.</p><p>No previous knowledge of Haskell is required from the reader, although you might want to have a peek at Haskell syntax in <a href="http://fpcomplete.com/ten-things-you-should-know-about-haskell-syntax/">Ten Things You Should Know About Haskell Syntax</a> or at &quot;A Bit of Haskell&quot; section at the end of this tutorial. I will also try to explain some of the concepts of modern web development as we go. If you're a little rusty in using HTML and CSS, you might want to look at <a href="http://www.w3schools.com/">W3Schools</a>.</p><h2 id="yesod-and-web-development"><a href="#yesod-and-web-development">Yesod and Web Development</a></h2><p>We build web sites using a combination of at least four languages. We use HTML for markup, CSS for formatting, JavaScript for the logic that runs on a client's browser; and yet another language for server-side logic (Java, C#, php, and so on).</p><p>While it makes sense to have specialized languages for specialized tasks, it's also important that those languages inter-operate. Unfortunately, this is not the case in traditional web development. Programmers are forced to keep track of horizontal dependencies either by using strict discipline or using a system of ad-hoc preprocessors.</p><p>The simplest test for interoperability is to be able to define a variable in one language and access it from another. For instance, how would you define an ID for a particular element of the web page? You could define it, say, in Java, as an integer, and initialize it to a unique number. Now you'd like to use this number (as a string) in your HTML to identify a marked-up element. Then, in CSS, to define the style of this element and, occasionally, in your JavaScript code to dynamically change its properties in response to user actions.</p><p>Because Yesod is written in Haskell, which is a great language for embedding domain specific languages, such horizontal integration is easy. HTML, CSS, and JavaScript are simply <i>embedded</i> in Haskell code. The code written in these languages is <i>quasi-quoted</i> and then pre-parsed by Haskell. Because of that last step, it's possible to <i>interpolate</i> Haskell code inside those quasi-quotes. So it's perfectly natural to define an integral identifier in Haskell and embed it in HTML, CSS, or JavaScript. If, for instance, <code>hdr</code> is a Haskell variable, it can be interpolated in (quasi-quoted) HTML using an escape sequence starting with <code>#{</code> and ending with <code>}</code>:</p><pre><code class="haskell">&lt;{-hi-}#{hdr}{-/hi-}&gt;</code></pre><p>This way any change in the definition or usage of an ID will be checked at compile time.</p><p>This is just a small example of the power of Haskell and Yesod. Once you learn how to use those powerful techniques, you'll never want to go back to traditional ways of programming.</p><h2 id="hello-piggies-"><a href="#hello-piggies-">Hello Piggies!</a></h2><p>Let's start with the simplest nontrivial Yesod program that serves just one web page with the text: &quot;Welcome to the Pigsty!&quot;. We'll be building up this web site to prove that even Piggies can write clean, maintainable code.</p><p><img alt="Chocolate Piggies" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fwww.fpcomplete.com%2Fmedia%2F631389d4-17e1-448e-a961-3d108d4fdac9.png" /></p><p>Have a look at this code even if you won't understand anything yet. It's highly stylized Haskell with some embedded domain-specific languages thrown into the mix.</p><p>Now press the &quot;Run&quot; button to run this code and see the web page it produces.</p><pre><code class="active haskell web">{-# LANGUAGE TypeFamilies, QuasiQuotes, MultiParamTypeClasses,
+             TemplateHaskell, OverloadedStrings #-}
+import Yesod
+
+data Piggies = Piggies
+
+instance Yesod Piggies
+
+mkYesod &quot;Piggies&quot; [parseRoutes|
+  / HomeR GET
+|]
+
+getHomeR = defaultLayout [whamlet|
+  Welcome to the Pigsty!
+  |]
+
+main = warpEnv Piggies</code></pre><p>Here's what happens when you press the Run button: The Haskell code is sent over to our server in the cloud, which then runs it. This creates a web server that can serve a web page across the internet. That page is displayed in a pane below the code. You can also view this page in a separate window, if you press the &quot;Show in Separate Window&quot; button._</p><p>Let me walk you through this code, just to gain some familiarity with it. The program starts with some bookkeeping. Haskell is an evolving language. The last ratified standard dates back to 2010, but it wasn't a big change from the 1998 standard, and anything added after that is considered an extension. Yesod uses a lot of Haskell extensions, so the first line lists those.</p><pre><code class="haskell">{-# LANGUAGE TypeFamilies, QuasiQuotes, MultiParamTypeClasses,
+             TemplateHaskell, OverloadedStrings #-}</code></pre><p>Strictly speaking anything enclosed between <code>{-</code> and <code>-}</code> is a comment, but this particular comment is understood by the Haskell compiler as a language pragma. This is all you need to know about it for now.</p><p>Next we have a statement to import the Yesod library.</p><pre><code class="haskell">import Yesod</code></pre><p>This is a little more than a C++ <code>#include</code>, because Haskell has a full-blown module system.</p><p>Next, every Yesod website must define its foundation data structure. Here I'm defining a type called <code>Piggies</code>:</p><pre><code class="haskell">data Piggies = Piggies</code></pre><p>The Haskell syntax here is: The keyword <code>data</code> introduces a new type that I call <code>Piggies</code>. The right hand side of a data definition is usually a series of <i>data constructors</i> -- here just one; and it's called by the same name as the type itself (this is customary for types that have only one constructor). This constructor happens to be trivial -- it takes no arguments and has no data associated with it. This will not always be true in more complex Yesod examples. If you're a C++ programmer, you may think of this data type as an enumeration called Piggies with only one element also called Piggies.</p><p>This foundation data type represents our particular web site. It doesn't matter that the type is trivial (in this case). What matters is that it's an instance of a very rich <b>type class</b>. The code below tells the compiler that our <code>Piggies</code> type is an instance of the <code>Yesod</code> class defined in the <code>Yesod</code> library. <i>Yesod</i> means <i>foundation</i> in Hebrew, so <code>Piggies</code> form a foundation of our web site.</p><pre><code class="haskell">instance Yesod Piggies</code></pre><p>It's not a far reach for a Java or C++ programmer to think of a type class as an interface with a bunch of virtual functions. These functions often have their default implementations (so they are not strictly interfaces). <code>Yesod</code> is just such a class. Later we'll see how to customize some of the behaviors of the web site by overriding <code>Yesod</code> functions. The <code>instance</code> declaration is the place for defining such overrides.</p><p>A lot of boilerplate code can be abstracted into Template Haskell functions. <code>TemplateHaskell</code> was listed as one of the language extensions at the top of the file. One way of looking at Template Haskell is as a generator of textual code -- sort of like C macros, except not that messy. (Acutally, Template Haskell generates type-checked Abstract Syntax Trees, but that's a completely different story.) <code>mkYesod</code> is an example of such a TH function.</p><pre><code class="haskell">mkYesod &quot;Piggies&quot; [parseRoutes|
+  / HomeR GET
+|]</code></pre><p>This template function takes two arguments. The first argument is the string version of the name of the foundation type, &quot;Piggies&quot;. The string is used to generate some glue code.</p><p>The second argument to <code>mkYesod</code> is some quasi-quoted code:</p><pre><code class="haskell">[parseRoutes|
+  / HomeR GET
+|]</code></pre><p>You'll see a lot of quasi-quoting in Yesod as a way to introduce embedded domain-specific languages (EDSLs). Here the language (or its parser function) is called <code>parseRoutes</code>. The code between <code>[parseRoutes|</code> and <code>|]</code> is written in this mini-language.</p><p>I'll explain the syntax of <code>parseRoute</code> later. For now let's concentrate on its purpose. When the user is typing a URL into their browser or is clicking on a link, the first part of the URL is used to find the web server, the rest is the <code>route</code> inside the web site. For instance, in the URL <code>http://www.fpcomplete.com/blog</code> the part <code>http://www.fpcomplete.com</code> is translated by the browser and the Internet into the address of the FP Complete server. The part <code>/blog</code> is interpreted by the FP Complete server as a route.</p><p>The <code>parseRoutes</code> code contains a list of routes, their corresponding <i>resources</i>, and methods for accessing them. In this case, I have just one route, <code>/</code> (slash), that identifies the root of this web site -- the home page if you will.</p><p><code>HomeR</code> is the name (actually, a data constructor) for this route. We'll be using this name internally. This is an important point: We don't want to use literal URLs for internal links. It would be a maintenance nightmare (as it is in other approaches to web programming). Instead, whenever I want to embed a link to the home page, I'll use <code>HomeR</code>. This approach has numerous advantages, one of them being that there will be no broken internal links in my code. If I break a link, the code will not compile! Also, I'm free to rename the route but keep the resource name the same -- the code will work just fine.</p><p>The final part of our route entry, <code>GET</code>, specifies the request method by which the web page is accessed. There are several request methods used in HTTP, <code>GET</code> and <code>POST</code> being the most common ones (by the way, you may define separate <code>GET</code> and <code>POST</code> methods for the same route, which is useful, for instance, when working with forms).</p><p>The important role of the <code>mkYesod</code> template function is that it dispatches requests to handlers for each route. The handlers must be implemented by the programmer. They have very specific names, a concatenation of the lowercase request method followed by the resource name. In our case it's <code>get</code>, the lowercase version of <code>GET</code>, and <code>HomeR</code>, resulting in <code>getHomeR</code>. This is our implementation of the home page handler:</p><pre><code class="haskell">getHomeR = defaultLayout [whamlet|
+  Welcome to the Pigsty!
+|]</code></pre><p>The implementation calls the function <code>defaultLayout</code> which lays out the page, whose contents is given by its quasi-quoted argument:</p><pre><code class="haskell">[whamlet|
+  Welcome to the Pigsty!
+|]</code></pre><p>First of all, the function <code>defaultLayout</code> is provided as part of the <code>Yesod</code> type class (that's one of those &quot;virtual&quot; functions that have the default implementation). As such, it can be overridden by the programmer as part of the <code>instance Yesod ...</code> statement. We'll use this capability later; for now let's just stick to defaults.</p><p>The argument to <code>defaultLayout</code> is a <code>Widget</code>, a very useful composable abstraction that may combine HTML, CSS, JavaScript, and more. I'll talk more about widgets later. Here I'm creating a widget in-line using an HTML EDSL called <code>whamlet</code> (it's really a version of <code>hamlet</code>, whose consonants are the anagram of html; the 'w' stands for widget). Like the other EDSL, <code>parseRoute</code>, <code>whamlet</code> is implemented using quasi-quotations. Here I'm quoting a trivial piece of HTML: a string &quot;Welcome to the Pigsty!&quot;. This will be the body of my web page.</p><p>Finally, our program has to start a web server that will be processing requests from web browsers. There are multiple backends supported by Yesod, including FastCGI and SCGI, which allow it to work with the popular servers like Apache. But there is also a built-in backend and server written in Haskell called <i>warp</i>. As the name suggests, it's a very fast server. Here I'll be using the special version of warp that works well with our cloud server (it retrieves the port number from the environment):</p><pre><code class="haskell">main = warpEnv Piggies</code></pre><p>If you run Yesod standalone, you'd probably use the debug version of warp:</p><pre><code class="haskell">main = warpDebug 3000 Piggies</code></pre><p>The first argument to <code>warpDebug</code> is the port it will be listening on, here it's port 3000; the second argument is a value of the type which is our foundation data type. (This value is constructed by calling the data constructor <code>Piggies</code> with no arguments.)</p><p>And that's it!</p><p>This might seem like a lot of work just to display &quot;Welcome to the Pigsty!&quot; but consider that I have constructed a whole active web site and touched a lot of customization points for future functionality.</p><h2 id="running-the-program"><a href="#running-the-program">Running the Program</a></h2><p>Let's see what happens when our program runs. This time I'll be using the debug version of warp, which displays requests as they come.</p><p>A warp server is started. It calls the system and waits for http requests coming through port 3000. I can see this in the debug output of the program:</p><pre><code>runhaskell main
+Application launched, listening on port 3000</code></pre><p>When I open a web browser and type in the URL <code>http://localhost:3000/</code>, a <i>GET</i> request is sent to the local system. Again, I can see this request in the debug output:</p><pre><code>127.0.0.1 - - [22/Aug/2012:12:08:23 +0200] &quot;GET / HTTP/1.1&quot; 200 4 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0.2) Gecko/20100101 Firefox/6.0.2&quot;</code></pre><p>The requested route is the single slash after GET (if you don't include the trailing slash in the URL, the browser will add one for you). This route in combination with GET resolves to the <code>HomeR</code> resource and is dispatched to the handler <code>getHomeR</code>. All this is done in the code generated by <code>mkYesod</code>.</p><p>The handler <code>getHomeR</code> produces the HTML page that is sent back to the browser. You can see the contents of this page by viewing page source in your browser:</p><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    Welcome to the Pigsty!
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2><p>Even in this simple program you may see important elements of the philosophy of Haskell and Yesod. Yesod is not a one-shot program, it's a framework. A well designed framework hides the details of its plumbing and exposes just the right customization points while keeping them orthogonal.</p><p>When you are using a modern elevator, you don't have to worry about regulating the current running through the motors with some kind of variable resistor -- you just press a button with the floor number. You also know that a car can be operated with a steering wheel and two pedals (the automatic models). These two pedals are not orthogonal though, since you can slow your car either by releasing the accelerator or by stepping on the brake. Flying a (non-computerized) helicopter is hard because when you increase the speed of the main rotor to go up, you have to adjust the speed of the tail rotor to stop the helicopter from spinning. A seasoned pilot doesn't have to think about it since his or her brain has been rewired through training.</p><p>By the same token even a lousy framework is usable because the brains of a programmer can be rewired. But if it takes years of training to correctly operate a few levers and wheels, how much time is needed to master cross-dependencies between web codes written in four languages? Having a well-designed orthogonal set of controls makes a huge difference.</p><p>Let's have another look at our program, this time with the eye on customization points.</p><ol><li>Foundation type: You can add arbitrary data that pertains to the web site as a whole (what is achieved with global variables in other frameworks).</li><li>Yesod instance: You can customize the look and feel of your whole web site by overriding default implementations of functions.</li><li>Routing tables (the <code>mkYesod</code> function): You can design and modify the site map of your web site.</li><li>Handlers for individual web pages/routes/request types.</li><li><code>main</code>: Starting and shutting down the web site.</li></ol><p>I will go through all these and many more customization points in more detail in later installments of this tutorial.</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><ol><li><p>The code inside the <code>whamlet</code> quotes is slightly stylized HTML. Go ahead and edit the code below <b>in place</b> and run it. First, replace the string &quot;Welcome to the Pigsty!&quot; with something else. Put the tag <code>&lt;h1&gt;</code> in front of it. Don't close the tag with <code>&lt;/h1&gt;</code>, <code>whamlet</code> does it for you when it finds the end of the line. Then add a link to an external page, like:</p></li></ol><pre><code>&lt;a href=&quot;http://fpcomplete.com&quot;&gt;Visit our site!</code></pre><p>(Again, don't close the tag.) When you're done, you can press the Show button below to see an example of such an embellishment. If you want, you can edit it further and run.</p><pre><code class="active haskell web">{-# LANGUAGE TypeFamilies, QuasiQuotes, MultiParamTypeClasses,
+             TemplateHaskell, OverloadedStrings #-}
+import Yesod
+
+data Piggies = Piggies
+
+instance Yesod Piggies
+
+mkYesod &quot;Piggies&quot; [parseRoutes|
+  / HomeR GET
+|]
+
+-- show
+getHomeR = defaultLayout [whamlet|
+  Welcome to the Pigsty!
+|]
+-- /show
+
+main = warpEnv Piggies</code></pre><div class="hidden"><pre><code class="active haskell web">{-# LANGUAGE TypeFamilies, QuasiQuotes, MultiParamTypeClasses,
+             TemplateHaskell, OverloadedStrings #-}
+import Yesod
+
+data Piggies = Piggies
+
+instance Yesod Piggies
+
+mkYesod &quot;Piggies&quot; [parseRoutes|
+  / HomeR GET
+|]
+
+-- show
+getHomeR = defaultLayout [whamlet|
+  &lt;h1&gt;Things to Do
+  &lt;a href=&quot;http://fpcomplete.com&quot;&gt;Visit FP Complete web site
+  &lt;ol&gt;
+    &lt;li&gt;Eat
+    &lt;li&gt;Sleep
+    &lt;li&gt;Go to 1.
+  &lt;img src=&quot;http://fpcomplete.com/wp-content/uploads/2012/09/Chocolate-300x207.png&quot; alt=&quot;Piggies&quot; title=&quot;Chocolate Piggies&quot; width=&quot;150&quot; height=&quot;100&quot;&gt;
+|]
+-- /show
+
+main = warpEnv Piggies</code></pre></div><h2 id="a-bit-of-haskell"><a href="#a-bit-of-haskell">A Bit of Haskell</a></h2><p>There is very little redundancy in Haskell so almost everything, including whitespace, has meaning.</p><p>The good thing is that, once you get used to it, you'll be able to see more program logic at a glance. In a wordy language you not only waste precious keystrokes but you also dilute the structure and meaning of your program. Code that fills one screenful in Haskell, would be spread over several screenfuls in Java. For a Haskell programmer, studying a Java or a C++ program is like looking at it through a microscope: you see lots of detail but miss the big picture.</p><p>One of those things that seem indispensable in other languages are special characters for separating statements (e.g., semicolons) and delimiting blocks (e.g., braces). Mind you, every programmer worth his or her salt uses formatting to make their code readable, but the compiler throws the formatting away. Haskell does (almost) the opposite. It recognizes blocks by indentation (but please use spaces, not tabs), and treats newlines as separators.</p><h3 id="function-call-syntax"><a href="#function-call-syntax">Function Call Syntax</a></h3><p>This is probably the first and the hardest obstacle in reading Haskell code fluently: There is no special syntax for function application. Any set of identifiers separated by <b>spaces</b> is a function call. For instance:</p><pre><code class="haskell">a b c d e</code></pre><p>is a call to function <code>a</code> with arguments <code>b</code>, <code>c</code>, <code>d</code>, and <code>e</code>. If you use parentheses, it's only to delimit individual arguments (if they are expressions); and commas are used to separate tuple elements. So if you see something like this:</p><pre><code class="haskell">f (a, b, c)</code></pre><p>you interpret it as a call to (application of) a function <code>f</code> to just <i>one argument</i> -- a tuple of three elements. It's very important to train your eyes to look for spaces. They separate functions from their arguments and arguments from each other.</p><p>When an argument to a function is a result of another function application, you have to use parentheses for that. For instance,</p><pre><code class="haskell">a b (c d)</code></pre><p>means the function <code>a</code> acting on two arguments, <code>b</code> and <code>(c d)</code>, which itself is an application of function <code>c</code> to <code>d</code>. (Note: This is not a tuple. A tuple would have a comma in between.)</p><p>There is a way to omit the parentheses in the above by using the operator <code>$</code> (dollar sign):</p><pre><code class="haskell">a b $ c d</code></pre><p>A <code>$</code> is interpreted as: What follows is the last argument to the function you're calling.</p><p>In this tutorial we've seen examples of function calls. Here's one:</p><pre><code class="haskell">defaultLayout [whamlet|
+  Welcome to the Pigsty!
+|]</code></pre><p>The argument to the function <code>defaultLayout</code> is split over several lines, but it could be written in one line as well:</p><pre><code class="haskell">defaultLayout [whamlet| Welcome to the Pigsty!|]</code></pre><p>Here's another example:</p><pre><code class="haskell">warpDebug 3000 Piggies</code></pre><p>The third one is a little tricky, since the function <code>mkYesod</code> is a Template Haskell function, but the syntax is the same (I condensed it to one line):</p><pre><code class="haskell">mkYesod &quot;Piggies&quot; [parseRoutes| / HomeR GET|]</code></pre><h3 id="function-definition-syntax"><a href="#function-definition-syntax">Function Definition Syntax</a></h3><p>A function definition:</p><ul><li>starts with the name of the function,</li><li>followed by its formal parameters separated by white spaces,</li><li>an <b>equal sign</b>,</li><li>and an expression that is the body of the function.</li></ul><p>You should be able to parse this line of code:</p><pre><code class="haskell">a b c = d e f</code></pre><p>It's a definition of the function <code>a</code> that takes two formal parameters, <code>b</code> and <code>c</code>. The body of this function is a call to <code>d</code> with two arguments, <code>e</code> and <code>f</code>. Of course, the use of short meaningless names is <i>not</i> encouraged in Haskell but I do it here to help you prime your internal parser.</p><p>In this tutorial there are two function definitions, <code>getHomeR</code> and <code>main</code>:</p><pre><code class="haskell">{-hi-}getHomeR{-/hi-} = defaultLayout [whamlet|Welcome to the Pigsty!|]
+
+{-hi-}main{-/hi-} = warpEnv Piggies</code></pre><p>In both definitions the expression on the right hand side of the equal sign is another function call.</p><p>The function <code>main</code> is the entry point of the program (just like in C++).</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/starting-with-haskell/libraries-and-frameworks/basics-of-yesod/yesod-1';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

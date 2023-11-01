@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html><head><title>Azúcar sintáctico y otros artilugios - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4">Parte 4</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4/tutorial">Azúcar sintáctico y otros artilugios</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Azúcar sintáctico y otros artilugios</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Sep 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/534ca6c362e22741bbda23862104664aa13d5235">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4">Go up to: Parte 4</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#operador-de-aplicaci-n----">Operador de aplicación ($)</a></li><li><a href="#instancias-derivadas--derived-instances-">Instancias derivadas (derived instances)</a><ul><li><a href="#derivaci-n-de-eq">Derivación de Eq</a></li><li><a href="#derivaci-n-de-show">Derivación de Show</a></li></ul></li><li><a href="#tuplas">Tuplas</a></li><li><a href="#registros">Registros</a><ul><li><a href="#actualizaci-n-de-registros">Actualización de registros</a></li><li><a href="#b-squeda-de-patrones-sobre-registros">Búsqueda de patrones sobre registros</a></li></ul></li><li><a href="#captura-de-argumentos">Captura de argumentos</a><ul><li><a href="#captura-de-argumentos-sobre-un-tipo-de-dato-algebraico">Captura de argumentos sobre un tipo de dato algebraico</a></li><li><a href="#captura-de-argumentos-sobre-un-registro">Captura de argumentos sobre un registro</a></li></ul></li><li><a href="#m-dulos">Módulos</a><ul><li><a href="#resolviendo-name-clashes">Resolviendo name clashes</a></li></ul></li><li><a href="#ejercicios">Ejercicios</a></li><li><a href="#siguiente-tutorial">Siguiente tutorial</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>En este tutorial conoceremos algunas formas de azúcar sintáctico y otros mecanismos que nos harán escribir código más corto. Aunque no nos darán más poder de cómputo, nos darán mayor poder de expresividad; algo dulce, algo que nos haga la vida más fácil<a href="http://img4.wikia.nocookie.net/__cb20131008205703/adventuretimewithfinnandjake/images/8/83/S5_e38_Jake_eating_a_cookie.PNG">.</a></p><p>Ya hemos visto un poco de azúcar sintáctico cuando hablamos de las listas y de como podríamos expresarlas con tipos de datos algebraicos recursivos en vez de su azúcar sintáctica: <code>[</code>,<code>]</code> y <code>,</code>; con eso qudó claro que el azucar sintáctico nos ofrece una alternativa menos tediosa para alguna expresión. Técnicamente este tutorial no es sobre programación funcional, sino de azúcar sintáctico y otras expresiones útiles para Haskell.</p><h2 id="operador-de-aplicaci-n----"><a href="#operador-de-aplicaci-n----">Operador de aplicación ($)</a></h2><p>El operador de aplicaicón <code>$</code> es redundante en Haskell, pues lo mismo es <code>f p</code> que <code>f $ p</code>, donde <code>f</code> es una función y <code>p</code> es un argumento. Por ejemplo:</p><pre><code class="active haskell">main =
+  do
+    print (even 2)
+    print $ even 2</code></pre><p>Sin embargo, aunque ambas formas producen el mismo resultado, la segunda utiliza menos paréntesis; estar cerrando paréntesis es tedioso, consume tiempo e interrumpe el flujo del pensamiento.</p><p><code>$</code> es un <i>operador infijo asociativo a la derecha con prioridad baja</i>.</p><p><i>Operador infijo</i> significa que <code>$</code> no se utiliza como función, sino como operador que toma dos argumentos, los cuales se colocan a los lados; que sea <i>asociativo a la derecha</i> lo diferencía de los operadores infijos asociativos a la izquierda, como el operador <code>/</code>; mientras <code>1/2/3 = ((1/2)/3)</code> (asociativo a la izquierda), <code>f1 $ f2 $ p = (f1 $ (f2 $ p))</code> (asociativo a la derecha). Que tenga <i>prioridad baja</i> significa que en caso de haber más operadores en una misma expresión, primero se asociarán los de mayor prioridad. Por ejemplo, <code>even $ 4 / 2 + 1</code> se asocia de esta manera: <code>even $ ((4 / 2) + 1)</code>, pues las prioridades de <code>$</code>, <code>+</code> y <code>/</code> son tal que <i>pr($) &lt; pr(+) &lt; pr(/)</i>, donde <i>pr(op)</i> es la prioridad de un operador <i>op</i>, o en otras palabras, primero se asocia la división: <code>(4 / 2)</code>, después la suma: <code>(4 / 2) + 1</code> y al final <code>$</code>: <code>even $ ((4 / 2) + 1)</code>.</p><blockquote><p>(<a href="https://www.haskell.org/onlinereport/haskell2010/haskellch4.html#x10-820004.4.2">Esta</a> es una lista de la prioridad de los operadores de Haskell)</p></blockquote><p><code>f1 $ f2 $ p</code> se traduce a <code>($) f1 (($) f2 p)</code> cuando <code>$</code> se utiliza como función <code>($)</code> en vez de como parámetro. Lo menciono para que quede claro que no hay nada excepcional en <code>$</code>; incluso Haskell le permite al usuario definir sus propios operadores con la asociatividad y precedencia que uno escoja.</p><p>Ejemplos del uso de <code>$</code>:</p><pre><code class="active haskell">main =
+  do
+    print $ even $ mod 6 4
+-- equals to:
+    ($) print (($) even (($) mod 6 4))
+-- that since ($) is redundant is equal to:
+    print (even (mod 6 4))
+    
+-- testing precedence of &quot;$&quot; versus &quot;+&quot;
+    print $ even $ 6 + 3</code></pre><p>A partir de ahora, lo usaremos mucho<a href="http://t.qkme.me/3qlrv3.jpg">.</a></p><h2 id="instancias-derivadas--derived-instances-"><a href="#instancias-derivadas--derived-instances-">Instancias derivadas (derived instances)</a></h2><p>Esto es de lo más <i>mágico</i> que tiene Haskell y sólo veremos la intuición en esta sección. En el tutorial <a href="https://www.fpcomplete.com/user/XookDo/introducci-n-a-la-programaci-n-funcional/parte-5/tutorial">Clases de tipos</a> daremos algunas explicaciones más detalladas.</p><h3 id="derivaci-n-de-eq"><a href="#derivaci-n-de-eq">Derivación de Eq</a></h3><p>Supongamos que tenemos un tipo de dato para los días de la semana:</p><pre><code class="haskell">data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday</code></pre><p>Si los necesitaras comparar, podrías hacer una función algo así:</p><pre><code class="haskell">compareDays d1 d2 =
+  case (d1, d2) of
+  (Monday, Monday) -&gt; True
+  (Monday, _) -&gt; False
+  (Tuesday, Tuesday) -&gt; True
+  (Tuesday, _) -&gt; False
+  ...</code></pre><p>Una manera más corta sería algo como esto:</p><pre><code class="haskell">compareDays d1 d2 =
+  dayToInt d1 == dayToInt d2
+  where dayToInt d = case d of
+                     Monday -&gt; 1
+                     Tuesday -&gt; 2
+                     ...</code></pre><p>Pero afortunadamente podemos &quot;derivar la instancia de <code>Eq</code>&quot; para <code>Day</code> y obtener los operadores <code>==</code> y <code>/=</code> gratis:</p><pre><code class="active haskell">data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday {-hi-}deriving Eq{-/hi-}
+main = do
+  print $ Saturday {-hi-}=={-/hi-} Saturday
+  print $ Friday {-hi-}/={-/hi-} Wednesday</code></pre><h3 id="derivaci-n-de-show"><a href="#derivaci-n-de-show">Derivación de Show</a></h3><p>También se puede derivar una instancia de la &quot;clase&quot; <code>Show</code>; esto nos permite usar la función <code>show</code> sobre nuestros propios tipos; no es la única manera de usar <code>show</code> sobre nuestros tipos, pero esta es la más fácil y especialmente útil para escribir tutoriales.</p><pre><code class="active haskell">data Color = Black | White | Gray {-hi-}deriving Show{-/hi-}
+
+main = putStrLn.{-hi-}show{-/hi-} $ White</code></pre><h2 id="tuplas"><a href="#tuplas">Tuplas</a></h2><p>Las tuplas son azucar sintáctico para la multiplicación de tipos. Por ejemplo, si necesitamos una estructura de datos con tres valores, en vez de escribir <code>data ThreeValues = ThreeValues a b c</code> (multiplicación de los tipos <code>a</code>, <code>b</code> y <code>c</code>) podemos no escribir nada y simplemente usar las tuplas que Haskell nos proporciona. E.g. <code>(1,2) :: (Int, Int)</code>, <code>(1,'♥',&quot;sugar&quot;) :: (Int, Char, [Char])</code>, etcétera.</p><p>La solución al ejercicio 2 del tutorial <a href>Algo sobre listas y todo sobre funciones</a></p><blockquote><ol><li>Write a function &quot;average&quot; that gets the average from a list of Doubles using &quot;foldl&quot;.
+  For the empty list, let the average be zero.
+  Write a function &quot;increaseAndSum&quot; that helps you with the folding.</li></ol></blockquote><p>luce así:</p><pre><code class="active haskell">data Tuple a b = Tuple a b
+zeroes = Tuple 0 0
+
+increaseAndSum (Tuple currentCount currentSum) x = Tuple (currentCount + 1) (currentSum + x)
+
+average [] = 0
+average ls = sum/count
+  where Tuple count sum = foldl increaseAndSum zeroes ls
+
+main = print (average (take 100 [1 ..]))</code></pre><p>Pero usando <b><i>tuplas</i></b> pudo haber sido más corto:</p><pre><code class="active haskell">{-hi-}increaseAndSum (currentCount, currentSum) x = (currentCount + 1, currentSum + x){-/hi-}
+
+average [] = 0
+average ls = sum/count
+  where {-hi-}(count, sum){-/hi-} = foldl increaseAndSum {-hi-}(0,0){-/hi-} ls
+
+main = print (average (take 100 [1 ..]))</code></pre><p>Y ya sólo estamos entonces a un pequeño paso de que finalmente quede así (usándo una función anónima):</p><pre><code class="active haskell">average [] = 0
+average ls = sum/count
+  where (count, sum) = foldl {-hi-}(\(cc,cs) x -&gt; (cc+1,cs+x)){-/hi-} (0,0) ls
+
+main = print (average (take 100 [1 ..]))</code></pre><p>Si vas a usar funciones anónimas, asegúrate de que sean fáciles de entender; en general, <a href="http://vignette2.wikia.nocookie.net/adventuretimewithfinnandjake/images/3/32/S2e24_princess_bubblegum_eating_ice_cream.png/revision/latest?cb=20120506192530">no abuses</a>.</p><h2 id="registros"><a href="#registros">Registros</a></h2><p>Supongamos que quieres modelar una partida de <a href="https://en.wikipedia.org/wiki/Tic-tac-toe">gato</a>. Usando solo tipos algebráicos, muy probablemente modelarías el estado de esta manera:</p><pre><code class="active haskell">data Mark = O | X | Empty
+data Player = PO | PX
+data Score = Score Int Int
+data GameState = GameState [[Mark]] Player Player Score</code></pre><p>Si hubiésemos usado registros, nos hubiera quedado de esta forma:</p><pre><code class="active haskell">data Mark = O | X | Empty
+data Player = PO | PX
+data Score = {-hi-}Score { oVictories::Int, xVictories::Int }{-/hi-}
+data GameState = {-hi-}GameState
+                 {
+                     boardState     :: [[Mark]]
+                   , nextToMove     :: Player
+                   , startedTheGame :: Player
+                   , score          :: Score
+                 }{-/hi-}</code></pre><p>Así queda un poco más clara la intención de los tipos; ahora que podemos usar &quot;etiquetas&quot; para los valores, debe ser fácil entender que el primer <code>Player</code> (<code>nextToMove</code>) representa el siguiente jugador en tirar y el segundo <code>Player</code> (<code>startedTheGame</code>) indica quien tiró al inicio del juego (para saber a quien le tocará iniciar en el siguiente juego).</p><p>Pero en realidad no son etiquetas, son funciones; por ejemplo, la etiqueta <code>oVictories</code> en realidad es una función de tipo <code>Score -&gt; Int</code>, o sea que recibe un score y regresa el número de victorias del jugador <i>círculo</i>. A continuación, usaremos <code>oVictories</code> como función:</p><pre><code class="active haskell">data Score = Score { oVictories::Int, xVictories::Int }
+someScore = Score { oVictories = 2, xVictories = 1 }
+main = (print.{-hi-}oVictories{-/hi-}) someScore</code></pre><p>Esto nos evita tener que hacer búsqueda de patrones. Si no hubiésemos usado registros, hubiésemos tenido que hacer algo como esto:</p><pre><code class="active haskell">data Score = Score Int Int
+someScore = Score 2 2
+
+main = print oVictories
+       where oVictories = case someScore of Score oVictories _ -&gt; oVictories</code></pre><p>Todo eso para hacer búsqueda de patrones sobre <code>someScore</code>... not cool.</p><p>Y siempre podemos construir un registro como si fuera un tipo de dato algebraico:</p><pre><code class="active haskell">data Score = Score { oVictories::Int, xVictories::Int }
+someScore = {-hi-}Score 2 1{-/hi-}
+main = (print.oVictories) someScore</code></pre><p><a href="https://31.media.tumblr.com/5e829faafb14759c51d20dae54525c29/tumblr_inline_nb7626MtH61rodyy6.gif">C0Ool</a>.</p><h3 id="actualizaci-n-de-registros"><a href="#actualizaci-n-de-registros">Actualización de registros</a></h3><blockquote><p>Técnicamente, ningún dato se &quot;actualiza&quot; en Haskell, pues eso le quitaría la pureza; cuando nos referimos a &quot;actualizar&quot; un dato, nos referimos a duplicar un dato con cierta variación.</p></blockquote><p>Supongamos que terminó un juego de gato y ganó <code>PO</code> y debemos crear un nuevo <code>Score</code> que refleje esto. Sin usar <i>registros</i>, se podría modelar así:</p><pre><code class="active haskell">import Text.Printf
+
+data Score = Score Int Int
+data Player = PO | PX deriving Eq
+
+updateScore (Score oVictories xVictories) winner
+  | winner == PO = Score (oVictories + 1) xVictories
+  | otherwise = Score oVictories (xVictories + 1)
+
+scoreToStr (Score oVictories xVictories) =
+  &quot;O: &quot; ++ (show oVictories) ++
+  &quot;, X: &quot; ++ (show xVictories)
+  
+someScore = Score 2 2
+
+main = do
+  putStrLn $ &quot;old score: &quot; ++ (scoreToStr someScore)
+  putStrLn $ &quot;new score: &quot; ++ (scoreToStr $ updateScore someScore PX)</code></pre><p>Pero utilizando registros, obtenemos una sintaxis más conveniente:</p><pre><code class="active haskell">data Player = PO | PX deriving Eq
+data Score = Score { oVictories::Int, xVictories::Int }
+
+updateScore {-hi-}s{-/hi-} winner
+  | winner == PO = {-hi-}s { oVictories = oVictories s + 1 }{-/hi-} -- &quot;updates&quot; oVictories, xVictories remains the same
+  | otherwise = {-hi-}s { xVictories = xVictories s + 1 }{-/hi-} -- &quot;updates&quot; xVictories, oVictories remains the same
+
+scoreToStr s =
+  &quot;O: &quot;   ++ (show.oVictories) s ++
+  &quot;, X: &quot; ++ (show.xVictories) s
+
+someScore = Score { oVictories = 2, xVictories = 1 }
+
+main = do
+  putStrLn $ &quot;old score: &quot; ++ (scoreToStr someScore)
+  putStrLn $ &quot;new score: &quot; ++ (scoreToStr $ updateScore someScore PX)
+  putStrLn $ &quot;old score remains unchanded: &quot; ++ (scoreToStr someScore) -- important!</code></pre><p>En este ejemplo, <code>s { oVictories = oVictories s + 1 }</code> actualiza el dato <code>oVictories</code> de <code>s</code> y deja <code>xVictories</code> sin modificar. En <code>s { xVictories = xVictories s + 1}</code>, se actualiza el dato <code>xVictories</code> de <code>s</code> y deja <code>oVictories</code> sin modificar. Es importante recalcar que en realidad <b>no se actualiza</b> nada, sino que se crea un segundo objeto.</p><h3 id="b-squeda-de-patrones-sobre-registros"><a href="#b-squeda-de-patrones-sobre-registros">Búsqueda de patrones sobre registros</a></h3><p>Si utilizas registros para tus estructuras, debes saber que también puedes realizar búsqueda de patrones sobre estos:</p><pre><code class="active haskell">data Mark = O | X | Empty
+data Player = PO | PX deriving Eq
+data Score = Score { oVictories::Int, xVictories::Int }
+data GameState
+  = GameState
+  { boardState     :: [[Mark]]
+  , nextToMove     :: Player
+  , startedTheGame :: Player
+  , score          :: Score
+  }
+
+updateScore s winner
+  | winner == PO = s { oVictories = oVictories s + 1 }
+  | winner == PX = s { xVictories = xVictories s + 1 }
+
+scoreToStr s =
+  &quot;O: &quot;   ++ (show.oVictories) s ++
+  &quot;, X: &quot; ++ (show.xVictories) s
+
+someGameState
+  = GameState
+  { boardState = [[Empty, Empty, Empty], [Empty, Empty, Empty], [Empty, Empty, Empty]]
+  , nextToMove = PX
+  , startedTheGame = PX
+  , score = Score { oVictories = 1, xVictories = 0 }
+  }
+
+printScore {-hi-}(GameState { score = s }){-/hi-} = putStrLn.scoreToStr $ s
+
+main = printScore someGameState</code></pre><h2 id="captura-de-argumentos"><a href="#captura-de-argumentos">Captura de argumentos</a></h2><p>Cuando hacemos búsqueda de patrones sobre una estructura de datos, podemos acceder a sus valores internos, pero perdemos la capacidad de hacer referencia a la estructura completa.</p><p>Por ejemplo supongamos que queremos definir una función <code>toAdult</code> que dada la información de una persona, regresa <code>Just p</code> si <code>p</code> es mayor de 17 años y <code>Nothing</code> de lo contrario.</p><pre><code class="active haskell">data Color = Red | Orange | Yellow | Green | Blue | Indigo | Violet | Pink deriving Show
+data Person = P String Int Color deriving Show -- Name, age, favorite color
+
+toAdult (P name age color)
+  | age &gt; 17 = Just $ P name age color
+  | otherwise = Nothing
+
+main = print $ map toAdult [P &quot;Lay&quot; 24 Blue, P &quot;Jenny&quot; 17 Pink, P &quot;Bill&quot; 59 Blue]</code></pre><p>Y no está tan mal, pero con la <b>captura de argumentos</b>, recobramos la habilidad de hacer referencia a la estrucutra completa a la vez que podemos hacer búsqueda de patrones.</p><p>A continuación veremos el mismo ejemplo pero implementado usando captura de patrones tanto para tipos de datos algebraicos como para registros.</p><h3 id="captura-de-argumentos-sobre-un-tipo-de-dato-algebraico"><a href="#captura-de-argumentos-sobre-un-tipo-de-dato-algebraico">Captura de argumentos sobre un tipo de dato algebraico</a></h3><pre><code class="active haskell">data Color = Red | Orange | Yellow | Green | Blue | Indigo | Violet | Pink deriving Show
+data Person = P String Int Color deriving Show -- Name, age, favorite color
+
+toAdult {-hi-}p@(P _ age _){-/hi-}
+  | age &gt; 17 = Just {-hi-}p{-/hi-}
+  | otherwise = Nothing
+
+main = print $ map toAdult [P &quot;Lay&quot; 24 Blue, P &quot;Jenny&quot; 17 Pink, P &quot;Bill&quot; 59 Blue]</code></pre><h3 id="captura-de-argumentos-sobre-un-registro"><a href="#captura-de-argumentos-sobre-un-registro">Captura de argumentos sobre un registro</a></h3><pre><code class="active haskell">data Color = Red | Orange | Yellow | Green | Blue | Indigo | Violet | Pink deriving Show
+data Person = P { name::String, age::Int, favColor::Color } deriving Show
+
+toAdult {-hi-}p@(P {age = a}){-/hi-}
+  | a &gt; 17 = Just {-hi-}p{-/hi-}
+  | otherwise = Nothing
+
+main = print $ map toAdult [P &quot;Lay&quot; 24 Blue, P &quot;Jenny&quot; 17 Pink, P &quot;Bill&quot; 59 Blue]</code></pre><h2 id="m-dulos"><a href="#m-dulos">Módulos</a></h2><p>Modularizar el código nos permite</p><ul><li>tener más de un <b><i>espacio de nombres</i></b> (<b><i>namespaces</i></b>)</li><li>agrupar el código por funcionalidad</li><li>esconder información de un módulo a otro</li></ul><p>En esta sección veremos brevemente como crear un programa usando tres módulos, cada uno en su propio archivo y como beneficiarnos de tener más de un <i>espacio de nombres</i>.</p><p>Empecemos directamente con un ejemplo, con lo que has aprendido hasta ahora, deberías de poder entender el significado del código con sólo leerlo.</p><pre><code class="active haskell">{-# START_FILE Color.hs #-}
+module Color where -- We declare a module named &quot;Color&quot;
+data Color = Red | Orange | Yellow | Green | Blue | Indigo | Violet | Pink deriving Show
+data RGB = RGB { red::Float, green::Float, blue::Float }
+
+rgbToStr (RGB r g b) =
+    &quot;R:&quot; ++ (show r) ++
+  &quot;, G:&quot; ++ (show g) ++
+  &quot;, B:&quot; ++ (show b)
+
+colorToRGB c = RGB r g b
+  where (r,g,b) = case c of
+                  Red    -&gt; (1, 0, 0)
+                  Orange -&gt; (1, 0.647, 0)
+                  Yellow -&gt; (1, 0.843, 0)
+                  Green  -&gt; (0, 1, 0)
+                  Blue   -&gt; (0, 0, 1)
+                  Indigo -&gt; (0.294, 0, 130)
+                  Violet -&gt; (0.933, 0.509, 0.933)
+                  Pink   -&gt; (1, 0.752, 0.796)
+
+-- blends two colors using this formula: http://stackoverflow.com/a/29321264
+blendColors (RGB r1 g1 b1) (RGB r2 g2 b2) t =
+  RGB r g b
+  where
+    r = sqrt $ ((1-t)*r1)^2 + (t*r2)^2
+    g = sqrt $ ((1-t)*g1)^2 + (t*g2)^2
+    b = sqrt $ ((1-t)*b1)^2 + (t*b2)^2
+
+{-# START_FILE Person.hs #-}
+module Person where -- We declare a module named &quot;Person&quot;
+import Color
+data Person = P { name::String, age::Int, favColor::Color }
+
+ana = P &quot;Ana&quot; 25 Red
+bob = P &quot;Bob&quot; 25 Pink
+
+blendFavColors p1 p2 t =
+  blendColors (colorToRGB $ favColor p1) (colorToRGB $ favColor p2) t
+
+{-# START_FILE Main.hs #-}
+module Main where -- declares a module named &quot;Main&quot;
+import Color      -- imports the Color module
+import Person     -- imports the Person module
+
+main =
+  putStrLn $ &quot;If we blend evenly ana's favorite color with bob's favorite color, we get &quot;
+             ++ (rgbToStr $ blendFavColors ana bob 0.5)</code></pre><h3 id="resolviendo-name-clashes"><a href="#resolviendo-name-clashes">Resolviendo name clashes</a></h3><p>En el módulo <code>Color</code> está definida una función <code>blendColors</code> y en el módulo <code>Person</code> está definida una función <code>blendFavColors</code>; la función <code>blendFavColors</code> bien pudo haberse llamado también <code>blendColors</code>, pero eso hubiese causado un &quot;<i>name clash</i>&quot; en el espacio de nombres del módulo <code>Main</code> pues habrían dos elementos con el mismo nombre.</p><p>La ambigüedad creada por dos elementos con el mísmo nombre se puede resolver si antecedemos el uso de dichos elementos con el nombre del módulo al que pertenecen y un punto: <code>{-hi-}Module.{-/hi-}element</code>.</p><p>Entonces, sí podemos llamar ambas funciones <code>blendColors</code> y el ejemplo pasado quedaría así:</p><pre><code class="active haskell">{-# START_FILE Color.hs #-}
+module Color where -- We declare a module named &quot;Color&quot;
+data Color = Red | Orange | Yellow | Green | Blue | Indigo | Violet | Pink deriving Show
+data RGB = RGB { red::Float, green::Float, blue::Float }
+
+rgbToStr (RGB r g b) =
+    &quot;R:&quot; ++ (show r) ++
+  &quot;, G:&quot; ++ (show g) ++
+  &quot;, B:&quot; ++ (show b)
+
+colorToRGB c = RGB r g b
+  where (r,g,b) = case c of
+                  Red    -&gt; (1, 0, 0)
+                  Orange -&gt; (1, 0.647, 0)
+                  Yellow -&gt; (1, 0.843, 0)
+                  Green  -&gt; (0, 1, 0)
+                  Blue   -&gt; (0, 0, 1)
+                  Indigo -&gt; (0.294, 0, 130)
+                  Violet -&gt; (0.933, 0.509, 0.933)
+                  Pink   -&gt; (1, 0.752, 0.796)
+
+-- blends to colors using this formula: http://stackoverflow.com/a/29321264
+blendColors (RGB r1 g1 b1) (RGB r2 g2 b2) t =
+  RGB r g b
+  where
+    r = sqrt $ ((1-t)*r1)^2 + (t*r2)^2
+    g = sqrt $ ((1-t)*g1)^2 + (t*g2)^2
+    b = sqrt $ ((1-t)*b1)^2 + (t*b2)^2
+
+{-# START_FILE Person.hs #-}
+module Person where -- We declare a module named &quot;Person&quot;
+import Color
+data Person = P { name::String, age::Int, favColor::Color }
+
+ana = P &quot;Ana&quot; 25 Red
+bob = P &quot;Bob&quot; 25 Pink
+
+{-hi-}blendColors{-/hi-} p1 p2 t =
+  {-hi-}Color.{-/hi-}blendColors (colorToRGB $ favColor p1) (colorToRGB $ favColor p2) t
+
+{-# START_FILE Main.hs #-}
+module Main where -- declares a module named &quot;Main&quot;
+import Color      -- imports the Color module
+import Person     -- imports the Person module
+
+main =
+  putStrLn $ &quot;If we blend evenly ana's favorite color with bob's favorite color, we get &quot;
+             ++ (rgbToStr $ {-hi-}Person.{-/hi-}blendColors ana bob 0.5)</code></pre><p>Si escribir el nombre completo del módulo es muy tedioso, se puede declarar un alias en la importación del módulo, por ejemplo:</p><pre><code class="haskell">{-# START_FILE Main.hs #-}
+module Main where
+import Color
+import Person {-hi-}as P{-/hi-}    -- imports the Person module
+
+main =
+  putStrLn $ &quot;If we blend evenly ana's favorite color with bob's favorite color, we get &quot;
+             ++ (rgbToStr $ {-hi-}P.{-/hi-}blendColors ana bob 0.5)</code></pre><p>Para una información más completa sobre la importación de módulos, visita <a href="https://en.wikibooks.org/wiki/Haskell/Modules">Modules - Haskell, The Wikibook</a>
+## Interpolación de cadenas (string interpolation)
+¿Recuerdas este ejemplo?</p><pre><code class="active haskell">data Color = Black | White | Gray deriving Show
+
+introduction :: String -&gt; (Int -&gt; (Color -&gt; String))
+introduction name age color =
+    &quot;Hi, I'm &quot; ++ name ++ &quot;. &quot;
+    ++ &quot;I'm &quot; ++ (show age) ++ &quot; years old &quot;
+    ++ &quot;and my favorite color is &quot; ++ (show color)
+
+main = putStrLn $ introduction &quot;Pluto&quot; 3 Gray</code></pre><p>Se puede evitar mezclar tantos <code>String</code>s con <code>++</code> y patrones utilizando <a href="https://en.wikipedia.org/wiki/String_interpolation#C.23.NET">interpolación de cadenas</a>. Existen varias formas, pero hay una que será familiar para muchos, <a href="http://hackage.haskell.org/package/base-4.2.0.1/docs/Text-Printf.html"><code>Text.Printf</code></a> pues está inspirada en <a href="https://es.wikipedia.org/wiki/Printf">printf</a> del lenguaje de programación C.</p><p>Usando interpolación de cadenas, queda más limpio:</p><pre><code class="active haskell">{-hi-}import Text.Printf{-/hi-}
+
+data Color = Black | White | Gray deriving Show
+
+introduction :: String -&gt; (Int -&gt; (Color -&gt; String))
+introduction name age color =
+  {-hi-}printf{-/hi-} &quot;Hi, I'm {-hi-}%s{-/hi-}. I'm {-hi-}%i{-/hi-} years old and my favorite color is {-hi-}%s{-/hi-}&quot; name age (show color)
+
+main = putStrLn $ introduction &quot;Pluto&quot; 3 Gray</code></pre><p>En el formato declarado, indicamos que interpolaremos tres variables, la primera siendo un <code>String</code> (<code>%s</code>), la segunda siendo un <code>Int</code> (<code>%i</code>) y la tercera un <code>String</code> (<code>%s</code>) nuevamente.</p><p><b>Pero ten cuidado</b>, pues el formato producido por <code>printf</code> no es muy fuertemente tipado y puede arrojar excepciones en tiempo de ejecución si es mal utilizado:</p><pre><code class="active haskell">import Text.Print
+format = printf &quot;%i&quot;           -- expects an int
+main = putStrLn $ format &quot;&gt;:)&quot; -- raises an exception {-hi-}in runtime{-/hi-} with an evil type error</code></pre><p>Por esta razón, algunos sugieren que nos conformemos con <code>++</code>.</p><p>En la documentación de <a href="http://hackage.haskell.org/package/base-4.2.0.1/docs/Text-Printf.html"><code>Text.Printf</code></a> hay una tabla con todas las conversiones soportadas.</p><h2 id="ejercicios"><a href="#ejercicios">Ejercicios</a></h2><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4/ejercicios">Ejercicios</a></p><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-4/soluciones">Soluciones</a></p><h2 id="siguiente-tutorial"><a href="#siguiente-tutorial">Siguiente tutorial</a></h2><p>Y eso es todo por este tutorial. Si has seguido todos los tutoriales y hecho todos los ejercicios, te mereces un postre <a href="http://mentalfloss.com/article/65394/how-do-you-punctuate-around-emoticons-and-emoji">:)</a> Cuando quieras, puedes continuar con el <a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-5/tutorial">siguiente tutorial</a>.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/parte-4/tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

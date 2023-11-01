@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html><head><title>11. State Monad - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/12-State-Monad">11. State Monad</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">11. State Monad</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">25 Dec 2014</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/8994d5735b08c326affa47a1c41184aeace1eb89">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/10_Error_Handling">Previous content: 10. Error Handling</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/13-the-list-monad">Next content: 12. The List Monad</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#curried-evaluator">Curried Evaluator</a></li><li><a href="#symbol-table-monad">Symbol Table Monad</a></li><li><a href="#state-monad">State Monad</a></li><li><a href="#what-is-a-monad-">What Is a Monad?</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#calculator-with-the-symbol-table-monad">Calculator with the Symbol Table Monad</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>The use of the <code>Either</code> monad helped us simplify error processing in the <a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/10_Error_Handling">last tutorial</a>. I promised to show you how another monad, the state monad, can eliminate explicit symbol-table threading. But before I do that, let's have a short refresher on currying, since it's relevant to the construction of the state monad (there is actually some beautiful math behind the relationship of currying and the state monad).</p><p>There are two ways of encoding a two-argument function and, in Haskell, they are equivalent. One is to implement a function that takes two values:</p><pre><code class="haskell">fPair :: a -&gt; b -&gt; c
+fPair x y = ...</code></pre><p>The other is to implement a function that takes one argument and returns another function of one argument (parentheses added for emphasis):</p><pre><code class="haskell">fCurry :: a -&gt; (b -&gt; c)
+fCurry x = \y -&gt; ...</code></pre><p>This might seem like a trivial transformation, but I'll show you how it can help us in coding the evaluator.</p><h2 id="curried-evaluator"><a href="#curried-evaluator">Curried Evaluator</a></h2><p>Let me remind you what the signature of the function <code>evaluate</code> was -- to make things simpler, let's consider the version from before the introduction of the <code>Either</code> monad:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; (Double, SymTab)</code></pre><p>I'm going to parenthesize it the way that highlights the currying interpretation:</p><pre><code class="haskell">evaluate :: Tree -&gt; (SymTab -&gt; (Double, SymTab))</code></pre><p>Let's read this signature carefully: <code>evaluate</code> is a function that takes a <code>Tree</code> and returns a function, which takes a <code>SymTab</code> and returns a pair <code>(Double, SymTab)</code>. What if we take this reading to heart and rewrite <code>evaluate</code> so that it actually returns a function (a lambda).</p><p>Let's start with the <code>UnaryNode</code> evaluator, which used to look like this:</p><pre><code class="haskell">evaluate (UnaryNode op tree) symTab =
+    let (x, symTab') = evaluate tree symTab
+    in case op of
+         Plus  -&gt; ( x, symTab')
+         Minus -&gt; (-x, symTab')</code></pre><p>and let's try something like this:</p><pre><code class="haskell">evaluate :: Tree -&gt; (SymTab -&gt; (Double, SymTab))
+evaluate (UnaryNode op tree) =
+    \symTab -&gt; 
+      let (x, symTab') = {-hi-}evaluate{-/hi-} tree symTab --??
+      in case op of
+         Plus  -&gt; ( x, symTab')
+         Minus -&gt; (-x, symTab')</code></pre><p>You see what the problem is? In the new scheme, the inner call to <code>evaluate</code> will no longer return a pair <code>(x, symTab')</code> but a function <code>(SymTab -&gt; (Double, SymTab))</code>. Let me call this function <code>act</code> for <i>action</i>. How can we extract <code>x</code> and <code>symTab'</code> from that action? By running it! We do have an argument <code>symTab</code> to pass to it -- it's the argument of the lambda:</p><pre><code class="haskell">evaluate :: Tree -&gt; (SymTab -&gt; (Double, SymTab))
+evaluate (UnaryNode op tree) =
+    \symTab -&gt; 
+        let act = evaluate tree 
+            (x, symTab') = {-hi-}act symTab{-/hi-}
+        in case op of
+            Plus  -&gt; ( x, symTab')
+            Minus -&gt; (-x, symTab')</code></pre><p>What have just happened? We called the new <code>evaluate</code> only to immediately execute the resulting action? Then why even bother with the intermediate step?</p><p>First of all, it's a neat idea that evaluation can be separated into two phases: one for creating a network of functions like <code>evaluate</code> calling each other but not actually evaluating the result; and another phase for excecuting this network, starting with a particular state -- the symbol table in this case. Obviously, if you provide a different starting symbol table, you will obtain a different final result. But the network of functions depends only on the original parse tree.</p><p>The second reason is that this form brings us closer to our goal of abstracting away the tedium of symbol-table passing. Symbol table passing is what &quot;actions&quot; are supposed to do; <code>evaluate</code> should only construct the tracks for the symbol-table train.</p><p>Interestingly, this separation between creating an action and running it turned out to be quite useful in C++, as I showed in my old post <a href="http://bartoszmilewski.com/2011/07/11/monads-in-c/">Monads in C++</a>. There, the actions were constructed at compile time using an EDSL, and then executed at runtime.</p><p>Going back to our program, we'll try follow the same procedure we used to derive the <code>Either</code> monad. The most important part of a monad is the bind function. Remember, bind is the glue that binds the output of one function to the input of another function -- the one we call a continuation. The signature of bind is determined by the definition of the <code>Monad</code> class. It has the form:</p><pre><code class="haskell">bind :: Blob a
+     -&gt; (a -&gt; Blob b)
+     -&gt; Blob b</code></pre><p>where <code>Blob</code> stands for the type constructor we are trying to monadize. In our case, this type constructor is of the form <code>(SymTab -&gt; (a, SymTab))</code>, with the type parameter <code>a</code> nested inside the return type of an action. I'll call this function type the new <code>Evaluator</code>:</p><pre><code class="haskell">type Evaluator a = SymTab -&gt; (a, SymTab)</code></pre><p>We'll standardize it later using a <code>newtype</code> definition, which is required by <code>instantiate</code>, but for now let's just work with a type synonym.</p><p>So here's what monadic bind should look like for our type (yes, it's exactly the same as for our <code>Either</code> monad, except that <code>Evaluator</code> now hides a function):</p><pre><code class="haskell">bindS :: Evaluator a
+      -&gt; (a -&gt; Evaluator b)
+      -&gt; Evaluator b</code></pre><p>The client of bind is supposed to pass an evaluator as the first argument and a continuation as the second. The continuation is a function that returns an evaluator. Let's look for this pattern in our implementation of <code>evaluate</code> of the <code>UnaryNode</code>:</p><pre><code class="haskell">evaluate :: Tree -&gt; (SymTab -&gt; (a, SymTab))
+evaluate (UnaryNode op tree) =
+    (\symTab -&gt; 
+          let act = evaluate tree 
+              (x, symTab') = act symTab
+          in case op of
+              Plus  -&gt; ( x, symTab')
+              Minus -&gt; (-x, symTab'))</code></pre><p>We are looking for a piece of code that can be interpreted as &quot;the rest of code.&quot; On first attempt we might think of the following lambda as our continuation:</p><pre><code class="haskell">\x' -&gt; case op of
+         Plus  -&gt; ( x', symTab')
+         Minus -&gt; (-x', symTab'))</code></pre><p>but it's the wrong type. Our continuation is supposed to be returning an <code>Evaluator</code>, not a pair <code>(Double, SymTab)</code>. How can we turn this value into an evaluator? That's what monadic <code>return</code> is supposed to do. Its signature, again, is determined by the <code>Monad</code> class (I'm calling it <code>returnS</code> for now to avoid name conflicts):</p><pre><code class="haskell">returnS :: a -&gt; Evaluator a</code></pre><p>The implementation is a no-brainer, really. We turn <code>x</code> into a function that returns this <code>x</code> with a side of <code>symTab</code>:</p><pre><code class="haskell">returnS x = \symTab -&gt; (x, symTab)</code></pre><p>So here's the candidate that fulfills all our requirements for a continuation:</p><pre><code class="haskell">\x' -&gt; case op of
+         Plus  -&gt; return x'
+         Minus -&gt; return (-x')</code></pre><p>This is indeed a fine monadic function (returning a value of the soon to be monadic <code>Evaluator</code>), and it fits the type signature of the continuation required by bind; except that we don't see it in the original code. We can't carve it out of the current implementation of <code>evaluate</code>. If we could only find a way to insert this <code>returnS</code> and then immediately cancel it. But how can one undo <code>returnS</code>? Well, how about exectuting its result? Check this out:</p><pre><code class="haskell">(returnsS x) symTab' = (\symTab -&gt; (x, symTab)) symTab'
+                     = (x, symTab')</code></pre><p>When you execute a lambda, you simply replace it with its body and replace the formal parameter with the actual argument. Here, I replaced <code>symTab</code> (formal parameter, or <i>bound</i> variable) with <code>symTab'</code> (the argument). In general, the argument may be a whole expression. You just stick at every place the formal parameter appears in the body. (You have to be careful though not to introduce name conflicts.)</p><p>So here's the final rewrite:</p><pre><code class="active haskell">data Operator = Plus | Minus
+data Tree = UnaryNode Operator Tree
+type SymTab = ()
+-- show
+type Evaluator a = SymTab -&gt; (a, SymTab)
+
+returnS :: a -&gt; Evaluator a
+returnS x = \symTab -&gt; (x, symTab)
+
+evaluate :: Tree -&gt; (SymTab -&gt; (Double, SymTab))
+evaluate (UnaryNode op tree) =
+    \symTab -&gt; 
+        let act = evaluate tree 
+            (x, symTab') = act symTab
+            k = \x' -&gt; case op of
+                        Plus  -&gt; returnS x'
+                        Minus -&gt; returnS (-x')
+            act' = k x
+        in
+            act' symTab'
+
+main = putStrLn &quot;It type checks!&quot;</code></pre><p>If it type checks, it must be correct, right? To convince yourself that this indeed works, first apply <code>k</code> to <code>x</code> -- this will just replace <code>x'</code> with <code>x</code>. Then apply the resulting action to <code>symTab'</code> to cancel out the <code>returnS</code>s.</p><p>Let's continue with our program to define a new monad. To this end, we need to identify the pattern we've been looking for. We want to pick the implementation of <code>bindS</code> from <code>evaluate</code>.</p><p><img alt src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FBasics%2FBindState.png" /></p><p>We can clearly see the two arguments to bind: one is <code>act</code>, the result of <code>evaluate tree</code>, and the other is the continuation <code>k</code>. The rest must be bind. Here it is, together with <code>returnS</code> and the new version of <code>evaluate</code>:</p><pre><code class="active haskell">data Operator = Plus | Minus
+data Tree = UnaryNode Operator Tree
+type SymTab = ()
+-- show
+type Evaluator a = SymTab -&gt; (a, SymTab)
+
+returnS :: a -&gt; Evaluator a
+returnS x = \symTab -&gt; (x, symTab)
+
+bindS :: Evaluator a
+      -&gt; (a -&gt; Evaluator b)
+      -&gt; Evaluator b
+bindS act k =
+    \symTab -&gt;
+        let (x, symTab') = act symTab
+            act' = k x
+        in 
+            act' symTab'
+
+evaluate :: Tree -&gt; (SymTab -&gt; (Double, SymTab))
+evaluate (UnaryNode op tree) =
+    bindS (evaluate tree)
+          (\x -&gt; case op of
+                   Plus  -&gt; returnS x
+                   Minus -&gt; returnS (-x))
+
+main = putStrLn &quot;It type checks!&quot;</code></pre><h2 id="symbol-table-monad"><a href="#symbol-table-monad">Symbol Table Monad</a></h2><p>Let's formalize what we've done so far using an actual instance of the <code>Monad</code> typeclass. First, we need to encapsulate our evaluator type in a <code>newtype</code> declaration. This muddles things a little, but is necessary if we want to use it in an <code>instance</code> declaration. Here's a type that contains nothing but a function:</p><pre><code class="haskell">newtype Evaluator a = Ev (SymTab -&gt; (a, SymTab))</code></pre><p>And here are our return and bind functions in their cleaned up form:</p><pre><code class="haskell">instance Monad Evaluator where
+    return x = Ev (\symTab -&gt; (x, symTab))
+    (Ev act) &gt;&gt;= k = Ev $ \symTab -&gt;
+        let (x, symTab') = act symTab
+            (Ev act')    = k x
+        in 
+            act' symTab'</code></pre><p>Now that the paperwork is done, we can start using the <code>do</code> notation. Here's our monadic <code>UnaryNode</code> evaluator:</p><pre><code class="haskell">evaluate (UnaryNode op tree) = do
+    x &lt;- evaluate tree 
+    case op of
+       Plus  -&gt; return x
+       Minus -&gt; return (-x)</code></pre><p><code>SumNode</code> is even more spectacular:</p><pre><code class="haskell">evaluate (SumNode op left right) = do
+    lft &lt;- evaluate left
+    rgt &lt;- evaluate right
+    case op of
+       Plus  -&gt; return (lft + rgt)
+       Minus -&gt; return (lft - rgt)</code></pre><p>Compare it with the original:</p><pre><code class="haskell">evaluate (SumNode op left right) symTab = 
+    let (lft, symTab')  = evaluate left symTab
+        (rgt, symTab'') = evaluate right symTab'
+    in
+        case op of
+          Plus  -&gt; (lft + rgt, symTab'')
+          Minus -&gt; (lft - rgt, symTab'')</code></pre><p>All references to the symbol table are magically gone. The code is not only cleaner, but also less error prone. In the original code there were way too many opportunities to use the wrong symbol table for the wrong call. That's all taken care of now.</p><p>There are only three places where you'll see explicit use of the symbol table: <code>lookUp</code>, <code>addSymbol</code>, and the main loop -- as it should be! I recommend studying the complete code for the calculculator listed at the end of this tutorial, with special attention to those functions.</p><p>Now you have seen with your own eyes that all this can be done with pure functions. We managed to manipulate state -- the symbol table -- in a purely functional way.</p><p>There is a popular misconception that you <i>must</i> use impure code to deal with mutable state, and that Haskell monads are impure. There are ways to introduce impurities in Haskell -- there's a bunch of functions whose names start with <i>unsafe</i> and there is <code>trace</code> for debugging, the <code>ST</code> monad (not to be confused with the <code>State</code> monad), all of which (carefully) let you inject impurity into your code. Sometimes it's done for debugging, sometimes for performance. In general, though, you can and should stick to the purely functional style.</p><h2 id="state-monad"><a href="#state-monad">State Monad</a></h2><p>What we have just done is to create our own version of a generic state monad. It was, hopefully, a good learning experience, but one that shouldn't be repeated when writing production code. So let's familiarize ourselves with the <code>Control.Monad.State</code> version of the state monad (strictly speaking the state monad is defined using a <i>monad transformer</i>, so the actual code in the library may look a bit different from what I present). State monad is defined by a new type <code>State</code>, which is parameterized by two type variables. The first one is used to represent the state (in our case that would be <code>SymTab</code>), and the second is the generic type parameter of every monad type constructor.</p><pre><code class="haskell">newtype State s a = State s -&gt; (a, s)</code></pre><p><code>State</code> has one data constructor also called <code>State</code>. It takes a function as an argument. The interesting thing is that this constructor is not exported from the library so you can't pattern match on it. If you want to create a new monadic <code>State</code>, use the function <code>state</code>:</p><pre><code class="haskell">state :: (s -&gt; (a, s)) -&gt; State s a</code></pre><p>Instead of extracting an action from <code>State</code>, which you can't do, and acting with it on some state, you call the function <code>runState</code> which does it for you:</p><pre><code class="haskell">runState :: State s a -&gt; s -&gt; (a, s)</code></pre><p>The <code>Monad</code> instance declaration for <code>State</code> looks something like this:</p><pre><code class="haskell">instance Monad (State s) where
+    return x = state (\st -&gt; (x, st))
+    act &gt;&gt;= k = state $ \st -&gt; 
+                          let (x, st') = runState act st
+                          in runState (k x) st'</code></pre><p>Notice that <code>State s</code> is not a type but a type constructor: it needs one more type variable to become a type. As I mentioned before, <code>Monad</code> class can only be instantiated with type constructors.</p><p>I've shown you how to extract the bind operator from state-threading code, but there is a more general derivation that's based on types. In Haskell you often see functions whose implementation is determined by their signatures. Sometimes it's determined uniquely, more often we pick the simplest non-trivial implementation that type checks. Here's the signature of <code>&gt;&gt;=</code> that is required by the <code>Monad</code> class as applied to <code>State s</code>:</p><pre><code class="haskell">(&gt;&gt;=) :: State s a -&gt; (a -&gt; State s b) -&gt; State s b
+act &gt;&gt;= k = ...</code></pre><p>The first observation is that, in order to run the continuation <code>k</code>, we need a value of type <code>a</code>. The only source of such value could be the first argument, <code>act</code>, and the only way to retrieve it is to call <code>act</code> with some state. But we don't have any state yet.</p><p>But notice that bind itself doesn't produce a value -- it produces a <code>State</code> object. How do you construct a <code>State</code>? By calling <code>state</code> with a function. Bind must therefore define a lambda of the signature <code>s -&gt; (b, s)</code> and pass it to <code>state</code>. The outer shell of <code>&gt;&gt;=</code> must therefore have the form:</p><pre><code class="haskell">act &gt;&gt; k = state $ \st -&gt; ...</code></pre><p>Now, inside the lambda, we do have access to a state variable <code>st</code> and we can use it to run <code>act</code>.</p><pre><code class="haskell">act &gt;&gt; k = state $ \st -&gt;
+                       let (x, st') = runState act st
+                       ...
+</code></pre><p>Now we have <code>x</code> of type <code>a</code> so we can call the continuation <code>k</code>:</p><pre><code class="haskell">act &gt;&gt; k = state $ \st -&gt;
+                       let (x, st') = runState act st
+                           act' = k x
+                           ...
+</code></pre><p>The continuation returns an action <code>act'</code> of the type <code>State s b</code>. Our lambda, though, must return a pair of the type <code>(b, s)</code>. The only way to generate a value of the type <code>b</code> is to run <code>act'</code> with some state. Here we have a choice: we can run it with the original <code>st</code> or with the new <code>st'</code>. The first choice would mean that the state never changes and, in fact, doesn't even have to be returned by the action. There is a perfectly good monad built on this assumption: it's called the reader monad (see the exercise at the end of this tutorial). But since here we are modeling mutable state, we choose to use <code>st'</code> to run <code>act'</code>:</p><pre><code class="haskell">act &gt;&gt; k = state $ \st -&gt;
+                       let (x, st') = runState act st
+                           act' = k x
+                       in runState act' st'
+</code></pre><p>There is one more ingredient necessary to make the state monad usable: the ability to access and modify the state. There are two generic functions <code>get</code> and <code>put</code> that provide this functionality:</p><pre><code class="haskell">get :: State s s
+get = state $ \st -&gt; (st, st)
+
+put :: s -&gt; State s ()
+put newState = state $ \_ -&gt; ((), newState)</code></pre><p><code>get</code> returns the value of the state. <code>put</code> returns unit, but has a &quot;side effect&quot; of injecting new state into subsequent computations.</p><h2 id="what-is-a-monad-"><a href="#what-is-a-monad-">What Is a Monad?</a></h2><p>We've seen two seemingly disparate examples of a monad and I will show you some more in the next tutorial. What do they have in common, other than implementing the functions <code>return</code> and <code>&gt;&gt;=</code>? Why are these two functions so important? It's time for some deeper insights.</p><p>The basic premise of all programming is that you can decompose a complex computation into a set of simpler ones.</p><p>The difference between various programming paradigms is in the mechanics of composing smaller computations into larger ones. For instance, in C you use a combination of functions and side effects. You call a function (procedure) whose effects can be:</p><ol><li>Returning a value</li><li>Modifying an argument (when it's a reference)</li><li>Modifying global variables</li><li>Interacting with the external world</li></ol><p>Some of the effects are visible in the signature of the function (types of input and output parameters), others are implicit. The compiler may help with flagging explicit mismatches, but it can't check the implicit ones. So when you're composing functions in C, you have to keep in mind all the hidden interactions between them.</p><p>In OO programming, side effects are somewhat tamed with data hiding. Although arguments are mostly passed by reference, including the implicit <code>this</code> pointer, the things you can do to them are restricted by their interfaces. Still, hidden dependencies make composition fragile. This is especially painful when dealing with concurrency.</p><p>The starting point of functional programming is that functions have no side effects whatsoever, so function composition is a straightforward matter of passing the results of one function as the input to the next. This is a great starting point from the point of composability. However, many of the traditional notions of computation don't have straightforward translations into pure functions. This has been a huge problem in the adoption of functional languages.</p><p>Two things happened (not necessarily in that order) to change this situation:</p><ol><li>We learned how to translate most computations into functions.</li><li>We use monads to abstract the tedium of this translation.</li></ol><p>I tried to emphasize the same two steps when introducing monads.</p><p>First, I showed you how to translate <i>partial computations</i> into total functions. These functions encapsulate their results into <code>Maybe</code> or <code>Either</code> types. I also showed you how to deal with mutable state by passing it as an additional parameter into and out of a function.</p><p>This is a very general pattern: Take a computation that takes input and produces output but does it in a non-functional way, and modify input and output types in such a way that the computation becomes functional.</p><p>Next, I showed you a way to do the same thing by modifying only the return types of the computation. If the translation of a computation required adding <i>input parameters</i> to the original signature (passing the symbol table in, for instance), I used currying and turned the output type into a function type. (In Exercise 1 you'll use the same trick used to implement the reader monad.)</p><p>So this is lesson one: A computation can be turned into a function that encapsulates the originally non-functional bits into its modified (decorated, fancified, or whatever you call it) output data type.</p><p>The great thing about it is that now all this additional information is visible to the compiler and the type checker. There is even a name for this system in type theory: the <i>effect system</i>. A function signature may expose the <i>effects</i> of a function in addition to just turning input into output types. These effects are propagated when composing functions (as was the effect of modifying the symbol table, or being undefined for some values of arguments) and can be checked at compile time.</p><p>A potential shortcoming of this approach is that the composition of such fancified functions requires writing some boilerplated code. In the case of <code>Maybe</code>- or <code>Either</code>-returning functions, we have to pattern match the results and fork the execution. In case of action-returning functions, we need to run these actions, provide the additional parameters they need, and pass results to the next action.</p><p>To our great relief, this highly repetitive (and error-prone) glue code can be abstracted into just two functions: <code>&gt;&gt;=</code> and <code>return</code> (optionally <code>&gt;&gt;</code> and <code>fail</code>). Now we can test our implementation of the glue code in one place, or still better, use the library code. And to make our lives even better, we have this wonderful syntactic sugar in the shape of the <code>do</code> notation.</p><p>But now, when you look at a do block, it looks very much like imperative code with hidden side effects. The <code>Either</code> monadic code looks like using functions that can throw exceptions. <code>State</code> monad code looks as if the state were a global mutable variable. You access it using <code>get</code> with no arguments, and you modify it by calling <code>put</code> that returns no value. So what have we gained in comparison to C?</p><p><i>We</i> might not see the hidden effects, but the compiler does. It desugars every do block and type-checks it. The state might look like a global variable but it's not. Monadic bind makes sure that the state is threaded from function to function. It's never shared. If you make your Haskell code concurrent, there will be no data races.</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p><b> Ex 1.</b> Define the reader monad. It's supposed to model computations that have access to some read-only environment. In imperative code such environment is often implemented as a global object. In functional languages we need to pass it as an argument to every function that might potentially need access to it. The reader monad hides this process.</p><pre><code class="active haskell">newtype Reader e a = Reader (e -&gt; a)
+
+reader :: (e -&gt; a) -&gt; Reader e a
+reader f = undefined
+
+runReader :: Reader e a -&gt; e -&gt; a
+runReader = undefined
+
+ask :: Reader e e
+ask = reader (\e -&gt; e)
+
+instance Monad (Reader e) where
+    ...
+
+type Env = Reader String
+-- curried version of
+-- type Env a = Reader String a
+
+test :: Env Int
+test = do
+    s &lt;- ask
+    return $ read s + 1
+
+main = print $ runReader test &quot;13&quot;</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">newtype Reader e a = Reader (e -&gt; a)
+
+reader :: (e -&gt; a) -&gt; Reader e a
+reader f = Reader f
+
+runReader :: Reader e a -&gt; e -&gt; a
+runReader (Reader act) env = act env
+
+ask :: Reader e e
+ask = reader (\e -&gt; e)
+
+instance Monad (Reader e) where
+    return x = reader (\_ -&gt; x)
+    rd &gt;&gt;= k = reader $ \env -&gt;
+                           let x = runReader rd env
+                               act' = k x
+                           in runReader act' env
+
+type Env = Reader String
+-- curried version of
+-- type Env a = Reader String a
+
+test :: Env Int
+test = do
+    s &lt;- ask
+    return $ read s + 1
+
+main = print $ runReader test &quot;13&quot;</code></pre></div><p><b>Ex 2.</b> Use the <code>State</code> monad from <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Control.Monad.State" title="Hoogle search for: Control.Monad.State"><code>Control.Monad.State</code></a> to re-implement the evaluator.</p><pre><code class="active haskell">import Data.Char
+import qualified Data.Map as M
+import Control.Monad.State
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+type SymTab = M.Map String Double
+
+type Evaluator a = State SymTab a
+
+lookUp :: String -&gt; Evaluator Double
+lookUp str = do ...
+
+addSymbol :: String -&gt; Double -&gt; Evaluator ()
+addSymbol str val = do ...
+
+evaluate :: Tree -&gt; Evaluator Double
+
+evaluate (SumNode op left right) = ...
+
+evaluate (ProdNode op left right) = ...
+
+evaluate (UnaryNode op tree) = ...
+
+evaluate (NumNode x) = ...
+
+evaluate (VarNode str) = ...
+
+evaluate (AssignNode str tree) = ...
+
+expr = AssignNode &quot;x&quot; (ProdNode Times (VarNode &quot;pi&quot;) 
+                                (ProdNode Times (NumNode 4) (NumNode 6)))
+
+main = print $ runState (evaluate expr) (M.fromList [(&quot;pi&quot;, pi)])</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import Data.Char
+import qualified Data.Map as M
+import Control.Monad.State
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+type SymTab = M.Map String Double
+
+type Evaluator a = State SymTab a
+
+lookUp :: String -&gt; Evaluator Double
+lookUp str = do
+    symTab &lt;- get
+    case M.lookup str symTab of
+      Just v  -&gt; return v
+      Nothing -&gt; error $ &quot;Undefined variable &quot; ++ str
+
+addSymbol :: String -&gt; Double -&gt; Evaluator ()
+addSymbol str val = do 
+    symTab &lt;- get
+    put $ M.insert str val symTab
+    return ()
+
+evaluate :: Tree -&gt; Evaluator Double
+
+evaluate (SumNode op left right) = do
+    lft &lt;- evaluate left
+    rgt &lt;- evaluate right
+    case op of
+       Plus  -&gt; return $ lft + rgt
+       Minus -&gt; return $ lft - rgt
+
+evaluate (ProdNode op left right) = do
+    lft &lt;- evaluate left
+    rgt &lt;- evaluate right
+    case op of
+       Times -&gt; return $ lft * rgt
+       Div   -&gt; return $ lft / rgt
+
+evaluate (UnaryNode op tree) = do
+    x &lt;- evaluate tree 
+    case op of
+       Plus  -&gt; return x
+       Minus -&gt; return (-x)
+
+evaluate (NumNode x) = return x
+
+evaluate (VarNode str) = lookUp str
+
+evaluate (AssignNode str tree) = do
+    v &lt;- evaluate tree
+    addSymbol str v
+    return v
+
+expr = AssignNode &quot;x&quot; (ProdNode Times (VarNode &quot;pi&quot;) 
+                                (ProdNode Times (NumNode 4) (NumNode 6)))
+
+main = print $ runState (evaluate expr) (M.fromList [(&quot;pi&quot;, pi)])</code></pre></div><h2 id="calculator-with-the-symbol-table-monad"><a href="#calculator-with-the-symbol-table-monad">Calculator with the Symbol Table Monad</a></h2><p>Here's the complete runnable version of the calculator that uses our Symbol Table Monad.</p><div class="hidden" title="Show code"><pre><code class="active haskell">import Data.Char
+import qualified Data.Map as M
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+ 
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier :: Char -&gt; String -&gt; [Token]
+identifier c cs = let (name, cs') = span isAlphaNum cs in
+                  TokIdent (c:name) : tokenize cs'
+
+number :: Char -&gt; String -&gt; [Token]
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+---- parser ----
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+lookAhead :: [Token] -&gt; Token
+lookAhead [] = TokEnd
+lookAhead (t:ts) = t
+
+accept :: [Token] -&gt; [Token]
+accept [] = error &quot;Nothing to accept&quot;
+accept (t:ts) = ts
+
+expression :: [Token] -&gt; (Tree, [Token])
+expression toks = 
+   let (termTree, toks') = term toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (exTree, toks'') = expression (accept toks') 
+            in (SumNode op termTree exTree, toks'')
+         TokAssign -&gt;
+            case termTree of
+               VarNode str -&gt; 
+                  let (exTree, toks'') = expression (accept toks') 
+                  in (AssignNode str exTree, toks'')
+               _ -&gt; error &quot;Only variables can be assigned to&quot;
+         _ -&gt; (termTree, toks')
+
+term :: [Token] -&gt; (Tree, [Token])
+term toks = 
+   let (facTree, toks') = factor toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Times, Div] -&gt;
+            let (termTree, toks'') = term (accept toks') 
+            in (ProdNode op facTree termTree, toks'')
+         _ -&gt; (facTree, toks')
+
+factor :: [Token] -&gt; (Tree, [Token])
+factor toks = 
+   case lookAhead toks of
+      (TokNum x)     -&gt; (NumNode x, accept toks)
+      (TokIdent str) -&gt; (VarNode str, accept toks)
+      (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (facTree, toks') = factor (accept toks) 
+            in (UnaryNode op facTree, toks')
+      TokLParen      -&gt; 
+         let (expTree, toks') = expression (accept toks)
+         in
+            if lookAhead toks' /= TokRParen 
+            then error &quot;Missing right parenthesis&quot;
+            else (expTree, accept toks')
+      _ -&gt; error $ &quot;Parse error on token: &quot; ++ show toks
+
+parse :: [Token] -&gt; Tree
+parse toks = let (tree, toks') = expression toks
+             in
+               if null toks' 
+               then tree
+               else error $ &quot;Leftover tokens: &quot; ++ show toks'
+
+---- evaluator ----
+-- show
+
+type SymTab = M.Map String Double
+
+newtype Evaluator a = Ev (SymTab -&gt; (a, SymTab))
+
+instance Monad Evaluator where
+    (Ev act) &gt;&gt;= k = Ev $
+        \symTab -&gt; 
+            let (x, symTab') = act symTab
+                (Ev act') = k x
+            in act' symTab'
+    return x = Ev (\symTab -&gt; (x, symTab))
+
+lookUp :: String -&gt; Evaluator Double
+lookUp str = Ev $ \symTab -&gt;
+    case M.lookup str symTab of
+      Just v  -&gt; (v, symTab)
+      Nothing -&gt; error $ &quot;Undefined variable &quot; ++ str
+
+addSymbol :: String -&gt; Double -&gt; Evaluator Double
+addSymbol str val = Ev $ \symTab -&gt;
+    let symTab' = M.insert str val symTab
+    in  (val, symTab')
+
+evaluate :: Tree -&gt; Evaluator Double
+
+evaluate (SumNode op left right) = do
+    lft &lt;- evaluate left
+    rgt &lt;- evaluate right
+    case op of
+       Plus  -&gt; return $ lft + rgt
+       Minus -&gt; return $ lft - rgt
+
+evaluate (ProdNode op left right) = do
+    lft &lt;- evaluate left
+    rgt &lt;- evaluate right
+    case op of
+       Times -&gt; return $ lft * rgt
+       Div   -&gt; return $ lft / rgt
+
+evaluate (UnaryNode op tree) = do
+    x &lt;- evaluate tree 
+    case op of
+       Plus  -&gt; return x
+       Minus -&gt; return (-x)
+
+evaluate (NumNode x) = return x
+
+evaluate (VarNode str) = lookUp str
+
+evaluate (AssignNode str tree) = do
+    v &lt;- evaluate tree
+    addSymbol str v
+
+main = do
+   loop (M.fromList [(&quot;pi&quot;, pi)])
+
+loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks = tokenize str
+          tree = parse toks
+          Ev act = evaluate tree
+          (val, symTab') = act symTab
+      in do
+          print val
+          loop symTab'</code></pre></div></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/basics-of-haskell/12-State-Monad';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

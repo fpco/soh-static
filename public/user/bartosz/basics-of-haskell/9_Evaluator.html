@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html><head><title>9. Evaluator - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Basics of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/9_Evaluator">9. Evaluator</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">9. Evaluator</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">24 Aug 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/7bcc0e4a8d11f2462273fdf880938c12e43f72cf">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/8_Parser">Previous content: 8. Parser</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell/10_Error_Handling">Next content: 10. Error Handling</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/basics-of-haskell">Go up to: Basics of Haskell</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#the-easy-evaluator">The Easy Evaluator</a></li><li><a href="#threading-the-symbol-table">Threading the Symbol Table</a><ul><li><a href="#symbol-table-lookup">Symbol Table Lookup</a></li><li><a href="#symbol-table-update">Symbol Table Update</a></li><li><a href="#implementing-evaluate">Implementing evaluate</a></li></ul></li><li><a href="#module-system">Module System</a></li><li><a href="#expression-problem">Expression Problem</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-symbolic-calculator-so-far">The Symbolic Calculator So Far</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Now that we know how to <a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/8_Parser">parse arithmetic expressions</a>, let's talk about evaluating our parse trees. First, let's implement the simplified evaluator which ignores symbolic variables. This turns out to be a very simple operation: you traverse the expression tree and evaluate every node. Our leaf nodes are literal numbers -- evaluation means extracting the number. For non-leaf nodes we first recurse into their children and then combine the results. Notice how recursive traversal fits very well with the recursive definition of the treee.</p><h2 id="the-easy-evaluator"><a href="#the-easy-evaluator">The Easy Evaluator</a></h2><p>The evaluator is implemented as a function <code>evaluate</code> that takes an expression tree and returns a number:</p><pre><code class="haskell">evaluate :: Tree -&gt; Double</code></pre><p><code>Tree</code> has several constructors, so we'll pattern match on each of them. Let's start with the number node -- its value is just the number that was passed to its constructor:</p><pre><code class="haskell">evaluate (NumNode x) = x</code></pre><p>The recursive nodes follow the following pattern: We call <code>evaluate</code> on each child to get the numbers and then perform a node-specific operation on them.</p><p>Here it is (You can run this code and do simple arithmetic. Try it!):</p><pre><code class="active haskell">import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+ 
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier :: Char -&gt; String -&gt; [Token]
+identifier c cs = let (name, cs') = span isAlphaNum cs in
+                  TokIdent (c:name) : tokenize cs'
+
+number :: Char -&gt; String -&gt; [Token]
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+---- parser ----
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+lookAhead :: [Token] -&gt; Token
+lookAhead [] = TokEnd
+lookAhead (t:ts) = t
+
+accept :: [Token] -&gt; [Token]
+accept [] = error &quot;Nothing to accept&quot;
+accept (t:ts) = ts
+
+expression :: [Token] -&gt; (Tree, [Token])
+expression toks = 
+   let (termTree, toks') = term toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (exTree, toks'') = expression (accept toks') 
+            in (SumNode op termTree exTree, toks'')
+         TokAssign -&gt;
+            case termTree of
+               VarNode str -&gt; 
+                  let (exTree, toks'') = expression (accept toks') 
+                  in (AssignNode str exTree, toks'')
+               _ -&gt; error &quot;Only variables can be assigned to&quot;
+         _ -&gt; (termTree, toks')
+
+term :: [Token] -&gt; (Tree, [Token])
+term toks = 
+   let (facTree, toks') = factor toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Times, Div] -&gt;
+            let (termTree, toks'') = term (accept toks') 
+            in (ProdNode op facTree termTree, toks'')
+         _ -&gt; (facTree, toks')
+
+factor :: [Token] -&gt; (Tree, [Token])
+factor toks = 
+   case lookAhead toks of
+      (TokNum x)     -&gt; (NumNode x, accept toks)
+      (TokIdent str) -&gt; (VarNode str, accept toks)
+      (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (facTree, toks') = factor (accept toks) 
+            in (UnaryNode op facTree, toks')
+      TokLParen      -&gt; 
+         let (expTree, toks') = expression (accept toks)
+         in
+            if lookAhead toks' /= TokRParen 
+            then error &quot;Missing right parenthesis&quot;
+            else (expTree, accept toks')
+      _ -&gt; error $ &quot;Parse error on token: &quot; ++ show toks
+
+parse :: [Token] -&gt; Tree
+parse toks = let (tree, toks') = expression toks
+             in
+               if null toks' 
+               then tree
+               else error $ &quot;Leftover tokens: &quot; ++ show toks'
+
+---- evaluator ----
+-- show
+
+evaluate :: Tree -&gt; Double
+evaluate (SumNode op left right) = 
+    let lft = evaluate left
+        rgt = evaluate right
+    in
+        case op of
+          Plus  -&gt; lft + rgt
+          Minus -&gt; lft - rgt
+
+evaluate (ProdNode op left right) = 
+    let lft = evaluate left
+        rgt = evaluate right
+    in
+        case op of
+          Times -&gt; lft * rgt
+          Div   -&gt; lft / rgt
+
+evaluate (UnaryNode op tree) =
+    let x = evaluate tree 
+    in case op of
+         Plus  -&gt; x
+         Minus -&gt; -x
+
+evaluate (NumNode x) = x
+
+-- dummy implementation
+evaluate (AssignNode str tree) = evaluate tree
+
+-- dummy implementation
+evaluate (VarNode str) = 0
+
+main = (print . evaluate . parse . tokenize) &quot;x1 = -15 / (2 + x2)&quot;</code></pre><p>I implemented <code>main</code> as a pipeline of functions, each passing its result to the next one. Notice that functions compose right to left reflecting the fact that they take arguments on the right and return results on the left.</p><h2 id="threading-the-symbol-table"><a href="#threading-the-symbol-table">Threading the Symbol Table</a></h2><p>How are we going to implement symbolic variables in our calculator? It seems obvious that <code>evaluate</code> acting on an assignment node must have a side effect -- it must modify the value of a variable. And this new value must be visible during the rest of the session, whenever the corresponding <code>VarNode</code> accesses it.</p><p>In functional programming we shun side effects so we have to use a different implementation strategy: we will thread the symbol table through every call to <code>evaluate</code>.</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; (Double, SymTab)</code></pre><p>When <code>evaluate</code> needs to modify the symbol table (add new or modify an existing variable), it constructs a <b>new copy</b> of the symbol table, with the modification included. It then returns that copy. We've seen this idiom already in the implementation of the parser -- we were threading the token list in a similar manner.</p><p>If you're worried about the performance impact of copying potentially large data structures, know that a properly implemented symbol table has its copy/modify operation comparable in cost with a modification of a mutable symbol table. I mentioned earlier that in functional languages you use <a href="http://en.wikipedia.org/wiki/Persistent_data_structure">persistent data structures</a>, which can be cloned by modifying just a handful of pointers, internally. Incidentally, the use of persistent data structures has spread to imperative languages as well because they can be easily made thread safe. We'll use such a persistent data structure for our symbol table. (Keep in mind, though, that if you are 100% sure that the table is the bottleneck of some algorithm, you can always switch to <code>Data.HashTable</code> library.)</p><p>We'll be using an efficient implementation of a balanced binary tree for our symbol table, taken from the <code>Data.Map</code> library. There is a slight problem when using this library: it defines a function <code>lookup</code> that has the same name as the Prelude function that operates on lists. Since we want to call <code>lookup</code> with a map, we have to resolve this name conflict. The standard way to do this is to use <code>Data.Map</code> as a namespace by importing it as <code>qualified</code>:</p><pre><code class="haskell">import qualified Data.Map</code></pre><p>To access <code>lookup</code> from <code>Data.Map</code>, we would have to qualify it as <code>Data.Map.lookup</code>. Since this is pretty verbose, we'll provide an alias <code>M</code> for this namespace:</p><pre><code class="haskell">import qualified Data.Map as M</code></pre><p>Any name from <code>Data.Map</code> will now have to be prefixed with <code>M.</code>. In particular, we'll be able to call <code>M.lookup</code> without the fear of conflict.</p><p>Our symbol table is a <code>Map</code> that is specialized for strings as keys and doubles as values (notice how we qualify it as <code>M.Map</code>).</p><pre><code class="haskell">type SymTab = M.Map String Double</code></pre><p>By the way, <code>Map</code> requires that the keys be comparable (they have to be instances of the <code>Cmp</code> type class, of which later). It so happens that our keys are <code>String</code>s, which are (lexicographically) comparable.</p><p>You may create an empty <code>Map</code> by calling the function <code>M.empty</code> or, if you want to pre-fill it, use the <code>M.fromList</code> instead:</p><pre><code class="haskell">M.fromList [(&quot;pi&quot;, pi), (&quot;e&quot;, exp 1)]
+</code></pre><p>As you can see, <code>fromList</code> accepts a list of key/value pairs. The value <code>pi</code> and the function <code>exp</code> are defined in the Prelude.</p><p>Notice that no constructors of <code>Map</code> are available to the client; only functions <code>empty</code>, <code>fromList</code>, and <code>singleton</code> (the latter to create a single-element list). That's because the Haskell module system (of which soon) supports <b>data hiding</b>, which lets the creator of the library select what to export and what to keep private (here, the constructors of <code>Map</code>).</p><p>The symbol table must not only be threaded through all recursive invocations of <code>eval</code>. It must also be passed between invocations of the main tokenize/parse/evaluate loop. We want user-defined variables to store values throughout the session. Here's the modified top-level of our calculator that ensures the longevity of the symbol table:</p><pre><code class="haskell">main = do
+   loop (M.fromList [(&quot;pi&quot;, pi)])
+
+loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks = tokenize str
+          tree = parse toks
+          (val, symTab') = evaluate tree symTab
+      in do
+          print val
+          loop symTab'</code></pre><p>We pass <code>symTab</code> to <code>evaluate</code> and obtain a new symbol table <code>symTab'</code>, together with the result. We then pass this modified symbol table, with user defined and modified symbolic variables, to the next iteration of the loop.</p><h3 id="symbol-table-lookup"><a href="#symbol-table-lookup">Symbol Table Lookup</a></h3><p>For uniformity, we will encapsulate both the symbol table lookup and insertion in functions that have a very similar signature to <code>evaluate</code> itself:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; (a, SymTab)</code></pre><p>For generality, I replaced <code>Double</code> with a type parameter <code>a</code>. This will come in handy when defining <code>addSymbol</code>.</p><p>Here's the lookup (we substituted <code>String</code> for <code>Tree</code> in the signature):</p><pre><code class="haskell">lookUp :: String -&gt; SymTab -&gt; (Double, SymTab)
+lookUp str symTab = 
+    case M.lookup str symTab of
+      Just v -&gt; (v, symTab)
+      Nothing -&gt; error $ &quot;Undefined variable &quot; ++ str</code></pre><p>We are calling the function <code>M.lookup</code> from the <code>Map</code> package. This function may fail if the key is not present in the map. So let's talk about failure.</p><p>Programmers come up with lots of ways of implementing failure -- often very hacky. For instance you may return a &quot;special&quot; value, like -1, an empty string, or a null pointer. The problem with special values is that it's easy to forget to check for them in the calling code. And cases of inadvertently dereferencing a null pointer or accessing the minus-first element of an array are endemic.</p><p>In Haskell there are many ways of dealing with failure or, as it's sometimes called, with <i>partial functions</i> -- functions that are not defined for all possible arguments. The simplest such method is to return a <code>Maybe</code> value. <code>Maybe</code> is defined in the Prelude as:</p><pre><code class="haskell">data Maybe a = Nothing | Just a</code></pre><p>It works for any type <code>a</code>, so it can be used to encapsulate any result. What's important is that you can hardly forget to check the result of a function returning a <code>Mabye</code>, because, in order to get at the value inside it, you are virtually forced to do pattern matching. We've done that in the implementation of <code>lookUp</code>: we pattern matched on the constructor <code>Just</code> to retrieve the value of the type <code>Double</code>; and we pattern-matched on <code>Nothing</code> to display an error. We'll implement a more sophisticated error checking later but for now, exiting with an error message will do.</p><p>You may find versions of <code>Mabye</code> in other languanges as well: <code>boost::optional</code> in C++, nullable in C#, <code>option</code> in ML, and so on.</p><h3 id="symbol-table-update"><a href="#symbol-table-update">Symbol Table Update</a></h3><p>Here's the function <code>addSymbol</code>, which inserts a new string/value pair into the symbol table. The function <code>M.insert</code> will overwrite the previous pair, if the key already exists in the map. That's why we can use <code>addSymbol</code> for both creating new symbolic variables and modifying them later.</p><pre><code class="haskell">addSymbol :: String -&gt; Double -&gt; SymTab -&gt; ((), SymTab)
+addSymbol str val symTab = 
+    let symTab' = M.insert str val symTab
+    in ((), symTab')</code></pre><p>Notice that, since there is no interesting value to be returned from <code>addSymbol</code>, I replaced <code>a</code> in the generic type signature with unit <code>()</code> (a.k.a., <code>void</code> in C-like languages).</p><p>As I explained before, the symbol table is not mutable: <code>insert</code> returns a new copy of it, which we then return from <code>addSymbol</code>, so it can be threaded through the rest of the code.</p><p>Why did I choose the symbol-table-threading interface for <code>lookUp</code> and <code>addSymbol</code>? It's because I have bigger unification plans for them. You might have noticed that the code is becoming -- seemingly unnecessarily -- complicated because of Haskell's insistence on purity and immutability. Why can't Haskell compromise like other functional languages? THe answer is  that Haskell <i>doesn't have to</i>. I'm only introducing this complexity -- this imperative rot -- to later show you the ways you can get rid of it. In Haskell you can have the cake and eat it too -- It's called <i>monads</i>. In particular, this kind of threading of state from function to function can be easily hidden from view by using the appropriate monad. But monads are not magic! By the time we are through with the complex implementation, you'll know exactly what a monad hides under the hood. So bear with me a little longer.</p><h3 id="implementing-evaluate"><a href="#implementing-evaluate">Implementing evaluate</a></h3><p>The rest of the implementation of the evaluator is pretty straightforward. You just have to remember that every call might return a modified symbol table, and that you have to pass it to subsequent calls. Here's <code>evaluate</code> for the <code>SumNode</code>:</p><pre><code class="haskell">evaluate :: Tree -&gt; SymTab -&gt; (Double, SymTab)
+
+evaluate (SumNode op left right) symTab = 
+    let (lft, symTab')  = evaluate left symTab
+        (rgt, symTab'') = evaluate right symTab'
+    in
+        case op of
+          Plus  -&gt; (lft + rgt, symTab'')
+          Minus -&gt; (lft - rgt, symTab'')</code></pre><p>The evaluators for <code>VarNode</code> and the <code>AssignNote</code> are easily implemented in terms of the primitives <code>lookUp</code> and <code>addSymbol</code>:</p><pre><code class="haskell">evaluate (VarNode str symTab) = lookUp str symTab
+
+evaluate (AssignNode str tree) symTab = 
+    let (v, symTab')  = evaluate tree symTab
+        (_, symTab'') = addSymbol str v symTab'
+    in (v, symTab'')</code></pre><p>The complete implementation of the calculator is at the end of this tutorial.</p><h2 id="module-system"><a href="#module-system">Module System</a></h2><p>The calculator project is small enough to fit in a single file. Nevertheless, it's a good idea to split it into multiple modules. I have posted the multi-module version of the project on <a href="https://github.com/BartoszMilewski/SymCalc1">my github</a>, where you can view or clone it. In that version I put lexer, parser, and evaluator in separate modules/files. There is also a main module with <code>main</code> and the main <code>loop</code>.</p><p>So far we've been only seeing library modules through <code>import</code> statements. Now we can see how these modules are created. A module corresponds to a file -- the name of the file (minus the extension .hs) is also the name of the module -- the compiler enforces it, except for single-file projects. The contents of each file starts with a module header, which contains the name of the module and an optional list of exports. If the exports are not listed, all top-level names are automatically exported.</p><p>Here's the header of the <code>Lexer</code> module from the file <code>Lexer.hs</code>.</p><pre><code class="haskell">module Lexer (Operator(..), Token(..), tokenize, lookAhead, accept) where</code></pre><p>In parentheses, you see the list of exported definitions of data types and functions. When exporting a data type, you have the option to export none, some, or all of its constructors. For instance, I could have exported only <code>Plus</code> and <code>Minus</code> constructors of <code>Operator</code>, and no constructors of <code>Token</code>:</p><pre><code class="haskell">module Lexer (Operator(Plus, Minus), Token, tokenize, lookAhead, accept) where</code></pre><p>If constructors are not exported, you can still use the type in other modules that import it, but you can't create or pattern match values of that type (that's exactly what to module <code>Data.Map</code> did).</p><p>It's common to export all constructors of a given type, and that's what the double-dot shortcut is for. Here we have <code>Operator(..)</code> and <code>Token(..)</code>.</p><p>When another module imports the module <code>Lexer</code>, all exported definitions become visible (unless you use selective imports, as below). Importing is not transitive, though. If <code>Parser</code> imports <code>Lexer</code> and <code>Main</code> imports <code>Parser</code>, the definitions from <code>Lexer</code> are not visible in <code>Main</code>. That's why the module <code>Main</code> had to import all of <code>Parser</code>, <code>Lexer</code>, and <code>Evaluator</code>:</p><pre><code class="haskell">module Main where
+
+import qualified Data.Map as M
+import Lexer (tokenize)
+import Parser (parse)
+import Evaluator (evaluate)</code></pre><p>In <code>Main</code>, we only need one function from each module so we use <i>selective</i> imports by specifying a (comma-separated, if more than one) lists of imported declarations.</p><p>The module system of Haskell is much cleaner than, for instance, that of C++ or Java. Also, you don't need separate header files -- Haskell parser can quickly scan files for exports and imports.</p><h2 id="expression-problem"><a href="#expression-problem">Expression Problem</a></h2><p>In this particular project we've been dealing, so far, with multiple expression nodes and just one function, <code>evaluate</code>. In principle, though, we could come up with many other functions acting on nodes (see Ex 2). You can imagine a two-dimensional matrix of possibilites: the nodes on one axis, the functions on another. An interesting question is, how easy it is to extend this matrix. How easy it is to add more node types, and how easy it is to define new functions.</p><p>If we were implementing the evaluator in an object-oriented language, chances are we would define an interface <code>Node</code> with a virtual function <code>evaluate</code>. All specific nodes would be described by classes that inherit from <code>Node</code>. Our <code>evaluate</code> would then be overridden separately for each type of node.</p><p>Suppose you want to write an <i>extensible</i> library based on this scheme. In Haskell it would be easy for the clients of our library to implement new functions acting on nodes. Adding new node constructors, on the other hand, would require modifying the definition of <code>Tree</code> and adding a new pattern to all existing functions that operate on <code>Tree</code>, including the ones defined in the library module. Our library would be open to new functions but closed to new variations of data.</p><p>In an object oriented language, the opposite is true: adding a function requires the modification of the top <code>Node</code> and all its descendants -- a new virtual function has to be added to <code>Node</code>, and all its overrides in existing nodes have to be implemented. You can't do that without touching the library. However, adding a new node is easy: you just define a new class that inherits from <code>Node</code> and implement its virtual functions. You don't need to touch the library in order to add new nodes. Object-oriented libraries are open to new data types, but closed to new functions.</p><p>This tradeoff is a symptom of the well known <a href="http://en.wikipedia.org/wiki/Expression_problem">expression problem</a> faced by library writes. Fortunately, Haskell offers an elegant solution to the expression problem, which I will describe in the <a href="https://www.fpcomplete.com/user/bartosz/basics-of-haskell/10_Error_Handling">next tutorial</a> (it requires type classes).</p><h2 id="exercises"><a href="#exercises">Exercises</a></h2><p><b>Ex 1.</b> Implement function <code>translate</code>, which takes a dictionary and a list of strings and returns a list of translated strigs. If a string is not in a dictionary, it should be replaced with &quot;whatchamacallit&quot;. For bonus points, try using the higher order <code>map</code> function from the Prelude, and the <code>where</code> clause. Remember that a function defined inside <code>where</code> has access to the arguments of the outer function.</p><pre><code class="active haskell">import qualified Data.Map as M
+
+type Dict = M.Map String String
+
+translate :: Dict -&gt; [String] -&gt; [String]
+translate = undefined
+
+testTranslation :: Dict -&gt; IO ()
+testTranslation dict = do
+    print $ translate dict [&quot;where&quot;, &quot;is&quot;, &quot;the&quot;, &quot;colosseum&quot;]
+
+testInsertion :: Dict -&gt; IO Dict
+testInsertion dict = do
+    return $ M.insert &quot;colosseum&quot; &quot;colosseo&quot; dict
+    
+main = 
+    let dict = M.fromList [(&quot;where&quot;, &quot;dove&quot;), (&quot;is&quot;, &quot;e&quot;), (&quot;the&quot;, &quot;il&quot;)]
+    in do
+          testTranslation dict
+          dict'  &lt;- testInsertion dict
+          testTranslation dict'
+          putStrLn &quot;The original dictionary is unchanged:&quot;
+          testTranslation dict</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">import qualified Data.Map as M
+
+type Dict = M.Map String String
+
+translate :: Dict -&gt; [String] -&gt; [String]
+translate dict words = map trans words
+  where
+    trans :: String -&gt; String
+    trans w =
+      case M.lookup w dict of
+        (Just w') -&gt; w'
+        Nothing   -&gt; &quot;whatchamacallit&quot;
+
+testTranslation :: Dict -&gt; IO ()
+testTranslation dict = do
+    print $ translate dict [&quot;where&quot;, &quot;is&quot;, &quot;the&quot;, &quot;colosseum&quot;]
+
+testInsertion :: Dict -&gt; IO Dict
+testInsertion dict = do
+    return $ M.insert &quot;colosseum&quot; &quot;colosseo&quot; dict
+    
+main = 
+    let dict = M.fromList [(&quot;where&quot;, &quot;dove&quot;), (&quot;is&quot;, &quot;e&quot;), (&quot;the&quot;, &quot;il&quot;)]
+    in do
+          testTranslation dict
+          dict'  &lt;- testInsertion dict
+          testTranslation dict'
+          putStrLn &quot;The original dictionary is unchanged:&quot;
+          testTranslation dict</code></pre></div><p><b>Ex 2.</b> Implement function <code>paren</code> that takes an expression tree and turns it into a string with fully parenthesized expression. For instance, when acting on <code>testExpr</code> it should produce the string <code>(x = ((2.0 * (y = 5.0)) + 3.0))</code></p><pre><code class="active haskell">data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+paren :: Tree -&gt; String
+paren = undefined
+
+-- x = 2 * (y = 5) + 3
+testExpr = AssignNode &quot;x&quot; (SumNode Plus 
+                             (ProdNode Times 
+                               (NumNode 2.0) 
+                               (AssignNode &quot;y&quot; (NumNode 5)))
+                             (NumNode 3))
+
+main = print $ paren testExpr</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+paren :: Tree -&gt; String
+paren (SumNode op left right) =
+    case op of
+      Plus  -&gt; bin &quot; + &quot; left right
+      Minus -&gt; bin &quot; - &quot; left right
+
+paren (ProdNode op left right) =
+    case op of
+      Times -&gt; bin &quot; * &quot; left right
+      Div   -&gt; bin &quot; / &quot; left right
+
+paren (AssignNode var tree) =
+    let treeS = paren tree 
+    in &quot;(&quot; ++ var ++ &quot; = &quot; ++ treeS ++ &quot;)&quot;
+
+paren (UnaryNode op tree) =
+    let treeS = paren tree
+        opS = case op of 
+                Plus -&gt; &quot; +&quot;
+                Minus -&gt; &quot; -&quot;
+    in &quot;(&quot; ++ opS ++ treeS ++ &quot;)&quot;
+
+paren (NumNode x) = show x
+
+paren (VarNode var) = var
+
+bin :: String -&gt; Tree -&gt; Tree -&gt; String
+bin op left right =
+    let leftS = paren left
+        rightS = paren right
+    in
+        &quot;(&quot; ++ leftS ++ op ++ rightS ++ &quot;)&quot;
+
+-- x = 2 * (y = 5) + 3
+testExpr = AssignNode &quot;x&quot; (SumNode Plus 
+                             (ProdNode Times 
+                               (NumNode 2.0) 
+                               (AssignNode &quot;y&quot; (NumNode 5)))
+                             (NumNode 3))
+
+main = print $ paren testExpr</code></pre></div><p><b> Ex 3.</b> The code below creates a frequency map of words in a given text. Fill in the implementation of <code>indexWords</code>, which counts the frequency of each word in a list of words; and <code>splitWords</code>, which splits a string into (lowercased) words, removing punctuation and newlines in the process. You might want to use the function <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Data.Map.findWithDefault" title="Hoogle search for: Data.Map.findWithDefault"><code>findWithDefault</code></a> from <code>Data.Map</code> and the function <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Prelude.words" title="Hoogle search for: Prelude.words"><code>words</code></a> from the Prelude. For bonus points try using <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Prelude.map" title="Hoogle search for: Prelude.map"><code>map</code></a> and <a class="hoogle" href="https://www.stackage.org/lts/hoogle?q=Prelude.foldl" title="Hoogle search for: Prelude.foldl"><code>foldl</code></a>.</p><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import qualified Data.Map as M
+import Data.Char (toLower)
+import Data.List (sortBy)
+
+type Index = M.Map String Int
+
+indexWords ::  Index -&gt; [String] -&gt; Index
+indexWords = undefined
+
+splitWords :: String -&gt; [String]
+splitWords = undefined
+
+mostFrequent :: [String] -&gt; [(String, Int)]
+mostFrequent wrds =
+    let index = indexWords M.empty wrds
+    in take 9 (sortBy cmpFreq (M.toList index))
+  where
+    cmpFreq :: (String, Int) -&gt; (String, Int) -&gt; Ordering
+    cmpFreq (w1, n1) (w2, n2) = compare n2 n1
+
+main = do
+    text &lt;- readFile &quot;moby.txt&quot;
+    print $ mostFrequent (splitWords text)
+
+{-# START_FILE moby.txt #-}
+Call me Ishmael. Some years ago - never mind how long precisely - having little 
+or no money in my purse, and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the world. It is a way 
+I have of driving off the spleen, and regulating the circulation. Whenever I find 
+myself growing grim about the mouth; whenever it is a damp, drizzly November 
+in my soul; whenever I find myself involuntarily pausing before coffin warehouses, 
+and bringing up the rear of every funeral I meet; and especially whenever 
+my hypos get such an upper hand of me, that it requires a strong moral principle 
+to prevent me from deliberately stepping into the street, and methodically 
+knocking people's hats off - then, I account it high time to get to sea as soon as I can.</code></pre><div class="hidden" title="Show solution"><pre><code class="active haskell">{-# START_FILE main.hs #-}
+import qualified Data.Map as M
+import Data.Char (toLower)
+import Data.List (sortBy)
+
+type Index = M.Map String Int
+
+indexWords ::  Index -&gt; [String] -&gt; Index
+indexWords index = 
+    foldl acc index 
+  where
+    acc :: Index -&gt; String -&gt; Index
+    acc ind word = 
+      let n = M.findWithDefault 0 word ind in
+      M.insert word (n + 1) ind
+
+splitWords :: String -&gt; [String]
+splitWords = words . map (\c -&gt; if elem c &quot;.,;-\n&quot; then ' ' else toLower c)
+
+mostFrequent :: [String] -&gt; [(String, Int)]
+mostFrequent wrds =
+    let index = indexWords M.empty wrds
+    in take 9 (sortBy cmpFreq (M.toList index))
+  where
+    cmpFreq :: (String, Int) -&gt; (String, Int) -&gt; Ordering
+    cmpFreq (w1, n1) (w2, n2) = compare n2 n1
+
+main = do
+    text &lt;- readFile &quot;moby.txt&quot;
+    print $ mostFrequent (splitWords text)
+
+{-# START_FILE moby.txt #-}
+Call me Ishmael. Some years ago - never mind how long precisely - having little 
+or no money in my purse, and nothing particular to interest me on shore, I thought 
+I would sail about a little and see the watery part of the world. It is a way 
+I have of driving off the spleen, and regulating the circulation. Whenever I find 
+myself growing grim about the mouth; whenever it is a damp, drizzly November 
+in my soul; whenever I find myself involuntarily pausing before coffin warehouses, 
+and bringing up the rear of every funeral I meet; and especially whenever 
+my hypos get such an upper hand of me, that it requires a strong moral principle 
+to prevent me from deliberately stepping into the street, and methodically 
+knocking people's hats off - then, I account it high time to get to sea as soon as I can.</code></pre></div><h2 id="the-symbolic-calculator-so-far"><a href="#the-symbolic-calculator-so-far">The Symbolic Calculator So Far</a></h2><p>Below is the source code for the whole project:</p><pre><code class="active haskell">{-# START_FILE Main.hs #-}
+module Main where
+
+import qualified Data.Map as M
+import Lexer (tokenize)
+import Parser (parse)
+import Evaluator (evaluate)
+
+main = do
+   loop (M.fromList [(&quot;pi&quot;, pi), (&quot;e&quot;, exp 1.0)])
+
+loop symTab = do
+   str &lt;- getLine
+   if null str
+   then
+      return ()
+   else
+      let toks = tokenize str
+          tree = parse toks
+          (val, symTab') = evaluate tree symTab
+      in do
+          print val
+          loop symTab'
+{-# START_FILE Lexer.hs #-}
+module Lexer (Operator(..), Token(..), tokenize, lookAhead, accept) where
+
+import Data.Char
+
+data Operator = Plus | Minus | Times | Div
+    deriving (Show, Eq)
+
+data Token = TokOp Operator
+           | TokAssign
+           | TokLParen
+           | TokRParen
+           | TokIdent String
+           | TokNum Double
+           | TokEnd
+    deriving (Show, Eq)
+
+lookAhead :: [Token] -&gt; Token
+lookAhead [] = TokEnd
+lookAhead (t:ts) = t
+
+accept :: [Token] -&gt; [Token]
+accept [] = error &quot;Nothing to accept&quot;
+accept (t:ts) = ts
+
+tokenize :: String -&gt; [Token]
+tokenize [] = []
+tokenize (c : cs) 
+    | elem c &quot;+-*/&quot; = TokOp (operator c) : tokenize cs
+    | c == '='  = TokAssign : tokenize cs
+    | c == '('  = TokLParen : tokenize cs
+    | c == ')'  = TokRParen : tokenize cs
+    | isDigit c = number c cs
+    | isAlpha c = identifier c cs
+    | isSpace c = tokenize cs
+    | otherwise = error $ &quot;Cannot tokenize &quot; ++ [c]
+
+identifier :: Char -&gt; String -&gt; [Token]
+identifier c cs = let (name, cs') = span isAlphaNum cs in
+                  TokIdent (c:name) : tokenize cs'
+
+number :: Char -&gt; String -&gt; [Token]
+number c cs = 
+   let (digs, cs') = span isDigit cs in
+   TokNum (read (c : digs)) : tokenize cs'
+
+operator :: Char -&gt; Operator
+operator c | c == '+' = Plus
+           | c == '-' = Minus
+           | c == '*' = Times
+           | c == '/' = Div
+{-# START_FILE Parser.hs #-}
+module Parser (Tree(..), parse)where
+
+import Lexer
+
+data Tree = SumNode Operator Tree Tree
+          | ProdNode Operator Tree Tree
+          | AssignNode String Tree
+          | UnaryNode Operator Tree
+          | NumNode Double
+          | VarNode String
+    deriving Show
+
+parse :: [Token] -&gt; Tree
+parse toks = let (tree, toks') = expression toks
+             in
+               if null toks' 
+               then tree
+               else error $ &quot;Leftover tokens: &quot; ++ show toks'
+
+expression :: [Token] -&gt; (Tree, [Token])
+expression toks = 
+   let (termTree, toks') = term toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (exTree, toks'') = expression (accept toks') 
+            in (SumNode op termTree exTree, toks'')
+         TokAssign -&gt;
+            case termTree of
+               VarNode str -&gt; 
+                  let (exTree, toks'') = expression (accept toks') 
+                  in (AssignNode str exTree, toks'')
+               _ -&gt; error &quot;Only variables can be assigned to&quot;
+         _ -&gt; (termTree, toks')
+
+term :: [Token] -&gt; (Tree, [Token])
+term toks = 
+   let (facTree, toks') = factor toks
+   in
+      case lookAhead toks' of
+         (TokOp op) | elem op [Times, Div] -&gt;
+            let (termTree, toks'') = term (accept toks') 
+            in (ProdNode op facTree termTree, toks'')
+         _ -&gt; (facTree, toks')
+
+factor :: [Token] -&gt; (Tree, [Token])
+factor toks = 
+   case lookAhead toks of
+      (TokNum x)     -&gt; (NumNode x, accept toks)
+      (TokIdent str) -&gt; (VarNode str, accept toks)
+      (TokOp op) | elem op [Plus, Minus] -&gt; 
+            let (facTree, toks') = factor (accept toks) 
+            in (UnaryNode op facTree, toks')
+      TokLParen      -&gt; 
+         let (expTree, toks') = expression (accept toks)
+         in
+            if lookAhead toks' /= TokRParen 
+            then error &quot;Missing right parenthesis&quot;
+            else (expTree, accept toks')
+      _ -&gt; error $ &quot;Parse error on token: &quot; ++ show toks
+
+{-# START_FILE Evaluator.hs #-}
+module Evaluator (evaluate) where
+
+import Lexer
+import Parser
+import qualified Data.Map as M
+
+type SymTab = M.Map String Double
+
+evaluate :: Tree -&gt; SymTab -&gt; (Double, SymTab)
+
+evaluate (SumNode op left right) symTab = 
+    let (lft, symTab') = evaluate left symTab
+        (rgt, symTab'') = evaluate right symTab'
+    in
+        case op of
+          Plus  -&gt; (lft + rgt, symTab'')
+          Minus -&gt; (lft - rgt, symTab'')
+
+evaluate (ProdNode op left right) symTab = 
+    let (lft, symTab') = evaluate left symTab
+        (rgt, symTab'') = evaluate right symTab'
+    in
+        case op of
+          Times -&gt; (lft * rgt, symTab)
+          Div   -&gt; (lft / rgt, symTab)
+
+evaluate (UnaryNode op tree) symTab =
+    let (x, symTab') = evaluate tree symTab
+    in case op of
+         Plus  -&gt; (x, symTab')
+         Minus -&gt; (-x, symTab')
+
+evaluate (NumNode x) symTab = (x, symTab)
+
+evaluate (VarNode str) symTab = lookUp str symTab
+
+evaluate (AssignNode str tree) symTab = 
+    let (v, symTab')  = evaluate tree symTab
+        (_, symTab'') = addSymbol str v symTab'
+    in (v, symTab'')
+
+lookUp :: String -&gt; SymTab -&gt; (Double, SymTab)
+lookUp str symTab = 
+    case M.lookup str symTab of
+      Just v -&gt; (v, symTab)
+      Nothing -&gt; error $ &quot;Undefined variable &quot; ++ str
+
+addSymbol :: String -&gt; Double -&gt; SymTab -&gt; ((), SymTab)
+addSymbol str val symTab = 
+    let symTab' = M.insert str val symTab
+    in ((), symTab')
+</code></pre></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/basics-of-haskell/9_Evaluator';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

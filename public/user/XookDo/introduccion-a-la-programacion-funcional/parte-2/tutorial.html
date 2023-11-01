@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html><head><title>Funciones y tipos de datos algebraicos - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional">Introducción a la Programación Funcional</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-2">Parte 2</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-2/tutorial">Funciones y tipos de datos algebraicos</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Funciones y tipos de datos algebraicos</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">21 Sep 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/XookDo">Xook &amp; Do</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/20078/dd206b43c7465979bb6224c05d585fdcd7299704">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-2">Go up to: Parte 2</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/XookDo">See all content by Xook &amp; Do</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#las-funciones-en-haskell">Las funciones en Haskell</a></li><li><a href="#tipos-de-datos-algebraicos">Tipos de datos algebraicos</a><ul><li><a href="#enumeraciones--especie---">Enumeraciones (especie *)</a></li><li><a href="#constructores-de-orden-superior--polimorfismo-">Constructores de orden superior (polimorfismo)</a></li><li><a href="#multiplicaci-n--adici-n-y-tipos-recursivos">Multiplicación, adición y tipos recursivos</a><ul><li><a href="#adici-n">Adición</a></li><li><a href="#tipos-recursivos">Tipos recursivos</a></li></ul></li></ul></li><li><a href="#sintaxis-b-sica-de-haskell--b-squeda-de-patrones">Sintaxis básica de Haskell: Búsqueda de patrones</a><ul><li><a href="#patr-n-expl-cito">Patrón explícito</a></li><li><a href="#-case----of-">&quot;case .. of&quot;</a></li><li><a href="#guardias">Guardias</a></li><li><a href="#comodines">Comodines</a></li><li><a href="#retomando-maybecolortostr">Retomando maybeColorToStr</a></li></ul></li><li><a href="#ejercicios-y-soluciones">Ejercicios y soluciones</a></li><li><a href="#tercera-parte">Tercera parte</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><p>En el tutorial pasado, usamos funciones sin su explicación completa. En este tutorial abarcaremos los detalles de las funciones en Haskell y las estructuras de datos sobre las que estas operan, los tipos de datos algebraicos. Para unir estos dos temas, también abarcaremos el tema de <b>búsqueda de patrones</b>.</p><h2 id="las-funciones-en-haskell"><a href="#las-funciones-en-haskell">Las funciones en Haskell</a></h2><p>Como ya habiamos dicho, todas las funciones en Haskell reciben un solo valor y producen un solo valor. El tipo de una función <code>f</code> que recibe una instancia del tipo <code>T</code> y produce una instancia del tipo <code>R</code> se firma en Haskell con la siguiente signatura.</p><pre><code class="haskell">f :: T -&gt; R</code></pre><p>Pero gracias a la <b>currificación automática</b> de Haskell, podemos expresar funciones que reciben múltiples parámetros de manera natural. La signatura de una función <code>f</code> que recibe <b>n</b> parametros y produce un valor de tipo <code>R</code> se describe de la siguiente manera.</p><pre><code class="haskell">f :: T1 -&gt; ... -&gt; Tn -&gt; R</code></pre><p>Como ejemplo de la currificación automática, analizemos la función <code>binOpApp</code>. Recordemos que <code>binOpApp</code> es una función que</p><ul><li>recibe un operador binario de enteros</li><li>recibe dos enteros</li><li>produce el resultado de aplicar el operador binario a los enteros.</li></ul><pre><code class="haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; Int -&gt; Int -&gt; Int
+binOpApp binOp = binOp</code></pre><p>Una notación alterna de su firma es:</p><pre><code class="active haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; (Int -&gt; Int -&gt; Int)
+binOpApp binOp = binOp
+
+main = putStrLn (show (binOpApp (+) 5 10))</code></pre><p>Ahora queda claro que <code>binOpApp</code> se puede firmar como una función que recibe un solo parámetro y regresa un solo valor. Sin embargo, es posible que no haya quedado claro su funcionamiento y para eso haremos la aplicación de sus parametros paso a paso, utilizando una técnica llamada <b>partial application</b>.
+Primero aplicamos el operador binario <code>+</code>, que para usarlo como función en vez de como operador, necesitamos rodearlo de paréntesis (como lo hemos estado haciendo).</p><pre><code class="haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; Int -&gt; Int -&gt; Int
+binOpApp binOp = binOp
+
+binOpApp1 :: Int -&gt; Int -&gt; Int
+-- que es lo mismo que
+binOpApp1 :: Int -&gt; (Int -&gt; Int)
+
+binOpApp1 = binOpApp (+)</code></pre><p>Después podemos aplicar un entero, el <code>5</code>, por ejemplo.</p><pre><code class="haskell">binOpApp2 :: Int -&gt; Int
+binOpApp2 = binOpApp1 5</code></pre><p>Y luego otro, el <code>10</code>, por ejemplo, para obtener finalmente el resultado.</p><pre><code class="haskell">binOpApp3 :: Int
+binOpApp3 = binOpApp2 10</code></pre><p>Todo junto y ejecutable:</p><pre><code class="active haskell">binOpApp :: (Int -&gt; Int -&gt; Int) -&gt; (Int -&gt; Int -&gt; Int)
+binOpApp binop = binop
+
+binOpApp1 = binOpApp (+)
+binOpApp2 = binOpApp1 5
+binOpApp3 = binOpApp2 10
+
+main = putStrLn (show binOpApp3)</code></pre><p>La <a href="http://www.angelfire.com/planet/maipage/compi/asociatividad.html">asociatividad</a> del operador <a href="https://wiki.haskell.org/Keywords#-.3E"><code>-&gt;</code></a> es a la derecha, por lo que que cada vez que vemos algo como:
+<code>:: T1 -&gt; T2 -&gt; T3 -&gt; ... -&gt; Tn</code>, en realidad es <code>:: T1 -&gt; (T2 -&gt; (T3 -&gt; (... -&gt; Tn)))</code>.</p><h2 id="tipos-de-datos-algebraicos"><a href="#tipos-de-datos-algebraicos">Tipos de datos algebraicos</a></h2><p>Las funciones son, en general, mapeos de un dato a otro. Una estructura de datos junto con un nombre forman un tipo; es decir, dos datos pueden tener la misma estructura y ser tipos distintos si tienen distintos nombres.</p><blockquote><p>No pueden haber dos tipos con el mismo nombre dentro del mismo namespace, pues no se sabría a cual tipo se está refiriendo (habría ambigüedad). Si se requiere usar un tipo de un módulo cuyo nombre ya está siendo utilizado, seguir <a href="https://wiki.haskell.org/Import">este wiki</a>.</p></blockquote><p>Ya que hemos entendido lo básico de las funciones, es momento de aprender como construir los tipos sobre los cuales las funciones operarán. Los <b>tipos de datos algebraicos</b> son usados para definir tipos en Haskell.</p><p>Los <i>tipos</i> en Haskell se producen mediante los <b><i>constructores de tipos</i></b> (<b><i>type constructors</i></b>); una manera de pensar sobre los <i>constructores de tipos</i> es que son funciones especiales que sólo reciben tipos y producen tipos. Cuando un <i>constructor de tipos</i> no recibe ningún parámetro, se dice que es miembro de la especie <code>*</code>; cuando un <i>constructor de tipos</i> recibe un tipo miembro de la especie <code>*</code>, se dice que es miembro de la especie <code>* -&gt; *</code> y etc. Los constructores de tipos se pueden combinar mediante <b><i>multiplicación</i></b> y <b><i>adición</i></b>.</p><p>Como primer ejemplo, veamos las <i>enumeraciones</i>, que son los tipos más sencillos en Haskell.</p><h3 id="enumeraciones--especie---"><a href="#enumeraciones--especie---">Enumeraciones (especie <code>*</code>)</a></h3><p>Una <i>enumeración</i> es un <i>constructor de tipos</i> miembro de la <i>especie</i> <code>*</code>, es decir, que no recibe ningún parámetro. Los colores del arcoiris son un buen caso de uso para una <i>enumeración</i>.</p><pre><code class="haskell">data RainbowColors = Red | Orange | Yellow | Green | Blue | Indigo | Violet</code></pre><p>Aquí, <code>RainbowColors</code> es el <i>constructor de tipos</i> (<i>type constructor</i>) y <code>Red</code>, <code>Orange</code>, etc. son los <i>constructores de datos</i> (<i>data constructors</i>).
+La <i>especie</i> de RainbowColors es <code>*</code>.</p><p>Los posibles casos de <code>RainbowColors</code> están separados mediante el operador <code>|</code> (<i>adición</i>).</p><p>A continuación, un simple caso de uso.</p><pre><code class="active haskell">data RainbowColor = Red | Orange | Yellow | Green | Blue | Indigo | Violet
+
+colorToStr Red    = &quot;Rojo&quot;
+colorToStr Orange = &quot;Naranja&quot;
+colorToStr Yellow = &quot;Amarillo&quot;
+colorToStr Green  = &quot;Verde&quot;
+colorToStr Blue   = &quot;Azul&quot;
+colorToStr Indigo = &quot;Indigo&quot;
+colorToStr Violet = &quot;Violeta&quot;
+
+main =
+  do putStrLn (colorToString Red)
+     putStrLn (colorToString Indigo)</code></pre><h3 id="constructores-de-orden-superior--polimorfismo-"><a href="#constructores-de-orden-superior--polimorfismo-">Constructores de orden superior (<a href="https://wiki.haskell.org/Polymorphism">polimorfismo</a>)</a></h3><p>Un &quot;<i>constructor de tipos de orden superior</i>&quot; es un <i>constructor de tipos</i> con uno o más parámetros. Los <i>constructores de tipos de orden superior</i> pueden ser miembros de la especie <code>* -&gt; *</code>, <code>(* -&gt; *) -&gt; *</code>, <code>* -&gt; * -&gt; *</code>, etc.; cualquier especie excepto <code>*</code>.</p><p>Un <i>constructor de tipos de orden superior</i> muy usado en Haskell es <code>Maybe</code> que sirve para denotar la posible presencia o ausencia de un valor. A continuación, crearemos nuestra propia definición con fines ilustrativos.</p><pre><code class="haskell">data Maybe a = Just a | Nothing</code></pre><p>El <i>constructor de tipos</i> <code>Maybe</code> es miembro de la especie <code>* -&gt; *</code> que se puede leer como: &quot;toma un tipo miembro de la especie <code>*</code> y produce un tipo miembro de la especie <code>*</code>&quot;. La <code>a</code> en la definicón de <code>Maybe</code> es una <i>variable de tipo</i> (<i>type variable</i>); a Maybe se le puede aplicar entonces un tipo (miembro de la especie <code>*</code>) que sustituya a la <code>a</code>. <code>Just a</code> se utiliza para expresar la presencia de un valor de tipo <code>a</code> y <code>Nothing</code> para expresar la ausencia.</p><blockquote><p>Al <code>Maybe</code> ser parte de &quot;Prelude&quot; (librería estándar de Haskell), no es necesario ni definirlo ni importarlo para usarlo; como se había dicho antes, es un constructor muy común. A continuación, un simple caso de uso.</p><p> ```active haskell
+data RainbowColor = Red | Orange | Yellow | Green | Blue | Indigo | Violet
+{-
+No es necesario definir ni importar el constructor Maybe
+data Maybe a = Just a | Nothing
+-}</p></blockquote><p>maybeColorToStr Nothing       = &quot;Color ausente&quot;
+maybeColorToStr (Just Red)    = &quot;Rojo&quot;
+maybeColorToStr (Just Orange) = &quot;Naranja&quot;
+maybeColorToStr (Just Yellow) = &quot;Amarillo&quot;
+maybeColorToStr (Just Green)  = &quot;Verde&quot;
+maybeColorToStr (Just Blue)   = &quot;Azul&quot;
+maybeColorToStr (Just Indigo) = &quot;Indigo&quot;
+maybeColorToStr (Just Violet) = &quot;Violeta&quot;</p><p>main =
+  do putStrLn (maybeColorToStr (Just Green))
+     putStrLn (maybeColorToStr Nothing)</p><pre><code>En este ejemplo puedes ver dos cosas. Primero, que el código ya no está quedando muy elegante; más adelante en este tutorial veremos más sintaxis básica de Haskell que nos permitirá reescribirlo de manera más elegante. Segundo, que usamos `RainbowColor` como argumento de `Maybe` implicitamente para obtener un tipo sencillo (miembro de la especie `*`), `Maybe RainbowColor`.
+```haskell
+-- La especie de los constructores
+Maybe a            :: * -&gt; *
+Maybe RainbowColor :: *
+-- El tipo de los datos
+Just Red           :: Maybe RainbowColor
+Nothing            :: Maybe RainbowColor
+  -- `Nothing` no hace ninguna referencia a RainbowColor; es la inferencia
+  -- de tipos del compilador lo que lo asocia a dicha enumeración.</code></pre><h3 id="multiplicaci-n--adici-n-y-tipos-recursivos"><a href="#multiplicaci-n--adici-n-y-tipos-recursivos">Multiplicación, adición y tipos recursivos</a></h3><p>Ya que vimos los <i>constructores de tipos</i> &quot;simples&quot; y &quot;de orden superior&quot;, veremos como los podemos combinar para hacer <i>constructores de tipos complejos</i>.
+#### Multiplicación
+Cuando un dato es formado por <b>n</b> datos, se modela mediante la <b>multiplicación</b> (o <b>unión</b>). Como ejemplo, modelaremos el concepto de <i>nombre completo</i> que consiste en dos datos: <i>nombre</i> y <i>apellido</i>.</p><pre><code class="haskell">data FullName = FullName String String
+billGates = FullName &quot;William&quot; &quot;Gates&quot;</code></pre><blockquote><p>En este emjemplo, el <i>constructor de tipos</i> y el <i>constructor de datos</i> tienen el mismo nombre, <b>FullName</b>.</p></blockquote><h4 id="adici-n"><a href="#adici-n">Adición</a></h4><p>Cuando un dato es uno de <b>n</b> posibilidades, se utiliza la <i>suma</i>, que fue lo que ya utilizamos para modelar <code>RainbowColor</code> y <code>Maybe</code>.</p><pre><code class="haskell">data RainbowColor = Red | Orange | Yellow | Green | Blue | Indigo | Violet
+
+data Maybe a = Just a | Nothing</code></pre><p>Las multiplicaciones y adiciones se pueden combinar:</p><pre><code class="haskell">data Name = FullName String String | Nickname String
+billGates = FullName &quot;William&quot; &quot;Gates&quot;
+me        = Nickname &quot;Lay&quot;
+
+-- both, billGates and me belong to the type Name</code></pre><h4 id="tipos-recursivos"><a href="#tipos-recursivos">Tipos recursivos</a></h4><p>Y los tipos pueden ser recursivos. Un ejemplo clásico es la modelación de un <a href="https://en.wikipedia.org/wiki/Binary_t+-+ree">árbol binario etiquetado</a>.</p><p>Como ejemplo, modelaremos <a href="https://en.wikipedia.org/wiki/Binary_tree#/media/File:Binary_tree.svg">este árbol binario etiquetado</a></p><pre><code class="haskell">data LBTree a = InternalNode a (LBTree a) (LBTree a) | Leaf (Maybe a)
+
+example = InternalNode 2
+            (InternalNode 7
+              (Leaf (Just 2))
+              (InternalNode 6
+                (Leaf (Just 5))
+                (Leaf (Just 11))))
+            (InternalNode 5
+              (Leaf Nothing)
+              (InternalNode 9
+                (Leaf (Just 4))
+                (Leaf Nothing)))</code></pre><p>El <i>constructor de datos</i> <b>InternalNode</b> representa un nodo interno, aquel que no es un nodo hoja y es la unión de <i>tres</i> datos: el valor del nodo y sus dos hijos (izquierdo y derecho).
+El <i>constructor de datos</i> <b>Leaf</b> representa un nodo hoja; dado que un nodo puede no tener un hijo izquierdo o un hijo derecho, el valor del nodo hoja es un <code>Maybe a</code>.
+En el ejemplo, <b>a</b> es asociado al tipo <code>Int</code>. Que <code>LBTree a</code> sea parte de la definición de <code>InternalNode</code> y que <code>InternalNode</code> sea parte de la definición de <code>LBTree</code> hacen a <code>LBTree</code> un <i>constructor de tipos</i> recursivo.</p><blockquote><p>Desconozco la razón por la cual se utilizan los nombres <b>adición</b> y <b>multiplicación</b>. Probablemente tenga su origen en el cálculo y el álgebra <a href="http://chris-taylor.github.io/blog/2013/02/10/the-algebra-of-algebraic-data-types/">1</a> o en teoría de categorías<a href="https://en.wikipedia.org/wiki/Addition#Addition_in_set_theory_and_category_theory">2</a> o ambas<a href="http://arxiv.org/pdf/math/0504565v1.pdf">3</a>. Si alguien tiene una respuesta definitiva, mándenme un correo, por favor.</p></blockquote><h2 id="sintaxis-b-sica-de-haskell--b-squeda-de-patrones"><a href="#sintaxis-b-sica-de-haskell--b-squeda-de-patrones">Sintaxis básica de Haskell: Búsqueda de patrones</a></h2><p>Ahora que tenemos un mejor entendimiento de los tipos y datos en Haskell, podemos hablar de lo que es la <b>búsqueda de patrones</b> (<b><i>pattern matching</i></b>).
+La búsqueda de patrones consiste en usar &quot;patrones&quot; para encontrar la expresión adecuada a evaluar. Existen muchas formas de búsqueda de patrones en Haskell</p><h3 id="patr-n-expl-cito"><a href="#patr-n-expl-cito">Patrón explícito</a></h3><p>Este es el caso más sencillo de <i>búsqueda de patrones</i>. Consiste en usar valores en vez de patrones en la definición de las funciones. Este tipo de pattern matching ya lo hemos estado usando; el primer caso donde lo usamos fue en la definición de <code>f</code> del tutorial pasado.</p><pre><code class="haskell">f first second True = first
+f first second False = second</code></pre><p>Cuando invocamos a <code>f</code> con los argumentos: <code>putStrLn &quot;Hello&quot;</code>, <code>putStrLn &quot;Goodbye&quot;</code> y <code>True</code>, es <code>True</code> (el tercer argumento) el que indica que es la primer definición la que hace &quot;match&quot; y por lo tanto se retorna <code>first</code>. Cuando invocamos a <code>f</code> con los argumentos: <code>putStrLn &quot;Hello&quot;</code>, <code>putStrLn &quot;Goodbye&quot;</code> y <code>False</code>, nuevamente es el tercer argumento el que hace match, pero esta vez con la segunda definición de <code>f</code> y por lo tanto se retorna <code>second</code>.</p><h3 id="-case----of-"><a href="#-case----of-">&quot;case .. of&quot;</a></h3><p>Otra manera en la que podemos definir <code>f</code> en una sola expresión es usando <i>case .. of</i>.</p><pre><code class="active haskell">f first second condition =
+  case condition of True -&gt; first
+                    False -&gt; second
+
+main = do
+  f (putStrLn &quot;Hello&quot;) (putStrLn &quot;Goodbye&quot;) True
+  f (putStrLn &quot;Hello&quot;) (putStrLn &quot;Goodbye&quot;) False</code></pre><h3 id="guardias"><a href="#guardias">Guardias</a></h3><p>Otra manera en la que podemos definir <code>f</code> en una sola expresión es usando <i>guardias</i> (<i>guards</i>).</p><pre><code class="active haskell">f first second condition | condition == True = first
+                         | condition == False = second
+
+main = do
+  f (putStrLn &quot;Hello&quot;) (putStrLn &quot;Goodbye&quot;) True
+  f (putStrLn &quot;Hello&quot;) (putStrLn &quot;Goodbye&quot;) False</code></pre><h3 id="comodines"><a href="#comodines">Comodines</a></h3><p>Cuando un patrón no va a ser utilizado, conviene mostrar nuestra intención y no utilizar un nombre para dicho patrón. En su lugar, se puede usar un <i>comodín</i> (<i>wildcard</i>), <code>_</code>.</p><pre><code class="active haskell">data Human = FullName String String | Nickname String
+
+simpleSalute (FullName firstName _) = &quot;Hi, it's me, &quot; ++ firstName ++ &quot;!&quot;
+simpleSalute (Nickname nickname)    = &quot;Hi, it's me, &quot; ++ nickname ++ &quot;!&quot;
+
+billGates = FullName &quot;William&quot; &quot;Gates&quot;
+me        = Nickname &quot;Lay&quot;
+
+main = do
+   putStrLn (simpleSalute billGates)
+   putStrLn (simpleSalute me)</code></pre><h3 id="retomando-maybecolortostr"><a href="#retomando-maybecolortostr">Retomando maybeColorToStr</a></h3><p>Ahora que ya sabemos hacer búsqueda de patrones, podemos reescribir <code>maybeColorToStr</code> de la siguiente manera:</p><pre><code class="active haskell">data RainbowColor = Red | Orange | Yellow | Green | Blue | Indigo | Violet
+
+maybeColorToStr Nothing  = &quot;Color ausente&quot;
+maybeColorToStr (Just c) = case c of
+                             Red -&gt; &quot;Rojo&quot;
+                             Orange -&gt; &quot;Naranja&quot;
+                             Yellow -&gt; &quot;Amarillo&quot;
+                             Green  -&gt; &quot;Verde&quot;
+                             Blue   -&gt; &quot;Azul&quot;
+                             Indigo -&gt; &quot;Indigo&quot;
+                             Violet -&gt; &quot;Violeta&quot;
+
+main =
+  do putStrLn (maybeColorToStr (Just Green))
+     putStrLn (maybeColorToStr Nothing)</code></pre><h2 id="ejercicios-y-soluciones"><a href="#ejercicios-y-soluciones">Ejercicios y soluciones</a></h2><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-2/ejercicios">Ejercicios</a></p><p><a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-2/soluciones">Soluciones</a></p><h1 id="tercera-parte"><a href="#tercera-parte">Tercera parte</a></h1><p>Cuando te sientas listo, continua con <a href="https://www.fpcomplete.com/user/XookDo/introduccion-a-la-programacion-funcional/parte-3/tutorial">la tercera parte</a>.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/XookDo/introduccion-a-la-programacion-funcional/parte-2/tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

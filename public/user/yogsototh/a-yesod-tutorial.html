@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html><head><title>A Yesod Tutorial - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/a-yesod-tutorial">A Yesod Tutorial</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">A Yesod Tutorial</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">27 Jan 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/yogsototh">Yann Esposito</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/70/74f35b03792806996e4173c1fd73478000cb2585">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh/an-interactive-yesod-tutorial-1">Next content: An Interactive Yesod Tutorial</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/yogsototh">See all content by Yann Esposito</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#why-haskell-">Why Haskell?</a></li><li><a href="#before-the-real-start">Before the real start</a><ul><li><a href="#install">Install</a></li><li><a href="#initialize">Initialize</a></li><li><a href="#configure-git">Configure git</a></li><li><a href="#some-last-minute-words">Some last minute words</a></li></ul></li><li><a href="#echo">Echo</a><ul><li><a href="#bulletproof-">Bulletproof?</a></li><li><a href="#cleaning-up">Cleaning up</a><ul><li><a href="#use-a-better-css">Use a better CSS</a></li><li><a href="#separate-handlers">Separate Handlers</a></li><li><a href="#data-text">Data.Text</a></li><li><a href="#use-templates">Use templates</a></li></ul></li></ul></li><li><a href="#mirror">Mirror</a></li><li><a href="#a-blog">A Blog</a></li><li><a href="#articles--if-null-articles----show-a-standard-message-if-there-is-no-article-there-are-no-articles-in-the-blog--else----show-the-list-of-articles--forall-entity-articleid-article---articletitle-article----articlewidget------you-should-remark-we-added-some-logic-inside-the-template--there-is-a-test-and-a--loop--another-very-interesting-part-is-the-creation-of-the-form--the-articlewidget-was-created-by-yesod--we-have-given-him-the-right-parameters--input-required-or-optional--labels--default-values---and-now-we-have-a-protected-form-made-for-us--but-we-have-to-create-the-submit-button-get-back-to-handler-blog-hs----we-continue-handler-blog-hs-postblogr----handler-rephtml-postblogr---do---res-articlewidget--enctype-----runformpost-entryform-case-res-of-formsuccess-article----do-articleid----rundb---insert-article-setmessage---tohtml----articletitle-article-------created--redirect---articler-articleid------defaultlayout---do-settitle--please-correct-your-entry-form----widgetfile--articleadderror--this-function-should-be-used-to-create-a-new-article--we-handle-the-form-response--if-there-is-an-error-we-display-an-error-page--for-example-if-we-left-some-required-value-blank--if-things-goes-right-we-add-the-new-article-inside-the-db--rundb---insert-article-we-add-a-message-to-be-displayed--setmessage-------we-are-redirected-to-the-article-web-page-here-is-the-content-of-the-error-page--form-method-post-enctype---enctype-----articlewidget---div---input-type-submit-value--post-new-article--finally-we-need-to-display-an-article-getarticler----articleid----handler-rephtml-getarticler-articleid---do-article----rundb---get404-articleid-defaultlayout---do-settitle---tohtml---articletitle-article---widgetfile--article--the-get404-function-try-to-do-a-get-on-the-db--if-it-fails-it-return-a-404-page--the-rest-should-be-clear--here-is-the-content-of-templates-article-hamlet---h1----articletitle-article---article----articlecontent-article--the-blog-system-is-finished--just-for-fun--you-can-try-to-create-an-article-with-the-following-content--p-a-last-try-to--em-cross-script--em--and--em-sql-injection--em---p---p-here-is-the-first-try---script-alert--you-loose-----script---p---p--and-here-is-the-last---p------drop-table-article--conclusionthis-is-the-end-of-this-tutorial--i-made-it-very-minimal-if-you-already-know-haskell-and-you-want-to-go-further--you-should-take-a-look-at-the-recent-i18n-blog-tutorial--it-will-be-obvious-i-inspired-my-own-tutorial-on-it--you-ll-learn-in-a-very-straightforward-way-how-easy-it-is-to-use-authorizations--time-and-internationalization-if--on-the-other-hand-you-don-t-know-haskell--then-you-shouldn-t-jump-directly-to-web-programming--haskell-is-a-very-complex-and-unusual-language--my-advice-to-go-as-fast-as-possible-in-using-haskell-for-web-programming-is-start-by-try-haskell-in-your-browserthen-read-the-excellent-learn-you-a-haskell-for-great-goodif-you-have-difficulties-in-understanding-concepts-like-monads--you-should-really-read-these-articles--for-me-they-were-enlightening-if-you-feel-confident--you-should-be-able-to-follows-the-yesod-book-and-if-you-find-difficult-to-follows-the-yesod-book--you-should-read-real-world-haskell-first--it-is-a-must-read--also--note-that-haskell-org-is-full-of-excellent-resources-hoogle-will-be-very-usefuluse-hlint-as-soon-as-possible-to-get-good-habits-as-you-should-see--if-you-don-t-already-know-haskell--the-path-is-long-but-i-guaranty-you-it-will-be-very-rewarding-ps--you-can-download-the-source-of-this-yesod-blog-tutorial-at-github-com-yogsototh-yosog-"> Articles
+$if null articles
+    -- Show a standard message if there is no article
+     There are no articles in the blog
+$else
+    -- Show the list of articles
+    
+        $forall Entity articleId article  
+                 #{articleTitle article}
+
+  
+    ^{articleWidget}
+    
+        
+```You should remark we added some logic inside the template.
+There is a test and a &quot;loop&quot;.Another very interesting part is the creation of the form.
+The articleWidget was created by yesod.
+We have given him the right parameters 
+(input required or optional, labels, default values).
+And now we have a protected form made for us.
+But we have to create the submit button.Get back to Handler/Blog.hs.-- we continue Handler/Blog.hs
+postBlogR :: Handler RepHtml
+postBlogR = do
+    ((res,articleWidget),enctype) &lt;- runFormPost entryForm
+    case res of 
+         FormSuccess article -&gt; do 
+            articleId &lt;- runDB $ insert article
+            setMessage $ toHtml $ (articleTitle article) &lt;&gt; &quot; created&quot;
+            redirect $ ArticleR articleId 
+         _ -&gt; defaultLayout $ do
+                setTitle &quot;Please correct your entry form&quot;
+                $(widgetFile &quot;articleAddError&quot;)This function should be used to create a new article.
+We handle the form response.
+If there is an error we display an error page.
+For example if we left some required value blank.
+If things goes right:we add the new article inside the DB (runDB $ insert article)we add a message to be displayed (setMessage $ ...)we are redirected to the article web page.Here is the content of the error Page:&lt;form method=post enctype=#{enctype}&gt;
+    ^{articleWidget}
+    &lt;div&gt;
+        &lt;input type=submit value=&quot;Post New Article&quot;&gt;Finally we need to display an article:getArticleR :: ArticleId -&gt; Handler RepHtml
+getArticleR articleId = do
+    article &lt;- runDB $ get404 articleId
+    defaultLayout $ do
+        setTitle $ toHtml $ articleTitle article
+        $(widgetFile &quot;article&quot;)The get404 function try to do a get on the DB. 
+If it fails it return a 404 page.
+The rest should be clear. 
+Here is the content of templates/article.hamlet:
+&lt;h1&gt; #{articleTitle article}
+&lt;article&gt; #{articleContent article}
+The blog system is finished.
+Just for fun, you can try to create an article with the following content:&lt;p&gt;A last try to &lt;em&gt;cross script&lt;/em&gt; 
+   and &lt;em&gt;SQL injection&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Here is the first try: 
+   &lt;script&gt;alert(&quot;You loose&quot;);&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt; And Here is the last &lt;/p&gt;
+&quot;); DROP TABLE ARTICLE;;ConclusionThis is the end of this tutorial.
+I made it very minimal.If you already know Haskell and you want to go further, 
+you should take a look at the
+recent i18n blog tutorial.
+It will be obvious I inspired my own tutorial on it.
+You&#39;ll learn in a very straightforward way how easy it is to use authorizations,
+Time and internationalization.If, on the other hand you don&#39;t know Haskell.
+Then you shouldn&#39;t jump directly to web programming.
+Haskell is a very complex and unusual language.
+My advice to go as fast as possible in using Haskell for web programming is:Start by try Haskell in your browserThen read the excellent Learn you a Haskell for Great GoodIf you have difficulties in understanding concepts like monads, you should really read these articles. For me they were enlightening.If you feel confident, you should be able to follows the yesod book and if you find difficult to follows the yesod book, you should read real world Haskell first (it is a must read).Also, note that:haskell.org is full of excellent resources.hoogle will be very usefulUse hlint as soon as possible to get good habits.As you should see, if you don&#39;t already know Haskell,
+the path is long but I guaranty you it will be very rewarding!ps: You can download the source of this yesod blog tutorial at 
+github.com/yogsototh/yosog.</a><ul><li><a href="#conclusion">Conclusion</a></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><h2 id="why-haskell-"><a href="#why-haskell-">Why Haskell?</a></h2><p><img alt="Impressive Haskell Benchmark" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FYesod-tutorial-for-newbies%2Fhaskell-benchmark.png" /></p><p>Its efficiency (see <a href="http://snapframework.com/blog/2010/11/17/snap-0.3-benchmarks">Snap Benchmark</a> <i>&amp;</i> 
+<a href="http://www.yesodweb.com/blog/2011/03/preliminary-warp-cross-language-benchmarks">Warp Benchmark</a>[^benchmarkdigression]).
+Haskell is an order of magnitude faster than interpreted languages 
+like <a href="http://shootout.alioth.debian.org/u64q/benchmark.php?test=all&amp;lang=ghc&amp;lang2=yarv">Ruby</a> and <a href="http://shootout.alioth.debian.org/u64q/benchmark.php?test=all&amp;lang=ghc&amp;lang2=python3">Python</a>[^speeddigression].</p><p>Haskell is a high level language and make it harder to shoot you in the foot
+than <code>C</code>, <code>C++</code> or <code>Java</code> for example.
+One of the best property of Haskell being:</p><blockquote><p>&quot;If your program compile it will be 
+ very close to what the programmer intended&quot;.</p></blockquote><p>Haskell web frameworks handle parallel tasks perfectly. 
+For example even better than node.js[^nodejstroll].</p><img alt="Thousands of Agent Smith" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FYesod-tutorial-for-newbies%2Fthousands_smiths.jpg" style="float:left;width:30%;margin-right:10px;margin-bottom:10px" /><p>From the pure technical point of view,
+Haskell seems to be the perfect web development tool.
+Weaknesses of Haskell certainly won't be technical:</p><ul><li>Hard to grasp Haskell</li><li>Hard to find a Haskell programmer</li><li>The Haskell community is smaller than the community for <code>/.*/</code></li><li>There is no <a href="http://heroku.com">heroku</a> for Haskell (even if <a href="http://www.yesodweb.com/blog/2011/07/haskell-on-heroku">Greg Weber did it</a>, it was more a workaround).</li></ul><p>I won't say these are not important drawbacks.
+But, with Haskell your web application will have both properties
+to absorb an impressive number of parallel request securely
+and to adapt to change.</p><p>Actually there are three main Haskell web frameworks:</p><ol><li><a href="http://happstack.com">Happstack</a></li><li><a href="http://snapframework.com">Snap</a></li><li><a href="http://yesodweb.com">Yesod</a></li></ol><p>I don't think there is a real winner between these three framework.
+The choice I made for yesod is highly subjective.
+I just lurked a bit and tried some tutorials.
+I had the feeling yesod make a better job at helping newcomers.
+Furthermore, apparently the yesod team seems the most active.
+Of course I might be wrong since it is a matter of feeling.</p><p><img alt="1. Draw some circles. 2. Draw the rest of the fucking owl" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FYesod-tutorial-for-newbies%2Fowl_draw.png" /></p><p>Why did I write this article?
+The yesod documentation and particularly the book are excellent.
+But I missed an intermediate tutorial.
+This tutorial won't explain all details.
+I tried to give a step by step of how to start from a five minute tutorial 
+to an almost production ready architecture.
+Furthermore explaining something to others is a great way to learn.
+If you are used to Haskell and Yesod, this tutorial won't learn you much.
+If you are completely new to Haskell and Yesod it might hopefully helps you.
+Also if you find yourself too confused by the syntax, it might helps to read this 
+<a href="http://blog.ezyang.com/2011/11/how-to-read-haskell/">article</a></p><p>During this tutorial you'll install, initialize and configure your first yesod project.
+Then there is a very minimal 5 minutes yesod tutorial to heat up and verify the awesomeness of yesod.
+Then we will clean up the 5 minutes tutorial to use some &quot;best practices&quot;.
+Finally there will be a more standard real world example; a minimal blog system.</p><h2 id="before-the-real-start"><a href="#before-the-real-start">Before the real start</a></h2><h3 id="install"><a href="#install">Install</a></h3><p>The recommended way to install <a href="http://www.haskell.org">Haskell</a> 
+is to download the <a href="http://www.haskell.org/platform">Haskell Platform</a>.</p><p>Once done, you need to install yesod.
+Open a terminal session and do:</p><pre><code>~ cabal update
+~ cabal install yesod cabal-dev</code></pre><p>There are few steps but it should take some time to finish.</p><h3 id="initialize"><a href="#initialize">Initialize</a></h3><p>You are now ready to initialize your first yesod project.
+Open a terminal and type:</p><pre><code>~ yesod init</code></pre><p>Enter your name, choose <code>yosog</code> for the project name and enter <code>Yosog</code> for the name of the Foundation.
+Finally choose <code>sqlite</code>.
+Now, start the development cycle:</p><pre><code class="">~ cd yosog
+~ cabal-dev install &amp;&amp; yesod --dev devel</code></pre><p>This will compile the entire project. Be patient it could take a while the first time.
+Once finished a server is launched and you could visit it by clicking this link:</p><p><a href="http://localhost:3000"><code>http://localhost:3000</code></a></p><p>Congratulation! Yesod works!</p><blockquote><p>Note: if something is messed up use the following command line inside the project directory.</p><code>
+\rm -rf dist/* ; cabal-dev install &amp;&amp; yesod --dev devel
+</code></blockquote><p>Until the end of the tutorial, use another terminal and let this one open 
+in a corner to see what occurs.</p><h3 id="configure-git"><a href="#configure-git">Configure git</a></h3><blockquote><p>Of course this step is not mandatory for the tutorial 
+but it is a good practice.</p></blockquote><p>Copy this <code>.gitignore</code> file into the <code>yosog</code> folder.</p><pre><code>cabal-dev
+dist
+.static-cache
+static/tmp
+*.sqlite3</code></pre><p>Then initialize your git repository:</p><pre><code>~ git init .
+~ git add .
+~ git commit -a -m &quot;Initial yesod commit&quot;</code></pre><p>We are almost ready to start.</p><h3 id="some-last-minute-words"><a href="#some-last-minute-words">Some last minute words</a></h3><p>Up until here, we have a directory containing a bunch of files 
+and a local web server listening the port 3000.
+If we modify a file inside this directory, yesod should try
+to recompile as fast as possible the site. 
+Instead of explaining the role of every file,
+let's focus only on the important files/directories for this tutorial:</p><ol><li><code>config/routes</code></li><li><code>Handler/</code></li><li><code>templates/</code></li><li><code>config/models</code></li></ol><p>Obviously:</p><table><tr><td>`config/routes` </td><td> is where you'll configure the map %url → Code.
+</td></tr><tr><td>`Handler/` </td><td>contains the files that will contain the code called when a %url is accessed.
+</td></tr><tr><td>`templates/`</td><td>contains %html, js and %css templates.
+</td></tr><tr><td>`config/models`</td><td>is where you'll configure the persistent objects (database tables).
+</td></tr></table><p>During this tutorial we'll modify other files as well,
+but we won't explore them in detail.</p><p>Also note, shell commands are executed in the root directory of your project instead specified otherwise.</p><p>We are now ready to start!</p><h2 id="echo"><a href="#echo">Echo</a></h2><p>To verify the quality of the security of the yesod framework,
+let's make a minimal echo application.</p><blockquote><p>Goal:</p><p>Make a server that when accessed <code>/echo/[some text]</code> should return a web page containing &quot;some text&quot; inside an <code>h1</code> bloc.</p></blockquote><p>In a first time, we must declare the %url of the form <code>/echo/...</code> are meaningful.
+Let's take a look at the file <code>config/routes</code>:</p><pre><code>/static StaticR Static getStatic
+/auth   AuthR   Auth   getAuth
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/ HomeR GET</code></pre><p>We want to add a route of the form <code>/echo/[anything]</code> somehow and do some action with this.
+Add the following:</p><pre><code>/echo/#String EchoR GET</code></pre><p>This line contains three elements: the URL pattern, a handler name, an HTTP method.
+I am not particularly fan of the big R notation but this is the standard convention.</p><p>If you save <code>config/routes</code>, you should see your terminal in which you launched <code>yesod devel</code> activate and certainly displaying an error message.</p><pre><code>Application.hs:31:1: Not in scope: `getEchoR'</code></pre><p>Why? Simply because we didn't written the code for the handler <code>EchoR</code>.
+Edit the file <code>Handler/Home.hs</code> and append this:</p><pre><code class="haskell">getEchoR :: String -&gt; Handler RepHtml
+getEchoR theText = do
+    defaultLayout $ do
+        [whamlet|&lt;h1&gt;#{theText}|]</code></pre><p>Don't worry if you find all of this a bit cryptic. 
+In short it just declare a function named <code>getEchoR</code> with one argument (<code>theText</code>) of type String.
+When this function is called, it return a <code>Handler RepHtml</code> whatever it is. 
+But mainly this will encapsulate our expected result inside an %html text.</p><p>After saving the file, you should see yesod recompile the application.
+When the compilation is finished you'll see the message: <code>Starting devel application</code>.</p><p>Now you can visit: <a href="http://localhost:3000/echo/Yesod%20rocks!"><code>http://localhost:3000/echo/Yesod%20rocks!</code></a></p><p>TADA! It works!</p><h3 id="bulletproof-"><a href="#bulletproof-">Bulletproof?</a></h3><p><img alt="&quot;Neo stops a myriad of bullets&quot;" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FYesod-tutorial-for-newbies%2Fneo_bullet_proof.jpg" /></p><p>Even this extremely minimal web application has some impressive properties.
+For exemple, imagine an attacker entering this url:</p><a href="http://localhost:3000/echo/&lt;a&gt;I'm&lt;script&gt;alert(&quot;Bad!&quot;);"><code>http://localhost:3000/echo/&lt;a&gt;I'm &lt;script&gt;alert(&quot;Bad!&quot;);</code></a><p>The special characters are protected for us. 
+A malicious user could not hide some bad script inside.</p><p>This behavior is a direct consequence of <i>type safety</i>.
+The %url string is put inside a URL type.
+Then the interesting part in the URL is put inside a String type.
+To pass from URL type to String type some transformation are made.
+For example, replace all &quot;<code>%20</code>&quot; by space characters.
+Then to show the String inside an %html document, the string is put inside an %html type.
+Some transformations occurs like replace &quot;<code>&lt;</code>&quot; by &quot;<code>&lt;</code>&quot;.
+Thanks to yesod, this tedious job is done for us.</p><pre><code>&quot;http://localhost:3000/echo/some%20text&lt;a&gt;&quot; :: URL
+                    ↓
+              &quot;some text&lt;a&gt;&quot;                :: String
+                    ↓
+          &quot;some text &amp;lt;a&amp;gt;&quot;     :: Html </code></pre><p>Yesod is not only fast, it helps us to remain secure.
+It protects us from many common errors in other paradigms.
+Yes, I am looking at you PHP!</p><h3 id="cleaning-up"><a href="#cleaning-up">Cleaning up</a></h3><p>Even this very minimal example should be enhanced.
+We will clean up many details:</p><ul><li>Use a general CSS (cleaner than the empty by default)</li><li>Dispatch handler code into different files</li><li>Use <code>Data.Text</code> instead of <code>String</code></li><li>Put our &quot;views&quot;[^explainviewwidget] inside the <code>template</code> directory</li></ul><h4 id="use-a-better-css"><a href="#use-a-better-css">Use a better CSS</a></h4><p>It is nice to note, the default template is based on %html5 boilerplate.
+Let's change the default %css. 
+Add a file named <code>default-layout.lucius</code> inside the <code>templates/</code> directory containing:</p><pre><code>
+body {
+    font-family: Helvetica, sans-serif; 
+    font-size: 18px; }
+#main {
+    padding: 1em;
+    border: #CCC solid 2px;
+    border-radius: 5px;
+    margin: 1em;
+    width: 37em;
+    margin: 1em auto;
+    background: #F2F2F2;
+    line-height: 1.5em;
+    color: #333; }
+.required { margin: 1em 0; }
+.optional { margin: 1em 0; }
+label { width: 8em; display: inline-block; }
+input, textarea { background: #FAFAFA}
+textarea { width: 27em; height: 9em;}
+ul { list-style: square; }
+a { color: #A56; }
+a:hover { color: #C58; }
+a:active { color: #C58; }
+a:visited { color: #943; }
+</code></pre><p>Personally I would prefer if such a minimal %css was put with the scaffolding tool.
+I am sure somebody already made such a minimal %css which give the impression 
+the browser handle correctly %html without any style applied to it.
+But I digress.</p><h4 id="separate-handlers"><a href="#separate-handlers">Separate Handlers</a></h4><p>Generally you don't want to have all your code inside a unique file.
+This is why we will separate our handlers.
+In a first time create a new file <code>Handler/Echo.hs</code> containing:</p><pre><code class="haskell">module Handler.Echo where
+
+import Import
+
+getEchoR :: String -&gt; Handler RepHtml
+getEchoR theText = do
+    defaultLayout $ do
+        [whamlet|&lt;h1&gt;#{theText}|]</code></pre><p>Do not forget to remove the getEchoR function inside <code>Handler/Home.hs</code>.</p><p>We must declare this new file into<code>yosog.cabal</code>. 
+Just after <code>Handler.Home</code>, add:</p><pre><code class="haskell">    Handler.Echo
+```    
+
+We must also declare this new Handler module inside `Application.hs`.
+Just after the &quot;`import Handler.Home`&quot;, add:
+
+``` haskell
+import Handler.Echo</code></pre><p>This is it.</p><small><em>ps:</em> I am sure not so far in the future we could simply write 
+`yesod add-handler Echo` to declare it and create a new handler file.</small><h4 id="data-text"><a href="#data-text"><code>Data.Text</code></a></h4><p>It is a good practice to use <code>Data.Text</code> instead of <code>String</code>.</p><p>To declare it, add this import directive to <code>Foundation.hs</code> (just after the last one):</p><pre><code>import Data.Text</code></pre><p>We have to modify <code>config/routes</code> and our handler accordingly. 
+Replace <code>#String</code> by <code>#Text</code> in <code>config/routes</code>:</p><pre><code>/echo/#Text EchoR GET</code></pre><p>And do the same in <code>Handler/Echo.hs</code>:</p><pre><code class="haskell">module Handler.Echo where
+
+import Import
+
+getEchoR :: Text -&gt; Handler RepHtml
+getEchoR theText = do
+    defaultLayout $ do
+        [whamlet|&lt;h1&gt;#{theText}|]</code></pre><h4 id="use-templates"><a href="#use-templates">Use templates</a></h4><p>Some HTML (more precisely hamlet) is written directly inside our handler.
+We should put this part inside another file.
+Create the new file <code>templates/echo.hamlet</code> containing:</p><pre><code>
+&lt;h1&gt; #{theText}
+</code></pre><p>and modify the handler <code>Handler/Echo.hs</code>:</p><pre><code class="haskell">getEchoR :: Text -&gt; Handler RepHtml
+getEchoR theText = do
+    defaultLayout $ do
+        $(widgetFile &quot;echo&quot;)</code></pre><p>At this point, our web application is structured between different files.
+Handler are grouped, we use <code>Data.Text</code> and our views are in templates.
+It is the time to make a slightly more complex example.</p><h2 id="mirror"><a href="#mirror">Mirror</a></h2><p><img alt="Neo touching a mirror" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fyannesposito.com%2FScratch%2Fimg%2Fblog%2FYesod-tutorial-for-newbies%2Fmirror.jpg" /></p><p>Let's make another minimal application.
+You should see a form containing a text field and a validation button.
+When you enter some text (for example &quot;Jormungad&quot;) and validate,
+the next page present you the content and its reverse appended to it. 
+In our example it should return &quot;JormungaddagnumroJ&quot;.</p><p>First, add a new route:</p><pre>
+/mirror MirrorR GET POST
+</pre><p>This time the path <code>/mirror</code> will accept GET and POST requests.
+Add the corresponding new Handler file:</p><pre><code class="haskell">module Handler.Mirror where
+
+import Import
+import qualified Data.Text as T
+
+getMirrorR :: Handler RepHtml
+getMirrorR = do
+    defaultLayout $ do
+        $(widgetFile &quot;mirror&quot;)
+
+postMirrorR :: Handler RepHtml
+postMirrorR =  do
+        postedText &lt;- runInputPost $ ireq textField &quot;content&quot;
+        defaultLayout $ do
+            $(widgetFile &quot;posted&quot;)</code></pre><p>Don't forget to declare it inside <code>yosog.cabal</code> and <code>Application.hs</code>.</p><p>We will need to use the <code>reverse</code> function provided by <code>Data.Text</code> 
+which explain the additional import.</p><p>The only new thing here is the line that get the POST parameter named &quot;content&quot;.
+If you want to know more detail about it and form in general you can take 
+look at <a href="http://www.yesodweb.com/book/forms">the yesod book</a>.</p><p>Create the two corresponding templates:</p><pre><code>&lt;h1&gt; Enter your text
+&lt;form method=post action=@{MirrorR}&gt;
+    &lt;input type=text name=content&gt;
+    &lt;input type=submit&gt;</code></pre><pre><code>&lt;h1&gt;You've just posted
+&lt;p&gt;#{postedText}#{T.reverse postedText}
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=@{MirrorR}&gt;Get back</code></pre><p>And that is all.
+This time, we won't need to clean up.
+We may have used another way to generate the form
+but we'll see this in the next section.</p><p>Just try it by <a href="http://localhost:3000/mirror">clicking here</a>.</p><p>Also you can try to enter strange values.
+Like before, your application is quite secure.</p><h2 id="a-blog"><a href="#a-blog">A Blog</a></h2><p>We saw how to retrieve %http parameters.
+It is the time to save things into a database.</p><p>As before add some routes inside <code>config/routes</code>:</p><pre>
+/blog               BlogR       GET POST
+/blog/#ArticleId    ArticleR    GET
+</pre><p>This example will be very minimal:</p><ul><li><code>GET</code>  on <code>/blog</code> should display the list of articles.</li><li><code>POST</code> on <code>/blog</code> should create a new article</li><li><code>GET</code>  on <code>/blog/&lt;article id&gt;</code> should display the content of the article.</li></ul><p>First we declare another model object.
+Append the following content to <code>config/models</code>:</p><pre>
+Article
+    title   Text
+    content Html 
+    deriving
+</pre><p>As <code>Html</code> is not an instance of <code>Read</code>, <code>Show</code> and <code>Eq</code>,
+we had to add the <code>deriving</code> line.
+If you forget it, there will be an error.</p><p>After the route and the model, we write the handler.
+First, declare a new Handler module.
+Add <code>import Handler.Blog</code> inside <code>Application.hs</code> and add it into <code>yosog.cabal</code>.
+Let's write the content of <code>Handler/Blog.hs</code>.
+We start by declaring the module and by importing some block necessary to 
+handle Html in forms.</p><pre><code class="haskell">module Handler.Blog
+    ( getBlogR
+    , postBlogR
+    , getArticleR
+    )
+where
+
+import Import
+import Data.Monoid
+
+-- to use Html into forms
+import Yesod.Form.Nic (YesodNic, nicHtmlField)
+instance YesodNic App</code></pre><small>Remark: it is a best practice to add the YesodNic instance inside `Foundation.hs`. 
+I put this definition here to make things easier but you should see a warning about this orphan instance.
+To put the include inside Foundation.hs is left as an exercice to the reader.</small><small>_Hint: Do not forget to put `YesodNic` and `nicHtmlField` inside the exported objects of the module._
+</small><pre><code class="haskell">entryForm :: Form Article
+entryForm = renderDivs $ Article
+    &lt;$&gt; areq   textField &quot;Title&quot; Nothing
+    &lt;*&gt; areq   nicHtmlField &quot;Content&quot; Nothing</code></pre><p>This function defines a form for adding a new article.
+Don't pay attention to all the syntax. 
+If you are curious you can take a look at Applicative Functor.
+You just have to remember <code>areq</code> is for required form input.
+Its arguments being: <code>areq type label default_value</code>.</p><pre><code class="haskell">-- The view showing the list of articles
+getBlogR :: Handler RepHtml
+getBlogR = do
+    -- Get the list of articles inside the database.
+    articles &lt;- runDB $ selectList [] [Desc ArticleTitle]
+    -- We'll need the two &quot;objects&quot;: articleWidget and enctype
+    -- to construct the form (see templates/articles.hamlet).
+    (articleWidget, enctype) &lt;- generateFormPost entryForm
+    defaultLayout $ do
+        $(widgetFile &quot;articles&quot;)
+</code></pre><p>This handler should display a list of articles.
+We get the list from the DB and we construct the form.
+Just take a look at the corresponding template:</p><p>```</p><h1 id="articles--if-null-articles----show-a-standard-message-if-there-is-no-article-there-are-no-articles-in-the-blog--else----show-the-list-of-articles--forall-entity-articleid-article---articletitle-article----articlewidget------you-should-remark-we-added-some-logic-inside-the-template--there-is-a-test-and-a--loop--another-very-interesting-part-is-the-creation-of-the-form--the-articlewidget-was-created-by-yesod--we-have-given-him-the-right-parameters--input-required-or-optional--labels--default-values---and-now-we-have-a-protected-form-made-for-us--but-we-have-to-create-the-submit-button-get-back-to-handler-blog-hs----we-continue-handler-blog-hs-postblogr----handler-rephtml-postblogr---do---res-articlewidget--enctype-----runformpost-entryform-case-res-of-formsuccess-article----do-articleid----rundb---insert-article-setmessage---tohtml----articletitle-article-------created--redirect---articler-articleid------defaultlayout---do-settitle--please-correct-your-entry-form----widgetfile--articleadderror--this-function-should-be-used-to-create-a-new-article--we-handle-the-form-response--if-there-is-an-error-we-display-an-error-page--for-example-if-we-left-some-required-value-blank--if-things-goes-right-we-add-the-new-article-inside-the-db--rundb---insert-article-we-add-a-message-to-be-displayed--setmessage-------we-are-redirected-to-the-article-web-page-here-is-the-content-of-the-error-page--form-method-post-enctype---enctype-----articlewidget---div---input-type-submit-value--post-new-article--finally-we-need-to-display-an-article-getarticler----articleid----handler-rephtml-getarticler-articleid---do-article----rundb---get404-articleid-defaultlayout---do-settitle---tohtml---articletitle-article---widgetfile--article--the-get404-function-try-to-do-a-get-on-the-db--if-it-fails-it-return-a-404-page--the-rest-should-be-clear--here-is-the-content-of-templates-article-hamlet---h1----articletitle-article---article----articlecontent-article--the-blog-system-is-finished--just-for-fun--you-can-try-to-create-an-article-with-the-following-content--p-a-last-try-to--em-cross-script--em--and--em-sql-injection--em---p---p-here-is-the-first-try---script-alert--you-loose-----script---p---p--and-here-is-the-last---p------drop-table-article--conclusionthis-is-the-end-of-this-tutorial--i-made-it-very-minimal-if-you-already-know-haskell-and-you-want-to-go-further--you-should-take-a-look-at-the-recent-i18n-blog-tutorial--it-will-be-obvious-i-inspired-my-own-tutorial-on-it--you-ll-learn-in-a-very-straightforward-way-how-easy-it-is-to-use-authorizations--time-and-internationalization-if--on-the-other-hand-you-don-t-know-haskell--then-you-shouldn-t-jump-directly-to-web-programming--haskell-is-a-very-complex-and-unusual-language--my-advice-to-go-as-fast-as-possible-in-using-haskell-for-web-programming-is-start-by-try-haskell-in-your-browserthen-read-the-excellent-learn-you-a-haskell-for-great-goodif-you-have-difficulties-in-understanding-concepts-like-monads--you-should-really-read-these-articles--for-me-they-were-enlightening-if-you-feel-confident--you-should-be-able-to-follows-the-yesod-book-and-if-you-find-difficult-to-follows-the-yesod-book--you-should-read-real-world-haskell-first--it-is-a-must-read--also--note-that-haskell-org-is-full-of-excellent-resources-hoogle-will-be-very-usefuluse-hlint-as-soon-as-possible-to-get-good-habits-as-you-should-see--if-you-don-t-already-know-haskell--the-path-is-long-but-i-guaranty-you-it-will-be-very-rewarding-ps--you-can-download-the-source-of-this-yesod-blog-tutorial-at-github-com-yogsototh-yosog-"><a href="#articles--if-null-articles----show-a-standard-message-if-there-is-no-article-there-are-no-articles-in-the-blog--else----show-the-list-of-articles--forall-entity-articleid-article---articletitle-article----articlewidget------you-should-remark-we-added-some-logic-inside-the-template--there-is-a-test-and-a--loop--another-very-interesting-part-is-the-creation-of-the-form--the-articlewidget-was-created-by-yesod--we-have-given-him-the-right-parameters--input-required-or-optional--labels--default-values---and-now-we-have-a-protected-form-made-for-us--but-we-have-to-create-the-submit-button-get-back-to-handler-blog-hs----we-continue-handler-blog-hs-postblogr----handler-rephtml-postblogr---do---res-articlewidget--enctype-----runformpost-entryform-case-res-of-formsuccess-article----do-articleid----rundb---insert-article-setmessage---tohtml----articletitle-article-------created--redirect---articler-articleid------defaultlayout---do-settitle--please-correct-your-entry-form----widgetfile--articleadderror--this-function-should-be-used-to-create-a-new-article--we-handle-the-form-response--if-there-is-an-error-we-display-an-error-page--for-example-if-we-left-some-required-value-blank--if-things-goes-right-we-add-the-new-article-inside-the-db--rundb---insert-article-we-add-a-message-to-be-displayed--setmessage-------we-are-redirected-to-the-article-web-page-here-is-the-content-of-the-error-page--form-method-post-enctype---enctype-----articlewidget---div---input-type-submit-value--post-new-article--finally-we-need-to-display-an-article-getarticler----articleid----handler-rephtml-getarticler-articleid---do-article----rundb---get404-articleid-defaultlayout---do-settitle---tohtml---articletitle-article---widgetfile--article--the-get404-function-try-to-do-a-get-on-the-db--if-it-fails-it-return-a-404-page--the-rest-should-be-clear--here-is-the-content-of-templates-article-hamlet---h1----articletitle-article---article----articlecontent-article--the-blog-system-is-finished--just-for-fun--you-can-try-to-create-an-article-with-the-following-content--p-a-last-try-to--em-cross-script--em--and--em-sql-injection--em---p---p-here-is-the-first-try---script-alert--you-loose-----script---p---p--and-here-is-the-last---p------drop-table-article--conclusionthis-is-the-end-of-this-tutorial--i-made-it-very-minimal-if-you-already-know-haskell-and-you-want-to-go-further--you-should-take-a-look-at-the-recent-i18n-blog-tutorial--it-will-be-obvious-i-inspired-my-own-tutorial-on-it--you-ll-learn-in-a-very-straightforward-way-how-easy-it-is-to-use-authorizations--time-and-internationalization-if--on-the-other-hand-you-don-t-know-haskell--then-you-shouldn-t-jump-directly-to-web-programming--haskell-is-a-very-complex-and-unusual-language--my-advice-to-go-as-fast-as-possible-in-using-haskell-for-web-programming-is-start-by-try-haskell-in-your-browserthen-read-the-excellent-learn-you-a-haskell-for-great-goodif-you-have-difficulties-in-understanding-concepts-like-monads--you-should-really-read-these-articles--for-me-they-were-enlightening-if-you-feel-confident--you-should-be-able-to-follows-the-yesod-book-and-if-you-find-difficult-to-follows-the-yesod-book--you-should-read-real-world-haskell-first--it-is-a-must-read--also--note-that-haskell-org-is-full-of-excellent-resources-hoogle-will-be-very-usefuluse-hlint-as-soon-as-possible-to-get-good-habits-as-you-should-see--if-you-don-t-already-know-haskell--the-path-is-long-but-i-guaranty-you-it-will-be-very-rewarding-ps--you-can-download-the-source-of-this-yesod-blog-tutorial-at-github-com-yogsototh-yosog-"> Articles
+$if null articles
+    -- Show a standard message if there is no article
+    <p> There are no articles in the blog
+$else
+    -- Show the list of articles
+    <ul>
+        $forall Entity articleId article &lt;-  
+                <a href="@{ArticleR"> #{articleTitle article}
+<hr />
+  <form enctype="#{enctype}" method="post">
+    ^{articleWidget}
+    <div>
+        <input type="submit" value="Post New Article" />
+```<p>You should remark we added some logic inside the template.
+There is a test and a &quot;loop&quot;.</p><p>Another very interesting part is the creation of the form.
+The <code>articleWidget</code> was created by yesod.
+We have given him the right parameters 
+(input required or optional, labels, default values).
+And now we have a protected form made for us.
+But we have to create the submit button.</p><p>Get back to <code>Handler/Blog.hs</code>.</p><pre><code class="haskell">-- we continue Handler/Blog.hs
+postBlogR :: Handler RepHtml
+postBlogR = do
+    ((res,articleWidget),enctype) &lt;- runFormPost entryForm
+    case res of 
+         FormSuccess article -&gt; do 
+            articleId &lt;- runDB $ insert article
+            setMessage $ toHtml $ (articleTitle article) &lt;&gt; &quot; created&quot;
+            redirect $ ArticleR articleId 
+         _ -&gt; defaultLayout $ do
+                setTitle &quot;Please correct your entry form&quot;
+                $(widgetFile &quot;articleAddError&quot;)</code></pre><p>This function should be used to create a new article.
+We handle the form response.
+If there is an error we display an error page.
+For example if we left some required value blank.
+If things goes right:</p><ul><li>we add the new article inside the DB (<code>runDB $ insert article</code>)</li><li>we add a message to be displayed (<code>setMessage $ ...</code>)</li><li>we are redirected to the article web page.</li></ul><p>Here is the content of the error Page:</p><pre><code class="haskell">&lt;form method=post enctype=#{enctype}&gt;
+    ^{articleWidget}
+    &lt;div&gt;
+        &lt;input type=submit value=&quot;Post New Article&quot;&gt;</code></pre><p>Finally we need to display an article:</p><pre><code class="haskell">getArticleR :: ArticleId -&gt; Handler RepHtml
+getArticleR articleId = do
+    article &lt;- runDB $ get404 articleId
+    defaultLayout $ do
+        setTitle $ toHtml $ articleTitle article
+        $(widgetFile &quot;article&quot;)</code></pre><p>The <code>get404</code> function try to do a get on the DB. 
+If it fails it return a 404 page.
+The rest should be clear. 
+Here is the content of <code>templates/article.hamlet</code>:</p><pre><code>
+&lt;h1&gt; #{articleTitle article}
+&lt;article&gt; #{articleContent article}
+</code></pre><p>The blog system is finished.
+Just for fun, you can try to create an article with the following content:</p><pre><code>&lt;p&gt;A last try to &lt;em&gt;cross script&lt;/em&gt; 
+   and &lt;em&gt;SQL injection&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Here is the first try: 
+   &lt;script&gt;alert(&quot;You loose&quot;);&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt; And Here is the last &lt;/p&gt;
+&quot;); DROP TABLE ARTICLE;;</code></pre><h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2><p>This is the end of this tutorial.
+I made it very minimal.</p><p>If you already know Haskell and you want to go further, 
+you should take a look at the
+recent <a href="http://yesodweb.com/blog/2012/01/blog-example">i18n blog tutorial</a>.
+It will be obvious I inspired my own tutorial on it.
+You'll learn in a very straightforward way how easy it is to use authorizations,
+Time and internationalization.</p><p>If, on the other hand you don't know Haskell.
+Then you shouldn't jump directly to web programming.
+Haskell is a very complex and unusual language.
+My advice to go as fast as possible in using Haskell for web programming is:</p><ol><li>Start by <a href="http://tryhaskell.org">try Haskell in your browser</a></li><li>Then read the excellent <a href="http://learnyouahaskell.com">Learn you a Haskell for Great Good</a></li><li>If you have difficulties in understanding concepts like monads, you should really read <a href="http://homepages.inf.ed.ac.uk/wadler/topics/monads.html">these articles</a>. For me they were enlightening.</li><li>If you feel confident, you should be able to follows the <a href="http://yesodweb.com/book">yesod book</a> and if you find difficult to follows the yesod book, you should read <a href="http://book.realworldhaskell.org">real world Haskell</a> first (it is a must read).</li></ol><p>Also, note that:</p><ul><li><a href="http://haskell.org">haskell.org</a> is full of excellent resources.</li><li><a href="http://www.haskell.org/hoogle/">hoogle</a> will be very useful</li><li>Use <a href="http://community.haskell.org/~ndm/hlint/">hlint</a> as soon as possible to get good habits.</li></ul><p>As you should see, if you don't already know Haskell,
+the path is long but I guaranty you it will be very rewarding!</p><p><i>ps:</i> You can download the source of this yesod blog tutorial at 
+<a href="http://github.com/yogsototh/yosog">github.com/yogsototh/yosog</a>.</p></div></form></a><!-----></ul></p></a></h1></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/yogsototh/a-yesod-tutorial';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

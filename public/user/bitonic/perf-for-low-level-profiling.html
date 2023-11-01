@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html><head><title>Perf for low-level profiling - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bitonic">Francesco Mazzoli</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bitonic/perf-for-low-level-profiling">Perf for low-level profiling</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Perf for low-level profiling</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 5 Jul 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bitonic">Francesco Mazzoli</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/6426/d2ad5b523b02ec649326b84ca78b162aa6fd29be">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bitonic">See all content by Francesco Mazzoli</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#perf-and-low-level-haskell-programs">perf and low-level Haskell programs</a><ul><li><a href="#the-setup">The setup</a><ul><li><a href="#building-haskell-libraries-with-dwarf">Building Haskell libraries with DWARF</a></li><li><a href="#debug-symbols-for-non-haskell-code">Debug symbols for non-Haskell code</a></li><li><a href="#keeping-the-source-code-for-built-library">Keeping the source code for built library</a></li><li><a href="#building-the-example-program">Building the example program</a></li></ul></li><li><a href="#making-the-haskell-version-fast">Making the Haskell version fast</a><ul><li><a href="#comparing-the-c-and-haskell-version">Comparing the C and Haskell version</a></li><li><a href="#finding-out-where-time-is-spent">Finding out where time is spent</a></li><li><a href="#why-is-the-haskell-version-is-slower">Why is the Haskell version is slower</a></li><li><a href="#making-the-haskell-version-faster">Making the Haskell version faster</a></li><li><a href="#acknowledgements">Acknowledgements</a></li></ul></li></ul></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="def">
+<article><h1 id="perf-and-low-level-haskell-programs"><a href="#perf-and-low-level-haskell-programs"><code>perf</code> and low-level Haskell programs</a></h1><p>TL;DR: <code>perf</code> can be particularly helpful when profiling performance
+critical sections of your programs.  We show how through an example.</p><p>The <code>perf_events</code> framework in the linux kernel, together with the
+<code>perf</code> userland tools, can be used to profile applications without any
+instrumentation -- beyond compiling them with debug symbols.  The debug
+symbols are specified in the DWARF format.  Recently, support was added
+to GHC to support DWARF debug symbols, thanks to work by Peter Wortmann.</p><p>In this article we go through the process of understanding the
+performance of a low-level Haskell program -- a function computing the
+CRC32 digest of a <code>ByteString</code>.  We compare a pure Haskell version,
+provided by the <code>digest-pure</code> package; to a version using a C function
+provided by <code>zlib</code>, provided by the <code>digest</code> package.  After we
+understand why the Haskell version is slower we modify it to make it
+almost at fast as the C one.</p><p>Note that this document is meant to be a showcase of what can be done
+with <code>perf</code>, rather than a tutorial on how to make an Haskell program as
+fast as a C one.  In this case, the shortest route would have been to
+directly replicate the behaviour of the C program in Haskell: we use
+<code>perf</code> to show how it's possible to understand precisely where and why
+time is being spent.</p><h2 id="the-setup"><a href="#the-setup">The setup</a></h2><h3 id="building-haskell-libraries-with-dwarf"><a href="#building-haskell-libraries-with-dwarf">Building Haskell libraries with DWARF</a></h3><p>Getting up to speed with <code>perf</code> and Haskell is easy but tedious and
+undocumented.  First, GHC HEAD (7.11) is needed, for DWARF support.  GHC
+7.10.1 has partial DWARF support, but some features are broken, so GHC
+HEAD is recommended.  The issues with GHC 7.10.1 are resolved in GHC 7.10.2, which will
+be released shortly.</p><p>Moreover, the RTS and the libraries built as part of the GHC build
+process should be built with debug symbols.  This can be done by adding</p><pre><code>GhcRtsHcOpts += -g
+GhcLibHcOpts += -g</code></pre><p>to your <code>mk/build.mk</code> file in the <code>ghc</code> source tree.</p><p>Once you have GHC 7.11, special care is needed to install every library
+with the right options when using <code>cabal</code>.  Specifically, we want to
+pass the <code>-g</code> options to GHC to generate debug symbols.  Moreover, we
+must stop <code>cabal</code> from stripping the object files from debug symbols.
+For example, to install the library <code>digest</code> we'll use</p><pre><code>$ cabal install --disable-library-stripping --ghc-options=&quot;-g -rtsopts&quot; digest</code></pre><h3 id="debug-symbols-for-non-haskell-code"><a href="#debug-symbols-for-non-haskell-code">Debug symbols for non-Haskell code</a></h3><p>Moreover, when debugging Haskell code involving foreign C code, we need
+to make sure that we have the debug symbols for the C libraries too.
+This can be accomplished in various ways -- on Debian systems debug
+symbols are packaged separately in <code>-dbg</code> packages.  So if we wanted to
+properly debug a program using the <code>digest</code> library, which uses <code>zlib</code>,
+we would need to issue</p><pre><code>$ sudo apt get install zlib1g-dbg</code></pre><h3 id="keeping-the-source-code-for-built-library"><a href="#keeping-the-source-code-for-built-library">Keeping the source code for built library</a></h3><p>Moreover, if we want to see source code in the <code>perf</code> tools, as we'll
+see in the following sections, we need to keep the Haskell source files
+where they were picked up to be built.  The easiest way to do this is
+using <code>cabal get</code>, for example:</p><pre><code>$ cabal get zlib
+Unpacking to zlib-0.6.1.0/
+$ cd zlib-0.6.1.0
+$ cabal install --disable-library-stripping --ghc-options=&quot;-g -rtsopts&quot;</code></pre><p>The same applies for C libraries that we want to debug with source code
+support.</p><h3 id="building-the-example-program"><a href="#building-the-example-program">Building the example program</a></h3><p>As an example, we will be testing the <code>digest-pure</code> library,
+implementing the CRC32 algorithm in Haskell; against the <code>digest</code>
+library, which also offers the CRC32 algorithm by binding to the <code>zlib</code>
+library.</p><p>First we'll build the <code>zlib</code> library manually to keep the source code in
+place, taking care of adding <code>-g</code> to the <code>CFLAGS</code> in the <code>Makefile</code>:</p><pre><code>$ wget http://zlib.net/zlib-1.2.8.tar.gz
+$ tar xzvf zlib-1.2.8.tar.gz
+$ cd zlib-1.2.8
+$ nano Makefile.in # Add -g to CFLAGS
+$ ./configure
+$ make
+$ export LD_LIBRARY_PATH=`pwd`:$LD_LIBRARY_PATH</code></pre><p>Then, we'll install the <code>digest</code> and <code>digest-pure</code> libraries, which we
+need for the benchmark:</p><pre><code>$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.11.20150411
+$ cabal get digest
+Unpacking to digest-0.0.1.2/
+$ cd digest-0.0.1.2/
+$ cabal install --disable-library-stripping --ghc-options=&quot;-g -rtsopts&quot;
+$ cd ..
+$ cabal get digest-pure
+$ cd digest-pure-0.0.3/
+$ cabal install --disable-library-stripping --ghc-options=&quot;-g -rtsopts&quot;</code></pre><p>Note how we're getting the packages using <code>cabal get</code>, so that the
+Haskell sources will be preserved in the locations where the objects
+were built from.</p><p>We'll also install <code>mwc-random</code> without bothering to keep the sources,
+since we won't need to inspect its functions (we use it to generate
+random data to run our benchmark on):</p><pre><code>$ cabal install --disable-library-stripping --ghc-options=&quot;-g -rtsopts&quot; mwc-random</code></pre><h2 id="making-the-haskell-version-fast"><a href="#making-the-haskell-version-fast">Making the Haskell version fast</a></h2><h3 id="comparing-the-c-and-haskell-version"><a href="#comparing-the-c-and-haskell-version">Comparing the C and Haskell version</a></h3><p>We're going to use a
+<a href="https://gist.github.com/bitonic/781ff80e6eb65eebf14a">simple benchmark</a>
+to compare the Haskell and C function.</p><pre><code>$ wget https://gist.github.com/bitonic/781ff80e6eb65eebf14a/raw/7cee087dbe12c6cf813667eccb0a00d721ecb9a6/crc32.hs
+$ ghc -g -O2 crc32.hs</code></pre><p><code>crc32.hs</code> let us compare two functions with an identical interface,
+computing the CRC32 for a given <code>ByteString</code>:</p><pre><code>crc32 :: ByteString -&gt; Word32</code></pre><p><code>digest</code> implements this function by calling a foreign <code>crc32</code> routine
+provided by <code>zlib</code>, while <code>digest-pure</code> implements it natively in
+Haskell.</p><p>Now we're ready to compare the two versions, one using the pure CRC32,
+and one using zlib.  First we generate some random data to work on</p><pre><code>$ ./crc32 generate</code></pre><p>This will write a <code>data</code> file to disk, which we can use in all
+subsequent tests.  Then we time each version:</p><pre><code>$ time ./crc32 hask # Using digest-pure
+./crc32 hask  34,55s user 0,01s system 99% cpu 34,599 total
+$ time ./crc32 c # Using digest
+./crc32 c  10,42s user 0,00s system 99% cpu 10,444 total</code></pre><p>The Haskell version is more than 3 times slower than the C one.  Let's
+try to find out why.</p><h3 id="finding-out-where-time-is-spent"><a href="#finding-out-where-time-is-spent">Finding out where time is spent</a></h3><p>The first thing we'll do is understand where time is spent.  We expect
+some CRC32 function to make up for most of the running time, but we'd
+like to verify this.  Moreover, we'd like to know what exactly is taking
+time in the CRC32 function itself.</p><p>Let's run the two versions again, but this time using <code>perf record</code>:</p><pre><code>$ perf record -o perf-hask.data ./crc32 hask
+[ perf record: Woken up 2 times to write data ]
+[ perf record: Captured and wrote 0.346 MB perf-hask.data (~15126 samples) ]
+$ perf record -o perf-c.data ./crc32 c
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.110 MB perf-c.data (~4789 samples) ]</code></pre><p><code>perf record</code> will sample the execution with the aid of the
+<code>perf_event_open</code> linux syscall.  Using <code>perf report -i perf-hask.data</code>
+we can inspect the result of the Haskell version.  The main screen shows
+a breakdown of where time is spent in the executable:</p><pre><code>Samples: 8K of event 'cpu-clock', Event count (approx.): 2233500000
+  99,75%  crc32  crc32              [.] s4Tw_info
+   0,10%  crc32  crc32              [.] c5gn_info
+   0,03%  crc32  crc32              [.] c5g3_info
+   0,02%  crc32  crc32              [.] c2k_info
+   0,02%  crc32  crc32              [.] c7F_info
+   0,01%  crc32  [kernel.kallsyms]  [k] __do_softirq
+   0,01%  crc32  crc32              [.] allocatePinned
+   0,01%  crc32  crc32              [.] c6le_info
+   0,01%  crc32  crc32              [.] chg3_info
+   0,01%  crc32  crc32              [.] 0x000000000041ca88
+   0,01%  crc32  libc-2.19.so       [.] _dl_addr</code></pre><p>Symbols like <code>c5gn_info</code> are generated by the GHC code generator.  As we
+can see, almost all the time is spent in a single symbol, <code>s4Tw_info</code>.
+We can drill down into <code>s4Tw_info</code>, and &quot;annotate&quot; it, to get a precise
+breakdown of where time is spent in <code>s4Tw_alone</code>:</p><pre><code>s4Tw_info  /home/francesco/crc32/crc32
+       │    Disassembly of section .text:
+       │
+       │    000000000063a738 &lt;s4Tw_info&gt;:
+       │        crc = flipAll prevCRC
+       │        flipAll = xor 0xffffffff
+       │
+       │    -- | Unsafe array access.
+       │    (!!!) :: (IArray a e, Ix i, Integral i) =&gt; a i e -&gt; i -&gt; e
+       │    arr !!! i = unsafeAt arr $ fromIntegral i
+  0,79 │ 0:┌─→add    $0x10,%r12
+ 10,33 │   │  cmp    0x358(%r13),%r12
+       │   │↓ ja     27
+  0,04 │   │  cmp    %rdi,%rsi
+  0,01 │   │↓ jne    36
+       │   │  movq   $0xa737a0,-0x8(%r12)
+       │   │  mov    %r14,(%r12)
+       │   │  lea    -0x7(%r12),%rbx
+       │   │↓ jmpq   ffffffffff9c58c8
+       │27:│  movq   $0x10,0x388(%r13)
+       │   │↓ jmpq   ffffffffff9c58c8
+       │   │  flipAll (tblEntry `xor` (crc `shiftR` 8))
+       │   │  where
+       │   │    -- Note: unsafe access is ok here, we guarantee that the value is within
+       │   │    -- (0..255), crc32Table covers that range.
+       │   │    tblEntry = crc32Table !!! ((crc `xor` (fromIntegral c)) .&amp;. 0xff)
+       │   │    crc = flipAll prevCRC
+  0,76 │36:│  add    $0xfffffffffffffff0,%r12
+  0,02 │   │  mov    $0xffffffff,%eax
+ 10,01 │   │  xor    %rax,%r14
+  0,03 │   │  mov    $0xffffffff,%eax
+  1,07 │   │  mov    %r14,%rcx
+       │   │  shr    $0x8,%rcx
+ 10,55 │   │  xor    %rax,%rcx
+  0,10 │   │  mov    0x4(%rbx),%rax
+  1,03 │   │  movzbl (%rsi),%edx
+  0,16 │   │  xor    %rdx,%r14
+  9,69 │   │  and    $0xff,%r14d
+  0,75 │   │  mov    0x10(%rax,%r14,4),%eax
+ 44,32 │   │  xor    %rcx,%rax
+ 10,31 │   │  inc    %rsi
+  0,01 │   │  mov    %rax,%r14
+       │   └──jmp    0</code></pre><p>What this breakdown tells us is that a whopping 75% of the time is spent
+in <code>xor</code> and <code>and</code> instructions alone.  Another 20% of the time is spent
+in looping code: a <code>cmp</code> at the beginning, and an <code>inc</code> at the end --
+which keep track of an index in the <code>ByteString</code> we're digesting to find
+out when we're done traversing it.  Moreover, we get the Haskell source
+code interleaved with the assembly deriving from it, which lets us
+understand what Haskell code parts of <code>s4Tw_info</code> correspond to.  In
+this case, the part that eats almost all of the time is
+<a href="https://github.com/danieldk/digest-pure/blob/master/src/Data/Digest/Pure/CRC32.hs#L50">the section of the code corresponding to the main section of the CRC32 algorithm</a>,
+which is what we expected.  What the code does is get a value out of pre
+computed table, and then use it together with the current CRC to get the
+new value.</p><p>To get more information about the symbol, we can also use <code>objdump</code> on
+the binary to get more information about the &quot;compile unit&quot; <code>s4Tw_info</code>
+comes from:</p><pre><code>$ objdump -Wi crc32
+[...]
+  Compilation Unit @ offset 0xdbd68:
+   Length:        0x629 (32-bit)
+   Version:       3
+   Abbrev Offset: 0x6cb
+   Pointer Size:  8
+ &lt;0&gt;&lt;dbd73&gt;: Abbrev Number: 1 (DW_TAG_compile_unit)
+    &lt;dbd74&gt;   DW_AT_name        : src/Data/Digest/Pure/CRC32.hs 
+    &lt;dbd92&gt;   DW_AT_producer    : The Glorious Glasgow Haskell Compilation System 7.11.20150411 
+    &lt;dbdd0&gt;   DW_AT_language    : 0x18  (Unknown: 18)
+    &lt;dbdd4&gt;   DW_AT_comp_dir    : /tmp/digest-pure-0.0.3/
+    &lt;dbdec&gt;   DW_AT_use_UTF8    : 255
+    &lt;dbded&gt;   DW_AT_stmt_list   : 0x32790
+[...]
+ &lt;1&gt;&lt;dbf83&gt;: Abbrev Number: 2 (DW_TAG_subprogram)
+    &lt;dbf84&gt;   DW_AT_name        : !!!
+    &lt;dbf88&gt;   DW_AT_MIPS_linkage_name: s4Tw_info
+    &lt;dbf92&gt;   DW_AT_external    : 0
+    &lt;dbf93&gt;   DW_AT_low_pc      : 0x63afc8
+    &lt;dbf9b&gt;   DW_AT_high_pc     : 0x63b03a
+    &lt;dbfa3&gt;   DW_AT_frame_base  : 1 byte block: 9c      (DW_OP_call_frame_cfa)
+[...]</code></pre><p>Which tells us the exact file the symbol comes from.  The DWARF
+information also takes a stab at pairing the symbol with a name,
+although it is often difficult to do so: in this case it picked the
+inlined <code>!!!</code> function, which is misleading.</p><p>Check out <a href="https://asciinema.org/a/19532">this screencast</a> for a taste
+of what interacting with <code>perf</code> on this data set looks like.</p><p>Now let's do the same with the C version, using <code>perf report -i
+perf-c.data</code>:</p><p><a href="https://asciinema.org/a/19533"><img alt="asciicast" src="https://www.schoolofhaskell.com/content-proxy?src=https%3A%2F%2Fasciinema.org%2Fa%2F19533.png" /></a></p><p>In this case almost all the time is spent in <code>libz.so</code> <code>crc32</code> function,
+which is again what we expect.  However when drilling into the <code>crc32</code>
+function, we get a much bigger disassemble output.  While confusing at
+first, it is quite clear that all the time is spent in the mysterious
+<code>DOLIT32</code>, a rather long section of the code:</p><pre><code>       │             DOLIT32;
+  0,04 │ 70:   xor    (%r8),%edi
+  1,29 │       mov    %rdi,%rax
+       │       mov    %edi,%r11d
+       │       movzbl %ah,%ebx
+  2,31 │       movzbl %dil,%eax
+  0,04 │       shr    $0x18,%edi
+       │       mov    0xc00(%rcx,%rax,4),%eax
+  3,33 │       xor    (%rcx,%rdi,4),%eax
+  2,76 │       shr    $0x10,%r11d
+  [...omitted code...]
+       │       shr    $0x18,%edi
+  1,17 │       shr    $0x10,%r11d
+  0,08 │       movzbl %ah,%eax
+  1,06 │       mov    (%rcx,%rdi,4),%edi
+  4,20 │       xor    0xc00(%rcx,%rbx,4),%edi
+  2,38 │       movzbl %r11b,%r11d
+       │       xor    0x800(%rcx,%rax,4),%edi
+  1,14 │       xor    0x400(%rcx,%r11,4),%edi</code></pre><p>In fact, summing up the small percentages in <code>DOLIT32</code> we find out that
+around 85% of the time is spent there.  To find out what <code>DOLIT32</code> does
+we need to consult the
+<a href="https://github.com/madler/zlib/blob/master/crc32.c#L241"><code>zlib</code> source code</a>.
+<code>DOLIT32</code> is a macro repeating <code>DOLIT4</code> 8 times.  <code>DOLIT4</code> is a macro
+which computes the CRC32 4 bytes at a time, assuming little endianness.
+Equivalent macros for big endian architecture are present.</p><h3 id="why-is-the-haskell-version-is-slower"><a href="#why-is-the-haskell-version-is-slower">Why is the Haskell version is slower</a></h3><p>The fact that <code>zlib</code> computes the CRC32 4 bytes at a time, and that it
+unrolls the main loop makes the code per byte needed to compute the
+CRC32 much smaller.  The loop (from <code>cmp</code> to <code>jmp</code>) with <code>DOLIT32</code> as a
+body uses around 110 instructions to compute the CRC32 for 32 bytes
+(≈3.5 instructions per byte), while the loop generated from the pure
+Haskell version uses 25 instructions for just one byte.  This should
+amount to a seven fold increase in the instructions executed by the
+Haskell program.</p><p>We can easily verify this fact using <code>perf</code>.  In this case we'll use
+<code>perf stat</code>, which gives us global statistics, since we know that one
+symbol is taking up all the time.  Otherwise we could use <code>perf record
+-e</code> to record the events we're interested and get figures for the
+specific symbols.</p><pre><code>$ perf stat ./crc32 hask
+
+ Performance counter stats for './crc32 hask':
+
+      35623,015084 task-clock (msec)         #    0,995 CPUs utilized
+             4.982 context-switches          #    0,140 K/sec
+               207 cpu-migrations            #    0,006 K/sec
+             3.318 page-faults               #    0,093 K/sec
+    94.594.036.631 cycles                    #    2,655 GHz
+    44.565.899.687 stalled-cycles-frontend   #   47,11% frontend cycles idle
+   &lt;not supported&gt; stalled-cycles-backend
+   210.111.081.169 instructions              #    2,22  insns per cycle
+                                             #    0,21  stalled cycles per insn
+    30.020.583.035 branches                  #  842,730 M/sec
+         1.138.765 branch-misses             #    0,00% of all branches
+
+      35,788883623 seconds time elapsed
+
+$ perf stat ./crc32 c
+
+ Performance counter stats for './crc32 c':
+
+      10690,308263 task-clock (msec)         #    0,995 CPUs utilized
+             1.754 context-switches          #    0,164 K/sec
+                63 cpu-migrations            #    0,006 K/sec
+             3.314 page-faults               #    0,310 K/sec
+    28.453.816.903 cycles                    #    2,662 GHz
+    18.427.339.226 stalled-cycles-frontend   #   64,76% frontend cycles idle
+   &lt;not supported&gt; stalled-cycles-backend
+    31.027.193.409 instructions              #    1,09  insns per cycle
+                                             #    0,59  stalled cycles per insn
+       330.594.059 branches                  #   30,925 M/sec
+           670.612 branch-misses             #    0,20% of all branches
+
+      10,743639214 seconds time elapsed</code></pre><p>The first thing to notice is the difference in the number of
+instructions.  The Haskell program uses 201 billions, versus the 31
+billions of the C program.  A 6.5 difference, which is a factor close to
+our rough estimate of 7.</p><p>Note that the 6.5 difference in instructions does not translate to a 6.5
+performance increase in the C program.  This can be due to a variety
+of reasons, but the <code>perf stat</code> output already shows a factor: the C
+version spends more time stalled, as evident from the
+<code>stalled-cycles-frontend</code> hardware counter.  This is most likely since
+the C code spends less time in the loop code, and more time fetching
+bytes from the input buffer and from the static tables used to compute
+the CRC32.  In fact, the overall productivity is lower: 1 instruction
+per cycle in C versus more than 2 in Haskell.  Thus, we only get a 3x
+speedup in C , as we have seen.</p><h3 id="making-the-haskell-version-faster"><a href="#making-the-haskell-version-faster">Making the Haskell version faster</a></h3><p>Now that we know the main reason for the Haskell version being slower,
+we can make the Haskell version more similar to the C one.  The first
+measure we adopted is to implement the CRC32 algorithm so that it
+consumes 4 bytes at a time.  We choose to do this before loop unrolling
+because it has more possibilities to impact performance.  For instance
+it makes the algorithm less sequential and increases the chances for pipelining, since we don't have to
+wait for each byte to continue.</p><p>To do so, we will split the input <code>ByteString</code> in three sections: an
+aligned vector of <code>Word32</code>s, and the remaining unaligned leading and
+trailing bytes.  For example, for a <code>ByteString</code> of length 26 starting
+at address 9, we will have 3 leading bytes (up to address 12), 6 aligned
+words (up to address 38), and 2 trailing bytes.  This will give us a
+memory-aligned section to perform the CRC32 word-by-word instead of
+byte-by-byte.  The type signature for the function splitting the
+<code>ByteString</code> will be</p><pre><code>getWord32Vector
+  :: BS.ByteString
+  -&gt; (BS.ByteString -&gt; V.Vector Word32 -&gt; BS.ByteString -&gt; IO a)
+  -&gt; IO a</code></pre><p>We use a continuation-passing style since we need to manipulate the
+pointer underlying the <code>ByteString</code> to know where the aligned section of
+the memory starts, and the functions that let us do this use CPS
+themselves.</p><p>Once we have this function, the ugly part is over: we can very easily
+port the algorithm present in <code>zlib</code> to Haskell, but in a more
+functional style:</p><pre><code>{-# NOINLINE crc32UpdateLittle #-}
+crc32UpdateLittle
+  :: Word32
+  -- ^ The previous CRC
+  -&gt; BS.ByteString
+  -- ^ The input to digest
+  -&gt; Word32
+  -- ^ Resulting CRC
+crc32UpdateLittle prevC bs =
+  unsafePerformIO $ getWord32Vector bs $ \leading aligned trailing -&gt; do
+    let c0 = complement prevC
+    let c1 = BS.foldl' word8Step c0 leading  -- Perform CRC32 on the leading bytes...
+    let c2 = V.foldl' word32Step c1 aligned  -- ...on the aligned words...
+    let c3 = BS.foldl' word8Step c2 trailing -- ...and on the trailing bytes.
+    return $ complement c3
+  where
+    {-# INLINE word32Step #-}
+    word32Step :: Word32 -&gt; Word32 -&gt; Word32
+    word32Step c0 word =
+      (crc32Table_3 !!! (c .&amp;. 0xff)) `xor`
+      (crc32Table_2 !!! ((c `unsafeShiftR` 8) .&amp;. 0xff)) `xor`
+      (crc32Table_1 !!! ((c `unsafeShiftR` 16) .&amp;. 0xff)) `xor`
+      (crc32Table_0 !!! (c `unsafeShiftR` 24))
+      where
+        c = c0 `xor` word
+
+    {-# INLINE word8Step #-}
+    word8Step :: Word32 -&gt; Word8 -&gt; Word32
+    word8Step c byte =
+      (crc32Table_0 !!! ((c `xor` fromIntegral byte) .&amp;. 0xff)) `xor` (c `unsafeShiftR` 8)</code></pre><p>The various <code>crc32Table_n</code> are various pre-computed tables needed to
+perform the algorithm, and <code>!!!</code> is an unsafe indexing operator (we know
+we're going to be within the bounds). The <code>Little</code> is to indicate that
+this is the algorithm for little-endian architectures.  A matching
+<code>crc32UpdateBig</code> has to be defined for big-endian architectures.</p><p>You can find the full source in <a href="https://github.com/bitonic/digest-pure/blob/fast-crc32/src/Data/Digest/Pure/CRC32.hs">my fork of <code>digest-pure</code></a>.</p><p>After we recompile <code>digest-pure</code> again with the changes above, and
+recompile our <code>crc32.hs</code> benchmark, we can run it again using the
+Haskell version:</p><pre><code>$ time ./crc32 hask
+./crc32 hask  12,87s user 0,02s system 99% cpu 12,903 total</code></pre><p>With the new algorithm we get a three fold speedup, and we're only 20%
+slower than the C version.</p><pre><code>$ perf stat ./crc32 hask
+
+ Performance counter stats for './crc32 hask':
+
+      13025,715282 task-clock (msec)         #    0,993 CPUs utilized
+             1.668 context-switches          #    0,128 K/sec
+                61 cpu-migrations            #    0,005 K/sec
+             3.340 page-faults               #    0,256 K/sec
+    35.174.753.255 cycles                    #    2,700 GHz
+    15.093.419.773 stalled-cycles-frontend   #   42,91% frontend cycles idle
+   &lt;not supported&gt; stalled-cycles-backend  
+    77.735.375.354 instructions              #    2,21  insns per cycle
+                                             #    0,19  stalled cycles per insn
+     2.541.638.382 branches                  #  195,125 M/sec
+           956.494 branch-misses             #    0,04% of all branches
+
+      13,121155788 seconds time elapsed</code></pre><p>The number of instructions is reduced by almost three times, while the
+productivity stays the same -- which explains the threefold increase in
+performance.  Note that we're still using more than twice the
+instructions as the C program, due to loop unrolling.  However, loop
+unrolling seems to push the program towards being memory-bound and thus
+does not result in a great performance increase.  We have not pursued
+this road further.</p><p>However, when analyzing the program through <code>perf report</code>, we get
+somewhat surprising results:</p><pre><code>       │    crc32UpdateLittle :: Word32 -&gt; BS.ByteString -&gt; Word32
+       │    crc32UpdateLittle prevC bs =
+       │      unsafePerformIO $ getWord32Vector bs $ \leading aligned trailing -&gt; do
+       │        let c0 = complement prevC
+       │        let c1 = BS.foldl' word8Step c0 leading
+       │        let c2 = V.foldl' word32Step c1 aligned
+  0,05 │ 9:   mov    0xe(%rbx),%rax
+  0,03 │      mov    0x16(%rbx),%rax
+  7,21 │      mov    0x1e(%rbx),%rax
+  0,01 │      mov    0x26(%rbx),%rax
+  0,06 │      mov    0x3e(%rbx),%rax
+  0,02 │      mov    0x46(%rbx),%rcx
+  7,27 │      mov    0x4e(%rbx),%rdx
+  0,02 │      mov    0x56(%rbx),%rdi
+  0,08 │      mov    0x36(%rbx),%r8
+  0,03 │      mov    (%r8,%rsi,4),%r8d
+  7,34 │      xor    %r8,%r14
+  0,07 │      mov    %r14,%r8
+  0,06 │      and    $0xff,%r8d
+  0,09 │      mov    (%rax,%r8,4),%eax
+ 29,32 │      mov    %r14,%r8
+  0,01 │      shr    $0x8,%r8
+  0,02 │      and    $0xff,%r8d
+       │      mov    (%rcx,%r8,4),%ecx
+ 10,83 │      mov    %r14,%r8
+  0,00 │      shr    $0x10,%r8
+  0,02 │      and    $0xff,%r8d
+  0,01 │      mov    (%rdx,%r8,4),%edx
+  8,89 │      shr    $0x18,%r14
+  0,00 │      mov    (%rdi,%r14,4),%edi
+  1,18 │      inc    %rsi
+  0,00 │      xor    %rdi,%rdx
+ 13,49 │      xor    %rdx,%rcx
+  6,75 │      xor    %rcx,%rax
+  7,15 │      mov    %rax,%r14</code></pre><p><code>mov</code> instructions from register to register make up for more than 60%
+of the time spent in the critical section of the code, while we would
+expect most of the time to be spent <code>xor</code>ing and <code>and</code>ing.  I have not
+investigated why this is the case, ideas welcome!</p><h3 id="acknowledgements"><a href="#acknowledgements">Acknowledgements</a></h3><p>Thanks to Peter Wortmann and to Arash Rouhani for the very informative discussions on the status of DWARF in GHC.  Also thanks to Niklas Hambüchen for reviewing a draft of this blogpost.</p></article>
+
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bitonic/perf-for-low-level-profiling';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

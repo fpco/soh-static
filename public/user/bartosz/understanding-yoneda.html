@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html><head><title>Understanding Yoneda - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/understanding-yoneda">Understanding Yoneda</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Understanding Yoneda</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">15 May 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/bartosz">Bartosz Milewski</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4/49a66e342baf329ef98e9f5ab29262aa66b7107d">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz/lenses-stores-and-yoneda">Next content: Lenses, Stores, and Yoneda</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/bartosz">See all content by Bartosz Milewski</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#a-teaser-problem">A Teaser Problem</a></li><li><a href="#categories">Categories</a></li><li><a href="#functors">Functors</a></li><li><a href="#yoneda-embedding">Yoneda Embedding</a><ul><li><a href="#summary-so-far">Summary So Far</a></li><li><a href="#a-bar-example">A Bar Example</a></li></ul></li><li><a href="#natural-transformations">Natural Transformations</a><ul><li><a href="#an-example-of-natural-transformation">An Example of Natural Transformation</a></li></ul></li><li><a href="#yoneda-lemma">Yoneda Lemma</a><ul><li><a href="#a-haskell-example">A Haskell Example</a></li></ul></li><li><a href="#the-structure-of-natural-transformations">The Structure of Natural Transformations</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#acknowledgments">Acknowledgments</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>{- <i>Note: This is a runnable version of the blog post, <a href="http://bartoszmilewski.com/2013/05/15/understanding-yoneda/">Understanding Yoneda</a>. Follow that link if you want to comment (the ability to post comments is in the plans for the School of Haskell).</i> -}</p><p>You don't need to know anything about category theory to use Haskell as a programming language. But if you want to understand the theory <i>behind</i> Haskell or contribute to its development, some familiarity with category theory is a prerequisite.</p><p>Category theory is very easy at the beginning. I was able to explain what a category is to my 10-year old son. But the learning curve gets steeper as you go. Functors are easy. Natural transformations may take some getting used to, but after chasing a few diagrams, you'll get the hang of it. The Yoneda lemma is usually the first serious challenge, because to understand it, you have to be able to juggle several things in your mind at once. But once you've got it, it's very satisfying. Things just fall into place and you gain a lot of intuition about categories, functors, and natural transformations.</p><h2 id="a-teaser-problem"><a href="#a-teaser-problem">A Teaser Problem</a></h2><p>You are given a polymorphic function <code>imager</code> that, for any function from <code>Bool</code> to any type <code>r</code>, returns a list of <code>r</code>. Try running the code below with <code>colorMap</code>, <code>heatMap</code>, and <code>soundMap</code>. You may also define your own function of <code>Bool</code> and pass it to imager.</p><pre><code class="active haskell">-- show
+{-# LANGUAGE ExplicitForAll #-}
+imager :: forall r . ((Bool -&gt; r) -&gt; [r])
+
+data Color = Red | Green | Blue        deriving Show
+data Note  = C | D | E | F | G | A | B deriving Show
+
+colorMap x = if x then Blue else Red
+heatMap  x = if x then 32   else 212
+soundMap x = if x then C    else G
+
+main = print $ imager colorMap
+-- /show
+imager iffie = fmap iffie [True, False, True, True] </code></pre><p>Can you guess the implementation of <code>imager</code>? How many possible <code>imager</code>s with the same signature are there? By the end of this article you should be able to validate your answers using the Yoneda's lemma.</p><h2 id="categories"><a href="#categories">Categories</a></h2><p>A category is a bunch of objects with arrows between them (incidentally, a &quot;bunch&quot; doesn't mean a <i>set</i> but a more generall <i>collection</i>). We don't know anything about the objects -- all we know is the arrows, a.k.a morphisms.</p><p>Our usual intuition is that arrows are sort of like functions. Functions are mappings between sets. Indeed, morphisms have some function-like properties, for instance composability, which is associative:</p><p><img alt="Associativity" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FAssociativity.png" /></p><p><b>Fig 1</b>. <i>Associativity of morphisms demonstrated on Haskell functions. (In my pictures, piggies will represent objects; sacks of potatoes, sets; and fireworks, morphisms.)</i></p><pre><code class="haskell">h :: a -&gt; b
+g :: b -&gt; c
+f :: c -&gt; d
+
+f . (g . h) == (f . g) . h</code></pre><p>There is also an identity morphism for every object in a category, just like the <code>id</code> function:</p><p><img alt="Identity" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FIdentity.png" /></p><p><b>Fig 2</b>. <i>The identity morphism.</i></p><pre><code class="haskell">id :: a -&gt; a
+
+id . f == f . id == f</code></pre><p>In all Haskell examples I'll be using the category <b>Hask</b> of Haskell types, with morphisms being plain old functions. An object in <b>Hask</b> is a type, like <code>Int</code>, <code>[Bool]</code>, or <code>[a]-&gt;Int</code>. Types are nothing more than just <i>sets</i> of values. <code>Bool</code> is a two element set {<code>True</code>, <code>False</code>}, <code>Integer</code> is the set of all integers, and so on.</p><p>In general, a category of all sets and functions is called <b>Set</b>.</p><p>So how good is this sets-and-functions intuition for an arbitrary category? Are all categories really like collections of sets, and morphisms are like functions from set to set? What does the word <i>like</i> even mean in this context?</p><h2 id="functors"><a href="#functors">Functors</a></h2><p>In category theory, when we say one category is &quot;like&quot; another category, we usually mean that there is a mapping between the two. For this mapping to be meaningful, it should preserve the structure of the category. So not only every object from one category has to be mapped into an object from another category, but also all morphisms must be mapped correctly -- meaning they should preserve composition. Such a mapping has a name: it's called a functor.</p><p>Functors in <b>Hask</b> are described by the type class <code>Functor</code></p><pre><code class="haskell">class Functor f where
+fmap :: (a -&gt; b) -&gt; (f a -&gt; f b)</code></pre><p>A Haskell <code>Functor</code> maps types into types and functions into functions -- a type constructor does the former and <code>fmap</code> does the latter.</p><p>A <i>type contructor</i> is a mapping from one type to another. For instance, a list type constructor takes any type <code>a</code> and creates a list type, <code>[a]</code>.</p><p>So instead of asking if every category is &quot;like&quot; the <b>Set</b> category, we can ask a more precise question: For what types of categories (if not all of them) there exist functors that map them into <b>Set</b>. Such categories are called <i>representable</i>, meaning they have a representation in <b>Set</b>.</p><p>As a physicist I had to deal a lot with groups, such as groups of spacetime rotations in various dimensions or unitary groups in complex spaces. It was very handy to <i>represent</i> these abstract groups as matrices acting on vectors. For instance, different representations of the same Lorenz group (more precisely, SL(2, C)) would correspond to physical particles with different spins. So vector spaces and matrices are to abstract groups as sets and functions are to abstract categories.</p><h2 id="yoneda-embedding"><a href="#yoneda-embedding">Yoneda Embedding</a></h2><p>One of the things Yoneda showed is that there is at least one canonical functor from any so called <i>locally small</i> category into the category of sets and functions. The construction of this functor is surpisingly easy, so let me sketch it.</p><p>This functor should map every object in category C into a set. Set of what? It doesn't really matter, a set is a set. So how about using a set of morphisms?</p><p><img alt="Yoneda embedding" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FYonedaEmbedding.png" /></p><p><b>Fig 3</b>. <i>The Yoneda embedding. Object X is mapped by the functor into the set H<sub>A</sub>(X). The elements of the set correspond to morphisms from A to X.</i></p><p>How can we map any object into a set of morphisms? Easy. First, let's arbitrarily fix one object in the category C, call it A. It doesn't matter which object we pick, we'll just have to hold on to it. Now, for every object X in C there is a set of morphisms (arrows) going from our fixed A to this X. We designate this set to be the image of X under the functor we are constructing. Let's call this functor H<sub>A</sub>. There is one element in the set H<sub>A</sub>(X) for every morphism from A to X.</p><p>A functor must define a mapping of objects to objects (to sets, in our case) and morphisms to morphisms (to functions in our case). We have established the first part of the mapping. To define the second part, let's pick an arbitrary morphism f from X to Y. We have to map it to some function from the set H<sub>A</sub>(X) to the set H<sub>A</sub>(Y).</p><p><img alt="The mapping of morphisms" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FMorphismMapping.png" /></p><p><b>Fig 4</b>. <i>The Yoneda functor also maps morphisms. Here, morphism f is mapped into the function H<sub>A</sub>(f) between sets H<sub>A</sub>(X) and H<sub>A</sub>(Y).</i></p><p>Let's define this function, we'll call it H<sub>A</sub>(f), through its action on any element of the set H<sub>A</sub>(X), call it <code>x</code>. By our construction, <code>x</code> corresponds to some particular morphism, <code>u</code>, from A to X. We now have at our disposal two morphisms, <code>u :: A -&gt; X</code> and <code>f :: X -&gt; Y</code> (that's the morphism we are mapping).  We can compose them. The result <code>f . u</code> is a morphism from A to Y, so it's a member of the set H<sub>A</sub>(Y). We have just defined a function that takes an <code>x</code> from H<sub>A</sub>(X) and maps it into <code>y</code> from H<sub>A</sub>(Y), and this will be our H<sub>A</sub>(f).</p><p>Of course, you have to prove that this construction of H<sub>A</sub> is indeed a functor preserving composition of morphisms, but that's reasonably easy, once the technique we have just used becomes familiar to you. Here's the gist of this technique: Use components! When you are defining a functor from category C to category D, pick a component -- an object X in C -- and define its image, F(X). Then pick a morphism f in C, say from X to Y, and define its image, F(f), as a particular morphism from F(X) to F(Y).</p><p>Similarly, when defining a function from set S to T, use its components. Pick an element x of S and define its image in T. That's exactly what we did in our construction.</p><p>Incidentally, what was that requirement that the category C be <i>locally small</i>? A category is locally small if the collection of morphisms between any two objects forms a set. This may come as a surprise but there are things in mathematics that are too big to be sets. A classic example is a collection of all sets, which cannot be a set itself, because it would lead to a paradox. A <i>collection</i> of all sets, however, is the basis of the <b>Set</b> category (which, incidentally, turns out to be locally small).</p><h3 id="summary-so-far"><a href="#summary-so-far">Summary So Far</a></h3><p>Let me summarize what we've learned so far. A category is just a bunch of abstract objects and arrows between them. It tells us nothing about the internal structure of objects. However, for every (locally small) category there is a structure-preserving mapping (a functor) that maps it into a category of sets. Objects in the <b>Set</b> category do have internal structure: they have elements; and morphisms are functions acting on those elements. A <i>representation</i> maps the categorie's surface structure of morphisms into the internal structure of sets.</p><p>It is like figuring out the properties of orbitals in atoms by looking at the chemical compounds they form, and at the way valencies work. Or discovering that baryons are composed of quarks by looking at their decay products. Incidentally, no one has ever &quot;seen&quot; a free quark, they always live inside other particles. It's as if physicists were studying the &quot;category&quot; of baryons by mapping them into sets of quarks.</p><h3 id="a-bar-example"><a href="#a-bar-example">A Bar Example</a></h3><p>This is all nice but we need an example. Let's start with &quot;A mathematician walks into a bar and orders a category.&quot; The barman says, &quot;We have this new tasty category but we can't figure out what's in it. All we know is that it has just one object A&quot; -- (&quot;Oh, it's a monoid,&quot; the mathematician murmurs knowingly) -- &quot;...plus a whole bunch of morphisms. Of course all these morphisms go from A to A, because there's nowhere else to go.&quot;</p><p>What the barman doesn't know is that the new category is just a re-packaging of the good old set of ASCII strings. The morphisms correspond to appending strings. So there is a morphism called <code>foo</code> that apends the string <code>&quot;foo&quot;</code></p><pre><code class="active haskell">foo :: String -&gt; String
+foo = (++&quot;foo&quot;)
+
+main = putStrLn $ foo &quot;Hello &quot;</code></pre><p>and so on.</p><p>&quot;I can tell you what's inside A,&quot; says the mathematician, &quot;but only up to an isomorphism. I'm a mathematician not a magician.&quot;</p><p>She quickly constructs a set that contains one element for each morphism -- morphisms must, by law, be listed by the manufacturer on the label. So, when she sees <code>foo</code>, she puts an element with the label &quot;foo&quot;, and so on. Incidentally, there is one morphism with no name, which the mathematician maps to an empty label. (In reality this is an identity morphism that appends an empty string.)</p><p>&quot;That's what's inside the object A,&quot; she says.</p><p>&quot;Moreover, this set comes equipped with functions that rearrange its elements. In fact there is a function for every morphism listed in the category,&quot; she says. &quot;Name any morphism and I'll construct you a function.&quot;</p><p>The barman gives her morphism <code>p</code>, which in reality is:</p><pre><code class="haskell">p = (++&quot;p&quot;)</code></pre><p>&quot;Okay,&quot; she says, &quot;here's how I construct the corresponding function. Pick any element in my set.&quot;</p><p>The barman picks &quot;foo&quot;.</p><p>&quot;Okay, 'foo' corresponds to the morphism <code>foo</code>,&quot; she says, &quot;so tell me what you call the morphism that's the composition of <code>foo</code> and <code>p</code>?&quot; (By law, the manufacturer is obliged to specify all admissible compositions of morphisms on the label.)</p><p>&quot;It's called <code>foop</code>,&quot; says the barman.</p><p>Quick check:</p><pre><code class="haskell">p . foo == (++&quot;p&quot;) . (++&quot;foo&quot;) == (++&quot;foop&quot;)
+foop = (++&quot;foop&quot;)</code></pre><p>&quot;Okay,&quot; she says, &quot;the function corresponding to <code>p</code> maps &quot;foo&quot; into &quot;foop&quot;. Hm, how curious! I bet this function will map the no-label elment into &quot;p&quot;, is that right?&quot;</p><p>&quot;Indeed, it does,&quot; says the barman.</p><p>Quick check:</p><pre><code class="haskell">p . id == p</code></pre><p>&quot;I bet you this is just a string monoid,&quot; says the mathematician.</p><p>&quot;I think I'll have my usual <b>Top</b> on the rocks instead.&quot;</p><h2 id="natural-transformations"><a href="#natural-transformations">Natural Transformations</a></h2><p>We've seen how to construct a representation of any (locally small) category in <b>Set</b> by selecting an arbitrary object A in the category and studying morphisms originating at A. What if we choose a different object B instead? How different is the representation H<sub>A</sub> from H<sub>B</sub>? For that matter, what if we pick any functor F from C to <b>Set</b>? How is it related to H<sub>A</sub>? That's what the Yoneda lemma is all about.</p><p>Let me start with a short recap.</p><p>A functor is a mapping between categories that preserves their structure. The structure of a category is defined by the way its morphisms compose. A functor <code>F</code> maps objects into objects and morphism into morphisms in such a way that if <code>f . g = h</code> then <code>F(f) . F(g) = F(h)</code>.</p><p>A <i>natural transformation</i> is a mapping between functors that preserves the structure of the underlying categories.</p><p><img alt="Natural transformation" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FNaturalTransformation.png" /></p><p><b>Fig 5</b>. <i>A component of a transformation Φ at X. Φ maps functor F into functor G, Φ<sub>X</sub> is a morphism that maps object F(X) into object G(X).</i></p><p>First we have to understand how to define mappings between functors. Suppose we have functors F and G, both going from category C to category D. For a given object X in C, F will map it into F(X) in D, and G will map it into G(X) in D. A mapping Φ between functors must map object F(X) to object G(X), both in category D. We know that a mapping of objects is called a morphism. So for every object X we have to provide a morphism Φ<sub>X</sub> from F(X) to G(X). This morphism is called a component of Φ at X. Or, looking at it from a different angle, Φ is a <i>family</i> of morphisms parameterized by X.</p><h3 id="an-example-of-natural-transformation"><a href="#an-example-of-natural-transformation">An Example of Natural Transformation</a></h3><p>Just to give you some Haskell intuition, consider functors on <b>Hask</b>. These are mapping of types (type constructors) such as <code>a -&gt; [a]</code> or <code>a -&gt; Maybe a</code>, with the corresponging mappings of morphisms (functions) defined by <code>fmap</code>. Recall:</p><pre><code class="haskell">class Functor f where
+fmap :: (a -&gt; b) -&gt; (f a -&gt; f b)</code></pre><p>The mapping between Haskell functors is a family of functions parameterized by types. For instance, a mapping between the <code>[]</code> functor and the <code>Maybe</code> functor will map a list of <code>a</code>, <code>[a]</code> into <code>Maybe a</code>. Here's an example of such a family of functions called <code>safeHead</code>:</p><pre><code class="haskell">safeHead :: [a] -&gt; Maybe a
+safeHead []     = Nothing
+safeHead (x:xs) = Just x</code></pre><p>A family of functions parameterized by type is nothing special: it's called a polymorphic function. It can also be described as a function on both types and values, with a more verbose signature:</p><pre><code class="active haskell">{-# LANGUAGE ExplicitForAll #-}
+
+safeHead :: forall a . [a] -&gt; Maybe a
+safeHead []     = Nothing
+safeHead (x:xs) = Just x
+
+main = print $ safeHead [&quot;One&quot;, &quot;Two&quot;]</code></pre><p>Let's go back to natural transformations. I have described what it means to define a transformation of functors in terms of objects, but functors also map morphism. It turns out, however, that the tranformation of morphisms is completely determined by the two functors. A morphism f from X to Y is transformed under F into F(f) and under G into G(f). G(f) must therefore be the image of F(f) under Φ. No choice here! Except that now we have two ways of going from F(X) to G(Y).</p><p><img alt="Naturality square" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FNaturalitySquare.png" /></p><p><b>Fig 6</b>. <i>The naturality square. Φ is a natural transformation if this diagram commutes, that is, both paths are equivalent.</i></p><p>We can first take the morphism F(f) to take us to F(Y) and then use Φ<sub>Y</sub> to G(Y). Or we can first take Φ<sub>X</sub> to take us to G(X), and then G(f) to get to G(Y). We call Φ a <i>natural</i> transformation if these two paths lead to the same morphism (the diagram <i>commutes</i>).</p><p>To gain some insight, imagine that a natural transformation expresses the idea that F(X) looks, from a certain angle, <i>the same</i> as G(X). Similarly, F(Y) looks <i>the same</i> as G(Y). If that's true, then a morphism from X to Y must map into something that looks like a single morphism from the concept that combines F(X) and G(X) to the concept that combines F(Y) and G(Y). This way F(f) looks <i>the same</i> and G(f) and <i>the same</i> as (Φ<sub>Y</sub> . F(f)) and <i>the same</i> as (G(f) . Φ<sub>X</sub>).</p><p>Going back to Haskell: Is <code>safeHead</code> a natural transformation between two functors <code>[]</code> and <code>Maybe</code>? Let's start with a function <code>f</code> from some type <code>a</code> to <code>b</code>. There are two ways of mapping this function: one using the <code>fmap</code> defined by <code>[]</code>, which is the list function <code>map</code>; and the other using the <code>Maybe</code>'s <code>fmap</code>, which is defined in the <code>Maybe</code>'s functor instance definition:</p><pre><code class="haskell">instance Functor Maybe where
+   fmap f (Just x) = Just (f x)
+   fmap _ Nothing  = Nothing</code></pre><p>The two path from <code>[a]</code> to <code>Maybe b</code> are:</p><ol><li>Apply <code>fmap f</code> to <code>[a]</code> to get <code>[b]</code> and then <code>safeHead</code> it, or</li><li>Apply <code>safeHead</code> to <code>[a]</code> and then use the <code>Maybe</code> version of <code>fmap</code>.</li></ol><p>There are only two cases to consider: an empty list and a non-empty list. For an emtpy list we get <code>Nothing</code> both ways, otherwise we get <code>Just</code> <code>f</code> acting on the first element of the list.</p><p>We have thus shown that <code>safeHead</code> is a natural transformation. There are more interestig examples of natural transformations in Haskell; monadic <code>return</code> and <code>join</code> come to mind.</p><p>The intuition behind natural transformations is that they deal with structure, not contents. <code>safeHead</code> couldn't care less about what's stored in a list, but it understands the structure of the list: things like the list being empty, or having a first element. The type of this element doesn't matter. In Haskell, natural transformations are polymorphic function that can, like <code>safeHead</code> be typed using <code>forall</code>:</p><pre><code class="haskell">safeHead :: forall a . [a] -&gt; Maybe a</code></pre><h2 id="yoneda-lemma"><a href="#yoneda-lemma">Yoneda Lemma</a></h2><p>Going back to the Yoneda lemma, it states that for any functor from C to <b>Set</b> there is a natural transformation from our canonical representation H<sub>A</sub> to this functor. Moreover, there are as many such natural transformations as there are elements in F(A).</p><p>That, by the way, answers our other question about the dependence on the choice of A in the Yoneda embedding. The Yoneda lemma tells us that there are natural transformations both ways between H<sub>A</sub> and H<sub>B</sub>.</p><p>Amazingly, the proof of the Yoneda lemma, at least in one direction, is quite simple. The trick is to first define the natural transformation Φ on one special element of H<sub>A</sub>(A):  the element that corresponds to the identity morphism on A (remember, there is always one of these for every object). Let's call this element p. Its image will be in F(A), which is a set. You can pick <i>any element</i> of this set and it will define a different but equally good Φ. Let's call this element q. So we fix Φ<sub>A</sub>(p) = q.</p><p>Now we have to define the action of Φ on an arbitrary element in the image of H<sub>A</sub>. Remember that the functor H<sub>A</sub> transforms objects in C into sets. So let's take an arbitrary object X and its image H<sub>A</sub>(X). The elements in H<sub>A</sub>(X) correspond to morphisms from A to X. So let's pick one such morphism and call it f. Its image is an element r in H<sub>A</sub>(X). The question is, what does r map into under Φ? Remember, it's image must be an element of F(X).</p><p><img alt="Yoneda Lemma" src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fwww.bartosz.com%2Fimages%2FYoneda%2FYonedaLemma.png" /></p><p><b>Fig 7</b>. <i>The mappings in the Yoneda lemma. F is an arbitrary functor. Any choice of p determines the morphism Φ<sub>X</sub> for any X.</i></p><p>To figure that out, let's consider the F route. F being a functor transforms our morphism f into F(f) -- which is a morphism from F(A) to F(X). But, as you may remember, we have selected a special emement in F(A) -- our q. Now apply F(f) to q and you get an element in F(X), call it s.</p><p>There's nothing more natural than picking Φ<sub>X</sub>(r) to be this s! We have thus defined a natural transformation Φ for any X and r.</p><p>The straightforward proof that this definition of Φ is indeed <i>natural</i> is left as an exercise to the user.</p><h3 id="a-haskell-example"><a href="#a-haskell-example">A Haskell Example</a></h3><p>I've been very meticulous about distinguishing between morphisms from A to X in C and the corresponding set elements in H<sub>A</sub>(X). But in practice it's more convenient to skip the middle man and define natural transformations in the Yoneda lemma as going directly from these morphisms to F(X). Keeping this in mind, the Haskell version of the Yoneda lemma is ofter written as follows:</p><pre><code class="haskell">forall r . ((a -&gt; r) -&gt; f r) ~ f a</code></pre><p>where the (lowercase) <code>f</code> is the functor (think of it as a type constructor and its corresponding <code>fmap</code>), <code>(a -&gt; r)</code> is a function corresponding to the morphism from A to X in our orginal formulation. The Yoneda's natural transformation maps this morphism into the image of <code>r</code> under <code>f</code> -- the F(X) in the original formulation. The <code>forall r</code> means that the function <code>((a -&gt; r) -&gt; f r)</code> works for any type <code>r</code>, as is necessary to make it a natural transformation. The lemma states that the type of this function, <code>forall r . ((a -&gt; r) -&gt; f r)</code> is equivalent to the much simpler type <code>f a</code>. If you remember that types are just sets of values, you can interpret this result as stating that there is one-to-one correspondence between natural transformations and values of the type <code>f r</code>.</p><p>Remember the example from the beginning of this article? There was a function <code>imager</code> with the following signature:</p><pre><code class="haskell">imager :: forall r . ((Bool -&gt; r) -&gt; [r])</code></pre><p>This looks very much like a natural transformation from the Yoneda lemma with the type <code>a</code> fixed to <code>Bool</code> and the functor, the list functor <code>[]</code>. (I'll call the functions <code>Bool-&gt;r</code> <i>iffies</i>.)</p><p>The question was, how many different implementations of this signature are there?</p><p>The Yoneda lemma tells us exactly how to construct such natural transformations. It instructs us to start with an identity iffie: <code>idBool :: Bool -&gt; Bool</code>, and pick any element of <code>[Bool]</code> to be its image under our natural transformation. We can, for instance, pick <code>[True, False, True, True]</code>. Once we've done that, the action of this natural transformation on <i>any</i> iffie <code>h</code> is fixed. We just map the morphism <code>h</code> using the functor (in Haskell we <code>fmap</code> the iffie), and apply it to our pick, <code>[True, False, True, True]</code>.</p><p>Therefore, all natural transformations with the signature:</p><pre><code class="haskell">forall r . ((Bool -&gt; r) -&gt; [r])</code></pre><p>are in one-to-one correspondence with different lists of <code>Bool</code>.</p><p>Conversely, if you want to find out what list of <code>Bool</code> is hidden in a given implementation of <code>imager</code>, just pass it an identity iffie. Try it:</p><pre><code class="active haskell">{-# LANGUAGE ExplicitForAll #-}
+
+imager :: forall r . ((Bool -&gt; r) -&gt; [r])
+{-hi-}imager iffie = fmap iffie [True, False, True, True]{-/hi-}
+
+data Color = Red | Green | Blue        deriving Show
+data Note  = C | D | E | F | G | A | B deriving Show
+
+colorMap x = if x then Blue else Red
+heatMap  x = if x then 32   else 212
+soundMap x = if x then C    else G
+idBool :: Bool -&gt; Bool
+idBool x = x
+
+main = print $ imager idBool</code></pre><p>Remember, this application of the Yoneda lemma is only valid if <code>imager</code> is a natural transformation -- its naturality square must commute. The two functors in the <code>imager</code> naturality diagram are the Yoneda embedding and the list functor. Naturality of <code>imager</code> translates into the requirement that any function <code>f :: a -&gt; b</code> modifying an iffie could be pulled out of the <code>imager</code>:</p><pre><code class="haskell">imager (f . iffie) == map f (imager iffie)</code></pre><p>Here's an example of such a function translating colors to strings commuting with the application of imager:</p><pre><code class="active haskell">{-# LANGUAGE ExplicitForAll #-}
+
+imager :: forall r . ((Bool -&gt; r) -&gt; [r])
+imager iffie = fmap iffie [True, False, True, True]
+
+data Color = Red | Green | Blue  deriving Show
+
+colorMap x = if x then Blue else Red
+
+{-hi-}f :: Color -&gt; String
+f = show {-/hi-}
+
+main = do
+    print $ imager (f . colorMap)
+    print $ map f (imager colorMap)</code></pre><h2 id="the-structure-of-natural-transformations"><a href="#the-structure-of-natural-transformations">The Structure of Natural Transformations</a></h2><p>That brings another important intuition about the Yoneda lemma in Haskell. You start with a type signature that describes a natural transformation: a particular kind of polymorphic function that takes a probing function as an argument and returns a type that's the result of a functor acting on the result type of the probing function. Yoneda tells us that the structure of this natural transformation is tightly constrained.</p><p>One of the strengths of Haskell is its very strict and powerful type system. Many Haskell programers start designing their programs by defining type signatures of major functions. The Yoneda lemma tells us that type signatures not only restrict how functions can be combined, but also how they can be implemented.</p><p>As an extreme, there is one particular signature that has only one implementation: <code>a-&gt;a</code> (or, more explicitly, <code>forall a. a -&gt; a</code>). The only <i>natural</i> implementation of this signature is the identity function, <code>id</code>.</p><p>Just for fun, let me sketch the proof using the Yoneda lemma. If we pick the source type as the singleton unit type, <code>()</code>, then the Yoneda embedding consists of all functions taking unit as an argument. A function taking unit has only one return value so it's really equivalent to this value. The functor we pick is the identity functor. So the question is, how many natural tranformation of the the following type are there?</p><pre><code class="haskell">forall a. ((() -&gt; a) -&gt; a)</code></pre><p>Well, there are as many as there are elements in the image of <code>()</code> under the identity functor, which is exactly one! Since a function <code>()-&gt;a</code> can be identified with <code>a</code>, it means we have only one natural transformation with the following signature:</p><pre><code class="haskell">forall a. (a -&gt; a)</code></pre><p>Moreover, by Yoneda construction, this function is defined by <code>fmap</code>ping the function <code>()-&gt;a</code> over the element <code>()</code> using the identity functor. So our natural transformation, when probed with a value of the type <code>a</code> will return the same value. But that's just the definition of the identity function. (In reality things are slightly more complicated because every Haskell type must include <code>undefined</code>, but that's a different story.)</p><p>Here's an exercise for the reader: Show that the naturality square for this example is equivalent to <code>id</code> commuting with any function: <code>f . id == id . f</code>.</p><h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2><p>I hope I provided you with enough background information and intuition so that you'll be able to easily read more advanced blog posts, like this one: <a href="http://blog.sigfpe.com/2006/11/yoneda-lemma.html">Reverse Engineering Machines with the Yoneda Lemma</a> by Dan Piponi, or <a href="http://www.haskellforall.com/2012/06/gadts.html">GADTs</a> by Gabriel Gonzales.</p><h2 id="acknowledgments"><a href="#acknowledgments">Acknowledgments</a></h2><p>I'd like to thank Gabriel Gonzales for providing useful comments and John Wiegley, Michael Sloan, and Eric Niebler for many interesting conversations.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "bartosz_milewski"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/bartosz/understanding-yoneda';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

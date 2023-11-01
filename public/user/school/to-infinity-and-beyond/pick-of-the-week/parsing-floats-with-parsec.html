@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html><head><title>Parsing Floats With Parsec - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/">School of Haskell</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond">To infinity and beyond</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Pick of the Week</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/parsing-floats-with-parsec">Parsing Floats With Parsec</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">Parsing Floats With Parsec</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date"> 7 Mar 2013</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/stevely">stevely</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/3249/ca279eb8bb4bd6e3e6a078e4ca1e5dc54e83d5ff">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/profunctors">Previous content: I love profunctors. They&#39;re so easy.</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/school/to-infinity-and-beyond/pick-of-the-week/basic-lensing">Next content: Basic Lensing</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week">Go up to: Pick of the Week</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/stevely">See all content by stevely</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#introduction">Introduction</a></li><li><a href="#parsing-integers">Parsing Integers</a><ul><li><a href="#parsing">Parsing</a></li><li><a href="#reading">Reading</a></li><li><a href="#combining-the-two">Combining the Two</a></li></ul></li><li><a href="#parsing-integers-with-leading-sign">Parsing Integers With Leading Sign</a><ul><li><a href="#number">number</a></li><li><a href="#plus">plus</a></li><li><a href="#minus">minus</a></li></ul></li><li><a href="#parsing-floats">Parsing Floats</a></li><li><a href="#running-the-parser">Running the Parser</a></li><li><a href="#monomorphism-restriction-and-flexible-contexts">Monomorphism Restriction and Flexible Contexts</a></li><li><a href="#conclusions">Conclusions</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>Note: This uses Parsec 3.</p><h2 id="introduction"><a href="#introduction">Introduction</a></h2><p>In many languages, when we want to write a simple parser the usual choices are either to use regular expressions or write a complete parser ourselves. Regular expressions are convenient for many reasons: they're concise, they're fast, and for simple parsing they are fairly readable for those that understand the syntax. Writing a parser by hand is much less convenient, but allows fine-grain error reporting and can support languages that are not regular.</p><p>These approaches have downsides, though. Regular expressions don't support much in the way of error handling, they require learning and understanding a completely different language, the exact syntax and features can vary between implementations, they only support regular languages (or if they do support languages that aren't regular it's through non-standard extensions), and even people with a lot of experience with regular expressions can have trouble understanding complex ones. Writing a parser by hand can alleviate these problems, but often lead to brittle implementations. The biggest problem with writing parsers by hand, however, is that it's simply a lot more work.</p><p>Luckily, parsing is a task that Haskell is especially well-suited for. Through libraries such as Parsec it's possible to build up complex parsers by using simple parsers and parser combinators. Not only does this result in code that is short and easy to understand, it provides good performance and helpful error messages for free.</p><h2 id="parsing-integers"><a href="#parsing-integers">Parsing Integers</a></h2><p>To start things simple, we'll create a parser for integers. Creating a full-blown parser for this might seem like overkill, but this will allow us to create fast, readable code with good error messages, all while remaining short and concise.</p><p>For our first go at creating a parser for integers, we'll ignore the optional leading signs. This makes things quite simple:</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative
+
+integer = rd &lt;$&gt; many1 digit
+    where rd = read :: String -&gt; Integer
+-- /show
+main = forever $ do putStrLn &quot;Enter an integer: &quot;
+                    input &lt;- getLine
+                    parseTest integer input</code></pre><p>So what's happening here?</p><h3 id="parsing"><a href="#parsing">Parsing</a></h3><p>The heart of our parser is in <code>many1 digit</code>. <code>digit</code> is a parser that matches a single digit character (0-9). <code>many1</code> is a parser combinator; it takes a parser p and transforms it into a parser that parses 1 or more occurances of p. So the two together gives us a parser that takes 1 or more digits. If we ran this parser we would either end up with a <code>String</code> containing 1 or more digits or get a parse error. You may have noticed that despite having written no error handling code, our parser outputs detailed, helpful error messages when given bad input. If you haven't already, feel free to feed the example above some bad input and see what happens.</p><h3 id="reading"><a href="#reading">Reading</a></h3><p>Now parsing a string representation of an integer is nice, but really what we want is the value of the integer and not the original input string. To do this conversion we will use the <code>read</code> function. Notice that we rename the <code>read</code> function to <code>rd</code> with the type <code>String -&gt; Integer</code>. This is necessary because <code>read</code> has a polymorphic type (click it in the example above to see). Because we don't have any types anywhere else, Haskell cannot figure out what type <code>read</code> is supposed to return. Therefor, we must state explicitly what the type of <code>read</code> is supposed to be, and we rename it to keep the clutter away from the rest of the definition for <code>integer</code>.</p><h3 id="combining-the-two"><a href="#combining-the-two">Combining the Two</a></h3><p>That leaves <code>&lt;$&gt;</code> as the final piece of the puzzle. If you opened up <code>ghci</code>, imported Parsec, and entered <code>:type many1 digit</code> you would get the following type back:</p><pre><code class="haskell">many1 digit :: Stream s m Char =&gt; ParsecT s u m [Char]</code></pre><p>That's quite a mouthful, but the important thing to notice is that the resulting <code>String</code> (as <code>[Char]</code>) is wrapped up in a <code>ParsecT</code> with some other types. This means we won't be able to directly access the parsed <code>String</code>. Luckily, <code>ParsecT</code> is an instance of <code>Functor</code>, which means it implements <code>fmap</code>. This means we can use <code>fmap</code> (as <code>&lt;$&gt;</code> here) to lift the <code>read</code> function to work within the <code>ParsecT</code> functor.</p><h2 id="parsing-integers-with-leading-sign"><a href="#parsing-integers-with-leading-sign">Parsing Integers With Leading Sign</a></h2><p>Now, an integer parser that could only parse positive integers isn't very useful, so let's expand our parser to dealing with a leading sign:</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+integer = rd &lt;$&gt; (plus &lt;|&gt; minus &lt;|&gt; number)
+    where rd     = read :: String -&gt; Integer
+          plus   = char '+' *&gt; number
+          minus  = (:) &lt;$&gt; char '-' &lt;*&gt; number
+          number = many1 digit
+-- /show
+main = forever $ do putStrLn &quot;Enter an integer: &quot;
+                    input &lt;- getLine
+                    parseTest integer input</code></pre><p>We've added quite a bit here, so let's break it down piece by piece. We've made 3 new parsers that are used in the final <code>integer</code> parser. We use the <code>&lt;|&gt;</code> operator (from <code>Text.Parsec</code>, not <code>Control.Applicative</code>) to implement choice. We will first try to parse using the <code>plus</code> parser, trying <code>minus</code> next if it fails, and finally <code>number</code> if both of those fail. If all 3 fail, then the parser returns an error. Note how our error messages change with this new version of <code>integer</code> despite the fact that we still do no explicit error handling.</p><p>Let's next look at our 3 parsers, starting with the simplest and ending with the most complicated:</p><h3 id="number"><a href="#number">number</a></h3><p><code>number</code> is simply our original integer parser, pulled out so that it can be referenced by the other parsers.</p><h3 id="plus"><a href="#plus">plus</a></h3><p><code>plus</code> is the parser for an integer that begins with a plus sign (<code>+</code>). It starts with the parser <code>char '+'</code>, which parsers the character <code>+</code>. We then link that parser to our number parser with <code>*&gt;</code>, from <code>Control.Applicative</code>. <code>*&gt;</code> simply takes two values wrapped in an applicative functor (which <code>ParsecT</code> happens to be) and returns the second wrapped value. However, it still performs any actions the first applicative functor may do. This lets us perform the first parse, grab the <code>+</code> character, and then drop the parsed value and continue parsing after it with <code>number</code>. This is often useful in cases where we need to ensure something exists, but we don't care about its actual value. Since <code>read</code> will assume a positive integer when there's no sign, bringing the <code>+</code> along is unnecessary.</p><h3 id="minus"><a href="#minus">minus</a></h3><p><code>minus</code> is the parser for an integer that begins with a minus sign (<code>-</code>). It's more complicated than <code>plus</code> since we can't simply ignore the minus sign like we can with the plus. Again we use the fact that <code>ParsecT</code> is an instance of <code>Applicative</code> to combine the two parsers of <code>char '-'</code> and <code>number</code>. Since we need to combine the two values inside the <code>ParsecT</code> values, we use the list constructor <code>(:)</code> since <code>String</code> is just a list of <code>Char</code>s and <code>char '-'</code> parses a single <code>Char</code> while <code>number</code> parses a <code>String</code>.</p><p>We use <code>&lt;$&gt;</code> to lift <code>(:)</code> to the functor level. We then use <code>&lt;*&gt;</code> to feed the second parser value in as the second argument to <code>(:)</code>. This lets us combine our two parsers while simultaneously combining their parsed values.</p><h2 id="parsing-floats"><a href="#parsing-floats">Parsing Floats</a></h2><p>Now that we have a basic understanding of parsing with Parsec, we can move on to parsing floats. This is quite a bit trickier, as floating point values have many different components. In addition to everything we did for integers, floats may also have a decimal component, an exponent component, or both. The exponent component leads with <code>e</code> but needs to be case insensitive, as well as potentially starting with a plus or minus sign.</p><p>To start, we'll simply take our integer parser above and change the type of <code>read</code> to give us a <code>Float</code> instead of an <code>Integer</code>.</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+float = rd &lt;$&gt; (plus &lt;|&gt; minus &lt;|&gt; number)
+    where rd     = read :: String -&gt; Float
+          plus   = char '+' *&gt; number
+          minus  = (:) &lt;$&gt; char '-' &lt;*&gt; number
+          number = many1 digit
+-- /show
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>Now, our parser will start getting a bit large for a single declaration, so let's move the smaller parsers to the top level:</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+number = many1 digit
+
+plus = char '+' *&gt; number
+
+minus = (:) &lt;$&gt; char '-' &lt;*&gt; number
+
+integer = plus &lt;|&gt; minus &lt;|&gt; number
+
+float = rd &lt;$&gt; integer
+    where rd = read :: String -&gt; Float
+-- /show
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>Next, we will add the decimal component. Since this is optional, we'll need to use the parser combinator <code>option</code>. This function simply takes a default value and a parser. If the parser succeeds it will get the parsed value, otherwise it will use the default value.</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+number = many1 digit
+
+plus = char '+' *&gt; number
+
+minus = (:) &lt;$&gt; char '-' &lt;*&gt; number
+
+integer = plus &lt;|&gt; minus &lt;|&gt; number
+
+float = fmap rd $ (++) &lt;$&gt; integer &lt;*&gt; decimal
+    where rd      = read :: String -&gt; Float
+          decimal = option &quot;&quot; $ (:) &lt;$&gt; char '.' &lt;*&gt; number
+-- /show
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>We've added quite a bit of stuff, so let's break down the complete list of changes.</p><ol><li>We changed <code>&lt;$&gt;</code> to regular <code>fmap</code> in the <code>float</code> parser so we could use the <code>$</code> operator to avoid parentheses.</li><li>We made a new parser named <code>decimal</code>. This is pretty much just our <code>minus</code> parser with the <code>-</code> character replaced with the <code>.</code> character. It also uses the <code>option</code> combinator to signify that it is optional. The <code>&quot;&quot;</code> argument is the parsed result if the parser fails.</li><li>We use <code>&lt;$&gt;</code> and <code>&lt;*&gt;</code> to combine our <code>integer</code> and <code>decimal</code> parsers much in the same way we combine <code>char '-'</code> and <code>number</code> in <code>minus</code>. We have to lift the string concatenation operator <code>(++)</code> instead of the list constructor <code>(:)</code> since in this case both <code>integer</code> and <code>decimal</code> parse <code>String</code>s instead of the first just parsing a single <code>Char</code>.</li></ol><p>Our manually lifting the <code>(:)</code> and <code>(++)</code> operators to the functor level is pretty ugly, so let's make our own operators to do this for us:</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+(&lt;++&gt;) a b = (++) &lt;$&gt; a &lt;*&gt; b
+(&lt;:&gt;) a b = (:) &lt;$&gt; a &lt;*&gt; b
+
+number = many1 digit
+
+plus = char '+' *&gt; number
+
+minus = char '-' &lt;:&gt; number
+
+integer = plus &lt;|&gt; minus &lt;|&gt; number
+
+float = fmap rd $ integer &lt;++&gt; decimal
+    where rd      = read :: String -&gt; Float
+          decimal = option &quot;&quot; $ char '.' &lt;:&gt; number
+-- /show
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>Much better. Note how we kept to the convention of wrapping the original operator names with angle brackets to signify that they are simply their base operator lifted to work with applicative functors. If you hadn't already noticed this pattern, compare the types of <code>$</code> and <code>&lt;$&gt;</code>.</p><p>These new operators will help us further keep things clean as we add the final component to our float parser: exponents. The only difficult thing about exponents is that they are case insensitive: &quot;<code>1e3</code>&quot; is just as valid as &quot;<code>1E3</code>&quot;. We could use the <code>&lt;|&gt;</code> operator to handle these two cases separately, but since it's just a single character difference it'd be simpler to use the parser combinator <code>oneOf</code>. This combinator takes a list of characters as a <code>String</code> and attempts to parse each of them in turn.</p><pre><code class="active haskell">import Control.Monad
+-- show
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+(&lt;++&gt;) a b = (++) &lt;$&gt; a &lt;*&gt; b
+(&lt;:&gt;) a b = (:) &lt;$&gt; a &lt;*&gt; b
+
+number = many1 digit
+
+plus = char '+' *&gt; number
+
+minus = char '-' &lt;:&gt; number
+
+integer = plus &lt;|&gt; minus &lt;|&gt; number
+
+float = fmap rd $ integer &lt;++&gt; decimal &lt;++&gt; exponent
+    where rd       = read :: String -&gt; Float
+          decimal  = option &quot;&quot; $ char '.' &lt;:&gt; number
+          exponent = option &quot;&quot; $ oneOf &quot;eE&quot; &lt;:&gt; integer
+-- /show
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>And with that, we have created a parser for floating point values. It's short, it's easy to read, it provides good error messages, and it's fast. All thanks to Haskell and the Parsec library.</p><h2 id="running-the-parser"><a href="#running-the-parser">Running the Parser</a></h2><p>We glossed over how to actually run the parser so far. If you checked the full source of the examples you would have seen that we use the <code>parseTest</code> function. This function simply runs the given parser and prints out either the parsed result or the error if the parser failed. This is the ideal tool when testing parsers with <code>ghci</code>, as you can simply feed it test strings to make sure everything is working correctly.</p><p>The functions for running parsers and getting their output all ultimately result in the same return value: &quot;<code>Either ParseError a</code>&quot;. <code>ParseError</code> is a type in the Parsec library for storing information about parse errors. You can either look up its specifications on Hackage or use <code>show</code> to generate the standard error messages as a <code>String</code>. <code>a</code> is the result type of the parser. For our <code>float</code> parser, that type would be <code>Float</code>.</p><p>There are basically two functions to execute parsers: <code>parse</code> and <code>parseFromFile</code>.</p><pre><code class="haskell">parse :: Stream s Identity t =&gt; Parsec s () a -&gt; SourceName -&gt; s -&gt; Either ParseError a</code></pre><p>This big type signature is actually fairly simple: it takes a parser, a source name (a <code>String</code> used as a part of error messages), a <code>Stream</code>, and either results in a <code>ParseError</code> or the result type of the parser. A <code>Stream</code> is simply a data type suitable for being used as a data source. <code>ByteString</code> and <code>Text</code> (both strict and lazy) have instances of <code>Stream</code>, as well as regular lists and <code>Strings</code>.</p><pre><code class="haskell">parseFromFile :: Parser a -&gt; String -&gt; IO (Either ParseError a)</code></pre><p>This function is pretty simple, taking a parser, a <code>String</code> containing the path to the file to parse, and produces either a <code>ParseError</code> or the result type of the parser. This is wrapped up in the <code>IO</code> monad, as we need to use <code>IO</code> to open and read the file.</p><p>The trick with <code>parseFromFile</code> is the fact that there are 5 different versions of it, and none of them will be in scope if you just import <code>Text.Parsec</code>. These different versions all use different backing data structures for reading in the data, and can have different performance characteristics. To access them, import one of the following modules:</p><ul><li><code>Text.Parsec.ByteString</code></li><li><code>Text.Parsec.ByteString.Lazy</code></li><li><code>Text.Parsec.Text</code></li><li><code>Text.Parsec.Text.Lazy</code></li><li><code>Text.Parsec.String</code></li></ul><p>As a general rule of thumb, use either <code>ByteString</code> or <code>Text</code> unless you definitely need laziness, in which case use the lazy version of one of the aforementioned. <code>String</code> should be avoided as it is the least performant.</p><h2 id="monomorphism-restriction-and-flexible-contexts"><a href="#monomorphism-restriction-and-flexible-contexts">Monomorphism Restriction and Flexible Contexts</a></h2><p>It's worth taking a moment to talk about two language extensions: the monomorphism restriction and flexible contexts. Normally it's considered good practice in Haskell to have explicit type declarations for any top-level terms. This is problematic when using Parsec for two reasons: the types are a bit complicated and possibly won't even compile. To illustrate this, if we loaded our final example into <code>ghci</code> and used <code>:type float</code> to get <code>float</code>'s generated type, we would get this:</p><pre><code class="haskell">float :: ParsecT String u Data.Functor.Identity.Identity Float</code></pre><p>Which seems fine, but here's an exercise: below is the complete final example with nothing hidden. Replace the last line in <code>main</code> with &quot;<code>putStrLn input</code>&quot; so that it no longer references <code>float</code> and try to execute it:</p><pre><code class="active haskell">import Control.Monad
+import Text.Parsec
+import Control.Applicative hiding ((&lt;|&gt;))
+
+(&lt;++&gt;) a b = (++) &lt;$&gt; a &lt;*&gt; b
+(&lt;:&gt;) a b = (:) &lt;$&gt; a &lt;*&gt; b
+
+number = many1 digit
+
+plus = char '+' *&gt; number
+
+minus = char '-' &lt;:&gt; number
+
+integer = plus &lt;|&gt; minus &lt;|&gt; number
+
+float = fmap rd $ integer &lt;++&gt; decimal &lt;++&gt; exponent
+    where rd       = read :: String -&gt; Float
+          decimal  = option &quot;&quot; $ char '.' &lt;:&gt; number
+          exponent = option &quot;&quot; $ oneOf &quot;eE&quot; &lt;:&gt; integer
+
+main = forever $ do putStrLn &quot;Enter a float: &quot;
+                    input &lt;- getLine
+                    parseTest float input</code></pre><p>You should get an error message starting with &quot;<code>No instance for (Stream s0 m0 Char) arising from a use of 'digit'</code>&quot;. The problem is that the reference to <code>float</code> is affecting <code>float</code>'s type, and subsequently the types of everything else. So why does it break when that reference is removed? The answer is the monomorphism restriction. Without getting into the details, the monomorphism restriction can result in type checking failing for some classes of correct Haskell programs. In this case, the reference to <code>float</code> in <code>main</code> puts a restriction on <code>float</code>'s type that shouldn't be there, causing <code>float</code> to have a type that is too specific and that happens to avoid the monomorphism restriction. <code>float</code>'s actual type should be this:</p><pre><code class="haskell">float :: Stream s m Char =&gt; ParsecT s u m Float</code></pre><p>But if you explicitly declare <code>float</code> to have this type you will still get an error! Luckily, we can get <code>float</code> to have the correct type if we simply keep the explicit type declarations off and disable the monomorphism restriction by putting this line at the top of our source file:</p><pre><code class="haskell">{-# LANGUAGE NoMonomorphismRestriction #-}</code></pre><p>Putting this at the top will allow the above example to compile whether or not <code>main</code> references <code>float</code>. <code>float</code> will also have the correct type regardless. But how do we explicitly declare the type of <code>float</code>? The problem is the <code>Stream</code> constraint has a specific type in <code>Char</code> instead of being all type variables. We can get around this problem with another language pragma: flexible contexts.</p><pre><code class="haskell">{-# LANGUAGE FlexibleContexts #-}</code></pre><p>This will allow us to explicitly define the type of <code>float</code> with no issues. In fact, if we declare the types of all our top-level values then we can forgo disabling the monomorphism restriction.</p><p>What exactly these extensions do is complex and subtle, but luckily we can avoid worrying about that if we keep to these three simple rules:</p><ul><li>If you have top-level parsers without type declarations, use NoMonomorphismRestriction.</li><li>If you have top-level parsers with type declarations, use FlexibleContexts.</li><li>If you have a mixture of both, use both.</li></ul><h2 id="conclusions"><a href="#conclusions">Conclusions</a></h2><p>Thanks to the power of Haskell and the Parsec library, we were able to make a parser for floating point numbers in only 10 effective lines of code. The code is clean and easy to understand, and with no effort on our part it provides good error messages when parsing fails. So the next time you find yourself writing another regular expression, just consider how nice it would be to instead write a parser with Parsec.</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "fpcomplete"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/school/to-infinity-and-beyond/pick-of-the-week/parsing-floats-with-parsec';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>

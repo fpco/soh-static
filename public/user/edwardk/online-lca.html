@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html><head><title>On-line Lowest Common Ancestor - School of Haskell | School of Haskell</title><meta http-equiv="x-ua-compatible" content="IE=9"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="google-site-verification" content="Rfxk2TdeMMXEXHgJ2_OO8Rt3hPbQSDao0OXQV_n6z_s" /><link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css"><link href="https://www.schoolofhaskell.com/recent-content/feed" type="application/rss+xml" rel="alternate" title="Recently published content">
+<link rel="stylesheet" href="https://www.schoolofhaskell.com/static/combined/UlwEHVcM.css"><style>.social{margin-right:1em}h1{font-family:Merriweather !important}article{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}h1,h2,h3,h4,h4,h5{font-family:Merriweather !important}.editor p{font-family:Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif}.article-footer{border-top:1px solid #ddd;padding-top:1em;margin-top:1em}body{font-size:16px !important}.navbar .navbar-inner{background:#3c3f41}.navbar .brand{font-size:14px}.navbar .brand img{width:6em}.navbar .icon-wrench{margin:0 -0.5em 0 -0.5em;padding:0 1em 0 1em;height:20px}.navbar-inverse .nav .active a{background:#333638}.navbar-inverse .nav > li > a{color:#a7a7a7
+}.navbar-inverse .btn-navbar{background:#333638}.navbar-inverse .nav > li a:hover,.navbar-inverse .btn{background:#333537 !important}@media (max-width: 979px) {.icon-wrench{padding-left:1em !important}}.breadcrumb{border-top-left-radius:0;border-top-right-radius:0}h1{margin-top:20px}.breadcrumb-container + .main-content h1{margin-top:0}.footer{padding:30px 0;margin-top:70px;border-top:1px solid #e5e5e5;background-color:#f5f5f5}.footer ul.footer-menu{list-style-type:none}.footer ul.footer-menu li{display:inline-block}.footer ul.footer-menu li + li{margin-left:0.5em}.footer ul.footer-menu li + li:before{margin-right:0.5em;content:"·";color:#999}.footer ul.menu li{display:inline-block}.footer ul.menu li + li{margin-left:0.5em}.footer .copyright{margin-left:25px}.main-content{min-height:100%}.gravatar{width:80px;height:80px;border-radius:2px;background:#eee}.empty-gravatar{width:0}.container{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}.container h1,.container h2,.container h4,.container h4,.container h5{font-family:"Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif}article{font-family:Merriweather !important}article h1{font-family:Merriweather !important}article li{font-family:Merriweather !important;line-height:1.6em}article li + li{margin-top:0.5em}article div.code{background:#f9f9f9;border:1px solid #d1d1d1;position:relative;border-radius:0.2em;margin:0.25em 0 0.75em 0;min-height:2.5em}article code{color:#005580;font-size:14px;white-space:pre}article a.hoogle > code{color:#0088cc;font-size:14px;white-space:pre;border:0}article .expand-code{display:none}article pre{overflow:auto;word-wrap:normal}article code.active{display:block;max-height:430px}article h1{font-size:31.5px}article h3{font-size:17.5px}article h4{font-size:14px}article h5,article h6{font-size:11.9px}article p{line-height:1.7em}article h1 code,article h2 code,article h3 code,article h4 code,article h5 code,article h6 code{font-size:inherit !important}article h1 a,article h2 a,article h3 a,article h4 a,article h5 a,article h6 a{color:#444}article h1 a:before,article h2 a:before,article h3 a:before,article h4 a:before,article h5 a:before,article h6 a:before{margin-left:-1.5em;padding-right:0.5em;font-family:fontawesome;content:"\f0c1";font-size:20px;color:#fff}article h1 a:hover,article h2 a:hover,article h3 a:hover,article h4 a:hover,article h5 a:hover,article h6 a:hover{text-decoration:none;color:#0088cc}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#888}article h2{font-size:24.5px}article .popover{font-family:actor}article .popover h3.popover-title{font-family:actor !important;font-size:1em}article .popover .popover-content{width:15em;font-size:1em}article .controlsRun{display:block;padding:0.5em;text-align:right;background:#f2f2f2}article .controlsRun a.clone{margin-right:1em;font-family:actor;text-decoration:none}article .controlsRun a.clone span{padding-left:0.5em}article .controlsRun a.run,article .controlsRun a.reset,article .controlsRun a.show-code{font-size:16px}article .controlsRun a.run span,article .controlsRun a.reset span,article .controlsRun a.show-code span{display:none}article .controlsRun a.reset{margin-left:0.5em;color:#a2becc}article .controlsRun a.reset{display:none}article .controlsRun a.show-code{margin-right:0.75em}article .controlsRun a.run:hover,article .controlsRun a.show-code:hover{text-decoration:none}article .controlsRun a.show-code.active{color:#DC0D0D}article .controlsRun a[disabled]{color:#a2becc;cursor:default}article .collapse-area .collapse-header{background:#0088cc;color:#fff;padding:0.3em;cursor:pointer}article .collapse-area .hidden-toggle:before{content:"\f0d7";font-family:fontawesome;margin-right:0.5em;margin-left:0.25em}article .collapse-area .collapsed-files{overflow:auto;height:auto}article .collapse-area.collapse-disabled{display:none}article .collapse-area.collapse-area-off .collapsed-files{height:0px;overflow:hidden}article .collapse-area.collapse-area-off .hidden-toggle:before{content:"\f0da"}article .snippet-stdio .stdout{margin:0.5em;padding-right:2em;position:relative;word-wrap:break-word}article .snippet-stdio .stdin{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none;padding:0;margin:0}article .hoogle-results{margin:0.25em}article .hoogle-results .hoogle-inner{background:#fff;padding:0.5em;border-radius:3px;border:1px solid #ddd}article .hoogle-results .hoogle-inner .close-link{position:relative;float:right;margin-top:-0.5em;margin-right:-0.5em}article .snippet-output-errors{margin:1em 0.5em 0.5em 0.5em;position:relative}article .snippet-output-errors ul{list-style-type:none;margin:0;position:relative}article .snippet-output-errors pre{border:0;border-radius:0;padding:0.25em;margin:0;background:inherit;color:inherit}article .snippet-output-errors .close-link{color:inherit;background:inherit}article .snippet-editors{z-index:0;padding:0.25em}article .close-link{padding:0.5em;background:#eaeaea;border-bottom-left-radius:0.2em;border-top-right-radius:0.2em;position:absolute;top:0;right:0}article .close-link:hover{text-decoration:none}article .snippet-title{padding:0.5em 0 0 0.5em}article .snippet-title .snippet-icon{font-family:FontAwesome;display:inline-block;margin-right:0.5em}article .fullModuleCode + div .snippet-title{margin-top:0.5em;border-top:1px solid #ccc;padding-top:0.5em}article .CodeMirror{height:auto;min-height:1em;line-height:1.5em;background:transparent;font-size:14px !important}article .CodeMirror .highlighted{background:rgba(250, 210, 0, 0.45) !important}article .CodeMirror-widget{margin-left:2em;line-height:1.8}article .CodeMirror.collapsed{height:10em !important}article .editor .expander{text-align:center;display:block;padding:0.5em;text-decoration:none;border-bottom-left-radius:2px;border-bottom-right-radius:2px}article .editor .expander .ellipsis{background:white;border:1px solid #ccc;padding:0 0.5em;height:1em;line-height:0.5em;display:inline-block;color:#555;cursor:pointer}article .editor .expander .ellipsis:hover{background:#ddd;color:#333}article .web-runner{margin:0.5em;padding:0.5em;border:1px solid #ccc;border-radius:3px;background:#f5f5f5}article .web-runner iframe{border:0;margin-top:0.5em;margin-bottom:0;background:white}article .web-runner .controls i{cursor:pointer;color:#0088cc}article .web-runner .controls i:hover{color:#222}article .web-runner .controls i + i{margin-left:0.5em}article .web-runner .controls .icon-remove{float:right}article .hidden{display:block;visibility:visible}article .controlsShowHide{margin-bottom:0.5em}.tutorial-body{float:left !important}.tutorial-nav{float:right !important}@media (max-width: 979px) {.related-content{float:right}.author-name{display:block;margin-left:20px !important;padding-left:5px;margin-top:5px}article h1 a:hover:before,article h2 a:hover:before,article h3 a:hover:before,article h4 a:hover:before,article h5 a:hover:before,article h6 a:hover:before{color:#fff}.tutorial-nav{float:none !important;width:auto !important}.tutorial-body{float:none !important;width:auto !important}}@media (min-width: 980px) and (max-width: 1199px) {.navbar-search{display:none}.tutorial-nav{width:200px}.tutorial-body{width:720px}}#accountPage h1{margin:20px 0 0 0}#accountPage h2{font-size:20px}.group-contents .span8{float:left}.group-contents .span4{float:right}.container > .alert-block{margin-top:1em}.alert{color:#aa874a
+}.social{margin-bottom:.8em;display:block}.social a{text-decoration:none}.social i{font-size:1.1em;color:#fff;padding:0.25em;border-radius:0.25em;width:1em;display:inline-block;text-align:center}.social i.icon-twitter{background:#0088cc}.social i.icon-facebook{background:#3b5998
+  }.social i.icon-google-plus{background:#dd4b39
+  }.well pre{background:#fcfcfc}.well h2{margin-top:0}code{color:#005580;font-size:14px;white-space:pre}</style><!--[if lt IE 8]><link rel="stylesheet" href="https://www.schoolofhaskell.com/static/design/css/ie7.css?etag=TSMl9x1V"><![endif]--><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body class="not-logged-in" itemscope itemtype="http://schema.org/Product"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-H62P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-H62P');</script><div class="navbar navbar-inverse navbar-static-top"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" type="button" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/"><img src="/static/img/haskell-logo-wide.png" title="School of Haskell">
+</a>
+<div class="nav-collapse collapse"><ul class="nav"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+</ul>
+<form class="navbar-search pull-left" action="https://www.schoolofhaskell.com/search"><input class="search-query" type="text" placeholder="Search" name="search">
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="container breadcrumb-container"><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+<span class="divider">/</span>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/online-lca">On-line Lowest Common Ancestor</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container main-content"><div class="row"><div class="span12"><h1 itemprop="name">On-line Lowest Common Ancestor</h1>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><p><span class="date">27 Aug 2015</span>
+<span class="author"><a href="https://www.schoolofhaskell.com/user/edwardk">Edward Kmett</a>
+</span>
+<span class="view-edit-link pull-right"><a class="view-source-link" href="https://www.schoolofhaskell.com/tutorial-raw/4906/12df3bd5cac020b2c1c77edf8fa6ccc92f9337b0">View Markdown source</a>
+</span>
+</p>
+<p class="tags"></p>
+</div>
+</div>
+<div class="row"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+<p class="alert">As of March 2020, School of Haskell has been switched to read-only mode.</p>
+<div class="row" itemprop="desc"><div class="span4 tutorial-nav"><div class="related-content"><ul class="nav nav-tabs nav-stacked"><li><script>reddit_target='fpcomplete'</script>
+<script src="https://redditstatic.s3.amazonaws.com/button/button1.js"></script>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/conquering-folds">Previous content: Conquering Folds</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk/parallel-crc">Next content: Parallel and Incremental CRCs</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user/edwardk">See all content by Edward Kmett</a>
+</li>
+</ul>
+
+</div>
+<div class="aside"><h3>Sections</h3>
+<ul><li><a href="#lowest-common-ancestor">Lowest Common Ancestor</a><ul><li><a href="#off-line-lca">Off-line LCA</a></li><li><a href="#functional-lca">Functional LCA</a></li><li><a href="#the-dumbest-thing-that-could-work">The Dumbest Thing That Could Work</a></li></ul></li><li><a href="#types-from-number-systems">Types from Number Systems</a><ul><li><a href="#unary">Unary</a></li><li><a href="#binary">Binary</a></li><li><a href="#skew-binary">Skew Binary</a></li></ul></li><li><a href="#cleaning-up">Cleaning Up</a></li><li><a href="#keep-on-trimming">Keep On Trimming</a></li><li><a href="#observations">Observations</a><ul><li><a href="#comparing-node-ids">Comparing Node IDs</a></li><li><a href="#monotonicity">Monotonicity</a></li><li><a href="#unique-representation">Unique Representation</a></li></ul></li><li><a href="#all-together-now">All Together Now</a></li><li><a href="#recap">Recap</a></li></ul></div>
+</div>
+<div class="span8 tutorial-body" data-environment="ghc-7.8-stable-14.09">
+<article><p>On-line <a href="http://en.wikipedia.org/wiki/Lowest_common_ancestor">lowest common ancestor</a> (LCA) search and the on-line version of the <a href="http://en.wikipedia.org/wiki/Level_ancestor_problem">level ancestor problem</a> have been traditionally viewed as having <i>O(h)</i> solutions.</p><p>Last year, I improved both of those bounds to <i>O(log h)</i> while using only purely functional data structures, when I was working on another problem, and I figured I should do a write-up on how that worked, as I'm going to use some of the same componentry in future posts.</p><p>Like most of my posts of late this one will dip a little bit into how we can use this abstruse theory to get improved distribution and parallelism as well.</p><p>In future posts, I'll talk about how this can be used to derive an efficient revision control monad and I've been using the same skew binary arithmetic to derive an efficient cache-oblivious unboxable version of the venerable <code>Data.Map</code>.</p><h1 id="lowest-common-ancestor"><a href="#lowest-common-ancestor">Lowest Common Ancestor</a></h1><p>Given a tree and two nodes in the tree, find the lowest entry in the tree that is an ancestor to both.</p><p>Consider this tree:</p><img src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fekmett.github.io%2Fimages%2Flca-example-1.png" /><pre><code class="haskell">lca D E = A
+lca F I = E
+lca G H = G
+lca H J = E</code></pre><p>There has been a lot written about the version of this problem, where there tree is fixed and unchanging, but not much about it in the case where it is allowed to continue to evolve.</p><p>There are a lot of applications for LCA.</p><ul><li>Computing dominators in flow graphs</li><li>Three-Way merge algorithms</li><li>Finding common word roots/suffixes</li><li>Range-Min Query (RMQ) problems</li><li>Computing distances in a tree</li></ul><p><a href="http://dl.acm.org/citation.cfm?id=804056">Aho, Hopcraft and Ullman</a> originally formulated the lowest common ancestor problem 40 years ago, back in 1973.</p><p>They provided both on-line and off-line versions of the problem, defined around two operations <code>link</code> and <code>lca</code>, but their specification has a distinctly imperative flavor.</p><p>LCA was defined in terms of two operations <code>link x y</code> and <code>lca x y</code>. <code>link x y</code> grafts an &quot;unattached tree&quot; <code>x</code> on as a new child of <code>y</code>, while <code>lca x y</code> computes the lowest common ancestor of <code>x</code> and <code>y</code>.</p><p>The difference betwen on-line and off-line has classically been whether the set of <code>link</code> and <code>lca</code> commands was fixed a priori.</p><p>Research has largely focused on the slightly more permissive off-line version of the problem where you are given the entire tree <i>a priori</i>. The original off-line version of the algorithm required time <i>O(n log* n)</i> for a precanned set of <code>lca</code> and <code>link</code> operations, and their on-line version required <i>O(n log n)</i>. These have since been improved.</p><h3 id="off-line-lca"><a href="#off-line-lca">Off-line LCA</a></h3><p>In general, these days if you're able to set up the tree you want in advance, and are willing to spend <code>O(n)</code> time preprocessing it, then you can answer subsequent <code>lca</code> queries on it in <code>O(1)</code>! However, if you make <i>any</i> edits, then you have to reprocess the entire tree in <code>O(n)</code> time. This renders these algorithms unsuitable for things like computing LCAs in version control graphs.</p><p>These algorithms are actually pretty complicated. They involve tricks like round-tripping to and from a <a href="http://en.wikipedia.org/wiki/Range_Minimum_Query">Range-Minimum-Query</a> (RMQ) formulation twice.</p><p>There is <a href="http://community.topcoder.com/tc?module=Static&amp;d1=tutorials&amp;d2=lowestCommonAncestor">an excellent writeup</a> that covers these classical techniques on this on top-coder. In the notation used there, the solution I'm going to explore is <code>&lt;O(1),O(log H)&gt;</code>, where <code>H</code> is the height of the tree, not the full size <code>N</code> that has to be used for all the other algorithms explored.</p><h3 id="functional-lca"><a href="#functional-lca">Functional LCA</a></h3><p>Notice in Aho, Hopcraft and Ullman's specification, <code>link</code> doesn't return anything! It is an inherently mutation-oriented approach to the problem statement. Instead I'm going to replace <code>link x y</code> with <code>cons a y</code>, which returns a new extended version of the path <code>y</code>, grown downward with the new <i>globally unique</i> node ID <code>a</code>.</p><p>We could also choose to replace <code>cons a y</code> with a monadic <code>grow y</code>, which tracks some kind of variable supply internally. By using a concurrent variable supply like the one in my <a href="http://hackage.haskell.org/package/concurrent-supply"><code>concurrent-supply</code> package</a>, we can grow the tree in parallel across multiple cores.</p><h3 id="the-dumbest-thing-that-could-work"><a href="#the-dumbest-thing-that-could-work">The Dumbest Thing That Could Work</a></h3><p>We can define a path to be just a a list with an associated length.</p><pre><code class="haskell">type Id = Int
+
+data Path = [Id] :# !Int</code></pre><p>and we can build them up:</p><pre><code class="haskell">empty :: Path
+empty = [] :# 0
+
+cons :: Id -&gt; Path -&gt; Path
+cons a (ys :# n) = (a:ys) :# (n + 1)</code></pre><p>With that paths look like:</p><pre><code class="haskell">x = [5,4,3,2,1] :# 5
+y =   [6,3,2,1] :# 4</code></pre><p>Now we can compute the lowest common ancestor of two paths by just cutting them off at the same height and marching down them in lock-step, comparing for equality as we go.</p><pre><code class="haskell">x' = [4,3,2,1] :# 4
+y' = [6,3,2,1] :# 4</code></pre><p>Then</p><pre><code class="haskell">lca x y = [3,2,1] :# 3</code></pre><p>Scribbling that out we get this algorithm.</p><pre><code class="haskell">
+lca :: Path -&gt; Path -&gt; Path
+lca (xs0 :# i) (ys0 :# j) = go k (drop (i-k) xs0) (drop (j-k) ys0) where 
+  k = min i j
+  go !n xxs@(x:xs) (y:ys) 
+    | x == y   = xxs :# n
+    | otherwse = go (n - 1) xs ys</code></pre><p>Already it has a number of pros and cons.</p><p>1.) It requires no preprocessing step.</p><p>2.) It is only <i>O(1)</i> to extend a path, and did I mention there is no recomputation necessary?</p><p>3.) There is no need to store the entire tree! You only ever have to store the paths you are actively considering. This helps with distribution and parallelization.</p><p>4.) On one hand, it is <i>O(h)</i> in the height <code>h</code> of our tree to compute and this is bad in that <i>O(h)</i> is a lot more than the <i>O(1)</i> <code>lca</code> calculations of the standard toolbox.</p><p>5.) On the other hand, <i>O(h)</i> is still often a lot less than a full <i>O(n)</i> recalculation required by other approaches as your tree changes. This permits the use of this algorithm when we care about on-line edits being made to the tree, and where we need to be able to roll with the punches rather than stop the world for a single calculation.</p><p>The bottleneck here is obviously the suffix extraction. It takes potentially <i>O(h)</i> to trim the two lists to the same length, then it takes <i>O(h)</i> to scan the trimmed lists in parallel.</p><p>As is usually my wont, I'll turn to Okasaki for at least part of the answer.</p><h1 id="types-from-number-systems"><a href="#types-from-number-systems">Types from Number Systems</a></h1><p>One tool in the functional programming tool-box is the trick of turning a number system into a data structure.</p><h3 id="unary"><a href="#unary">Unary</a></h3><p>We're actually quite familiar with one such structure:</p><pre><code class="haskell">data Nat    = Zero | Succ    Nat
+data IdList = Nil  | Cons Id IdList</code></pre><p>Here, we can think of <code>Nat</code> as a unary encoding of the natural numbers. (Technically they are extended here via their one-point compactification with infinity due to laziness.)</p><p>If we augment each <code>Succ</code> with a piece of data, this gives us the well known list data structure.</p><p>Here the fact that we can increment a unary number in <i>O(1)</i> leads to the observation that we can <code>cons</code> onto our list in <i>O(1)</i> as well.</p><p>The cost of adding numbers in unary and the costs of appending lists are related as well.</p><p>The asymptotics of <code>take</code> and <code>drop</code> can be related to the complexity of calculating similar clamped operations involving <code>min</code> on the naturals.</p><h3 id="binary"><a href="#binary">Binary</a></h3><p>It worked with unary, so we could try to do this with binary, but it wouldn't work well. We could use a bunch of arrays with sizes based on powers of 2, where each array is present or absent such that the total of all of the array sizes is our number of elements, but when we're done we'd still have to do a bunch of array merging. Incrementing our counter may cause a 'carry' that affects all <i>O(log n)</i> such arrays!</p><p>This leads us to search for a number system where carries lead to less work.</p><h3 id="skew-binary"><a href="#skew-binary">Skew Binary</a></h3><p>Skew Binary is a type of &quot;almost binary&quot; number system, where our digits are either 0 or 1... or 2.</p><p>It differs from ternary in the value of eachdigits, and in the fact that we're only going to allow ourselves at most a single 2, and we'll use it to defeat the need for multiple carries.</p><p>In skew binary, the <i>n</i>th digit is worth 2^(k+1)-1, rather than 2^k like in binary.</p><p>This leads to the progression:</p><p>1,3,7,15,31,63,127...</p><p>rather than the binary progression so familiar to programmers.</p><p>1,2,4,8,16,32,64...</p><p>If we say the <code>2</code> can only occur as the least significant non-zero in our number, then every natural can be <i>uniquely</i> represented in skew binary. We'll need this uniqueness later!</p><pre><code>n     731                      n
+--    ---                      --
+ 0:   000 --                    0
+ 1:   001 --             1*1 =  1
+ 2:   002 --             2*1 =  2
+ 3:   010 --       1*3       =  3
+ 4:   011 --       1*3 + 1*1 =  4
+ 5:   012 --       1*3 + 2*1 =  5
+ 6:   020 --       2*3       =  6
+ 7:   100 -- 1*7             =  7
+ 8:   101 -- 1*7    +    1*1 =  8
+ 9:   102 -- 1*7    +    2*1 =  9
+10:   110 -- 1*7 + 1*3       = 10
+11:   111 -- 1*7 + 1*3 + 1*1 = 11
+12:   112 -- 1*7 + 1*3 + 2*1 = 12
+13:   120 -- 1*7 + 2*3       = 13
+14:   200 -- 2*7             = 14
+...</code></pre><p>If we represent a skew binary number as a linked list of digits from least to most significant, such that we just don't store the zeros and just store the number of inhabitants by storing the size we can write:</p><pre><code class="haskell">data Skew = Two !Int Skew | One !Int Skew | Zero</code></pre><p>By inspection, incrementing the counter is an <code>O(1)</code> operation, (if we ignore the price of manipulating the size).</p><pre><code class="haskell">succ :: Skew -&gt; Skew
+succ (Two x (One y ys)) | x*2+1 == y = Two y ys
+succ (Two x xs) = One (x*2+1) xs
+succ (One 1 xs) = Two 1 xs
+succ xs         = One 1 xs</code></pre><p>We can greatly simplify this by just saying that a 'Two' is really two ones of the same size in a list. Due to our constraints, such a <code>Two</code> will only occur at the front of the list.</p><pre><code class="haskell">data Skew = One !Int Skew | Zero</code></pre><p>Then we can observe that <code>Skew</code> is just <code>[Int]</code>.</p><pre><code class="haskell">type Skew = [Int]
+
+succ :: Skew -&gt; Skew
+succ (x:y:zs) | x == y = x+y+1 : zs
+succ xs = 1:xs</code></pre><p>So what happens when we turn this into a data structure?</p><p>Now all we want to do is replace our digits with a data structure that has the same size. Our digits are sized like: 1,3,7,15... Those look familiar. That is the number of children in complete binary trees of a heights 1,2,3,4...</p><p>If only we had some operation that took one element, and two complete binary trees and gave us a new binary tree, like making that element the new root...</p><p>We could get fancy and enforce the completeness of these trees bottom up 
+or top down with invariants, but I leave that to you to do efficiently.</p><p>We'll need a size as well, so let's shoehorn that in too.</p><pre><code class="haskell">data Tree 
+  = Tip
+  | Bin !Int !Id Tree Tree 
+  
+size :: Tree -&gt; Int
+size (Tip _) = 1
+size (Bin n _ _ _) = n</code></pre><pre><code class="haskell">type Path = [Tree]</code></pre><p>Corresponding to <code>succ</code>, we could now implement <code>cons</code>.</p><pre><code class="haskell">cons :: Id -&gt; Path -&gt; Path
+cons a (x:y:zs) | size x == size y = Bin (size x*2+1) a x y : zs
+cons a xs = Tip a : xs</code></pre><p>All we've done is maintain the invariant that a &quot;digit&quot; worth <code>n</code> is associated with <code>n</code> entries worth of data.</p><p>With that <code>cons</code> for our paths is now <code>O(1)</code>. You can similarly generate <code>pred</code> and <code>tail</code>.</p><h1 id="cleaning-up"><a href="#cleaning-up">Cleaning Up</a></h1><p>For sake of convenience I'm going to want to know the total number of elements in the whole list of trees. This is technically a matter of convenience rather than necessity, as it doesn't affect us asymptotically, so let's go back and redefine <code>Path</code> to be a real data type. While we're at it, we can switch the size annotation to the list node as well, so we don't have to store it recursively in the trees. Finally, I'm going to fix the type of the IDs to <code>Int</code>.</p><p>With those gymnastics out of the way we're left with:</p><pre><code class="haskell">data Path
+  = Nil
+  | Cons !Int -- `n` entries in this path
+         !Int -- `w` entries in this particular tree
+         Tree -- a complete tree with @w@ elements
+         Path       
+  deriving (Show, Read)</code></pre><p>Now our Trees are storing an <code>Int</code> key / <code>a</code> value pair rather than a size and a value:</p><pre><code class="haskell">data Tree
+  = Bin !Id Tree Tree
+  | Tip !Id
+  deriving (Show, Read)</code></pre><p>And with a for-internal-use-only helper:</p><pre><code class="haskell">consT :: Int -&gt; Tree -&gt; Path -&gt; Path
+consT w t ts = Cons (w + size ts) w t ts</code></pre><p>we can define <code>cons</code> and <code>uncons</code>:</p><pre><code class="haskell">cons :: Id -&gt; Path -&gt; Path
+cons k (Cons n w t (Cons _ w' t2 ts)) 
+  | w == w' = Cons (n + 1) (2 * w + 1) (Bin k t t2) ts
+cons k ts = Cons (size ts + 1) 1 (Tip k) ts
+
+uncons :: Path -&gt; Maybe (Id, Path)
+uncons Nil = Nothing
+uncons (Cons _ _ (Tip k) ts)     = Just (k, ts)
+uncons (Cons _ w (Bin k l r) ts) = Just (k, consT w2 l (consT w2 r ts))
+  where w2 = div w 2</code></pre><p>If you prefer, you can go implement <code>cons</code>/<code>uncons</code> using the <code>_Cons</code> <code>Prism</code> from <code>lens</code> instead.</p><p>This gives us a pretty basic &quot;skew binary random access list&quot; of identifiers.</p><h1 id="keep-on-trimming"><a href="#keep-on-trimming">Keep On Trimming</a></h1><p>All we need to do is address the <code>O(h)</code> cost of trimming and the <code>O(h)</code> cost of scanning.</p><p>Rather than talk about dropping, it is easier to switch to tracking how much we want to <code>keep</code>. The transformation to the original list code is trivial.</p><pre><code class="haskell">keep k (xs :# n) = drop (n-k) xs :# max 0 (n-k)</code></pre><p>So, now the issue becomes how to define a faster <code>keep</code> to deal with the trimming.</p><p>To define a faster <code>keep</code>, we need to work smarter. We have at most <code>O(log h)</code> trees in our skew binary random access list.</p><p>So we can run along our list of trees until we find the tree we need to cut up to get a skew binary random access list of the right size.</p><p>When we're done, we can just cut off the tops of our tree to keep the right number of entries.</p><p>Consider what happens when we have the <code>Path</code> of identifiers <code>[6,5,4,3,2,1]</code> and we want to <code>keep</code> only the top 2.</p><p>Recall our digits are worth 1,3,7,15..., so since 6 = 2*3, our path would be represented by two complete binary trees each with three elements in them.</p><p>Running down the spine: we see <code>Cons 6 3 tree1 (Cons 3 1 tree2 Nil)</code>, so we can just drop the first tree wholesale: (Cons 3 1 tree2 Nil), so we know we're going to cut up <code>tree2</code> to get our new list.</p><img src="https://www.schoolofhaskell.com/content-proxy?src=http%3A%2F%2Fekmett.github.io%2Fimages%2Ftree-keeping.gif" /><p>If we had a bigger structure we'd be getting out new complete trees to cons onto the rest of the list... but recall, later trees are always bigger than ones that came before with the possible exception of the first two trees, and if we cut off the top of a tree, we're going to wind up smaller still.</p><p>Turning that into code:</p><pre><code class="haskell">keep :: Int -&gt; Path -&gt; Path
+keep _ Nil = Nil
+keep k xs@(Cons n w t ts)
+  | k &gt;= n = xs
+  | otherwise = case compare k (n - w) of
+     GT -&gt; keepT (k - n + w) w t ts
+     EQ -&gt; ts
+     LT -&gt; keep k ts
+
+keepT :: Int -&gt; Int -&gt; Tree -&gt; Path -&gt; Path
+keepT n w (Bin _ l r) ts = case compare n w2 of
+  LT -&gt; keepT n w2 r ts
+  EQ -&gt; consT w2 r ts
+  GT | n == w - 1 -&gt; consT w2 l (consT w2 r ts)
+     | otherwise -&gt; keepT (n - w2) w2 l (consT w2 r ts)
+ where w2 = div w 2
+keepT _ _ _ ts = ts </code></pre><p><code>keepT</code> is used when we know we're taking at least one element off the top of a Tree, and that that tree is at most as tall as the shortest tree in a <code>Path</code>, AND we can know that the path has at most one element of its shorest length, so after we cut off the top, we can at most produce 2 nodes of the same size, but they'll be shorter than everything in the Path.</p><p>Putting all of that together, we can prove <code>keep</code> takes <code>O(log h)</code>, but I leave that to you to do to convince yourself.</p><p>The notion that <code>keep</code> or <code>drop</code> can be implemented in logarithmic time in a skew binary random access list had previously been unpublished.</p><p>This is sufficient to yield an improvement in the known asymptotics for the on-line version of the <a href="http://en.wikipedia.org/wiki/Level_ancestor_problem">level ancestor</a> problem. Just take your <code>Path</code> and <code>keep</code> how ever many levels you want!</p><h1 id="observations"><a href="#observations">Observations</a></h1><p>To implement a faster <code>trim</code> we need a few observations on the nature of a skew binary random access list.</p><h3 id="comparing-node-ids"><a href="#comparing-node-ids">Comparing Node IDs</a></h3><p>We can check to see if two paths have the same head or are both empty in <i>O(1)</i>. We'll use <code>(==)</code> for this under the assumption that we mentioned early on that all identifiers that we use in the paths will be <i>globally unique</i>.</p><pre><code class="haskell">instance Eq Path where
+  Nil == Nil = True
+  Cons _ _ s _ == Cons _ _ t _ = s == t
+
+instance Eq Tree where
+  Tip a     == Tip b     = a == b
+  Bin a _ _ == Bin b _ _ = a == b
+  _         == _         = False</code></pre><p>These are each <i>O(1)</i> to compute.</p><h3 id="monotonicity"><a href="#monotonicity">Monotonicity</a></h3><p>We can modify the algorithm for <code>keep</code> to work with any monotone predicate that transitions from <code>False</code> to <code>True</code> at most once during the walk up the path to the root.</p><p>As with <code>keep</code>, the resulting algorithm will take at most <i>O(log h)</i> applications of the predicate and can run in <i>O(log h)</i> time if the predicate is <i>O(1)</i>.</p><h3 id="unique-representation"><a href="#unique-representation">Unique Representation</a></h3><p>There are many number systems we could have chosen to use for our paths. One of the nice properties of skew binary that I alluded to earlier is that there is precisely one representation for each natural number in skew binary. Other number systems often give up this property to get other properties.</p><p>Let's use it.</p><p>By knowing that we have a unique representation for a given number in skew binary, we can know that our skew binary random access list has a unique <i>shape</i> for a given number of entries!</p><p>This means that we can walk the spine of two random access lists of the same length at the same time in lock-step, and we'll visit the same number of trees, of the exact same size.</p><p>So, if we go back to <code>keep</code>, we can modify the algorithm to work with a pair of paths, computing <code>(==)</code> which is <i>O(1)</i>. The fact that our identifiers are globally unique mean that once we find a match, all the parents from then on up the tree should also match.</p><p>We effectively gallop along the spines of our two lists of trees, searching for a match, then back up and search through the two trees we have searching for the first match.</p><p>Monotonicity was required to let us overshoot, and then go back.</p><p>Now we can define <code>lca'</code>, which requires the two paths to have the same length:</p><pre><code class="haskell">lca' :: Path -&gt; Path -&gt; Path
+lca' h@(Cons _ w x xs) (Cons _ _ y ys)
+  | x == y = h
+  | xs == ys = lcaT w x y ys
+  | otherwise = lca' xs ys
+lca' _ _ = Nil
+
+lcaT :: Int -&gt; Tree -&gt; Tree -&gt; Path -&gt; Path
+lcaT w (Bin _ la ra) (Bin _ lb rb) ts
+  | la == lb = consT w2 la (consT w2 ra ts)
+  | ra == rb = lcaT w2 la lb (consT w ra ts)
+  | otherwise = lcaT w2 ra rb ts
+  where w2 = div w 2
+lcaT _ _ _ ts = ts</code></pre><p>Then a full <code>lca</code> just trims first:</p><pre><code class="haskell">lca :: Path -&gt; Path -&gt; Path
+lca xs ys = case compare nxs nys of
+  LT -&gt; lca' xs (keep nxs ys)
+  EQ -&gt; lca' xs ys
+  GT -&gt; lca' (keep nys xs) ys
+ where
+  nxs = size xs
+  nys = size ys</code></pre><h1 id="all-together-now"><a href="#all-together-now">All Together Now</a></h1><p>To show that I'm not just talking nonsense, let's take all of that and put it in an active haskell snippet that you can play with.</p><p>Click Run to see it in action.</p><pre><code class="active haskell">import Data.List (unfoldr) 
+type Id = Int
+
+data Tree
+  = Bin {-# UNPACK #-} !Id Tree Tree
+  | Tip {-# UNPACK #-} !Id
+  deriving (Show, Read)
+
+instance Eq Tree where
+  Tip a     == Tip b     = a == b
+  Bin a _ _ == Bin b _ _ = a == b
+  _         == _         = False
+
+data Path
+  = Nil
+  | Cons {-# UNPACK #-} !Int
+         {-# UNPACK #-} !Int
+         Tree
+         Path
+  deriving (Show, Read)
+
+instance Eq Path where
+  Nil == Nil = True
+  Cons _ _ s _ == Cons _ _ t _ = s == t
+
+size :: Path -&gt; Int
+size Nil = 0
+size (Cons n _ _ _) = n
+
+consT :: Int -&gt; Tree -&gt; Path -&gt; Path
+consT w t ts = Cons (w + size ts) w t ts
+
+cons :: Id -&gt; Path -&gt; Path
+cons k (Cons n w t (Cons _ w' t2 ts)) 
+  | w == w' = Cons (n + 1) (2 * w + 1) (Bin k t t2) ts
+cons k ts = Cons (size ts + 1) 1 (Tip k) ts
+
+uncons :: Path -&gt; Maybe (Id, Path)
+uncons Nil = Nothing
+uncons (Cons _ _ (Tip k) ts)     = Just (k, ts)
+uncons (Cons _ w (Bin k l r) ts) = Just (k, consT w2 l (consT w2 r ts))
+  where w2 = div w 2
+
+keep :: Int -&gt; Path -&gt; Path
+keep _ Nil = Nil
+keep k xs@(Cons n w t ts)
+  | k &gt;= n = xs
+  | otherwise = case compare k (n - w) of
+     GT -&gt; keepT (k - n + w) w t ts
+     EQ -&gt; ts
+     LT -&gt; keep k ts
+
+keepT :: Int -&gt; Int -&gt; Tree -&gt; Path -&gt; Path
+keepT n w (Bin _ l r) ts = case compare n w2 of
+  LT -&gt; keepT n w2 r ts
+  EQ -&gt; consT w2 r ts
+  GT | n == w - 1 -&gt; consT w2 l (consT w2 r ts)
+     | otherwise -&gt; keepT (n - w2) w2 l (consT w2 r ts)
+ where w2 = div w 2
+keepT _ _ _ ts = ts 
+
+lca' :: Path -&gt; Path -&gt; Path
+lca' h@(Cons _ w x xs) (Cons _ _ y ys)
+  | x == y = h
+  | xs == ys = lcaT w x y ys
+  | otherwise = lca' xs ys
+lca' _ _ = Nil
+
+lcaT :: Int -&gt; Tree -&gt; Tree -&gt; Path -&gt; Path
+lcaT w (Bin _ la ra) (Bin _ lb rb) ts
+  | la == lb = consT w2 la (consT w2 ra ts)
+  | ra == rb = lcaT w2 la lb (consT w ra ts)
+  | otherwise = lcaT w2 ra rb ts
+  where w2 = div w 2
+lcaT _ _ _ ts = ts
+
+lca :: Path -&gt; Path -&gt; Path
+lca xs ys = case compare nxs nys of
+  LT -&gt; lca' xs (keep nxs ys)
+  EQ -&gt; lca' xs ys
+  GT -&gt; lca' (keep nys xs) ys
+ where
+  nxs = size xs
+  nys = size ys
+  
+fromList :: [Int] -&gt; Path
+fromList = foldr cons Nil
+
+toList :: Path -&gt; [Int]
+toList = unfoldr uncons
+
+xs = fromList [6,4,3,2,1]
+ys = fromList [5,3,2,1]
+
+main = print $ toList (lca xs ys)</code></pre><h1 id="recap"><a href="#recap">Recap</a></h1><p>With that we can compute an <code>lca</code> in logarithmic time, without preprocessing.</p><p>To summarize:</p><ul><li><p>My algorithm requires no preprocessing step</p></li><li><p><i>O(log h)</i> LCA query type in h, the length of the path</p></li><li><p><i>O(1)</i> to <code>cons</code> onto the end of the path.</p></li><li><p><i>O(1)</i> to compare paths for equality.</p></li><li><p>There is no need to store the entire tree locally, merely the paths you are currently using. This helps with distribution and parallelization when working with large trees.</p></li><li><p>As an on-line algorithm the tree can grow downward from any node without requiring costly recalculations. This renders it suitable for use in version control and other domains where we constantly extend the trees.</p></li><li><p>I've preserved all of the benefits of the naïve algorithm, while drastically reducing the costs.</p></li><li><p>It is a heck of a lot simpler than the off-line algorithms!</p></li></ul><p>This code is packaged up on hackage as the <code>lca</code> package. There it has a few refinements. In particular in addition to the integer identifiers for each entry, I store some user annotation making the paths <code>Traversable</code>. Secondly, while trimming the path, it is easy to calculate a monoidal summary of what we trimmed off.</p><p>If we consider monoids that cost <i>O(1)</i> to do its work, then the cost model doesn't change. This version is in <a href="http://hackage.haskell.org/packages/archive/lca/0.2.4/doc/html/Data-LCA-Online-Monoidal.html">Data.LCA.Online.Monoidal</a>.</p><p>This isn't the end of the story. There are (newer) algorithms that can let us update a more static form of an LCA tree in an imperative setting, permitting us to split a node in the path in O(1) or extend a path downward by one in O(1), just like we can do here. However, these retain the cost that you have to preprocess and store the entire tree rather than just information about your active path, unlike the approach given here.</p><p>-<a href="mailto:ekmett@gmail.com">Edward Kmett</a></p><p>September 14th, 2013</p></article>
+
+<div id="disqus_thread"><script>var disqus_shortname = "edwardk"; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="dsq-brlink" href="https://disqus.com">comments powered by <span class="logo-disqus">Disqus</span></a></a>
+</div>
+
+</div>
+</div>
+<div class="row article-footer"><div class="span7 meta"><span class="sociallinksunicode social">
+<a href="https://twitter.com/home?status=$url$" target="_blank"><i class="icon-twitter"></i></a>&nbsp;
+<a href="http://www.facebook.com/sharer/sharer.php?u=$url$" target="_blank"><i class="icon-facebook"></i></a>&nbsp;
+<a href="https://plus.google.com/share?url=$url$" target="_blank"><i class="icon-google-plus"></i></a></span>
+</div>
+</div>
+</div>
+<div class="footer"><div class="container"><div class="row"><div class="span12"><ul class="menu"><li><a href="https://www.schoolofhaskell.com/">School</a>
+</li>
+<li><a href="https://www.schoolofhaskell.com/user">Users</a>
+</li>
+
+<li><a class="brand" href="https://fpcomplete.com">Sponsored by:
+<img src="/static/img/logo.png" title="FPComplete">
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="row"><div class="span12"></div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="https://www.schoolofhaskell.com/static/combined/Y-3k9_tW.js"></script><script>$(function(){
+  $("a.logout").click(function(){
+    var form = $("<form method='post'/>");
+    form.attr("action", $(this).attr("href"));
+    $("body").append(form);
+    form.submit();
+    return false;
+  });
+});
+
+$(function(){
+    $('.sociallinksunicode a').each(function(){
+        $(this).attr('href',$(this).attr('href').replace('$url$',document.location));
+    });
+});
+
+$(function(){
+  // If we need to select a user/select a password then show the
+  // details confirmation form, otherwise enable the getting started
+  // section.
+  if($('.alert-block a').text().match(/(selected a username|change your password)/)) {
+    $("#confirm-details").show();
+    $("#confirm-details #inputUsername").focus();
+  } else {
+    $("#get-started").removeClass('disabled').addClass('enabled');
+  }
+
+  // For lack of a plain HTML validation story this will do.
+  $('.welcome-page').each(function(){
+    $('form').submit(check);
+  });
+  function check(){
+    setTimeout(check,500);
+    var error = false;
+    $('.error').removeClass('error');
+    $('#enter-details input').each(function(){
+      if($(this).val() == '') {
+        $(this).parent().parent().addClass('error');
+        error = true;
+      }
+    });
+    if(error) return false;
+    if($('[name=password]').val() == $('[name=confirm]').val()) {
+      $('#confirm').removeClass('error');
+      return true;
+    } else {
+      $('#confirm').addClass('error');
+      return false;
+    }
+  }
+});
+
+$(function(){
+  // When scrolling over a snippet editor, activate the "clone in IDE" popovers
+  $('article').each(function(){
+    var n = 100;
+    var wait = 10000;
+    function check(){
+      if($('.clone').length == 0) {
+        setTimeout(check,n);
+        return;
+      }
+      var activated = $.cookie('clone-popover');
+      if (activated) return;
+      var activate = false;
+      $('.controlsRun:onScreen').each(function(){
+        $.cookie('clone-popover', 'true', { expires: 30, path: '/' });
+        activate = true;
+        return false;
+      });
+      if(activate) {
+          $('.clone').each(function(){
+              // The bootstrap API is rather unreasonable to say the
+              // least.
+              next = $(this).parent();
+              var title = next.attr('title');
+              next.attr('data-content',$(this).attr('data-content'));
+              next.attr('title',$(this).attr('title'));
+              next.popover('show',{
+                  title: $(this).attr('title')
+              });
+              next.attr('title',title);
+          });
+          setTimeout(function(){
+              $('.clone').each(function(){
+                  $(this).parent().popover('hide');
+              });
+          },wait);
+      } else {
+        setTimeout(check,n);
+      }
+    }
+    setTimeout(check,n);
+  });
+});
+
+// onScreen jQuery plugin v0.2.1
+// (c) 2011-2013 Ben Pickles
+//
+// http://benpickles.github.com/onScreen
+//
+// Released under MIT license.
+(function(a){a.expr[":"].onScreen=function(b){var c=a(window),d=c.scrollTop(),e=c.height(),f=d+e,g=a(b),h=g.offset().top,i=g.height(),j=h+i;return h>=d&&h<f||j>d&&j<=f||i>e&&h<=d&&j>=f}})(jQuery);
+
+/*!
+ * jQuery Cookie Plugin v1.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+(function($, document) {
+
+  var pluses = /\+/g;
+  function raw(s) {
+    return s;
+  }
+  function decoded(s) {
+    return decodeURIComponent(s.replace(pluses, ' '));
+  }
+
+  $.cookie = function(key, value, options) {
+
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+      options = $.extend({}, $.cookie.defaults, options);
+
+      if (value == null) {
+	options.expires = -1;
+      }
+
+      if (typeof options.expires === 'number') {
+	var days = options.expires, t = options.expires = new Date();
+	t.setDate(t.getDate() + days);
+      }
+
+      value = String(value);
+
+      return (document.cookie = [
+	encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+	options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+	options.path    ? '; path=' + options.path : '',
+	options.domain  ? '; domain=' + options.domain : '',
+	options.secure  ? '; secure' : ''
+      ].join(''));
+    }
+
+    // key and possibly options given, get cookie...
+    options = value || $.cookie.defaults || {};
+    var decode = options.raw ? raw : decoded;
+    var cookies = document.cookie.split('; ');
+    for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+      if (decode(parts.shift()) === key) {
+	return decode(parts.join('='));
+      }
+    }
+    return null;
+  };
+  $.cookie.defaults = {};})(jQuery, document);
+</script><!--[if lt IE 10]><script src="https://www.schoolofhaskell.com/static/design/js/ie.js?etag=ayV2DuJ0"></script><![endif]--><script>if(!window.location.href.match(/localhost/)){var track = '/tutorial/user/edwardk/online-lca';
+window._gaq = [['_setAccount','UA-36928035-1'],track != ''? ['_trackPageview',track] : ['_trackPageview']
+,['_trackPageLoadTime']];window._gaq.push(['_setCustomVar',1,'Section','School of Haskell',3]);
+window._gaq.push(['_setCustomVar',2,'User Type','Visitor',1]);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();}</script>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started --><!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]--></body></html>
